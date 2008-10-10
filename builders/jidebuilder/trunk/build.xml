@@ -44,6 +44,22 @@
       </jar>
    </target>
 
+   <target name="dist"
+           depends="package"
+           description="Binary distribution">
+      <mkdir dir="${project.build.dir}/dist" />
+      <copy todir="${project.build.dir}/dist">
+         <fileset dir="${project.lib.dir}">
+            <include name="**/*.jar" />
+            <exclude name="**/groovy*.jar" />
+         </fileset>
+      </copy>
+      <copy todir="${project.build.dir}/dist"
+            file="${project.build.dir}/${project.final.name}.jar" />
+      <zip destfile="${project.build.dir}/${project.final.name}-binary.zip" 
+           basedir="${project.build.dir}/dist" />
+   </target>
+
    <target name="sources"
            depends="clean"
            description="Source jar">
