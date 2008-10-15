@@ -29,7 +29,7 @@ includeTargets << new File ( "${griffonHome}/scripts/Package.groovy" )
 
 festSourceDir = "${basedir}/test/fest"
 festTargetDir = "${projectWorkDir}/fest-classes"
-festReportDir = "${basedir}/build/fest-reports"
+festReportDir = "${basedir}/test/fest-reports"
 fest_version = new File("${griffonHome}/plugins/fest/latest").text.trim()
 fest_skip = false
 
