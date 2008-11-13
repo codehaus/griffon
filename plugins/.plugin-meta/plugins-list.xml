@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugins revision="1">
+    <plugin latest-release="trunk" name="fest">
+        <release tag="trunk" type="svn" version="trunk">
+            <title>Fest Griffon Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>\Enables application testing with FEST (http://easytesting.org)</description>
+            <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
+            <file>http://svn.codehaus.org/plugins/fest/trunk/griffon-fest-trunk.zip</file>
+        </release>
+    </plugin>
+</plugins>

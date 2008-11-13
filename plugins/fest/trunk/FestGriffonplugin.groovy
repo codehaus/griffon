@@ -10,5 +10,5 @@ class FestGriffonPlugin {
 Enables application testing with FEST (http://easytesting.org)
 '''
 
-    def documentation = "http://griffon.org/Fest+Plugin"
+    def documentation = "http://griffon.codehaus.org/Fest+Plugin"
 }
