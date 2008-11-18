@@ -16,7 +16,7 @@
 
 /**
  * Gant script that runs FEST tests
- * 
+ *
  * @author Andres Almiray
  *
  * @since 0.1
@@ -25,16 +25,23 @@
 Ant.property(environment:"env")
 griffonHome = Ant.antProject.properties."env.GRIFFON_HOME"
 
-includeTargets << new File ( "${griffonHome}/scripts/Package.groovy" )
+defaultTarget("Run FEST tests") {
+    depends(checkVersion, configureProxy, packageApp, classpath)
+    checkFestSources()
+    compileFest()
+    runFest()
+}
+
+includeTargets << griffonScript("Package")
 
 festSourceDir = "${basedir}/test/fest"
 festTargetDir = "${projectWorkDir}/fest-classes"
 festReportDir = "${basedir}/test/fest-reports"
-fest_version = new File("${griffonHome}/plugins/fest/latest").text.trim()
+festPluginBase = getPluginDirForName('fest').file as String
 fest_skip = false
 
 Ant.path( id : 'festJarSet' ) {
-    fileset( dir: "${griffonHome}/plugins/fest/${fest_version}/lib/test" , includes : "*.jar" )
+    fileset( dir: "${festPluginBase}/lib/test" , includes : "*.jar" )
 }
 
 Ant.taskdef( resource: "testngtasks", classpathref: "festJarSet" )
@@ -48,13 +55,6 @@ Ant.path( id: "fest.compile.classpath" ) {
 Ant.path( id: "fest.runtime.classpath" ) {
     path(refid:"fest.compile.classpath")
     pathelement(location: "${festTargetDir}")
-}
-
-target('default': "Run FEST tests") {
-    depends(checkVersion, configureProxy, packageApp, classpath)
-    checkFestSources()
-    compileFest()
-    runFest()
 }
 
 target(checkFestSources:"") {
