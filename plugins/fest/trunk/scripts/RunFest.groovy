@@ -27,18 +27,16 @@ griffonHome = Ant.antProject.properties."env.GRIFFON_HOME"
 
 defaultTarget("Run FEST tests") {
     depends(checkVersion, configureProxy, packageApp, classpath)
-    checkFestSources()
-    compileFest()
-    runFest()
+    runFestImpl()
 }
 
 includeTargets << griffonScript("Package")
 
 festSourceDir = "${basedir}/test/fest"
 festTargetDir = "${projectWorkDir}/fest-classes"
-festReportDir = "${basedir}/test/fest-reports"
+festReportDir = config.griffon.testing.reports.destDir ?: "${basedir}/test/fest-reports"
 festPluginBase = getPluginDirForName('fest').file as String
-fest_skip = false
+_fest_skip = false
 
 Ant.path( id : 'festJarSet' ) {
     fileset( dir: "${festPluginBase}/lib/test" , includes : "*.jar" )
@@ -57,16 +55,22 @@ Ant.path( id: "fest.runtime.classpath" ) {
     pathelement(location: "${festTargetDir}")
 }
 
-target(checkFestSources:"") {
+target(runFestImpl:"Run FEST tests") {
+    checkFestTestsSources()
+    compileFestTests()
+    runFestTests()
+}
+
+target(checkFestTestsSources:"") {
     def src = new File( festSourceDir )
     if( !src || !src.list() ) {
         println "No FEST sources were found. SKIPPING"
-        fest_skip = true
+        _fest_skip = true
     }
 }
 
-target(compileFest: "") {
-    if( fest_skip ) return
+target(compileFestTests: "") {
+    if( _fest_skip ) return
     event("CompileStart", ['fest'])
 
     Ant.mkdir( dir: festTargetDir )
@@ -88,8 +92,8 @@ target(compileFest: "") {
     event("CompileEnd", ['fest'])
 }
 
-target(runFest: "") {
-    if( fest_skip ) return
+target(runFestTests: "") {
+    if( _fest_skip ) return
     Ant.mkdir( dir: festReportDir )
     Ant.testng( classpathref: "fest.runtime.classpath",
                 outputDir: "${festReportDir}",
