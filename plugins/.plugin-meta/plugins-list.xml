@@ -16,7 +16,7 @@
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <title>Allows creating installers for your Griffon application</title>
             <documentation>http://griffon.codehaus.org/Installer+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/fest/trunk/griffon-installer-0.1-SNAPSHOT.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/installer/trunk/griffon-installer-0.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1-SNAPSHOT" name="jide-builder">
@@ -25,7 +25,7 @@
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <title>Jide Builder Plugin</title>
             <documentation>http://griffon.codehaus.org/JideBuilder+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/fest/trunk/griffon-jide-builder-0.1-SNAPSHOT.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/jide-builder/trunk/griffon-jide-builder-0.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1-SNAPSHOT" name="swingx-builder">
@@ -34,7 +34,7 @@
             <authorEmail>james.l.williams@gmail.com</authorEmail>
             <title>SwingX Builder Plugin</title>
             <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/swingx-plugin/trunk/griffon-swingx-builder-0.1-SNAPSHOT.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/swingx-builder/trunk/griffon-swingx-builder-0.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
 </plugins>
