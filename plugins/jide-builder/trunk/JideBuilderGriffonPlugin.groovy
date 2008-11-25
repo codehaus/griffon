@@ -3,9 +3,8 @@ class JideBuilderGriffonPlugin {
     def canBeGlobal = false
     def dependsOn = [:]
 
-    // TODO Fill in these fields
-    def author = "Danno Ferrin"
-    def authorEmail = "danno.ferrin@shemnon.com"
+    def author = "Andres Almiray"
+    def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Jide Builder Plugin"
     def description = '''\\
 Brings the Jide Builder libraries into a Griffon Build 

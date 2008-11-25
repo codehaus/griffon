@@ -3,9 +3,8 @@ class SwingxBuilderGriffonPlugin {
     def canBeGlobal = false
     def dependsOn = [:]
 
-    // TODO Fill in these fields
-    def author = "Danno Ferrin"
-    def authorEmail = "danno.ferrin@shemnon.com"
+    def author = "James Williams"
+    def authorEmail = "james.l.williams@gmail.com"
     def title = "SwingX Builder Plugin"
     def description = '''\\
 Brings the SwingX Builder libraries into a Griffon Build 
