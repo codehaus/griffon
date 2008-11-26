@@ -15,3 +15,8 @@ eventAllTestsEnd = { info, unitOnly, integrationOnly ->
    // call run-fest after all other tests have run
    GSR.callPluginOrGriffonScript("RunFest")
 }
+
+eventJarFilesStart = {
+   // make sure FestGriffonPlugin.class is not added to app jar
+   Ant.delete(file: "${projectWorkDir}/classes/FestGriffonPlugin.class", failonerror: false)
+}
