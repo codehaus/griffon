@@ -60,7 +60,7 @@ class SVGIconFactory extends AbstractJideComponentFactory {
 
    public void setParent( FactoryBuilderSupport builder, Object parent, Object child ){
       try{
-         MetaClass mc = InvokerHelper.getInstance().getMetaClass( parent )
+         MetaClass mc = InvokerHelper.getMetaClass( parent )
          mc.setProperty( parent, "icon", child )
          child.installSizeTracker( parent )
          if( parent.preferredSizeSet && !child.sizeSet ){
