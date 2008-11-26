@@ -1,0 +1,6 @@
+<plugin name='easyb' version='trunk'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Enables BDD testing with Easyb</title>
+  <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
+</plugin>
