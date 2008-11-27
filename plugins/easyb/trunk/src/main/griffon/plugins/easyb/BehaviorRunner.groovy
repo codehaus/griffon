@@ -73,10 +73,10 @@ class BehaviorRunner {
          GroovyShell g = null;
          if (behavior instanceof Story) {
             currentStep = listener.startStep(BehaviorStepType.STORY, behavior.getPhrase());
-            g = new GroovyShell(grailsApp.classLoader,StoryBinding.getBinding(listener));
+            g = new GroovyShell(app.class.classLoader,StoryBinding.getBinding(listener));
          } else {
             currentStep = listener.startStep(BehaviorStepType.SPECIFICATION, behavior.getPhrase());
-            g = new GroovyShell(grailsApp.classLoader,SpecificationBinding.getBinding(listener));
+            g = new GroovyShell(app.class.classLoader,SpecificationBinding.getBinding(listener));
          }
          g.getContext().setVariable("app",app);
          g.evaluate(behaviorFile);
