@@ -1,5 +1,5 @@
 class EasybGriffonPlugin {
-    def version = 'trunk'
+    def version = '0.1'
     def canBeGlobal = true
     def dependsOn = [:]
 
