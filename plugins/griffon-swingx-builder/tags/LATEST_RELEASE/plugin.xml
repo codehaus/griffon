@@ -1,0 +1,6 @@
+<plugin name='swingx-builder' version='0.1-SNAPSHOT'>
+  <author>James Williams</author>
+  <authorEmail>james.l.williams@gmail.com</authorEmail>
+  <title>SwingX Builder Plugin</title>
+  <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
+</plugin>
