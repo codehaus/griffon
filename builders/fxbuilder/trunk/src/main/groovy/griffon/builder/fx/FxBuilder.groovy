@@ -52,11 +52,11 @@ public class FxBuilder extends SwingBuilder {
       registerBeanFactory("swingCheckBox", SwingCheckBox)
       registerBeanFactory("swingComboBox", SwingComboBox)
       registerBeanFactory("swingIcon", SwingIcon)
-      registerBeanFactory("swingList", SwingList)
+      registerFactory("swingList", new FxBeanFactory(SwingList,false))
       registerBeanFactory("swingListItem", SwingListItem)
       registerBeanFactory("swingLabel", SwingLabel)
       registerBeanFactory("swingRadioButton", SwingRadioButton)
-      registerBeanFactory("swingScrollPane", SwingScrollPane)
+      registerFactory("swingScrollPane", new FxBeanFactory(SwingScrollPane,false))
       registerBeanFactory("swingSlider", SwingSlider)
       registerBeanFactory("swingTextField", SwingTextField)
       registerBeanFactory("swingToggleButton", SwingToggleButton)
@@ -74,9 +74,10 @@ public class FxBuilder extends SwingBuilder {
 
    public void registerFxSupport() {
       registerBeanFactory("cursor", Cursor)
-      registerBeanFactory("group", Group)
-      registerBeanFactory("scene", Scene)
-//       registerBeanFactory("stage", Stage)
+      registerFactory("group", new FxBeanFactory(Group,false))
+      registerFactory("scene", new FxBeanFactory(Scene,false))
+      registerFactory("content", new ContentFactory())
+      registerFactory("stage", new FxBeanFactory(Stage,false))
 
       setVariable("CURSOR_DEFAULT",  Cursor."\$DEFAULT")
       setVariable("CURSOR_CROSSHAIR",Cursor."\$CROSSHAIR")
@@ -101,8 +102,8 @@ public class FxBuilder extends SwingBuilder {
 
    public void registerFxLayout() {
       // TODO resolve clash with SwingBuilder[hbox,vbox]
-      registerBeanFactory("hbox", HBox)
-      registerBeanFactory("vbox", VBox)
+      registerFactory("hbox", new FxLayoutFactory(HBox))
+      registerFactory("vbox", new FxLayoutFactory(VBox))
    }
 
    public void registerFxImage() {

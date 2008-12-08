@@ -15,15 +15,12 @@
  */
 
 package griffon.builder.fx.factory
+
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
-abstract class AbstractFxFactory extends AbstractFactory implements FxFactory {
-    public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
-        try {
-           node."initialize\$"()
-        } catch( MissingMethodException mme ) {
-           // ignore
-        }
+class FxLayoutFactory extends FxBeanFactory {
+    FxLayoutFactory( Class beanClass ) {
+        super( beanClass, false )
     }
 }

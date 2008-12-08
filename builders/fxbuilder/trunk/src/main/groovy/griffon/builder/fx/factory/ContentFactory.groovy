@@ -15,15 +15,32 @@
  */
 
 package griffon.builder.fx.factory
+
+import javafx.scene.Node
+import com.sun.javafx.runtime.location.SequenceVariable
+import griffon.builder.fx.impl.ListSequence
+
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
-abstract class AbstractFxFactory extends AbstractFactory implements FxFactory {
+class ContentFactory extends AbstractFxFactory {
+    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+            throws InstantiationException, IllegalAccessException {
+        new ListSequence([])
+    }
+
+    public void setParent( FactoryBuilderSupport builder, Object parent, Object child ) {
+        // keep empty
+    }
+
+    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+        parent << child
+    }
+
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
-        try {
-           node."initialize\$"()
-        } catch( MissingMethodException mme ) {
-           // ignore
+        if( parent ) {
+            parent.attribute("content").set(node)
         }
+        super.onNodeCompleted( builder, parent, node )
     }
 }

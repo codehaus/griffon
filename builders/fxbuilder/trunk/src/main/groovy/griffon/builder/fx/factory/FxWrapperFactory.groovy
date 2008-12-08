@@ -82,6 +82,7 @@ class FxWrapperFactory extends AbstractFxFactory {
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         delegate.onNodeCompleted( builder, parent, node )
+        super.onNodeCompleted( builder, parent, node )
     }
 
     public void setParent( FactoryBuilderSupport builder, Object parent, Object child ) {

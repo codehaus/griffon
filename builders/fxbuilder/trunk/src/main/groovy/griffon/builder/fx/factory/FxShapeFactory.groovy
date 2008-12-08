@@ -21,7 +21,7 @@ package griffon.builder.fx.factory
  */
 class FxShapeFactory extends FxBeanFactory {
     FxShapeFactory( Class beanClass ) {
-        super( beanClass, true )
+        super( beanClass, false )
     }
 
     FxShapeFactory( Class beanClass, boolean leaf ) {
