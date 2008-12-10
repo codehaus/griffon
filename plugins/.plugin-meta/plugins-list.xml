@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="160">
+<plugins revision="172">
     <plugin name="code-coverage"/>
     <plugin name="easyb"/>
     <plugin name="fest"/>
-    <plugin name="installer"/>
+    <plugin latest-release="0.1-SNAPSHOT" name="installer">
+        <release tag="RELEASE_0_1-SNAPSHOT" type="svn" version="0.1-SNAPSHOT">
+            <title>Allows creating installers for your Griffon application</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/Installer+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/tags/RELEASE_0_1-SNAPSHOT/griffon-installer-0.1-SNAPSHOT.zip</file>
+        </release>
+        <release tag="trunk" type="svn" version="0.1-SNAPSHOT">
+            <title>Allows creating installers for your Griffon application</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/Installer+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/trunk/griffon-installer-0.1-SNAPSHOT.zip</file>
+        </release>
+    </plugin>
     <plugin name="jdepend"/>
     <plugin latest-release="0.1-SNAPSHOT" name="jide-builder">
         <release tag="RELEASE_0_1-SNAPSHOT" type="svn" version="0.1-SNAPSHOT">
