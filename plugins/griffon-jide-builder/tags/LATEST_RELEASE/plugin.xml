@@ -1,0 +1,6 @@
+<plugin name='jide-builder' version='0.1-SNAPSHOT'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Jide Builder Plugin</title>
+  <documentation>http://griffon.codehaus.org/JideBuilder+Plugin</documentation>
+</plugin>
