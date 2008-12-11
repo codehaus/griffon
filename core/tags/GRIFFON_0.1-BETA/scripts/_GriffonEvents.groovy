@@ -100,7 +100,7 @@ loadEventHooks = {
     }
 }
 
-void loadEventScript(theFile) {
+loadEventScript = { theFile ->
     try {
         // Load up the given events script.
         def script = eventsClassLoader.parseClass(theFile).newInstance()

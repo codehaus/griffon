@@ -505,6 +505,10 @@ installPluginForName = { String fullPluginName ->
                     println "griffon ${scriptName}"
                 }
             }
+            File pluginEvents = new File("${pluginsDirPath}/${fullPluginName}/scripts/_Events.groovy")
+            if (pluginEvents.exists()) {
+                loadEventScript(pluginEvents)
+            }
 
             event("PluginInstalled", [fullPluginName])
         }
