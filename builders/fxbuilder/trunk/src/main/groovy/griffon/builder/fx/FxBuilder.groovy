@@ -75,7 +75,7 @@ public class FxBuilder extends SwingBuilder {
    public void registerFxSupport() {
       registerBeanFactory("cursor", Cursor)
       registerFactory("group", new FxBeanFactory(Group,false))
-      registerFactory("scene", new FxBeanFactory(Scene,false))
+      registerFactory("scene", new FxSceneFactory())
       registerFactory("content", new ContentFactory())
       registerFactory("stage", new FxBeanFactory(Stage,false))
 
