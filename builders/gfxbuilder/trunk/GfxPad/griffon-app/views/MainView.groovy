@@ -16,6 +16,7 @@
 import java.awt.BorderLayout as BL
 import java.awt.GridBagConstraints
 import javax.swing.SwingConstants
+import org.jdesktop.swingx.plaf.basic.BasicStatusBarUI
 
 build(MainActions)
 
@@ -42,6 +43,7 @@ menuBar( build(MainMenuBar) )
          constraints:gbc(insets: [1,3,1,3])
       )
    }
+   statusPanel.putClientProperty(BasicStatusBarUI.AUTO_ADD_SEPARATOR, false)
 }
 
 build(MainStyles)

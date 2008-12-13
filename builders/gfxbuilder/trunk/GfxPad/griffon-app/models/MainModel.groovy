@@ -14,6 +14,7 @@
  */
 
 import groovy.beans.Bindable
+import ca.odell.glazedlists.BasicEventList
 
 class MainModel {
    @Bindable boolean dirty = false
@@ -21,6 +22,7 @@ class MainModel {
    @Bindable File scriptFile
    @Bindable String status = ""
    @Bindable String errors = ""
+   @Bindable int caretPosition = 0
 
    @Bindable int exportAsImageWidth
    @Bindable int exportAsImageHeight
@@ -34,4 +36,7 @@ class MainModel {
    @Bindable String importFromSvgFile
 
    @Bindable URL currentPage = new URL("file:/")
+
+   @Bindable Map suggestion = [:]
+   List suggestions = new BasicEventList()
 }

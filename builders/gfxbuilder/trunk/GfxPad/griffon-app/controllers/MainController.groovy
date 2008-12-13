@@ -14,9 +14,12 @@
  */
 
 import java.awt.Font
+import java.awt.Robot
 import javax.swing.JFileChooser
 import javax.swing.JOptionPane
+import javax.swing.SwingConstants
 import java.awt.event.ActionEvent
+import javax.imageio.ImageIO
 import groovy.swing.j2d.GraphicsRenderer
 import groovy.swing.j2d.GraphicsBuilder
 import groovy.swing.j2d.GraphicsOperation
@@ -26,6 +29,7 @@ import java.util.prefs.Preferences
 import groovy.ui.text.FindReplaceUtility
 import javax.xml.parsers.SAXParserFactory
 import org.xml.sax.*
+import org.codehaus.groovy.runtime.StackTraceUtils
 
 class MainController {
    def model
@@ -34,7 +38,9 @@ class MainController {
 
    private prefs = Preferences.userNodeForPackage(MainController)
    private File currentFileChooserDir = new File(prefs.get('currentFileChooserDir', '.'))
+   private File currentSnapshotDir = new File(prefs.get('currentSnapshotDir', '.'))
    private templateEngine = new SimpleTemplateEngine()
+   private sampleScript
    private simple_script_source
    private export_script_source
    private GraphicsRenderer gr
@@ -43,6 +49,8 @@ class MainController {
    private runThread = null
    private xmlReader = SAXParserFactory.newInstance().newSAXParser().xMLReader
    private URL nodeReferenceURL
+   private static int scriptCounter = 0
+   private Set factorySet = new TreeSet()
 
    void mvcGroupInit( Map args ) {
       gr = new GraphicsRenderer()
@@ -55,6 +63,8 @@ class MainController {
                    getResourceAsStream("export-script.txt").text
          nodeReferenceURL = Thread.currentThread().contextClassLoader.
                    getResource("node-reference.html")
+         sampleScript = Thread.currentThread().contextClassLoader.
+                   getResourceAsStream("sample-script.txt").text
       }
    }
 
@@ -115,6 +125,32 @@ class MainController {
       }
    }
 
+   def snapshot = { evt ->
+      def fc = new JFileChooser(currentSnapshotDir)
+      fc.fileSelectionMode = JFileChooser.FILES_ONLY
+      fc.acceptAllFileFilterUsed = true
+      if (fc.showDialog(app.appFrames[0], "Snapshot") == JFileChooser.APPROVE_OPTION) {
+         currentSnapshotDir = fc.currentDirectory
+         prefs.put('currentSnapshotDir', currentSnapshotDir.path)
+         def frameBounds = app.appFrames[0].bounds
+         def capture = new Robot().createScreenCapture(frameBounds)
+         def filename = fc.selectedFile.name
+         def dot = filename.lastIndexOf(".")
+         def ext = "png"
+         if( dot > 0 )  {
+            ext = filename[dot+1..-1]
+         } else {
+            filename += ".$ext"
+         }
+         def target = new File(currentSnapshotDir,filename)
+         ImageIO.write( capture, ext, target )
+         def pane = builder.optionPane()
+         pane.setMessage("Successfully saved snapshot to\n\n${target.absolutePath}")
+         def dialog = pane.createDialog(app.appFrames[0], 'Snapshot')
+         dialog.show()
+      }
+   }
+
    private void invokeTextAction( evt, closure ) {
       if( evt.source ) closure(view.editor.textEditor)
    }
@@ -136,16 +172,23 @@ class MainController {
    def replace = { evt = null -> FindReplaceUtility.showDialog(true) }
 
    def largerFont = { evt = null ->
-      def inputArea = view.editor.textEditor
-      def currentFont = inputArea.font
-      if( currentFont.size > 40 ) return
-      inputArea.font = new Font( 'Monospaced', currentFont.style, currentFont.size + 2 )
+      modifyFont(view.editor.textEditor, {it > 40}, +2)
+      modifyFont(view.errors, {it > 40}, +2)
    }
+
    def smallerFont = { evt = null ->
-      def inputArea = view.editor.textEditor
-      def currentFont = inputArea.font
-      if( currentFont.size < 5 ) return
-      inputArea.font = new Font( 'Monospaced', currentFont.style, currentFont.size - 2 )
+      modifyFont(view.editor.textEditor, {it < 5}, -2)
+      modifyFont(view.errors, {it < 5}, -2)
+   }
+
+   def showRulers = { evt = null ->
+      def rh = evt?.source?.state ? view.rowHeader : view.emptyRowHeader
+      def ch = evt?.source?.state ? view.columnHeader : view.emptyColumnHeader
+      if( view.scroller.rowHeader.view != rh ) {
+         view.scroller.rowHeaderView = rh
+         view.scroller.columnHeaderView = ch
+         view.scroller.repaint()
+      }
    }
 
    def runScript = { evt = null ->
@@ -153,7 +196,10 @@ class MainController {
          try {
             doLater {
                model.status = "Running Script ..."
-               model.errors = ""
+               if( !model.errors ) {
+                  model.errors = ""
+                  model.caretPosition = 0
+               }
                view.canvas.removeAll()
                showDialog( "runWaitDialog" )
             }
@@ -167,6 +213,86 @@ class MainController {
             }
          }
       }
+   }
+   
+   def runSampleScript = { evt = null ->
+      if( !model.errors ) {
+         model.errors = ""
+         model.caretPosition = 0
+      }
+      view.tabs.selectedIndex = 0 // sourceTab
+      view.editor.textEditor.text = sampleScript
+      runScript(evt)
+   }
+
+   def showToolbar = { evt = null ->
+      def showToolbar = evt.source.selected
+      prefs.putBoolean('showToolbar', showToolbar)
+      view.toolbar.visible = showToolbar
+   }
+
+   def suggestNodeName = { evt = null ->
+      if( !model.content ) return
+
+      def editor = view.editor.textEditor
+      def caret = editor.caretPosition
+      if( !caret ) return
+
+      def document = editor.document
+      def target = ""
+      def ch = document.getText(--caret,1)
+      while( ch =~ /[a-zA-Z]/ ) {
+         target = ch + target
+         ch = document.getText(--caret,1)
+         if( caret == 0 ) {
+            ch = document.getText(caret,1)
+            if( ch =~ /[a-zA-Z]/ ) target = ch + target
+            break
+         }
+      }
+
+      if( !factorySet ) populateFactorySet()
+      def suggestions = factorySet.findAll{ it.startsWith(target) }
+      if( !suggestions ) return
+      if( suggestions.size() == 1 ) {
+         model.suggestion = [
+            start: caret,
+            end: caret + target.size(),
+            offset: target.size(),
+            text: suggestions.iterator().next()
+         ]
+         writeSuggestion()
+      } else {
+         model.suggestion = [
+            start: caret,
+            end: caret + target.size(),
+            offset: target.size()
+         ]
+         model.suggestions.clear()
+         model.suggestions.addAll(suggestions)
+         view.popup.showPopup(SwingConstants.CENTER, app.appFrames[0])
+         view.suggestionList.selectedIndex = 0
+      }
+   }
+
+   def codeComplete = { evt ->
+      model.suggestion.text = model.suggestions[view.suggestionList.selectedIndex]
+      view.popup.hidePopup(true)
+      writeSuggestion()
+   }
+
+   private writeSuggestion() {
+      if( !model.suggestion ) return
+
+      def editor = view.editor.textEditor
+      def document = editor.document
+      def s = model.suggestion
+      def text = s.text.substring(s.offset)
+      document.insertString(s.end+1, text, null)
+      editor.requestFocus()
+
+      // clear it!
+      model.suggestion = [:]
    }
 
    def exportAsImage = { evt = null -> 
@@ -342,13 +468,17 @@ class MainController {
 
    private void finishWithException( Throwable t ) {
       model.status = 'Execution terminated with exception.'
+      StackTraceUtils.deepSanitize(t)
       t.printStackTrace()
-      displayError( t.message )
-   }
-
-   private void displayError( text ) {
-      model.errors = text
-      view.errors.caretPosition = 0
+      def baos = new ByteArrayOutputStream()
+      t.printStackTrace(new PrintStream(baos))
+      doLater {
+         view.canvas.removeAll()
+         view.canvas.repaint()
+         view.tabs.selectedIndex = 1 // errorsTab
+         model.errors = baos.toString()
+         model.caretPosition = 0
+      }
    }
 
    private void showAlert(title, message) {
@@ -427,5 +557,16 @@ class MainController {
       xmlReader.contentHandler = handler
       xmlReader.parse( new InputSource(new StringReader(svgText)) )
       return writer.toString()
+   }
+
+   private modifyFont( target, sizeFilter, sizeMod ) {
+      def currentFont = target.font
+      if( sizeFilter(currentFont.size) ) return
+      target.font = new Font( 'Monospaced', currentFont.style, currentFont.size + sizeMod )
+   }
+
+   private populateFactorySet() {
+      factorySet.clear()
+      factorySet.addAll(gb.factories.keySet())
    }
 }

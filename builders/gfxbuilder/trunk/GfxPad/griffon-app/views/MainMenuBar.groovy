@@ -56,16 +56,22 @@ menuBar( id: 'menuBar') {
    menu(text: 'View', mnemonic: 'V') {
       menuItem(largerFontAction)
       menuItem(smallerFontAction)
+      checkBoxMenuItem(showRulersAction, selected: true)
+      checkBoxMenuItem(showToolbarAction, selected: controller.showToolbar)
+      separator()
+      menuItem(snapshotAction)
    }
 
    menu(text: 'Script', mnemonic: 'S') {
       menuItem(runAction)
+      menuItem(suggestAction)
    }
 
    if( !isMacOSX ) {
        glue()
        menu(text: 'Help', mnemonic: 'H') {
            menuItem(nodeReferenceAction)
+           menuItem(sampleScriptAction)
            menuItem(aboutAction)
        }
    }

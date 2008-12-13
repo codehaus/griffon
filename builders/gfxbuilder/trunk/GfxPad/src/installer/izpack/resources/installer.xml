@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <installation version="1.0">
   <variables>
-    <variable name="appGroup" value="@app.name"/>
-    <variable name="appTitle" value="GfxPad"/>
-    <variable name="appSubPath" value="GfxPad-0.1"/>
-    <variable name="appVersion" value="0.1"/>
+    <variable name="appGroup" value="@app.name@"/>
+    <variable name="appTitle" value="@app.name@"/>
+    <variable name="appSubPath" value="@app.name@-@app.version@"/>
+    <variable name="appVersion" value="@app.version@"/>
     <!-- pre-select desktop shortcut checkbox -->
     <variable name="DesktopShortcutCheckboxEnabled" value="true" />
   </variables>
@@ -14,15 +14,15 @@
   </native>
   <info>
     <javaversion>1.5</javaversion>
-    <appname>GfxPad</appname>
-    <appsubpath>GfxPad-0.1</appsubpath>
-    <appversion>0.1</appversion>
+    <appname>@app.name@</appname>
+    <appsubpath>@app.name@-@app.version@</appsubpath>
+    <appversion>@app.version@</appversion>
 
     <!-- following appears in HelloPanel -->
     <authors>
-      <author name="Andres Almiray" email="aalmiray@users.sourceforget.net"/>
+      <author name="The Griffon team" email="dev@griffon.codehaus.org"/>
     </authors>
-    <url>http://groovy.codehaus.org/GraphicsBuilder</url>
+    <url>http://groovy.codehaus.org/Griffon</url>
   </info>
 
   <guiprefs width="800" height="600" resizable="yes">
@@ -84,8 +84,8 @@
   </listeners>
 
   <packs>
-    <pack name="GfxPad binary" required="yes">
-      <description>GfxPad binary installation.</description>
+    <pack name="@app.name@ binary" required="yes">
+      <description>@app.name@ binary installation.</description>
 
       <fileset dir="binary/"
          targetdir="$INSTALL_PATH">
@@ -98,9 +98,9 @@
       <parsable targetfile="$INSTALL_PATH/Uninstaller/pre-uninstall.bat" os="windows" />
       <executable targetfile="$INSTALL_PATH/Uninstaller/pre-uninstall.bat" os="windows" stage="uninstall" />
 
-      <executable targetfile="$INSTALL_PATH/bin/GfxPad" os="unix" />
+      <executable targetfile="$INSTALL_PATH/bin/@app.name@" os="unix" />
       <executable targetfile="$INSTALL_PATH/bin/startApp" os="unix" />
-      <executable targetfile="$INSTALL_PATH/bin/GfxPad.bat" os="windows" />
+      <executable targetfile="$INSTALL_PATH/bin/@app.name@.bat" os="windows" />
       <executable targetfile="$INSTALL_PATH/bin/startApp.bat" os="windows" />
     </pack>
   </packs>

@@ -17,39 +17,69 @@ import groovy.ui.ConsoleTextEditor
 import java.awt.Color
 import java.awt.Font
 import java.awt.Toolkit
+import java.awt.event.KeyEvent
+import javax.swing.KeyStroke
 
-import java.awt.BorderLayout as BL
+import static java.awt.BorderLayout.*
 import javax.swing.BorderFactory as BF
+import javax.swing.JTabbedPane
+import javax.swing.ListSelectionModel
 import javax.swing.event.CaretListener
 import javax.swing.event.DocumentListener
 import static javax.swing.JSplitPane.VERTICAL_SPLIT
 import groovy.swing.j2d.GraphicsPanel
 import groovy.swing.j2d.event.*
+import ca.odell.glazedlists.swing.EventListModel
 
 rowHeader = new ScrollPaneRuler(ScrollPaneRuler.VERTICAL)
 columnHeader = new ScrollPaneRuler(ScrollPaneRuler.HORIZONTAL)
 
+emptyRowHeader = label("")
+emptyColumnHeader = label("")
+
 splitPane(id: 'splitPane', resizeWeight: 0.75F,
       orientation: VERTICAL_SPLIT ) {
-   scrollPane( id: 'canvasScroller', constraints:BL.CENTER,
-               border: BF.createLineBorder(Color.BLACK),
+   scrollPane( id: 'scroller', constraints: CENTER,
+               border: lineBorder(color: Color.BLACK, thickness: 1),
                rowHeaderView: rowHeader, columnHeaderView: columnHeader ){
-      panel( new GraphicsPanel(), id: 'canvas', border: BF.createEmptyBorder(),
-            background: Color.white )
+      widget( new GraphicsPanel(), id: 'canvas', border: emptyBorder(0) )
    }
-   panel {
-      borderLayout( )
-      container( new ConsoleTextEditor(), id: 'editor', constraints: BL.CENTER,
-                  border: BF.createTitledBorder(BF.createLineBorder(Color.BLACK), "Source"),
-                  font: new Font( Font.MONOSPACED, Font.PLAIN, 14 ) ){
-         action(runAction)
+   tabbedPane( id: "tabs", constraints: CENTER, tabPlacement: JTabbedPane.BOTTOM, 
+               border: lineBorder(color:Color.BLACK, thickness:1) ) {
+      panel( title: "Source", id: "sourceTab" ) {
+         borderLayout()
+         container( new ConsoleTextEditor(), id: 'editor', border: emptyBorder(0),
+                    font: new Font( "Monospaced", Font.PLAIN, 14 ) ){
+            action(runAction)
+         }
       }
-      scrollPane( constraints: BL.SOUTH,
-                  border: BF.createTitledBorder(BF.createLineBorder(Color.BLACK), "Errors") ) {
-         textArea( id: 'errors', rows: 2, text: bind { model.errors } )
+      panel( title: "Errors", id: "errorsTab" ) {
+         borderLayout()
+         scrollPane( border: emptyBorder(0) ) {
+            textArea( id: 'errors', border: emptyBorder(0),
+                     background: Color.WHITE, editable: false,
+                     font: new Font( "Monospaced", Font.PLAIN, 10 ),
+                     caretPosition: bind(reverse:true){ model.caretPosition },
+                     text: bind(reverse:true){ model.errors } )
+         }
       }
    }
 }
+
+jidePopup( id: 'popup', movable: false, resizable: false,
+   popupMenuCanceled: { evt -> editor.textEditor.requestFocus() } ) {
+   panel {
+      borderLayout()
+      scrollPane() {
+         list( id: "suggestionList",
+               selectionMode: ListSelectionModel.SINGLE_SELECTION,
+               model: new EventListModel(model.suggestions) )
+      }
+   }
+}
+popup.setDefaultFocusComponent(suggestionList)
+suggestionList.inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "complete")
+suggestionList.actionMap.put("complete", completeAction)
 
 canvas.addGraphicsErrorListener({ evt ->
    controller.displayError( evt.cause.localizedMessage )

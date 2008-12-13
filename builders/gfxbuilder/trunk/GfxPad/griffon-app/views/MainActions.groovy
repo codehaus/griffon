@@ -55,6 +55,10 @@ actions {
       mnemonic: 'B',
       accelerator: shortcut('B')
    )
+   action( id: 'sampleScriptAction',
+      name: 'Run Sample Script',
+      closure: controller.runSampleScript
+   )
 
    action( id: 'saveAction',
       name: 'Save',
@@ -75,7 +79,7 @@ actions {
       name: 'Import from svg...',
       closure: controller.importFromSvg,
       mnemonic: 'G',
-      accelerator: shortcut('G'),
+      accelerator: shortcut('shift G'),
       shortDescription: 'Import from a SVG file'
    )
    action( id: 'exportAsImageAction',
@@ -83,7 +87,7 @@ actions {
       enabled: bind {model.dirty},
       closure: controller.exportAsImage,
       mnemonic: 'I',
-      accelerator: shortcut('I'),
+      accelerator: shortcut('shift I'),
       shortDescription: 'Export as image (png|gif)'
    )
    action( id: 'exportAsScriptAction',
@@ -91,7 +95,7 @@ actions {
       enabled: bind {model.dirty},
       closure: controller.exportAsScript,
       mnemonic: 'T',
-      accelerator: shortcut('T'),
+      accelerator: shortcut('shift T'),
       shortDescription: 'Export as standalone script'
    )
    action( id: 'exportAsSvgAction',
@@ -99,7 +103,7 @@ actions {
       enabled: bind {model.dirty},
       closure: controller.exportAsSvg,
       mnemonic: 'V',
-      accelerator: shortcut('V'),
+      accelerator: shortcut('shift V'),
       shortDescription: 'Export as SVG file'
    )
 
@@ -188,6 +192,26 @@ actions {
       mnemonic: 'S',
       accelerator: shortcut('shift S')
    )
+   action(id: 'showRulersAction',
+      name: 'Rulers',
+      closure: controller.showRulers,
+      accelerator: shortcut('shift U')
+   )
+   action(id: 'showToolbarAction',
+      name: 'Show Toolbar',
+      closure: controller.showToolbar
+   )
+   action(id: 'suggestAction',
+      name: 'Code Suggest',
+      enabled: bind {model.dirty},
+      closure: controller.suggestNodeName,
+      mnemonic: 'G',
+      accelerator: shortcut('G'),
+      keyStroke: shortcut('SPACE')
+   )
+   action(id: 'completeAction',
+      closure: controller.codeComplete
+   )
 
    action(id: 'runAction',
       name: 'Run',
@@ -203,5 +227,14 @@ actions {
    action(id: 'interruptAction',
       name: 'Interrupt',
       closure: controller.confirmRunInterrupt
+   )
+
+   action(id: 'snapshotAction',
+      name: 'Snapshot',
+      closure: controller.snapshot,
+      mnemonic: 'T',
+      accelerator: shortcut('T'),
+      smallIcon: imageIcon(resource:"icons/camera.png", class: MainActions),
+      shortDescription: 'Take a snapshot'
    )
 }

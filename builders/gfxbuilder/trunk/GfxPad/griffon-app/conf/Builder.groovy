@@ -6,6 +6,9 @@ root {
     'griffon.app.ApplicationBuilder' {
         view = '*'
     }
+    'griffon.builder.jide.JideBuilder' {
+        view = '*'
+    }
 }
 
 jx {
