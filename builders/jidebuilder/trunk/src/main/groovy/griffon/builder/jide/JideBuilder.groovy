@@ -72,7 +72,7 @@ public class JideBuilder extends SwingBuilder {
       // handle 'panes' in JideSplitPane
 
       /* ==================================== */
-      registerFactory("svgIcon", new SVGIconFactory())
+      registerFactory("jideSvgIcon", new SVGIconFactory())
 
       // delegates
       addAttributeDelegate(JideBuilder.&calculatorAttributeDelegate)
