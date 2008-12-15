@@ -19,6 +19,8 @@ package griffon.builder.flamingo
 import groovy.swing.SwingBuilder
 import griffon.builder.flamingo.factory.*
 
+import org.jvnet.flamingo.common.*
+
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
@@ -43,7 +45,13 @@ public class FlamingoBuilder extends SwingBuilder {
    }
 
    public void registerFlamingoWidgets() {
-      registerFactory("commandButton", new CommandButtonFactory())
+      registerFactory("commandButton", new CommandButtonFactory(JCommandButton))
       registerFactory("commandButtonPanel", new CommandButtonPanelFactory())
+      registerFactory("commandButtonStrip", new CommandButtonStripFactory())
+      registerFactory("commandMenuButton", new CommandButtonFactory(JCommandMenuButton))
+      registerFactory("commandToggleButton", new CommandButtonFactory(JCommandToggleButton))
+      registerFactory("flexiSlider", new FlexiSliderFactory())
+      registerFactory("range", new FlexiRangeFactory())
+      registerFactory("controlPoint", new FlexiControlPointFactory())
    }
 }

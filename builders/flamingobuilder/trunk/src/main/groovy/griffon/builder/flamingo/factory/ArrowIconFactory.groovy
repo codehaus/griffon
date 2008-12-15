@@ -43,6 +43,9 @@ class ArrowIconFactory extends AbstractFactory {
             case SwingConstants.NORTH:
             case SwingConstants.SOUTH:
                break
+            case {it instanceof String}:
+               d = SwingConstants."${d.toUpperCase()}"
+               break
             default:
                throw new IllegalArgumentException("Invalid direction '$d' for arrowIcon");
          }
@@ -55,7 +58,7 @@ class ArrowIconFactory extends AbstractFactory {
       if( (!id instanceof Dimension) ) throw new RuntimeException("In $name initialDim: attributes must be of type java.awt.Dimension")
 
       if( attributes.remove("doubleHeaded") ) {
-         return new DoubleArrowResizableIcon(id,d)
+         return new DoubleArrowResizableIcon(id,SwingConstants.SOUTH)
       } else {
          return new ArrowResizableIcon(id,d)
       }

@@ -53,7 +53,7 @@ class CommandButtonPanelFactory extends AbstractFactory {
 
       def startingDimension = attributes.remove("startingDimension")
       if(startingDimension) return new JCommandButtonPanel(startingDimension)
-      CommandButtonFactory.translateStringConstant("commandButtonDisplayState",CommandButtonDisplayState,attributes)
+      FlamingoFactoryUtils.translateCommandButtonConstants(attributes)
       def commandButtonDisplayState = attributes.remove("commandButtonDisplayState")
       if(commandButtonDisplayState) return new JCommandButtonPanel(commandButtonDisplayState)
       def panel = new JCommandButtonPanel()
