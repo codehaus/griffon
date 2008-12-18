@@ -241,15 +241,13 @@ class MainController {
       def document = editor.document
       def target = ""
       def ch = document.getText(--caret,1)
+      def update = false
       while( ch =~ /[a-zA-Z]/ ) {
          target = ch + target
-         ch = document.getText(--caret,1)
-         if( caret == 0 ) {
-            ch = document.getText(caret,1)
-            if( ch =~ /[a-zA-Z]/ ) target = ch + target
-            break
-         }
+         if( caret ){ ch = document.getText(--caret,1); update = true }
+         else break
       }
+      if( update ) caret++
 
       if( !factorySet ) populateFactorySet()
       def suggestions = factorySet.findAll{ it.startsWith(target) }
@@ -288,7 +286,7 @@ class MainController {
       def document = editor.document
       def s = model.suggestion
       def text = s.text.substring(s.offset)
-      document.insertString(s.end+1, text, null)
+      document.insertString(s.start+s.offset, text, null)
       editor.requestFocus()
 
       // clear it!
@@ -477,6 +475,16 @@ class MainController {
          view.canvas.repaint()
          view.tabs.selectedIndex = 1 // errorsTab
          model.errors = baos.toString()
+         model.caretPosition = 0
+      }
+   }
+
+   private void displayError( String message ) {
+      doLater {
+         view.canvas.removeAll()
+         view.canvas.repaint()
+         view.tabs.selectedIndex = 1 // errorsTab
+         model.errors = message
          model.caretPosition = 0
       }
    }
