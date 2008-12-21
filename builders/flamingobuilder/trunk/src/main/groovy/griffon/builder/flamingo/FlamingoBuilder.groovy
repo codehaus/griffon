@@ -45,7 +45,7 @@ public class FlamingoBuilder extends SwingBuilder {
       registerFactory("commandButtonStrip", new CommandButtonStripFactory())
       registerFactory("commandMenuButton", new CommandButtonFactory(JCommandMenuButton))
       registerFactory("commandToggleButton", new CommandButtonFactory(JCommandToggleButton))
-       registerFactory("commandToggleButtonGroup", new CommandToggleButtonGroupFactory())
+      registerFactory("commandToggleButtonGroup", new CommandToggleButtonGroupFactory())
       addAttributeDelegate(CommandToggleButtonGroupFactory.&buttonGroupAttributeDelegate)
    }
 
@@ -56,6 +56,8 @@ public class FlamingoBuilder extends SwingBuilder {
    }
 
    public void registerFlamingoBreadcrumb() {
-      registerFactory("breadcrumbItem", new BreadcrumbItemFactory())
+      registerFactory("fileBreadcrumbBar", new BreadcrumbFileSelectorFactory())
+      registerFactory("treeBreadcrumbBar", new BreadcrumbTreeAdapterSelectorFactory())
+//       registerFactory("breadcrumbItem", new BreadcrumbItemFactory())
    }
 }
