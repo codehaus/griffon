@@ -56,6 +56,7 @@ public class FlamingoBuilder extends SwingBuilder {
    }
 
    public void registerFlamingoBreadcrumb() {
+      registerFactory("breadcrumbBar", new BreadcrumbBarFactory())
       registerFactory("fileBreadcrumbBar", new BreadcrumbFileSelectorFactory())
       registerFactory("treeBreadcrumbBar", new BreadcrumbTreeAdapterSelectorFactory())
 //       registerFactory("breadcrumbItem", new BreadcrumbItemFactory())
