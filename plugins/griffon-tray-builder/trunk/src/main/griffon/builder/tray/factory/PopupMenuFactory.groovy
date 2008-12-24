@@ -18,9 +18,11 @@ package griffon.builder.tray.factory
 import java.awt.TrayIcon
 import java.awt.PopupMenu
 import java.awt.Menu
-import griffon.builder.tray.impl.SwingPopupMenu
 import javax.swing.JMenuItem
+import javax.swing.JSeparator
 import javax.swing.Action
+
+import griffon.builder.tray.impl.SwingPopupMenu
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
@@ -37,7 +39,8 @@ class PopupMenuFactory extends AbstractFactory {
     }
 
     public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
-        if( child instanceof String || child instanceof Action || child instanceof JMenuItem ) {
+        if( child instanceof String || child instanceof Action || 
+            child instanceof JMenuItem || child instanceof JSeparator ) {
             parent.add(child)
         }
     }

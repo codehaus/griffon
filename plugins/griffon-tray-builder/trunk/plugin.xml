@@ -3,4 +3,5 @@
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>TrayBuilder Plugin</title>
   <documentation>http://griffon.codehaus.org/TrayBuilder+Plugin</documentation>
+  <dependencies />
 </plugin>
