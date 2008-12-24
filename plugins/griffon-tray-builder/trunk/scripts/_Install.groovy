@@ -14,7 +14,7 @@ o.each() { prefix, v ->
 if (!builderIsSet) {
     println 'Adding TrayBuilder to Builders.groovy'
     new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
-root.'griffon.builder.tray.TrayBuilder'.view = '*
+root.'griffon.builder.tray.TrayBuilder'.view = '*'
 """)
 }
 
