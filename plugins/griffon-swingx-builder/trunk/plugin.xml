@@ -3,4 +3,5 @@
   <authorEmail>james.l.williams@gmail.com</authorEmail>
   <title>SwingX Builder Plugin</title>
   <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
+  <dependencies />
 </plugin>
