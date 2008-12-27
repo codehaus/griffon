@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="227">
-    <plugin name="code-coverage"/>
+<plugins revision="245">
+    <plugin latest-release="0.1" name="code-coverage">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Generates Code Coverage reports</title>
+            <author>Andres Allmiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_1/griffon-code-coverage-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="easyb"/>
     <plugin name="fest"/>
     <plugin name="flamingo-builder">
