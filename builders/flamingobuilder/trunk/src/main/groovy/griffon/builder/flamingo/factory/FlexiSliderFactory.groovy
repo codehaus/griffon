@@ -19,6 +19,9 @@ package griffon.builder.flamingo.factory
 import javax.swing.Icon
 import org.jvnet.flamingo.slider.FlexiRangeModel
 import org.jvnet.flamingo.slider.JFlexiSlider
+import javax.swing.event.ChangeListener
+
+import groovy.swing.SwingBuilder
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
@@ -28,6 +31,7 @@ class FlexiSliderFactory extends AbstractFactory {
             throws InstantiationException, IllegalAccessException {
         builder.context.ranges = []
         builder.context.controlPoints = []
+        builder.context.flexiId = attributes[builder.getAt(SwingBuilder.DELEGATE_PROPERTY_OBJECT_ID) ?: SwingBuilder.DEFAULT_DELEGATE_PROPERTY_OBJECT_ID]
         return [:]
     }
 
@@ -46,6 +50,17 @@ class FlexiSliderFactory extends AbstractFactory {
            def flexiSlider = new JFlexiSlider( builder.context.ranges as FlexiRangeModel.Range[],
                                                icons as Icon[],
                                                texts as String[] )
+           if( node.stateChanged ) {
+              flexiSlider.model.addChangeListener(node.stateChanged as ChangeListener)
+           }
+           if( builder.context.flexiId ) {
+              builder.setVariable(builder.context.flexiId, flexiSlider)
+           }
+           if( builder.context.startingRange ) {
+              def range = builder.context.startingRange.range
+              def fraction = builder.context.startingRange.fraction
+              flexiSlider.value = new FlexiRangeModel.Value(range,fraction)
+           }
            if( builder.parentFactory ) {
                builder.parentFactory.setChild(builder,parent,flexiSlider)
            }
@@ -69,8 +84,9 @@ class FlexiRangeFactory extends AbstractFactory {
     public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
         def n = attributes.remove("name")
-        def d = attributes.remove("discrete")
-        def w = attributes.remove("weight")
+        def d = attributes.remove("discrete") ?: false
+        def w = attributes.remove("weight") ?: 0.0
+        builder.context.startingValue = attributes.remove("startingValue")
 
         if( !n ) {
             return new FlexiRangeModel.Range(d,w)
@@ -79,9 +95,12 @@ class FlexiRangeFactory extends AbstractFactory {
         }
     }
 
-    public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
-        if( builder.parentContext.ranges != null ) {
-            builder.parentContext.ranges << node
+    public void setParent( FactoryBuilderSupport builder, Object parent, Object child ) {
+        if( builder?.parentContext?.ranges != null ) {
+            builder.parentContext.ranges << child
+            if( builder.context.startingValue != null ) {
+               builder.parentContext.startingRange = [range:child,fraction:builder.context.startingValue]
+            }
         }
     }
 }
@@ -106,9 +125,9 @@ class FlexiControlPointFactory extends AbstractFactory {
         return [icon: i, text: t]
     }
 
-    public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
-        if( builder.parentContext.controlPoints != null ) {
-            builder.parentContext.controlPoints << node
+    public void setParent( FactoryBuilderSupport builder, Object parent, Object child ) {
+        if( builder?.parentContext?.controlPoints != null ) {
+            builder.parentContext.controlPoints << child
         }
     }
 }
