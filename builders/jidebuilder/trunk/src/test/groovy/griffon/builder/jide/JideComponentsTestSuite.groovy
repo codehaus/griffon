@@ -16,6 +16,7 @@
 
 package griffon.builder.jide
 
+import java.awt.Color
 import java.awt.Component
 import javax.swing.*
 import griffon.builder.jide.JideBuilder
@@ -67,6 +68,7 @@ public class JideComponentsTestSuite extends GroovySwingTestCase {
          checkBoxListWithSelectable: CheckBoxListWithSelectable,
          checkBoxTree: CheckBoxTree,
          clickThroughLabel: ClickThroughLabel,
+         clickThroughStyledLabel: ClickThroughStyledLabel,
          contentContainer: ContentContainer,
          dateSpinner: DateSpinner,
          dialogBannerPanel: DialogBannerPanel,
@@ -75,6 +77,7 @@ public class JideComponentsTestSuite extends GroovySwingTestCase {
          dialogPage: DefaultDialogPage,
          gripper: Gripper,
          headerBox: HeaderBox,
+         infiniteProgressPanel: InfiniteProgressPanel,
          jideButton: JideButton,
          jideMenu: JideMenu,
          jidePopup: JidePopup,
@@ -86,7 +89,9 @@ public class JideComponentsTestSuite extends GroovySwingTestCase {
          jideToggleButton: JideToggleButton,
          jideToggleSplitButton: JideToggleSplitButton,
          labeledTextField: LabeledTextField,
+         meterProgressBar: MeterProgressBar,
          multilineLabel: MultilineLabel,
+         multilineToggleButton: MultilineToggleButton,
          multiplePageDialogPane: MultiplePageDialogPane,
          nullButton: NullButton,
          nullCheckBox: NullCheckBox,
@@ -99,6 +104,7 @@ public class JideComponentsTestSuite extends GroovySwingTestCase {
          pointSpinner: PointSpinner,
          rangeSlider: RangeSlider,
          simpleScrollPane: SimpleScrollPane,
+         scrollableButtonPanel: ScrollableButtonPanel,
          styledLabel: StyledLabel,
          tristateCheckBox: TristateCheckBox,
          overlayCheckBox: OverlayCheckBox,
@@ -397,11 +403,35 @@ public class JideComponentsTestSuite extends GroovySwingTestCase {
       def jide = new JideBuilder()
       jide.panel {
          jide.button(id: "button")
-         jide.animator(id: "animator", source: button,
-                 totalSteps: 9, animatorListener: animatorListener )
+         jide.animator(id: "animator", source: button, totalSteps: 9 )
       }
+      jide.animator.addAnimatorListener(animatorListener)
       jide.animator.start()
       Thread.sleep( 300 )
       assert count == 10
+   }
+
+   void testBorders() {
+      def jide = new JideBuilder()
+      def panel = jide.panel( border: jide.partialLineBorder(color:Color.BLACK) )
+      assert panel.border instanceof PartialLineBorder
+      panel = jide.panel( border: jide.partialEtchedBorder() )
+      assert panel.border instanceof PartialEtchedBorder
+      panel = jide.panel( border: jide.partialLoweredEtchedBorder() )
+      assert panel.border instanceof PartialEtchedBorder
+      panel = jide.panel( border: jide.partialRaisedEtchedBorder() )
+      assert panel.border instanceof PartialEtchedBorder
+      panel = jide.panel( border: jide.partialGradientLineBorder(colors:[Color.BLACK,Color.WHITE]) )
+      assert panel.border instanceof PartialGradientLineBorder
+   }
+
+   void testTitledSeparator() {
+      def jide = new JideBuilder()
+      jide.panel {
+         titledSeparator( "TITLE", id: "ts", type: "partial line", textAlignment: "RIGHT" )
+      }
+      assert jide.ts instanceof TitledSeparator
+      assert jide.ts.separatorBorder instanceof PartialLineBorder
+      assert jide.ts.textAlignment == SwingConstants.RIGHT
    }
 }
