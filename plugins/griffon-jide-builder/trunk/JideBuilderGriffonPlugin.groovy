@@ -2,6 +2,7 @@ class JideBuilderGriffonPlugin {
     def version = "0.1-SNAPSHOT"
     def canBeGlobal = false
     def dependsOn = [:]
+    def jdk = "1.5"
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
