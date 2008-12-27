@@ -1,27 +1,30 @@
-/*
- * Copyright 2008 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+/* --------------------------------------------------------------------
+   TrayBuilder
+   Copyright (C) 2008 Andres Almiray
+
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this library; if not, see <http://www.gnu.org/licenses/>.
+   ---------------------------------------------------------------------
+*/
 
 package griffon.builder.tray.factory
 
 import java.awt.SystemTray
-import java.awt.TrayIcon
-import java.awt.Menu
-import java.awt.PopupMenu
 import java.awt.Image
 import java.awt.Toolkit
+
+import javax.swing.JPopupMenu
+import net.java.fishfarm.ui.JPopupTrayIcon
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
@@ -82,7 +85,7 @@ class TrayIconFactory extends AbstractFactory {
             throw new RuntimeException("$name has neither a value argument or one of image:, url:, file:, or resource:")
         }
 
-        def trayIcon = new TrayIcon(Toolkit.getDefaultToolkit().getImage(value))
+        def trayIcon = new JPopupTrayIcon(Toolkit.getDefaultToolkit().getImage(value))
         trayIcon.imageAutoSize = true
         return trayIcon
     }
@@ -90,6 +93,14 @@ class TrayIconFactory extends AbstractFactory {
     public void setParent( FactoryBuilderSupport builder, Object parent, Object child ) {
         if( parent instanceof SystemTray ) {
             parent.add(child)
+        }
+    }
+
+    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+        if( child instanceof JPopupMenu ) {
+            parent.setJPopupMenu(child)
+        } else {
+            throw new RuntimeException("taryIcon only accepts JPopupMenu instances as children")
         }
     }
 }
