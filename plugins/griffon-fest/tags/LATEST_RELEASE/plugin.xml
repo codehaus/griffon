@@ -1,7 +1,0 @@
-<plugin name='fest' version='0.1-SNAPSHOT' jdk='1.4'>
-  <author>Andres Almiray</author>
-  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-  <title>Enables application testing with FEST</title>
-  <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
-  <dependencies />
-</plugin>
