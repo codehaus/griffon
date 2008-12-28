@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="265">
+<plugins revision="270">
     <plugin latest-release="0.1" name="code-coverage">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generates Code Coverage reports</title>
@@ -57,7 +57,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/trunk/griffon-installer-0.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
-    <plugin name="jdepend"/>
+    <plugin latest-release="0.1" name="jdepend">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Runs JDepend metrics on your Griffon application</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/Jdepend+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jdepend/tags/RELEASE_0_1/griffon-jdepend-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.1-SNAPSHOT" name="jide-builder">
         <release tag="RELEASE_0_1-SNAPSHOT" type="svn" version="0.1-SNAPSHOT">
             <title>Jide Builder Plugin</title>
