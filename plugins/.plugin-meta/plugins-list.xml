@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="270">
+<plugins revision="275">
     <plugin latest-release="0.1" name="code-coverage">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generates Code Coverage reports</title>
@@ -29,7 +29,15 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/trunk/griffon-fest-0.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
-    <plugin name="flamingo-builder">
+    <plugin latest-release="0.1-SNAPSHOT" name="flamingo-builder">
+        <release tag="RELEASE_0_1-SNAPSHOT" type="svn" version="0.1-SNAPSHOT">
+            <title>FlamingoBuilder Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/FlamingoBuilder+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_1-SNAPSHOT/griffon-flamingo-builder-0.1-SNAPSHOT.zip</file>
+        </release>
         <release tag="trunk" type="svn" version="0.1-SNAPSHOT">
             <title>FlamingoBuilder Plugin</title>
             <author>Andres Almiray</author>
