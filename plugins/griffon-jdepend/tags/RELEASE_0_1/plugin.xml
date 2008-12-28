@@ -1,0 +1,7 @@
+<plugin name='jdepend' version='0.1' jdk='1.4'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Runs JDepend metrics on your Griffon application</title>
+  <documentation>http://griffon.codehaus.org/Jdepend+Plugin</documentation>
+  <dependencies />
+</plugin>
