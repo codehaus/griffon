@@ -241,13 +241,12 @@ class MainController {
       def document = editor.document
       def target = ""
       def ch = document.getText(--caret,1)
-      def update = false
       while( ch =~ /[a-zA-Z]/ ) {
          target = ch + target
-         if( caret ){ ch = document.getText(--caret,1); update = true }
+         if( caret ) ch = document.getText(--caret,1)
          else break
       }
-      if( update ) caret++
+      if( target.size() != document.length ) caret++
 
       if( !factorySet ) populateFactorySet()
       def suggestions = factorySet.findAll{ it.startsWith(target) }
