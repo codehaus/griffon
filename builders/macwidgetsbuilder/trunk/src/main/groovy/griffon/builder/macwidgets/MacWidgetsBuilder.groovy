@@ -33,22 +33,22 @@ public class MacWidgetsBuilder extends SwingBuilder {
    }
 
    def registerMacWidgets() {
-      registerFactory("macButtonAddItem16", new MacButtonFactory(
+      registerFactory("macButtonAddItem16", new MacButtonsFactory(
          MacWidgetsIcons.ADD_ITEM_16, "segmentedTextured", false
       ))
-      registerFactory("macButtonAddItem18", new MacButtonFactory(
+      registerFactory("macButtonAddItem18", new MacButtonsFactory(
          MacWidgetsIcons.ADD_ITEM_18, "segmentedTextured", false
       ))
-      registerFactory("macButtonRemoveItem16", new MacButtonFactory(
+      registerFactory("macButtonRemoveItem16", new MacButtonsFactory(
          MacWidgetsIcons.REMOVE_ITEM_16, "segmentedTextured", false
       ))
-      registerFactory("macButtonRemoveItem18", new MacButtonFactory(
+      registerFactory("macButtonRemoveItem18", new MacButtonsFactory(
          MacWidgetsIcons.REMOVE_ITEM_18, "segmentedTextured", false
       ))
-      registerFactory("macButtonLock", new MacButtonFactory(
+      registerFactory("macButtonLock", new MacButtonsFactory(
          MacWidgetsIcons.LOCK, "textured"
       ))
-      registerFactory("macButtonSourceViewNormal", new MacButtonFactory(
+      registerFactory("macButtonSourceViewNormal", new MacButtonsFactory(
          MacWidgetsIcons.SOURCE_VIEW_NORMAL, "segmentedTextured", true, MacWidgetsIcons.SOURCE_VIEW_NORMAL_SELECTED
       ))
 
@@ -62,6 +62,8 @@ public class MacWidgetsBuilder extends SwingBuilder {
       registerFactory("itunesTable", new ITunesTableFactory())
       registerFactory("labeledComponentGroup", new LabeledComponentGroupFactory())
 //       registerFactory("macPreferencesTabBar", new MacPreferencesTabBarFactory())
+      registerFactory("macGradientButton", new MacGradientButtonFactory())
+      registerFactory("macGradientPopdownButton", new MacGradientPopdownButtonFactory())
       registerFactory("preferencesTab", new PreferencesTabFactory())
       registerFactory("preferencesTabBar", new PreferencesTabBarFactory())
       registerFactory("sourceList", new SourceListFactory())
@@ -69,9 +71,13 @@ public class MacWidgetsBuilder extends SwingBuilder {
       registerFactory("sourceListItem", new SourceListItemFactory())
       registerFactory("sourceListControlBar", new SourceListControlBarFactory())
       registerFactory("sourceListSplitPane", new SourceListSplitPaneFactory())
+      registerFactory("sourceListContextMenuProvider", new SourceListContextMenuProviderFactory())
       registerFactory("controlBarButton", new SourceListControlBarButtonFactory())
       registerFactory("controlBarPopdownButton", new SourceListControlBarPopdownButtonFactory())
       registerFactory("spacer", new SpacerFactory())
+      registerFactory("unifiedToolBar", new UnifiedToolBarFactory())
+      registerFactory("preferencesBarButton", new MacBarButonFactory(MacBarButtonType.UNIFIED_TOOLBAR))
+      registerFactory("unifiedToolBarButton", new MacBarButonFactory(MacBarButtonType.UNIFIED_TOOLBAR))
 
       addAttributeDelegate(MacWidgetsBuilder.&repaintWindowAttributeDelegate)
       addAttributeDelegate(MacWidgetsBuilder.&leopardizeWindowAttributeDelegate)

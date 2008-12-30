@@ -24,6 +24,7 @@ import com.explodingpixels.macwidgets.SourceListCategory
 import com.explodingpixels.macwidgets.SourceListClickListener
 import com.explodingpixels.macwidgets.SourceListSelectionListener
 import com.explodingpixels.macwidgets.SourceListControlBar
+import com.explodingpixels.macwidgets.SourceListContextMenuProvider
 
 import javax.swing.JComponent
 import groovy.swing.SwingBuilder
@@ -83,8 +84,10 @@ class SourceListFactory extends AbstractFactory {
       } else if( child instanceof SourceListControlBar ) {
          builder.parentContext.sourceList.installSourceListControlBar(child)
          builder.parentContext.sourceListControlBar = child
+      } else if( child instanceof SourceListContextMenuProvider ) {
+         builder.parentContext.sourceList.sourceListContextMenuProvider = child
       } else {
-         throw new RuntimeException("sourceList accepts sourceListCategory() and sourceListControlBar() as child content only.")
+         throw new RuntimeException("sourceList accepts sourceListCategory, sourceListControlBar and sourceListContextMenuProvider as child content only.")
       }
    }
 }

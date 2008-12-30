@@ -177,3 +177,17 @@ class ComponentStatusBarFactory extends TriAreaComponentFactory {
       builder.parentContext.triArea.addComponentToRightWithBorder(child)
    }
 }
+
+/**
+ * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ */
+class UnifiedToolBarFactory extends TriAreaComponentFactory {
+   UnifiedToolBarFactory() {
+      super(TriAreaComponent)
+   }
+
+   protected triAreaInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+            throws InstantiationException, IllegalAccessException {
+      return MacWidgetFactory.createUnifiedToolBar()
+   }
+}
