@@ -22,6 +22,7 @@ import com.explodingpixels.macwidgets.SourceListItem
 import com.explodingpixels.macwidgets.SourceListCategory
 import com.explodingpixels.macwidgets.SourceListClickListener
 import com.explodingpixels.macwidgets.SourceListSelectionListener
+import com.explodingpixels.macwidgets.SourceListControlBar
 
 import groovy.swing.SwingBuilder
 import org.codehaus.groovy.runtime.InvokerHelper
@@ -72,8 +73,10 @@ class SourceListFactory extends AbstractFactory {
    public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
       if( child instanceof SourceListCategory ) {
          builder.context.sourceListModel.addCategory(child)
+      } else if( child instanceof SourceListControlBar ) {
+         builder.parentContext.sourceList.installSourceListControlBar(child)
       } else {
-         throw new RuntimeException("sourceList accepts sourceListCategory() as child content only.")
+         throw new RuntimeException("sourceList accepts sourceListCategory() and sourceListControlBar() as child content only.")
       }
    }
 }

@@ -57,12 +57,16 @@ public class MacWidgetsBuilder extends SwingBuilder {
       registerFactory("iappScrollPane", new IAppScrollPaneFactory())
       registerFactory("imageButton", new ImageButtonFactory())
       registerFactory("itunesTable", new ITunesTableFactory())
+      registerFactory("labeledComponentGroup", new LabeledComponentGroupFactory())
 //       registerFactory("macPreferencesTabBar", new MacPreferencesTabBarFactory())
       registerFactory("preferencesTab", new PreferencesTabFactory())
       registerFactory("preferencesTabBar", new PreferencesTabBarFactory())
       registerFactory("sourceList", new SourceListFactory())
       registerFactory("sourceListCategory", new SourceListCategoryFactory())
       registerFactory("sourceListItem", new SourceListItemFactory())
+      registerFactory("sourceListControlBar", new SourceListControlBarFactory())
+      registerFactory("controlBarButton", new SourceListControlBarButtonFactory())
+      registerFactory("controlBarPopdownButton", new SourceListControlBarPopdownButtonFactory())
       registerFactory("spacer", new SpacerFactory())
    }
 }

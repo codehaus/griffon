@@ -16,6 +16,7 @@
 
 package griffon.builder.macwidgets.factory
 
+import javax.swing.Icon
 import javax.swing.ImageIcon
 import com.explodingpixels.macwidgets.SourceList
 import com.explodingpixels.macwidgets.SourceListModel
@@ -40,7 +41,7 @@ class SourceListItemFactory extends AbstractFactory {
          throw new RuntimeException("in $name either value must be a java.lang.String or text: must not be null")
       }
 
-      def icon = null
+      Icon icon = null
       if( !attributes.containsKey("icon") ) {
          if (attributes.containsKey("url")) {
             value = attributes.remove("url")
