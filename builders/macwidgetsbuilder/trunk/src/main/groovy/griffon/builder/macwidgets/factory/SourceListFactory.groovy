@@ -16,6 +16,7 @@
 
 package griffon.builder.macwidgets.factory
 
+import com.explodingpixels.macwidgets.MacWidgetFactory
 import com.explodingpixels.macwidgets.SourceList
 import com.explodingpixels.macwidgets.SourceListModel
 import com.explodingpixels.macwidgets.SourceListItem
@@ -24,7 +25,9 @@ import com.explodingpixels.macwidgets.SourceListClickListener
 import com.explodingpixels.macwidgets.SourceListSelectionListener
 import com.explodingpixels.macwidgets.SourceListControlBar
 
+import javax.swing.JComponent
 import groovy.swing.SwingBuilder
+import groovy.swing.factory.LayoutFactory
 import org.codehaus.groovy.runtime.InvokerHelper
 
 /**
@@ -33,12 +36,13 @@ import org.codehaus.groovy.runtime.InvokerHelper
 class SourceListFactory extends AbstractFactory {
    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
-      builder.context.sourceListId = attributes.remove(builder.getAt(SwingBuilder.DELEGATE_PROPERTY_OBJECT_ID) ?: SwingBuilder.DEFAULT_DELEGATE_PROPERTY_OBJECT_ID)
+      builder.context.widgetId = attributes.remove(builder.getAt(SwingBuilder.DELEGATE_PROPERTY_OBJECT_ID) ?: SwingBuilder.DEFAULT_DELEGATE_PROPERTY_OBJECT_ID)
+      builder.context.constraints = attributes[LayoutFactory.DELEGATE_PROPERTY_CONSTRAINT] ?: attributes[LayoutFactory.DEFAULT_DELEGATE_PROPERTY_CONSTRAINT]
 
       if( FactoryBuilderSupport.checkValueIsTypeNotString(value, name, SourceList) ) {
          builder.context.sourceListModel = sourceList.model
          builder.context.sourceList = value
-         builder.setVariable(builder.context.sourceListId,value)
+         builder.setVariable(builder.context.widgetId,value)
          return value
       }
 
@@ -46,7 +50,7 @@ class SourceListFactory extends AbstractFactory {
       builder.context.sourceListModel = model
       def sourceList = new SourceList(model)
       builder.context.sourceList = sourceList
-      builder.setVariable(builder.context.sourceListId,sourceList)
+      builder.setVariable(builder.context.widgetId,sourceList)
       return sourceList.component
    }
 
@@ -64,10 +68,13 @@ class SourceListFactory extends AbstractFactory {
       if( sourceListItemSelected ) {
          sourceList.addSourceListSelectionListener(sourceListItemSelected as SourceListSelectionListener)
       }
-      attributes.each { property, value ->
-         InvokerHelper.setProperty(sourceList, property, value)
+
+      ["focusable","selectedItem","sourceListContextMenuProvider"].each { property ->
+         def value = attributes.remove(property)
+         if( value != null ) sourceList."$property" = value
       }
-      return false
+
+      return true
    }
 
    public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
@@ -75,8 +82,59 @@ class SourceListFactory extends AbstractFactory {
          builder.context.sourceListModel.addCategory(child)
       } else if( child instanceof SourceListControlBar ) {
          builder.parentContext.sourceList.installSourceListControlBar(child)
+         builder.parentContext.sourceListControlBar = child
       } else {
          throw new RuntimeException("sourceList accepts sourceListCategory() and sourceListControlBar() as child content only.")
+      }
+   }
+}
+
+/**
+ * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ */
+class SourceListSplitPaneFactory extends AbstractFactory {
+   public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+            throws InstantiationException, IllegalAccessException {
+      builder.context.widgetId = attributes.remove(builder.getAt(SwingBuilder.DELEGATE_PROPERTY_OBJECT_ID) ?: SwingBuilder.DEFAULT_DELEGATE_PROPERTY_OBJECT_ID)
+      builder.context.constraints = attributes[LayoutFactory.DELEGATE_PROPERTY_CONSTRAINT] ?: attributes[LayoutFactory.DEFAULT_DELEGATE_PROPERTY_CONSTRAINT]
+
+      return [:]
+   }
+
+   public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+      if( builder.context.sourceList && !parent.sourceList ) {
+         parent.sourceList = builder.context.sourceList
+      } else if( child instanceof JComponent ) {
+         parent.component = child
+      }
+
+      if( parent.sourceList && builder.context.sourceListControlBar ) {
+         parent.sourceListControlBar = builder.context.sourceListControlBar
+      }
+   }
+
+   public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
+      super.onNodeCompleted(builder, parent, node)
+      if(!node || !node.sourceList || !node.component) {
+         throw new RuntimeException("In ${builder.currentName} you need to specify a sourceList and another JComponent as children.")
+      }
+
+      def splitPane = MacWidgetFactory.createSplitPaneForSourceList(
+        node.remove("sourceList"),
+        node.remove("component")
+      )
+      def sourceListControlBar = node.remove("sourceListControlBar")
+      if( sourceListControlBar ) {
+         sourceListControlBar.installDraggableWidgetOnSplitPane(splitPane)
+      }
+      node.each { property, value ->
+         InvokerHelper.setProperty(splitPane, property, value)
+      }
+      if( builder.parentFactory ) {
+         builder.parentFactory.setChild(builder,parent,splitPane)
+      }
+      if( builder.context.widgetId ) {
+         builder.setVariable(builder.context.widgetId,splitPane)
       }
    }
 }

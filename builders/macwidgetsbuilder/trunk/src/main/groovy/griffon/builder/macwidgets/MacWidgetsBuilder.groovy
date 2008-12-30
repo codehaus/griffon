@@ -16,10 +16,13 @@
 
 package griffon.builder.macwidgets
 
+import java.awt.Window
+import javax.swing.JFrame
 import groovy.swing.SwingBuilder
 import griffon.builder.macwidgets.factory.*
 
 import com.explodingpixels.macwidgets.*
+import com.explodingpixels.widgets.WindowUtils
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -65,8 +68,30 @@ public class MacWidgetsBuilder extends SwingBuilder {
       registerFactory("sourceListCategory", new SourceListCategoryFactory())
       registerFactory("sourceListItem", new SourceListItemFactory())
       registerFactory("sourceListControlBar", new SourceListControlBarFactory())
+      registerFactory("sourceListSplitPane", new SourceListSplitPaneFactory())
       registerFactory("controlBarButton", new SourceListControlBarButtonFactory())
       registerFactory("controlBarPopdownButton", new SourceListControlBarPopdownButtonFactory())
       registerFactory("spacer", new SpacerFactory())
+
+      addAttributeDelegate(MacWidgetsBuilder.&repaintWindowAttributeDelegate)
+      addAttributeDelegate(MacWidgetsBuilder.&leopardizeWindowAttributeDelegate)
+   }
+
+   public static repaintWindowAttributeDelegate( builder, node, attributes ) {
+      if( node instanceof Window && attributes.containsKey("installRepaintListener") ) {
+         boolean installRepaintListener = attributes.remove("installRepaintListener")
+         if( installRepaintListener ) {
+            WindowUtils.createAndInstallRepaintWindowFocusListener(node)
+         }
+      }
+   }
+
+   public static leopardizeWindowAttributeDelegate( builder, node, attributes ) {
+      if( node instanceof JFrame && attributes.containsKey("makeLeopardStyle") ) {
+         boolean makeLeopardStyle = attributes.remove("makeLeopardStyle")
+         if( makeLeopardStyle ) {
+            MacUtils.makeWindowLeopardStyle(node.rootPane)
+         }
+      }
    }
 }
