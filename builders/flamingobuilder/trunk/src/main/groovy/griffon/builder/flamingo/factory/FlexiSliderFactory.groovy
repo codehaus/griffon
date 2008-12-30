@@ -22,6 +22,7 @@ import org.jvnet.flamingo.slider.JFlexiSlider
 import javax.swing.event.ChangeListener
 
 import groovy.swing.SwingBuilder
+import groovy.swing.factory.LayoutFactory
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
@@ -32,6 +33,7 @@ class FlexiSliderFactory extends AbstractFactory {
         builder.context.ranges = []
         builder.context.controlPoints = []
         builder.context.flexiId = attributes[builder.getAt(SwingBuilder.DELEGATE_PROPERTY_OBJECT_ID) ?: SwingBuilder.DEFAULT_DELEGATE_PROPERTY_OBJECT_ID]
+        builder.context.constraints = attributes[LayoutFactory.DELEGATE_PROPERTY_CONSTRAINT] ?: attributes[LayoutFactory.DEFAULT_DELEGATE_PROPERTY_CONSTRAINT]
         return [:]
     }
 

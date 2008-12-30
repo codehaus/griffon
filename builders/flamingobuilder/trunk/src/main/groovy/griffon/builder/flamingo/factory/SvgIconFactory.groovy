@@ -66,7 +66,7 @@ class SvgIconFactory extends AbstractFactory {
                klass = attributes.remove("class")
          }
          if (klass == null) {
-               klass = WrapperIconFactory
+               klass = SvgIconFactory
          } else if (!(klass instanceof Class)) {
                klass = klass.class
          }
