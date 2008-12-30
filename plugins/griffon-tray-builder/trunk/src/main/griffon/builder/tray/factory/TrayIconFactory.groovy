@@ -69,7 +69,7 @@ class TrayIconFactory extends AbstractFactory {
                 klass = attributes.remove("class")
             }
             if (klass == null) {
-                klass = ImageIconFactory
+                klass = TrayIconFactory
             } else if (!(klass instanceof Class)) {
                 klass = klass.class
             }
