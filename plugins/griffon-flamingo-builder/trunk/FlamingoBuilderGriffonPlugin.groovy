@@ -1,5 +1,5 @@
 class FlamingoBuilderGriffonPlugin {
-    def version = "0.1-SNAPSHOT"
+    def version = "0.1"
     def canBeGlobal = false
     def dependsOn = [:]
     def jdk = "1.6"
