@@ -10,7 +10,6 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_1/griffon-code-coverage-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="easyb"/>
     <plugin latest-release="0.1" name="fest">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables application testing with FEST</title>
@@ -93,7 +92,6 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jide-builder/tags/RELEASE_0_1-SNAPSHOT/griffon-jide-builder-0.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
-    <plugin name="macwidgets-builder-plugin"/>
     <plugin latest-release="0.1-SNAPSHOT" name="swingx-builder">
         <release tag="RELEASE_0_1-SNAPSHOT" type="svn" version="0.1-SNAPSHOT">
             <title>SwingX Builder Plugin</title>
