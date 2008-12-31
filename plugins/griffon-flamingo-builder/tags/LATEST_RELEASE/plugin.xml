@@ -1,7 +1,0 @@
-<plugin name='flamingo-builder' version='0.1-SNAPSHOT' jdk='1.6'>
-  <author>Andres Almiray</author>
-  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-  <title>FlamingoBuilder Plugin</title>
-  <documentation>http://griffon.codehaus.org/FlamingoBuilder+Plugin</documentation>
-  <dependencies />
-</plugin>
