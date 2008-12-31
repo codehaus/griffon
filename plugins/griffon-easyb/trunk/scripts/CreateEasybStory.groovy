@@ -21,11 +21,12 @@
 import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 
 includeTargets << griffonScript("Init")
-includeTargets << griffonScript("_GriffonCreateArtifacts")
+includeTargets << griffonScript("CreateIntegrationTest")
 
 target (createEasybStory: "Creates a new Griffon Easyb story") {
-   depends(checkVersion)
-   def (pkg, name) = extractArtifactName(args)
+   depends(checkVersion, parseArguments)
+   promptForName(type: "Easyb Story")
+   def (pkg, name) = extractArtifactName(argsMap["params"][0])
    def fqn = "${pkg?pkg:''}${pkg?'.':''}${GCU.getClassNameRepresentation(name)}"
 
    createArtifact(
