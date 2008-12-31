@@ -1,5 +1,5 @@
 class FestGriffonPlugin {
-    def version = '0.1-SNAPSHOT'
+    def version = '0.1'
     def canBeGlobal = true
     def dependsOn = [:]
 
