@@ -1,14 +1,14 @@
 scriptEnv = "test"
 
-Ant.property(environment:"env")
-griffonHome = Ant.antProject.properties."env.GRIFFON_HOME"
+ant.property(environment:"env")
+griffonHome = ant.antProject.properties."env.GRIFFON_HOME"
 System.setProperty('cobertura.code.coverage', 'on')
 
 includeTargets << griffonScript("Package")
 includeTargets << griffonScript("Bootstrap")
 includeTargets << griffonScript("TestApp")
 
-pluginHome = getPluginDirForName('code-coverage').file as String
+pluginHome = getPluginDirForName("code-coverage").file as String
 reportFormat = 'html'
 postProcessReports = false
 codeCoverageExclusionList = [
@@ -32,14 +32,14 @@ def testAppExitCode = 0
 //dataFile = "${griffonTmp}/cobertura.ser"
 dataFile = "cobertura.ser"
 
-target ('default': "Test App with Cobertura") {
+target ('testAppCobertura': "Test App with Cobertura") {
     depends(classpath, checkVersion, configureProxy)
 
     packageApp()
 
     // Check whether the project defines its own directory for test
     // reports.
-    coverageReportDir = "${config.griffon.testing.reports.destDir ?: testDir}/cobertura"
+    coverageReportDir = config.griffon.testing.reports.destDir ?: "${basedir}/test/cobertura"
 
     // Add any custom exclusions defined by the project.
     // this needs to happen AFTER packageApp so config.groovy is properly loaded
@@ -49,7 +49,7 @@ target ('default': "Test App with Cobertura") {
 
     cleanup()
 
-    Ant.path(id: "cobertura.classpath"){
+    ant.path(id: "cobertura.classpath"){
         fileset(dir:"${pluginHome}/lib/cobertura"){
             include(name:"*.jar")
         }
@@ -73,7 +73,7 @@ target ('default': "Test App with Cobertura") {
 
     coberturaReport()
     if (postProcessReports) {postProcessReports()}
-    Ant.delete(dir:testDirPath)
+    ant.delete(dir:testDirPath)
     event("StatusFinal", ["Cobertura Code Coverage Complete (view reports in: ${coverageReportDir})"])
 
     // Exit the script using the code returned by 'testApp'.
@@ -81,18 +81,18 @@ target ('default': "Test App with Cobertura") {
 }
 
 target(cleanup:"Remove old files") {
-    Ant.delete(file:"${dataFile}", quiet:true)
-    Ant.delete(dir:testDirPath, quiet:true)
-    Ant.delete(dir:coverageReportDir, quiet:true)
+    ant.delete(file:"${dataFile}", quiet:true)
+    ant.delete(dir:testDirPath, quiet:true)
+    ant.delete(dir:coverageReportDir, quiet:true)
 }
 
 target(instrumentTests:"Instruments the compiled test cases") {
-    Ant.taskdef (  classpathRef : 'cobertura.classpath', resource:"tasks.properties" )
+    ant.taskdef (  classpathRef : 'cobertura.classpath', resource:"tasks.properties" )
     try {
         //for now, instrument classes in the same directory griffon creates for testClasses
         //TODO - need to figure out how to put cobertura instrumented classes in different dir
         //and put that dir in front of testClasses in the classpath
-        Ant.'cobertura-instrument' (datafile:"${dataFile}") {
+        ant.'cobertura-instrument' (datafile:"${dataFile}") {
             fileset(dir:testDirPath) {
                 include(name:"**/*.class")
                 codeCoverageExclusionList.each { pattern ->
@@ -108,10 +108,10 @@ target(instrumentTests:"Instruments the compiled test cases") {
 }
 
 target(coberturaReport:"Generate Cobertura Reports") {
-    Ant.mkdir(dir:"${coverageReportDir}")
-    Ant.taskdef (  classpathRef : 'cobertura.classpath', resource:"tasks.properties" )
+    ant.mkdir(dir:"${coverageReportDir}")
+    ant.taskdef (  classpathRef : 'cobertura.classpath', resource:"tasks.properties" )
     try {
-        Ant.'cobertura-report'(destDir:"${coverageReportDir}", datafile:"${dataFile}", format:reportFormat){
+        ant.'cobertura-report'(destDir:"${coverageReportDir}", datafile:"${dataFile}", format:reportFormat){
             //load all these dirs independently so the dir structure is flattened,
             //otherwise the source isn't found for the reports
             fileset(dir:"${basedir}/griffon-app/controllers")
@@ -142,7 +142,7 @@ target('postProcessReports': 'replace controller closure class name with action 
 //         controllerClass.reference.propertyDescriptors.each {propertyDescriptor ->
 //             def closure = controllerClass.getPropertyOrStaticPropertyOrFieldValue(propertyDescriptor.name, Closure)
 //             if (closure) {
-//                 Ant.replace(dir: "${coverageReportDir}",
+//                 ant.replace(dir: "${coverageReportDir}",
 //                         token: ">${closure.class.name}<",
 //                         value: ">${controllerClass.fullName}.${propertyDescriptor.name}<") {
 //                     include(name: "${controllerClass.fullName}.html")
@@ -172,3 +172,5 @@ def flushCoverageData() {
         exit(1)
     }
 }
+
+setDefaultTarget(testAppCobertura)
