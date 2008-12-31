@@ -21,39 +21,35 @@
  * @since 0.1
  */
 
-Ant.property(environment:"env")
-griffonHome = Ant.antProject.properties."env.GRIFFON_HOME"
-
-defaultTarget("Run JDepend metrics") {
-    depends(checkVersion, configureProxy, packageApp, classpath)
-    _runJdependImpl()
-}
+ant.property(environment:"env")
+griffonHome = ant.antProject.properties."env.GRIFFON_HOME"
 
 includeTargets << griffonScript("Package")
 
 jdependReportDir = "${basedir}/test/reports"
 jdependPluginBase = getPluginDirForName('jdepend').file as String
 
-Ant.path( id : "jdependJarSet" ) {
+ant.path( id : "jdependJarSet" ) {
     fileset( dir: "${jdependPluginBase}/lib/jdepend" , includes : "*.jar" )
 }
 
-Ant.taskdef( name: "jdepend",
+ant.taskdef( name: "jdepend",
              classname: "org.apache.tools.ant.taskdefs.optional.jdepend.JDependTask",
              classpathref: "jdependJarSet" )
 
+target(runJdepend: "Run JDepend metrics") {
+    depends(checkVersion, configureProxy, packageApp, classpath)
 
-target(_runJdependImpl: "Run JDepend metrics") {
     jdependReportDir = config.griffon.testing.reports.destDir ?: jdependReportDir
     jdependWorkDir = "${projectWorkDir}/jdepend-classes"
 
-    Ant.mkdir(dir: jdependReportDir)
-    Ant.delete(dir: jdependWorkDir, failonerror: false )
-    Ant.mkdir(dir: jdependWorkDir )
+    ant.mkdir(dir: jdependReportDir)
+    ant.delete(dir: jdependWorkDir, failonerror: false )
+    ant.mkdir(dir: jdependWorkDir )
 
     packageApp()
 
-    Ant.copy( todir: jdependWorkDir ) {
+    ant.copy( todir: jdependWorkDir ) {
         fileset( dir: "${projectWorkDir}/classes" ) {
             exclude( name: "**/*_closure*" )
         }
@@ -78,13 +74,15 @@ target(_runJdependImpl: "Run JDepend metrics") {
         }
     }
 
-    Ant.jdepend( outputfile: "${jdependReportDir}/jdepend-report.txt",
+    ant.jdepend( outputfile: "${jdependReportDir}/jdepend-report.txt",
                  jdependConfig )
-    Ant.jdepend( outputfile: "${jdependReportDir}/jdepend-report.xml",
+    ant.jdepend( outputfile: "${jdependReportDir}/jdepend-report.xml",
                  format: "xml",
                  jdependConfig )
-    Ant.xslt( basedir: "${jdependReportDir}",
+    ant.xslt( basedir: "${jdependReportDir}",
               destdir: "${jdependReportDir}",
               includes: "jdepend-report.xml",
               style: "${jdependPluginBase}/src/etc/jdepend.xsl" )
 }
+
+setDefaultTarget(runJdepend)

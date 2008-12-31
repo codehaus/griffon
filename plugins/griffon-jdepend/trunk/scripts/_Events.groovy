@@ -1,3 +1,3 @@
 eventCleanEnd = {
-    Ant.delete(dir: "${projectWorkDir}/jdepend-classes", failonerror: false)
+    ant.delete(dir: "${projectWorkDir}/jdepend-classes", failonerror: false)
 }
