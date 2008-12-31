@@ -15,25 +15,24 @@
  */
 
 /**
- * Gant script that creates a new Griffon integration test
- *
- * @author Graeme Rocher
- *
- * @since 0.4
+ * Gant script that creates a new Easyb story
  */
 
-Ant.property(environment:"env")
-griffonHome = Ant.antProject.properties."env.GRIFFON_HOME"
+import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 
-includeTargets << new File ( "${griffonHome}/scripts/Init.groovy" )
-target ('default': "Creates a new Griffon Easyb story") {
-   typeName = ""
-   depends( checkVersion, createEasybStory )
+includeTargets << griffonScript("Init")
+includeTargets << griffonScript("_GriffonCreateArtifacts")
+
+target (createEasybStory: "Creates a new Griffon Easyb story") {
+   depends(checkVersion)
+   def (pkg, name) = extractArtifactName(args)
+   def fqn = "${pkg?pkg:''}${pkg?'.':''}${GCU.getClassNameRepresentation(name)}"
+
+   createArtifact(
+      name: fqn,
+      suffix: "Story",
+      type: "EasybStory",
+      path: "test/easyb")
 }
 
-target (createEasybStory: "Implementation of create-easyb-story") {
-   typeName <<= "Story"
-   artifactName = "EasybStory"
-   artifactPath = "test/easyb"
-   createArtifact()
-}
+setDefaultTarget(createEasybStory)

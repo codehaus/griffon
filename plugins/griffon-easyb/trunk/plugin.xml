@@ -1,6 +1,7 @@
-<plugin name='easyb' version='0.1'>
+<plugin name='easyb' version='0.1' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Enables BDD testing with Easyb</title>
   <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
+  <dependencies />
 </plugin>

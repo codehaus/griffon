@@ -1,8 +1,8 @@
 import org.codehaus.griffon.cli.GriffonScriptRunner as GSR
 
 eventCleanEnd = {
-    Ant.delete(dir: "${projectWorkDir}/easyb-classes", failonerror: false)
-    Ant.delete(dir: "${basedir}/test/easyb-reports", failonerror: false)
+    ant.delete(dir: "${projectWorkDir}/easyb-classes", failonerror: false)
+    ant.delete(dir: "${basedir}/test/easyb-reports", failonerror: false)
 }
 
 eventAllTestsStart = { info, unitOnly, integrationOnly ->
@@ -14,4 +14,8 @@ eventAllTestsEnd = { info, unitOnly, integrationOnly ->
 
    // call run-fest after all other tests have run
    GSR.callPluginOrGriffonScript("RunEasyb")
+}
+
+eventCopyLibsEnd = { jardir ->
+   ant.delete(dir:jardir, includes: "**/easyb.*")
 }

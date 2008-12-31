@@ -24,27 +24,23 @@
  * @since 0.1
  */
 
-Ant.property(environment:"env")
-griffonHome = Ant.antProject.properties."env.GRIFFON_HOME"
-
-defaultTarget("Run Easyb stories") {
-    depends(checkVersion, configureProxy, packageApp, classpath)
-    runEasybImpl()
-}
+ant.property(environment:"env")
+griffonHome = ant.antProject.properties."env.GRIFFON_HOME"
 
 includeTargets << griffonScript("Bootstrap")
 
 easybSourceDir = "${basedir}/test/easyb"
 easybTargetDir = "${projectWorkDir}/easyb-classes"
 easybReportDir = "${basedir}/test/easyb-reports"
-easybPluginBase = getPluginDirForName('easyb').file as String
+easybPluginBase = getPluginDirForName("easyb").file as String
 _easyb_skip = false
 
-Ant.path( id : "easybJarSet" ) {
+ant.path( id : "easybJarSet" ) {
     fileset( dir: "${easybPluginBase}/lib/test" , includes : "*.jar" )
 }
 
-target(runEasybImpl:"Run Easyb stories") {
+target(runEasyb:"Run Easyb stories") {
+    depends(checkVersion, configureProxy, packageApp, classpath)
     checkEasybStoriesSources()
     if( !_easyb_skip ) {
         loadApp()
@@ -62,7 +58,7 @@ target(checkEasybStoriesSources:"") {
 }
 
 target(runEasybStories: "") {
-    easybTestSource = Ant.path {
+    easybTestSource = ant.path {
         fileset( dir : easybSourceDir ) {
             include(name:"**/*Story.groovy")
             include(name:"**/*.story")
@@ -77,9 +73,9 @@ target(runEasybStories: "") {
 
     easybReportDir = config.griffon.testing.reports.destDir ?: easybReportDir
 
-    Ant.mkdir(dir: easybReportDir)
-    Ant.mkdir(dir: "${easybReportDir}/xml")
-    Ant.mkdir(dir: "${easybReportDir}/plain")
+    ant.mkdir(dir: easybReportDir)
+    ant.mkdir(dir: "${easybReportDir}/xml")
+    ant.mkdir(dir: "${easybReportDir}/plain")
 
     reports = [[location:"${easybReportDir}/xml/easyb.xml",format:"xml",type:"easyb"],
                [location:"${easybReportDir}/plain/stories.txt",format:"txt",type:"story"],
@@ -108,3 +104,5 @@ new BehaviorRunner(convertedReports,app).runBehavior(behaviors)
     shell = new GroovyShell( classloader, binding )
     shell.evaluate( script )
 }
+
+setDefaultTarget(runEasyb)
