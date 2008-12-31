@@ -1,8 +1,8 @@
 import org.codehaus.griffon.cli.GriffonScriptRunner as GSR
 
 eventCleanEnd = {
-    Ant.delete(dir: "${projectWorkDir}/fest-classes", failonerror: false)
-    Ant.delete(dir: "${basedir}/test/fest-reports", failonerror: false)
+    ant.delete(dir: "${projectWorkDir}/fest-classes", failonerror: false)
+    ant.delete(dir: "${basedir}/test/fest-reports", failonerror: false)
 }
 
 eventAllTestsStart = { info, unitOnly, integrationOnly ->
@@ -18,5 +18,5 @@ eventAllTestsEnd = { info, unitOnly, integrationOnly ->
 
 eventJarFilesStart = {
    // make sure FestGriffonPlugin.class is not added to app jar
-   Ant.delete(file: "${projectWorkDir}/classes/FestGriffonPlugin.class", failonerror: false)
+   ant.delete(file: "${projectWorkDir}/classes/FestGriffonPlugin.class", failonerror: false)
 }

@@ -15,25 +15,25 @@
  */
 
 /**
- * Gant script that creates a new Griffon integration test
- *
- * @author Graeme Rocher
- *
- * @since 0.4
+ * Gant script that creates a new Griffon FEST test
  */
 
-Ant.property(environment:"env")
-griffonHome = Ant.antProject.properties."env.GRIFFON_HOME"
+import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 
-includeTargets << new File ( "${griffonHome}/scripts/Init.groovy" )
-target ('default': "Creates a new Griffon Fest test") {
-   typeName = ""
-   depends( checkVersion, createTestSuite )
+includeTargets << griffonScript("Init")
+includeTargets << griffonScript("CreateIntegrationTest")
+
+target (createFestTest: "Creates a new Griffon FEST test") {
+   depends(checkVersion,parseArguments)
+   promptForName(type: "FEST Test")
+   def (pkg, name) = extractArtifactName(argsMap["params"][0])
+   def fqn = "${pkg?pkg:''}${pkg?'.':''}${GCU.getClassNameRepresentation(name)}"
+
+   createArtifact(
+      name: fqn,
+      suffix: "Test",
+      type: "FestTest",
+      path: "test/fest")
 }
 
-target (createTestSuite: "Implementation of create-test-suite") {
-   typeName <<= "Test"
-   artifactName = "FestTest"
-   artifactPath = "test/fest"
-   createArtifact()
-}
+setDefaultTarget(createFestTest)
