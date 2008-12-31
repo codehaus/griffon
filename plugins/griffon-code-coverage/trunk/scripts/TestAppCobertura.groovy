@@ -2,7 +2,7 @@ scriptEnv = "test"
 
 ant.property(environment:"env")
 griffonHome = ant.antProject.properties."env.GRIFFON_HOME"
-System.setProperty('cobertura.code.coverage', 'on')
+System.setProperty('cobertura.code.coverage', 'true')
 
 includeTargets << griffonScript("Package")
 includeTargets << griffonScript("Bootstrap")
@@ -66,6 +66,8 @@ target ('testAppCobertura': "Test App with Cobertura") {
     }
 
     compileTests()
+    packageTests()
+    instrumentClasses()
     instrumentTests()
     testApp()
 
@@ -73,7 +75,8 @@ target ('testAppCobertura': "Test App with Cobertura") {
 
     coberturaReport()
     if (postProcessReports) {postProcessReports()}
-    ant.delete(dir:testDirPath)
+    ant.delete(dir:griffonSettings.classesDir)
+    ant.delete(dir:griffonSettings.testClassesDir)
     event("StatusFinal", ["Cobertura Code Coverage Complete (view reports in: ${coverageReportDir})"])
 
     // Exit the script using the code returned by 'testApp'.
@@ -82,8 +85,29 @@ target ('testAppCobertura': "Test App with Cobertura") {
 
 target(cleanup:"Remove old files") {
     ant.delete(file:"${dataFile}", quiet:true)
-    ant.delete(dir:testDirPath, quiet:true)
+    ant.delete(dir:griffonSettings.testClassesDir, quiet:true)
     ant.delete(dir:coverageReportDir, quiet:true)
+}
+
+target(instrumentClasses:"Instruments the compiled cases") {
+    ant.taskdef (  classpathRef : 'cobertura.classpath', resource:"tasks.properties" )
+    try {
+        //for now, instrument classes in the same directory griffon creates for classes
+        //TODO - need to figure out how to put cobertura instrumented classes in different dir
+        //and put that dir in front of classes in the classpath
+        ant.'cobertura-instrument' (datafile:"${dataFile}") {
+            fileset(dir:griffonSettings.classesDir) {
+                include(name:"**/*.class")
+                codeCoverageExclusionList.each { pattern ->
+                    exclude(name:pattern)
+                }
+            }
+        }
+    }
+    catch(Exception e) {
+       event("StatusFinal", ["Compilation Error: ${e.message}"])
+       exit(1)
+    }
 }
 
 target(instrumentTests:"Instruments the compiled test cases") {
@@ -93,7 +117,7 @@ target(instrumentTests:"Instruments the compiled test cases") {
         //TODO - need to figure out how to put cobertura instrumented classes in different dir
         //and put that dir in front of testClasses in the classpath
         ant.'cobertura-instrument' (datafile:"${dataFile}") {
-            fileset(dir:testDirPath) {
+            fileset(dir:griffonSettings.testClassesDir) {
                 include(name:"**/*.class")
                 codeCoverageExclusionList.each { pattern ->
                     exclude(name:pattern)
