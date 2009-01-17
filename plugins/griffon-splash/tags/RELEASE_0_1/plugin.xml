@@ -1,6 +1,0 @@
-<plugin name='splash' version='0.1'>
-  <author>Jim Shingler</author>
-  <authorEmail>ShinglerJim@gmail.com</authorEmail>
-  <title>Plugin summary/headline</title>
-  <documentation>http://griffon.codehaus.org/Splash+Plugin</documentation>
-</plugin>
