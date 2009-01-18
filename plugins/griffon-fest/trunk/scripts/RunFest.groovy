@@ -25,13 +25,17 @@
 ant.property(environment:"env")
 griffonHome = ant.antProject.properties."env.GRIFFON_HOME"
 
-includeTargets << griffonScript("Package")
+includeTargets << griffonScript("_GriffonPackage")
+includeTargets << griffonScript("_GriffonClean")
+includeTargets << griffonScript("_GriffonInit")
+includeTargets << griffonScript("_GriffonBootstrap")
 
 festSourceDir = "${basedir}/test/fest"
 festTargetDir = "${projectWorkDir}/fest-classes"
 festReportDir = config.griffon.testing.reports.destDir ?: "${basedir}/test/fest-reports"
 festPluginBase = getPluginDirForName("fest").file as String
 _fest_skip = false
+_cobertura_enabled = false
 
 ant.path( id : 'festJarSet' ) {
     fileset( dir: "${festPluginBase}/lib/test" , includes : "*.jar" )
@@ -52,10 +56,29 @@ ant.path( id: "fest.runtime.classpath" ) {
 }
 
 target(runFest:"Run FEST tests") {
-    depends(checkVersion, configureProxy, packageApp, classpath)
+    depends(checkVersion, configureProxy, clean, packageApp, parseArguments, classpath)
+    initCobertura()
     checkFestTestsSources()
     compileFestTests()
     runFestTests()
+    finishCobertura()
+}
+
+target(initCobertura:"") {
+   def coberturaPlugin = getPluginDirForName("code-coverage")
+   if( coberturaPlugin && argsMap.cobertura ) {
+      _cobertura_enabled = true
+       includeTargets << pluginScript("code-coverage","TestAppCobertura")
+       coberturaSetup()
+       coberturaInstrumentClasses()
+       coberturaInstrumentTests()
+   }
+}
+
+target(finishCobertura:"") {
+   if( _cobertura_enabled ) {
+      coberturaReport()
+   }
 }
 
 target(checkFestTestsSources:"") {

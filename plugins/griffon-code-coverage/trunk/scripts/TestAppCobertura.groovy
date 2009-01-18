@@ -4,9 +4,11 @@ ant.property(environment:"env")
 griffonHome = ant.antProject.properties."env.GRIFFON_HOME"
 System.setProperty('cobertura.code.coverage', 'true')
 
-includeTargets << griffonScript("Package")
-includeTargets << griffonScript("Bootstrap")
-includeTargets << griffonScript("TestApp")
+includeTargets << griffonScript("_GriffonPackage")
+includeTargets << griffonScript("_GriffonClean")
+includeTargets << griffonScript("_GriffonInit")
+includeTargets << griffonScript("_GriffonBootstrap")
+includeTargets << griffonScript("_GriffonTest")
 
 pluginHome = getPluginDirForName("code-coverage").file as String
 reportFormat = 'html'
@@ -18,7 +20,6 @@ codeCoverageExclusionList = [
     "Config*",
     //"**/*DataSource*",
     "**/*resources*",
-    //"**/*UrlMappings*",
     "**/*Tests*",
     "**/griffon/test/**",
     "**/org/codehaus/groovy/griffon/**",
@@ -33,10 +34,27 @@ def testAppExitCode = 0
 dataFile = "cobertura.ser"
 
 target ('testAppCobertura': "Test App with Cobertura") {
-    depends(classpath, checkVersion, configureProxy)
+    depends(classpath, checkVersion, configureProxy, parseArguments)
 
     packageApp()
+    coberturaSetup()
 
+    compileTests()
+    packageTests()
+    coberturaInstrumentClasses()
+    coberturaInstrumentTests()
+    testApp()
+
+    coberturaReport()
+    ant.delete(dir:griffonSettings.classesDir)
+    ant.delete(dir:griffonSettings.testClassesDir)
+    event("StatusFinal", ["Cobertura Code Coverage Complete (view reports in: ${coverageReportDir})"])
+
+    // Exit the script using the code returned by 'testApp'.
+    System.exit(testAppExitCode)
+}
+
+target(coberturaSetup:"" ) {
     // Check whether the project defines its own directory for test
     // reports.
     coverageReportDir = config.griffon.testing.reports.destDir ?: "${basedir}/test/cobertura"
@@ -55,32 +73,13 @@ target ('testAppCobertura': "Test App with Cobertura") {
         }
     }
 
-    if(args?.indexOf('-xml') >-1) {
-        reportFormat = 'xml'
-        args -= '-xml'
+    if( argsMap.xml ) {
+       reportFormat = 'xml'
     }
 
-    if (args?.indexOf('-nopost') > -1) {
-        postProcessReports = false
-        args -= '-nopost'
+    if( argsMap.nopost ) {
+       postProcessReports = false
     }
-
-    compileTests()
-    packageTests()
-    instrumentClasses()
-    instrumentTests()
-    testApp()
-
-    flushCoverageData()
-
-    coberturaReport()
-    if (postProcessReports) {postProcessReports()}
-    ant.delete(dir:griffonSettings.classesDir)
-    ant.delete(dir:griffonSettings.testClassesDir)
-    event("StatusFinal", ["Cobertura Code Coverage Complete (view reports in: ${coverageReportDir})"])
-
-    // Exit the script using the code returned by 'testApp'.
-    System.exit(testAppExitCode)
 }
 
 target(cleanup:"Remove old files") {
@@ -89,7 +88,7 @@ target(cleanup:"Remove old files") {
     ant.delete(dir:coverageReportDir, quiet:true)
 }
 
-target(instrumentClasses:"Instruments the compiled cases") {
+target(coberturaInstrumentClasses:"Instruments the compiled cases") {
     ant.taskdef (  classpathRef : 'cobertura.classpath', resource:"tasks.properties" )
     try {
         //for now, instrument classes in the same directory griffon creates for classes
@@ -110,7 +109,7 @@ target(instrumentClasses:"Instruments the compiled cases") {
     }
 }
 
-target(instrumentTests:"Instruments the compiled test cases") {
+target(coberturaInstrumentTests:"Instruments the compiled test cases") {
     ant.taskdef (  classpathRef : 'cobertura.classpath', resource:"tasks.properties" )
     try {
         //for now, instrument classes in the same directory griffon creates for testClasses
@@ -132,6 +131,7 @@ target(instrumentTests:"Instruments the compiled test cases") {
 }
 
 target(coberturaReport:"Generate Cobertura Reports") {
+    flushCoverageData()
     ant.mkdir(dir:"${coverageReportDir}")
     ant.taskdef (  classpathRef : 'cobertura.classpath', resource:"tasks.properties" )
     try {
@@ -156,6 +156,7 @@ target(coberturaReport:"Generate Cobertura Reports") {
        event("StatusFinal", ["Compilation Error: ${e.message}"])
        exit(1)
     }
+    if (postProcessReports) {postProcessReports()}
 }
 
 target('postProcessReports': 'replace controller closure class name with action name') {

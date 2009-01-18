@@ -27,26 +27,49 @@
 ant.property(environment:"env")
 griffonHome = ant.antProject.properties."env.GRIFFON_HOME"
 
-includeTargets << griffonScript("Bootstrap")
+includeTargets << griffonScript("_GriffonPackage")
+includeTargets << griffonScript("_GriffonClean")
+includeTargets << griffonScript("_GriffonInit")
+includeTargets << griffonScript("_GriffonBootstrap")
 
 easybSourceDir = "${basedir}/test/easyb"
 easybTargetDir = "${projectWorkDir}/easyb-classes"
 easybReportDir = "${basedir}/test/easyb-reports"
 easybPluginBase = getPluginDirForName("easyb").file as String
 _easyb_skip = false
+_cobertura_enabled = false
 
 ant.path( id : "easybJarSet" ) {
     fileset( dir: "${easybPluginBase}/lib/test" , includes : "*.jar" )
 }
 
 target(runEasyb:"Run Easyb stories") {
-    depends(checkVersion, configureProxy, packageApp, classpath)
+    depends(checkVersion, configureProxy, clean, packageApp, parseArguments, classpath)
     checkEasybStoriesSources()
     if( !_easyb_skip ) {
+        initCobertura()
         loadApp()
         configureApp()
         runEasybStories()
+        finishCobertura()
     }
+}
+
+target(initCobertura:"") {
+   def coberturaPlugin = getPluginDirForName("code-coverage")
+   if( coberturaPlugin && argsMap.cobertura ) {
+      _cobertura_enabled = true
+       includeTargets << pluginScript("code-coverage","TestAppCobertura")
+       coberturaSetup()
+       coberturaInstrumentClasses()
+       coberturaInstrumentTests()
+   }
+}
+
+target(finishCobertura:"") {
+   if( _cobertura_enabled ) {
+      coberturaReport()
+   }
 }
 
 target(checkEasybStoriesSources:"") {
