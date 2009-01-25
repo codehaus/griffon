@@ -19,22 +19,32 @@ package griffon.builder.swingxtras.factory
 import java.beans.*
 import com.l2fprod.common.propertysheet.*
 import griffon.builder.swingxtras.impl.MutableProperty
+import griffon.builder.swingxtras.impl.BindablePropertySheetPanel
 import groovy.swing.factory.ComponentFactory
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
 class PropertySheetPanelFactory extends ComponentFactory {
+   PropertySheetPanelFactory() {
+      super(PropertySheetPanel,false)
+   }
+
    public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {
       if( value instanceof PropertySheetPanel) {
          return value
       }
-      return new PropertySheetPanel()
+      def panel = new BindablePropertySheetPanel()
+      def excludes = attributes.remove("excludes") ?: []
+      def includes = attributes.remove("includes") ?: []
+      if( value != null ) panel.bind(value,excludes,includes)
+      return panel
    }
 
    public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
       if( child instanceof PropertySheetTable ) {
-         parent.tabel = child
+         parent.table = child
+         if(parent.bound) parent.unbind()
       } else if( child instanceof Property ) {
          def table = parent.table
          if( !table ) {
@@ -47,6 +57,7 @@ class PropertySheetPanelFactory extends ComponentFactory {
             table.model = model
          }
          model.addProperty(child)
+         if(parent.bound) parent.unbind()
       } else {
          super.setChild(builder, parent, child)
       }
@@ -62,10 +73,12 @@ class PropertySheetTableModelFactory extends AbstractFactory {
          return value
       }
       def excludes = attributes.remove("excludes") ?: []
+      def includes = attributes.remove("includes") ?: []
       def model = new PropertySheetTableModel()
       if( value ) {
          Introspector.getBeanInfo(value.class).propertyDescriptors.each {
             if( it.name in excludes ) return
+            if( includes && !(it.name in includes) ) return
             def property = new MutableProperty(it)
             property.readFromObject(value)
             model.addProperty(property)
