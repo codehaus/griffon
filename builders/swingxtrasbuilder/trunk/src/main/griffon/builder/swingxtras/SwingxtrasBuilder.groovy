@@ -58,7 +58,7 @@ public class SwingxtrasBuilder extends SwingBuilder {
 
    public void registerL2fprod() {
       registerBeanFactory("jbannerPanel", BannerPanel)
-      registerBeanFactory("jbuttonBar", JButtonBar)
+      registerFactory("jbuttonBar", new JButtonBarFactory())
       registerFactory("linkButton", new RichActionWidgetFactory(JLinkButton))
       registerBeanFactory("jtipOfTheDay", JTipOfTheDay)
       registerBeanFactory("jdefaultTipModel", DefaultTipModel)
