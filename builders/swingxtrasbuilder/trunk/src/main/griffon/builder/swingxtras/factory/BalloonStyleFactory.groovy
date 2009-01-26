@@ -87,10 +87,10 @@ class TexturedBalloonStyleFactory extends AbstractFactory {
             value = attributes.remove("file")
             if (value instanceof File) {
                value = value.toURI().toURL()
-            } else if (value instanceof String) {
+            } else if (value instanceof String || value instanceof GString) {
                value = new File(value).toURI().toURL()
             } else {
-               throw new RuntimeException("In $name file: attributes must be of type java.io.File or a string")
+               throw new RuntimeException("In $name file: attributes must be of type java.io.File or a String")
             }
          } else if (attributes.containsKey("inputStream")) {
             value = attributes.remove("inputStream")

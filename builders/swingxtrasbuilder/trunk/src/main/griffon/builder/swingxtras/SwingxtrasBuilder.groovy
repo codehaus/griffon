@@ -50,8 +50,9 @@ public class SwingxtrasBuilder extends SwingBuilder {
 
    public void registerXSwingX() {
       registerFactory("searchField", new SearchFieldFactory())
-      registerFactory("promptTextArea", new TextArgWidgetFactory(JXTextArea))
-      registerFactory("promptTextField", new TextArgWidgetFactory(JXTextField))
+      registerFactory("promptArea", new TextArgWidgetFactory(JXTextArea))
+      registerFactory("promptField", new TextArgWidgetFactory(JXTextField))
+      registerFactory("formattedPromptField", new TextArgWidgetFactory(JXFormattedTextField))
       registerFactory("promptSupport", new PromptSupportFactory())
       registerFactory("buddySupport", new BuddySupportFactory())
    }

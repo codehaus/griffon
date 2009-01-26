@@ -40,6 +40,8 @@ class SearchFieldFactory extends AbstractFactory {
       def node = new JXSearchField()
       if( value instanceof String ) {
          node.text = value
+      } else if( value instanceof GString ) {
+         node.text = value.toString()
       }
       return node
    }

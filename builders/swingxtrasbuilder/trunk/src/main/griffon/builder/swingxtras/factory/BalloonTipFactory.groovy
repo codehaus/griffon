@@ -60,7 +60,8 @@ class BalloonTipFactory extends AbstractFactory {
 
       builder.context.widgetId = attributes.remove(builder.getAt(SwingBuilder.DELEGATE_PROPERTY_OBJECT_ID) ?: SwingBuilder.DEFAULT_DELEGATE_PROPERTY_OBJECT_ID)
 
-      def balloonTip = newBalloonTip(builder, name, component, text, attributes)
+      // force GStrings to be evalluated by calling toString()
+      def balloonTip = newBalloonTip(builder, name, component, text.toString(), attributes)
       // make sure it starts invisible
       balloonTip.visible = false
       builder.context.balloonTip = balloonTip
@@ -86,7 +87,22 @@ class BalloonTipFactory extends AbstractFactory {
    }
 
    protected BalloonTip newBalloonTip( builder, name, component, text, attributes ) {
-      return new BalloonTip(component, text)
+      BalloonTipStyle style = attributes.remove("style") ?: new RoundedBalloonStyle(5,5,Color.WHITE,Color.BLACK)
+      BalloonTipPositioner positioner = attributes.remove("positioner")
+      BalloonTip.Orientation alignment = attributes.remove("alignment") ?: BalloonTip.Orientation.LEFT_ABOVE
+      BalloonTip.AttachLocation attachLocation = attributes.remove("attachLocation") ?: BalloonTip.AttachLocation.ALIGNED
+      def horizontalOffset = attributes.remove("horizontalOffset")
+      if( horizontalOffset == null ) horizontalOffset = 16
+      def verticalOffset = attributes.remove("verticalOffset")
+      if( verticalOffset == null ) verticalOffset = 20
+      def useCloseButton = attributes.remove("useCloseButton")
+      if( useCloseButton == null ) useCloseButton = true
+      if( positioner == null ) {
+         return new BalloonTip(component, text, style, alignment,
+            attachLocation, horizontalOffset as int, verticalOffset as int, useCloseButton)
+      } else {
+         return new BalloonTip(component, text, style, positioner, useCloseButton)
+      }
    }
 
    public boolean onHandleNodeAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
