@@ -1,0 +1,7 @@
+<plugin name='scala' version='0.1' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Brings the Scala language compiler and libraries</title>
+  <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
+  <dependencies />
+</plugin>
