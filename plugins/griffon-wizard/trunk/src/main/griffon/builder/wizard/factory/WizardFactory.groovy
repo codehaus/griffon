@@ -23,6 +23,7 @@ import javax.imageio.ImageIO
 import org.netbeans.spi.wizard.Wizard
 import org.netbeans.spi.wizard.WizardPage
 import griffon.builder.wizard.GriffonWizardPage
+import griffon.builder.wizard.GriffonWizardPanelProvider
 import griffon.builder.wizard.impl.WizardResultProducerImpl
 
 /**
@@ -41,6 +42,14 @@ class WizardFactory extends AbstractFactory {
 
    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
+      if( value instanceof String || value instanceof GString ) {
+         value = value.toString()
+         if( !value.endsWith("WizardPanelProvider") ) value += "WizardPanelProvider"
+         GriffonWizardPanelProvider wpp = (value as Class).newInstance()
+         wpp.builder = builder
+         return wpp.createWizard()
+      }
+
       String title = attributes.remove("title") ?: "Wizard"
       def pages = attributes.remove("pages")
       if( !pages ) {

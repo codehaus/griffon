@@ -23,17 +23,17 @@ import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
-target (createWizardPage: "Creates a new WizardPage") {
+target (createWizardPanelProvider: "Creates a new WizardPanelProvider") {
    depends(checkVersion, parseArguments)
-   promptForName(type: "Wizard page")
+   promptForName(type: "Wizard panel provider")
    def (pkg, name) = extractArtifactName(argsMap["params"][0])
    def fqn = "${pkg?pkg:''}${pkg?'.':''}${GCU.getClassNameRepresentation(name)}"
 
    createArtifact(
       name: fqn,
-      suffix: "WizardPage",
-      type: "WizardPage",
+      suffix: "WizardPanelProvider",
+      type: "WizardPanelProvider",
       path: "griffon-app/wizards")
 }
 
-setDefaultTarget(createWizardPage)
+setDefaultTarget(createWizardPanelProvider)
