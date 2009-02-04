@@ -22,8 +22,8 @@ import javax.imageio.ImageIO
 
 import org.netbeans.spi.wizard.Wizard
 import org.netbeans.spi.wizard.WizardPage
-import griffon.builder.wizard.GriffonWizardPage
-import griffon.builder.wizard.GriffonWizardPanelProvider
+import griffon.builder.wizard.impl.GriffonWizardPage
+import griffon.builder.wizard.impl.GriffonWizardPanelProvider
 import griffon.builder.wizard.impl.WizardResultProducerImpl
 
 /**
@@ -42,34 +42,76 @@ class WizardFactory extends AbstractFactory {
 
    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
+      GriffonWizardPanelProvider wpp = null
       if( value instanceof String || value instanceof GString ) {
          value = value.toString()
          if( !value.endsWith("WizardPanelProvider") ) value += "WizardPanelProvider"
-         GriffonWizardPanelProvider wpp = (value as Class).newInstance()
-         wpp.builder = builder
-         return wpp.createWizard()
+         def wppd = (value as Class).newInstance()
+         wpp = new GriffonWizardPanelProvider(wppd, builder)
       }
 
       String title = attributes.remove("title") ?: "Wizard"
       def pages = attributes.remove("pages")
-      if( !pages ) {
-          throw new RuntimeException("In $name you must define a value for pages: with either a List of GriffonWizardPage instances or page names")
+      if( !wpp ) {
+        if( !pages ) {
+            throw new RuntimeException("In $name you must define a value for pages: with either a List of GriffonWizardPage instances or page names")
+        }
+
+        if( pages instanceof List ) {
+            if ( pages.every{ it instanceof String } ) {
+                pages = pages.collect { n ->
+                if( !n.endsWith("WizardPage") ) n += "WizardPage"
+                def pd = (n as Class).newInstance()
+                GriffonWizardPage page = new GriffonWizardPage(pd, builder)
+                return page
+                } as WizardPage[]
+            } else {
+                throw new RuntimeException("In $name you must define a value for pages: as a List of page names")
+            }
+        }
       }
 
-      if( pages instanceof List ) {
-         if( pages.every{ it instanceof GriffonWizardPage } ) {
-            pages = pages.collect { it.build(builder) }
-         } else if ( pages.every{ it instanceof String } ) {
-            pages = pages.collect { n ->
-               if( !n.endsWith("WizardPage") ) n += "WizardPage"
-               GriffonWizardPage page = (n as Class).newInstance()
-               page.builder = builder
-               return page
-            } as WizardPage[]
-         } else {
-            throw new RuntimeException("In $name you must define a value for pages: with either a List of GriffonWizardPage instances or page names")
+      handleWizardImage(builder, name, attributes)
+
+      def resultProducer = attributes.remove("resultProducer")
+      if( resultProducer != null ) {
+         if( resultProducer instanceof Map && resultProducer.cancel && resultProducer.finish ) {
+            resultProducer = resultProducer as WizardPage.WizardResultProducer
+         } else if ( !(resultProducer instanceof WizardPage.WizardResultProducer) ){
+            throw new RuntimeException("In $name value of resultProducer: must be an instance of WizardPage.WizardResultProducer or a Map with cancel: and finish: attributes")
          }
+         builder.context.resultProducer = resultProducer
+      } else {
+         builder.context.resultProducerImpl = new WizardResultProducerImpl(builder)
+         resultProducer = builder.context.resultProducerImpl
       }
+
+      if( wpp ){
+         builder.context.wpp = wpp
+         return wpp.createWizard()
+      }
+      Wizard wizard = WizardPage.createWizard(title, pages, resultProducer)
+      PAGES_PER_WIZARD[wizard] = pages
+      return wizard
+   }
+
+   public boolean isHandlesNodeChildren() {
+      return true
+   }
+
+   public boolean onNodeChildren( FactoryBuilderSupport builder, Object node, Closure childContent ) {
+      if( builder.context.resultProducer ) {
+         throw new RuntimeException("In ${builder.currentName} you can not define a nested resultProducer if one was set as a property already.")
+      }
+      builder.context.resultProducerImpl.delegate = childContent.delegate
+      childContent.delegate = builder.context.resultProducerImpl
+      childContent()
+      builder.context.wpp.resultProducer = builder.context.resultProducerImpl
+      return false
+   }
+
+   private void handleWizardImage( FactoryBuilderSupport builder, Object name, Map attributes ) {
+      def value = null
 
       if (attributes.containsKey("url")) {
          value = attributes.remove("url")
@@ -116,36 +158,5 @@ class WizardFactory extends AbstractFactory {
          }
          UIManager.put("wizard.sidebar.image", value)
       }
-
-      def resultProducer = attributes.remove("resultProducer")
-      if( resultProducer != null ) {
-         if( resultProducer instanceof Map && resultProducer.cancel && resultProducer.finish ) {
-            resultProducer = resultProducer as WizardPage.WizardResultProducer
-         } else if ( !(resultProducer instanceof WizardPage.WizardResultProducer) ){
-            throw new RuntimeException("In $name value of resultProducer: must be an instance of WizardPage.WizardResultProducer or a Map with cancel: and finish: attributes")
-         }
-         builder.context.resultProducer = resultProducer
-      } else {
-         builder.context.resultProducerImpl = new WizardResultProducerImpl(builder)
-         resultProducer = builder.context.resultProducerImpl
-      }
-
-      Wizard wizard = WizardPage.createWizard(title, pages, resultProducer)
-      PAGES_PER_WIZARD[wizard] = pages
-      return wizard
-   }
-
-   public boolean isHandlesNodeChildren() {
-      return true
-   }
-
-   public boolean onNodeChildren( FactoryBuilderSupport builder, Object node, Closure childContent ) {
-      if( builder.context.resultProducer ) {
-         throw new RuntimeException("In ${builder.currentName} you can not define a nested resultProducer if one was set as a property already.")
-      }
-      builder.context.resultProducerImpl.delegate = childContent.delegate
-      childContent.delegate = builder.context.resultProducerImpl
-      childContent()
-      return false
    }
 }

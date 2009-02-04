@@ -36,6 +36,10 @@ class WizardBuilder extends SwingBuilder {
       registerExplicitMethod("showWizard", this.&showWizard)
    }
 
+   public def showWizard( Wizard wizard, Map params ) {
+      return showWizard( wizard, params.helpAction, params.initialProperties, params.location )
+   }
+
    public def showWizard( Wizard wizard, Action helpAction = null, Map initialProperties = null, def location = null ) {
        if( location instanceof List ) {
           if( location.size() != 4 ||

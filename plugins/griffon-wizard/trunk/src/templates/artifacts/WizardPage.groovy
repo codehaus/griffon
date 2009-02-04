@@ -1,20 +1,18 @@
 @artifact.package@
 
-import griffon.builder.wizard.GriffonWizardPage
-
-class @artifact.name@ extends GriffonWizardPage {
-   @artifact.name@() {
-      super("stepId", "Step Description", true)
-   }
+class @artifact.name@ {
+   def stepId = "step1" // must be unique per WizardPage
+   def description = "Step Description"
+   def autoListen = true
 
    def pageContents = {
       // remember to always set a name: property to each input widget
       textField( name: "tf1", text: "Add Content Here" ) // delete me
    }
 
-   /*
-   def validator = { component, event ->
-
+   // Either return a String that indicates a problem
+   // or return a null valud indicating no problem
+   def onValidate = { component, /*PropertyChangeEvent*/ event ->
+      return null // no problems
    }
-   */
 }
