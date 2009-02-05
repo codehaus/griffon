@@ -32,6 +32,7 @@ class WizardBuilder extends SwingBuilder {
    }
 
    public void registerWizard() {
+      registerFactory("branchingWizard", new BranchingWizardFactory())
       registerFactory("wizard", new WizardFactory())
       registerExplicitMethod("showWizard", this.&showWizard)
    }

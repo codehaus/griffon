@@ -22,6 +22,7 @@ import javax.imageio.ImageIO
 
 import org.netbeans.spi.wizard.Wizard
 import org.netbeans.spi.wizard.WizardPage
+import griffon.builder.wizard.impl.GriffonBranchingWizard
 import griffon.builder.wizard.impl.GriffonWizardPage
 import griffon.builder.wizard.impl.GriffonWizardPanelProvider
 import griffon.builder.wizard.impl.WizardResultProducerImpl
@@ -42,54 +43,22 @@ class WizardFactory extends AbstractFactory {
 
    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
-      GriffonWizardPanelProvider wpp = null
-      if( value instanceof String || value instanceof GString ) {
-         value = value.toString()
-         if( !value.endsWith("WizardPanelProvider") ) value += "WizardPanelProvider"
-         def wppd = (value as Class).newInstance()
-         wpp = new GriffonWizardPanelProvider(wppd, builder)
-      }
+      GriffonWizardPanelProvider wpp = handleWizardPanelProvider(builder, name, value, attributes)
 
-      String title = attributes.remove("title") ?: "Wizard"
-      def pages = attributes.remove("pages")
+      def pages = null
       if( !wpp ) {
-        if( !pages ) {
-            throw new RuntimeException("In $name you must define a value for pages: with either a List of GriffonWizardPage instances or page names")
-        }
-
-        if( pages instanceof List ) {
-            if ( pages.every{ it instanceof String } ) {
-                pages = pages.collect { n ->
-                if( !n.endsWith("WizardPage") ) n += "WizardPage"
-                def pd = (n as Class).newInstance()
-                GriffonWizardPage page = new GriffonWizardPage(pd, builder)
-                return page
-                } as WizardPage[]
-            } else {
-                throw new RuntimeException("In $name you must define a value for pages: as a List of page names")
-            }
-        }
+        pages = handleWizardPages(builder, name, attributes)
       }
 
       handleWizardImage(builder, name, attributes)
-
-      def resultProducer = attributes.remove("resultProducer")
-      if( resultProducer != null ) {
-         if( resultProducer instanceof Map && resultProducer.cancel && resultProducer.finish ) {
-            resultProducer = resultProducer as WizardPage.WizardResultProducer
-         } else if ( !(resultProducer instanceof WizardPage.WizardResultProducer) ){
-            throw new RuntimeException("In $name value of resultProducer: must be an instance of WizardPage.WizardResultProducer or a Map with cancel: and finish: attributes")
-         }
-         builder.context.resultProducer = resultProducer
-      } else {
-         builder.context.resultProducerImpl = new WizardResultProducerImpl(builder)
-         resultProducer = builder.context.resultProducerImpl
-      }
+      def resultProducer = handleResultProducer(builder, name, attributes)
 
       if( wpp ){
          builder.context.wpp = wpp
          return wpp.createWizard()
       }
+
+      String title = attributes.remove("title") ?: "Wizard"
       Wizard wizard = WizardPage.createWizard(title, pages, resultProducer)
       PAGES_PER_WIZARD[wizard] = pages
       return wizard
@@ -110,7 +79,44 @@ class WizardFactory extends AbstractFactory {
       return false
    }
 
-   private void handleWizardImage( FactoryBuilderSupport builder, Object name, Map attributes ) {
+
+   static handleWizardPanelProvider( FactoryBuilderSupport builder, Object name, Object value, Map attributes ) {
+      if( value instanceof String || value instanceof GString ) {
+         value = value.toString()
+      } else if ( attributes.containsKey("panelProvider") ) {
+         value = attributes.remove("panelProvider")
+      }
+
+      if( !value ) return null
+
+      GriffonWizardPanelProvider wpp = null
+      if( !value.endsWith("WizardPanelProvider") ) value += "WizardPanelProvider"
+      def wppd = (value as Class).newInstance()
+      wpp = new GriffonWizardPanelProvider(wppd, builder)
+      return wpp
+   }
+
+   static handleWizardPages( FactoryBuilderSupport builder, Object name, Map attributes ) {
+      def pages = attributes.remove("pages")
+
+      if( pages instanceof List ) {
+         if ( pages.every{ it instanceof String } ) {
+            pages = pages.collect { n ->
+            if( !n.endsWith("WizardPage") ) n += "WizardPage"
+               def pd = (n as Class).newInstance()
+               GriffonWizardPage page = new GriffonWizardPage(pd, builder)
+               return page
+            } as GriffonWizardPage[]
+         } else {
+            throw new RuntimeException("In $name you must define a value for pages: as a List of page names")
+         }
+      } else {
+         throw new RuntimeException("In $name you must define a value for pages: as a List of page names")
+      }
+      return pages
+   }
+
+   static void handleWizardImage( FactoryBuilderSupport builder, Object name, Map attributes ) {
       def value = null
 
       if (attributes.containsKey("url")) {
@@ -158,5 +164,58 @@ class WizardFactory extends AbstractFactory {
          }
          UIManager.put("wizard.sidebar.image", value)
       }
+   }
+
+   static handleResultProducer( FactoryBuilderSupport builder, Object name, Map attributes ) {
+      def resultProducer = attributes.remove("resultProducer")
+      if( resultProducer != null ) {
+         if( resultProducer instanceof Map && resultProducer.cancel && resultProducer.finish ) {
+            resultProducer = resultProducer as WizardPage.WizardResultProducer
+         } else if ( !(resultProducer instanceof WizardPage.WizardResultProducer) ){
+            throw new RuntimeException("In $name value of resultProducer: must be an instance of WizardPage.WizardResultProducer or a Map with cancel: and finish: attributes")
+         }
+         builder.context.resultProducer = resultProducer
+      } else {
+         builder.context.resultProducerImpl = new WizardResultProducerImpl(builder)
+         resultProducer = builder.context.resultProducerImpl
+      }
+      return resultProducer
+   }
+}
+
+/**
+ * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ */
+class BranchingWizardFactory extends WizardFactory {
+   public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+            throws InstantiationException, IllegalAccessException {
+      value = String.valueOf(value)
+      if( !value.endsWith("BranchingWizard") ) value += "BranchingWizard"
+      def bw = (value as Class).newInstance()
+      bw.builder = builder
+
+      GriffonWizardPanelProvider wpp = null
+      if( bw.metaClass.hasProperty(bw,"initialPanelProvider") ) {
+         wpp = handleWizardPanelProvider(builder, bw.initialPanelProvider, value, attributes)
+      }
+      def pages = null
+      if( !wpp && bw.metaClass.hasProperty(bw,"initialPages") ) {
+        Map attrs = [pages: bw.initialPages]
+        attrs.putAll(attributes)
+        pages = handleWizardPages(builder, name, attrs)
+      }
+
+      if( !wpp && !pages ) {
+         throw new RuntimeException("In $name you must define one of the following properties initialPages, initialPanelProvider on ${bw.class}")
+      }
+
+      handleWizardImage(builder, name, attributes)
+      builder.context.branchingWizard = new GriffonBranchingWizard(wpp ?: pages, bw, builder)
+
+      return builder.context.branchingWizard.createWizard()
+   }
+
+   public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
+      builder.context.branchingWizard.init()
    }
 }
