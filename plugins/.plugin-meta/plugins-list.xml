@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="443">
+<plugins revision="453">
     <plugin latest-release="0.2" name="code-coverage">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generates Code Coverage reports</title>
@@ -184,7 +184,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-tray-builder/tags/RELEASE_0_1-SNAPSHOT/griffon-tray-builder-0.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="wizard">
+    <plugin latest-release="0.2" name="wizard">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Adds a Wizard facility to your Griffon apps</title>
             <author>Andres Almiray</author>
@@ -192,6 +192,14 @@
             <description></description>
             <documentation>http://griffon.codehaus.org/Wizard+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wizard/tags/RELEASE_0_1/griffon-wizard-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
+            <title>Adds a Wizard facility to your Griffon apps</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/Wizard+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-wizard/tags/RELEASE_0_2/griffon-wizard-0.2.zip</file>
         </release>
     </plugin>
 </plugins>
