@@ -202,7 +202,7 @@ class PromptSupportFactory extends AbstractFactory {
          throw new RuntimeException("$name does not know what to do with additional attributes: ${attributes.keySet()}")
       }
 
-      return null
+      return [:] // make null return warning go away
    }
 }
 
@@ -289,6 +289,6 @@ class BuddySupportFactory extends AbstractFactory {
          throw new RuntimeException("$name does not know what to do with additional attributes: ${attributes.keySet()}")
       }
 
-      return null
+      return [:] // make null return warning go away
    }
 }
