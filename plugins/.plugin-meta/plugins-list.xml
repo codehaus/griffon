@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="470">
+<plugins revision="485">
     <plugin latest-release="0.2" name="code-coverage">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generates Code Coverage reports</title>
@@ -172,6 +172,16 @@
             <description></description>
             <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/trunk/griffon-swingx-builder-0.1-SNAPSHOT.zip</file>
+        </release>
+    </plugin>
+    <plugin latest-release="0.1" name="swingxtras-builder">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Swingxtras Builder Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/SwingxtrasBuilder+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-swingxtras-builder/tags/RELEASE_0_1/griffon-swingxtras-builder-0.1.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1" name="tray-builder">
