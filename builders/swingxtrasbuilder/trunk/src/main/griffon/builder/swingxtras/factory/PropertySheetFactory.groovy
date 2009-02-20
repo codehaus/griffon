@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,14 +37,17 @@ class PropertySheetPanelFactory extends ComponentFactory {
       def panel = new BindablePropertySheetPanel()
       def excludes = attributes.remove("excludes") ?: []
       def includes = attributes.remove("includes") ?: []
-      if( value != null ) panel.bind(value,excludes,includes)
+      if( value != null ) {
+         if( !attributes.remove("skipSetup") ) panel.setup(value,excludes,includes)
+         panel.bind(value)
+      }
       return panel
    }
 
    public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
       if( child instanceof PropertySheetTable ) {
          parent.table = child
-         if(parent.bound) parent.unbind()
+         // if(parent.bound) parent.unbind()
       } else if( child instanceof Property ) {
          def table = parent.table
          if( !table ) {
@@ -56,8 +59,19 @@ class PropertySheetPanelFactory extends ComponentFactory {
             model = new PropertySheetTableModel()
             table.model = model
          }
-         model.addProperty(child)
-         if(parent.bound) parent.unbind()
+         // check if a property with same name: is already in the model
+         def replaced = false
+         def properties = model.properties
+         for( int i = 0; i < properties.size(); i++ ) {
+            if( properties[i].name == child.name ) {
+               properties[i] = child
+               model.properties = properties
+               replaced = true
+               break
+            }
+         }
+         if( !replaced ) model.addProperty(child)
+         // if(parent.bound) parent.unbind()
       } else {
          super.setChild(builder, parent, child)
       }
@@ -89,7 +103,19 @@ class PropertySheetTableModelFactory extends AbstractFactory {
 
    public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
       if( child instanceof Property ) {
-         parent.addProperty(child)
+         def model = parent.model
+         // check if a property with same name: is already in the model
+         def replaced = false
+         def properties = model.properties
+         for( int i = 0; i < properties.size(); i++ ) {
+            if( properties[i].name == child.name ) {
+               properties[i] = child
+               model.properties = properties
+               replaced = true
+               break
+            }
+         }
+         if( !replaced ) model.addProperty(child)
       }
    }
 }
@@ -98,14 +124,17 @@ class PropertySheetTableModelFactory extends AbstractFactory {
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
 class PropertyFactory extends AbstractFactory {
-   public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {      
+   public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {
       if( value instanceof Property ) {
          return value
+      }
+      if( value == null && builder.current instanceof BindablePropertySheetPanel ) {
+         value = builder.current.bean
       }
       if( value == null ) {
          throw new RuntimeException("In $name you must specify a bean as value")
       }
-      def propertyName = attributes.remove("name")
+      def propertyName = attributes.name
       if( !propertyName ) {
          throw new RuntimeException("In $name you must specify a value for name:")
       }

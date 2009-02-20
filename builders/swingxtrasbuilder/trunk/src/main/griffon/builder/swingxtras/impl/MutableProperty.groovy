@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,12 @@ class MutableProperty implements Property {
    Property parentProperty
    List<Property> subproperties = new ArrayList<Property>()
 
+   // overridable properties
+   String displayName
+   String name
+   String shortDescription
+   Class type
+
    MutableProperty( PropertyDescriptor propertyDescriptor ) {
       this.propertyDescriptor = propertyDescriptor
    }
@@ -39,18 +45,22 @@ class MutableProperty implements Property {
       other.category = category
       other.parentProperty = parentProperty
       other.subproperties.addAll(suproperties)
+      other.displayName = displayName
+      other.name = name
+      other.shortDescription = shortDescription
+      other.type = type
    }
 
    public String getDisplayName() {
-      propertyDescriptor.displayName
+      displayName ?: propertyDescriptor.displayName
    }
 
    public String getName() {
-      propertyDescriptor.name
+      name ?: propertyDescriptor.name
    }
 
    public String getShortDescription() {
-      propertyDescriptor.shortDescription
+      shortDescription ?: propertyDescriptor.shortDescription
    }
 
    public Property[] getSubProperties() {
@@ -58,7 +68,7 @@ class MutableProperty implements Property {
    }
 
    public Class getType() {
-      propertyDescriptor.propertyType
+      type ?: propertyDescriptor.propertyType
    }
 
    public boolean isEditable() {

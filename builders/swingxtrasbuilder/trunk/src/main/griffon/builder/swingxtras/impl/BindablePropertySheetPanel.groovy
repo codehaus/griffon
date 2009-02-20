@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ class BindablePropertySheetPanel extends PropertySheetPanel {
    Object bean
    private PropertyChangeListener listener
 
-   public void bind( Object bean, List<String> excludes = [], List<String> includes = [] ) {
+   public void setup( Object bean, List<String> excludes = [], List<String> includes = [] ) {
       if( !this.bean.is(bean) ) {
          unbind()
       }
@@ -41,28 +41,47 @@ class BindablePropertySheetPanel extends PropertySheetPanel {
       }
       this.setProperties(properties as Property[])
       this.readFromObject(bean)
+   }
 
-      listener = { evt ->
-         Property prop = evt.source
-         try {
-            prop.writeToObject(bean)
-         } catch( RuntimeException e ) {
-            // handle PropertyVetoException and restore previous value
-            if( e.cause instanceof PropertyVetoException) {
-               prop.value = evt.oldValue
-            }
-         }
-      } as PropertyChangeListener
+   public void bind( Object bean ) {
+      if( !this.bean.is(bean) ) {
+         unbind()
+      }
+      this.bean = bean
+      listener = new PropertySheetChangeListener(bean)
       addPropertySheetChangeListener(listener)
    }
 
    public void unbind() {
-      if( listener ) addPropertySheetChangeListener(listener)
+      if( listener ) removePropertySheetChangeListener(listener)
       this.bean = null
       this.listener = null
    }
 
    public boolean isBound() {
       return bean != null
+   }
+}
+
+/**
+ * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ */
+class PropertySheetChangeListener implements PropertyChangeListener {
+   private final Object bean
+
+   PropertySheetChangeListener( Object bean ) {
+      this.bean = bean
+   }
+
+   public void propertyChange( PropertyChangeEvent evt ) {
+      Property prop = evt.source
+      try {
+         prop.writeToObject(bean)
+      } catch( RuntimeException e ) {
+         // handle PropertyVetoException and restore previous value
+         if( e.cause instanceof PropertyVetoException) {
+            prop.value = evt.oldValue
+         }
+      }
    }
 }
