@@ -104,6 +104,8 @@ class TriAreaComponentFactory extends AbstractFactory {
             default:
                throw new RuntimeException("In ${builder.parentName} value of locationOnBar: must be one of ['left','center','right] or the corresponding SwingConstants field.")
          }
+      } catch( MissingPropertyException mpe ) {
+         addChildToLeft(builder,parent,child,ops.get("spacer",0))
       }
    }
 
