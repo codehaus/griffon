@@ -17,9 +17,8 @@
 package griffon.builder.fx
 
 import com.sun.javafx.runtime.FXObject
-import com.sun.javafx.runtime.location.ObjectChangeListener
-import com.sun.javafx.runtime.location.ObjectLocation
-import com.sun.javafx.runtime.sequence.Sequence
+import com.sun.javafx.runtime.location.*
+import com.sun.javafx.runtime.sequence.*
 import com.sun.javafx.functions.*
 
 /**
@@ -55,6 +54,15 @@ public class Fx {
          } else {
             throw new MissingPropertyException(name,clazz)
          }
+      }
+
+      FXObject.metaClass.hasAttribute = { String name ->
+         def clazz = delegate.getClass()
+         def mc = clazz.metaClass
+         def metaProperty = mc.getMetaProperty(name)
+         if(!metaProperty) metaProperty = mc.getMetaProperty("\$$name")
+         if(!metaProperty) metaProperty = mc.getMetaProperty("\$${clazz.name.replace('.','\$')}\$$name")
+         return metaProperty != null
       }
 
       FXObject.metaClass.attribute = { String name ->

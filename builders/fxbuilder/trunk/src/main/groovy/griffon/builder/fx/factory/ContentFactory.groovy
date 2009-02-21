@@ -17,8 +17,6 @@
 package griffon.builder.fx.factory
 
 import javafx.scene.Node
-// import com.sun.javafx.runtime.location.SequenceVariable
-// import griffon.builder.fx.impl.ListSequence
 import com.sun.javafx.runtime.TypeInfo
 import com.sun.javafx.runtime.sequence.SequenceBuilder
 
@@ -28,12 +26,7 @@ import com.sun.javafx.runtime.sequence.SequenceBuilder
 class ContentFactory extends AbstractFxFactory {
     public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
-//         new ListSequence([])
         []
-    }
-
-    public void setParent( FactoryBuilderSupport builder, Object parent, Object child ) {
-//         parent.attribute("content").set(child)
     }
 
     public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
@@ -42,7 +35,6 @@ class ContentFactory extends AbstractFxFactory {
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         if( parent ) {
-//             parent.attribute("content").set(node)
              def sb = new SequenceBuilder(TypeInfo.Object)
              node.each { sb.add(it) }
              def s = sb.toSequence()

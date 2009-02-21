@@ -17,30 +17,33 @@
 package griffon.builder.fx.factory
 
 import javafx.scene.Scene
-import com.sun.scenario.scenegraph.JSGPanel
-import com.sun.javafx.scene.JSGPanelSceneImpl
+import javafx.scene.Node
+import com.sun.javafx.runtime.location.*
+import com.sun.javafx.runtime.sequence.*
+import com.sun.javafx.runtime.TypeInfo
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
 class FxSceneFactory extends FxBeanFactory {
-    private static final String SCENE_HOST = "_FX_SCENE_HOST_"
-
     FxSceneFactory() {
         super( Scene, false )
     }
 
-    public void setParent( FactoryBuilderSupport builder, Object parent, Object child ) {
-        def host = new JSGPanelSceneImpl()
-        host.scene = child
-        def panel = new JSGPanel()
-        panel.scene = host.root
-        parent.add(panel)
-        builder.context.SCENE_HOST = host
+    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+        if(!builder.parentContext.children) builder.parentContext.children = []
+        builder.parentContext.children << child
     }
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
+        if( builder.context.children ) {
+            def sb = new SequenceBuilder(TypeInfo.getTypeInfo(Node))
+            builder.context.children.each{ sb.add(it) }
+            node.attribute("content").setAsSequenceFromLiteral(sb.toSequence())
+        }
+
         super.onNodeCompleted( builder, parent, node )
-        //builder.context.SCENE_HOST."initialize\$"()
+
+        if( parent && parent.hasAttribute("scene") ) parent.scene = node
     }
 }

@@ -15,6 +15,11 @@
  */
 
 package griffon.builder.fx.factory
+
+import com.sun.javafx.runtime.location.*
+import com.sun.javafx.runtime.sequence.*
+import com.sun.javafx.runtime.TypeInfo
+
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
@@ -25,5 +30,27 @@ abstract class AbstractFxFactory extends AbstractFactory implements FxFactory {
         } catch( MissingMethodException mme ) {
            // ignore
         }
+    }
+
+    public boolean onHandleNodeAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
+        attributes.each { key, value ->
+            def attr = node.attribute(key)
+            switch(attr) {
+                case BooleanVariable: attr.setAsBooleanFromLiteral(value); break
+                case DoubleVariable: attr.setAsDoubleFromLiteral(value); break
+                case IntVariable: attr.setAsIntFromLiteral(value); break
+                case SequenceVariable:
+                    switch(value) {
+                        case Sequence: attr.setAsSequenceFromLiteral(value); break
+                        default:
+                            def sb = new SequenceBuilder(TypeInfo.Object)
+                            value.each{ sb.add(it) }
+                            attr.setAsSequenceFromLiteral(sb.toSequence())
+                    }
+                    break
+                default: attr.setFromLiteral(value)
+            }
+        }
+        return false
     }
 }

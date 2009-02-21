@@ -48,6 +48,7 @@ public class FxBuilder extends SwingBuilder {
    }
 
    public void registerFxSwing() {
+      registerFactory("swingScene", new FxSwingSceneFactory())
       registerBeanFactory("swingButton", SwingButton)
       registerBeanFactory("swingCheckBox", SwingCheckBox)
       registerBeanFactory("swingComboBox", SwingComboBox)
@@ -60,7 +61,6 @@ public class FxBuilder extends SwingBuilder {
       registerBeanFactory("swingSlider", SwingSlider)
       registerBeanFactory("swingTextField", SwingTextField)
       registerBeanFactory("swingToggleButton", SwingToggleButton)
-//       registerBeanFactory("swingButton", SwingToggleGroup)
 
       setVariable("SwingHorizontalAlignment_LEADING", SwingHorizontalAlignment.LEADING)
       setVariable("SwingHorizontalAlignment_TRAILING",SwingHorizontalAlignment.TRAILING)
@@ -78,6 +78,7 @@ public class FxBuilder extends SwingBuilder {
       registerFactory("scene", new FxSceneFactory())
       registerFactory("content", new ContentFactory())
       registerFactory("stage", new FxBeanFactory(Stage,false))
+      registerFactory("customNode", new FXCustomNodeFactory())
 
       setVariable("CURSOR_DEFAULT",  Cursor."\$DEFAULT")
       setVariable("CURSOR_CROSSHAIR",Cursor."\$CROSSHAIR")
@@ -169,8 +170,8 @@ public class FxBuilder extends SwingBuilder {
       "royalBlue", "saddleBrown", "salmon", "sandyBrown", "seaGreen", "seaShell", "sienna", "silver",
       "skyBlue", "slateBlue", "slateGray", "slateGrey", "snow", "springGreen", "steelBlue", "tan",
       "teal", "thistle", "tomato", "turquoise", "violet", "wheat", "white", "whiteSmoke", "yellow", "yellowGreen"].each {
-         setVariable(it, Color."\$${it.toUpperCase()}")
-         setVariable("color_$it", Color."\$${it.toUpperCase()}")
+         // setVariable(it, Color."\$${it.toUpperCase()}".get())
+         setVariable("color_$it", Color."\$${it.toUpperCase()}".get())
       }
 
       registerExplicitMethod("color", Color.&color)

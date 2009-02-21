@@ -37,7 +37,7 @@ class FxBeanFactory extends AbstractFxFactory {
         if( FactoryBuilderSupport.checkValueIsTypeNotString(value, name, beanClass) ) {
             return value
         }
-        beanClass.newInstance()
+        beanClass.getDeclaredConstructor([Boolean.TYPE] as Class[]).newInstance([true] as Object[])
     }
 
     public boolean isLeaf() {
