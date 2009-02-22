@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,11 +51,7 @@ class ArrowIconFactory extends AbstractFactory {
          }
       }
 
-      def id = attributes.remove("initialDim")
-      if( id == null ) id = new Dimension(48,48)
-      if( id instanceof Number ) id = new Dimension(id.intValue(),id.intValue())
-      if( id instanceof List ) id = id as Dimension
-      if( (!id instanceof Dimension) ) throw new RuntimeException("In $name initialDim: attributes must be of type java.awt.Dimension")
+      def id = FlamingoFactoryUtils.processIconInitialDimAttribute(name, attributes)
 
       if( attributes.remove("doubleHeaded") ) {
          return new DoubleArrowResizableIcon(id,SwingConstants.SOUTH)

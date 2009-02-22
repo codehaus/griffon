@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,10 +31,9 @@ class DecoratedResizableIconFactory extends AbstractFactory {
          return value
       }
 
-      def icon = attributes.remove("icon")
-      if( !icon ) throw new IllegalArgumentException("decoratedIcon requires an icon attribute")
+      def icon = FlamingoFactoryUtils.createIcon(builder, name, value, attributes)
       if( !(icon instanceof ResizableIcon) )
-         throw new IllegalArgumentException("decoratedIcon requires a ResizableIcon as delegate, current one is ${icon.class.name}")
+         throw new IllegalArgumentException("$name requires a ResizableIcon as delegate, current one is ${icon.class.name}")
       def decorators = attributes.remove("decorators") ?: []
       return new DecoratedResizableIcon(icon,decorators)
    }

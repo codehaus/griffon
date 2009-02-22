@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package griffon.builder.flamingo.factory
 
-import org.jvnet.flamingo.common.icon.ResizableIcon
+import org.jvnet.flamingo.common.icon.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
@@ -34,11 +34,11 @@ class CommandButtonFactory extends AbstractFactory {
          return value
       }
 
-      def icon = attributes.remove("icon")
-      if( !icon ) throw new IllegalArgumentException("$name requires an icon attribute")
-      if( !(icon instanceof ResizableIcon) )
-         throw new IllegalArgumentException("$name requires a ResizableIcon as delegate, current one is ${icon.class.name}")
-      def title = value instanceof String ? value : attributes.remove("text")
+      def icon = FlamingoFactoryUtils.createIcon(builder, name, null, attributes)
+      if( !icon ) icon = new EmptyResizableIcon(32)
+      if( !icon || !(icon instanceof ResizableIcon) )
+         throw new IllegalArgumentException("In $name a value for icon: must be defined.")
+      def title = value instanceof String || value instanceof GString ? value.toString() : attributes.remove("text")?.toString()
       title = title ?: ""
       return beanClass.getDeclaredConstructor([String,ResizableIcon] as Class[]).newInstance(title, icon)
    }
