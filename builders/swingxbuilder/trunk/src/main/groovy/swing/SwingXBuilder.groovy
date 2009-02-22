@@ -16,6 +16,9 @@
 package groovy.swing
 
 import groovy.swing.factory.*
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.logging.Logger
 import org.jdesktop.swingx.*
 import org.jdesktop.swingx.MultiSplitLayout.Divider
@@ -54,34 +57,15 @@ public class SwingXBuilder extends SwingBuilder {
     Map componentCollections = [:]
 
     public SwingXBuilder( boolean init = true ) {
-        super( init )
-
-        //registerWidgets()
-        // use copy hash map to avoid concurrent modification
-        new HashMap(getFactories()).each {k, v ->
-            // don't use GString, bad equality testing
-            registerFactory("classicSwing:" + k, v)
+        super( false )
+        if(init) {
+           sxbAutoRegiser()
         }
-
-        addShortcutHandler()
-        /*
-           init = true will take care of autoregistering factories
-           watchout for repeated method names like registerLayouts
-        */
-        //registerShortcutHandler()
-        //registerSwingxHighlighters()
-        // this one fails to autoregister - needs review
-        registerSwingxComponents()
-        //registerSwingxPainters()
-        //registerSwingxEffects()
-        //registerSwingxFilters()
-        //registerSwingxAnimators()
-        //registerSwingxLayouts()
     }
 
     protected Factory resolveFactory(Object name, Map attributes, Object value) {
         def classicSwing = (boolean) attributes.remove("classicSwing")
-        if (classicSwing != null && classicSwing == true) {
+        if (classicSwing != null && classicSwing) {
             // don't use GString, bad equality testing
             return super.resolveFactory("classicSwing:" + name, attributes, value)
         } else {
@@ -89,17 +73,54 @@ public class SwingXBuilder extends SwingBuilder {
         }
     }
 
-/*
-    protected Object createNode(Object name, Map attributes, Object value) {
-        def classicSwing = (boolean) attributes.remove("classicSwing")
-        if (classicSwing != null && classicSwing == true) {
-            // don't use GString, bad equality testing
-            return super.createNode("classicSwing:" + name, attributes, value)
-        } else {
-            return super.createNode(name, attributes, value)
+    public sxbAutoRegiser() {
+        // if java did atomic blocks, this would be one
+        synchronized (this) {
+            if (autoRegistrationRunning || autoRegistrationComplete) {
+                // registration already done or in process, abort
+                return;
+            }
+        }
+        autoRegistrationRunning = true;
+        try {
+            sxbCallAutoRegisterMethods(getClass());
+        } finally {
+            autoRegistrationComplete = true;
+            autoRegistrationRunning = false;
         }
     }
-*/
+
+
+    private void sxbCallAutoRegisterMethods(Class declaredClass) {
+        if (declaredClass == null) {
+            return;
+        }
+        sxbCallAutoRegisterMethods(declaredClass.getSuperclass());
+        if (declaredClass == SwingXBuilder) {
+            new HashMap(getFactories()).each {k, v ->
+                // don't use GString, bad equality testing
+                registerFactory('classicSwing:' + k, v)
+            }
+        }
+
+        for (Method method in declaredClass.getDeclaredMethods()) {
+            if (method.getName().startsWith("register") && method.getParameterTypes().length == 0) {
+                registringGroupName = method.getName().substring("register".length());
+                registrationGroup.put(registringGroupName, new TreeSet<String>());
+                try {
+                    if (Modifier.isPublic(method.getModifiers())) {
+                        method.invoke(this);
+                    }
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException("Cound not init " + getClass().getName() + " because of an access error in " + declaredClass.getName() + "." + method.getName(), e);
+                } catch (InvocationTargetException e) {
+                    throw new RuntimeException("Cound not init " + getClass().getName() + " because of an exception in " + declaredClass.getName() + "." + method.getName(), e);
+                } finally {
+                    registringGroupName = "";
+                }
+            }
+        }
+    }
 
     public void addShortcut(className, propName, shortcut) {
         if (shortcuts[className] != null) {
@@ -111,7 +132,7 @@ public class SwingXBuilder extends SwingBuilder {
         }
     }
 
-    void addShortcutHandler() {
+    void registerShortcutHandler() {
         addAttributeDelegate {builder, node, attributes ->
             def shortcutList = builder.shortcuts[node.getClass()]
             if (shortcutList) {

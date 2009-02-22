@@ -23,7 +23,7 @@ public class SwingWorkerFactory extends AbstractFactory {
       Class workerClass = null
       try {
           workerClass = Class.forName("groovy.swing.impl.Jdk6SwingWorker")
-      } catch( Exception e ) {
+      } catch( NoClassDefFoundError e  ) {
           workerClass = Class.forName("groovy.swing.impl.Jdk5SwingWorker")
       }
 
