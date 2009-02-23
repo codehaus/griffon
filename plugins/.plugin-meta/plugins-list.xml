@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="495">
+<plugins revision="507">
     <plugin latest-release="0.2" name="code-coverage">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generates Code Coverage reports</title>
@@ -164,7 +164,15 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-splash/tags/RELEASE_0_1/griffon-splash-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1-SNAPSHOT" name="swingx-builder">
+    <plugin latest-release="0.1" name="swingx-builder">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>SwingX Builder Plugin</title>
+            <author>James Williams</author>
+            <authorEmail>james.l.williams@gmail.com</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/tags/RELEASE_0_1/griffon-swingx-builder-0.1.zip</file>
+        </release>
         <release tag="RELEASE_0_1-SNAPSHOT" type="svn" version="0.1-SNAPSHOT">
             <title>SwingX Builder Plugin</title>
             <author>James Williams</author>
@@ -172,14 +180,6 @@
             <description></description>
             <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/tags/RELEASE_0_1-SNAPSHOT/griffon-swingx-builder-0.1-SNAPSHOT.zip</file>
-        </release>
-        <release tag="trunk" type="svn" version="0.1-SNAPSHOT">
-            <title>SwingX Builder Plugin</title>
-            <author>James Williams</author>
-            <authorEmail>james.l.williams@gmail.com</authorEmail>
-            <description></description>
-            <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/trunk/griffon-swingx-builder-0.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1" name="swingxtras-builder">
