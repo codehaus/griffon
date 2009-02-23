@@ -1,4 +1,4 @@
-<plugin name='swingx-builder' version='0.1-SNAPSHOT' jdk='1.4'>
+<plugin name='swingx-builder' version='0.1' jdk='1.5'>
   <author>James Williams</author>
   <authorEmail>james.l.williams@gmail.com</authorEmail>
   <title>SwingX Builder Plugin</title>
