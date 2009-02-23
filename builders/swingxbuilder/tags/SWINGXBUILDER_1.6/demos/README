@@ -1,0 +1,19 @@
+The demos:
+
+30BoxesViewer --- A demo showing CollapsiblePanes and a simple API built by using SwingX-WS calls
+		[This one might break due to changes to 30Boxes's REST API]
+CalendarDemo  --- A port of a Glossitope widget showing a view of the month and the current day
+PainterDemo   --- A port of the demo orginally done by Romain Guy
+
+
+To build:
+
+Make sure you have Gant 0.30 installed. Each project has its own build.gant file.
+
+To run:
+
+For all:
+Have the swingx, swingxbuilder, and associated jars on your classpath. All three demos make use of MigLayout.
+
+30Boxes Viewer:
+You must register at 30Boxes.com and retrieve an API key and auth token.
