@@ -1,10 +1,11 @@
 import org.codehaus.griffon.cli.GriffonScriptRunner as GSR
+import org.codehaus.griffon.plugins.GriffonPluginUtils
 
 eventSetClasspath = { classLoader ->
     def wizardPlugin = getPluginDirForName('wizard')
     if( !wizardPlugin ) return
     ant.fileset(dir:"${wizardPlugin.file}/lib/", includes:"*.jar").each { jar ->
-        classLoader.adURL( jar.toURI().toURL() )
+        classLoader.addURL( jar.file.toURI().toURL() )
     }
 }
 
@@ -34,4 +35,9 @@ eventCompileStart = { type ->
     compileSources(classpathId) {
         src(path: "${basedir}/griffon-app/wizards")
     }
+}
+
+getPluginDirForName = { String pluginName ->
+    // pluginsHome = griffonSettings.projectPluginsDir.path
+    GriffonPluginUtils.getPluginDirForName(pluginsHome, pluginName)
 }

@@ -1,5 +1,5 @@
 class WizardGriffonPlugin {
-    def version = 0.2
+    def version = "0.2.1-SNAPSHOT"
     def canBeGlobal = false
     def dependsOn = [:]
 
