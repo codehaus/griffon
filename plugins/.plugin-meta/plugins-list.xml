@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="531">
-    <plugin latest-release="0.2" name="code-coverage">
+<plugins revision="558">
+    <plugin latest-release="0.2.1" name="code-coverage">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generates Code Coverage reports</title>
             <author>Andres Allmiray</author>
@@ -17,8 +17,16 @@
             <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_2/griffon-code-coverage-0.2.zip</file>
         </release>
+        <release tag="RELEASE_0_2_1" type="svn" version="0.2.1">
+            <title>Generates Code Coverage reports</title>
+            <author>Andres Allmiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_2_1/griffon-code-coverage-0.2.1.zip</file>
+        </release>
     </plugin>
-    <plugin latest-release="0.1" name="easyb">
+    <plugin latest-release="0.1.1" name="easyb">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables BDD testing with Easyb</title>
             <author>Andres Almiray</author>
@@ -27,8 +35,16 @@
             <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_1/griffon-easyb-0.1.zip</file>
         </release>
+        <release tag="RELEASE_0_1_1" type="svn" version="0.1.1">
+            <title>Enables BDD testing with Easyb</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_1_1/griffon-easyb-0.1.1.zip</file>
+        </release>
     </plugin>
-    <plugin latest-release="0.2" name="fest">
+    <plugin latest-release="0.2.1" name="fest">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables application testing with FEST</title>
             <author>Andres Almiray</author>
@@ -53,6 +69,14 @@
             <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_2/griffon-fest-0.2.zip</file>
         </release>
+        <release tag="RELEASE_0_2_1" type="svn" version="0.2.1">
+            <title>Enables application testing with FEST</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_2_1/griffon-fest-0.2.1.zip</file>
+        </release>
     </plugin>
     <plugin latest-release="0.1" name="flamingo-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
@@ -72,7 +96,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_1-SNAPSHOT/griffon-flamingo-builder-0.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="installer">
+    <plugin latest-release="0.2.1" name="installer">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Allows creating installers for your Griffon application</title>
             <author>Andres Almiray</author>
@@ -96,6 +120,14 @@
             <description></description>
             <documentation>http://griffon.codehaus.org/Installer+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/tags/RELEASE_0_2/griffon-installer-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_2_1" type="svn" version="0.2.1">
+            <title>Allows creating installers for your Griffon application</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/Installer+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/tags/RELEASE_0_2_1/griffon-installer-0.2.1.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1" name="jdepend">
