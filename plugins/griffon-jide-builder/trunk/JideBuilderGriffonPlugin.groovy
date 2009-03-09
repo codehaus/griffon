@@ -1,5 +1,5 @@
 class JideBuilderGriffonPlugin {
-    def version = "0.1"
+    def version = "0.1.1"
     def canBeGlobal = false
     def dependsOn = [:]
 
