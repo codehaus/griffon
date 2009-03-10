@@ -1,7 +1,0 @@
-<plugin name='wizard' version='0.2.1-SNAPSHOT' jdk='1.5'>
-  <author>Andres Almiray</author>
-  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-  <title>Adds a Wizard facility to your Griffon apps</title>
-  <documentation>http://griffon.codehaus.org/Wizard+Plugin</documentation>
-  <dependencies />
-</plugin>

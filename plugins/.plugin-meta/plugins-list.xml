@@ -53,14 +53,6 @@
             <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_1/griffon-fest-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_1-SNAPSHOT" type="svn" version="0.1-SNAPSHOT">
-            <title>Enables application testing with FEST</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
-            <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_1-SNAPSHOT/griffon-fest-0.1-SNAPSHOT.zip</file>
-        </release>
         <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Enables application testing with FEST</title>
             <author>Andres Almiray</author>
@@ -87,14 +79,6 @@
             <documentation>http://griffon.codehaus.org/FlamingoBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_1/griffon-flamingo-builder-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_1-SNAPSHOT" type="svn" version="0.1-SNAPSHOT">
-            <title>FlamingoBuilder Plugin</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
-            <documentation>http://griffon.codehaus.org/FlamingoBuilder+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_1-SNAPSHOT/griffon-flamingo-builder-0.1-SNAPSHOT.zip</file>
-        </release>
         <release tag="RELEASE_0_1_1" type="svn" version="0.1.1">
             <title>FlamingoBuilder Plugin</title>
             <author>Andres Almiray</author>
@@ -112,14 +96,6 @@
             <description></description>
             <documentation>http://griffon.codehaus.org/Installer+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/tags/RELEASE_0_1/griffon-installer-0.1.zip</file>
-        </release>
-        <release tag="RELEASE_0_1-SNAPSHOT" type="svn" version="0.1-SNAPSHOT">
-            <title>Allows creating installers for your Griffon application</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
-            <documentation>http://griffon.codehaus.org/Installer+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/tags/RELEASE_0_1-SNAPSHOT/griffon-installer-0.1-SNAPSHOT.zip</file>
         </release>
         <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Allows creating installers for your Griffon application</title>
@@ -164,14 +140,6 @@
             <description></description>
             <documentation>http://griffon.codehaus.org/JideBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jide-builder/tags/RELEASE_0_1/griffon-jide-builder-0.1.zip</file>
-        </release>
-        <release tag="RELEASE_0_1-SNAPSHOT" type="svn" version="0.1-SNAPSHOT">
-            <title>Jide Builder Plugin</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
-            <documentation>http://griffon.codehaus.org/JideBuilder+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-jide-builder/tags/RELEASE_0_1-SNAPSHOT/griffon-jide-builder-0.1-SNAPSHOT.zip</file>
         </release>
         <release tag="RELEASE_0_1_1" type="svn" version="0.1.1">
             <title>Jide Builder Plugin</title>
@@ -281,14 +249,6 @@
             <documentation>http://griffon.codehaus.org/TrayBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-tray-builder/tags/RELEASE_0_1/griffon-tray-builder-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_1-SNAPSHOT" type="svn" version="0.1-SNAPSHOT">
-            <title>TrayBuilder Plugin</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
-            <documentation>http://griffon.codehaus.org/TrayBuilder+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-tray-builder/tags/RELEASE_0_1-SNAPSHOT/griffon-tray-builder-0.1-SNAPSHOT.zip</file>
-        </release>
         <release tag="RELEASE_0_1_1" type="svn" version="0.1.1">
             <title>TrayBuilder Plugin</title>
             <author>Andres Almiray</author>
@@ -322,14 +282,6 @@
             <description></description>
             <documentation>http://griffon.codehaus.org/Wizard+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wizard/tags/RELEASE_0_2_1/griffon-wizard-0.2.1.zip</file>
-        </release>
-        <release tag="RELEASE_0_2_1-SNAPSHOT" type="svn" version="0.2.1-SNAPSHOT">
-            <title>Adds a Wizard facility to your Griffon apps</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
-            <documentation>http://griffon.codehaus.org/Wizard+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-wizard/tags/RELEASE_0_2_1-SNAPSHOT/griffon-wizard-0.2.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
 </plugins>
