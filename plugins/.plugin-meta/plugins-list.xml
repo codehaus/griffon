@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="608">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<plugins revision="612">
     <plugin latest-release="0.2.1" name="code-coverage">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generates Code Coverage reports</title>
             <author>Andres Allmiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_1/griffon-code-coverage-0.1.zip</file>
         </release>
@@ -13,7 +13,7 @@
             <title>Generates Code Coverage reports</title>
             <author>Andres Allmiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_2/griffon-code-coverage-0.2.zip</file>
         </release>
@@ -21,7 +21,7 @@
             <title>Generates Code Coverage reports</title>
             <author>Andres Allmiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_2_1/griffon-code-coverage-0.2.1.zip</file>
         </release>
@@ -31,7 +31,7 @@
             <title>Enables BDD testing with Easyb</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_1/griffon-easyb-0.1.zip</file>
         </release>
@@ -39,7 +39,7 @@
             <title>Enables BDD testing with Easyb</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_1_1/griffon-easyb-0.1.1.zip</file>
         </release>
@@ -49,7 +49,7 @@
             <title>Enables application testing with FEST</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_1/griffon-fest-0.1.zip</file>
         </release>
@@ -57,7 +57,7 @@
             <title>Enables application testing with FEST</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_2/griffon-fest-0.2.zip</file>
         </release>
@@ -65,7 +65,7 @@
             <title>Enables application testing with FEST</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_2_1/griffon-fest-0.2.1.zip</file>
         </release>
@@ -75,7 +75,7 @@
             <title>FlamingoBuilder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/FlamingoBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_1/griffon-flamingo-builder-0.1.zip</file>
         </release>
@@ -83,7 +83,7 @@
             <title>FlamingoBuilder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/FlamingoBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_1_1/griffon-flamingo-builder-0.1.1.zip</file>
         </release>
@@ -93,7 +93,7 @@
             <title>Allows creating installers for your Griffon application</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Installer+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/tags/RELEASE_0_1/griffon-installer-0.1.zip</file>
         </release>
@@ -101,7 +101,7 @@
             <title>Allows creating installers for your Griffon application</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Installer+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/tags/RELEASE_0_2/griffon-installer-0.2.zip</file>
         </release>
@@ -109,7 +109,7 @@
             <title>Allows creating installers for your Griffon application</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Installer+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/tags/RELEASE_0_2_1/griffon-installer-0.2.1.zip</file>
         </release>
@@ -119,7 +119,7 @@
             <title>Runs JDepend metrics on your Griffon application</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Jdepend+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jdepend/tags/RELEASE_0_1/griffon-jdepend-0.1.zip</file>
         </release>
@@ -127,7 +127,7 @@
             <title>Runs JDepend metrics on your Griffon application</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Jdepend+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jdepend/tags/RELEASE_0_1_1/griffon-jdepend-0.1.1.zip</file>
         </release>
@@ -137,7 +137,7 @@
             <title>Jide Builder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/JideBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jide-builder/tags/RELEASE_0_1/griffon-jide-builder-0.1.zip</file>
         </release>
@@ -145,7 +145,7 @@
             <title>Jide Builder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/JideBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jide-builder/tags/RELEASE_0_1_1/griffon-jide-builder-0.1.1.zip</file>
         </release>
@@ -155,7 +155,7 @@
             <title>MacWidgetsBuilder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/MacWidgetsBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-macwidgets-builder/tags/RELEASE_0_1/griffon-macwidgets-builder-0.1.zip</file>
         </release>
@@ -163,7 +163,7 @@
             <title>MacWidgetsBuilder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/MacWidgetsBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-macwidgets-builder/tags/RELEASE_0_2/griffon-macwidgets-builder-0.2.zip</file>
         </release>
@@ -171,7 +171,7 @@
             <title>MacWidgetsBuilder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/MacWidgetsBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-macwidgets-builder/tags/RELEASE_0_2_1/griffon-macwidgets-builder-0.2.1.zip</file>
         </release>
@@ -181,7 +181,7 @@
             <title>Brings the Scala language compiler and libraries</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_1/griffon-scala-0.1.zip</file>
         </release>
@@ -189,7 +189,7 @@
             <title>Brings the Scala language compiler and libraries</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_1_1/griffon-scala-0.1.1.zip</file>
         </release>
@@ -199,9 +199,17 @@
             <title>A Griffon Splash Screen Plugin</title>
             <author>Jim Shingler</author>
             <authorEmail>ShinglerJim@gmail.com</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Splash+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-splash/tags/RELEASE_0_1/griffon-splash-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_1_0" type="svn" version="0.1">
+            <title>A Griffon Splash Screen Plugin</title>
+            <author>Jim Shingler</author>
+            <authorEmail>ShinglerJim@gmail.com</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Splash+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-splash/tags/RELEASE_0_1_0/griffon-splash-0.1.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1" name="swingx-builder">
@@ -209,7 +217,7 @@
             <title>SwingX Builder Plugin</title>
             <author>James Williams</author>
             <authorEmail>james.l.williams@gmail.com</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/tags/RELEASE_0_1/griffon-swingx-builder-0.1.zip</file>
         </release>
@@ -217,7 +225,7 @@
             <title>SwingX Builder Plugin</title>
             <author>James Williams</author>
             <authorEmail>james.l.williams@gmail.com</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/tags/RELEASE_0_1-SNAPSHOT/griffon-swingx-builder-0.1-SNAPSHOT.zip</file>
         </release>
@@ -227,7 +235,7 @@
             <title>Swingxtras Builder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/SwingxtrasBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingxtras-builder/tags/RELEASE_0_1/griffon-swingxtras-builder-0.1.zip</file>
         </release>
@@ -235,7 +243,7 @@
             <title>Swingxtras Builder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/SwingxtrasBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingxtras-builder/tags/RELEASE_0_1_1/griffon-swingxtras-builder-0.1.1.zip</file>
         </release>
@@ -245,7 +253,7 @@
             <title>TrayBuilder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/TrayBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-tray-builder/tags/RELEASE_0_1/griffon-tray-builder-0.1.zip</file>
         </release>
@@ -253,7 +261,7 @@
             <title>TrayBuilder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/TrayBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-tray-builder/tags/RELEASE_0_1_1/griffon-tray-builder-0.1.1.zip</file>
         </release>
@@ -263,7 +271,7 @@
             <title>Adds a Wizard facility to your Griffon apps</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Wizard+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wizard/tags/RELEASE_0_1/griffon-wizard-0.1.zip</file>
         </release>
@@ -271,7 +279,7 @@
             <title>Adds a Wizard facility to your Griffon apps</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Wizard+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wizard/tags/RELEASE_0_2/griffon-wizard-0.2.zip</file>
         </release>
@@ -279,7 +287,7 @@
             <title>Adds a Wizard facility to your Griffon apps</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description></description>
+            <description/>
             <documentation>http://griffon.codehaus.org/Wizard+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wizard/tags/RELEASE_0_2_1/griffon-wizard-0.2.1.zip</file>
         </release>
