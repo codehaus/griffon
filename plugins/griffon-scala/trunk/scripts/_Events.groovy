@@ -1,27 +1,44 @@
 import org.codehaus.griffon.cli.GriffonScriptRunner as GSR
+import org.codehaus.griffon.plugins.GriffonPluginUtils
+
+ant.property(environment: "env")
+scalaHome = ant.antProject.properties."env.SCALA_HOME"
 
 eventSetClasspath = { classLoader ->
-    def scalaPlugin = getPluginDirForName("scala")
-    if( !scalaPlugin ) return
-    ant.fileset(dir:"${scalaPlugin.file}/lib/", includes:"*.jar").each { jar ->
-        classLoader.adURL( jar.toURI().toURL() )
+    if( compilingScalaPlugin() ) return
+
+    adjustScalaHome()
+    println "[scala-plugin] Using SCALA_HOME => ${scalaHome}"
+
+    ant.fileset(dir:"${scalaHome}/lib/", includes:"*.jar").each { jar ->
+        classLoader.addURL( jar.file.toURI().toURL() )
     }
 }
 
 eventCopyLibsEnd = { jardir ->
-    ant.fileset(dir:"${getPluginDirForName('scala').file}/lib/", includes:"*.jar").each {
+    if( compilingScalaPlugin() ) return
+    adjustScalaHome()
+    println "[scala-plugin] Copying Scala jar files from ${scalaHome}/lib"
+
+    ant.fileset(dir:"${scalaHome}/lib/", includes:"*.jar").each {
         griffonCopyDist(it.toString(), jardir)
     }
 }
 
 eventCompileStart = { type ->
+    if( compilingScalaPlugin() ) return
     if( type != "source" ) return
+    adjustScalaHome()
     def scalaSrc = "${basedir}/src/scala"
-    if( !new File(scalaSrc).exists() ) return
-    def scalaPlugin = getPluginDirForName("scala")
+    // if( !new File(scalaSrc).exists() ) return
 
+    def scalaDir = resolveResources("file:${scalaHome}/lib/*")
+    if (!scalaDir) {
+       println "[scala-plugin] No Scala jar files found at ${scalaHome}"
+       return
+    }
     ant.path(id : "scalaJarSet") {
-       fileset(dir: "${scalaPlugin.file}/lib" , includes : "*.jar")
+       fileset(dir: "${scalaHome}/lib" , includes : "*.jar")
     }
     ant.taskdef(resource: "scala/tools/ant/antlib.xml",
                 classpathref: "scalaJarSet")
@@ -29,9 +46,35 @@ eventCompileStart = { type ->
        path(refid:"griffon.compile.classpath")
        path(refid:"scalaJarSet")
     }
-    ant.scalac(destdir: classesDirPath,
-               classpathref: "scala.compile.classpath",
-               encoding:"UTF-8") {
-        src(path: scalaSrc)
+
+    def scalaSrcEncoding = buildConfig.scala?.src?.encoding ?: 'UTF-8'
+
+    println "[scala-plugin] Compiling Scala sources with SCALA_HOME=${scalaHome} to $classesDirPath"
+    try {
+        ant.scalac(destdir: classesDirPath,
+                   classpathref: "scala.compile.classpath",
+                   encoding: scalaSrcEncoding) {
+            // joint compile java sources
+            src(path: "${basedir}/src/main")
+            src(path: scalaSrc)
+        }
     }
+    catch (Exception e) {
+        ant.fail(message: "Could not compile Scala sources: " + e.class.simpleName + ": " + e.message)
+    }
+}
+
+/**
+ * Detects whether we're compiling the scala plugin itself
+ */
+private boolean compilingScalaPlugin() { getPluginDirForName("scala") == null }
+
+private void adjustScalaHome() {
+    if( compilingScalaPlugin() ) return
+    if( !scalaHome || (buildConfig.scala?.useBundledLibs) ) scalaHome = getPluginDirForName("scala").file
+}
+
+getPluginDirForName = { String pluginName ->
+    // pluginsHome = griffonSettings.projectPluginsDir.path
+    GriffonPluginUtils.getPluginDirForName(pluginsHome, pluginName)
 }
