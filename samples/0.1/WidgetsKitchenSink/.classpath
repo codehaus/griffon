@@ -25,7 +25,7 @@
 
 <classpathentry kind="var" path="GRIFFON_HOME/lib/commons-logging-1.1.jar" />
 
-<classpathentry kind="var" path="GRIFFON_HOME/lib/groovy-all-1.6-RC-1.jar" />
+<classpathentry kind="var" path="GRIFFON_HOME/lib/groovy-all-1.6.0.jar" />
 
 <classpathentry kind="var" path="GRIFFON_HOME/lib/jline-0.9.94.jar" />
 
