@@ -10,11 +10,13 @@
  * e i t h e r expressed or implied . Use at your own risk . Permission to
  * use or copy t h i s software is hereby granted without fee provided
  * you always retain this copy right notice .
- */ 
- 
+ */
+
 import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.net.URL;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 /**
  * SplashScreen i s a general??purpose splash screen f o r a p p l i c a t i o n
@@ -155,52 +157,51 @@ import java.net.URL;
  */
 public class SplashScreen implements ImageObserver {
 
-	// Design dec i s ion.
-	// Choose delegat ion over i n h e r i t a n c e.SplashScreen i s not a
-	// Frame or a Window , or an Image f o r t h a t mat ter ; i t i s a
-	// concept.Frame and Image are i t s components.
+	// Design decision.
+	// Choose delegation over inheritance. SplashScreen is not a
+	// Frame or a Window , or an Image for that matter ; it is a
+	// concept.Frame and Image are its components.
 	//
-	// Conceptual ly , the splash screen i s an image wi th t e x t
-	// underneath : an image and a l a b e l i n Java terms.The Frame
+	// Conceptually , the splash screen is an image with text
+	// underneath : an image and a label in Java terms.The Frame
 
-	// i s a somewhat more abs t rac t sof tware??engineer ing
-	// e n t i t y.
+	// is a somewhat more abstract software??engineering
+	// entity.
 	//
-	// I n s t a n t i a t e the l a b e l now and give d e f a u l t
+	// Instantiate the label now and give default
 	// contents.Use
-	// method showStatus ( s : St r i n g ) to over r ide the d e f a u l t.You
+	// method showStatus ( s : String ) to override the default. You
 	// can
-	// c a l l t h i s before splash ( ).Design feature.
+	// call this before splash ( ).Design feature.
 	private Image image;
-	private Label label = new Label("Loading...", Label.CENTER);
+	//private Label label = new Label("Loading...", Label.CENTER);
+	private JLabel label = new JLabel("<html><br /><span style=\"font-size:large;\">Loading...</span><br /><br /></html>", SwingConstants.CENTER);
 
 	private Frame frame;
 	private long splashTime = 0;
 
 	/**
-	 * Const ructs SplashScreen using a given f i lename f o r the splash image.
+	 * Constructs SplashScreen using a given filename for the splash image.
 	 * 
-	 * @param f
-	 *            i lename name of an image f i l e
+	 * @param filename name of an image file
 	 */
 	public SplashScreen(String filename) {
 		setImage(filename);
 	}
 
 	/**
-	 * Const ructs SplashScreen using a given URL f o r the splash image.
+	 * Constructs SplashScreen using a given URL f o r the splash image.
 	 * 
-	 * @param u
-	 *            r l the URL of an image
+	 * @param url the URL of an image
 	 */
 	public SplashScreen(URL url) {
 		setImage(url);
 	}
 
 	/**
-	 * Const ructs SplashScreen using f i lename ” splash.g i f ” f o r the
-	 * image unless you change the d e f a u l t using setImage or c a l l
-	 * splash wi th an argument s p e c i f y i n g a d i f f e r e n t image.
+	 * Constructs SplashScreen using filename ” splash.gif ” for the
+	 * image unless you change the default using setImage or call
+	 * splash with an argument specifying a different image.
 	 */
 	public SplashScreen() {
 	}
@@ -210,20 +211,21 @@ public class SplashScreen implements ImageObserver {
 	public static SplashScreen getInstance() {
 		if (instance == null) {
 			instance = new SplashScreen();
+			URL url = SplashScreen.class.getResource("splash.png");
+			instance.setImage(url);
 		}
 		return instance;
 	}
 
 	/**
-	 * Uses the given f i lename f o r the splash image.This method c a l l s T
-	 * o o l k i t.getImage which resolves mu l t i p l e requests f o r the
-	 * same f i lename to the same Image , u n l i k e createImage which creates
+	 * Uses the given filename for the splash image.This method calls 
+	 * Toolkit.getImage which resolves mu l t i p l e requests f o r the
+	 * same filename to the same Image , u n l i k e createImage which creates
 	 * a non??shared instance of Image.In other words , getImage caches Images ,
 	 * createImage does not.Use <code>splash ( createImage (</ code >... i f you
-	 * want Image pr i vac y.
+	 * want Image privacy.
 	 * 
-	 * @param f
-	 *            i lename name of an image f i l e
+	 * @param filename name of an image file
 	 */
 	public void setImage(String filename) {
 		image = Toolkit.getDefaultToolkit().getImage(filename);
