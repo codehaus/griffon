@@ -16,7 +16,10 @@
    sodipodi:version="0.32"
    inkscape:version="0.46"
    sodipodi:docname="griffon-icon.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/home/danno/svn/codehaus.org/griffon/art/griffon-icon-16x16.png"
+   inkscape:export-xdpi="6.0097041"
+   inkscape:export-ydpi="6.0097041">
   <metadata
      id="metadata8532">
     <rdf:RDF>
@@ -25,12 +28,38 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by/3.0/" />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Carl Vervisch</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Danno Ferrin</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+        <dc:title>Griffon &quot;Flying G&quot; Icon</dc:title>
       </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="973"
-     inkscape:window-width="1680"
+     inkscape:window-height="868"
+     inkscape:window-width="1132"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      guidetolerance="10.0"
@@ -41,10 +70,10 @@
      pagecolor="#ffffff"
      id="base"
      showgrid="false"
-     inkscape:zoom="3.1258808"
-     inkscape:cx="62.86228"
+     inkscape:zoom="2.6834998"
+     inkscape:cx="56.828771"
      inkscape:cy="119.80623"
-     inkscape:window-x="0"
+     inkscape:window-x="-1"
      inkscape:window-y="25"
      inkscape:current-layer="svg2755" />
   <defs
@@ -139,7 +168,7 @@
   </g>
   <g
      id="g2776"
-     transform="matrix(1.25,0,0,1.25,-263.83685,613.96569)"
+     transform="matrix(1.25,0,0,1.25,-263.93685,614.06569)"
      clip-path="url(#clipPath8602)"
      style="fill:#ffffff;fill-opacity:1">
     <g
