@@ -49,5 +49,11 @@ public class TridentBuilder extends FactoryBuilderSupport {
       registerFactory("linearEase", new EaseFactory(Linear))
       registerFactory("sineEase", new EaseFactory(Sine))
       registerFactory("splineEase", new SplineEaseFactory())
+      // scenarios
+      registerFactory("timelineScenario",  new TimelineScenarioFactory(TimelineScenario))
+      registerFactory("parallelScenario",  new TimelineScenarioFactory(TimelineScenario.Parallel))
+      registerFactory("sequenceScenario",  new TimelineScenarioFactory(TimelineScenario.Sequence))
+      registerFactory("rendevouzScenario", new TimelineScenarioFactory(TimelineScenario.RendezvousSequence))
+      registerFactory("timelineScenarioCallback", new TimelineScenarioCallbackFactory())
    }
 }
