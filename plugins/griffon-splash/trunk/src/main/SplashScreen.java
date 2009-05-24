@@ -3,12 +3,12 @@
  * 
  * http://www.randelshofer.ch/oop/javasplash/Java%20Splash%20Screen.pdf
  *
- * Copyright (C) 2 0 0 4 , Roy Ratcliffe , Lancaster , United Kingdom.
- * A l l r i g h t s reserved .
+ * Copyright (C) 2004, Roy Ratcliffe, Lancaster , United Kingdom.
+ * All rights reserved .
  *
- * This software is provided ‘ ‘ as is ’ ’ without warranty of any kind ,
- * e i t h e r expressed or implied . Use at your own risk . Permission to
- * use or copy t h i s software is hereby granted without fee provided
+ * This software is provided ‘‘as is’’ without warranty of any kind ,
+ * either expressed or implied . Use at your own risk. Permission to
+ * use or copy this software is hereby granted without fee provided
  * you always retain this copy right notice .
  */
 
@@ -19,26 +19,26 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 /**
- * SplashScreen i s a general??purpose splash screen f o r a p p l i c a t i o n
- * s t a r t??up.Usage i s s t r a i g h t f o rwa r d : simply construct a
- * SplashScreen at the s t a r t of main ( ) and c a l l i t s splash ( )
- * method. Proceed with s t a r t??up as normal.Use showStatus ( String ) f
- * o r r e p o r t i n g progress during s t a r t??up.F i n a l l y , at the
- * end of main ( ) c a l l SplashScreen ’ s dispose ( ) method.By d e f a u l t
- * , the splash loads image splash.g i f but you can change t h i s i f
+ * SplashScreen is a general??purpose splash screen for application
+ * start??up.  Usage is straight forward: simply construct a
+ * SplashScreen at the start of main ( ) and call its splash ()
+ * method. Proceed with start??up as normal.Use showStatus ( String ) f
+ * or reporting progress during start??up.  Finally , at the
+ * end of main() call SplashScreen’s dispose() method.By default
+ * , the splash loads image splash.g i f but you can change this if
  * necessary.
  * 
  * <h3>Example 1</h3>
  * 
  * <pre>
  * class splasher1 {
- * p u b l i c s t a t i c void main ( St r i n g [ ] args ) {
+ * public static void main ( String[ ] args ) {
  * SplashScreen splashScreen = new SplashScreen ( ) ;
  * splashScreen.splash ( ) ;
- * f o r ( i n t i = 1 0 ; i &gt; 0 ; i ????) {
- * splashScreen.showStatus ( Integer.t oSt r i n g ( i ) + ”...” ) ;
- * t r y {
- * Thread.sleep (1000) ;
+ * for ( int i = 10 ; i &gt; 0 ; i++) {
+ * splashScreen.showStatus ( Integer.toString ( i ) + ”...” ) ;
+ * try {
+ * Thead.sleep (1000) ;
  * g
  * catch ( Inter ruptedEx cept ion i e ) f g
  * g
@@ -53,7 +53,7 @@ import javax.swing.SwingConstants;
  * 
  * <pre>
  * class splasher2 {
- * p u b l i c s t a t i c void main ( St r i n g [ ] args ) {
+ * public static void main ( String[ ] args ) {
  * SplashScreen splashScreen = new SplashScreen ( ) ;
  * 
  * splashScreen.splash ( ) ;
@@ -61,7 +61,7 @@ import javax.swing.SwingConstants;
  * Thread.sleep ( 5 0 0 ) ;
  * g
  * catch ( Inter ruptedEx cept ion i e ) f g
- * splashScreen.splashFor ( 1 0 0 0 ) ; // d i s c r e t i o n
+ * splashScreen.splashFor ( 1 0 0 0 ) ; // discretion
  * splashScreen.dispose ( ) ;
  * g
  * g
@@ -125,34 +125,34 @@ import javax.swing.SwingConstants;
  * instance from anywhere.
  * <p>
  * Secondly , method delayForSplash ( ) appears j u s t a f t e r splash ( ).
- * This <em>pos s ibl y</em> delays the main thread , al lowing the splash
- * screen to load and di splay.Tests on some uniprocessor plat forms show poor
- * mu l t i??threading performance.See Appendix F of design documentation by
- * R.R. The new method bases the extent of delay i { any on number of a v a i l
+ * This <em>possibly</em> delays the main thread , allowing the splash
+ * screen to load and display.Tests on some uniprocessor platforms show poor
+ * multi??threading performance.See Appendix F of design documentation by
+ * R.R. The new method bases the extent of delay i { any on number of avail
  * a b l e computing resources.
  * 
- * <h3>Model l ing</h3>
- * In U.M. L.model l ing terms , SplashScreen f u l f i l s the f o l l owi n g
- * requi rement depicted as a Use Case.
+ * <h3>Modelling</h3>
+ * In U.M. L. modelling terms , SplashScreen fulfils the following
+ * requirement depicted as a Use Case.
  * <p>
  * <img src=”UseCaseDiagram1.g i f ”>
  * <p>
- * The sketch below o u t l i n e s the user i n t e r f a c e design.
+ * The sketch below outlines the user interface design.
  * <p>
- * <img src=” hc i.g i f ”>
+ * <img src=”hci.gif”>
  * <p>
- * To meet t h i s requi rement , the implementat ion uses the f o l l owi n g
+ * To meet this requirement , the implementation uses the following
  * class design.
  * <p>
- * <img src=” ClassDiagram2.g i f ”>
+ * <img src=” ClassDiagram2.gif”>
  * <p>
- * Or i n f u l l d e t a i l as f o l l ows.
+ * Or in full detail as follows.
  * <p>
- * <img src=” ClassDiagram2a.g i f ”>
+ * <img src=”ClassDiagram2a.gif”>
  * <p>
  * 
- * @todo Add method or methods f o r a d j u s t i n g background colours.
- * @author Roy Ra t c l i f f e
+ * @todo Add method or methods for adjusting background colours.
+ * @author Roy Ratcliffe
  * @version 1.5
  */
 public class SplashScreen implements ImageObserver {
@@ -175,7 +175,7 @@ public class SplashScreen implements ImageObserver {
 	// call this before splash ( ).Design feature.
 	private Image image;
 	//private Label label = new Label("Loading...", Label.CENTER);
-	private JLabel label = new JLabel("<html><br /><span style=\"font-size:large;\">Loading...</span><br /><br /></html>", SwingConstants.CENTER);
+	private JLabel label = new JLabel("<html><br><span style=\"font-size:large;\">Loading...</span><br><br></html>", SwingConstants.CENTER);
 
 	private Frame frame;
 	private long splashTime = 0;
