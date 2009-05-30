@@ -36,7 +36,8 @@ public class SwingWorkerFactory extends AbstractFactory {
    }
 
    public boolean onHandleNodeAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
-      builder.context["start"] = attributes.remove("start")
+      def start = attributes.remove("start")
+      builder.context["start"] = start != null ? start : true
       return true
    }
 
@@ -49,6 +50,6 @@ public class SwingWorkerFactory extends AbstractFactory {
 
    public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
       node.init()
-      if( builder.context.start ) node.execute()
+      if( Boolean.valueOf(builder.context.start) ) node.execute()
    }
 }
