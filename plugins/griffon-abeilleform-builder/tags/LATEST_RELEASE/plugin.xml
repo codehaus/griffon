@@ -1,0 +1,7 @@
+<plugin name='abeilleform-builder' version='0.1' jdk='1.5'>
+  <author>Jim Shingler</author>
+  <authorEmail>ShinglerJim@gmail.com</authorEmail>
+  <title>A Builder for Abeille Forms</title>
+  <documentation>http://griffon.codehaus.org/AbeilleformBuilder+Plugin</documentation>
+  <dependencies />
+</plugin>
