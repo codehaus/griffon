@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="721">
+<plugins revision="729">
+    <plugin latest-release="0.1" name="abeilleform-builder">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>A Builder for Abeille Forms</title>
+            <author>Jim Shingler</author>
+            <authorEmail>ShinglerJim@gmail.com</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/AbeilleformBuilder+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-abeilleform-builder/tags/RELEASE_0_1/griffon-abeilleform-builder-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.2.1" name="code-coverage">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generates Code Coverage reports</title>
