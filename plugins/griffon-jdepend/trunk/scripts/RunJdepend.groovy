@@ -55,6 +55,8 @@ target(runJdepend: "Run JDepend metrics") {
         }
     }
 
+    def config = loadConfig()
+
     def jdependConfig = {
         exclude( name: "java.lang" )
         exclude( name: "java.util" )
@@ -64,6 +66,9 @@ target(runJdepend: "Run JDepend metrics") {
         exclude( name: "groovy.lang" )
         exclude( name: "groovy.util" )
         exclude( name: "org.codehaus.groovy.*" )
+        if( config?.excludes && config.excludes instanceof List ) {
+            config.excludes.each { x -> exclude( name: x ) }
+        }
         classespath {
            pathelement( location: jdependWorkDir )
         }
@@ -83,6 +88,12 @@ target(runJdepend: "Run JDepend metrics") {
               destdir: "${jdependReportDir}",
               includes: "jdepend-report.xml",
               style: "${jdependPluginBase}/src/etc/jdepend.xsl" )
+}
+
+private ConfigObject loadConfig() {
+    def classLoader = Thread.currentThread().contextClassLoader
+    classLoader.addURL(new File(classesDirPath).toURL())
+    return new ConfigSlurper().parse(classLoader.loadClass('Config')).jdepend
 }
 
 setDefaultTarget(runJdepend)
