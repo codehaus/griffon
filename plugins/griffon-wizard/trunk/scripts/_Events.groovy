@@ -27,16 +27,6 @@ eventCopyLibsEnd = { jardir ->
     }
 }
 
-eventCompileStart = { type ->
-    if( type != "source" ) return
-    def wizardSrc = new File("${basedir}/griffon-app/wizards")
-    if( !wizardSrc.exists() ) return
-    String classpathId = "griffon.compile.classpath"
-    compileSources(classpathId) {
-        src(path: "${basedir}/griffon-app/wizards")
-    }
-}
-
 getPluginDirForName = { String pluginName ->
     // pluginsHome = griffonSettings.projectPluginsDir.path
     GriffonPluginUtils.getPluginDirForName(pluginsHome, pluginName)
