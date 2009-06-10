@@ -6,6 +6,12 @@
      <fileset dir="${project.lib.dir}">
        <include name="**/*.jar"/>
      </fileset>
+     <fileset dir="${javafx.home}/lib/shared">
+       <include name="**/*.jar"/>
+     </fileset>
+     <fileset dir="${javafx.home}/lib/desktop">
+       <include name="**/*.jar"/>
+     </fileset>
    </path>
 
    <taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpathref="build.classpath" />
