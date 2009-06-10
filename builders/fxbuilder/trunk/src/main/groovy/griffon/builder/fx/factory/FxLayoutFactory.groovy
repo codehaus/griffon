@@ -16,11 +16,31 @@
 
 package griffon.builder.fx.factory
 
+import javafx.scene.Node
+import com.sun.javafx.runtime.location.*
+import com.sun.javafx.runtime.sequence.*
+import com.sun.javafx.runtime.TypeInfo
+
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
 class FxLayoutFactory extends FxBeanFactory {
     FxLayoutFactory( Class beanClass ) {
         super( beanClass, false )
+    }
+
+    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+        if(!builder.parentContext.children) builder.parentContext.children = []
+        builder.parentContext.children << child
+    }
+
+    public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
+        if( builder.context.children ) {
+            def sb = new SequenceBuilder(TypeInfo.getTypeInfo(Node))
+            builder.context.children.each{ sb.add(it) }
+            node.attribute("content").setAsSequenceFromLiteral(sb.toSequence())
+        }
+
+        super.onNodeCompleted( builder, parent, node )
     }
 }
