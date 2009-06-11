@@ -1,6 +1,7 @@
-package com.feature50.clarity.css;
+package griffon.builder.css;
 
 import com.feature50.clarity.ClarityConstants;
+import com.feature50.clarity.css.CSSPropertyHandlers;
 import com.feature50.util.ArrayUtils;
 import com.feature50.util.StringUtils;
 import com.feature50.util.SwingUtils;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.Component;
+import java.awt.Container;
 
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.css.CSSStyleSheet;
@@ -27,13 +29,37 @@ import javax.swing.JList;
 public class CSSDecorator {
     private static final Logger logger = Logger.getLogger(CSSDecorator.class.getName());
 
-    public void decorate(String[] cssNames, List<JComponent> allComponents) {
-        decorate(cssNames, allComponents, getClass().getClassLoader());
+    public static void decorate(String cssName, Container root) {
+        decorate(new String[]{cssName}, SwingUtils.getAllJComponents(root), CSSDecorator.class.getClassLoader());
     }
 
-    public void decorate(String[] cssNames, List<JComponent> allComponents, ClassLoader classLoader) {
+    public static void decorate(String cssName, Container root, ClassLoader classLoader) {
+        decorate(new String[]{cssName}, SwingUtils.getAllJComponents(root), classLoader);
+    }
+
+    public static void decorate(String cssName, List<JComponent> allComponents) {
+        decorate(new String[]{cssName}, allComponents, CSSDecorator.class.getClassLoader());
+    }
+
+    public static void decorate(String cssName, List<JComponent> allComponents, ClassLoader classLoader) {
+        decorate(new String[]{cssName}, allComponents, classLoader);
+    }
+
+    public static void decorate(String[] cssNames, Container root) {
+        decorate(cssNames, SwingUtils.getAllJComponents(root), CSSDecorator.class.getClassLoader());
+    }
+
+    public static void decorate(String[] cssNames, Container root, ClassLoader classLoader) {
+        decorate(cssNames, SwingUtils.getAllJComponents(root), classLoader);
+    }
+
+    public static void decorate(String[] cssNames, List<JComponent> allComponents) {
+        decorate(cssNames, allComponents, CSSDecorator.class.getClassLoader());
+    }
+
+    public static void decorate(String[] cssNames, List<JComponent> allComponents, ClassLoader classLoader) {
         if (ArrayUtils.isNullOrEmpty(cssNames)) return;
-        if( classLoader == null ) classLoader = getClass().getClassLoader();
+        if( classLoader == null ) classLoader = CSSDecorator.class.getClassLoader();
 
         for (int i = 0; i < cssNames.length; i++) {
             String cssName = cssNames[i];
@@ -69,7 +95,6 @@ public class CSSDecorator {
                     }
                 }
             }
-
         }
     }
 }

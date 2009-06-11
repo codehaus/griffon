@@ -16,16 +16,28 @@
 
 package griffon.builder.css
 
+import groovy.swing.SwingBuilder
 import groovy.util.GroovySwingTestCase
 import com.feature50.clarity.ClarityConstants
+import java.awt.Color
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 public class CSSBuilderTests extends GroovySwingTestCase {
+   CSSBuilder builder
+
+   void setUp() {
+      builder = new CSSBuilder()
+      def factories = new SwingBuilder().getFactories()
+      builder.registerFactory("panel", factories["panel"])
+      builder.registerFactory("button", factories["button"])
+      builder.addAttributeDelegate(SwingBuilder.&objectIDAttributeDelegate)
+      builder[SwingBuilder.DELEGATE_PROPERTY_OBJECT_ID] = SwingBuilder.DEFAULT_DELEGATE_PROPERTY_OBJECT_ID
+   }
+
    void testCssClassAttribute() {
       testInEDT {
-         def builder = new CSSBuilder()
          builder.panel {
             button(id: "button", name: "button", cssClass: "active")
          }
@@ -33,9 +45,19 @@ public class CSSBuilderTests extends GroovySwingTestCase {
       }
    }
 
+   void testCssClassProperty() {
+      testInEDT {
+         builder.panel {
+            button(id: "button", name: "button", cssClass: "active")
+         }
+         assert "active" == builder.button.cssClass
+         builder.button.cssClass = "inactive"
+         assert "inactive" == builder.button.cssClass
+      }
+   }
+
    void testFindComponentByName_shortcut() {
       testInEDT {
-         def builder = new CSSBuilder()
          def panel = builder.panel {
             button(id: "button1", name: "button1")
             button(id: "button2")
@@ -51,7 +73,6 @@ public class CSSBuilderTests extends GroovySwingTestCase {
 
    void testFindComponentsByName_shortcut() {
       testInEDT {
-         def builder = new CSSBuilder()
          def panel = builder.panel {
             button(id: "button1", name: "button1")
             button(id: "button2")
@@ -60,6 +81,36 @@ public class CSSBuilderTests extends GroovySwingTestCase {
             }
          }
          assert [builder.button1, builder.button3] == panel.$s("button1","button3")
+      }
+   }
+
+   void testFindComponentsBySelector_shortcut() {
+      testInEDT {
+         def panel = builder.panel {
+            button(id: "button1", name: "button1", cssClass: "c1")
+            button(id: "button2", cssClass: "c1")
+            panel {
+               button(id: "button3", name: "button3")
+            }
+         }
+         assert [builder.button1, builder.button2, builder.button3] == panel.$$("jbutton")
+         assert [builder.button1, builder.button2] == panel.$$(".c1")
+         assert [builder.button3] == panel.$$("#button3")
+      }
+   }
+
+   void testCSSDecorator() {
+      testInEDT {
+         def panel = builder.panel {
+            button(id: "button1", name: "button1")
+            button(id: "button2", name: "button2")
+            button(id: "button3", name: "button3", cssClass: "active")
+         }
+         CSSDecorator.decorate("griffon/builder/css/simple",panel)
+         assert panel.background == Color.RED
+         assert builder.button1.background == new Color(0,128,0)
+         assert builder.button2.background == Color.BLUE
+         assert builder.button3.background == Color.YELLOW
       }
    }
 }

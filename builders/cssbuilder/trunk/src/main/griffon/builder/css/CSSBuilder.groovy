@@ -16,15 +16,15 @@
 
 package griffon.builder.css
 
-import groovy.swing.SwingBuilder
 import java.awt.Container
 import javax.swing.JComponent
 import com.feature50.clarity.ClarityConstants
 import com.feature50.util.SwingUtils
+
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-public class CSSBuilder extends SwingBuilder {
+public class CSSBuilder extends FactoryBuilderSupport {
    public static final String DELEGATE_PROPERTY_CSS_CLASS = "_delegateProperty:cssClass"
    public static final String DEFAULT_DELEGATE_PROPERTY_CSS_CLASS = "cssClass"
 
@@ -38,13 +38,13 @@ public class CSSBuilder extends SwingBuilder {
    }
 
    public void registerCSS() {
-      addAttributeDelegate(CSSBuilder.&cssAttributeDelegate)
-      addPostNodeCompletionDelegate(CSSBuilder.&cssPostNodeCompletionDelegate)
+      //addAttributeDelegate(CSSBuilder.&cssAttributeDelegate)
+      //addPostNodeCompletionDelegate(CSSBuilder.&cssPostNodeCompletionDelegate)
       registerExplicitMethod("\$", CSSBuilder.&$)
       registerExplicitMethod("\$s", CSSBuilder.&$s)
       registerExplicitMethod("\$\$", CSSBuilder.&$$)
    }
-
+/*
    static cssAttributeDelegate( FactoryBuilderSupport builder, node, Map attributes ) {
       def cssAttr = builder.getAt(DELEGATE_PROPERTY_CSS_CLASS) ?: DEFAULT_DELEGATE_PROPERTY_CSS_CLASS
       builder.getContext()[cssAttr] = attributes.remove(cssAttr)
@@ -57,9 +57,17 @@ public class CSSBuilder extends SwingBuilder {
          node.putClientProperty(ClarityConstants.CLIENT_PROPERTY_CLASS_KEY, cssClass)
       }
    }
-
+*/
    static enhanceSwingClasses() {
-      Class klass = Container
+      Class klass = JComponent
+      if( !AbstractSyntheticMetaMethods.hasBeenEnhanced(klass) ) {
+         AbstractSyntheticMetaMethods.enhance(klass,[
+            "getCssClass": {-> delegate.getClientProperty(ClarityConstants.CLIENT_PROPERTY_CLASS_KEY) },
+            "setCssClass": { String cssClass -> delegate.putClientProperty(ClarityConstants.CLIENT_PROPERTY_CLASS_KEY, cssClass) }
+         ])
+      }
+
+      klass = Container
       if( !AbstractSyntheticMetaMethods.hasBeenEnhanced(klass) ) {
          AbstractSyntheticMetaMethods.enhance(klass,[
             "\$": { String name -> CSSBuilder.$(delegate,name) },
@@ -67,13 +75,14 @@ public class CSSBuilder extends SwingBuilder {
             "\$\$": { String selector -> CSSBuilder.$$(delegate,selector) }
          ])
       }
+
    }
 
-   static $( Container target, String name ) {
+   static JComponent $( Container target, String name ) {
        SwingUtils.getComponentByName(target, name)
    }
 
-   static $s( Container target, String... names ) {
+   static JComponent[] $s( Container target, String... names ) {
        List<JComponent> components = new ArrayList<JComponent>()
 
        for (int i = 0; i < names.length; i++) {
@@ -84,7 +93,7 @@ public class CSSBuilder extends SwingBuilder {
        components.toArray(new JComponent[components.size()])
    }
 
-   static $$( Container target, String selector ) {
+   static JComponent[] $$( Container target, String selector ) {
       SwingUtils.parseSelector(selector, SwingUtils.getAllJComponents(target))
    }
 }
