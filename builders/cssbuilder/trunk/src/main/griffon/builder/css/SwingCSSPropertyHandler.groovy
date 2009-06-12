@@ -26,7 +26,8 @@ import java.awt.Insets
 import java.awt.Dimension
 import java.awt.Container
 import com.feature50.clarity.css.CSSPropertyHandler
-import com.feature50.clarity.css.DefaultCSSPropertyHandler
+import static com.feature50.clarity.css.CSSUtils.getColor
+import static com.feature50.clarity.css.CSSUtils.normalizeSize
 import org.codehaus.groovy.control.CompilationFailedException
 
 /**
@@ -56,26 +57,26 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                        propertyName.equalsIgnoreCase("padding-right")) {
                 component.setBorder(calculatePadding(component,propertyName,propertyValue))
             } else if (propertyName.equalsIgnoreCase("border-color")) {
-                component.setBorder(calculateMatteBorder(component, DefaultCSSPropertyHandler.getColor(propertyName,propertyValue)))
+                component.setBorder(calculateMatteBorder(component, getColor(propertyName,propertyValue)))
             } else if (propertyName.equalsIgnoreCase("border-width")) {
-                component.setBorder(calculateMatteBorder(component, normalize(propertyName,propertyValue)))
+                component.setBorder(calculateMatteBorder(component, normalizeSize(propertyName,propertyValue)))
             } else if (propertyName.equalsIgnoreCase("width") ||
                        propertyName.equalsIgnoreCase("height")) {
-                component.setSize(calculateSize(component.getSize(),propertyName,normalize(propertyName,propertyValue)))
+                component.setSize(calculateSize(component.getSize(),propertyName,normalizeSize(propertyName,propertyValue)))
             } else if (propertyName.equalsIgnoreCase("min-width") ||
                        propertyName.equalsIgnoreCase("min-height")) {
-                component.setMinimumSize(calculateSize(component.getMinimumSize(),propertyName.substring(4),normalize(propertyName,propertyValue)))
+                component.setMinimumSize(calculateSize(component.getMinimumSize(),propertyName.substring(4),normalizeSize(propertyName,propertyValue)))
             } else if (propertyName.equalsIgnoreCase("max-width") ||
                        propertyName.equalsIgnoreCase("max-height")) {
-                component.setMaximumSize(calculateSize(component.getMaximumSize(),propertyName.substring(4),normalize(propertyName,propertyValue)))
+                component.setMaximumSize(calculateSize(component.getMaximumSize(),propertyName.substring(4),normalizeSize(propertyName,propertyValue)))
             } else if (propertyName.equalsIgnoreCase("pref-width") ||
                        propertyName.equalsIgnoreCase("pref-height")) {
-                component.setPreferredSize(calculateSize(component.getPreferredSize(),propertyName.substring(5),normalize(propertyName,propertyValue)))
+                component.setPreferredSize(calculateSize(component.getPreferredSize(),propertyName.substring(5),normalizeSize(propertyName,propertyValue)))
             } else if (propertyName.equalsIgnoreCase("border-top-width") ||
                        propertyName.equalsIgnoreCase("border-left-width") ||
                        propertyName.equalsIgnoreCase("border-bottom-width") ||
                        propertyName.equalsIgnoreCase("border-right-width")) {
-                component.setBorder(calculateMatteBorder(component,propertyName,normalize(propertyName,propertyValue)))
+                component.setBorder(calculateMatteBorder(component,propertyName,normalizeSize(propertyName,propertyValue)))
             } else if (propertyName.equalsIgnoreCase("swing-row-height")) {
                 if (component instanceof JTable) {
                     JTable table = (JTable) component
@@ -92,6 +93,10 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                 } catch (CompilationFailedException e) {
                     logger.log(Level.WARNING, "swing-client-property value ('${propertyValue}') unsupported",e)
                 }
+            } else if (propertyName.equalsIgnoreCase("swing-halign")) {
+                setHorizontalAlignment(component,propertyValue)
+            } else if (propertyName.equalsIgnoreCase("swing-valign")) {
+                setVerticalAlignment(component,propertyValue)
             }
         }
     }
@@ -123,7 +128,9 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
               "border-bottom-width",
               "border-right-width",
               "swing-row-height",
-              "swing-client-property"
+              "swing-client-property",
+              "swing-halign",
+              "swing-valign"
            ] as String[]
     }
 
@@ -151,7 +158,7 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
     private Border calculateMargin( JComponent component, String propertyName, String value ) {
         Border currentBorder = component.border
         String coord = propertyName.substring(7)
-        int val = normalize(propertyName,value)
+        int val = normalizeSize(propertyName,value)
         if( val < 0 ) return currentborder
         if( !BorderUtils.isMargin(currentBorder) ) {
             Insets insets = newInsets(propertyName,val,coord)
@@ -207,7 +214,7 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
     private Border calculatePadding( JComponent component, String propertyName, String value ) {
         Border currentBorder = component.border
         String coord = propertyName.substring(8)
-        int val = normalize(propertyName,value)
+        int val = normalizeSize(propertyName,value)
         if( val < 0 ) return currentborder
         if( BorderUtils.isMargin(currentBorder) ) currentBorder = currentBorder.insideBorder
         if( !BorderUtils.isPadding(currentBorder) ) {
@@ -264,7 +271,7 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                borderInsets?.right != null  ? borderInsets.right : 0,
             )
             Border newBorder = BorderFactory.createCompoundBorder(createMatteBorder(insets, color),currentBorder.insideBorder)
-            newBorder.borderColor = col
+            newBorder.borderColor = color
             newBorder.borderInsets = insets
             BorderUtils.setAsPadding(newBorder)
             BorderUtils.clear(currentBorder)
@@ -291,7 +298,7 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
         } else {
             Border outer = currentBorder.outsideBorder
             Insets insets = new Insets(width,width,width,width)
-            Border newBorder = BorderFactory.createCompoundBorder(createMatteBorder(insets, outer.borderColor),currentBorder.insideBorder)
+            Border newBorder = BorderFactory.createCompoundBorder(createMatteBorder(insets, currentBorder.borderColor),currentBorder.insideBorder)
             newBorder.borderColor = outer.borderColor
             newBorder.borderInsets = insets
             BorderUtils.setAsPadding(newBorder)
@@ -321,7 +328,7 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
         } else {
             Border outer = currentBorder.outsideBorder
             Insets insets = merge(newInsets(propertyName, width, coord), outer.borderInsets, coord)
-            Border newBorder = BorderFactory.createCompoundBorder(createMatteBorder(insets, outer.borderColor),currentBorder.insideBorder)
+            Border newBorder = BorderFactory.createCompoundBorder(createMatteBorder(insets, currentBorder.borderColor),currentBorder.insideBorder)
             newBorder.borderInsets = insets
             newBorder.borderColor = currentBorder.borderColor
             BorderUtils.setAsPadding(newBorder)
@@ -337,12 +344,44 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
         return currentBorder
     }
 
+    private void setHorizontalAlignment( JComponent component, String propertyValue ) {
+        try {
+            if ("left".equalsIgnoreCase(propertyValue)) {
+                component.setHorizontalAlignment(SwingConstants.LEFT)
+            } else if ("right".equalsIgnoreCase(propertyValue)) {
+                component.setHorizontalAlignment(SwingConstants.RIGHT)
+            } else if ("center".equalsIgnoreCase(propertyValue)) {
+                component.setHorizontalAlignment(SwingConstants.CENTER)
+            } else {
+               throw new RuntimeException("Unknown value ('${propertyValue}'), use 'left', 'right' or 'center'.")
+            }
+        } catch (Exception e) {
+            logger.log(Level.WARNING,"swing-halign does not support value ('${propertyValue}')",e)
+        }
+    }
+
+    private void setVerticalAlignment( JComponent component, String propertyValue ) {
+        try {
+            if ("top".equalsIgnoreCase(propertyValue)) {
+                component.setVerticalAlignment(SwingConstants.TOP)
+            } else if ("bottom".equalsIgnoreCase(propertyValue)) {
+                component.setVerticalAlignment(SwingConstants.BOTTOM)
+            } else if ("middle".equalsIgnoreCase(propertyValue)) {
+                component.setHorizontalAlignment(SwingConstants.CENTER)
+            } else {
+               throw new RuntimeException("Unknown value ('${propertyValue}'), use 'top', 'bottom' or 'middle'.")
+            }
+        } catch (Exception e) {
+            logger.log(Level.WARNING,"swing-valign does not support value ('${propertyValue}')",e)
+        }
+    }
+
     private Dimension calculateSize( Dimension originalSize, String prop, int value ) {
-       if( value < 0 ) return originalSize
-       return new Dimension(
-          (prop == "width" ? value : originalSize.width) as int,
-          (prop == "height" ? value : originalSize.height) as int
-       )
+        if( value < 0 ) return originalSize
+        return new Dimension(
+            (prop == "width" ? value : originalSize.width) as int,
+            (prop == "height" ? value : originalSize.height) as int
+        )
     }
 
     private Border createEmptyBorder( Insets insets ) {
@@ -360,12 +399,12 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
     private Insets newInsets( String propertyName, String[] values ) {
         Insets insets = null
         switch(values.size()) {
-           case 1: insets = new Insets(normalize(propertyName,values[0]),0,0,0); break;
-           case 2: insets = new Insets(normalize(propertyName,values[0]),0,normalize(propertyName,values[1]),0); break;
-           case 3: insets = new Insets(normalize(propertyName,values[0]),normalize(propertyName,values[1]),
-                                       normalize(propertyName,values[2]),normalize(propertyName,values[1])); break;
-           case 4: insets = new Insets(normalize(propertyName,values[0]),normalize(propertyName,values[3]),
-                                       normalize(propertyName,values[2]),normalize(propertyName,values[1])); break;
+           case 1: insets = new Insets(normalizeSize(propertyName,values[0]),0,0,0); break;
+           case 2: insets = new Insets(normalizeSize(propertyName,values[0]),0,normalizeSize(propertyName,values[1]),0); break;
+           case 3: insets = new Insets(normalizeSize(propertyName,values[0]),normalizeSize(propertyName,values[1]),
+                                       normalizeSize(propertyName,values[2]),normalizeSize(propertyName,values[1])); break;
+           case 4: insets = new Insets(normalizeSize(propertyName,values[0]),normalizeSize(propertyName,values[3]),
+                                       normalizeSize(propertyName,values[2]),normalizeSize(propertyName,values[1])); break;
            default:
                logger.warning("${propertyName} value ('${values}') unsupported just use integer values")
                return null
@@ -374,13 +413,13 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
     }
 
     private Insets newInsets( String propertyName, String size ) {
-        int val = normalize(propertyName,size)
+        int val = normalizeSize(propertyName,size)
         if( val == -1 ) return null
         return new Insets(val,val,val,val)
     }
 
     private Insets newInsets( String propertyName, String size, String coord ) {
-        int val = normalize(propertyName,size)
+        int val = normalizeSize(propertyName,size)
         if( val == -1 ) return null
         return new Insets(
             coord == "top"    ? val: 0,
@@ -406,15 +445,5 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
              coord == "bottom" ? a.bottom: (b ? b.bottom : 0),
              coord == "right"  ? a.right:  (b ? b.right : 0)
         )
-    }
-
-    private int normalize( String propertyName, String size ) {
-        if (size.endsWith("em") || size.endsWith("px")) size = size.substring(0, size.length() - 2)
-        try {
-           return Integer.valueOf(size)
-        } catch (NumberFormatException e) {
-            logger.log(Level.WARNING,"${propertyName} value ('${size}') not supported; 'em' and 'px' are the only supported length suffixes", e);
-        }
-        return -1
     }
 }
