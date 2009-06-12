@@ -18,6 +18,7 @@ package griffon.builder.flamingo.factory
 
 import java.awt.Dimension
 import java.awt.Image
+import javax.swing.Action
 import org.jvnet.flamingo.common.*
 import org.jvnet.flamingo.common.icon.*
 
@@ -25,6 +26,25 @@ import org.jvnet.flamingo.common.icon.*
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
 class FlamingoFactoryUtils {
+   public static final String ICON_PROPERTY = "Icon"
+   public static final String NAME_PROPERTY = Action.NAME
+   public static final String ENABLED_PROPERTY = "Enabled"
+   public static final String DISABLED_ICON_PROPERTY = "DisabledIcon"
+   public static final String TOOLTIP_PROPERTY = Action.SHORT_DESCRIPTION
+   public static final String TOOLTIP_TEXT_PROPERTY = "ToolTipText"
+
+   static configureFromAction( AbstractCommandButton button, Action action ) {
+       [DISABLED_ICON_PROPERTY: DISABLED_ICON_PROPERTY,
+        TOOLTIP_PROPERTY:       TOOLTIP_TEXT_PROPERTY,
+        TOOLTIP_TEXT_PROPERTY:  TOOLTIP_TEXT_PROPERTY].each { name, prop ->
+           def value = action.getValue(name)
+           println "set${prop}(${value})"
+           if( value != null ) button."set$prop"(value)
+       }
+       button
+       button.addActionListener(action)
+   }
+
    static translateCommandButtonConstants( Map attributes ) {
       [ commandButtonKind: JCommandButton.CommandButtonKind,
         commandButtonPopupOrientationKind: JCommandButton.CommandButtonPopupOrientationKind,

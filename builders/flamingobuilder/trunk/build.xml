@@ -29,7 +29,7 @@
    </target>
 
    <target name="package"
-           depends="clean, compile"
+           depends="clean, compile, test"
            description="Binary jar">
       <jar jarfile="${project.build.dir}/${project.final.name}.jar"
            basedir="${project.build.output}"
@@ -84,6 +84,11 @@
          <pathelement location="${project.build.output}" />
        </classpath>
      </groovyc>
+     <copy todir="${project.test.output}/griffon/builder/flamingo">
+        <fileset dir="${project.res.dir}">
+           <include name="**/*.svg" />
+        </fileset>
+     </copy>
    </target>
 
    <target name="test"
@@ -91,7 +96,6 @@
            if="junit.present"
            description="Run the test cases (Groovy)">
      <mkdir dir="${project.test.reports}" />
-<!--
      <junit printSummary="yes"
             haltonerror="true"
             haltonfailure="true"
@@ -107,11 +111,10 @@
        </classpath>
        <batchtest todir="${project.test.reports}">
           <fileset dir="${project.test.output}">
-             <include name="griffon/builder/flamingo/*TestSuite.class" />
+             <include name="griffon/builder/flamingo/*Tests.class" />
           </fileset>
        </batchtest>
      </junit>
--->
    </target>
 
    <target name="-test-junit-present">

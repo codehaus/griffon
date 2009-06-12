@@ -16,6 +16,7 @@
 
 package griffon.builder.flamingo.factory
 
+import javax.swing.Action
 import org.jvnet.flamingo.common.icon.*
 
 /**
@@ -30,17 +31,29 @@ class CommandButtonFactory extends AbstractFactory {
 
     public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
-      if( FactoryBuilderSupport.checkValueIsTypeNotString(value, name, beanClass) ) {
+      if( value && beanClass.isAssignableFrom(value.getClass()) ) {
          return value
       }
 
-      def icon = FlamingoFactoryUtils.createIcon(builder, name, null, attributes)
-      if( !icon ) icon = new EmptyResizableIcon(32)
-      if( !icon || !(icon instanceof ResizableIcon) )
-         throw new IllegalArgumentException("In $name a value for icon: must be defined.")
-      def title = value instanceof String || value instanceof GString ? value.toString() : attributes.remove("text")?.toString()
-      title = title ?: ""
-      return beanClass.getDeclaredConstructor([String,ResizableIcon] as Class[]).newInstance(title, icon)
+      def icon = null
+      def text = null
+      /*if( value instanceof Action ) {
+         icon = value.getValue(FlamingoFactoryUtils.ICON_PROPERTY) ?: new EmptyResizableIcon(32)
+         text = value.getValue(FlamingoFactoryUtils.NAME_PROPERTY)
+         if( !(icon instanceof ResizableIcon) )
+            throw new IllegalArgumentException("In $name, provided icon: by action is not a ResizableIcon.")
+      } else {*/
+         icon = FlamingoFactoryUtils.createIcon(builder, name, null, attributes)
+         if( !icon ) icon = new EmptyResizableIcon(32)
+         if( !(icon instanceof ResizableIcon) )
+            throw new IllegalArgumentException("In $name a value for icon: must be defined.")
+         text = value instanceof String || value instanceof GString ? value : attributes.remove("text")
+      //}
+      text = text != null ? text.toString() : "" // force GString eval
+
+      def cmd = beanClass.getDeclaredConstructor([String,ResizableIcon] as Class[]).newInstance(text, icon)
+      //if( value instanceof Action ) FlamingoFactoryUtils.configureFromAction(cmd,value)
+      return cmd
    }
 
    public boolean onHandleNodeAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
