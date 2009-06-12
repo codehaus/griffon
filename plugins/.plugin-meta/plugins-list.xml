@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="729">
+<plugins revision="751">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -44,6 +44,16 @@
             <description></description>
             <documentation>http://griffon.codehaus.org/Codenarc+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_1/griffon-codenarc-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin latest-release="0.1" name="css-builder">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>CSS for Swing</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description></description>
+            <documentation>http://griffon.codehaus.org/CssBuilder+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-css-builder/tags/RELEASE_0_1/griffon-css-builder-0.1.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1.1" name="easyb">
