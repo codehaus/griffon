@@ -33,8 +33,8 @@
            excludes="**/package.html" >
          <manifest>
             <attribute name="Built-By" value="${user.name}"/>
-            <attribute name="Extension-Name" value="JideBuilder"/>
-            <attribute name='Specification-Title' value='CSSBuilder: CSS2 for Swing'/>
+            <attribute name="Extension-Name" value="CSSBuilder"/>
+            <attribute name='Specification-Title' value='CSSBuilder: CSS for Swing'/>
             <attribute name='Specification-Vendor' value='The Codehaus'/>
          </manifest>
          <zipfileset fullpath="META-INF/LICENSE.txt" file="LICENSE.txt"/>
