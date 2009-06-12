@@ -16,9 +16,13 @@
 
 package griffon.builder.css
 
+import java.awt.Color
+import java.awt.Insets
 import java.awt.Container
 import javax.swing.JComponent
+import javax.swing.border.Border
 import com.feature50.clarity.ClarityConstants
+import com.feature50.clarity.css.CSSPropertyHandlers
 import com.feature50.util.SwingUtils
 
 /**
@@ -30,6 +34,7 @@ public class CSSBuilder extends FactoryBuilderSupport {
 
    static {
       enhanceSwingClasses()
+      CSSPropertyHandlers.getInstance().addHandler(SwingCSSPropertyHandler.getInstance());
    }
 
    public CSSBuilder( boolean init = true ) {
@@ -76,6 +81,17 @@ public class CSSBuilder extends FactoryBuilderSupport {
          ])
       }
 
+      klass = Border
+      if( !AbstractSyntheticMetaMethods.hasBeenEnhanced(klass) ) {
+         AbstractSyntheticMetaMethods.enhance(klass,[
+            "getBorderType": {-> BorderUtils.getBorderType(delegate) },
+            "setBorderType": { type -> BorderUtils.setBorderType(delegate,type) },
+            "getBorderColor": {-> BorderUtils.getBorderColor(delegate) },
+            "setBorderColor": { Color color -> BorderUtils.setBorderColor(delegate,color) },
+            "getBorderInsets": {-> BorderUtils.getBorderInsets(delegate) },
+            "setBorderInsets": { Insets insets -> BorderUtils.setBorderInsets(delegate,insets) },
+         ])
+      }
    }
 
    static JComponent $( Container target, String name ) {

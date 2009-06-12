@@ -1,3 +1,20 @@
+/*
+ * Copyright 2007-2009 The orginal author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
 package griffon.builder.css;
 
 import com.feature50.clarity.ClarityConstants;
@@ -26,6 +43,12 @@ import java.util.logging.Level;
 import javax.swing.JComponent;
 import javax.swing.JList;
 
+
+/**
+ *
+ * @author Ben Galbraith
+ * @author Andres Almiray
+ */
 public class CSSDecorator {
     private static final Logger logger = Logger.getLogger(CSSDecorator.class.getName());
 
@@ -43,6 +66,22 @@ public class CSSDecorator {
 
     public static void decorate(String cssName, List<JComponent> allComponents, ClassLoader classLoader) {
         decorate(new String[]{cssName}, allComponents, classLoader);
+    }
+
+    public static void decorate(List<String> cssNames, Container root) {
+        decorate(cssNames.toArray(new String[cssNames.size()]), SwingUtils.getAllJComponents(root), CSSDecorator.class.getClassLoader());
+    }
+
+    public static void decorate(List<String> cssNames, Container root, ClassLoader classLoader) {
+        decorate(cssNames.toArray(new String[cssNames.size()]), SwingUtils.getAllJComponents(root), classLoader);
+    }
+
+    public static void decorate(List<String> cssNames, List<JComponent> allComponents) {
+        decorate(cssNames.toArray(new String[cssNames.size()]), allComponents, CSSDecorator.class.getClassLoader());
+    }
+
+    public static void decorate(List<String> cssNames, List<JComponent> allComponents, ClassLoader classLoader) {
+       decorate(cssNames.toArray(new String[cssNames.size()]), allComponents, classLoader);
     }
 
     public static void decorate(String[] cssNames, Container root) {
