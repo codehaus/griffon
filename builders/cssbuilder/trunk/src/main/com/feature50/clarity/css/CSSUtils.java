@@ -155,7 +155,7 @@ public final class CSSUtils {
         return false;
     }
 
-    public static  int getHorizontalAlignment( String propertyName, String propertyValue ) {
+    public static int getHorizontalAlignment( String propertyName, String propertyValue ) {
         if ("left".equalsIgnoreCase(propertyValue)) {
              return SwingConstants.LEFT;
         } else if ("right".equalsIgnoreCase(propertyValue)) {
@@ -168,7 +168,7 @@ public final class CSSUtils {
         return SwingConstants.LEFT;
     }
 
-    public static  int getVerticalAlignment( String propertyName, String propertyValue ) {
+    public static int getVerticalAlignment( String propertyName, String propertyValue ) {
         if ("top".equalsIgnoreCase(propertyValue)) {
              return SwingConstants.TOP;
         } else if ("bottom".equalsIgnoreCase(propertyValue)) {
@@ -181,7 +181,7 @@ public final class CSSUtils {
         return SwingConstants.LEFT;
     }
 
-    public static  int getOrientation( String propertyName, String propertyValue ) {
+    public static int getOrientation( String propertyName, String propertyValue ) {
         if ("horizontal".equalsIgnoreCase(propertyValue)) {
              return SwingConstants.HORIZONTAL;
         } else if ("vertical".equalsIgnoreCase(propertyValue)) {
@@ -192,7 +192,7 @@ public final class CSSUtils {
         return SwingConstants.HORIZONTAL;
     }
 
-    public static  int getHorizontalTextPosition( String propertyName, String propertyValue ) {
+    public static int getHorizontalTextPosition( String propertyName, String propertyValue ) {
         if ("left".equalsIgnoreCase(propertyValue)) {
              return SwingConstants.LEFT;
         } else if ("center".equalsIgnoreCase(propertyValue)) {
@@ -209,15 +209,15 @@ public final class CSSUtils {
         return SwingConstants.TRAILING;
     }
 
-    public static  int getVerticalTextPosition( String propertyName, String propertyValue ) {
+    public static int getVerticalTextPosition( String propertyName, String propertyValue ) {
         if ("top".equalsIgnoreCase(propertyValue)) {
              return SwingConstants.TOP;
-        } else if ("center".equalsIgnoreCase(propertyValue)) {
+        } else if ("middle".equalsIgnoreCase(propertyValue)) {
              return SwingConstants.CENTER;
         } else if ("bottom".equalsIgnoreCase(propertyValue)) {
              return SwingConstants.BOTTOM;
         } else {
-            logger.warning(String.format("%1$s unknown value ('%2$s'), use 'top', 'center' or 'bottom'.",propertyName, propertyValue));
+            logger.warning(String.format("%1$s unknown value ('%2$s'), use 'top', 'middle' or 'bottom'.",propertyName, propertyValue));
         }
         return SwingConstants.CENTER;
     }
