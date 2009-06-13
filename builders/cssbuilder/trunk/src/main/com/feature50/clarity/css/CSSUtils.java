@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -140,9 +141,85 @@ public final class CSSUtils {
         try {
            return Integer.valueOf(size);
         } catch (NumberFormatException e) {
-            logger.log(Level.WARNING,"${propertyName} value ('${size}') not supported; 'em' and 'px' are the only supported length suffixes", e);
+            logger.log(Level.WARNING,String.format("%1$s value ('%2$s') not supported; 'em' and 'px' are the only supported length suffixes",propertyName,size), e);
         }
         return -1;
+    }
+
+    public static boolean getBoolean( String propertyName, String bool ) {
+        try {
+           return Boolean.valueOf(bool);
+        } catch (NumberFormatException e) {
+            logger.log(Level.WARNING,String.format("%1$s value ('%2$s') not supported; 'true' and 'false' are the only supported values",propertyName,bool), e);
+        }
+        return false;
+    }
+
+    public static  int getHorizontalAlignment( String propertyName, String propertyValue ) {
+        if ("left".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.LEFT;
+        } else if ("right".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.RIGHT;
+        } else if ("center".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.CENTER;
+        } else {
+            logger.warning(String.format("%1$s unknown value ('%2$s'), use 'left', 'right' or 'center'.",propertyName, propertyValue));
+        }
+        return SwingConstants.LEFT;
+    }
+
+    public static  int getVerticalAlignment( String propertyName, String propertyValue ) {
+        if ("top".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.TOP;
+        } else if ("bottom".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.BOTTOM;
+        } else if ("middle".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.CENTER;
+        } else {
+            logger.warning(String.format("%1$s unknown value ('%2$s'), use 'top', 'bottom' or 'middle'.",propertyName, propertyValue));
+        }
+        return SwingConstants.LEFT;
+    }
+
+    public static  int getOrientation( String propertyName, String propertyValue ) {
+        if ("horizontal".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.HORIZONTAL;
+        } else if ("vertical".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.VERTICAL;
+        } else {
+            logger.warning(String.format("%1$s unknown value ('%2$s'), use 'horizontal' or 'vertical'.",propertyName, propertyValue));
+        }
+        return SwingConstants.HORIZONTAL;
+    }
+
+    public static  int getHorizontalTextPosition( String propertyName, String propertyValue ) {
+        if ("left".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.LEFT;
+        } else if ("center".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.CENTER;
+        } else if ("right".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.RIGHT;
+        } else if ("leading".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.LEADING;
+        } else if ("trailing".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.TRAILING;
+        } else {
+            logger.warning(String.format("%1$s unknown value ('%2$s'), use 'left', 'center', 'right', 'leading' or 'trailing'.",propertyName, propertyValue));
+        }
+        return SwingConstants.TRAILING;
+    }
+
+    public static  int getVerticalTextPosition( String propertyName, String propertyValue ) {
+        if ("top".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.TOP;
+        } else if ("center".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.CENTER;
+        } else if ("bottom".equalsIgnoreCase(propertyValue)) {
+             return SwingConstants.BOTTOM;
+        } else {
+            logger.warning(String.format("%1$s unknown value ('%2$s'), use 'top', 'center' or 'bottom'.",propertyName, propertyValue));
+        }
+        return SwingConstants.CENTER;
     }
 
     private static Color rgbToColor(String colorValue) {

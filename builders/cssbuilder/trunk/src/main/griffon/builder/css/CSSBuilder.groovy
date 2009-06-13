@@ -29,9 +29,6 @@ import com.feature50.util.SwingUtils
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 public class CSSBuilder extends FactoryBuilderSupport {
-   public static final String DELEGATE_PROPERTY_CSS_CLASS = "_delegateProperty:cssClass"
-   public static final String DEFAULT_DELEGATE_PROPERTY_CSS_CLASS = "cssClass"
-
    static {
       enhanceSwingClasses()
       CSSPropertyHandlers.getInstance().addHandler(SwingCSSPropertyHandler.getInstance());
@@ -39,30 +36,14 @@ public class CSSBuilder extends FactoryBuilderSupport {
 
    public CSSBuilder( boolean init = true ) {
       super( init )
-      this[DELEGATE_PROPERTY_CSS_CLASS] = DEFAULT_DELEGATE_PROPERTY_CSS_CLASS
    }
 
    public void registerCSS() {
-      //addAttributeDelegate(CSSBuilder.&cssAttributeDelegate)
-      //addPostNodeCompletionDelegate(CSSBuilder.&cssPostNodeCompletionDelegate)
       registerExplicitMethod("\$", CSSBuilder.&$)
       registerExplicitMethod("\$s", CSSBuilder.&$s)
       registerExplicitMethod("\$\$", CSSBuilder.&$$)
    }
-/*
-   static cssAttributeDelegate( FactoryBuilderSupport builder, node, Map attributes ) {
-      def cssAttr = builder.getAt(DELEGATE_PROPERTY_CSS_CLASS) ?: DEFAULT_DELEGATE_PROPERTY_CSS_CLASS
-      builder.getContext()[cssAttr] = attributes.remove(cssAttr)
-   }
 
-   static cssPostNodeCompletionDelegate( FactoryBuilderSupport builder, parent, node ) {
-      def cssAttr = builder.getAt(DELEGATE_PROPERTY_CSS_CLASS) ?: DEFAULT_DELEGATE_PROPERTY_CSS_CLASS
-      def cssClass = builder.getContext()[cssAttr]
-      if( cssClass && node instanceof JComponent ) {
-         node.putClientProperty(ClarityConstants.CLIENT_PROPERTY_CLASS_KEY, cssClass)
-      }
-   }
-*/
    static enhanceSwingClasses() {
       Class klass = JComponent
       if( !AbstractSyntheticMetaMethods.hasBeenEnhanced(klass) ) {
