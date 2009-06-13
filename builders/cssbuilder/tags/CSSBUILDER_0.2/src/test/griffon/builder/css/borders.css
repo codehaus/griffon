@@ -1,0 +1,26 @@
+#button0 {
+  border-width: 5;
+  border-color: blue;
+}
+
+#button1 {
+  border-top-width: 1em;
+}
+
+#button2 {
+  border-top-width: 1em;
+  border-bottom-width: 2em;
+}
+
+#button3 {
+  border-top-width: 1em;
+  border-bottom-width: 2em;
+  border-left-width: 3em;
+}
+
+#button4 {
+  border-top-width: 1em;
+  border-bottom-width: 2em;
+  border-left-width: 3em;
+  border-right-width: 4em;
+}
