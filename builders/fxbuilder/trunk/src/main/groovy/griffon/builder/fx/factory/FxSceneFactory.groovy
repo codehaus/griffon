@@ -37,13 +37,11 @@ class FxSceneFactory extends FxBeanFactory {
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         if( builder.context.children ) {
-            def sb = new SequenceBuilder(TypeInfo.getTypeInfo(Node))
-            builder.context.children.each{ sb.add(it) }
-            node.attribute("content").setAsSequenceFromLiteral(sb.toSequence())
+            node.location("content").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
         }
 
         super.onNodeCompleted( builder, parent, node )
 
-        if( parent && parent.hasAttribute("scene") ) parent.scene = node
+         if( parent && parent.hasLocation("scene") ) parent.scene = node
     }
 }

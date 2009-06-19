@@ -18,7 +18,7 @@ package griffon.builder.fx.factory
 
 import javafx.scene.Node
 import com.sun.javafx.runtime.TypeInfo
-import com.sun.javafx.runtime.sequence.SequenceBuilder
+import com.sun.javafx.runtime.sequence.Sequences
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
@@ -35,10 +35,7 @@ class ContentFactory extends AbstractFxFactory {
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         if( parent ) {
-             def sb = new SequenceBuilder(TypeInfo.Object)
-             node.each { sb.add(it) }
-             def s = sb.toSequence()
-             parent.attribute("content").setAsSequenceFromLiteral(s)
+             parent.location("content").setAsSequence(Sequences.fromCollection(TypeInfo.Object,node))
         }
         super.onNodeCompleted( builder, parent, node )
     }

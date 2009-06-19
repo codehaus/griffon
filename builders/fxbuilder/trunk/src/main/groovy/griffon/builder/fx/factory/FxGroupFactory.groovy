@@ -37,9 +37,7 @@ class FxGroupFactory extends FxBeanFactory {
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         if( builder.context.children ) {
-            def sb = new SequenceBuilder(TypeInfo.getTypeInfo(Node))
-            builder.context.children.each{ sb.add(it) }
-            node.attribute("content").setAsSequenceFromLiteral(sb.toSequence())
+            node.location("content").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
         }
 
         super.onNodeCompleted( builder, parent, node )

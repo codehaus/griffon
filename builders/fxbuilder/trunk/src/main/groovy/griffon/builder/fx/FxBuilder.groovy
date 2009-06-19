@@ -20,8 +20,9 @@ import groovy.swing.SwingBuilder
 import griffon.builder.fx.factory.*
 import griffon.builder.fx.impl.*
 
-import com.sun.javafx.runtime.FXObject
-import com.sun.javafx.runtime.location.ObjectLocation
+import com.sun.javafx.runtime.*
+import com.sun.javafx.runtime.location.*
+import com.sun.javafx.runtime.sequence.*
 import javafx.stage.*
 import javafx.scene.*
 import javafx.scene.shape.*
@@ -38,9 +39,9 @@ import javafx.ext.swing.*
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-public class FxBuilder extends SwingBuilder {
+class FxBuilder extends SwingBuilder {
    static {
-      Fx.enhance()
+      Fx.enhanceFxClasses()
    }
 
    public FxBuilder( boolean init = true ) {
@@ -48,7 +49,7 @@ public class FxBuilder extends SwingBuilder {
    }
 
    public void registerFxSwing() {
-      registerFactory("swingScene", new FxSwingSceneFactory())
+      //registerFactory("swingScene", new FxSwingSceneFactory())
       registerBeanFactory("swingButton", SwingButton)
       registerBeanFactory("swingCheckBox", SwingCheckBox)
       registerBeanFactory("swingComboBox", SwingComboBox)
@@ -171,14 +172,14 @@ public class FxBuilder extends SwingBuilder {
       "skyBlue", "slateBlue", "slateGray", "slateGrey", "snow", "springGreen", "steelBlue", "tan",
       "teal", "thistle", "tomato", "turquoise", "violet", "wheat", "white", "whiteSmoke", "yellow", "yellowGreen"].each {
          // setVariable(it, Color."\$${it.toUpperCase()}".get())
-         setVariable("color_$it", Color."\$${it.toUpperCase()}".get())
+         setVariable("color_$it", Color."\$${it.toUpperCase()}"/*.get()*/)
       }
 
-      registerExplicitMethod("color", Color.&color)
-      registerExplicitMethod("rgb", Color.&rgb)
-      registerExplicitMethod("hsb", Color.&hsb)
-      registerExplicitMethod("web", Color.&web)
-      registerExplicitMethod("fromAWTColor", Color.&fromAWTColor)
+//       registerExplicitMethod("color", Color.&color)
+//       registerExplicitMethod("rgb", Color.&rgb)
+//       registerExplicitMethod("hsb", Color.&hsb)
+//       registerExplicitMethod("web", Color.&web)
+//       registerExplicitMethod("fromAWTColor", Color.&fromAWTColor)
 
       setVariable("cycleMethod_NO_CYCLE", CycleMethod.NO_CYCLE)
       setVariable("cycleMethod_REFLECT", CycleMethod.REFLECT)
@@ -290,9 +291,9 @@ public class FxBuilder extends SwingBuilder {
 
    public static translateValue( node, attributes, name, value ) {
       try {
-         if( ObjectLocation.isAssignableFrom(node.attributeType(name)) ) {
+         if( ObjectLocation.isAssignableFrom(node.locationType(name)) ) {
             attributes[name] = value instanceof Closure ? new ClosureFunction(value) : value
-            attributes[name] = value instanceof List ? new ListSequence(value) : attributes[name]
+            attributes[name] = value instanceof List ? Sequences.fromCollection(TypeInfo.Object,value) : attributes[name]
          }
       } catch( MissingPropertyException mpe ) {
          // ignore

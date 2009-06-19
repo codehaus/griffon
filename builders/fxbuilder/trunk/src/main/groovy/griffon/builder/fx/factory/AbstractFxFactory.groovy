@@ -26,29 +26,35 @@ import com.sun.javafx.runtime.TypeInfo
 abstract class AbstractFxFactory extends AbstractFactory implements FxFactory {
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         try {
-           node."initialize\$"()
+           //node."applyTriggers\$"()
+           node."complete\$"()
         } catch( MissingMethodException mme ) {
            // ignore
         }
+
+        /*try {
+           node."initialize\$"()
+        } catch( MissingMethodException mme ) {
+           // ignore
+        }*/
     }
 
     public boolean onHandleNodeAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
         attributes.each { key, value ->
-            def attr = node.attribute(key)
+            def attr = node.location(key)
             switch(attr) {
-                case BooleanVariable: attr.setAsBooleanFromLiteral(value); break
-                case DoubleVariable: attr.setAsDoubleFromLiteral(value); break
-                case IntVariable: attr.setAsIntFromLiteral(value); break
                 case SequenceVariable:
                     switch(value) {
-                        case Sequence: attr.setAsSequenceFromLiteral(value); break
+                        case Sequence:
+                            attr.setAsSequence(value)
+                            break
                         default:
-                            def sb = new SequenceBuilder(TypeInfo.Object)
-                            value.each{ sb.add(it) }
-                            attr.setAsSequenceFromLiteral(sb.toSequence())
+                            // TODO check for Array
+                            if(!value instanceof Collection) value = [value]
+                            attr.setAsSequence(Sequences.fromCollection(TypeInfo.Object,value))
                     }
                     break
-                default: attr.setFromLiteral(value)
+                default: attr.set(value)
             }
         }
         return false

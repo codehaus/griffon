@@ -88,6 +88,7 @@
        <classpath>
          <path refid="build.classpath" />
          <pathelement location="${project.build.output}" />
+          <pathelement location="${project.test.output}" />
        </classpath>
      </groovyc>
    </target>
@@ -96,7 +97,6 @@
            depends="-junit-present, compile-tests" 
            if="junit.present"
            description="Run the test cases (Groovy)">
-<!--
      <mkdir dir="${project.test.reports}" />
      <junit printSummary="yes"
             haltonerror="true"
@@ -113,11 +113,10 @@
        </classpath>
        <batchtest todir="${project.test.reports}">
           <fileset dir="${project.test.output}">
-             <include name="griffon/builder/fx/*TestSuite.class" />
+             <include name="griffon/builder/fx/*Tests.class" />
           </fileset>
        </batchtest>
      </junit>
--->
    </target>
 
    <target name="-test-junit-present">
