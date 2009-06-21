@@ -16,8 +16,7 @@
 
 package griffon.builder.fx.factory
 
-import javafx.scene.Group
-import javafx.scene.Node
+import javafx.scene.control.ListView
 import com.sun.javafx.runtime.location.*
 import com.sun.javafx.runtime.sequence.*
 import com.sun.javafx.runtime.TypeInfo
@@ -25,9 +24,9 @@ import com.sun.javafx.runtime.TypeInfo
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
-class FxGroupFactory extends FxBeanFactory {
-    FxGroupFactory() {
-        super( Group, false )
+class FxListViewFactory extends FxBeanFactory {
+    FxListViewFactory() {
+        super( ListView, false )
     }
 
     public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
@@ -37,8 +36,7 @@ class FxGroupFactory extends FxBeanFactory {
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         if( builder.context.children ) {
-            node.location("content").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
-            builder.context.children = []
+            node.location("items").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
         }
 
         super.onNodeCompleted( builder, parent, node )

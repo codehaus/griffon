@@ -36,4 +36,19 @@ class FxPropertyChangeAdapter extends FxChangeListenerAdapter {
          source, propertyName, oldValue, newValue
       ))
    }
+
+   boolean equals(Object obj) {
+      if(!obj || !(obj instanceof FxClosureChangeAdapter)) return false
+      return source == obj.source &&
+             propertyName == obj.propertyName &&
+             listener == obj.listener
+   }
+
+   int hashCode() {
+      int seed = 23 * 37
+      int hashcode = seed * source.hashCode()
+      hashcode = seed * hashcode + propertyName.hashCode()
+      hashcode = seed * hashcode + listener.hashCode()
+      return hashcode
+   }
 }

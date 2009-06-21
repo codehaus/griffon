@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ import griffon.builder.fx.impl.*
 import com.sun.javafx.runtime.*
 import com.sun.javafx.runtime.location.*
 import com.sun.javafx.runtime.sequence.*
+import javafx.animation.*
+import javafx.animation.transition.*
 import javafx.stage.*
 import javafx.scene.*
 import javafx.scene.shape.*
@@ -44,11 +46,11 @@ class FxBuilder extends SwingBuilder {
       Fx.enhanceFxClasses()
    }
 
-   public FxBuilder( boolean init = true ) {
+   FxBuilder( boolean init = true ) {
       super( init )
    }
 
-   public void registerFxSwing() {
+   void registerFxSwing() {
       //registerFactory("swingScene", new FxSwingSceneFactory())
       registerBeanFactory("swingButton", SwingButton)
       registerBeanFactory("swingCheckBox", SwingCheckBox)
@@ -73,13 +75,28 @@ class FxBuilder extends SwingBuilder {
       setVariable("SwingVerticalAlignment_BOTTOM",SwingVerticalAlignment.BOTTOM)
    }
 
-   public void registerFxSupport() {
+   void registerControls() {
+      registerBeanFactory("button", Button)
+      registerBeanFactory("checkBox", CheckBox)
+      registerBeanFactory("hyperlink", Hyperlink)
+      registerBeanFactory("radioButton", RadioButton)
+      registerBeanFactory("toggleButton", ToggleButton)
+      registerBeanFactory("toggleGroup", ToggleGroup)
+      registerBeanFactory("textBox", TextBox)
+      registerBeanFactory("scrollBar", ScrollBar)
+      registerBeanFactory("progressBar", ProgressBar)
+      registerBeanFactory("progressIndicator", ProgressIndicator)
+      registerBeanFactory("slider", Slider)
+      registerFactory("listView", new FxListViewFactory())
+   }
+
+   void registerFxSupport() {
       registerBeanFactory("cursor", Cursor)
-      registerFactory("group", new FxBeanFactory(Group,false))
+      registerFactory("group", new FxGroupFactory())
       registerFactory("scene", new FxSceneFactory())
       registerFactory("content", new ContentFactory())
       registerFactory("stage", new FxBeanFactory(Stage,false))
-      registerFactory("customNode", new FXCustomNodeFactory())
+      registerFactory("customNode", new FxCustomNodeFactory())
 
       setVariable("CURSOR_DEFAULT",  Cursor."\$DEFAULT")
       setVariable("CURSOR_CROSSHAIR",Cursor."\$CROSSHAIR")
@@ -100,19 +117,28 @@ class FxBuilder extends SwingBuilder {
       setVariable("CURSOR_NONE",     Cursor."\$NONE")
 
       addAttributeDelegate(FxBuilder.&fxAttributeDelegate)
+
+      registerExplicitMethod("question",FxBuilder.&question)
+      registerExplicitMethod("confirm",FxBuilder.&confirm)
+      registerExplicitMethod("inform",FxBuilder.&inform)
    }
 
-   public void registerFxLayout() {
+   void registerFxLayout() {
       // TODO resolve clash with SwingBuilder[hbox,vbox]
       registerFactory("hbox", new FxLayoutFactory(HBox))
       registerFactory("vbox", new FxLayoutFactory(VBox))
+      registerFactory("flow", new FxLayoutFactory(Flow))
+      registerFactory("stack", new FxLayoutFactory(javafx.scene.layout.Stack))
+      registerFactory("tile", new FxLayoutFactory(Tile))
+      registerFactory("clipView", new FxClipViewFactory())
+      registerBeanFactory("layoutInfo", LayoutInfo)
    }
 
-   public void registerFxImage() {
+   void registerFxImage() {
       registerBeanFactory("imageView", ImageView)
    }
 
-   public void registerFxText() {
+   void registerFxText() {
       registerBeanFactory("font", Font)
       registerBeanFactory("text", Text)
 
@@ -141,7 +167,8 @@ class FxBuilder extends SwingBuilder {
       setVariable("TextOrigin_BOTTOM",   TextOrigin.BOTTOM)
    }
 
-   public void registerFxTransform() {
+   void registerFxTransform() {
+      registerFactory("transforms", new FxTransformsFactory())
       registerBeanFactory("affine", Affine)
       registerBeanFactory("rotate", Rotate)
       registerBeanFactory("scale", Scale)
@@ -149,7 +176,7 @@ class FxBuilder extends SwingBuilder {
       registerBeanFactory("translate", Translate)
    }
 
-   public void registerFxPaint() {
+   void registerFxPaint() {
       ["transparent", "aliceBlue", "antiqueWhite", "aqua", "aquamarine", "azure", "beige", "bisque",
       "black", "blancheDalmond", "blue", "blueViolet", "brown", "burlyWood", "cadetBlue",
       "chartreuse", "chocolate", "coral", "cornflowerBlue", "cornSilk", "crimson", "cyan",
@@ -185,12 +212,12 @@ class FxBuilder extends SwingBuilder {
       setVariable("cycleMethod_REFLECT", CycleMethod.REFLECT)
       setVariable("cycleMethod_REPEAT", CycleMethod.REPEAT)
 
-      registerFactory("linearGradient", new FxPaintFactory(LinearGradient))
-      registerFactory("radialGradient", new FxPaintFactory(RadialGradient))
-//       registerBeanFactory("stop", Stop)
+      registerFactory("linearGradient", new FxPaintFactory(LinearGradient,false))
+      registerFactory("radialGradient", new FxPaintFactory(RadialGradient,false))
+      registerBeanFactory("stop", Stop)
    }
 
-   public void registerFxShape() {
+   void registerFxShape() {
       registerFactory("arc", new FxShapeFactory(Arc))
       registerFactory("circle", new FxShapeFactory(Circle))
       registerFactory("cubicCurve", new FxShapeFactory(CubicCurve))
@@ -200,12 +227,12 @@ class FxBuilder extends SwingBuilder {
       registerFactory("polyline", new FxShapeFactory(Polyline))
       registerFactory("quadCurve", new FxShapeFactory(QuadCurve))
       registerFactory("rectangle", new FxShapeFactory(Rectangle))
-      registerFactory("shape", new FxShapeFactory(Shape))
+      //registerFactory("shape", new FxShapeFactory(Shape))
       registerFactory("intersect", new FxShapeFactory(ShapeIntersect))
       registerFactory("subtract", new FxShapeFactory(ShapeSubtract))
       registerFactory("svgPath", new FxShapeFactory(SVGPath))
 
-      registerFactory("path", new FxShapeFactory(Path))
+      registerFactory("path", new FxPathFactory())
       registerFactory("arcTo", new FxPathElementFactory(ArcTo))
       registerFactory("cubicCurveTo", new FxPathElementFactory(CubicCurveTo))
       registerFactory("hlineTo", new FxPathElementFactory(HLineTo))
@@ -225,12 +252,12 @@ class FxBuilder extends SwingBuilder {
       setVariable("StrokeLineJoin_ROUND", StrokeLineJoin.ROUND)
    }
 
-   public void registerFxEffect() {
+   void registerFxEffect() {
       registerFactory("blend", new FxEffectFactory(Blend))
       registerFactory("bloom", new FxEffectFactory(Bloom))
       registerFactory("colorAdjust", new FxEffectFactory(ColorAdjust))
       registerFactory("displacementMap", new FxEffectFactory(DisplacementMap))
-      registerFactory("dropShadow",new FxEffectFactory( DropShadow))
+      registerFactory("dropShadow",new FxEffectFactory(DropShadow))
       registerFactory("floatMap", new FxEffectFactory(FloatMap))
       registerFactory("flood", new FxEffectFactory(Flood))
       registerFactory("gaussianBlur", new FxEffectFactory(GaussianBlur))
@@ -241,7 +268,7 @@ class FxBuilder extends SwingBuilder {
 
       registerFactory("lighting", new FxEffectFactory(Lighting))
       registerBeanFactory("distantLight", DistantLight)
-      registerBeanFactory("light", Light)
+      //registerBeanFactory("light", Light)
       registerBeanFactory("pointLight", PointLight)
       registerBeanFactory("spotLight", SpotLight)
 
@@ -250,6 +277,54 @@ class FxBuilder extends SwingBuilder {
       registerFactory("reflection", new FxEffectFactory(Reflection))
       registerFactory("sepiaTone", new FxEffectFactory(SepiaTone))
       registerFactory("shadow", new FxEffectFactory(Shadow))
+   }
+
+   void registerFxAnimation() {
+      registerBeanFactory("timeline", Timeline)
+      registerBeanFactory("keyFrame", KeyFrame)
+      registerFactory("keyFrames", new FxKeyFramesFactory())
+   }
+
+   void registerFxTransition() {
+      registerFactory("parallelTransition", new FxTransitionFactory(ParallelTransition))
+      registerFactory("sequentialTransition", new FxTransitionFactory(SequentialTransition))
+      registerBeanFactory("fadeTransition", FadeTransition)
+      registerBeanFactory("pathTransition", PathTransition)
+      registerBeanFactory("pauseTransition", PauseTransition)
+      registerBeanFactory("rotateTransition", RotateTransition)
+      registerBeanFactory("scaleTransition", ScaleTransition)
+      registerBeanFactory("translateTransition", TranslateTransition)
+   }
+
+   static boolean question( input ) {
+      if( input instanceof Map ) {
+         def title = input?.title?.toString()
+         def msg = input?.message?.toString() ?: ""
+         if(title) return Alert.question(title,msg)
+         else return Alert.question(msg)
+      } else {
+         return Alert.question(input.toString())
+      }
+   }
+
+   static boolean confirm( input ) {
+      if( input instanceof Map ) {
+         def title = input?.title?.toString()
+         def msg = input?.message?.toString() ?: ""
+         if(title) return Alert.confirm(title,msg)
+         else return Alert.confirm(msg)
+      } else {
+         return Alert.confirm(input.toString())
+      }
+   }
+
+   static void inform( input ) {
+      if( input instanceof Map ) {
+         def msg = input?.message?.toString() ?: ""
+         Alert.inform(msg)
+      } else {
+         Alert.inform(input.toString())
+      }
    }
 
    public void registerBeanFactory( String theName, Class beanClass ) {
@@ -280,7 +355,7 @@ class FxBuilder extends SwingBuilder {
       else super.registerFactory(name, groupName, new FxWrapperFactory(factory) )
    }
 
-   public static fxAttributeDelegate( builder, node, attributes ) {
+   static fxAttributeDelegate( builder, node, attributes ) {
       attributes.each { k, v ->
           if( !(node instanceof FXObject) ) return
           // let the wrapper handle property conversions
@@ -289,7 +364,7 @@ class FxBuilder extends SwingBuilder {
       }
    }
 
-   public static translateValue( node, attributes, name, value ) {
+   static translateValue( node, attributes, name, value ) {
       try {
          if( ObjectLocation.isAssignableFrom(node.locationType(name)) ) {
             attributes[name] = value instanceof Closure ? new ClosureFunction(value) : value

@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,11 @@
 
 package griffon.builder.fx.factory
 
+import javafx.scene.paint.*
+import com.sun.javafx.runtime.location.*
+import com.sun.javafx.runtime.sequence.*
+import com.sun.javafx.runtime.TypeInfo
+
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
@@ -26,5 +31,19 @@ class FxPaintFactory extends FxBeanFactory {
 
     FxPaintFactory( Class beanClass, boolean leaf ) {
         super( beanClass, leaf )
+    }
+
+    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+        if(!builder.parentContext.children) builder.parentContext.children = []
+        if(child instanceof Stop) builder.parentContext.children << child
+    }
+
+    public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
+        if(builder.context.children && node.hasLocation("stops")) {
+            node.location("stops").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
+            builder.context.children = []
+        }
+
+        super.onNodeCompleted( builder, parent, node )
     }
 }

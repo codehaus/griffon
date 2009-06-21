@@ -18,8 +18,10 @@ package griffon.builder.fx
 
 import com.sun.javafx.runtime.FXObject
 import com.sun.javafx.runtime.location.*
+import com.sun.javafx.runtime.sequence.*
 import java.beans.PropertyChangeListener
 import griffon.builder.fx.impl.*
+import javafx.animation.transition.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -74,7 +76,37 @@ class Fx {
                hasLocation: {String name -> Fx.fxHasLocation(delegate,name)},
                locationType: {String name -> Fx.fxGetLocationType(delegate,name)},
                addChangeListener: [{String name, Closure closure -> Fx.addClosureChangeAdapter(delegate, name, closure)},
-                                   {String name, PropertyChangeListener listener -> Fx.addPropertyChangeAdapter(delegate, name, listener)}]
+                                   {String name, PropertyChangeListener listener -> Fx.addPropertyChangeAdapter(delegate, name, listener)}],
+               removeChangeListener: [{String name, Closure closure -> Fx.removeClosureChangeAdapter(delegate, name, closure)},
+                                      {String name, PropertyChangeListener listener -> Fx.removePropertyChangeAdapter(delegate, name, listener)}]
+            ])
+        }
+
+        klass = ObjectLocation
+        if( !Fx.hasBeenEnhanced(klass) ) {
+            Fx.enhance(klass,[
+               onChange: { Closure closure -> Fx.addLocationChangeAdapter(delegate,closure)}
+            ])
+        }
+
+        klass = Sequence
+        if( !Fx.hasBeenEnhanced(klass) ) {
+            Fx.enhance(klass,[
+               getAt: { int index -> delegate.get(index)}
+            ])
+        }
+
+        klass = ParallelTransition
+        if( !Fx.hasBeenEnhanced(klass) ) {
+            Fx.enhance(klass,[
+               getAt: { int index -> delegate.location("content").get()[index]}
+            ])
+        }
+
+        klass = SequentialTransition
+        if( !Fx.hasBeenEnhanced(klass) ) {
+            Fx.enhance(klass,[
+               getAt: { int index -> delegate.location("content").get()[index]}
             ])
         }
     }
@@ -123,7 +155,7 @@ class Fx {
        return mp.type
     }
 
-    static fxHasLocationType(FXObject target, String name) {
+    static fxHasLocation(FXObject target, String name) {
        return fxGetLocationField(target, name) != null
     }
 
@@ -133,9 +165,26 @@ class Fx {
        variable.addChangeListener(new FxClosureChangeAdapter(target, propertyName, closure))
     }
 
+    static removeClosureChangeAdapter(FXObject target, String propertyName, Closure closure) {
+       if( !propertyName || !closure) return
+       def variable = fxGetLocation(target, propertyName)
+       variable.removeChangeListener(new FxClosureChangeAdapter(target, propertyName, closure))
+    }
+
     static addPropertyChangeAdapter(FXObject target, String propertyName, PropertyChangeListener listener) {
        if( !propertyName || !listener) return
        def variable = fxGetLocation(target, propertyName)
        variable.addChangeListener(new FxPropertyChangeAdapter(target, propertyName, listener))
+    }
+
+    static removePropertyChangeAdapter(FXObject target, String propertyName, PropertyChangeListener listener) {
+       if( !propertyName || !listener) return
+       def variable = fxGetLocation(target, propertyName)
+       variable.removeChangeListener(new FxPropertyChangeAdapter(target, propertyName, listener))
+    }
+
+    static addLocationChangeAdapter(ObjectLocation target, Closure closure) {
+       if( !closure) return
+       target.addChangeListener(new FxOnChangeListener(closure))
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,6 +53,12 @@ class FxWrapperFactory extends AbstractFxFactory {
     }
 
     public boolean onHandleNodeAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
+        try {
+           node.addTriggers$()
+           node.applyDefaults$()
+        } catch( MissingMethodException mme ) {
+           // ignore
+        }
         // find out if the wrapped object (if any) responds to some of the attributes
         if( builder.context.wrapped ) {
             def wrapped = node.getJComponent()

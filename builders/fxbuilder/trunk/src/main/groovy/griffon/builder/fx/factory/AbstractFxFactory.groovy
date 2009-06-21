@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,22 +26,31 @@ import com.sun.javafx.runtime.TypeInfo
 abstract class AbstractFxFactory extends AbstractFactory implements FxFactory {
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         try {
-           //node."applyTriggers\$"()
-           node."complete\$"()
+           node.complete$()
         } catch( MissingMethodException mme ) {
            // ignore
         }
-
-        /*try {
-           node."initialize\$"()
-        } catch( MissingMethodException mme ) {
-           // ignore
-        }*/
     }
 
     public boolean onHandleNodeAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
+        try {
+           node.addTriggers$()
+           node.applyDefaults$()
+        } catch( MissingMethodException mme ) {
+           // ignore
+        }
+        applyAttributes(builder, node, attributes)
+        return false
+    }
+
+    protected void applyAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
         attributes.each { key, value ->
             def attr = node.location(key)
+            switch(value) {
+                case BigDecimal:
+                    attr.set(value.floatValue())
+                    return
+            }
             switch(attr) {
                 case SequenceVariable:
                     switch(value) {
@@ -57,6 +66,5 @@ abstract class AbstractFxFactory extends AbstractFactory implements FxFactory {
                 default: attr.set(value)
             }
         }
-        return false
     }
 }

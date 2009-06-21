@@ -16,8 +16,8 @@
 
 package griffon.builder.fx.factory
 
-import javafx.scene.Group
 import javafx.scene.Node
+import javafx.scene.layout.ClipView
 import com.sun.javafx.runtime.location.*
 import com.sun.javafx.runtime.sequence.*
 import com.sun.javafx.runtime.TypeInfo
@@ -25,23 +25,23 @@ import com.sun.javafx.runtime.TypeInfo
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
-class FxGroupFactory extends FxBeanFactory {
-    FxGroupFactory() {
-        super( Group, false )
+class FxClipViewFactory extends FxBeanFactory {
+    FxClipViewFactory() {
+        super( ClipView, false )
     }
 
     public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
-        if(!builder.parentContext.children) builder.parentContext.children = []
-        builder.parentContext.children << child
+        if(child instanceof Node) parent.node = child
     }
 
+    /*
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         if( builder.context.children ) {
             node.location("content").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
-            builder.context.children = []
         }
 
         super.onNodeCompleted( builder, parent, node )
         //if(builder.parentFactory) builder.parentFactory.setChild(builder,parent,node)
     }
+    */
 }

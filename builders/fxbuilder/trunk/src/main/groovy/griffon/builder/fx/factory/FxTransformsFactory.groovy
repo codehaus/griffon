@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,38 +16,28 @@
 
 package griffon.builder.fx.factory
 
-import com.sun.scenario.scenegraph.JSGPanel
-import com.sun.scenario.scenegraph.fx.FXGroup
-import com.sun.scenario.scenegraph.fx.FXNode
+import javafx.scene.transform.Transform
+import com.sun.javafx.runtime.FXObject
+import com.sun.javafx.runtime.TypeInfo
+import com.sun.javafx.runtime.sequence.Sequences
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
-class FxSwingSceneFactory extends FxBeanFactory {
-    FxSwingSceneFactory() {
-        super(JSGPanel, false)
-    }
-
+class FxTransformsFactory extends AbstractFxFactory {
     public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
-        if( FactoryBuilderSupport.checkValueIsTypeNotString(value, name, beanClass) ) {
-            return value
-        }
-        beanClass.newInstance()
+        []
     }
 
     public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
-        if(!builder.parentContext.children) builder.parentContext.children = []
-        builder.parentContext.children << child
+        if( child instanceof Transform) parent << child
     }
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
-        if( builder.context.children ) {
-            FXGroup group = new FXGroup()
-            builder.context.children.each { child ->
-                group.add(child.impl_getFXNode())
-            }
-            node.scene = group
+        if(parent && (parent instanceof FXObject) && parent.hasLocation("transforms")) {
+             parent.location("transforms").setAsSequence(Sequences.fromCollection(TypeInfo.Object,node))
         }
+        super.onNodeCompleted( builder, parent, node )
     }
 }

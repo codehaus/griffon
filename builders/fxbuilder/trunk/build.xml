@@ -2,19 +2,25 @@
 <project name="fxbuilder" default="package" basedir=".">
    <property file="build.properties" />
 
+   <path id="javafx.classpath">
+      <fileset dir="${javafx.home}/lib/shared">
+         <include name="*.jar"/>
+      </fileset>
+      <fileset dir="${javafx.home}/lib/desktop">
+         <include name="*.jar"/>
+         <exclude name="rt15.jar"/>
+      </fileset>
+   </path>
+   <property name="javafx.compiler.classpath" refid="javafx.classpath" />
    <path id="build.classpath">
-     <fileset dir="${project.lib.dir}">
-       <include name="**/*.jar"/>
-     </fileset>
-     <fileset dir="${javafx.home}/lib/shared">
-       <include name="**/*.jar"/>
-     </fileset>
-     <fileset dir="${javafx.home}/lib/desktop">
-       <include name="**/*.jar"/>
-     </fileset>
+      <fileset dir="${project.lib.dir}">
+         <include name="**/*.jar"/>
+      </fileset>
+      <path refid="javafx.classpath"/>
    </path>
 
    <taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpathref="build.classpath" />
+   <taskdef resource="javafxc-ant-task.properties" classpathref="javafx.classpath" />
 
    <target name="clean"
           description="Clean the output directory">
@@ -22,7 +28,7 @@
    </target>
 
    <target name="compile"
-           description="Compile the code (Groovy)">
+           description="Compile the code">
      <mkdir dir="${project.build.output}" />
      <groovyc srcdir="${project.src.dir}"
               destdir="${project.build.output}"
@@ -35,7 +41,7 @@
    </target>
 
    <target name="package"
-           depends="clean, compile"
+           depends="clean, compile, test"
            description="Binary jar">
       <jar jarfile="${project.build.dir}/${project.final.name}.jar"
            basedir="${project.build.output}"
@@ -81,13 +87,21 @@
 
    <target name="compile-tests"
            depends="compile"
-           description="Compile the test code (Groovy)">
+           description="Compile the test code">
      <mkdir dir="${project.test.output}" />
+     <javafxc srcdir="${project.test.dir}"
+              destdir="${project.test.output}"
+              includes="**/*.fx"
+              compilerclasspath="${javafx.compiler.classpath}">
+        <classpath>
+           <path refid="javafx.classpath"/>
+        </classpath>
+     </javafxc>
      <groovyc srcdir="${project.test.dir}"
               destdir="${project.test.output}">
        <classpath>
-         <path refid="build.classpath" />
-         <pathelement location="${project.build.output}" />
+          <path refid="build.classpath" />
+          <pathelement location="${project.build.output}" />
           <pathelement location="${project.test.output}" />
        </classpath>
      </groovyc>
@@ -96,7 +110,7 @@
    <target name="test"
            depends="-junit-present, compile-tests" 
            if="junit.present"
-           description="Run the test cases (Groovy)">
+           description="Run the test cases">
      <mkdir dir="${project.test.reports}" />
      <junit printSummary="yes"
             haltonerror="true"

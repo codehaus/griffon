@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 the original author or authors.
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package griffon.builder.fx.factory
 
 import javafx.scene.Scene
 import javafx.scene.Node
+import com.sun.javafx.runtime.FXObject
 import com.sun.javafx.runtime.location.*
 import com.sun.javafx.runtime.sequence.*
 import com.sun.javafx.runtime.TypeInfo
@@ -38,10 +39,11 @@ class FxSceneFactory extends FxBeanFactory {
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         if( builder.context.children ) {
             node.location("content").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
+            builder.context.children = []
         }
 
         super.onNodeCompleted( builder, parent, node )
 
-         if( parent && parent.hasLocation("scene") ) parent.scene = node
+         if( parent && (parent instanceof FXObject) && parent.hasLocation("scene") ) parent.scene = node
     }
 }

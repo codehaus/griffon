@@ -16,35 +16,28 @@
 
 package griffon.builder.fx.factory
 
-import javafx.scene.CustomNode
+import javafx.animation.*
+import com.sun.javafx.runtime.FXObject
+import com.sun.javafx.runtime.TypeInfo
+import com.sun.javafx.runtime.sequence.Sequences
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
-class FxCustomNodeFactory extends AbstractFxFactory {
+class FxKeyFramesFactory extends AbstractFxFactory {
     public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
-        if( value instanceof CustomNode ) {
-            return value
-        } else if( value instanceof Class && CustomNode.isAssignableFrom(value) ) {
-            def node = value.getDeclaredConstructor([Boolean.TYPE] as Class[]).newInstance([true] as Object[])
-            try {
-                node.addTriggers$()
-                node.applyDefaults$()
-            } catch( MissingMethodException mme ) {
-                // ignore
-            }
-            return node
+        []
+    }
+
+    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+        parent << child
+    }
+
+    public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
+        if(parent && (parent instanceof FXObject) && parent.hasLocation("keyFrames")) {
+             parent.location("keyFrames").setAsSequence(Sequences.fromCollection(TypeInfo.Object,node))
         }
-        throw new RuntimeException("in $name value must be either an instance of CustomNode or a CustomNode subclass.")
-    }
-
-    public boolean onHandleNodeAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
-        applyAttributes(builder, node, attributes)
-        return false
-    }
-
-    public boolean isLeaf() {
-        return true
+        super.onNodeCompleted( builder, parent, node )
     }
 }
