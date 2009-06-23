@@ -16,9 +16,7 @@
 
 package griffon.builder.fx.factory
 
-import javafx.scene.Scene
 import javafx.scene.Node
-import com.sun.javafx.runtime.FXObject
 import com.sun.javafx.runtime.location.*
 import com.sun.javafx.runtime.sequence.*
 import com.sun.javafx.runtime.TypeInfo
@@ -26,24 +24,29 @@ import com.sun.javafx.runtime.TypeInfo
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
-class FxSceneFactory extends FxBeanFactory {
-    FxSceneFactory(Class sceneClass) {
-        super(sceneClass, false)
+class FxNodesContainerFactory extends FxBeanFactory {
+    private final String prop
+
+    FxNodesContainerFactory(Class beanClass) {
+        this(beanClass,"content")
+    }
+
+    FxNodesContainerFactory(Class beanClass, String prop) {
+        super( beanClass, false )
+        this.prop = prop
     }
 
     public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
         if(!builder.parentContext.children) builder.parentContext.children = []
-        builder.parentContext.children << child
+        if(child instanceof Node) builder.parentContext.children << child
     }
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         if( builder.context.children ) {
-            node.location("content").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
+            node.location(prop).setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
             builder.context.children = []
         }
 
         super.onNodeCompleted( builder, parent, node )
-
-         if( parent && (parent instanceof FXObject) && parent.hasLocation("scene") ) parent.scene = node
     }
 }

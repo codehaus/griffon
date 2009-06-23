@@ -31,6 +31,8 @@ import javafx.scene.transform.*
 import javafx.scene.effect.*
 import javafx.scene.effect.light.*
 import javafx.ext.swing.*
+import org.jfxtras.scene.shape.*
+import org.jfxtras.scene.border.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -238,6 +240,60 @@ public class FxBuilderTests extends GroovySwingTestCase {
             rotateTransition: RotateTransition,
             scaleTransition: ScaleTransition,
             translateTransition: TranslateTransition
+         ]
+         widgets.each{ name, expectedClass ->
+            def node = builder."$name"(id:"${name}Id".toString())
+            assert builder."${name}Id".class == expectedClass
+         }
+      }
+   }
+
+   void testJfxtrasShapes() {
+      testInEDT {
+         def widgets = [
+            almond: Almond,
+            arrow: Arrow,
+            asterisk: Asterisk,
+            astroid: Astroid,
+            ballon: Balloon,
+            cross: Cross,
+            donut: Donut,
+            etriangle: ETriangle,
+            itriangle: ITriangle,
+            rtriangle: RTriangle,
+            lauburu: Lauburu,
+            multiRoundRectangle: MultiRoundRectangle,
+            rays: Rays,
+            regularPolygon: RegularPolygon,
+            resizableEllipse: ResizableEllipse,
+            resizableRectangle: ResizableRectangle,
+            reuleauxTriangle: ReuleauxTriangle,
+            roundPin: RoundPin,
+            star2: Star2
+         ]
+         widgets.each{ name, expectedClass ->
+            def node = builder."$name"(id:"${name}Id".toString())
+            assert builder."${name}Id".class == expectedClass
+         }
+      }
+   }
+
+   void testJfxtrasBorders() {
+      testInEDT {
+         def widgets = [
+            bevelBorder: BevelBorder,
+            ellipseBorder: EllipseBorder,
+            emptyBorder: EmptyBorder,
+            etchedBorder: EtchedBorder,
+            frameBorder: FrameBorder,
+            imageBorder: ImageBorder,
+            lineBorder: LineBorder,
+            metallicBorder: MetallicBorder,
+            pipeBorder: PipeBorder,
+            roundedRectBorder: RoundedRectBorder,
+            shapeBorder: ShapeBorder,
+            softBevelBorder: SoftBevelBorder,
+            titledBorder: TitledBorder
          ]
          widgets.each{ name, expectedClass ->
             def node = builder."$name"(id:"${name}Id".toString())

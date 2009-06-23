@@ -17,31 +17,16 @@
 package griffon.builder.fx.factory
 
 import javafx.scene.Node
-import javafx.scene.layout.ClipView
-import com.sun.javafx.runtime.location.*
-import com.sun.javafx.runtime.sequence.*
-import com.sun.javafx.runtime.TypeInfo
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
-class FxClipViewFactory extends FxBeanFactory {
-    FxClipViewFactory() {
-        super( ClipView, false )
+class FxNodeContainerFactory extends FxBeanFactory {
+    FxNodeContainerFactory(Class beanClass) {
+        super(beanClass, false)
     }
 
     public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
         if(child instanceof Node) parent.node = child
     }
-
-    /*
-    public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
-        if( builder.context.children ) {
-            node.location("content").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
-        }
-
-        super.onNodeCompleted( builder, parent, node )
-        //if(builder.parentFactory) builder.parentFactory.setChild(builder,parent,node)
-    }
-    */
 }

@@ -37,6 +37,14 @@ import javafx.scene.transform.*
 import javafx.scene.effect.*
 import javafx.scene.effect.light.*
 import javafx.ext.swing.*
+import org.jfxtras.stage.*
+import org.jfxtras.scene.*
+import org.jfxtras.scene.shape.*
+import org.jfxtras.scene.border.*
+import org.jfxtras.scene.control.*
+import org.jfxtras.scene.effect.*
+import org.jfxtras.scene.image.*
+import org.jfxtras.scene.layout.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -92,8 +100,8 @@ class FxBuilder extends SwingBuilder {
 
    void registerFxSupport() {
       registerBeanFactory("cursor", Cursor)
-      registerFactory("group", new FxGroupFactory())
-      registerFactory("scene", new FxSceneFactory())
+      registerFactory("group", new FxNodesContainerFactory(Group))
+      registerFactory("scene", new FxSceneFactory(Scene))
       registerFactory("content", new ContentFactory())
       registerFactory("stage", new FxBeanFactory(Stage,false))
       registerFactory("customNode", new FxCustomNodeFactory())
@@ -130,7 +138,7 @@ class FxBuilder extends SwingBuilder {
       registerFactory("flow", new FxLayoutFactory(Flow))
       registerFactory("stack", new FxLayoutFactory(javafx.scene.layout.Stack))
       registerFactory("tile", new FxLayoutFactory(Tile))
-      registerFactory("clipView", new FxClipViewFactory())
+      registerFactory("clipView", new FxNodeContainerFactory(ClipView))
       registerBeanFactory("layoutInfo", LayoutInfo)
    }
 
@@ -294,6 +302,76 @@ class FxBuilder extends SwingBuilder {
       registerBeanFactory("rotateTransition", RotateTransition)
       registerBeanFactory("scaleTransition", ScaleTransition)
       registerBeanFactory("translateTransition", TranslateTransition)
+   }
+
+   void registerJfxtrasShapes() {
+      registerFactory("almond", new FxShapeFactory(Almond))
+      registerFactory("arrow", new FxShapeFactory(Arrow))
+      registerFactory("asterisk", new FxShapeFactory(Asterisk))
+      registerFactory("astroid", new FxShapeFactory(Astroid))
+      registerFactory("ballon", new FxShapeFactory(Balloon))
+      registerFactory("cross", new FxShapeFactory(Cross))
+      registerFactory("donut", new FxShapeFactory(Donut))
+      registerFactory("etriangle", new FxShapeFactory(ETriangle))
+      registerFactory("itriangle", new FxShapeFactory(ITriangle))
+      registerFactory("rtriangle", new FxShapeFactory(RTriangle))
+      registerFactory("lauburu", new FxShapeFactory(Lauburu))
+      registerFactory("multiRoundRectangle", new FxShapeFactory(MultiRoundRectangle))
+      registerFactory("rays", new FxShapeFactory(Rays))
+      registerFactory("regularPolygon", new FxShapeFactory(RegularPolygon))
+      registerFactory("resizableEllipse", new FxShapeFactory(ResizableEllipse))
+      registerFactory("resizableRectangle", new FxShapeFactory(ResizableRectangle))
+      registerFactory("reuleauxTriangle", new FxShapeFactory(ReuleauxTriangle))
+      registerFactory("roundPin", new FxShapeFactory(RoundPin))
+      registerFactory("star2", new FxShapeFactory(Star2))
+   }
+
+   void registerJfxtrasBorders() {
+      registerFactory("bevelBorder", new FxNodeContainerFactory(BevelBorder))
+      registerFactory("ellipseBorder", new FxNodeContainerFactory(EllipseBorder))
+      registerFactory("emptyBorder", new FxNodeContainerFactory(EmptyBorder))
+      registerFactory("etchedBorder", new FxNodeContainerFactory(EtchedBorder))
+      registerFactory("frameBorder", new FxNodeContainerFactory(FrameBorder))
+      registerFactory("imageBorder", new FxNodeContainerFactory(ImageBorder))
+      registerFactory("lineBorder", new FxNodeContainerFactory(LineBorder))
+      registerFactory("metallicBorder", new FxNodeContainerFactory(MetallicBorder))
+      registerFactory("pipeBorder", new FxNodeContainerFactory(PipeBorder))
+      registerFactory("roundedRectBorder", new FxNodeContainerFactory(RoundedRectBorder))
+      registerFactory("shapeBorder", new FxNodeContainerFactory(ShapeBorder))
+      registerFactory("softBevelBorder", new FxNodeContainerFactory(SoftBevelBorder))
+      registerFactory("titledBorder", new FxNodeContainerFactory(TitledBorder))
+   }
+
+   void registerJfxtrasImage() {
+      registerBeanFactory("imageFix", ImageFix)
+      registerBeanFactory("resizableImageView", ResizableImageView)
+   }
+
+   void registerJfxtrasEffects() {
+      registerFactory("rotationEffect", new FxEffectFactory(RotationEffect))
+   }
+
+   void registerJfxtrasControls() {
+      registerFactory("scrollView", new FxNodeContainerFactory(ScrollView))
+   }
+
+   void registerJfxtrasLayout() {
+      registerFactory("cell", new FxNodeContainerFactory(Cell))
+      registerFactory("row", new FxNodesContainerFactory(Row,"nodes"))
+      registerFactory("defaultLayout", new FxLayoutFactory(DefaultLayout))
+      registerBeanFactory("extendedLayoutInfo", ExtendedLayoutInfo)
+      registerFactory("grid", new JFxGridFactory())
+      registerBeanFactory("gridLayoutInfo", GridLayoutInfo)
+      registerFactory("migLayout", new FxLayoutFactory(MigLayout))
+      registerBeanFactory("migNodeLayoutInfo", MigNodeLayoutInfo)
+      registerFactory("resizableHBox", new FxLayoutFactory(ResizableHBox))
+      registerFactory("resizableVBox", new FxLayoutFactory(ResizableVBox))
+   }
+
+   void registerJfxtras() {
+      registerFactory("jfxstage", new FxBeanFactory(JFXStage,false))
+      registerFactory("jfxdialog", new FxBeanFactory(JFXDialog,false))
+      registerFactory("scene", new FxSceneFactory(ResizableScene))
    }
 
    static boolean question( input ) {
