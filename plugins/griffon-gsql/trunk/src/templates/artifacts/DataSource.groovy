@@ -12,7 +12,7 @@ pool {
 environments {
     development {
         dataSource {
-            dbCreate = "create" // one of 'create', 'create-drop'
+            dbCreate = "create" // one of 'create', 'create-drop', 'skip'
             url = "jdbc:hsqldb:mem:devDB"
         }
     }
@@ -24,7 +24,7 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "create-drop"
+            dbCreate = "skip"
             url = "jdbc:hsqldb:file:prodDb;shutdown=true"
         }
     }

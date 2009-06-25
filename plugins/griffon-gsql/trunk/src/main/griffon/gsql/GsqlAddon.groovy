@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2005 the original author or authors.
+ * Copyright 2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,6 @@ class GsqlAddon {
    private static final String ENVIRONMENT_DEV_LONG = "development"
    private static final String ENVIRONMENT_PROD_LONG = "production"
 
-
    def addonInit = { app ->
       app.addApplicationEventListener(this)
    }
@@ -59,7 +58,7 @@ class GsqlAddon {
       try {
          connection = dataSource.getConnection()
          bootstrap.destroy(new Sql(connection))
-         def dbName =connection.metaData.databaseProductName
+         def dbName = connection.metaData.databaseProductName
          if(dbName == 'HSQL Database Engine') {
             connection.createStatement().executeUpdate('SHUTDOWN')
          }
@@ -73,10 +72,10 @@ class GsqlAddon {
       instance.metaClass.withSql = this.withSql
    }
 
- // ======================================================
+   // ======================================================
 
    private parseConfig() {
-      String env = System.getProperty(ENVIRONMENT, ENVIRONMENT_DEV)
+      String env = System.getProperty(ENVIRONMENT, ENVIRONMENT_PROD)
       if(env == ENVIRONMENT_DEV) env = ENVIRONMENT_DEV_LONG 
       if(env == ENVIRONMENT_PROD) env = ENVIRONMENT_PROD_LONG 
       def dataSourceClass = this.class.classLoader.loadClass("DataSource")
@@ -86,24 +85,31 @@ class GsqlAddon {
    private void createDataSource(config) {
       if(dataSource) return
       
-//      if(config.dataSource.pooled){
-         Class.forName(config.dataSource.driverClassName.toString())
-         ObjectPool connectionPool = new GenericObjectPool(null)
+      Class.forName(config.dataSource.driverClassName.toString())
+      ObjectPool connectionPool = new GenericObjectPool(null)
+      if(config.dataSource.pooled) {
          if(config?.pool?.maxWait != null)  connectionPool.maxWait = config.pool.maxWait
          if(config?.pool?.maxIdle != null)  connectionPool.maxIdle = config.pool.maxIdle
          if(config?.pool?.maxActive != null)  connectionPool.maxActive = config.pool.maxActive
+      }
 
-         ConnectionFactory connectionFactory = new DriverManagerConnectionFactory(
-           config.dataSource.url.toString(),
-           config.dataSource.username.toString(),
-           config.dataSource.password.toString()
-         )
-         PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,connectionPool,null,null,false,true)
-         dataSource = new PoolingDataSource(connectionPool)
-//      }
+      String url = config.dataSource.url.toString()
+      String username = config.dataSource.username.toString()
+      String password = config.dataSource.password.toString()
+      ConnectionFactory connectionFactory = null
+      if( username ) {
+         connectionFactory = new DriverManagerConnectionFactory(url, username, password)
+      } else {
+         connectionFactory = new DriverManagerConnectionFactory(url, null)
+      }
+      PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,connectionPool,null,null,false,true)
+      dataSource = new PoolingDataSource(connectionPool)
    }
 
    private void createSchema(config) {
+      def dbCreate = config.dataSource?.dbCreate.toString()
+      if(dbCreate == "skip") return
+
       TypeMap typeMap = new TypeMap()
       Binding binding = new Binding()
       binding.setVariable("builder", new RelationalBuilder(typeMap))
@@ -115,7 +121,7 @@ class GsqlAddon {
       SqlGenerator sqlGenerator = new SqlGenerator(typeMap,System.getProperty("line.separator","\n"))
       StringWriter writer = new StringWriter()
       sqlGenerator.writer = writer
-      boolean drop = config.dataSource?.dbCreate == "create-drop"
+      boolean drop = dbCreate == "create-drop"
       sqlGenerator.createDatabase(schema,drop)
       writer.flush()
       withSql { sql -> sql.execute(writer.toString()) }

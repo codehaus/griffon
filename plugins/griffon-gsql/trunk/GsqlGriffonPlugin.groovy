@@ -1,5 +1,5 @@
 class GsqlGriffonPlugin {
-    def version = 0.1-SNAPSHOT
+    def version = '0.1-SNAPSHOT'
     def canBeGlobal = false
     def dependsOn = [:]
 
