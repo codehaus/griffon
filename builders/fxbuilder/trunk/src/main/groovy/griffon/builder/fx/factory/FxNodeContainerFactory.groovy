@@ -22,11 +22,24 @@ import javafx.scene.Node
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
 class FxNodeContainerFactory extends FxBeanFactory {
+    private final String propertyName
+    private final Class propertyClass
+
     FxNodeContainerFactory(Class beanClass) {
+        this(beanClass, "node", Node)
+    }
+
+    FxNodeContainerFactory(Class beanClass, String propertyName) {
+        this(beanClass, propertyName, Node)
+    }
+
+    FxNodeContainerFactory(Class beanClass, String propertyName, Class propertyClass) {
         super(beanClass, false)
+        this.propertyName = propertyName
+        this.propertyClass = propertyClass
     }
 
     public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
-        if(child instanceof Node) parent.node = child
+        if(propertyClass.isAssignableFrom(child?.class)) parent.location(propertyName).set(child)
     }
 }

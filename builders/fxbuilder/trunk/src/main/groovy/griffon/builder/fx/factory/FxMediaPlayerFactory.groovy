@@ -16,8 +16,7 @@
 
 package griffon.builder.fx.factory
 
-import javafx.scene.Scene
-import javafx.scene.Node
+import javafx.scene.media.*
 import com.sun.javafx.runtime.FXObject
 import com.sun.javafx.runtime.location.*
 import com.sun.javafx.runtime.sequence.*
@@ -26,24 +25,37 @@ import com.sun.javafx.runtime.TypeInfo
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
-class FxSceneFactory extends FxBeanFactory {
-    FxSceneFactory(Class sceneClass) {
-        super(sceneClass, false)
+class FxMediaPlayerFactory extends FxBeanFactory {
+    FxMediaPlayerFactory() {
+        super(MediaPlayer, false)
     }
 
     public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
-        if(!builder.parentContext.children) builder.parentContext.children = []
-        builder.parentContext.children << child
+        switch(child) {
+           case Media:
+              parent.location("media").set(child)
+              break
+           case Track:
+              if(!builder.parentContext.tracks) builder.parentContext.tracks = []
+              builder.parentContext.tracks << child
+              break
+           case MediaTimer:
+              if(!builder.parentContext.timers) builder.parentContext.timers = []
+              builder.parentContext.timers << child
+              break
+         }
     }
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
-        if( builder.context.children ) {
-            node.location("content").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
-            builder.context.children = []
+        if( builder.context.tracks ) {
+            node.location("enabledTracks").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.tracks))
+            builder.context.tracks = []
+        }
+        if( builder.context.timers ) {
+            node.location("timers").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.timers))
+            builder.context.timers = []
         }
 
         super.onNodeCompleted( builder, parent, node )
-
-        if( parent && (parent instanceof FXObject) && parent.hasLocation("scene") ) parent.scene = node
     }
 }

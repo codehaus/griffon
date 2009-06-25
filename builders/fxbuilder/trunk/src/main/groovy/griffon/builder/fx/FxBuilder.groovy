@@ -36,6 +36,7 @@ import javafx.scene.image.*
 import javafx.scene.transform.*
 import javafx.scene.effect.*
 import javafx.scene.effect.light.*
+import javafx.scene.media.*
 import javafx.ext.swing.*
 import org.jfxtras.stage.*
 import org.jfxtras.scene.*
@@ -302,6 +303,16 @@ class FxBuilder extends SwingBuilder {
       registerBeanFactory("rotateTransition", RotateTransition)
       registerBeanFactory("scaleTransition", ScaleTransition)
       registerBeanFactory("translateTransition", TranslateTransition)
+   }
+
+   void registerFxMedia() {
+      registerFactory("mediaView", new FxNodeContainerFactory(MediaView, "mediaPlayer", MediaPlayer))
+      registerFactory("mediaPlayer", new FxMediaPlayerFactory())
+      registerFactory("media", new FxNodesContainerFactory(Media, "tracks", Track))
+      registerBeanFactory("mediaTimer", MediaTimer)
+      registerBeanFactory("audioTrack", AudioTrack)
+      registerBeanFactory("subtitleTrack", SubtitleTrack)
+      registerBeanFactory("videoTrack", VideoTrack)
    }
 
    void registerJfxtrasShapes() {

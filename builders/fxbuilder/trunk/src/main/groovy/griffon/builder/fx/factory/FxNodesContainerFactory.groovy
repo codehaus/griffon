@@ -25,25 +25,31 @@ import com.sun.javafx.runtime.TypeInfo
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
 class FxNodesContainerFactory extends FxBeanFactory {
-    private final String prop
+    private final String propertyName
+    private final String propertyClass
 
     FxNodesContainerFactory(Class beanClass) {
-        this(beanClass,"content")
+        this(beanClass, "content", Node)
     }
 
-    FxNodesContainerFactory(Class beanClass, String prop) {
+    FxNodesContainerFactory(Class beanClass, String propertyName) {
+        this(beanClass, propertyName, Node)
+    }
+
+    FxNodesContainerFactory(Class beanClass, String propertyName, Class propertyClass) {
         super( beanClass, false )
-        this.prop = prop
+        this.propertyName = propertyName
+        this.propertyClass = propertyClass
     }
 
     public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
         if(!builder.parentContext.children) builder.parentContext.children = []
-        if(child instanceof Node) builder.parentContext.children << child
+        if(propertyClass.isAssignableFrom(child?.class)) builder.parentContext.children << child
     }
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         if( builder.context.children ) {
-            node.location(prop).setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
+            node.location(propertyName).setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
             builder.context.children = []
         }
 
