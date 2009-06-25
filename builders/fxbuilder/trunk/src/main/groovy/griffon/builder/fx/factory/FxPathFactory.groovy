@@ -30,7 +30,7 @@ class FxPathFactory extends FxBeanFactory {
         super( Path, false )
     }
 
-    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+    public void doSetChild( FactoryBuilderSupport builder, Object parent, Object child ) {
         if(!builder.parentContext.children) builder.parentContext.children = []
         if(child instanceof PathElement) builder.parentContext.children << child
     }
@@ -38,9 +38,9 @@ class FxPathFactory extends FxBeanFactory {
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         if( builder.context.children ) {
             node.location("elements").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
+            builder.context.children = []
         }
 
         super.onNodeCompleted( builder, parent, node )
-        //if(builder.parentFactory) builder.parentFactory.setChild(builder,parent,node)
     }
 }

@@ -39,7 +39,7 @@ class FxNodeContainerFactory extends FxBeanFactory {
         this.propertyClass = propertyClass
     }
 
-    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+    public void doSetChild( FactoryBuilderSupport builder, Object parent, Object child ) {
         if(propertyClass.isAssignableFrom(child?.class)) parent.location(propertyName).set(child)
     }
 }

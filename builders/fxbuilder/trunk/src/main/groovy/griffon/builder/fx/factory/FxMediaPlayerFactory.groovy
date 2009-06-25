@@ -30,7 +30,7 @@ class FxMediaPlayerFactory extends FxBeanFactory {
         super(MediaPlayer, false)
     }
 
-    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+    public void doSetChild( FactoryBuilderSupport builder, Object parent, Object child ) {
         switch(child) {
            case Media:
               parent.location("media").set(child)

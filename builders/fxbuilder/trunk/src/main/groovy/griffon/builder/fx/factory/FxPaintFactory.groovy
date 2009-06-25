@@ -33,7 +33,7 @@ class FxPaintFactory extends FxBeanFactory {
         super( beanClass, leaf )
     }
 
-    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+    public void doSetChild( FactoryBuilderSupport builder, Object parent, Object child ) {
         if(!builder.parentContext.children) builder.parentContext.children = []
         if(child instanceof Stop) builder.parentContext.children << child
     }

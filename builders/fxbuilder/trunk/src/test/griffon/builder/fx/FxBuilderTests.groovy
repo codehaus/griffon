@@ -423,6 +423,21 @@ public class FxBuilderTests extends GroovySwingTestCase {
          }
       }
    }
+
+   void testImplicitSwingWidget() {
+       testInEDT {
+           builder.registerFactory("comboBox", new groovy.swing.factory.ComboBoxFactory())
+
+           def node = builder.listView {
+               comboBox(id:'swingCombo', items:['a','b','c'])
+           }
+           assert node
+           def items = node.location("items").get()
+           assert items
+           assert items[0] instanceof Node
+           assert builder.swingCombo instanceof javax.swing.JComboBox
+       }
+   }
 /*
    void testPaintsAndChildren() {
       testInEDT {
@@ -458,18 +473,18 @@ public class FxBuilderTests extends GroovySwingTestCase {
         testInEDT {
             builder.stage(title: "Griffon + FX", width: 240, height: 84) {
                 scene {
-//                     vbox {
-//                         swingButton(text: "Click me!", id: "button1",
-//                             width: 230, action: {counter(button1)})
-//                         swingButton(text: "Click me!", id: "button2",
-//                             width: 230, action: {counter(button2)})
-//                     }
-//                     customNode(HelloWorldCustomNode, str: "Groovy")
-//                      hbox(spacing: 10) {
-//                         button(text: "Button1", action: {println "Button1"})
-//                         button(text: "Button2", action: {println "Button2"})
-//                      }
-                    listView(height: 100, items: [ "one", "two", "three", "four" ])
+                    vbox {
+                        swingButton(text: "Click me!", id: "button1",
+                            width: 230, action: {counter(button1)})
+                        swingButton(text: "Click me!", id: "button2",
+                            width: 230, action: {counter(button2)})
+                        customNode(HelloWorldCustomNode, str: "Groovy")
+                        hbox(spacing: 10) {
+                            button(text: "Button1", action: {println "Button1"})
+                            button(text: "Button2", action: {println "Button2"})
+                        }
+                    }
+                    //listView(height: 100, items: [ "one", "two", "three", "four" ])
                 }
             }
         }

@@ -46,6 +46,7 @@ import org.jfxtras.scene.control.*
 import org.jfxtras.scene.effect.*
 import org.jfxtras.scene.image.*
 import org.jfxtras.scene.layout.*
+import org.jfxtras.scene.media.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -60,7 +61,7 @@ class FxBuilder extends SwingBuilder {
    }
 
    void registerFxSwing() {
-      //registerFactory("swingScene", new FxSwingSceneFactory())
+      registerFactory("swingScene", new FxSwingSceneFactory(Scene))
       registerBeanFactory("swingButton", SwingButton)
       registerBeanFactory("swingCheckBox", SwingCheckBox)
       registerBeanFactory("swingComboBox", SwingComboBox)
@@ -133,7 +134,6 @@ class FxBuilder extends SwingBuilder {
    }
 
    void registerFxLayout() {
-      // TODO resolve clash with SwingBuilder[hbox,vbox]
       registerFactory("hbox", new FxLayoutFactory(HBox))
       registerFactory("vbox", new FxLayoutFactory(VBox))
       registerFactory("flow", new FxLayoutFactory(Flow))
@@ -207,15 +207,8 @@ class FxBuilder extends SwingBuilder {
       "royalBlue", "saddleBrown", "salmon", "sandyBrown", "seaGreen", "seaShell", "sienna", "silver",
       "skyBlue", "slateBlue", "slateGray", "slateGrey", "snow", "springGreen", "steelBlue", "tan",
       "teal", "thistle", "tomato", "turquoise", "violet", "wheat", "white", "whiteSmoke", "yellow", "yellowGreen"].each {
-         // setVariable(it, Color."\$${it.toUpperCase()}".get())
          setVariable("color_$it", Color."\$${it.toUpperCase()}"/*.get()*/)
       }
-
-//       registerExplicitMethod("color", Color.&color)
-//       registerExplicitMethod("rgb", Color.&rgb)
-//       registerExplicitMethod("hsb", Color.&hsb)
-//       registerExplicitMethod("web", Color.&web)
-//       registerExplicitMethod("fromAWTColor", Color.&fromAWTColor)
 
       setVariable("cycleMethod_NO_CYCLE", CycleMethod.NO_CYCLE)
       setVariable("cycleMethod_REFLECT", CycleMethod.REFLECT)
@@ -379,10 +372,15 @@ class FxBuilder extends SwingBuilder {
       registerFactory("resizableVBox", new FxLayoutFactory(ResizableVBox))
    }
 
+
+   void registerJfxtrasMedia() {
+      registerFactory("resizableMediaView", new FxNodeContainerFactory(ResizableMediaView, "mediaPlayer", MediaPlayer))
+   }
+
    void registerJfxtras() {
       registerFactory("jfxstage", new FxBeanFactory(JFXStage,false))
       registerFactory("jfxdialog", new FxBeanFactory(JFXDialog,false))
-      registerFactory("scene", new FxSceneFactory(ResizableScene))
+      registerFactory("resizableScene", new FxSceneFactory(ResizableScene))
    }
 
    static boolean question( input ) {
@@ -421,7 +419,6 @@ class FxBuilder extends SwingBuilder {
          registerFactory(theName, new FxBeanFactory(beanClass))
       } else {
          super.registerBeanFactory(theName,beanClass)
-         registerFactory(theName, factories[theName])
       }
    }
 
@@ -430,25 +427,12 @@ class FxBuilder extends SwingBuilder {
          registerFactory(nodeName, groupName, new FxBeanFactory(klass))
       } else {
          super.registerBeanFactory(nodeName, groupName, klass)
-         registerFactory(nodeName, groupName, factories[nodeName])
       }
    }
 
-   public void registerFactory( String name, Factory factory ) {
-      if( factory instanceof FxFactory ) super.registerFactory(name, factory)
-      else super.registerFactory(name, new FxWrapperFactory(factory) )
-   }
-
-   public void registerFactory( String name, String groupName, Factory factory ) {
-      if( factory instanceof FxFactory ) super.registerFactory(name, groupName, factory)
-      else super.registerFactory(name, groupName, new FxWrapperFactory(factory) )
-   }
-
    static fxAttributeDelegate( builder, node, attributes ) {
+      if( !(node instanceof FXObject) ) return
       attributes.each { k, v ->
-          if( !(node instanceof FXObject) ) return
-          // let the wrapper handle property conversions
-          if( builder.context.wrapped ) return
           translateValue( node, attributes, k, v )
       }
    }

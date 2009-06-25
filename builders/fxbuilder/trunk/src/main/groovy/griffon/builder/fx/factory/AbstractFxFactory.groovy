@@ -19,6 +19,8 @@ package griffon.builder.fx.factory
 import com.sun.javafx.runtime.location.*
 import com.sun.javafx.runtime.sequence.*
 import com.sun.javafx.runtime.TypeInfo
+import javax.swing.JComponent
+import javafx.ext.swing.SwingComponent
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
@@ -41,6 +43,14 @@ abstract class AbstractFxFactory extends AbstractFactory implements FxFactory {
         }
         applyAttributes(builder, node, attributes)
         return false
+    }
+
+    public final void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+        doSetChild(builder, parent, wrap(child))
+    }
+
+    public void doSetChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+
     }
 
     protected void applyAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
@@ -66,5 +76,9 @@ abstract class AbstractFxFactory extends AbstractFactory implements FxFactory {
                 default: attr.set(value)
             }
         }
+    }
+
+    static wrap( object ) {
+        object instanceof JComponent ? SwingComponent.wrap(object) : object
     }
 }

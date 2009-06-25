@@ -31,7 +31,7 @@ class FxSceneFactory extends FxBeanFactory {
         super(sceneClass, false)
     }
 
-    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+    public void doSetChild( FactoryBuilderSupport builder, Object parent, Object child ) {
         if(!builder.parentContext.children) builder.parentContext.children = []
         builder.parentContext.children << child
     }

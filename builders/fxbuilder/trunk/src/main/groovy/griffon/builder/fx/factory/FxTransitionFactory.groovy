@@ -29,7 +29,7 @@ class FxTransitionFactory extends FxBeanFactory {
         super(beanClass, false )
     }
 
-    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+    public void doSetChild( FactoryBuilderSupport builder, Object parent, Object child ) {
         if(!builder.parentContext.children) builder.parentContext.children = []
         if( child instanceof Transition) builder.parentContext.children << child
     }

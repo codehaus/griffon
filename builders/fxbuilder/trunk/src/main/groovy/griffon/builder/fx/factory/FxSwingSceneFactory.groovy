@@ -16,7 +16,9 @@
 
 package griffon.builder.fx.factory
 
+import javafx.scene.Scene
 import javafx.scene.Node
+import com.sun.javafx.runtime.FXObject
 import com.sun.javafx.runtime.location.*
 import com.sun.javafx.runtime.sequence.*
 import com.sun.javafx.runtime.TypeInfo
@@ -24,35 +26,25 @@ import com.sun.javafx.runtime.TypeInfo
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
-class FxNodesContainerFactory extends FxBeanFactory {
-    private final String propertyName
-    private final String propertyClass
-
-    FxNodesContainerFactory(Class beanClass) {
-        this(beanClass, "content", Node)
-    }
-
-    FxNodesContainerFactory(Class beanClass, String propertyName) {
-        this(beanClass, propertyName, Node)
-    }
-
-    FxNodesContainerFactory(Class beanClass, String propertyName, Class propertyClass) {
-        super( beanClass, false )
-        this.propertyName = propertyName
-        this.propertyClass = propertyClass
+class FxSwingSceneFactory extends FxBeanFactory {
+    FxSwingSceneFactory(Class sceneClass) {
+        super(sceneClass, false)
     }
 
     public void doSetChild( FactoryBuilderSupport builder, Object parent, Object child ) {
         if(!builder.parentContext.children) builder.parentContext.children = []
-        if(propertyClass.isAssignableFrom(child?.class)) builder.parentContext.children << child
+        builder.parentContext.children << child
     }
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
         if( builder.context.children ) {
-            node.location(propertyName).setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
+            node.location("content").setAsSequence(Sequences.fromCollection(TypeInfo.Object,builder.context.children))
             builder.context.children = []
         }
 
-        super.onNodeCompleted( builder, parent, node )
+        super.onNodeCompleted(builder, parent, node)
+
+        def swingScene = node.impl_getPeer()
+        if(builder.parentFactory) builder.parentFactory.setChild(builder, parent, swingScene.scenePanel)
     }
 }

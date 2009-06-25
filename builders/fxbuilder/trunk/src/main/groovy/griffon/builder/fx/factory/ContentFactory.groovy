@@ -30,7 +30,7 @@ class ContentFactory extends AbstractFxFactory {
         []
     }
 
-    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
+    public void doSetChild( FactoryBuilderSupport builder, Object parent, Object child ) {
         parent << child
     }
 
