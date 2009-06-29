@@ -16,21 +16,39 @@
 
 package griffon.builder.trident.impl
 
+import org.pushingpixels.trident.Timeline
+import org.pushingpixels.trident.interpolator.PropertyInterpolator
+
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
 class InterpolatedProperty {
-   final String name
+   final Object target
+   final String property
    final def from
    final def to
+   final PropertyInterpolator interpolator
 
-   InterpolatedProperty( String name, from, to ) {
-      this.name = name
+   InterpolatedProperty( Object target, String property, from, to, PropertyInterpolator interpolator ) {
+      this.target = target
+      this.property = property
       this.from = from
       this.to = to
+      this.interpolator = interpolator
    }
 
    public String toString() {
-      return "[name: $name, from: $from, to: $to]"
+      return "[property: property, from: $from, to: $to, interpolator: $interpolator, target: $target]"
+   }
+
+   public void addToTimeline( Timeline timeline ) {
+      def args = []
+      if(target) args << target
+      args << property
+      if(from != null ) args << from
+      args << to
+      if(interpolator) args << interpolator
+
+      from != null ? timeline.addPropertyToInterpolate(*args) : timeline.addPropertyToInterpolateTo(*args)
    }
 }

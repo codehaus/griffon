@@ -16,7 +16,6 @@
 
 package griffon.builder.trident.factory
 
-import java.awt.Color
 import org.pushingpixels.trident.*
 import org.pushingpixels.trident.callback.*
 import org.pushingpixels.trident.ease.*
@@ -43,9 +42,37 @@ class TimelineScenarioFactory extends AbstractFactory {
    }
 
    public void setChild( FactoryBuilderSupport builder, Object parent, Object child ) {
-      if( child instanceof Timeline ) {
+      if( child instanceof Timeline || child instanceof TimelineRunnable ) {
          parent.addScenarioActor(child)
       } else if( child instanceof TimelineScenarioCallback ) {
+         parent.addCallback(child)
+      }
+   }
+}
+
+/**
+ * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ */
+class TimelineRunnableFactory extends AbstractFactory {
+   public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+            throws InstantiationException, IllegalAccessException {
+      if( value instanceof TimelineRunnable ) {
+         return value
+      }
+      return new MutableTimelineRunnable(builder)
+   }
+
+   public boolean isHandlesNodeChildren() {
+      return true
+   }
+
+   public boolean onNodeChildren( FactoryBuilderSupport builder, Object node, Closure childContent ) {
+      node.closure = childContente
+      return false
+   }
+
+   public void setParent(FactoryBuilderSupport builder, Object parent, Object child) {
+      if( parent instanceof Timeline ) {
          parent.addCallback(child)
       }
    }
@@ -73,11 +100,4 @@ class TimelineScenarioCallbackFactory extends AbstractFactory {
       childContent()
       return false
    }
-/*
-   public void setParent(FactoryBuilderSupport builder, Object parent, Object child) {
-      if( parent instanceof TimelineScenario ) {
-         parent.addCallback(child)
-      }
-   }
-*/
 }

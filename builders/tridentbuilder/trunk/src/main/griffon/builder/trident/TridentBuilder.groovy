@@ -46,6 +46,8 @@ public class TridentBuilder extends FactoryBuilderSupport {
       registerFactory("timeline", new TimelineFactory())
       registerFactory("timelineCallback", new TimelineCallbackFactory())
       registerFactory("interpolatedProperty", new InterpolatedPropertyFactory())
+      registerFactory("keyFrames", new KeyFramesFactory())
+      registerFactory("keyFrame", new KeyFrameFactory())
       registerFactory("linearEase", new EaseFactory(Linear))
       registerFactory("sineEase", new EaseFactory(Sine))
       registerFactory("splineEase", new SplineEaseFactory())
@@ -55,5 +57,8 @@ public class TridentBuilder extends FactoryBuilderSupport {
       registerFactory("sequenceScenario",  new TimelineScenarioFactory(TimelineScenario.Sequence))
       registerFactory("rendevouzScenario", new TimelineScenarioFactory(TimelineScenario.RendezvousSequence))
       registerFactory("timelineScenarioCallback", new TimelineScenarioCallbackFactory())
+      //
+      registerFactory("swingRepaintTimeline", new SwingRepaintTimelineFactory())
+      registerFactory("timelineRunnable", new TimelineRunnableFactory())
    }
 }

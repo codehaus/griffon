@@ -16,10 +16,11 @@
 
 package griffon.builder.trident.factory
 
-import java.awt.Color
 import org.pushingpixels.trident.*
 import org.pushingpixels.trident.callback.*
 import org.pushingpixels.trident.ease.*
+import org.pushingpixels.trident.swing.*
+import org.pushingpixels.trident.interpolator.*
 import griffon.builder.trident.impl.*
 
 /**
@@ -33,24 +34,14 @@ class TimelineFactory extends AbstractFactory {
       }
 
       if( !value ) {
-         if( !attributes.containsKey("target") ) {
-            throw new RuntimeException("In $name you must specify either a value or a target: property.")
-         }
          value = attributes.remove("target")
       }
 
-      TridentFactoryUtils.processTimelineKind(builder, name, attributes)
-      TimelineKind kind = attributes.remove("kind")
-      kind ? new Timeline(kind,value) : new Timeline(value)
+      return new Timeline(value)
    }
 
    public boolean onHandleNodeAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
-      if( attributes.containsKey("loopCount") && attributes.containsKey("repeatBehavior") ) {
-         def loopCount = attributes.remove("loopCount")
-         TridentFactoryUtils.processRepeatBehavior(builder, builder.currentName, attributes)
-         Timeline.RepeatBehavior repeatBehavior = attributes.remove("repeatBehavior")
-         node.loop(loopCount, repeatBehavior)
-      }
+
       builder.context.start = attributes.remove("start")
       return true
    }
@@ -59,6 +50,25 @@ class TimelineFactory extends AbstractFactory {
       if(builder.context.start) {
          node.play()
       }
+   }
+}
+
+
+/**
+ * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ */
+class SwingRepaintTimelineFactory extends TimelineFactory {
+   public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+            throws InstantiationException, IllegalAccessException {
+      if( value instanceof SwingRepaintTimeline ) {
+         return value
+      }
+
+      if( !value ) {
+         value = attributes.remove("target")
+      }
+
+      return new SwingRepaintTimeline(value, attributes.remove("zone")/*Rectangle*/)
    }
 }
 
@@ -101,32 +111,79 @@ class InterpolatedPropertyFactory extends AbstractFactory {
       if( value instanceof InterpolatedProperty ) {
          return value
       }
-      if( !value ) {
-         if( !attributes.remove("name") ) {
-            throw new RuntimeException("In $name you must specify either a value or a name: property.")
-         }
-         value = attributes.remove("name")
+
+      def target = value
+      def property = attributes.remove("property")
+      if( !property ) {
+         target = null
+         property = value?.toString() ?: property.toString()
       }
-      value = value.toString() // trigger GString conversion
-      if( attributes.from == null ) {
-         throw new RuntimeException("In $name you must specify a value for from: property.")
-      }
-      if( attributes.to == null ) {
-         throw new RuntimeException("In $name you must specify a value for to: property.")
-      }
-      return new InterpolatedProperty(value, attributes.remove("from"), attributes.remove("to"))
+      if( !property ) throw new RuntimeException("In $name you must specify either a value or a property: attribute.")
+      def from = attributes.remove("from")
+      def to = attributes.remove("to")
+      if( to == null ) throw new RuntimeException("In $name you must specify a value for the to: attribute")
+      def interpolator = attributes.remove("interpolator")
+
+      return new InterpolatedProperty(target, property, from, to, interpolator)
    }
 
    public void setParent(FactoryBuilderSupport builder, Object parent, Object child) {
       if( parent instanceof Timeline ) {
-         if( child.from instanceof Color && child.to instanceof Color ) {
-            parent.addPropertyToInterpolate(child.name, child.from, child.to)
-         } else if( child.from instanceof Number && child.to instanceof Number ) {
-            parent.addPropertyToInterpolate(child.name, child.from.floatValue(), child.to.floatValue())
-         } else {
-            throw new UnsupportedOperationException("Cannot add interpolated property $child")
-         }
+          child.addToTimeline(parent)
       }
+   }
+}
+
+/**
+ * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ */
+class KeyFramesFactory extends AbstractFactory {
+   public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+            throws InstantiationException, IllegalAccessException {
+      def property = attributes.remove("property")
+      if( !property ) {
+         property = value?.toString() ?: property.toString()
+      }
+      if( !property ) throw new RuntimeException("In $name you must specify either a value or a property: attribute.")
+      PropertyInterpolator interpolator = attributes.remove("interpolator")
+      [property: property, interpolator: interpolator, keyframes: []]
+   }
+
+   public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
+      if(child instanceof KeyFrame) parent.keyframes << child
+   }
+
+   public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
+      if(parent instanceof Timeline) {
+          def offsets = []
+          def values = []
+          def eases = []
+          node.keyframes.each {
+             offsets << it.offset
+             values << it.value
+             if(it.ease) eases << it.ease
+          }
+          KeyValues keyValues = node.interpolator ? KeyValues.create(node.interpolator, *values) : KeyValues.create(*values)
+          eases ? parent.addPropertyToInterpolate(node.property, new KeyFrames(keyValues, new KeyTimes(*offsets), *eases)) :
+                  parent.addPropertyToInterpolate(node.property, new KeyFrames(keyValues, new KeyTimes(*offsets)))
+      }
+   }
+}
+
+/**
+ * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ */
+class KeyFrameFactory extends AbstractFactory {
+   public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+            throws InstantiationException, IllegalAccessException {
+      FactoryBuilderSupport.checkValueIsNull(value, name)
+      def offset = attributes.remove("offset")
+      value = attributes.remove("value")
+      TimelineEase ease = attributes.remove("ease")
+      if( offset == null ) {
+         throw new RuntimeException("In $name you must specify a value for offset: attribute.")
+      }
+      return new KeyFrame(offset, value, ease)
    }
 }
 
