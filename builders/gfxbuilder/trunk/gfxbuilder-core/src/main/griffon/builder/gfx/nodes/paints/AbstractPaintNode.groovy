@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  */
 
-package griffon.builder.gfx
+package griffon.builder.gfx.nodes.paints
 
-import java.awt.Paint
-import java.awt.geom.Rectangle2D
+import griffon.builder.gfx.GfxNode
+import griffon.builder.gfx.GfxContext
+import griffon.builder.gfx.PaintProvider
 
 /**
- * Marker interface for operations that work with Paint.
- *
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-public interface PaintProvider {
-    Paint getPaint(Rectangle2D bounds)
+abstract class AbstractPaintNode extends GfxNode implements PaintProvider {
+    public AbstractPaintNode(String name) {
+       super( name )
+    }
+
+    void apply(GfxContext context) {}
 }

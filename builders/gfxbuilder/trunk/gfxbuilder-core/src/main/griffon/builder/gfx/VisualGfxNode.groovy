@@ -265,7 +265,13 @@ abstract class VisualGfxNode extends AggregateGfxNode implements GfxInputListene
           case Paint:
              def paint = g.paint
              g.paint = __f
-             applyFill( context, shape )
+             applyFill(context, shape)
+             g.paint = paint
+             break
+          case PaintProvider:
+             def paint = g.paint
+             g.paint = __f.getPaint(shape.bounds)
+             applyFill(context, shape)
              g.paint = paint
              break
           case MultiPaintProvider:

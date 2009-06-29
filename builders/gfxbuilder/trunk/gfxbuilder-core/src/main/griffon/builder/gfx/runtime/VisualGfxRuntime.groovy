@@ -117,12 +117,12 @@ class VisualGfxRuntime extends AbstractGfxRuntime {
          if( _fill instanceof Boolean && !_fill ){
             _fill = null
          }else if( pp != null ){
-            if( pp instanceof PaintProvider ){
-               //_fill = pp.runtime(context).paint
-            }else if( pp instanceof MultiPaintProvider ){
+            //if( pp instanceof PaintProvider ){
+            //   _fill = pp
+            //}else if( pp instanceof MultiPaintProvider ){
                // let the caller handle it
                _fill = pp
-            }
+            //}
          }else if( _fill ){
             switch( _fill ){
                case String:

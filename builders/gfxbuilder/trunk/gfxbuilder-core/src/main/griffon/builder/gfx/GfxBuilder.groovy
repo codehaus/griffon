@@ -206,19 +206,16 @@ class GfxBuilder extends FactoryBuilderSupport {
         registerFactory("matrix", new TransformFactory(MatrixTransform))
         registerFactory("transform", new TransformTransformFactory())
     }
-        //
-        // paints
-        //
+
+    void registerGfxPaints() {
 //         registerFactory( "borderPaint", new BorderPaintFactory() )
-//         registerGfxBeanFactory( "gradientPaint", GradientPaintGfx, true )
+        registerGfxBeanFactory("gradientPaint", GradientPaintNode, true)
 //         registerGfxBeanFactory( "multiPaint", MultiPaintGfx )
 //         registerFactory( "paint", new PaintFactory() )
 //         registerGfxBeanFactory( "texturePaint", TexturePaintGfx, true )
 //         registerFactory( "colorPaint", new ColorPaintFactory() )
+    }
 
-        //
-        // strokes
-        //
     void registerGfxStrokes() {
         registerFactory("stroke", new StrokeFactory())
         registerFactory("basicStroke", new StrokesFactory(BasicStrokeNode))
