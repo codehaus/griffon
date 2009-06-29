@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<project name="gfxbuilder-core" default="package" basedir=".">
+   <property file="build.properties" />
+   <property file="${basedir}/../build-gfx.properties" />
+
+   <path id="build.classpath.local" >
+      <fileset dir="${project.lib.dir}">
+         <include name="**/*.jar"/>
+      </fileset>
+   </path>
+
+   <import file="${basedir}/../build/build-common.xml" />
+ 
+</project>
