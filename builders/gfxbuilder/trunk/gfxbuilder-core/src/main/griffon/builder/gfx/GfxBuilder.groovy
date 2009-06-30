@@ -74,7 +74,6 @@ class GfxBuilder extends FactoryBuilderSupport {
         }
     }
 
-
     private void gfxbCallAutoRegisterMethods(Class declaredClass) {
         if (declaredClass == null) {
             return;
@@ -114,7 +113,7 @@ class GfxBuilder extends FactoryBuilderSupport {
 //         addAttributeDelegate(GfxBuilder.&alphaCompositeAttributeDelegate)
 
 //         registerFactory( "draw", new DrawFactory() )
-//         registerFactory( "font", new FontFactory() )
+        registerFactory("font", new FontFactory())
         registerGfxBeanFactory("group", GroupNode)
         registerGfxBeanFactory("renderingHint", RenderingHintNode, true)
         registerFactory("noparent", new CollectionFactory())
@@ -130,11 +129,12 @@ class GfxBuilder extends FactoryBuilderSupport {
         registerFactory("color", new ColorFactory())
         registerFactory("rgba", factories.color)
 //         registerFactory( "clip", new ClipFactory() )
-        registerFactory( "antialias", new AntialiasFactory() )
+        registerFactory("antialias", new AntialiasFactory())
 //         registerFactory( "alphaComposite", new AlphaCompositeFactory() )
 //         registerFactory( "viewBox", new ViewBoxFactory() )
 //         registerFactory( "props", new PropsFactory() )
-        registerFactory( "background", new BackgroundFactory() )
+        registerFactory("background", new BackgroundFactory())
+        registerFactory("customNode", new CustomNodeFactory())
 
         // variables
         variables['on'] = true

@@ -37,7 +37,7 @@ import griffon.builder.gfx.*
 class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
    MouseMotionListener, MouseWheelListener, KeyListener {
      private GfxNode _node
-     private GfxContext context = new GfxContext()
+     private GfxContext _context = new GfxContext()
      private boolean displayed
      private List errorListeners = []
      private List lastTargets = []
@@ -80,14 +80,14 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
      }
 
      public void paintComponent(Graphics g){
-         context.g = g
-         context.component = this
+         _context.g = g
+         _context.component = this
          if(_node){
              g.clearRect( 0, 0, size.width as int, size.height as int )
              try{
-                 context.eventTargets = []
-                 context.groupSettings = [:]
-                 _node.apply(context)
+                 _context.eventTargets = []
+                 _context.groupSettings = [:]
+                 _node.apply(_context)
              }catch( Exception e ){
                  fireGfxErrorEvent( e )
              }
@@ -146,7 +146,7 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
      /* ===== MouseMotionListener ===== */
 
      public void mouseMoved( MouseEvent e ){
-//          if( !context.eventTargets ) return
+//          if( !_context.eventTargets ) return
 //          def targets = getTargets(e)
 //          if( targets ){
 //             def oldTargets = []
@@ -203,7 +203,7 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
      /* ===== PRIVATE ===== */
 
      private void fireMouseEvent( MouseEvent e, String mouseEventMethod ){
-//          if( !context.eventTargets ) return
+//          if( !_context.eventTargets ) return
 //          getTargets(e).each { target ->
 //             def inputEvent = new GfxInputEvent( this, e, target )
 //             target."$mouseEventMethod"( inputEvent )
@@ -212,9 +212,9 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
 
      private def getTargets( MouseEvent e ){
          def targets = []
-//          def eventTargets = context.eventTargets
+//          def eventTargets = _context.eventTargets
 //          for( target in eventTargets.reverse() ){
-//              //def bp = target.getBoundingShape(context)
+//              //def bp = target.getBoundingShape(_context)
 //              def bs = target.runtime.boundingShape
 //              if( bs && bs.contains(e.point) ){
 //                  targets << target

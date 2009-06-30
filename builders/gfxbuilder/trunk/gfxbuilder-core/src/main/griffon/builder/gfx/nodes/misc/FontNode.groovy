@@ -15,8 +15,7 @@
 
 package griffon.builder.gfx.nodes.misc
 
-import java.awt.Color
-import griffon.builder.gfx.Colors
+import java.awt.Font
 import griffon.builder.gfx.GfxContext
 import griffon.builder.gfx.GfxAttribute
 import griffon.builder.gfx.GfxNode
@@ -24,27 +23,20 @@ import griffon.builder.gfx.GfxNode
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-class BackgroundNode extends GfxNode {
-    @GfxAttribute(alias="c") def color
+class FontNode extends GfxNode {
+    @GfxAttribute(alias="f") Font font
 
-    BackgroundNode() {
-        super( "background" )
+    FontNode() {
+        super( "font" )
     }
 
-    BackgroundNode(Color color) {
-        super( "background" )
-        this.color = color
+    FontNode(Font font) {
+        super( "font" )
+        this.font = font
     }
 
-    BackgroundNode(String color) {
-        super( "background" )
-        this.color = Colors.getColor(color)
-    }
-
-    void apply(GfxContext context){
-        if( !color ) return
-        def clip = context.g.clipBounds
-        context.g.background = color
-        context.g.clearRect(clip.x as int, clip.y as int, clip.width as int, clip.height as int)
+    void apply(GfxContext context) {
+        if( !font ) return
+        context.g.font = font
     }
 }
