@@ -27,7 +27,7 @@ import java.awt.geom.AffineTransform
 class GroupNode extends VisualGfxNode  {
     private Map previousGroupSettings = [:]
 
-    public GroupNode() {
+    GroupNode() {
         super("group")
     }
 
@@ -47,16 +47,11 @@ class GroupNode extends VisualGfxNode  {
     }
 
     protected boolean shouldSkip(GfxContext context){
-       false
+       return !visible
     }
 
     protected void applyNode(GfxContext context) {
-       AffineTransform transform = new AffineTransform()
-       transform.concatenate context.g.transform
-       transforms.each { t ->
-          if(t.transform) transform.concatenate t.transform
-       }
-       context.g.transform = transform
+
     }
 
     Shape calculateShape() { null }

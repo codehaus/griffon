@@ -37,7 +37,14 @@ class Transforms extends GfxNode {
        _transforms.addPropertyChangeListener(this)
     }
 
-    void apply(GfxContext context) {}
+    void apply(GfxContext context) {
+       AffineTransform transform = new AffineTransform()
+       transform.concatenate context.g.transform
+       _transforms.each { t ->
+          if(t.transform) transform.concatenate t.transform
+       }
+       context.g.transform = transform
+    }
 
     Transform getAt(String name) {
        return _transforms.find{ it?.name == name }

@@ -172,7 +172,7 @@ public class GfxAttributeASTTransformation implements ASTTransformation, Opcodes
         String setterName = "set" + MetaClassHelper.capitalize(propertyName);
         if (declaringClass.getMethods(setterName).isEmpty()) {
             Expression fieldExpression = new FieldExpression(fieldNode);
-            Statement setterBlock = createGfxAttributeStatement(propertyName, fieldExpression);
+            Statement setterBlock = createGfxAttributeStatement(fieldNode.getName(), fieldExpression);
             createSetterMethod(declaringClass, fieldNode, setterName, setterBlock);
         } else {
             wrapSetterMethod(declaringClass, propertyName);
@@ -329,6 +329,15 @@ public class GfxAttributeASTTransformation implements ASTTransformation, Opcodes
                 if (foundAdd && foundRemove && foundFire) {
                     return false;
                 }
+            }
+            consideredClass = consideredClass.getSuperClass();
+        }
+        // check if a super class has @GfxAttribute annotations
+        consideredClass = declaringClass.getSuperClass();
+        while (consideredClass!=null) {
+            if (hasGfxAttributeAnnotation(consideredClass)) return false;
+            for (FieldNode field : consideredClass.getFields()) {
+                if (hasGfxAttributeAnnotation(field)) return false;
             }
             consideredClass = consideredClass.getSuperClass();
         }

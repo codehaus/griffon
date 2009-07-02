@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2009 the original author or authors.
+ * Copyright 2007-2008 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,31 +13,15 @@
  * See the License for the specific language governing permissions and
  */
 
-package griffon.builder.gfx
+package griffon.builder.gfx.runtime
+
+import griffon.builder.gfx.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-interface GfxInputListener {
-    void keyPressed(GfxInputEvent e)
-
-    void keyReleased(GfxInputEvent e)
-
-    void keyTyped(GfxInputEvent e)
-
-    void mouseClicked(GfxInputEvent e)
-
-    void mouseDragged(GfxInputEvent e)
-
-    void mouseEntered(GfxInputEvent e)
-
-    void mouseExited(GfxInputEvent e)
-
-    void mouseMoved(GfxInputEvent e)
-
-    void mousePressed(GfxInputEvent e)
-
-    void mouseReleased(GfxInputEvent e)
-
-    void mouseWheelMoved(GfxInputEvent e)
+class DrawableGfxRuntime extends AbstractGfxRuntime {
+   DrawableGfxRuntime(GfxNode node, GfxContext context){
+      super(node, context)
+   }
 }

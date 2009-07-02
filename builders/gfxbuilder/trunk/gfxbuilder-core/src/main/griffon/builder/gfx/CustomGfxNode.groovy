@@ -15,23 +15,15 @@
 
 package griffon.builder.gfx
 
-import java.awt.AlphaComposite
-import java.awt.Composite
-import java.awt.Shape
-import java.awt.Color
-import java.awt.Paint
-import java.awt.geom.AffineTransform
-import java.awt.geom.Rectangle2D
 import java.beans.PropertyChangeEvent
 
 import griffon.builder.gfx.runtime.*
-import griffon.builder.gfx.nodes.transforms.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-abstract class CustomGfxNode extends VisualGfxNode {
-   private VisualGfxNode _node
+abstract class CustomGfxNode extends AbstractDrawableGfxNode {
+   private Drawable _node
    private static final GfxBuilder GFXBUILDER = new GfxBuilder()
 
    CustomGfxNode() {
@@ -42,7 +34,7 @@ abstract class CustomGfxNode extends VisualGfxNode {
       super(name)
    }
 
-   VisualGfxNode getNode() {
+   Drawable getNode() {
       if(!_node) {
          _node = createNode(GFXBUILDER)
          _node.addPropertyChangeListener(this)
@@ -50,11 +42,7 @@ abstract class CustomGfxNode extends VisualGfxNode {
       _node
    }
 
-   abstract VisualGfxNode createNode(GfxBuilder builder)
-
-   Shape calculateShape() {
-      getNode().getShape()
-   }
+   abstract Drawable createNode(GfxBuilder builder)
 
    void propertyChanged(PropertyChangeEvent event) {
       if(event.source == _node) {
@@ -64,17 +52,7 @@ abstract class CustomGfxNode extends VisualGfxNode {
       }
    }
 
-   GfxRuntime getRuntime() {
-      _runtime
-   }
-
-   GfxRuntime createRuntime(GfxContext context) {
-      // TODO custom runtime?
-      _runtime = new VisualGfxRuntime(this, context)
-      _runtime
-   }
-
-   void onDirty( PropertyChangeEvent event ) {
+   void onDirty(PropertyChangeEvent event) {
       _node = null
       super.onDirty(event)
    }
@@ -85,6 +63,7 @@ abstract class CustomGfxNode extends VisualGfxNode {
    }
 
    protected void applyNode(GfxContext context) {
+      getNode()
       if( shouldSkip(context) ) return
       _node.apply(context)
    }
@@ -94,7 +73,6 @@ abstract class CustomGfxNode extends VisualGfxNode {
    }
 
    protected boolean shouldSkip(GfxContext context) {
-      // if _node !visible or not withtin clipBounds
-      false
+      !visible || !_node?.visible
    }
 }

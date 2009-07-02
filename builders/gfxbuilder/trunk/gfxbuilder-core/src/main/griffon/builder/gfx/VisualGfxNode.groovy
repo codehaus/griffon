@@ -30,39 +30,17 @@ import griffon.builder.gfx.nodes.transforms.*
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-abstract class VisualGfxNode extends AggregateGfxNode implements GfxInputListener {
-   private ObservableMap _drag = new ObservableMap()
+abstract class VisualGfxNode extends AbstractDrawableGfxNode {
+   //private ObservableMap _drag = new ObservableMap()
    private Shape _shape
    private Shape _localShape
-   private Transforms _transforms
-   protected GfxRuntime _runtime
-   private previousGraphics
-   // private Filters
-
-   Closure beforeRender
-   Closure afterRender
-
-   Closure keyPressed
-   Closure keyReleased
-   Closure keyTyped
-   Closure mouseClicked
-   Closure mouseDragged
-   Closure mouseEntered
-   Closure mouseExited
-   Closure mouseMoved
-   Closure mousePressed
-   Closure mouseReleased
-   Closure mouseWheelMoved
 
    @GfxAttribute(alias="s")  boolean asShape = false
-   @GfxAttribute(alias="v")  boolean visible = true
-   @GfxAttribute(alias="o")  double opacity = Double.NaN
-   @GfxAttribute(alias="c")  Composite composite = null
    @GfxAttribute(alias="bc") def/*Color*/ borderColor
    @GfxAttribute(alias="bw") double borderWidth = 1d
    @GfxAttribute(alias="f")  def/*Color*/ fill
-   @GfxAttribute(alias="pt") boolean passThrough = false
-   @GfxAttribute(alias="ad") boolean autoDrag = false
+   //@GfxAttribute(alias="pt") boolean passThrough = false
+   //@GfxAttribute(alias="ad") boolean autoDrag = false
    @GfxAttribute(alias="p")  def/*Paint*/ paint = null
    @GfxAttribute(alias="st") def/*Stroke*/ stroke = null
    @GfxAttribute(alias="tx") double translateX = Double.NaN
@@ -71,9 +49,8 @@ abstract class VisualGfxNode extends AggregateGfxNode implements GfxInputListene
    @GfxAttribute(alias="sx") double scaleX = Double.NaN
    @GfxAttribute(alias="sy") double scaleY = Double.NaN
 
-   VisualGfxNode( String name ) {
-      super( name )
-      setTransforms(new Transforms())
+   VisualGfxNode(String name) {
+      super(name)
    }
 
    Shape getShape() {
@@ -87,53 +64,25 @@ abstract class VisualGfxNode extends AggregateGfxNode implements GfxInputListene
       if( !_localShape ) {
          _localShape = getShape()
          if(_localShape) {
-            double __x = _localShape.bounds.x
-            double __y = _localShape.bounds.x
-            double __cx = __x + (_localShape.bounds.width/2)
-            double __cy = __y + (_localShape.bounds.height/2)
+            double _x = _localShape.bounds.x
+            double _y = _localShape.bounds.x
+            double _cx = _x + (_localShape.bounds.width/2)
+            double _cy = _y + (_localShape.bounds.height/2)
             AffineTransform affineTransform = new AffineTransform()
             if(!Double.isNaN(sx) && !Double.isNaN(sy)) {
-               affineTransform.concatenate AffineTransform.getTranslateInstance(__x-__cx, __y-__cy)
+               affineTransform.concatenate AffineTransform.getTranslateInstance(_x-_cx, _y-_cy)
                affineTransform.concatenate AffineTransform.getScaleInstance(sx, sy)
             }
             if(!Double.isNaN(tx) && !Double.isNaN(ty)) {
                affineTransform.concatenate AffineTransform.getTranslateInstance(tx, ty)
             }
             if(!Double.isNaN(ra)) {
-               affineTransform.concatenate AffineTransform.getRotateInstance(Math.toRadians(ra),__cx, __cy)
+               affineTransform.concatenate AffineTransform.getRotateInstance(Math.toRadians(ra),_cx, _cy)
             }
             _localShape = affineTransform.createTransformedShape(_localShape)
          }
       }
       _localShape
-   }
-
-   void propertyChanged(PropertyChangeEvent event) {
-      if(event.source == _transforms) {
-         onDirty(event)
-      } else {
-         super.propertyChanged(event)
-      }
-   }
-
-   void setTransforms(Transforms transforms) {
-      def oldValue = _transforms
-      if(_transforms) _transforms.removePropertyChangeListener(this)
-      _transforms = transforms
-      if(_transforms) _transforms.addPropertyChangeListener(this)
-      firePropertyChange("transforms", oldValue, transforms)
-   }
-
-   Transforms getTransforms() {
-      _transforms
-   }
-
-   Transforms getTxs() {
-      _transforms
-   }
-
-   GfxRuntime getRuntime() {
-      _runtime
    }
 
    GfxRuntime createRuntime(GfxContext context) {
@@ -144,70 +93,8 @@ abstract class VisualGfxNode extends AggregateGfxNode implements GfxInputListene
    abstract Shape calculateShape()
 
    void onDirty( PropertyChangeEvent event ) {
+      super.onDirty(event)
       _shape = null
-   }
-
-   VisualGfxNode leftShift( VisualGfxNode node ) {
-      nodes << node
-      this
-   }
-
-   void keyPressed( GfxInputEvent e ) {
-      if( keyPressed ) this.@keyPressed(e)
-   }
-
-   void keyReleased( GfxInputEvent e ) {
-      if( keyReleased ) this.@keyReleased(e)
-   }
-
-   void keyTyped( GfxInputEvent e ) {
-      if( keyTyped ) this.@keyTyped(e)
-   }
-
-   void mouseClicked( GfxInputEvent e ) {
-      if( mouseClicked ) this.@mouseClicked(e)
-   }
-
-   void mouseDragged( GfxInputEvent e ) {
-      //if( autoDrag ) this.trackDrag(e)
-      if( mouseDragged ) this.@mouseDragged(e)
-   }
-
-   void mouseEntered( GfxInputEvent e ) {
-      if( mouseEntered ) this.@mouseEntered(e)
-   }
-
-   void mouseExited( GfxInputEvent e ) {
-      //if( autoDrag ) this.endDrag(e)
-      if( mouseExited ) this.@mouseExited(e)
-   }
-
-   void mouseMoved( GfxInputEvent e ) {
-      if( mouseMoved ) this.@mouseMoved(e)
-   }
-
-   void mousePressed( GfxInputEvent e ) {
-      //if( autoDrag ) this.startDrag(e)
-      if( mousePressed ) this.@mousePressed(e)
-   }
-
-   void mouseReleased( GfxInputEvent e ) {
-      //if( autoDrag ) this.endDrag(e)
-      if( mouseReleased ) this.@mouseReleased(e)
-   }
-
-   void mouseWheelMoved( GfxInputEvent e ) {
-      if( mouseWheelMoved ) this.@mouseWheelMoved(e)
-   }
-
-   protected void applyBeforeAll(GfxContext context) {
-      createRuntime(context)
-      if(shouldSkip(context)) return
-      previousGraphics = context.g
-      context.g = context.g.create()
-      if(!Double.isNaN(opacity)) {
-         context.g.composite = AlphaComposite.SrcOver.derive(opacity as float)
-      }
    }
 
    protected void applyNode(GfxContext context) {
@@ -220,21 +107,8 @@ abstract class VisualGfxNode extends AggregateGfxNode implements GfxInputListene
       }
    }
 
-   protected boolean applyBeforeNestedNodes(GfxContext context) {
-      true
-   }
-
    protected void applyNestedNode(GfxNode node, GfxContext context) {
       // node.apply(context)
-   }
-
-   protected boolean applyAfterNestedNodes(GfxContext context) {
-      true
-   }
-
-   protected void applyAfterAll(GfxContext context) {
-      context.g.dispose()
-      context.g = previousGraphics
    }
 
    protected boolean withinClipBounds(GfxContext context, Shape shape) {
@@ -242,13 +116,11 @@ abstract class VisualGfxNode extends AggregateGfxNode implements GfxInputListene
    }
 
    protected boolean shouldSkip(GfxContext context){
+      if( super.shouldSkip(context) ) return true
       Shape shape = runtime.transformedShape
       if( !shape ) return false
        // honor the clip
-      if( asShape || !visible || !withinClipBounds(context, shape) ){
-          return true
-      }
-      return false
+      return asShape || !withinClipBounds(context, shape)
    }
 
    protected void fill(GfxContext context, Shape shape){

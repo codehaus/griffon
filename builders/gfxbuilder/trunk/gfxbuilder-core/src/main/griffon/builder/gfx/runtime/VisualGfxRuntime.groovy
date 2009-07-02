@@ -37,7 +37,6 @@ class VisualGfxRuntime extends AbstractGfxRuntime {
    protected def _stroke
    protected def _shape
    protected def _transformedShape
-   protected def _localShape
    protected def _boundingShape
    protected double _cx = Double.NaN
    protected double _cy = Double.NaN
@@ -201,36 +200,6 @@ class VisualGfxRuntime extends AbstractGfxRuntime {
    }
 
    /**
-    * Returns the shape after applying local transformations.<p>
-    *
-    * @return a java.awt.Shape
-    */
-   /*public def getLocalShape() {
-      if( !_localShape ) {
-         _localShape = getShape()
-         if(_localShape) {
-            double x = _localShape.bounds.x
-            double y = _localShape.bounds.x
-            double cx = x + (_localShape.bounds.width/2)
-            double cy = y + (_localShape.bounds.height/2)
-            AffineTransform affineTransform = new AffineTransform()
-            if(!Double.isNaN(_node.sx) && !Double.isNaN(_node.sy)) {
-               affineTransform.concatenate AffineTransform.getTranslateInstance(x-cx, y-cy)
-               affineTransform.concatenate AffineTransform.getScaleInstance(_node.sx, _node.sy)
-            }
-            if(!Double.isNaN(_node.tx) && !Double.isNaN(_node.ty)) {
-               affineTransform.concatenate AffineTransform.getTranslateInstance(_node.tx, _node.ty)
-            }
-            if(!Double.isNaN(_node.ra)) {
-               affineTransform.concatenate AffineTransform.getRotateInstance(Math.toRadians(_node.ra),cx, cy)
-            }
-            _localShape = affineTransform.createTransformedShape(_localShape)
-         }
-      }
-      _localShape
-   }*/
-
-   /**
     * Returns the shape after applying transformations.<p>
     *
     * @return a java.awt.Shape
@@ -304,7 +273,7 @@ class VisualGfxRuntime extends AbstractGfxRuntime {
       if(Double.isNaN(_y)) {
          def s = getTransformedShape()
          if(s) {
-            _y = s.bounds.x
+            _x = s.bounds.x
             _y = s.bounds.y
          }
       }

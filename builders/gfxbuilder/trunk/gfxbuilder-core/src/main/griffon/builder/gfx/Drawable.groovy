@@ -18,26 +18,5 @@ package griffon.builder.gfx
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-interface GfxInputListener {
-    void keyPressed(GfxInputEvent e)
-
-    void keyReleased(GfxInputEvent e)
-
-    void keyTyped(GfxInputEvent e)
-
-    void mouseClicked(GfxInputEvent e)
-
-    void mouseDragged(GfxInputEvent e)
-
-    void mouseEntered(GfxInputEvent e)
-
-    void mouseExited(GfxInputEvent e)
-
-    void mouseMoved(GfxInputEvent e)
-
-    void mousePressed(GfxInputEvent e)
-
-    void mouseReleased(GfxInputEvent e)
-
-    void mouseWheelMoved(GfxInputEvent e)
+public interface Drawable {
 }

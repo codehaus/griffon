@@ -24,7 +24,7 @@ import groovy.util.ObservableList.ElementEvent
 abstract class AggregateGfxNode extends GfxNode {
    private final ObservableList/*<GfxNode>*/ _nodes = new ObservableList()
 
-   AggregateGfxNode( String name ) {
+   AggregateGfxNode(String name) {
       super( name )
       _nodes.addPropertyChangeListener(this)
    }
@@ -33,7 +33,7 @@ abstract class AggregateGfxNode extends GfxNode {
       _nodes
    }
 
-   void propertyChange( PropertyChangeEvent event ) {
+   void propertyChange(PropertyChangeEvent event) {
       if( event.source == _nodes ){
          handleElementEvent(event)
       } else {
@@ -75,7 +75,7 @@ abstract class AggregateGfxNode extends GfxNode {
 
    protected void applyAfterAll(GfxContext context) {}
 
-   protected void handleElementEvent( ElementEvent event ) {
+   protected void handleElementEvent(ElementEvent event) {
       switch( event.type ) {
          case ElementEvent.ADDED:
              event.newValue.addPropertyChangeListener(this)
@@ -91,9 +91,9 @@ abstract class AggregateGfxNode extends GfxNode {
          case ElementEvent.UPDATED:
              break
       }
-      dirty = true
+      _dirty = true
       onDirty(event)
-      dirty = false
+      _dirty = false
    }
 
    protected def findLast(Closure cls) {

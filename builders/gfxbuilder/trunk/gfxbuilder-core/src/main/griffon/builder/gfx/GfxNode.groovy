@@ -36,17 +36,17 @@ import java.beans.PropertyChangeListener
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-abstract class GfxNode extends GroovyObjectSupport implements PropertyChangeListener {
+abstract class GfxNode /*extends GroovyObjectSupport*/ implements PropertyChangeListener {
    private final String _name
    private Map _props = new ObservableMap()
 
    @GfxAttribute(alias="n") String name
-   boolean dirty
+   protected boolean _dirty
 
    GfxNode( String name ) {
       _name = name
-      addPropertyChangeListener(this)
-      _props.addPropertyChangeListener(this)
+      this.addPropertyChangeListener(this)
+      this._props.addPropertyChangeListener(this)
    }
 
    String getNodeName() {
@@ -66,13 +66,13 @@ abstract class GfxNode extends GroovyObjectSupport implements PropertyChangeList
    public void propertyChange( PropertyChangeEvent event ) {
       if( event.source == this ||
          (event.source == _props && event instanceof ObservableMap.PropertyUpdatedEvent) ) {
-          dirty = true
+          _dirty = true
           onDirty(event)
-          dirty = false
+          _dirty = false
       }
    }
 
-   void onDirty( PropertyChangeEvent event ) {
+   void onDirty(PropertyChangeEvent event) {
       // empty
    }
 

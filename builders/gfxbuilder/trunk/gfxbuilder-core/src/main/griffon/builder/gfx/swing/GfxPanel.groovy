@@ -41,9 +41,11 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
      private boolean displayed
      private List errorListeners = []
      private List lastTargets = []
+     private final boolean _animate
 
-     GfxPanel(){
+     GfxPanel( boolean animate = false ){
          super( null )
+         _animate = animate
          addMouseListener( this )
          addMouseMotionListener( this )
          addMouseWheelListener( this )
@@ -116,7 +118,7 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
      }
 
      public void propertyChange( PropertyChangeEvent event ){
-         if( visible /*&& event.source instanceof GfxOperation*/ ){
+         if( _animate && visible /*&& event.source instanceof GfxOperation*/ ){
              repaint()
          }
      }
