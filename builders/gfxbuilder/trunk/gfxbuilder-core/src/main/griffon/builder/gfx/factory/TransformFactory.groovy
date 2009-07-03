@@ -17,7 +17,8 @@
 package griffon.builder.gfx.factory
 
 import java.awt.geom.AffineTransform
-import griffon.builder.gfx.VisualGfxNode
+import griffon.builder.gfx.Transformable
+import griffon.builder.gfx.nodes.transforms.*
 import griffon.builder.gfx.nodes.transforms.*
 
 /**
@@ -46,7 +47,7 @@ class TransformsFactory extends GfxBeanFactory {
    }
 
    public void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-      if(parent instanceof VisualGfxNode) {
+      if(parent instanceof Transformable) {
          parent.transforms = node
       } else {
          throw new RuntimeException("Node ${parent} does not accept nesting of ${child}.")

@@ -214,6 +214,9 @@ class GfxBuilder extends FactoryBuilderSupport {
 //         registerFactory( "paint", new PaintFactory() )
 //         registerGfxBeanFactory( "texturePaint", TexturePaintGfx, true )
 //         registerFactory( "colorPaint", new ColorPaintFactory() )
+        registerFactory("stop", new GradientStopFactory())
+        registerGfxBeanFactory("linearGradient", LinearGradientPaintNode)
+        registerGfxBeanFactory("radialGradient", RadialGradientPaintNode)
     }
 
     void registerGfxStrokes() {

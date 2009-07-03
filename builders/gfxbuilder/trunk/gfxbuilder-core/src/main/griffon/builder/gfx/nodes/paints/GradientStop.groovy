@@ -16,28 +16,18 @@
 package griffon.builder.gfx.nodes.paints
 
 import java.awt.Color
-import java.awt.Paint
-import java.awt.GradientPaint
-import java.awt.geom.Point2D
 import griffon.builder.gfx.GfxAttribute
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-class GradientPaintNode extends AbstractLinearGradientPaintNode {
-    @GfxAttribute(alias="c1") def color1 = Color.BLACK
-    @GfxAttribute(alias="c2") def color2 = Color.WHITE
+class GradientStop {
+    @GfxAttribute(alias="c") Color color
+    @GfxAttribute(alias="s") float offset = 0f
+    @GfxAttribute(alias="o") float opacity = 1f
+    @GfxAttribute(alias="n") String name
 
-    GradientPaintNode() {
-       super("gradientPaint")
-       cycle = getDefaultCycleValue()
-    }
-
-    protected Paint makePaint( x1, y1, x2, y2 ){
-       return new GradientPaint( new Point2D.Double(x1,y1),
-                                 color1,
-                                 new Point2D.Double(x2,y2),
-                                 color2,
-                                 cycle as boolean )
+    public String toString(){
+       return "stop[offset: $offset, color: $color, opacity: $opacity, name: $name]"
     }
 }

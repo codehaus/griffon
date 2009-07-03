@@ -15,8 +15,15 @@
 
 package griffon.builder.gfx
 
+import griffon.builder.gfx.nodes.transforms.Transforms
+
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-interface Drawable {
+interface Transformable {
+   void setTransforms(Transforms transforms)
+
+   Transforms getTransforms()
+
+   Transforms getTxs()
 }

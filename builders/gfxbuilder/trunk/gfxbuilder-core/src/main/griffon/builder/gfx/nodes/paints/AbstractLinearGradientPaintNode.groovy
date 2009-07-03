@@ -28,8 +28,6 @@ import griffon.builder.gfx.PaintProvider
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 abstract class AbstractLinearGradientPaintNode extends AbstractPaintNode {
-    protected static final boolean DEFAULT_CYCLE_VALUE = false
-
     @GfxAttribute double x1 = 0d
     @GfxAttribute double x2 = 100d
     @GfxAttribute double y1 = 0d
@@ -40,6 +38,10 @@ abstract class AbstractLinearGradientPaintNode extends AbstractPaintNode {
 
     AbstractLinearGradientPaintNode(String name) {
        super( name )
+    }
+
+    protected def getDefaultCycleValue() {
+       false
     }
 
     public void setCycle( value ) {
@@ -54,7 +56,7 @@ abstract class AbstractLinearGradientPaintNode extends AbstractPaintNode {
        this.@stretch = value
        if( value ) {
           this.@fit = false
-          this.@cycle = DEFAULT_CYCLE_VALUE
+          this.@cycle = getDefaultCycleValue()
        }
     }
 
@@ -62,7 +64,7 @@ abstract class AbstractLinearGradientPaintNode extends AbstractPaintNode {
        this.@fit = value
        if( value ) {
           this.@stretch = false
-          this.@cycle = DEFAULT_CYCLE_VALUE
+          this.@cycle = getDefaultCycleValue()
        }
     }
 

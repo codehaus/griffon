@@ -40,10 +40,14 @@ class Transforms extends GfxNode {
     void apply(GfxContext context) {
        AffineTransform transform = new AffineTransform()
        transform.concatenate context.g.transform
+       concatenateTo(transform)
+       context.g.transform = transform
+    }
+
+    void concatenateTo(AffineTransform transform) {
        _transforms.each { t ->
           if(t.transform) transform.concatenate t.transform
        }
-       context.g.transform = transform
     }
 
     Transform getAt(String name) {

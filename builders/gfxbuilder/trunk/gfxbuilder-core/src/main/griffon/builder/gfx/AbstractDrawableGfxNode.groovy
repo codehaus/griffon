@@ -15,6 +15,7 @@
 
 package griffon.builder.gfx
 
+import java.awt.AlphaComposite
 import java.awt.Composite
 import java.beans.PropertyChangeEvent
 
@@ -24,7 +25,7 @@ import griffon.builder.gfx.nodes.transforms.*
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-abstract class AbstractDrawableGfxNode extends AggregateGfxNode implements GfxInputListener, Drawable {
+abstract class AbstractDrawableGfxNode extends AggregateGfxNode implements GfxInputListener, Drawable, Transformable {
    private Transforms _transforms
    protected GfxRuntime _runtime
    private previousGraphics

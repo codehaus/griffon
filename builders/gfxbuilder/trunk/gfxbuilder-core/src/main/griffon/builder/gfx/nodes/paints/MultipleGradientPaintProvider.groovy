@@ -13,10 +13,15 @@
  * See the License for the specific language governing permissions and
  */
 
-package griffon.builder.gfx
+package griffon.builder.gfx.nodes.paints
+
+import griffon.builder.gfx.PaintProvider
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-interface Drawable {
+interface MultipleGradientPaintProvider extends PaintProvider {
+   void addStop(GradientStop stop)
+
+   List getStops()
 }
