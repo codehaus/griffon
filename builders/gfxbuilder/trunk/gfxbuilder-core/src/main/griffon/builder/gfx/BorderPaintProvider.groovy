@@ -13,28 +13,12 @@
  * See the License for the specific language governing permissions and
  */
 
-package griffon.builder.gfx.nodes.transforms
-
-import java.awt.geom.AffineTransform
-
-import griffon.builder.gfx.GfxAttribute
+package griffon.builder.gfx
 
 /**
+ * Marker interface for nodes...
+ *
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-class ShearTransform extends AbstractTransform {
-    @GfxAttribute double x = 1d
-    @GfxAttribute double y = 1d
-
-    ShearTransform() {
-       super("shear")
-    }
-
-    ShearTransform clone() {
-       new ShearTransform(x: x, y: y, enabled: enabled)
-    }
-
-    AffineTransform getTransform() {
-       AffineTransform.getShearInstance(x as double, y as double)
-    }
+interface BorderPaintProvider extends PaintProvider{
 }

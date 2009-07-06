@@ -22,15 +22,8 @@ import griffon.builder.gfx.*
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-class DrawableGfxRuntime extends AbstractGfxRuntime {
-   protected def _shape
-   protected def _transformedShape
-   protected double _cx = Double.NaN
-   protected double _cy = Double.NaN
-   protected double _x = Double.NaN
-   protected double _y = Double.NaN
-
-   DrawableGfxRuntime(GfxNode node, GfxContext context){
+class GroupGfxRuntime extends DrawableGfxRuntime {
+   GroupGfxRuntime(GfxNode node, GfxContext context){
       super(node, context)
    }
 
@@ -64,58 +57,5 @@ class DrawableGfxRuntime extends AbstractGfxRuntime {
          }
       }
       _transformedShape
-   }
-
-   /**
-    * Returns the bounding shape including stroked border.<p>
-    *
-    * @return a java.awt.Shape
-    */
-   public def getBoundingShape() {
-      getTransformedShape()
-   }
-
-   public double getCx() {
-      if(Double.isNaN(_cx)) {
-         def s = getTransformedShape()
-         if(s) {
-            _cx = s.bounds.x + (s.bounds.width/2)
-            _cy = s.bounds.y + (s.bounds.height/2)
-         }
-      }
-      _cx
-   }
-
-   public double getCy() {
-      if(Double.isNaN(_cy)) {
-         def s = getTransformedShape()
-         if(s) {
-            _cx = s.bounds.x + (s.bounds.width/2)
-            _cy = s.bounds.y + (s.bounds.height/2)
-         }
-      }
-      _cy
-   }
-
-   public double getX() {
-      if(Double.isNaN(_x)) {
-         def s = getTransformedShape()
-         if(s) {
-            _x = s.bounds.x
-            _y = s.bounds.y
-         }
-      }
-      _x
-   }
-
-   public double getY() {
-      if(Double.isNaN(_y)) {
-         def s = getTransformedShape()
-         if(s) {
-            _x = s.bounds.x
-            _y = s.bounds.y
-         }
-      }
-      _y
    }
 }

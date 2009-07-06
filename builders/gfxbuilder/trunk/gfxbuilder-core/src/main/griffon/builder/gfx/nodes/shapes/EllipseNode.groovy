@@ -23,6 +23,8 @@ import griffon.builder.gfx.GfxAttribute
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class EllipseNode extends AbstractShapeGfxNode {
+    @GfxAttribute double x = Double.NaN
+    @GfxAttribute double y = Double.NaN
     @GfxAttribute double cx = 10d
     @GfxAttribute double cy = 5d
     @GfxAttribute(alias="rx") double radiusX = 10d
@@ -32,17 +34,25 @@ class EllipseNode extends AbstractShapeGfxNode {
         super("ellipse")
     }
 
-    EllipseNode( Ellipse2D circle ) {
+    EllipseNode( Ellipse2D ellipse ) {
         super( "circle" )
-        radiusX = circle.width/2
-        radiusY = circle.height/2
-        cx = circle.x + radiusX
-        cy = circle.y + radiusY
+        x = ellipse.x
+        y = ellipse.y
+        radiusX = ellipse.width/2
+        radiusY = ellipse.height/2
+        cx = ellipse.x + radiusX
+        cy = ellipse.y + radiusY
     }
 
     Shape calculateShape() {
-       return new Ellipse2D.Double( (cx - radiusX) as double,
-                                    (cy - radiusY) as double,
+       if(Double.isNaN(x) && Double.isNaN(y)) {
+           return new Ellipse2D.Double( (cx - radius) as double,
+                                        (cy - radius) as double,
+                                        (radiusX * 2) as double,
+                                        (radiusY * 2) as double )
+       }
+       return new Ellipse2D.Double( x as double,
+                                    y as double,
                                     (radiusX * 2) as double,
                                     (radiusY * 2) as double )
     }

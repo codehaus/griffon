@@ -29,6 +29,10 @@ class TransformTransform extends AbstractTransform {
        super("transform")
     }
 
+    TransformTransform clone() {
+       new TransformTransform(transform: transform, enabled: enabled)
+    }
+
     AffineTransform getTransform() {
        transform
     }

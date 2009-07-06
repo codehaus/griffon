@@ -18,8 +18,8 @@ package griffon.builder.gfx
 // import java.awt.AlphaComposite
 // import java.awt.image.AffineTransformOp
 // 
-// import groovy.swing.factory.BindFactory
-// import groovy.swing.factory.BindProxyFactory
+import groovy.swing.factory.BindFactory
+import groovy.swing.factory.BindProxyFactory
 import groovy.swing.factory.CollectionFactory
 import griffon.builder.gfx.factory.*
 import griffon.builder.gfx.nodes.misc.*
@@ -120,10 +120,10 @@ class GfxBuilder extends FactoryBuilderSupport {
 //         registerFactory( "shape", new ShapeFactory() )
 
         // binding related classes
-//         BindFactory bindFactory = new BindFactory()
-//         registerFactory("bind", bindFactory)
-//         addAttributeDelegate(bindFactory.&bindingAttributeDelegate)
-//         registerFactory("bindProxy", new BindProxyFactory())
+        BindFactory bindFactory = new BindFactory()
+        registerFactory("bind", bindFactory)
+        addAttributeDelegate(bindFactory.&bindingAttributeDelegate)
+        registerFactory("bindProxy", new BindProxyFactory())
 
 //         registerFactory( "image", new ImageFactory() )
         registerFactory("color", new ColorFactory())
@@ -132,7 +132,7 @@ class GfxBuilder extends FactoryBuilderSupport {
         registerFactory("antialias", new AntialiasFactory())
 //         registerFactory( "alphaComposite", new AlphaCompositeFactory() )
 //         registerFactory( "viewBox", new ViewBoxFactory() )
-//         registerFactory( "props", new PropsFactory() )
+        registerFactory("props", new PropsFactory())
         registerFactory("background", new BackgroundFactory())
         registerFactory("customNode", new CustomNodeFactory())
 
@@ -149,7 +149,7 @@ class GfxBuilder extends FactoryBuilderSupport {
         registerGfxBeanFactory("ellipse", EllipseNode)
         registerGfxBeanFactory("polygon", PolygonNode)
         registerGfxBeanFactory("rect", RectangleNode)
-//         registerGfxBeanFactory("text", TextNode)
+        registerGfxBeanFactory("text", TextNode)
         registerGfxBeanFactory("almond", AlmondNode)
         registerGfxBeanFactory("arrow", ArrowNode)
         registerGfxBeanFactory("asterisk", AsteriskNode)
@@ -208,12 +208,12 @@ class GfxBuilder extends FactoryBuilderSupport {
     }
 
     void registerGfxPaints() {
-//         registerFactory( "borderPaint", new BorderPaintFactory() )
+        registerFactory("borderPaint", new BorderPaintFactory())
         registerGfxBeanFactory("gradientPaint", GradientPaintNode, true)
-//         registerGfxBeanFactory( "multiPaint", MultiPaintGfx )
+        registerFactory("multiPaint", new MultiPaintFactory())
 //         registerFactory( "paint", new PaintFactory() )
 //         registerGfxBeanFactory( "texturePaint", TexturePaintGfx, true )
-//         registerFactory( "colorPaint", new ColorPaintFactory() )
+        registerFactory("colorPaint", new ColorPaintFactory())
         registerFactory("stop", new GradientStopFactory())
         registerGfxBeanFactory("linearGradient", LinearGradientPaintNode)
         registerGfxBeanFactory("radialGradient", RadialGradientPaintNode)

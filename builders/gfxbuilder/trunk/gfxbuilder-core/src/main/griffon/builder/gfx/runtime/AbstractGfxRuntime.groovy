@@ -30,7 +30,7 @@ abstract class AbstractGfxRuntime implements GfxRuntime {
       _context = context
    }
 
-   public GfxContext getGfxContext() {
+   public GfxContext getContext() {
       _context
    }
 }

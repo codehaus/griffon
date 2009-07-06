@@ -23,11 +23,15 @@ import griffon.builder.gfx.GfxAttribute
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class TranslateTransform extends AbstractTransform {
-    @GfxAttribute def x = 0d
-    @GfxAttribute def y = 0d
+    @GfxAttribute double x = 0d
+    @GfxAttribute double y = 0d
 
     TranslateTransform() {
        super("translate")
+    }
+
+    TranslateTransform clone() {
+       new TranslateTransform(x: x, y: y, enabled: enabled)
     }
 
     AffineTransform getTransform() {

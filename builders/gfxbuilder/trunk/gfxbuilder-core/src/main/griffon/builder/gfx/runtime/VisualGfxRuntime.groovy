@@ -21,7 +21,6 @@ import java.awt.BasicStroke
 import java.awt.Stroke
 import java.awt.Shape
 import java.awt.geom.Area
-import java.awt.geom.AffineTransform
 import griffon.builder.gfx.*
 
 import griffon.builder.gfx.nodes.transforms.Transform
@@ -29,19 +28,13 @@ import griffon.builder.gfx.nodes.transforms.Transform
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-class VisualGfxRuntime extends AbstractGfxRuntime {
+class VisualGfxRuntime extends DrawableGfxRuntime {
    protected def _fill
    protected def _paint
    protected def _borderColor
    protected def _borderWidth
    protected def _stroke
-   protected def _shape
-   protected def _transformedShape
    protected def _boundingShape
-   protected double _cx = Double.NaN
-   protected double _cy = Double.NaN
-   protected double _x = Double.NaN
-   protected double _y = Double.NaN
 
    VisualGfxRuntime(GfxNode node, GfxContext context){
       super(node, context)
@@ -151,7 +144,12 @@ class VisualGfxRuntime extends AbstractGfxRuntime {
    public def getPaint() {
       if( !_paint ){
           _node.nodes.each { n ->
-             if(n instanceof PaintProvider || n instanceof MultiPaintProvider) _paint = n
+              switch(n) {
+                  case BorderPaintProvider: break;
+                  case PaintProvider:
+                  case MultiPaintProvider:
+                      _paint = n
+              }
           }
       }
       _paint
@@ -188,38 +186,6 @@ class VisualGfxRuntime extends AbstractGfxRuntime {
    }
 
    /**
-    * Returns the shape after applying explicit transformations.<p>
-    *
-    * @return a java.awt.Shape
-    */
-   public def getShape() {
-      if( !_shape ){
-         _shape = _node.shape
-      }
-      _shape
-   }
-
-   /**
-    * Returns the shape after applying transformations.<p>
-    *
-    * @return a java.awt.Shape
-    */
-   public def getTransformedShape() {
-      if( !_transformedShape ) {
-         _transformedShape = _node.getLocalShape()
-         if(_transformedShape) {
-            AffineTransform affineTransform = new AffineTransform()
-            affineTransform.concatenate _context.g.transform
-            _node.transforms.each { t ->
-               if(t.transform) affineTransform.concatenate t.transform
-            }
-            _transformedShape = affineTransform.createTransformedShape(_transformedShape)
-         }
-      }
-      _transformedShape
-   }
-
-   /**
     * Returns the bounding shape including stroked border.<p>
     *
     * @return a java.awt.Shape
@@ -234,49 +200,5 @@ class VisualGfxRuntime extends AbstractGfxRuntime {
          }
       }
       _boundingShape
-   }
-
-   public double getCx() {
-      if(Double.isNaN(_cx)) {
-         def s = getTransformedShape()
-         if(s) {
-            _cx = s.bounds.x + (s.bounds.width/2)
-            _cy = s.bounds.y + (s.bounds.height/2)
-         }
-      }
-      _cx
-   }
-
-   public double getCy() {
-      if(Double.isNaN(_cy)) {
-         def s = getTransformedShape()
-         if(s) {
-            _cx = s.bounds.x + (s.bounds.width/2)
-            _cy = s.bounds.y + (s.bounds.height/2)
-         }
-      }
-      _cy
-   }
-
-   public double getX() {
-      if(Double.isNaN(_x)) {
-         def s = getTransformedShape()
-         if(s) {
-            _x = s.bounds.x
-            _y = s.bounds.y
-         }
-      }
-      _x
-   }
-
-   public double getY() {
-      if(Double.isNaN(_y)) {
-         def s = getTransformedShape()
-         if(s) {
-            _x = s.bounds.x
-            _y = s.bounds.y
-         }
-      }
-      _y
    }
 }

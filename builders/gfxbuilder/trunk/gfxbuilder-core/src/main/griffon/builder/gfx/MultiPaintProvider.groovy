@@ -18,10 +18,10 @@ package griffon.builder.gfx
 import java.awt.Shape
 
 /**
- * Marker interface for operations that work with Paint.
+ * Marker interface for nodes...
  *
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-public interface MultiPaintProvider {
-    void apply( GfxContext context, Shape shape )
+interface MultiPaintProvider {
+    void apply(GfxContext context, Shape shape)
 }

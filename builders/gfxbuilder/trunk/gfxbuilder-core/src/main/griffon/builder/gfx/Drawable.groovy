@@ -15,8 +15,13 @@
 
 package griffon.builder.gfx
 
+import java.awt.Shape
+
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 interface Drawable {
+   Shape getShape()
+
+   Shape getLocalShape()
 }

@@ -23,11 +23,15 @@ import griffon.builder.gfx.GfxAttribute
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class ScaleTransform extends AbstractTransform {
-    @GfxAttribute def x = 1d
-    @GfxAttribute def y = 1d
+    @GfxAttribute double x = 1d
+    @GfxAttribute double y = 1d
 
     ScaleTransform() {
        super("scale")
+    }
+
+    ScaleTransform clone() {
+       new ScaleTransform(x: x, y: y, enabled: enabled)
     }
 
     AffineTransform getTransform() {

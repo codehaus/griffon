@@ -15,7 +15,6 @@
 
 package griffon.builder.gfx.nodes.shapes
 
-import griffon.builder.gfx.GfxContext
 import griffon.builder.gfx.VisualGfxNode
 import griffon.builder.gfx.ShapeProvider
 
@@ -30,41 +29,40 @@ abstract class AbstractShapeGfxNode extends VisualGfxNode implements ShapeProvid
       super( name )
    }
     /* ===== OPERATOR OVERLOADING ===== */
-/*
-    public Shape plus( ShapeProvider shape ){
-       return plus( shape.runtime().locallyTransformedShape )
+
+    public Shape plus(ShapeProvider shape) {
+       return plus(shape.getLocalShape())
     }
-    public Shape plus( Shape shape ){
-       def area = new Area(runtime().locallyTransformedShape)
-       area.add( new Area(shape) )
+    public Shape plus(Shape shape) {
+       def area = new Area(getLocalShape())
+       area.add(shape instanceof Area ? shape :new Area(shape))
        return area
     }
 
-    public Shape minus( ShapeProvider shape ){
-       return minus( shape.runtime().locallyTransformedShape )
+    public Shape minus(ShapeProvider shape) {
+       return minus(shape.getLocalShape())
     }
-    public Shape minus( Shape shape ){
-       def area = new Area(runtime().locallyTransformedShape)
-       area.subtract( new Area(shape) )
+    public Shape minus(Shape shape) {
+       def area = new Area(getLocalShape())
+       area.subtract(shape instanceof Area ? shape :new Area(shape))
        return area
     }
 
-    public Shape and( ShapeProvider shape ){
-       return and( shape.runtime().locallyTransformedShape )
+    public Shape and(ShapeProvider shape) {
+       return and(shape.getLocalShape())
     }
-    public Shape and( Shape shape ){
-       def area = new Area(runtime().locallyTransformedShape)
-       area.intersect( new Area(shape) )
+    public Shape and(Shape shape) {
+       def area = new Area(getLocalShape())
+       area.intersect(shape instanceof Area ? shape :new Area(shape))
        return area
     }
 
-    public Shape xor( ShapeProvider shape ){
-       return xor( shape.runtime().locallyTransformedShape )
+    public Shape xor(ShapeProvider shape) {
+       return xor(shape.getLocalShape())
     }
-    public Shape xor( Shape shape ){
-       def area = new Area(runtime().locallyTransformedShape)
-       area.exclusiveOr( new Area(shape) )
+    public Shape xor(Shape shape) {
+       def area = new Area(getLocalShape())
+       area.exclusiveOr(shape instanceof Area ? shape :new Area(shape))
        return area
     }
-*/
 }

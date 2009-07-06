@@ -41,18 +41,18 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
      private boolean displayed
      private List errorListeners = []
      private List lastTargets = []
-     private final boolean _animate
 
-     GfxPanel( boolean animate = false ){
-         super( null )
-         _animate = animate
-         addMouseListener( this )
-         addMouseMotionListener( this )
-         addMouseWheelListener( this )
-         addKeyListener( this )
+     boolean animate
+
+     GfxPanel(){
+         super(null)
+         addMouseListener(this)
+         addMouseMotionListener(this)
+         addMouseWheelListener(this)
+         addKeyListener(this)
      }
 
-     public void setLayout( LayoutManager mgr ){
+     public void setLayout(LayoutManager mgr){
          // do not allow the layout to be changed
      }
 
@@ -70,12 +70,12 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
       */
      public void setNode(GfxNode node){
          if( node ){
-             if( _node ){
-                _node.removePropertyChangeListener( this )
+             if(_node){
+                _node.removePropertyChangeListener(this)
              }
              _node = node
-             _node.addPropertyChangeListener( this )
-             if( visible ){
+             _node.addPropertyChangeListener(this)
+             if(visible){
                  repaint()
              }
          }
@@ -85,86 +85,86 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
          _context.g = g
          _context.component = this
          if(_node){
-             g.clearRect( 0, 0, size.width as int, size.height as int )
+             g.clearRect(0, 0, size.width as int, size.height as int)
              try{
                  _context.eventTargets = []
                  _context.groupSettings = [:]
                  _node.apply(_context)
-             }catch( Exception e ){
-                 fireGfxErrorEvent( e )
+             }catch(Exception e){
+                 fireGfxErrorEvent(e)
              }
          }
      }
 
-     public void addGfxErrorListener( GfxErrorListener listener ){
+     public void addGfxErrorListener(GfxErrorListener listener){
          if( !listener || errorListeners.contains(listener) ) return
          errorListeners.add( listener )
      }
 
-     public void removeGfxErrorListener( GfxErrorListener listener ){
+     public void removeGfxErrorListener(GfxErrorListener listener){
          if( listener ) errorListeners.remove( listener )
      }
 
      public List getGfxErrorListeners(){
-         return Collections.unmodifiableList( errorListeners )
+         return Collections.unmodifiableList(errorListeners)
      }
 
-     protected void fireGfxErrorEvent( Throwable t ) {
+     protected void fireGfxErrorEvent(Throwable t) {
          t.printStackTrace()
-         def event = new GfxErrorEvent( this, t )
+         def event = new GfxErrorEvent(this, t)
          errorListeners.each { listener ->
             listener.errorOccurred( event )
          }
      }
 
      public void propertyChange( PropertyChangeEvent event ){
-         if( _animate && visible /*&& event.source instanceof GfxOperation*/ ){
+         if(animate && visible){
              repaint()
          }
      }
 
      /* ===== MouseListener ===== */
 
-     public void mouseEntered( MouseEvent e ){
+     public void mouseEntered(MouseEvent e){
          lastTargets.clear()
      }
 
-     public void mouseExited( MouseEvent e ){
+     public void mouseExited(MouseEvent e){
          lastTargets.clear()
      }
 
-     public void mousePressed( MouseEvent e ){
+     public void mousePressed(MouseEvent e){
          fireMouseEvent( e, "mousePressed" )
      }
 
-     public void mouseReleased( MouseEvent e ){
+     public void mouseReleased(MouseEvent e){
          fireMouseEvent( e, "mouseReleased" )
      }
 
-     public void mouseClicked( MouseEvent e ){
+     public void mouseClicked(MouseEvent e){
          fireMouseEvent( e, "mouseClicked" )
      }
 
      /* ===== MouseMotionListener ===== */
 
-     public void mouseMoved( MouseEvent e ){
-//          if( !_context.eventTargets ) return
-//          def targets = getTargets(e)
-//          if( targets ){
-//             def oldTargets = []
-//             def visitedTargets = []
-//             lastTargets.each { target ->
-//                if( !targets.contains(target) ){
-//                   oldTargets << target
-//                }else{
-//                   visitedTargets << target
-//                }
-//             }
-//             def newTargets = targets - visitedTargets
-//             oldTargets.each { t -> t.mouseExited( new GfxInputEvent( this, e, t ) ) }
-//             newTargets.each { t -> t.mouseEntered( new GfxInputEvent( this, e, t ) ) }
-//             targets.each { t -> t.mouseMoved( new GfxInputEvent( this, e, t ) ) }
-//             lastTargets = targets
+     public void mouseMoved(MouseEvent e){
+         if( !_context.eventTargets ) return
+         def targets = getTargets(e)
+         if( targets ){
+            def oldTargets = []
+            def visitedTargets = []
+            lastTargets.each { target ->
+               if( !targets.contains(target) ){
+                  oldTargets << target
+               }else{
+                  visitedTargets << target
+               }
+            }
+            def newTargets = targets - visitedTargets
+            oldTargets.each { t -> t.mouseExited(new GfxInputEvent(this, e, t)) }
+            newTargets.each { t -> t.mouseEntered(new GfxInputEvent(this, e, t)) }
+            targets.each { t -> t.mouseMoved(new GfxInputEvent(this, e, t)) }
+            lastTargets = targets
 //                 def inputEvent = new GfxInputEvent( this, e, target )
 //                 if( target != lastTarget ){
 //                    if( lastTarget ) lastTarget.mouseExited( new GfxInputEvent( this, e, target ) )
@@ -172,57 +172,58 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
 //                    target.mouseEntered( inputEvent )
 //                 }
 //                 target.mouseMoved( inputEvent )
-//          }else if( lastTargets ){
-//             lastTargets.each { it.mouseExited( new GfxInputEvent( this, e, it ) ) }
-//             lastTargets.clear()
-//          }
+         }else if(lastTargets){
+            lastTargets.each { it.mouseExited(new GfxInputEvent(this, e, it)) }
+            lastTargets.clear()
+         }
      }
 
-     public void mouseDragged( MouseEvent e ){
+     public void mouseDragged(MouseEvent e){
          fireMouseEvent( e, "mouseDragged" )
      }
 
      /* ===== MouseWheelListener ===== */
 
-     public void mouseWheelMoved( MouseWheelEvent e ){
+     public void mouseWheelMoved(MouseWheelEvent e){
          fireMouseEvent( e, "mouseWheelMoved" )
      }
 
      /* ===== KeyListener ===== */
 
-     public void keyPressed( KeyEvent e ){
+     public void keyPressed(KeyEvent e){
 
      }
 
-     public void keyReleased( KeyEvent e ){
+     public void keyReleased(KeyEvent e){
 
      }
 
-     public void keyTyped( KeyEvent e ){
+     public void keyTyped(KeyEvent e){
 
      }
 
      /* ===== PRIVATE ===== */
 
-     private void fireMouseEvent( MouseEvent e, String mouseEventMethod ){
-//          if( !_context.eventTargets ) return
-//          getTargets(e).each { target ->
-//             def inputEvent = new GfxInputEvent( this, e, target )
-//             target."$mouseEventMethod"( inputEvent )
-//          }
+     private void fireMouseEvent(MouseEvent e, String mouseEventMethod){
+         if( !_context.eventTargets ) return
+         getTargets(e).each { target ->
+            def inputEvent = new GfxInputEvent(this, e, target)
+            target."$mouseEventMethod"( inputEvent )
+         }
      }
 
-     private def getTargets( MouseEvent e ){
-         def targets = []
-//          def eventTargets = _context.eventTargets
-//          for( target in eventTargets.reverse() ){
-//              //def bp = target.getBoundingShape(_context)
-//              def bs = target.runtime.boundingShape
-//              if( bs && bs.contains(e.point) ){
-//                  targets << target
-//                  if( !target.passThrough ) break
-//              }
-//          }
-         return targets
+     private def getTargets(MouseEvent e){
+         List targets = []
+         def eventTargets = _context.eventTargets
+         for(target in eventTargets.reverse()){
+             //def bp = target.getBoundingShape(_context)
+             //def s = target.runtime.transformedShape
+             def s = target.runtime.getBoundingShape()
+             if(s && s.contains(e.point)){
+                 targets << target
+                 if(!target.passThrough) break
+             }
+         }
+         targets
      }
 }

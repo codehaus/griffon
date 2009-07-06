@@ -30,8 +30,8 @@ abstract class AbstractDrawableGfxNode extends AggregateGfxNode implements GfxIn
    protected GfxRuntime _runtime
    private previousGraphics
 
-   Closure beforeRender
-   Closure afterRender
+//    Closure beforeRender
+//    Closure afterRender
 
    Closure keyPressed
    Closure keyReleased
@@ -48,6 +48,7 @@ abstract class AbstractDrawableGfxNode extends AggregateGfxNode implements GfxIn
    @GfxAttribute(alias="v")  boolean visible = true
    @GfxAttribute(alias="o")  double opacity = Double.NaN
    @GfxAttribute(alias="c")  Composite composite = null
+   @GfxAttribute(alias="pt") boolean passThrough = false
 
    AbstractDrawableGfxNode(String name) {
       super(name)
@@ -145,6 +146,15 @@ abstract class AbstractDrawableGfxNode extends AggregateGfxNode implements GfxIn
    protected void applyAfterAll(GfxContext context) {
       context.g.dispose()
       context.g = previousGraphics
+      addAsEventTarget(context)
+   }
+
+   protected void addAsEventTarget(GfxContext context){
+      if( visible || keyPressed || keyReleased || keyTyped || mouseClicked ||
+          mouseDragged || mouseEntered || mouseExited || mouseMoved ||
+          mousePressed || mouseReleased || mouseWheelMoved /*|| autoDrag*/ ){
+          context.eventTargets << this
+      }
    }
 
    protected boolean shouldSkip(GfxContext context){

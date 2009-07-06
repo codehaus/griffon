@@ -50,7 +50,7 @@ class TransformsFactory extends GfxBeanFactory {
       if(parent instanceof Transformable) {
          parent.transforms = node
       } else {
-         throw new RuntimeException("Node ${parent} does not accept nesting of ${child}.")
+         throw new RuntimeException("Node ${parent} does not accept nesting of ${node}.")
       }
    }
 

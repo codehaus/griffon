@@ -24,6 +24,7 @@ import java.awt.geom.AffineTransform
 import java.awt.geom.Rectangle2D
 import java.beans.PropertyChangeEvent
 
+import griffon.builder.gfx.Colors
 import griffon.builder.gfx.runtime.*
 import griffon.builder.gfx.nodes.transforms.*
 
@@ -39,7 +40,6 @@ abstract class VisualGfxNode extends AbstractDrawableGfxNode {
    @GfxAttribute(alias="bc") def/*Color*/ borderColor
    @GfxAttribute(alias="bw") double borderWidth = 1d
    @GfxAttribute(alias="f")  def/*Color*/ fill
-   //@GfxAttribute(alias="pt") boolean passThrough = false
    //@GfxAttribute(alias="ad") boolean autoDrag = false
    @GfxAttribute(alias="p")  def/*Paint*/ paint = null
    @GfxAttribute(alias="st") def/*Stroke*/ stroke = null
@@ -97,11 +97,19 @@ abstract class VisualGfxNode extends AbstractDrawableGfxNode {
       _shape = null
    }
 
+//    void setBorderColor(String color) {
+//       setBorderColor((Color) Colors.getColor(color))
+//    }
+// 
+//    void setFill(String color) {
+//       setFill((Color) Colors.getColor(color))
+//    }
+
    protected void applyNode(GfxContext context) {
-      if( shouldSkip(context) ) return
+      if(shouldSkip(context)) return
       def shape = _runtime.transformedShape
       if( shape ) {
-         //context.bounds = shape.bounds
+         context.bounds = _runtime.getBoundingShape()?.bounds ?: context.bounds
          fill(context, shape)
          draw(context, shape)
       }
@@ -116,7 +124,7 @@ abstract class VisualGfxNode extends AbstractDrawableGfxNode {
    }
 
    protected boolean shouldSkip(GfxContext context){
-      if( super.shouldSkip(context) ) return true
+      if(super.shouldSkip(context)) return true
       Shape shape = runtime.transformedShape
       if( !shape ) return false
        // honor the clip
@@ -131,7 +139,7 @@ abstract class VisualGfxNode extends AbstractDrawableGfxNode {
           case Color:
              def color = g.color
              g.color = __f
-             applyFill( context, shape )
+             applyFill(context, shape)
              g.color = color
              break
           case Paint:
@@ -141,13 +149,15 @@ abstract class VisualGfxNode extends AbstractDrawableGfxNode {
              g.paint = paint
              break
           case PaintProvider:
+             if(!__f.enabled) break
              def paint = g.paint
              g.paint = __f.getPaint(shape.bounds)
              applyFill(context, shape)
              g.paint = paint
              break
           case MultiPaintProvider:
-             __f.apply( context, shape )
+             if(!__f.enabled) break
+             __f.apply(context, shape)
              break
           default:
              // no fill
@@ -163,19 +173,20 @@ abstract class VisualGfxNode extends AbstractDrawableGfxNode {
        def g = context.g
        def __bc = _runtime.borderColor
        def __st = _runtime.stroke
-       //def __bp = findLast{ it instanceof BorderPaintProvider }
+       def __bp = findLast{ it instanceof BorderPaintProvider }
 
-       /*if( __bp && __bp.paint ){
+       if(__bp && __bp.paint){
+          if(!__bp.paint.enabled) return
           def __ss = __st.createStrokedShape(shape)
           if( __bp.paint instanceof MultiPaintProvider ){
              __bp.apply(context,__ss)
-          }else{
+          } else {
              def __p = g.paint
-             g.paint = __bp.getPaint(context,__ss.bounds2D)
+             g.paint = __bp.getPaint(__ss.bounds2D)
              g.fill(__ss)
              g.paint = __p
           }
-       }else*/ if( __bc ){
+       }else if( __bc ){
           def __pc = g.color
           def __ps = g.stroke
           g.color = __bc

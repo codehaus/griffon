@@ -47,6 +47,18 @@ class LinearGradientPaintNode extends AbstractLinearGradientPaintNode implements
       'nocycle'
    }
 
+   LinearGradientPaintNode clone() {
+       LinearGradientPaintNode node = new LinearGradientPaintNode( x1: x1,
+                                                                   x2: x2,
+                                                                   y1: y1,
+                                                                   y2: y2,
+                                                                   cycle: cycle,
+                                                                   stretch: stretch,
+                                                                   fit: fit)
+       stops.each{ stop -> node.addStop(stop.clone()) }
+       return node
+   }
+
 //    void setTransforms(Transforms transforms) {
 //       def oldValue = _transforms
 //       if(_transforms) _transforms.removePropertyChangeListener(this)
@@ -83,7 +95,7 @@ class LinearGradientPaintNode extends AbstractLinearGradientPaintNode implements
    }
 
    public void propertyChange(PropertyChangeEvent event){
-      if(event.source == _transforms || stops.contains(event.source)){
+      if(/*event.source == _transforms ||*/ stops.contains(event.source)){
          onDirty(event)
       }else{
          super.propertyChange(event)
@@ -108,7 +120,7 @@ class LinearGradientPaintNode extends AbstractLinearGradientPaintNode implements
          GradientStop stop = stops[i]
          fractions[i] = stop.offset
          colors[i] = stop.color
-         colors[i] = colors[i].derive(alpha: stop.opacity)
+         if(!Float.isNaN(stop.opacity)) colors[i] = colors[i].derive(alpha: stop.opacity)
       }
 
       AffineTransform transform = new AffineTransform()

@@ -15,8 +15,11 @@
 
 package griffon.builder.gfx.runtime
 
+import griffon.builder.gfx.GfxContext
+
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 public interface GfxRuntime {
+   GfxContext getContext()
 }

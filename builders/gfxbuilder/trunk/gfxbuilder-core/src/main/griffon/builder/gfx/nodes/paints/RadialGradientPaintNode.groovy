@@ -45,6 +45,7 @@ class RadialGradientPaintNode extends AbstractPaintNode implements MultipleGradi
    @GfxAttribute(alias="r") double radius = Double.NaN
    @GfxAttribute(alias="c") def cycle = 'nocycle'
    @GfxAttribute(alias="f") boolean fit = true
+   @GfxAttribute(alias="a") boolean absolute = true
    @GfxAttribute def linkTo
 
    RadialGradientPaintNode() {
@@ -70,6 +71,19 @@ class RadialGradientPaintNode extends AbstractPaintNode implements MultipleGradi
 
    public List getStops(){
       return Collections.unmodifiableList(stops)
+   }
+
+   RadialGradientPaintNode clone() {
+       RadialGradientPaintNode node = new RadialGradientPaintNode(cx: cx,
+                                                                  cy: cy,
+                                                                  fx: fx,
+                                                                  fy: fy,
+                                                                  r: r,
+                                                                  cycle: cycle,
+                                                                  fit: fit)
+       stops.each{ stop -> node.addStop(stop.clone()) }
+       node.transforms = _transforms.clone()
+       return node
    }
 
    public void addStop(GradientStop stop) {
@@ -98,7 +112,7 @@ class RadialGradientPaintNode extends AbstractPaintNode implements MultipleGradi
    void onDirty(PropertyChangeEvent event) {
       if(event.propertyName == "linkTo" && event.newValue instanceof MultipleGradientPaintProvider){
          even.newValue.stops.each { stop ->
-            addStop(stop) 
+            addStop(stop)
          }
       }
       super.onDirty(event)
@@ -108,10 +122,10 @@ class RadialGradientPaintNode extends AbstractPaintNode implements MultipleGradi
       double bcx = bounds.x + (bounds.width/2)
       double bcy = bounds.y + (bounds.height/2)
 
-      double _cx = Double.isNaN(cx) ? bcx : cx
-      double _cy = Double.isNaN(cy) ? bcy : cy
-      double _fx = Double.isNaN(fx) ? _cx : fx
-      double _fy = Double.isNaN(fy) ? _cy : fy
+      double _cx = Double.isNaN(cx) ? bcx : cx + bounds.x
+      double _cy = Double.isNaN(cy) ? bcy : cy + bounds.y
+      double _fx = Double.isNaN(fx) ? _cx : fx + bounds.x
+      double _fy = Double.isNaN(fy) ? _cy : fy + bounds.y
       double _r  = Double.isNaN(r)  ? min(bounds.width/2, bounds.height/2) : r
       double _rx = bounds.width/2
       double _ry = bounds.height/2
@@ -119,6 +133,9 @@ class RadialGradientPaintNode extends AbstractPaintNode implements MultipleGradi
       double _sy = bounds.height/(_r*2)
       double _tx = _cx-((_cx/_r)*_rx)
       double _ty = _cy-((_cy/_r)*_ry)
+
+//       println([this,[cx,cy],[fx,fy],[r],bounds])
+//       println([this,[_cx,_cy],[_fx,_fy],[_rx,_ry,_r],[_sx,_sy],[_tx,_ty]])
 
       AffineTransform transform = new AffineTransform()
       if(fit) {
@@ -135,7 +152,7 @@ class RadialGradientPaintNode extends AbstractPaintNode implements MultipleGradi
          GradientStop stop = stops[i]
          fractions[i] = stop.offset
          colors[i] = stop.color
-         colors[i] = colors[i].derive(alpha: stop.opacity)
+         if(!Float.isNaN(stop.opacity)) colors[i] = colors[i].derive(alpha: stop.opacity)
       }
 
       return new RadialGradientPaint( new Point2D.Float(_cx as float, _cy as float),
@@ -152,11 +169,11 @@ class RadialGradientPaintNode extends AbstractPaintNode implements MultipleGradi
       if( cycle instanceof CycleMethod ){
          return cycle
       }else if( cycle instanceof String ){
-         if( "nocycle".compareToIgnoreCase( cycle ) == 0 || "pad".compareToIgnoreCase( cycle ) == 0 ){
+         if( "nocycle".compareToIgnoreCase(cycle) == 0 || "pad".compareToIgnoreCase(cycle) == 0 ){
             return CycleMethod.NO_CYCLE
-         }else if( "reflect".compareToIgnoreCase( cycle ) == 0 ){
+         }else if( "reflect".compareToIgnoreCase(cycle) == 0 ){
             return CycleMethod.REFLECT
-         }else if( "repeat".compareToIgnoreCase( cycle ) == 0 ){
+         }else if( "repeat".compareToIgnoreCase(cycle) == 0 ){
             return CycleMethod.REPEAT
          }else{
             throw new IllegalStateException( "'cycle=" + cycle

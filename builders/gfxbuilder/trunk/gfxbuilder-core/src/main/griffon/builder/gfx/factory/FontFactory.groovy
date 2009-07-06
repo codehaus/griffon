@@ -18,7 +18,7 @@ package griffon.builder.gfx.factory
 
 import griffon.builder.gfx.nodes.misc.FontNode
 import griffon.builder.gfx.nodes.misc.GroupNode
-//import griffon.builder.gfx.nodes.shapes.TextNode
+import griffon.builder.gfx.nodes.shapes.TextNode
 import griffon.builder.gfx.nodes.strokes.TextStrokeNode
 
 import java.awt.Font
@@ -47,12 +47,12 @@ class FontFactory extends AbstractGfxFactory {
     }
 
     public void setParent( FactoryBuilderSupport builder, Object parent, Object child ) {
-       if( parent instanceof GroupNode /*|| parent instanceof TextNode*/ ) {
+       if( parent instanceof GroupNode || parent instanceof TextNode ) {
           parent << child
        } else if( parent instanceof TextStrokeNode ){
           parent.font = child
        } else {
-          throw new IllegalArgumentException("font() can only be nested in [group,text,textStroke]")
+          throw new IllegalArgumentException("font() can only be nested in [group, text, textStroke]")
        }
     }
 

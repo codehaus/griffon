@@ -17,14 +17,17 @@ package griffon.builder.gfx.nodes.paints
 
 import griffon.builder.gfx.GfxNode
 import griffon.builder.gfx.GfxContext
+import griffon.builder.gfx.GfxAttribute
 import griffon.builder.gfx.PaintProvider
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 abstract class AbstractPaintNode extends GfxNode implements PaintProvider {
+    @GfxAttribute(alias="e") boolean enabled = true
+
     public AbstractPaintNode(String name) {
-       super( name )
+       super(name)
     }
 
     void apply(GfxContext context) {}

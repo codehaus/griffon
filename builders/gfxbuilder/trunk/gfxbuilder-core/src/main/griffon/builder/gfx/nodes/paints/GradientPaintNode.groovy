@@ -19,6 +19,7 @@ import java.awt.Color
 import java.awt.Paint
 import java.awt.GradientPaint
 import java.awt.geom.Point2D
+import griffon.builder.gfx.Colors
 import griffon.builder.gfx.GfxAttribute
 
 /**
@@ -33,7 +34,27 @@ class GradientPaintNode extends AbstractLinearGradientPaintNode {
        cycle = getDefaultCycleValue()
     }
 
-    protected Paint makePaint( x1, y1, x2, y2 ){
+//     void setColor1(String color) {
+//         setColor1((Color) Colors.getColor(color))
+//     }
+// 
+//     void setColor2(String color) {
+//         setColor2((Color) Colors.getColor(color))
+//     }
+
+    GradientPaintNode clone() {
+       new GradientPaintNode(color1: color1,
+                             color2: color2,
+                             x1: x1,
+                             x2: x2,
+                             y1: y1,
+                             y2: y2,
+                             cycle: cycle,
+                             stretch: stretch,
+                             fit: fit)
+    }
+
+    protected Paint makePaint(x1, y1, x2, y2){
        return new GradientPaint( new Point2D.Double(x1,y1),
                                  color1,
                                  new Point2D.Double(x2,y2),

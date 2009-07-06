@@ -23,12 +23,19 @@ import griffon.builder.gfx.GfxAttribute
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class RotateTransform extends AbstractTransform {
-    @GfxAttribute def x = 0d
-    @GfxAttribute def y = 0d
-    @GfxAttribute(alias="a") def angle = 0d
+    @GfxAttribute double x = 0d
+    @GfxAttribute double y = 0d
+    @GfxAttribute(alias="a") double angle = 0d
 
     RotateTransform() {
        super("rotate")
+    }
+
+    RotateTransform clone() {
+       new RotateTransform(x: x,
+                           y: y,
+                           angle: angle,
+                           enabled: enabled)
     }
 
     AffineTransform getTransform() {

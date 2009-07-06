@@ -38,6 +38,7 @@ class Transforms extends GfxNode {
     }
 
     void apply(GfxContext context) {
+       if(!isEnabled()) return
        AffineTransform transform = new AffineTransform()
        transform.concatenate context.g.transform
        concatenateTo(transform)
@@ -45,6 +46,7 @@ class Transforms extends GfxNode {
     }
 
     void concatenateTo(AffineTransform transform) {
+       if(!isEnabled()) return
        _transforms.each { t ->
           if(t.transform) transform.concatenate t.transform
        }
@@ -52,6 +54,12 @@ class Transforms extends GfxNode {
 
     Transform getAt(String name) {
        return _transforms.find{ it?.name == name }
+    }
+
+    Transforms clone() {
+       Transforms node = new Transforms(enabled: enabled)
+       _transforms.each{ node.addTransform(it.clone()) }
+       node
     }
 
     void addTransform(Transform transform) {

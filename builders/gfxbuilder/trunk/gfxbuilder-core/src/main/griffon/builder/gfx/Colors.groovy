@@ -32,9 +32,9 @@ public class Colors {
            setColor(name,value)
         }
         */
-        Colors.metaClass.'static'.propertyMissing << { String name ->
-           getColor(name)
-        }
+//         Colors.metaClass.'static'.propertyMissing << { String name ->
+//            instance.getColor(name)
+//         }
     }
 
     /*
@@ -60,15 +60,35 @@ public class Colors {
      * @param name the name of the color to retrieve
      * @return the named color, null if not found
      */
-    public static Color getColor( String name ) {
+    public static Color getColor(String name) {
        return instance._getColor(name)
     }
 
-    public static Color getColor( Color color ) {
+    public static Color getColor(Color color) {
        return instance._getColor(color)
     }
 
-    public static Color getColor( Number value ) {
+    public static Color getColor(Number value) {
+       return instance._getColor(value)
+    }
+
+    public static Color getColor(Map value) {
+       return instance._getColor(value)
+    }
+
+    public static Color get(String name) {
+       return instance._getColor(name)
+    }
+
+    public static Color get(Color color) {
+       return instance._getColor(color)
+    }
+
+    public static Color get(Number value) {
+       return instance._getColor(value)
+    }
+
+    public static Color get(Map value) {
        return instance._getColor(value)
     }
 
@@ -79,19 +99,23 @@ public class Colors {
      * @param name the name of the color to store
      * @param color the Color to store
      */
-    public static void setColor( String name, Color color ) {
+    public static void setColor(String name, Color color) {
        instance._setColor(name,color)
     }
 
-    def propertyMissing( String name ) {
+    public static void set(String name, Color color) {
+       instance._setColor(name,color)
+    }
+
+    def propertyMissing(String name) {
        return getColor(name)
     }
 
-    void propertyMissing( String name, value ) {
+    void propertyMissing(String name, value) {
        setColor( name, value )
     }
 
-    private Color _getColor( String name ) {
+    private Color _getColor(String name) {
         if(!name) return null
         Color color = customColors[normalize(name)]
         if( color == null ){
@@ -114,15 +138,45 @@ public class Colors {
         return color
     }
 
-    private Color _getColor( Color color ){
+    private Color _getColor(Color color){
        return color
     }
 
-    private Color _getColor( Number value ){
+    private Color _getColor(Number value){
        return new Color( value.intValue(), true )
     }
 
-    private void _setColor( String name, Color color ) {
+    private Color _getColor(Map map){
+        if(map.red == null)   map.red =   map.remove("r")
+        if(map.green == null) map.green = map.remove("g")
+        if(map.blue == null)  map.blue =  map.remove("b")
+        if(map.alpha == null) map.alpha = map.remove("a")
+
+        if( map.containsKey( "red" )   ||
+            map.containsKey( "green" ) ||
+            map.containsKey( "blue" )  ||
+            map.containsKey( "alpha") ){
+
+            def red = map.remove( "red" )
+            def green = map.remove( "green" )
+            def blue = map.remove( "blue" )
+            def alpha = map.remove( "alpha" )
+
+            red = red != null ? red : 0
+            green = green != null ? green : 0
+            blue = blue != null ? blue : 0
+            alpha = alpha != null ? alpha : 255
+
+            red = red > 1 ? red/255 : red
+            green = green > 1 ? green/255 : green
+            blue = blue > 1 ? blue/255 : blue
+            alpha = alpha > 1 ? alpha/255 : alpha
+
+            return new Color(red as float, green as float, blue as float, alpha as float)
+        }
+    }
+
+    private void _setColor(String name, Color color) {
         if(!name) return
         customColors[normalize(name)] = color
     }

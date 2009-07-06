@@ -16,6 +16,7 @@
 package griffon.builder.gfx.nodes.paints
 
 import java.awt.Color
+import griffon.builder.gfx.Colors
 import griffon.builder.gfx.GfxAttribute
 
 /**
@@ -24,8 +25,19 @@ import griffon.builder.gfx.GfxAttribute
 class GradientStop {
     @GfxAttribute(alias="c") Color color
     @GfxAttribute(alias="s") float offset = 0f
-    @GfxAttribute(alias="o") float opacity = 1f
+    @GfxAttribute(alias="o") float opacity = Float.NaN
     @GfxAttribute(alias="n") String name
+
+//     public void setColor(String color) {
+//        setColor((Color) Colors.getColor(color))
+//     }
+
+    GradientStop clone() {
+       new GradientStop(color: color,
+                        offset: offset,
+                        opacity: opacity,
+                        name: name)
+    }
 
     public String toString(){
        return "stop[offset: $offset, color: $color, opacity: $opacity, name: $name]"

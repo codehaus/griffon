@@ -17,36 +17,35 @@ package griffon.builder.gfx.nodes.shapes
 
 import java.awt.Shape
 import java.awt.geom.Area
-import griffon.builder.gfx.GfxAttribute
-import griffon.builder.gfx.VisualGfxNode
-import griffon.builder.gfx.runtime.VisualGfxRuntime
+import griffon.builder.gfx.ShapeProvider
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-public class AreaNode extends AbstractShapeGfxNode {
-    private String areaMethod
+class AreaNode extends AbstractShapeGfxNode {
+    private final String areaMethod
 
-    public AreaNode(String name, String methodName) {
+    AreaNode(String name, String methodName) {
         super("area-"+name)
         this.areaMethod = methodName
     }
 
     Shape calculateShape() {
-        def shapeNodes = _nodes.findAll{ it instanceof VisualGfxNode }
+        def shapeNodes = nodes.findAll{ it instanceof ShapeProvider }
         if( !shapeNodes ) {
            throw new IllegalArgumentException("No nested shapes on ${this}")
         }
 
-        def shapes = shapeNodes.inject([]) { node, list ->
+        List shapes = []
+        for(node in shapeNodes) {
            def s = node.localShape
-           if(s) list << s
-           list
+           if(s) shapes << s
         }
 
         Area area = new Area(shapes[0])
-        gos[1..-1].each { shape ->
-           area."$areaMethod" new Area(shape)
+        shapes[1..-1].each { s ->
+           area."$areaMethod"(s instanceof Area ? s : new Area(s))
         }
+        area
     }
 }

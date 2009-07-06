@@ -13,28 +13,35 @@
  * See the License for the specific language governing permissions and
  */
 
-package griffon.builder.gfx.nodes.transforms
+package griffon.builder.gfx.nodes.paints
 
-import java.awt.geom.AffineTransform
-
+import java.awt.Color
+import java.awt.Paint
+import java.awt.GradientPaint
+import java.awt.geom.Rectangle2D
+import griffon.builder.gfx.Colors
 import griffon.builder.gfx.GfxAttribute
+import griffon.builder.gfx.GfxContext
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-class ShearTransform extends AbstractTransform {
-    @GfxAttribute double x = 1d
-    @GfxAttribute double y = 1d
+final class ColorPaintNode extends AbstractPaintNode {
+    @GfxAttribute(alias="c") def/*Color|String*/ color = Color.BLACK
 
-    ShearTransform() {
-       super("shear")
+    ColorPaintNode(){
+       super("colorPaint")
     }
 
-    ShearTransform clone() {
-       new ShearTransform(x: x, y: y, enabled: enabled)
+    ColorPaintNode clone() {
+       new ColorPaintNode(color: color)
     }
 
-    AffineTransform getTransform() {
-       AffineTransform.getShearInstance(x as double, y as double)
+    Paint getPaint(Rectangle2D bounds) {
+       if( color instanceof String ){
+          return Colors.getColor( color )
+       }else if(color instanceof Color){
+          return color
+       }
     }
 }

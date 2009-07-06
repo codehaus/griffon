@@ -15,6 +15,7 @@
 
 package griffon.builder.gfx
 
+import java.awt.Shape
 import java.beans.PropertyChangeEvent
 
 import griffon.builder.gfx.runtime.*
@@ -28,10 +29,12 @@ abstract class CustomGfxNode extends AbstractDrawableGfxNode {
 
    CustomGfxNode() {
       super("customNode")
+      passThrough = false
    }
 
    CustomGfxNode(String name) {
       super(name)
+      passThrough = false
    }
 
    Drawable getNode() {
@@ -43,6 +46,14 @@ abstract class CustomGfxNode extends AbstractDrawableGfxNode {
    }
 
    abstract Drawable createNode(GfxBuilder builder)
+
+   Shape getShape() {
+      getNode().getShape()
+   }
+
+   Shape getLocalShape() {
+      getNode().getLocalShape()
+   }
 
    void propertyChanged(PropertyChangeEvent event) {
       if(event.source == _node) {
@@ -73,6 +84,6 @@ abstract class CustomGfxNode extends AbstractDrawableGfxNode {
    }
 
    protected boolean shouldSkip(GfxContext context) {
-      !visible || !_node?.visible
+      !visible || _node.shouldSkip(context)
    }
 }

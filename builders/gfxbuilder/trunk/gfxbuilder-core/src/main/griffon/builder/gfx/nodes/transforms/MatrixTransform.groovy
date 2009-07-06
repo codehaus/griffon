@@ -34,6 +34,16 @@ class MatrixTransform extends AbstractTransform {
        super("matrix")
     }
 
+    MatrixTransform clone() {
+       new MatrixTransform(m00: m00,
+                           m10: m10,
+                           m01: m01,
+                           m11: m11,
+                           m02: m02,
+                           m12: m12,
+                           enabled: enabled)
+    }
+
     AffineTransform getTransform() {
        return new AffineTransform( m00 as double,
                                    m10 as double,
