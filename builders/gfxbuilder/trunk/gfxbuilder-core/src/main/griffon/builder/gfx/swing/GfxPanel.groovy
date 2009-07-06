@@ -92,7 +92,6 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
              _context.g = img.getGraphics()
              _context.g.clip = g.clip
              _context.g.color = g.color
-             GraphicsConfiguration gc = GraphicsConfiguration
              _context.g.clearRect(0, 0, getWidth() as int, getHeight() as int)
              try {
                  _context.eventTargets = []
@@ -239,6 +238,6 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
 
      private BufferedImage createCompatibleImage(int width, int height) {
         GraphicsConfiguration gc = GraphicsEnvironment.localGraphicsEnvironment.defaultScreenDevice.defaultConfiguration
-        return gc.createCompatibleImage( width as int, height as int, Transparency.TRANSLUCENT as int )
+        return gc.createCompatibleImage(width as int, height as int, Transparency.TRANSLUCENT as int)
      }
 }

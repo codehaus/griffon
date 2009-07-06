@@ -16,8 +16,9 @@
 
 package griffon.builder.gfx.factory
 
-import griffon.builder.gfx.Colors
 import java.awt.Color
+import com.camick.awt.HSLColor
+import griffon.builder.gfx.Colors
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -26,10 +27,10 @@ class ColorFactory extends AbstractGfxFactory {
     public Object newInstance( FactoryBuilderSupport builder, Object name, Object value,
           Map properties ) throws InstantiationException, IllegalAccessException {
         if( value != null ){
-            if( Color.class.isAssignableFrom( value.getClass() ) ){
+            if(Color.class.isAssignableFrom(value.getClass())){
                 return value
             }else{
-                return Colors.getColor( value )
+                return Colors.getColor(value)
             }
         }
 
@@ -58,10 +59,66 @@ class ColorFactory extends AbstractGfxFactory {
             blue = blue > 1 ? blue/255 : blue
             alpha = alpha > 1 ? alpha/255 : alpha
 
-            return new Color( red as float, green as float, blue as float, alpha as float )
+            return new Color(red as float, green as float, blue as float, alpha as float)
         }
 
         return Color.BLACK
+    }
+
+    public void setParent( FactoryBuilderSupport builder, Object parent, Object child ){
+       // empty
+    }
+
+    public boolean isLeaf(){
+        return true
+    }
+}
+
+/**
+ * @author Andres Almiray <aalmiray@users.sourceforge.net>
+ */
+class HSLColorFactory extends AbstractGfxFactory {
+    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value,
+          Map properties ) throws InstantiationException, IllegalAccessException {
+        HSLColor hsl = new HSLColor(Color.BLACK)
+        if( value != null ){
+            if( Color.class.isAssignableFrom(value.getClass())){
+                return value
+            } else if(HSLColor.class.isAssignableFrom(value.getClass())){
+                hsl = value
+            } else {
+               return Colors.getColor(value)
+            }
+        }
+
+        if( properties.hue == null )        properties.hue        = properties.remove("h")
+        if( properties.saturation == null ) properties.saturation = properties.remove("s")
+        if( properties.luminance == null )  properties.luminance  = properties.remove("l")
+        if( properties.alpha == null )      properties.alpha      = properties.remove("a")
+
+        if( properties.containsKey("hue") ||
+            properties.containsKey("saturation") ||
+            properties.containsKey("luminance") ||
+            properties.containsKey("alpha")){
+
+            def h = properties.remove("hue")
+            def s = properties.remove("saturation")
+            def l = properties.remove("luminance")
+            def a = properties.remove("alpha")
+            def shade = properties.remove("shade")
+            def tone = properties.remove("tone")
+
+            def _h = h != null ? h : hsl.hue
+            def _s = s != null ? s : hsl.saturation
+            def _l = l != null ? l : hsl.luminance
+            def _a = a != null ? a : hsl.alpha
+
+            hsl = new HSLColor(_h as float, _s as float, _l as float, _a as float)
+            if(shade != null) hsl = new HSLColor(hsl.adjustShade(shade as float))
+            if(tone != null) hsl = new HSLColor(hsl.adjustTone(tone as float))
+        }
+
+        return hsl.getRGB()
     }
 
     public void setParent( FactoryBuilderSupport builder, Object parent, Object child ){
