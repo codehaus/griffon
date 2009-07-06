@@ -16,7 +16,11 @@
 package griffon.builder.gfx.swing
 
 import java.awt.Graphics
+import java.awt.GraphicsConfiguration
+import java.awt.GraphicsEnvironment
 import java.awt.LayoutManager
+import java.awt.Transparency
+import java.awt.image.BufferedImage
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import java.awt.event.MouseEvent
@@ -82,15 +86,21 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
      }
 
      public void paintComponent(Graphics g){
-         _context.g = g
          _context.component = this
-         if(_node){
-             g.clearRect(0, 0, size.width as int, size.height as int)
-             try{
+         if(_node) {
+             def img = createCompatibleImage(getWidth(), getHeight())
+             _context.g = img.getGraphics()
+             _context.g.clip = g.clip
+             _context.g.color = g.color
+             GraphicsConfiguration gc = GraphicsConfiguration
+             _context.g.clearRect(0, 0, getWidth() as int, getHeight() as int)
+             try {
                  _context.eventTargets = []
                  _context.groupSettings = [:]
                  _node.apply(_context)
-             }catch(Exception e){
+                 g.drawImage(img, 0, 0, this)
+                 _context.g.dispose()
+             } catch(Exception e) {
                  fireGfxErrorEvent(e)
              }
          }
@@ -172,7 +182,7 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
 //                    target.mouseEntered( inputEvent )
 //                 }
 //                 target.mouseMoved( inputEvent )
-         }else if(lastTargets){
+         } else if(lastTargets) {
             lastTargets.each { it.mouseExited(new GfxInputEvent(this, e, it)) }
             lastTargets.clear()
          }
@@ -225,5 +235,10 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
              }
          }
          targets
+     }
+
+     private BufferedImage createCompatibleImage(int width, int height) {
+        GraphicsConfiguration gc = GraphicsEnvironment.localGraphicsEnvironment.defaultScreenDevice.defaultConfiguration
+        return gc.createCompatibleImage( width as int, height as int, Transparency.TRANSLUCENT as int )
      }
 }
