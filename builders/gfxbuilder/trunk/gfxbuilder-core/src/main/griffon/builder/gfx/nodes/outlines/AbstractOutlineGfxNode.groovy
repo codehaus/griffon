@@ -16,7 +16,7 @@
 package griffon.builder.gfx.nodes.outlines
 
 import griffon.builder.gfx.GfxContext
-import griffon.builder.gfx.VisualGfxNode
+import griffon.builder.gfx.AbstractGfxNode
 import griffon.builder.gfx.OutlineProvider
 
 import java.awt.Shape
@@ -24,7 +24,7 @@ import java.awt.Shape
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-abstract class AbstractOutlineGfxNode extends VisualGfxNode implements OutlineProvider {
+abstract class AbstractOutlineGfxNode extends AbstractGfxNode implements OutlineProvider {
    public AbstractOutlineGfxNode(String name) {
       super(name)
    }

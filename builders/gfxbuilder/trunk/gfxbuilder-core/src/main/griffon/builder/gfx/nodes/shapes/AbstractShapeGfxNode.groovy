@@ -15,7 +15,7 @@
 
 package griffon.builder.gfx.nodes.shapes
 
-import griffon.builder.gfx.VisualGfxNode
+import griffon.builder.gfx.AbstractGfxNode
 import griffon.builder.gfx.ShapeProvider
 
 import java.awt.Shape
@@ -24,7 +24,7 @@ import java.awt.geom.Area
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-abstract class AbstractShapeGfxNode extends VisualGfxNode implements ShapeProvider {
+abstract class AbstractShapeGfxNode extends AbstractGfxNode implements ShapeProvider {
    public AbstractShapeGfxNode(String name) {
       super( name )
    }

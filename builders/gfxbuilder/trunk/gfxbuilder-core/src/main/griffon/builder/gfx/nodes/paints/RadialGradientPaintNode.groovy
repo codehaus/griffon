@@ -53,6 +53,20 @@ class RadialGradientPaintNode extends AbstractPaintNode implements MultipleGradi
       setTransforms(new Transforms())
    }
 
+   RadialGradientPaintNode(RadialGradientPaintNode paint) {
+      super("radialGradient")
+//       setTransforms(new Transforms())
+      cx = paint.centerPoint.x
+      cy = paint.centerPoint.y
+      fx = paint.focusPoint.x
+      fy = paint.focusPoint.y
+      radius = paint.radius
+      cycle = paint.cycleMethod
+      paint.colors.eachWithIndex { c, int i ->
+         addStop(new GradientStop(offset: paint.fractions[i], color: c))
+      }
+   }
+
    void setTransforms(Transforms transforms) {
       def oldValue = _transforms
       if(_transforms) _transforms.removePropertyChangeListener(this)

@@ -13,31 +13,22 @@
  * See the License for the specific language governing permissions and
  */
 
-package griffon.builder.gfx
+package griffon.builder.gfx.event
+
+import java.util.EventObject
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-interface GfxInputListener {
-    void keyPressed(GfxInputEvent e)
+final class GfxErrorEvent extends EventObject {
+    private final Throwable cause
 
-    void keyReleased(GfxInputEvent e)
+    public GfxErrorEvent(Object source, Throwable cause) {
+        super( source )
+        this.cause = cause
+    }
 
-    void keyTyped(GfxInputEvent e)
-
-    void mouseClicked(GfxInputEvent e)
-
-    void mouseDragged(GfxInputEvent e)
-
-    void mouseEntered(GfxInputEvent e)
-
-    void mouseExited(GfxInputEvent e)
-
-    void mouseMoved(GfxInputEvent e)
-
-    void mousePressed(GfxInputEvent e)
-
-    void mouseReleased(GfxInputEvent e)
-
-    void mouseWheelMoved(GfxInputEvent e)
+    public Throwable getCause() {
+        return cause
+    }
 }

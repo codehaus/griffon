@@ -27,7 +27,7 @@ public class PropsFactory extends AbstractGfxFactory {
 
     public void setParent( FactoryBuilderSupport builder, Object parent, Object child ) {
         // will throw an exception if parent doesn't accept custom props
-        parent.props.putAll( child )
+        parent.props.putAll(child)
     }
 
     public boolean isLeaf(){

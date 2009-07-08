@@ -21,6 +21,6 @@ import java.awt.image.BufferedImage
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-public interface FilterProvider {
-    BufferedImage filter( BufferedImage src, BufferedImage dst, Shape clip )
+interface FilterProvider {
+    BufferedImage filter(BufferedImage src, BufferedImage dst, Shape clip)
 }

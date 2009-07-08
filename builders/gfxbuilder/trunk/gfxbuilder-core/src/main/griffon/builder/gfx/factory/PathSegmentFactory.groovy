@@ -17,7 +17,7 @@
 package griffon.builder.gfx.factory
 
 import java.awt.Shape
-import griffon.builder.gfx.VisualGfxNode
+import griffon.builder.gfx.DrawableNode
 import griffon.builder.gfx.nodes.shapes.PathNode
 import griffon.builder.gfx.nodes.shapes.path.ShapePathSegment
 
@@ -55,7 +55,7 @@ class ShapePathSegmentFactory extends GfxBeanFactory {
    }
 
    public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-      if(child instanceof Shape || child instanceof VisualGfxNode) {
+      if(child instanceof Shape || child instanceof DrawableNode) {
          parent.setShape(child)
       } else {
          throw new RuntimeException("Node ${parent} does not accept nesting of ${child}.")

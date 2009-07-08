@@ -23,6 +23,6 @@ import java.awt.geom.Rectangle2D
  *
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-public interface PaintProvider {
+interface PaintProvider {
     Paint getPaint(Rectangle2D bounds)
 }

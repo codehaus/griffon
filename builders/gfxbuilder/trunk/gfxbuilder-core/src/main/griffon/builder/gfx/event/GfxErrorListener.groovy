@@ -13,28 +13,11 @@
  * See the License for the specific language governing permissions and
  */
 
-package griffon.builder.gfx
-
-import java.util.EventObject
+package griffon.builder.gfx.event
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-final class GfxInputEvent extends EventObject {
-    private final EventObject event
-    private final GfxNode target
-
-    GfxInputEvent( Object source, EventObject event, GfxNode target ) {
-        super( source )
-        this.event = event
-        this.target = target
-    }
-
-    EventObject getEvent() {
-        return event
-    }
-
-    GfxNode getTarget() {
-        return target
-    }
+interface GfxErrorListener {
+    void errorOccurred(GfxErrorEvent event)
 }

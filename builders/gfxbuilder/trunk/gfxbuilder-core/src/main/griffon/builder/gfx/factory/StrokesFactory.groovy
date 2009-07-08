@@ -17,7 +17,7 @@
 package griffon.builder.gfx.factory
 
 import java.awt.Stroke
-import griffon.builder.gfx.VisualGfxNode
+import griffon.builder.gfx.ContainerNode
 import griffon.builder.gfx.StrokeProvider
 import griffon.builder.gfx.nodes.strokes.*
 
@@ -34,7 +34,7 @@ class StrokesFactory extends GfxBeanFactory {
     }
 
     public void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-       if(parent instanceof VisualGfxNode || parent instanceof ComposableStroke){
+       if(parent instanceof ContainerNode || parent instanceof ComposableStroke){
           parent << node
        } else {
           throw new IllegalArgumentException("node can not be nested inside $parent")
@@ -59,7 +59,7 @@ class ShapeStrokeFactory extends GfxBeanFactory {
     }
 
     public void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-       if(parent instanceof VisualGfxNode || parent instanceof ComposableStroke){
+       if(parent instanceof ContainerNode || parent instanceof ComposableStroke){
           parent << node
        } else {
           throw new IllegalArgumentException("node can not be nested inside $parent")
@@ -67,7 +67,7 @@ class ShapeStrokeFactory extends GfxBeanFactory {
     }
 
     public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-       if(child instanceof VisualGfxNode) {
+       if(child instanceof ContainerNode) {
           parent << child
        } else {
           throw new IllegalArgumentException("$child can not be nested inside $parent")
@@ -89,7 +89,7 @@ public class StrokeFactory extends AbstractGfxFactory {
     }
 
     public void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-       if(parent instanceof VisualGfxNode || parent instanceof ComposableStroke){
+       if(parent instanceof ContainerNode || parent instanceof ComposableStroke){
           parent << node
        } else {
           throw new IllegalArgumentException("node can not be nested inside $parent")

@@ -16,9 +16,9 @@
 
 package griffon.builder.gfx.factory
 
+import java.awt.Color
 import griffon.builder.gfx.Colors
 import griffon.builder.gfx.nodes.misc.BackgroundNode
-import java.awt.Color
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>

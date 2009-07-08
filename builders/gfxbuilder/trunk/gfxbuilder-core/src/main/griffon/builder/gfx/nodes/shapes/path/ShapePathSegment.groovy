@@ -19,7 +19,7 @@ import java.awt.Shape
 import java.awt.geom.GeneralPath
 import java.beans.PropertyChangeEvent
 import griffon.builder.gfx.GfxAttribute
-import griffon.builder.gfx.VisualGfxNode
+import griffon.builder.gfx.DrawableNode
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -36,8 +36,8 @@ class ShapePathSegment extends AbstractPathSegment {
         shapes = shape
     }
 
-    public void setShape(VisualGfxNode node){
-        if(shape instanceof VisualGfxNode) {
+    public void setShape(DrawableNode node){
+        if(shape instanceof DrawableNode) {
            shape.removePropertyChangeListener(this)
         }
         node.addPropertyChangeListener(this)
@@ -53,6 +53,10 @@ class ShapePathSegment extends AbstractPathSegment {
    }
 
     void apply( GeneralPath path ) {
-       path.append(shape, connect as boolean)
+       if(shape instanceof Shape) {
+          path.append(shape, connect as boolean)
+       } else {
+          path.append(shape.localShape, connect as boolean)
+       }
     }
 }

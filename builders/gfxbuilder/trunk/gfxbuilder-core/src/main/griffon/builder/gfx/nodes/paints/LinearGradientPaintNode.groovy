@@ -43,6 +43,19 @@ class LinearGradientPaintNode extends AbstractLinearGradientPaintNode implements
       cycle = getDefaultCycleValue()
    }
 
+   LinearGradientPaintNode(LinearGradientPaint paint) {
+      super("linearGradient")
+//       setTransforms(new Transforms())
+      x1 = paint.startPoint.x
+      y1 = paint.startPoint.y
+      x2 = paint.endPoint.x
+      y2 = paint.endPoint.y
+      cycle = paint.cycleMethod
+      paint.colors.eachWithIndex { c, int i ->
+         addStop(new GradientStop(offset: paint.fractions[i], color: c))
+      }
+   }
+
    protected def getDefaultCycleValue() {
       'nocycle'
    }

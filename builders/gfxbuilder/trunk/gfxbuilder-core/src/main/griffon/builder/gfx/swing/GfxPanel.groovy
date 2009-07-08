@@ -32,6 +32,7 @@ import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import javax.swing.JPanel
 import griffon.builder.gfx.*
+import griffon.builder.gfx.event.*
 
 /**
  * A Panel that can use a GfxOperation to draw itself.
@@ -86,6 +87,11 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
      }
 
      public void paintComponent(Graphics g){
+         if(!visible) return
+         if(!_node) {
+            super.paintComponent(g)
+            return
+         }
          _context.component = this
          if(_node) {
              def img = createCompatibleImage(getWidth(), getHeight())

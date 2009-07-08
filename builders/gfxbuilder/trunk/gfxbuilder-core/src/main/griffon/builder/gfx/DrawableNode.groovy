@@ -15,9 +15,15 @@
 
 package griffon.builder.gfx
 
+import java.awt.Shape
+
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-interface GfxErrorListener {
-    void errorOccurred( GfxErrorEvent event )
+interface DrawableNode {
+   Shape getShape()
+
+   Shape getLocalShape()
+
+   void apply(GfxContext context)
 }

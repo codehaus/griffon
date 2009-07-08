@@ -19,13 +19,16 @@ import java.awt.AlphaComposite
 import java.awt.Composite
 import java.beans.PropertyChangeEvent
 
-import griffon.builder.gfx.runtime.*
-import griffon.builder.gfx.nodes.transforms.*
+import griffon.builder.gfx.event.GfxInputEvent
+import griffon.builder.gfx.event.GfxInputListener
+import griffon.builder.gfx.runtime.GfxRuntime
+import griffon.builder.gfx.runtime.DrawableGfxRuntime
+import griffon.builder.gfx.nodes.transforms.Transforms
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-abstract class AbstractDrawableGfxNode extends AggregateGfxNode implements GfxInputListener, Drawable, Transformable {
+abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener, DrawableNode, Transformable {
    private Transforms _transforms
    protected GfxRuntime _runtime
    private previousGraphics
@@ -50,7 +53,7 @@ abstract class AbstractDrawableGfxNode extends AggregateGfxNode implements GfxIn
    @GfxAttribute(alias="c")  Composite composite = null
    @GfxAttribute(alias="pt") boolean passThrough = false
 
-   AbstractDrawableGfxNode(String name) {
+   AbstractDrawableNode(String name) {
       super(name)
       setTransforms(new Transforms())
    }
@@ -89,50 +92,56 @@ abstract class AbstractDrawableGfxNode extends AggregateGfxNode implements GfxIn
    }
 
    void keyPressed(GfxInputEvent e) {
-      if( keyPressed ) this.@keyPressed(e)
+      if(keyPressed) this.@keyPressed(e)
    }
 
    void keyReleased(GfxInputEvent e) {
-      if( keyReleased ) this.@keyReleased(e)
+      if(keyReleased) this.@keyReleased(e)
    }
 
    void keyTyped(GfxInputEvent e) {
-      if( keyTyped ) this.@keyTyped(e)
+      if(keyTyped) this.@keyTyped(e)
    }
 
    void mouseClicked(GfxInputEvent e) {
-      if( mouseClicked ) this.@mouseClicked(e)
+      if(mouseClicked) this.@mouseClicked(e)
    }
 
    void mouseDragged(GfxInputEvent e) {
-      if( mouseDragged ) this.@mouseDragged(e)
+      if(mouseDragged) this.@mouseDragged(e)
    }
 
    void mouseEntered(GfxInputEvent e) {
-      if( mouseEntered ) this.@mouseEntered(e)
+      if(mouseEntered) this.@mouseEntered(e)
    }
 
    void mouseExited(GfxInputEvent e) {
-      if( mouseExited ) this.@mouseExited(e)
+      if(mouseExited) this.@mouseExited(e)
    }
 
    void mouseMoved(GfxInputEvent e) {
-      if( mouseMoved ) this.@mouseMoved(e)
+      if(mouseMoved) this.@mouseMoved(e)
    }
 
    void mousePressed(GfxInputEvent e) {
-      if( mousePressed ) this.@mousePressed(e)
+      if(mousePressed) this.@mousePressed(e)
    }
 
    void mouseReleased(GfxInputEvent e) {
-      if( mouseReleased ) this.@mouseReleased(e)
+      if(mouseReleased) this.@mouseReleased(e)
    }
 
    void mouseWheelMoved(GfxInputEvent e) {
-      if( mouseWheelMoved ) this.@mouseWheelMoved(e)
+      if(mouseWheelMoved) this.@mouseWheelMoved(e)
    }
 
-   protected void applyBeforeAll(GfxContext context) {
+   final void apply(GfxContext context) {
+       beforeApply(context)
+       applyNode(context)
+       afterApply(context)
+   }
+
+   protected void beforeApply(GfxContext context) {
       previousGraphics = context.g
       context.g = context.g.create()
       _transforms?.apply(context)
@@ -143,13 +152,16 @@ abstract class AbstractDrawableGfxNode extends AggregateGfxNode implements GfxIn
       }
    }
 
-   protected void applyAfterAll(GfxContext context) {
+   protected abstract void applyNode(GfxContext contex)
+
+   protected void afterApply(GfxContext context) {
       context.g.dispose()
       context.g = previousGraphics
+      if(shouldSkip(context)) return
       addAsEventTarget(context)
    }
 
-   protected void addAsEventTarget(GfxContext context){
+   protected void addAsEventTarget(GfxContext context) {
       if( visible || keyPressed || keyReleased || keyTyped || mouseClicked ||
           mouseDragged || mouseEntered || mouseExited || mouseMoved ||
           mousePressed || mouseReleased || mouseWheelMoved /*|| autoDrag*/ ){

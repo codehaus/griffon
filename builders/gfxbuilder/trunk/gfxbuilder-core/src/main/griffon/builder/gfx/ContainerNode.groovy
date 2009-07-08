@@ -15,13 +15,11 @@
 
 package griffon.builder.gfx
 
-import java.awt.Shape
-
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-interface Drawable {
-   Shape getShape()
+interface ContainerNode {
+   List/*<GfxNode>*/ getNodes()
 
-   Shape getLocalShape()
+   void addNode(GfxNode node)
 }

@@ -19,7 +19,6 @@ package griffon.builder.gfx.factory
 import java.awt.geom.AffineTransform
 import griffon.builder.gfx.Transformable
 import griffon.builder.gfx.nodes.transforms.*
-import griffon.builder.gfx.nodes.transforms.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>

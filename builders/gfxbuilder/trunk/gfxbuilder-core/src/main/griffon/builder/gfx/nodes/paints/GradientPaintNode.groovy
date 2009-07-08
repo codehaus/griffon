@@ -34,6 +34,18 @@ class GradientPaintNode extends AbstractLinearGradientPaintNode {
        cycle = getDefaultCycleValue()
     }
 
+    GradientPaintNode(GradientPaint paint) {
+       super("gradientPaint")
+       cycle = getDefaultCycleValue()
+       x1 = paint.point1.x
+       y1 = paint.point1.y
+       x2 = paint.point2.x
+       y2 = paint.point2.y
+       color1 = paint.color1
+       color2 = paint.color2
+       cycle = paint.cyclic
+    }
+
 //     void setColor1(String color) {
 //         setColor1((Color) Colors.getColor(color))
 //     }

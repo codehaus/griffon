@@ -23,8 +23,8 @@ import griffon.builder.gfx.runtime.*
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-abstract class CustomGfxNode extends AbstractDrawableGfxNode {
-   private Drawable _node
+abstract class CustomGfxNode extends AbstractDrawableNode {
+   private DrawableNode _node
    private static final GfxBuilder GFXBUILDER = new GfxBuilder()
 
    CustomGfxNode() {
@@ -37,7 +37,7 @@ abstract class CustomGfxNode extends AbstractDrawableGfxNode {
       passThrough = false
    }
 
-   Drawable getNode() {
+   DrawableNode getNode() {
       if(!_node) {
          _node = createNode(GFXBUILDER)
          _node.addPropertyChangeListener(this)
@@ -45,7 +45,7 @@ abstract class CustomGfxNode extends AbstractDrawableGfxNode {
       _node
    }
 
-   abstract Drawable createNode(GfxBuilder builder)
+   abstract DrawableNode createNode(GfxBuilder builder)
 
    Shape getShape() {
       getNode().getShape()
@@ -68,19 +68,15 @@ abstract class CustomGfxNode extends AbstractDrawableGfxNode {
       super.onDirty(event)
    }
 
-   protected void applyBeforeAll(GfxContext context) {
+   protected void beforeApply(GfxContext context) {
       getNode()
-      super.applyBeforeAll(context)
+      super.beforeApply(context)
    }
 
    protected void applyNode(GfxContext context) {
       getNode()
       if( shouldSkip(context) ) return
       _node.apply(context)
-   }
-
-   protected void applyNestedNode(GfxNode node, GfxContext context) {
-      // node.apply(context)
    }
 
    protected boolean shouldSkip(GfxContext context) {

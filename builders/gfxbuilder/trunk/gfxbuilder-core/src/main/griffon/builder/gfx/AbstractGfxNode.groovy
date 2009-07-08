@@ -25,13 +25,14 @@ import java.awt.geom.Rectangle2D
 import java.beans.PropertyChangeEvent
 
 import griffon.builder.gfx.Colors
-import griffon.builder.gfx.runtime.*
+import griffon.builder.gfx.runtime.GfxRuntime
+import griffon.builder.gfx.runtime.VisualGfxRuntime
 import griffon.builder.gfx.nodes.transforms.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-abstract class VisualGfxNode extends AbstractDrawableGfxNode {
+abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
    //private ObservableMap _drag = new ObservableMap()
    private Shape _shape
    private Shape _localShape
@@ -49,7 +50,7 @@ abstract class VisualGfxNode extends AbstractDrawableGfxNode {
    @GfxAttribute(alias="sx") double scaleX = Double.NaN
    @GfxAttribute(alias="sy") double scaleY = Double.NaN
 
-   VisualGfxNode(String name) {
+   AbstractGfxNode(String name) {
       super(name)
    }
 
@@ -105,7 +106,7 @@ abstract class VisualGfxNode extends AbstractDrawableGfxNode {
 //       setFill((Color) Colors.getColor(color))
 //    }
 
-   protected void applyNode(GfxContext context) {
+   protected void applyThisNode(GfxContext context) {
       if(shouldSkip(context)) return
       def shape = _runtime.transformedShape
       if( shape ) {

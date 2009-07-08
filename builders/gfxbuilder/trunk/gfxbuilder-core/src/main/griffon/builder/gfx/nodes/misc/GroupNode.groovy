@@ -26,7 +26,7 @@ import java.awt.geom.AffineTransform
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-class GroupNode extends VisualGfxNode  {
+class GroupNode extends AbstractGfxNode  {
     private Map previousGroupSettings = [:]
     private Shape _shape
 
@@ -40,8 +40,8 @@ class GroupNode extends VisualGfxNode  {
         _runtime
     }
 
-    protected void applyBeforeAll(GfxContext context) {
-       super.applyBeforeAll(context)
+    protected void beforeApply(GfxContext context) {
+       super.beforeApply(context)
        if(shouldSkip(context)) return
        previousGroupSettings = [:]
        previousGroupSettings.putAll(context.groupSettings)
@@ -51,17 +51,17 @@ class GroupNode extends VisualGfxNode  {
        if(fill != null) context.groupSettings.fill = fill
     }
 
-    protected void applyAfterAll(GfxContext context) {
+    protected void afterApply(GfxContext context) {
        if(shouldSkip(context)) return
        context.groupSettings = previousGroupSettings
-       super.applyAfterAll(context)
+       super.afterApply(context)
     }
 
     protected boolean shouldSkip(GfxContext context){
        return !visible
     }
 
-    protected void applyNode(GfxContext context) {
+    protected void applyThisNode(GfxContext context) {
        if(shouldSkip(context)) return
     }
 
@@ -75,7 +75,7 @@ class GroupNode extends VisualGfxNode  {
        if(!context) return null
        List shapes = []
        getNodes().each { node ->
-          if(node instanceof Drawable) {
+          if(node instanceof DrawableNode) {
              if(!node.getRuntime()) node.createRuntime(context)
              def s = node.getRuntime().getTransformedShape()
              if(s) shapes << s

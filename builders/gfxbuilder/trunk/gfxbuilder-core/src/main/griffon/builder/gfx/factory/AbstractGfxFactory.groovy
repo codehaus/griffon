@@ -17,7 +17,7 @@
 package griffon.builder.gfx.factory
 
 import griffon.builder.gfx.GfxNode
-import griffon.builder.gfx.AggregateGfxNode
+import griffon.builder.gfx.ContainerNode
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
@@ -30,7 +30,7 @@ abstract class AbstractGfxFactory extends AbstractFactory implements GfxFactory 
 //    }
 //
    public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-      if(parent instanceof AggregateGfxNode && child instanceof GfxNode) parent << child
+      if(parent instanceof ContainerNode && child instanceof GfxNode) parent << child
 //       else throw new RuntimeException("Node ${parent} does not accept nesting of ${child}.")
    }
 }

@@ -22,7 +22,7 @@ import java.awt.Stroke
 import com.jhlabs.awt.ShapeStroke
 import java.beans.PropertyChangeEvent
 import griffon.builder.gfx.GfxAttribute
-import griffon.builder.gfx.VisualGfxNode
+import griffon.builder.gfx.DrawableNode
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -39,18 +39,18 @@ class ShapeStrokeNode extends AbstractStrokeNode {
         if(shape) shapes << shape
     }
 
-    void addShape(VisualGfxNode node){
+    void addShape(DrawableNode node){
         if(node) {
            node.addPropertyChangeListener(this)
            shapes << node
         }
     }
 
-    ShapeStrokeNode leftShift( Shape shape ) {
+    ShapeStrokeNode leftShift(Shape shape) {
       addShape(shape)
     }
 
-    ShapeStrokeNode leftShift( VisualGfxNode node ) {
+    ShapeStrokeNode leftShift(DrawableNode node) {
       addShape(node)
     }
 
@@ -67,7 +67,7 @@ class ShapeStrokeNode extends AbstractStrokeNode {
         def s = []
         shapes.each { shape ->
            if(shape instanceof Shape) s << shape
-           if(shape instanceof VisualGfxNode) {
+           if(shape instanceof DrawableNode) {
               def _s = shape.localShape
               if(_s) s << _s
            }

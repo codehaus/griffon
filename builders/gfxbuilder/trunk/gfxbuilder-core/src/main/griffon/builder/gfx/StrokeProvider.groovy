@@ -20,6 +20,6 @@ import java.awt.Stroke
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-public interface StrokeProvider {
+interface StrokeProvider {
     Stroke getStroke()
 }
