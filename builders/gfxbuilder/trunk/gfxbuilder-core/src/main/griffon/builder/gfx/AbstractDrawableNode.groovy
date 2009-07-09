@@ -17,6 +17,8 @@ package griffon.builder.gfx
 
 import java.awt.AlphaComposite
 import java.awt.Composite
+import java.awt.Graphics
+import java.awt.geom.AffineTransform
 import java.beans.PropertyChangeEvent
 
 import griffon.builder.gfx.event.GfxInputEvent
@@ -31,10 +33,7 @@ import griffon.builder.gfx.nodes.transforms.Transforms
 abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener, DrawableNode, Transformable {
    private Transforms _transforms
    protected GfxRuntime _runtime
-   private previousGraphics
-
-//    Closure beforeRender
-//    Closure afterRender
+   private Graphics _previousGraphics
 
    Closure keyPressed
    Closure keyReleased
@@ -52,6 +51,11 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
    @GfxAttribute(alias="o")  double opacity = Double.NaN
    @GfxAttribute(alias="c")  Composite composite = null
    @GfxAttribute(alias="pt") boolean passThrough = false
+   @GfxAttribute(alias="tx") double translateX = Double.NaN
+   @GfxAttribute(alias="ty") double translateY = Double.NaN
+   @GfxAttribute(alias="ra") double rotateAngle = Double.NaN
+   @GfxAttribute(alias="sx") double scaleX = Double.NaN
+   @GfxAttribute(alias="sy") double scaleY = Double.NaN
 
    AbstractDrawableNode(String name) {
       super(name)
@@ -69,9 +73,9 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
    void setTransforms(Transforms transforms) {
       def oldValue = _transforms
       if(_transforms) _transforms.removePropertyChangeListener(this)
-      _transforms = transforms
+      _transforms = transforms.clone()
       if(_transforms) _transforms.addPropertyChangeListener(this)
-      firePropertyChange("transforms", oldValue, transforms)
+      firePropertyChange("transforms", oldValue, _transforms)
    }
 
    Transforms getTransforms() {
@@ -136,17 +140,18 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
    }
 
    final void apply(GfxContext context) {
+       if(!visible || !enabled) return
        beforeApply(context)
        applyNode(context)
        afterApply(context)
    }
 
    protected void beforeApply(GfxContext context) {
-      previousGraphics = context.g
+      _previousGraphics = context.g
       context.g = context.g.create()
-      _transforms?.apply(context)
+      _transforms.apply(context)
       createRuntime(context)
-      if(shouldSkip(context)) return
+      //if(shouldSkip(context)) return
       if(!Double.isNaN(opacity)) {
          context.g.composite = AlphaComposite.SrcOver.derive(opacity as float)
       }
@@ -156,20 +161,20 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
 
    protected void afterApply(GfxContext context) {
       context.g.dispose()
-      context.g = previousGraphics
-      if(shouldSkip(context)) return
+      context.g = _previousGraphics
+      //if(shouldSkip(context)) return
       addAsEventTarget(context)
    }
 
    protected void addAsEventTarget(GfxContext context) {
       if( visible || keyPressed || keyReleased || keyTyped || mouseClicked ||
           mouseDragged || mouseEntered || mouseExited || mouseMoved ||
-          mousePressed || mouseReleased || mouseWheelMoved /*|| autoDrag*/ ){
+          mousePressed || mouseReleased || mouseWheelMoved || enabled ){
           context.eventTargets << this
       }
    }
 
    protected boolean shouldSkip(GfxContext context){
-      return !visible
+      return false
    }
 }

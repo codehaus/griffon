@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2008 the original author or authors.
+ * Copyright 2007-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,35 +27,11 @@ class GroupGfxRuntime extends DrawableGfxRuntime {
       super(node, context)
    }
 
-   /**
-    * Returns the shape after applying explicit transformations.<p>
-    *
-    * @return a java.awt.Shape
-    */
-   public def getShape() {
-      if( !_shape ){
-         _shape = _node.getShape()
-      }
-      _shape
+   public Shape getLocalShape() {
+      getShape()
    }
 
-   /**
-    * Returns the shape after applying transformations.<p>
-    *
-    * @return a java.awt.Shape
-    */
-   public def getTransformedShape() {
-      if( !_transformedShape ) {
-         _transformedShape = _node.getLocalShape()
-         if(_transformedShape) {
-            AffineTransform affineTransform = new AffineTransform()
-            affineTransform.concatenate _context.g.transform
-            _node.transforms.each { t ->
-               if(t.transform) affineTransform.concatenate t.transform
-            }
-            _transformedShape = affineTransform.createTransformedShape(_transformedShape)
-         }
-      }
-      _transformedShape
+   public Shape getTransformedShape() {
+      getShape()
    }
 }

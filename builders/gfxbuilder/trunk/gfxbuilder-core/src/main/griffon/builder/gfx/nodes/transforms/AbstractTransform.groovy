@@ -16,15 +16,12 @@
 package griffon.builder.gfx.nodes.transforms
 
 import griffon.builder.gfx.GfxNode
-import griffon.builder.gfx.GfxAttribute
 import griffon.builder.gfx.GfxContext
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 abstract class AbstractTransform extends GfxNode implements Transform {
-    @GfxAttribute(alias="e") boolean enabled = true
-
     AbstractTransform(String name) {
        super(name)
     }

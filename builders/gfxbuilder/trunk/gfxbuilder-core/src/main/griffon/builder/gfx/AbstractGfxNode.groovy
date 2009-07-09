@@ -20,7 +20,6 @@ import java.awt.Composite
 import java.awt.Shape
 import java.awt.Color
 import java.awt.Paint
-import java.awt.geom.AffineTransform
 import java.awt.geom.Rectangle2D
 import java.beans.PropertyChangeEvent
 
@@ -61,31 +60,6 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
       _shape
    }
 
-   Shape getLocalShape() {
-      if( !_localShape ) {
-         _localShape = getShape()
-         if(_localShape) {
-            double _x = _localShape.bounds.x
-            double _y = _localShape.bounds.x
-            double _cx = _x + (_localShape.bounds.width/2)
-            double _cy = _y + (_localShape.bounds.height/2)
-            AffineTransform affineTransform = new AffineTransform()
-            if(!Double.isNaN(sx) && !Double.isNaN(sy)) {
-               affineTransform.concatenate AffineTransform.getTranslateInstance(_x-_cx, _y-_cy)
-               affineTransform.concatenate AffineTransform.getScaleInstance(sx, sy)
-            }
-            if(!Double.isNaN(tx) && !Double.isNaN(ty)) {
-               affineTransform.concatenate AffineTransform.getTranslateInstance(tx, ty)
-            }
-            if(!Double.isNaN(ra)) {
-               affineTransform.concatenate AffineTransform.getRotateInstance(Math.toRadians(ra),_cx, _cy)
-            }
-            _localShape = affineTransform.createTransformedShape(_localShape)
-         }
-      }
-      _localShape
-   }
-
    GfxRuntime createRuntime(GfxContext context) {
       _runtime = new VisualGfxRuntime(this, context)
       _runtime
@@ -108,8 +82,8 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
 
    protected void applyThisNode(GfxContext context) {
       if(shouldSkip(context)) return
-      def shape = _runtime.transformedShape
-      if( shape ) {
+      Shape shape = _runtime.getLocalShape()
+      if(shape) {
          context.bounds = _runtime.getBoundingShape()?.bounds ?: context.bounds
          fill(context, shape)
          draw(context, shape)
@@ -120,9 +94,11 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
       // node.apply(context)
    }
 
+/*
    protected boolean withinClipBounds(GfxContext context, Shape shape) {
       context.g.clipBounds ? shape.intersects(context.g.clipBounds) : false
    }
+
 
    protected boolean shouldSkip(GfxContext context){
       if(super.shouldSkip(context)) return true
@@ -131,6 +107,7 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
        // honor the clip
       return asShape || !withinClipBounds(context, shape)
    }
+*/
 
    protected void fill(GfxContext context, Shape shape){
        def __f = _runtime.fill
@@ -179,7 +156,7 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
        if(__bp && __bp.paint){
           if(!__bp.paint.enabled) return
           def __ss = __st.createStrokedShape(shape)
-          if( __bp.paint instanceof MultiPaintProvider ){
+          if(__bp.paint instanceof MultiPaintProvider){
              __bp.apply(context,__ss)
           } else {
              def __p = g.paint
@@ -187,7 +164,7 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
              g.fill(__ss)
              g.paint = __p
           }
-       }else if( __bc ){
+       }else if(__bc){
           def __pc = g.color
           def __ps = g.stroke
           g.color = __bc

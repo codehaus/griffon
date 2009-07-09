@@ -18,6 +18,7 @@ package griffon.builder.gfx.nodes.misc
 import java.awt.Image
 import java.awt.Rectangle
 import java.awt.Shape
+import java.awt.RenderingHints
 import java.awt.geom.AffineTransform
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
@@ -33,7 +34,6 @@ import griffon.builder.gfx.runtime.*
 class ImageNode extends AbstractDrawableNode {
    private Image _image
    private Shape _shape
-   private Shape _localShape
 
    @GfxAttribute(alias="i") Image image
    @GfxAttribute(alias="f") def file
@@ -48,6 +48,7 @@ class ImageNode extends AbstractDrawableNode {
    @GfxAttribute(alias="ra") double rotateAngle = Double.NaN
    @GfxAttribute(alias="sx") double scaleX = Double.NaN
    @GfxAttribute(alias="sy") double scaleY = Double.NaN
+   @GfxAttribute def interpolation
 
    ImageNode() {
       super("image")
@@ -78,7 +79,7 @@ class ImageNode extends AbstractDrawableNode {
       super.onDirty(event)
    }
 
-   Image getImage() {
+   Image getImg() {
       if(!_image) {
          _image = getRuntime().getImage()
       }
@@ -92,57 +93,42 @@ class ImageNode extends AbstractDrawableNode {
       _shape
    }
 
-   Shape getLocalShape() {
-      if( !_localShape ) {
-         _localShape = getShape()
-         if(_localShape) {
-            AffineTransform affineTransform = getLocalTransforms(_localShape)
-            _localShape = affineTransform.createTransformedShape(_localShape)
-         }
-      }
-      _localShape
-   }
-
-   private AffineTransform getLocalTransforms(Shape shape) {
-      double _x = shape.bounds.x
-      double _y = shape.bounds.x
-      double _cx = _x + (shape.bounds.width/2)
-      double _cy = _y + (shape.bounds.height/2)
-      AffineTransform affineTransform = new AffineTransform()
-      if(!Double.isNaN(sx) && !Double.isNaN(sy)) {
-         affineTransform.concatenate AffineTransform.getTranslateInstance(_x-_cx, _y-_cy)
-         affineTransform.concatenate AffineTransform.getScaleInstance(sx, sy)
-      }
-      if(!Double.isNaN(tx) && !Double.isNaN(ty)) {
-         affineTransform.concatenate AffineTransform.getTranslateInstance(tx, ty)
-      }
-      if(!Double.isNaN(ra)) {
-         affineTransform.concatenate AffineTransform.getRotateInstance(Math.toRadians(ra),_cx, _cy)
-      }
-      affineTransform
-   }
-
    protected void beforeApply(GfxContext context) {
-      getImage()
       super.beforeApply(context)
-      AffineTransform transform = new AffineTransform()
-      transform.concatenate context.g.transform
-      transform.concatenate getLocalTransforms(getShape())
-      context.g.transform = transform
+      getImg()
    }
 
    protected void applyNode(GfxContext context) {
-      getImage()
-      if(shouldSkip(context)) return
+      def _interpolation = getInterpolationValue()
+      if(_interpolation) {
+         context.g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, _interpolation)
+      }
+
+      AffineTransform transform = new AffineTransform()
+      transform.concatenate context.g.transform
+      transform.concatenate getRuntime().getLocalTransforms()
+      context.g.transform = transform
+
       if(Double.isNaN(width) && Double.isNaN(height)) {
-         context.g.drawImage(_image, x, y, context.component)
+         context.g.drawImage(_image, x as int, y as int, context.component)
       } else {
-         context.g.drawImage(_image, x, y,, width, height, context.component)
+         context.g.drawImage(_image, x as int, y as int, width as int, height as int, context.component)
       }
    }
 
    GfxRuntime createRuntime(GfxContext context) {
       _runtime = new ImageGfxRuntime(this, context)
       _runtime
+   }
+
+   private def getInterpolationValue() {
+      switch( interpolation ){
+          case ~/(?i:bicubic)/:  return RenderingHints.VALUE_INTERPOLATION_BICUBIC
+          case ~/(?i:bilinear)/: return RenderingHints.VALUE_INTERPOLATION_BILINEAR
+          case ~/(?i:nearest neighbor)/:
+          case ~/(?i:nearest)/:
+             return RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR
+      }
+      return RenderingHints.VALUE_INTERPOLATION_BILINEAR
    }
 }

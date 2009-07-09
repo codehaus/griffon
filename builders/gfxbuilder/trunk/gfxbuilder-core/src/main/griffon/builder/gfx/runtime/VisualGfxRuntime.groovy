@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2008 the original author or authors.
+ * Copyright 2007-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ class VisualGfxRuntime extends DrawableGfxRuntime {
    protected def _borderColor
    protected def _borderWidth
    protected def _stroke
-   protected def _boundingShape
+   protected Shape _boundingShape
 
    VisualGfxRuntime(GfxNode node, GfxContext context){
       super(node, context)
@@ -94,7 +94,7 @@ class VisualGfxRuntime extends DrawableGfxRuntime {
     * <li>fill property (inherited from group too) if set to non null, non false</li>
     * </ol>
     *
-    * @return either <code>false</code>/<code>null</code> (no fill), java.awt.Color, java.awt.Paint or MultiPaintProvider 
+    * @return either <code>false</code>/<code>null</code> (no fill), java.awt.Color, java.awt.Paint or MultiPaintProvider
     */
    public def getFill() {
       if( _fill == null ){
@@ -190,7 +190,7 @@ class VisualGfxRuntime extends DrawableGfxRuntime {
     *
     * @return a java.awt.Shape
     */
-   public def getBoundingShape() {
+   public Shape getBoundingShape() {
       if( !_boundingShape ){
          def s = getTransformedShape()
          if(s) {

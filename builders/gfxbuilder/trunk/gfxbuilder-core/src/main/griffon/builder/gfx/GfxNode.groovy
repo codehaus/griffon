@@ -26,6 +26,7 @@ abstract class GfxNode /*extends GroovyObjectSupport*/ implements PropertyChange
    private Map _props = new ObservableMap()
 
    @GfxAttribute(alias="n") String name
+   @GfxAttribute(alias="e") boolean enabled = true
    protected boolean _dirty
 
    GfxNode(String name) {

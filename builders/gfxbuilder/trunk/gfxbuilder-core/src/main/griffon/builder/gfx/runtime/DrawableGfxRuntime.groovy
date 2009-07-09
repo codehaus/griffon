@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2008 the original author or authors.
+ * Copyright 2007-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,10 @@ import griffon.builder.gfx.*
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class DrawableGfxRuntime extends AbstractGfxRuntime {
-   protected def _shape
-   protected def _transformedShape
+   protected Shape _shape
+   protected Shape _localShape
+   protected Shape _transformedShape
+   protected AffineTransform _localTransforms
    protected double _cx = Double.NaN
    protected double _cy = Double.NaN
    protected double _x = Double.NaN
@@ -34,28 +36,55 @@ class DrawableGfxRuntime extends AbstractGfxRuntime {
       super(node, context)
    }
 
-   /**
-    * Returns the shape after applying explicit transformations.<p>
-    *
-    * @return a java.awt.Shape
-    */
-   public def getShape() {
+   AffineTransform getLocalTransforms() {
+      if( !_localTransforms ) {
+         def shape = getShape()
+         AffineTransform transform = new AffineTransform()
+         if(shape) {
+            double x = shape.bounds.x
+            double y = shape.bounds.x
+            double cx = x + (shape.bounds.width/2)
+            double cy = y + (shape.bounds.height/2)
+            if(!Double.isNaN(_node.tx) || !Double.isNaN(_node.ty)) {
+               double tx = Double.isNaN(_node.tx) ? 0 : _node.tx
+               double ty = Double.isNaN(_node.ty) ? 0 : _node.ty
+               transform.concatenate AffineTransform.getTranslateInstance(tx, ty)
+            }
+            if(!Double.isNaN(_node.sx) || !Double.isNaN(_node.sy)) {
+               double sx = Double.isNaN(_node.sx) ? 1 : _node.sx
+               double sy = Double.isNaN(_node.sy) ? 1 : _node.sy
+               double tsx = (x - cx) * (sx >= 1 ? sx : -1)
+               double tsy = (y - cy) * (sy >= 1 ? sy : -1)
+               transform.concatenate AffineTransform.getTranslateInstance(tsx,tsy)
+               transform.concatenate AffineTransform.getScaleInstance(sx, sy)
+            }
+            if(!Double.isNaN(_node.ra)) {
+               transform.concatenate AffineTransform.getRotateInstance(Math.toRadians(_node.ra),cx, cy)
+            }
+         }
+         _localTransforms = transform
+      }
+      _localTransforms
+   }
+
+   Shape getShape() {
       if( !_shape ){
          _shape = _node.getShape()
       }
       _shape
    }
 
-   public def getLocalShape() {
-      _node.getLocalShape()
+   Shape getLocalShape() {
+      if( !_localShape ) {
+         _localShape = getShape()
+         if(_localShape) {
+            _localShape = getLocalTransforms().createTransformedShape(_localShape)
+         }
+      }
+      _localShape
    }
 
-   /**
-    * Returns the shape after applying transformations.<p>
-    *
-    * @return a java.awt.Shape
-    */
-   public def getTransformedShape() {
+   Shape getTransformedShape() {
       if( !_transformedShape ) {
          _transformedShape = getLocalShape()
          if(_transformedShape) {
@@ -70,16 +99,11 @@ class DrawableGfxRuntime extends AbstractGfxRuntime {
       _transformedShape
    }
 
-   /**
-    * Returns the bounding shape including stroked border.<p>
-    *
-    * @return a java.awt.Shape
-    */
-   public def getBoundingShape() {
+   Shape getBoundingShape() {
       getTransformedShape()
    }
 
-   public double getCx() {
+   double getCx() {
       if(Double.isNaN(_cx)) {
          def s = getTransformedShape()
          if(s) {
@@ -90,7 +114,7 @@ class DrawableGfxRuntime extends AbstractGfxRuntime {
       _cx
    }
 
-   public double getCy() {
+   double getCy() {
       if(Double.isNaN(_cy)) {
          def s = getTransformedShape()
          if(s) {
@@ -101,7 +125,7 @@ class DrawableGfxRuntime extends AbstractGfxRuntime {
       _cy
    }
 
-   public double getX() {
+   double getX() {
       if(Double.isNaN(_x)) {
          def s = getTransformedShape()
          if(s) {
@@ -112,7 +136,7 @@ class DrawableGfxRuntime extends AbstractGfxRuntime {
       _x
    }
 
-   public double getY() {
+   double getY() {
       if(Double.isNaN(_y)) {
          def s = getTransformedShape()
          if(s) {

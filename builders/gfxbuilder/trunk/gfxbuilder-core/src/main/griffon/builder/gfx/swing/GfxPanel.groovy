@@ -94,16 +94,17 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
          }
          _context.component = this
          if(_node) {
-             def img = createCompatibleImage(getWidth(), getHeight())
-             _context.g = img.getGraphics()
-             _context.g.clip = g.clip
-             _context.g.color = g.color
+             //def img = createCompatibleImage(getWidth(), getHeight())
+             //_context.g = img.getGraphics()
+             //_context.g.clip = g.clip
+             //_context.g.color = g.color
+             _context.g = g
              _context.g.clearRect(0, 0, getWidth() as int, getHeight() as int)
              try {
                  _context.eventTargets = []
                  _context.groupSettings = [:]
                  _node.apply(_context)
-                 g.drawImage(img, 0, 0, this)
+                 //g.drawImage(img, 0, 0, this)
                  _context.g.dispose()
              } catch(Exception e) {
                  fireGfxErrorEvent(e)

@@ -30,7 +30,6 @@ import griffon.builder.gfx.GfxAttribute
 class Transforms extends GfxNode {
     private final ObservableList OLDVALUE = new ObservableList()
     private final ObservableList _transforms = new ObservableList()
-    @GfxAttribute(alias="e") boolean enabled = true
 
     Transforms() {
        super("transforms")
@@ -38,7 +37,7 @@ class Transforms extends GfxNode {
     }
 
     void apply(GfxContext context) {
-       if(!isEnabled()) return
+       if(!enabled()) return
        AffineTransform transform = new AffineTransform()
        transform.concatenate context.g.transform
        concatenateTo(transform)
@@ -78,9 +77,9 @@ class Transforms extends GfxNode {
         if(enabled && oldSize != newSize) firePropertyChange("size", oldSize, newSize)
     }
 
-    boolean isEnabled() {
+    boolean enabled() {
         def b = _transforms.any { it.enabled }
-        b ? this.@enabled : false
+        b ?: enabled
     }
 
     boolean isEmpty() {

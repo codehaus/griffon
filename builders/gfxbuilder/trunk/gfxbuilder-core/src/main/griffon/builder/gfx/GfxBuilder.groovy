@@ -125,7 +125,7 @@ class GfxBuilder extends FactoryBuilderSupport {
         addAttributeDelegate(bindFactory.&bindingAttributeDelegate)
         registerFactory("bindProxy", new BindProxyFactory())
 
-//         registerFactory( "image", new ImageFactory() )
+        registerGfxBeanFactory("image", ImageNode, false)
         registerFactory("color", new ColorFactory())
         registerFactory("rgba", factories.color)
         registerFactory("hsl", new HSLColorFactory())

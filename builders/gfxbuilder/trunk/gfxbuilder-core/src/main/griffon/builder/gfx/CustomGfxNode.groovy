@@ -16,6 +16,7 @@
 package griffon.builder.gfx
 
 import java.awt.Shape
+import java.awt.geom.AffineTransform
 import java.beans.PropertyChangeEvent
 
 import griffon.builder.gfx.runtime.*
@@ -51,10 +52,6 @@ abstract class CustomGfxNode extends AbstractDrawableNode {
       getNode().getShape()
    }
 
-   Shape getLocalShape() {
-      getNode().getLocalShape()
-   }
-
    void propertyChanged(PropertyChangeEvent event) {
       if(event.source == _node) {
          onDirty(event)
@@ -69,17 +66,26 @@ abstract class CustomGfxNode extends AbstractDrawableNode {
    }
 
    protected void beforeApply(GfxContext context) {
-      getNode()
       super.beforeApply(context)
+      getNode().createRuntime(context)
    }
 
    protected void applyNode(GfxContext context) {
-      getNode()
-      if( shouldSkip(context) ) return
+//      getNode()
+//      if( shouldSkip(context) ) return
+println([this,getRuntime().getShape().bounds])
+println([this,getRuntime().getLocalShape().bounds])
+println([this,getRuntime().getTransformedShape().bounds])
+      AffineTransform transform = new AffineTransform()
+      transform.concatenate context.g.transform
+      transform.concatenate getRuntime().getLocalTransforms()
+      context.g.transform = transform
+
       _node.apply(context)
    }
-
+/*
    protected boolean shouldSkip(GfxContext context) {
       !visible || _node.shouldSkip(context)
    }
+*/
 }

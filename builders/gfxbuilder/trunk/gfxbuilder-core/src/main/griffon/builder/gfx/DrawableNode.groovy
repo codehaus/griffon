@@ -23,7 +23,7 @@ import java.awt.Shape
 interface DrawableNode {
    Shape getShape()
 
-   Shape getLocalShape()
+   // Shape getLocalShape()
 
    void apply(GfxContext context)
 }

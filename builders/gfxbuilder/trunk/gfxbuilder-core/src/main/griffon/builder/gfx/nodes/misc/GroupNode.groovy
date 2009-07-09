@@ -20,6 +20,7 @@ import griffon.builder.gfx.runtime.*
 
 import java.awt.Rectangle
 import java.awt.Shape
+import java.awt.Graphics
 import java.awt.geom.Area
 import java.awt.geom.AffineTransform
 
@@ -27,7 +28,7 @@ import java.awt.geom.AffineTransform
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class GroupNode extends AbstractGfxNode  {
-    private Map previousGroupSettings = [:]
+    private Map _previousGroupSettings = [:]
     private Shape _shape
 
     GroupNode() {
@@ -41,47 +42,63 @@ class GroupNode extends AbstractGfxNode  {
     }
 
     protected void beforeApply(GfxContext context) {
+       //createRuntime(context)
        super.beforeApply(context)
-       if(shouldSkip(context)) return
-       previousGroupSettings = [:]
-       previousGroupSettings.putAll(context.groupSettings)
+       //if(shouldSkip(context)) return
+       _previousGroupSettings = [:]
+       _previousGroupSettings.putAll(context.groupSettings)
        if(borderColor != null) context.groupSettings.borderColor = borderColor
        if(borderWidth != null) context.groupSettings.borderWidth = borderWidth
-       if(opacity != null) context.groupSettings.opacity = opacity
        if(fill != null) context.groupSettings.fill = fill
     }
 
     protected void afterApply(GfxContext context) {
-       if(shouldSkip(context)) return
-       context.groupSettings = previousGroupSettings
+       //if(shouldSkip(context)) return
+       context.groupSettings = _previousGroupSettings
        super.afterApply(context)
     }
-
+/*
     protected boolean shouldSkip(GfxContext context){
        return !visible
     }
-
+*/
     protected void applyThisNode(GfxContext context) {
-       if(shouldSkip(context)) return
+//       if(shouldSkip(context)) return
     }
 
     protected void applyNestedNode(GfxNode node, GfxContext context) {
-       if(shouldSkip(context)) return
+//       if(shouldSkip(context)) return
        node.apply(context)
     }
 
     Shape calculateShape() {
-       GfxContext context = getRuntime()?.getContext()
-       if(!context) return null
+       GfxContext context = getRuntime().getContext()
        List shapes = []
+
        getNodes().each { node ->
+          if(!node.enabled) return
           if(node instanceof DrawableNode) {
+             if(!node.visible) return
              if(!node.getRuntime()) node.createRuntime(context)
-             def s = node.getRuntime().getTransformedShape()
-             if(s) shapes << s
+             Graphics gcopy = null
+             if(node.txs.enabled && !node.txs.empty) {
+                gcopy = context.g
+                context.g = gcopy.create()
+             }
+             try {
+                Shape s = node.getRuntime().getTransformedShape()
+                if(s) shapes << s
+             } finally {
+                if(gcopy) {
+                   context.g.dispose()
+                   context.g = gcopy
+                }
+             }
           }
        }
+
        if(!shapes) return null
+
        Area area = new Area(shapes[0])
        if(shapes.size() > 1) {
           shapes[1..-1].each { shape ->
