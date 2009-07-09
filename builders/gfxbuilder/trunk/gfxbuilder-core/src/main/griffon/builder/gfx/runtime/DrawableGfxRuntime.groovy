@@ -46,6 +46,10 @@ class DrawableGfxRuntime extends AbstractGfxRuntime {
       _shape
    }
 
+   public def getLocalShape() {
+      _node.getLocalShape()
+   }
+
    /**
     * Returns the shape after applying transformations.<p>
     *
@@ -53,7 +57,7 @@ class DrawableGfxRuntime extends AbstractGfxRuntime {
     */
    public def getTransformedShape() {
       if( !_transformedShape ) {
-         _transformedShape = _node.getLocalShape()
+         _transformedShape = getLocalShape()
          if(_transformedShape) {
             AffineTransform affineTransform = new AffineTransform()
             affineTransform.concatenate _context.g.transform
