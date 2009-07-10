@@ -18,6 +18,10 @@ package griffon.builder.gfx.runtime
 import java.awt.Shape
 import java.awt.geom.AffineTransform
 import griffon.builder.gfx.*
+import static java.lang.Math.abs
+import static java.lang.Math.sin
+import static java.lang.Math.cos
+import static java.lang.Math.toRadians
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -42,24 +46,31 @@ class DrawableGfxRuntime extends AbstractGfxRuntime {
          AffineTransform transform = new AffineTransform()
          if(shape) {
             double x = shape.bounds.x
-            double y = shape.bounds.x
+            double y = shape.bounds.y
             double cx = x + (shape.bounds.width/2)
             double cy = y + (shape.bounds.height/2)
+            if(!Double.isNaN(_node.ra)) {
+               transform.rotate(toRadians(_node.ra),cx, cy)
+            }
             if(!Double.isNaN(_node.tx) || !Double.isNaN(_node.ty)) {
                double tx = Double.isNaN(_node.tx) ? 0 : _node.tx
                double ty = Double.isNaN(_node.ty) ? 0 : _node.ty
-               transform.concatenate AffineTransform.getTranslateInstance(tx, ty)
+               if(!Double.isNaN(_node.ra)) {
+                  double radians = toRadians(_node.ra)
+                  double rtx = (tx * cos(radians)) - (ty * sin(radians))
+                  double rty = -((tx * sin(radians)) + (ty * cos(radians)))
+                  tx = rtx
+                  ty = rty
+               }
+               transform.translate(tx, ty)
             }
             if(!Double.isNaN(_node.sx) || !Double.isNaN(_node.sy)) {
                double sx = Double.isNaN(_node.sx) ? 1 : _node.sx
                double sy = Double.isNaN(_node.sy) ? 1 : _node.sy
-               double tsx = (x - cx) * (sx >= 1 ? sx : -1)
-               double tsy = (y - cy) * (sy >= 1 ? sy : -1)
-               transform.concatenate AffineTransform.getTranslateInstance(tsx,tsy)
-               transform.concatenate AffineTransform.getScaleInstance(sx, sy)
-            }
-            if(!Double.isNaN(_node.ra)) {
-               transform.concatenate AffineTransform.getRotateInstance(Math.toRadians(_node.ra),cx, cy)
+               double tsx = (cx - (cx*sx)) / sx
+               double tsy = (cy - (cy*sy)) / sy
+               transform.scale(sx,sy)
+               transform.translate(tsx,tsy)
             }
          }
          _localTransforms = transform

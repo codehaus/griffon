@@ -73,9 +73,6 @@ abstract class CustomGfxNode extends AbstractDrawableNode {
    protected void applyNode(GfxContext context) {
 //      getNode()
 //      if( shouldSkip(context) ) return
-println([this,getRuntime().getShape().bounds])
-println([this,getRuntime().getLocalShape().bounds])
-println([this,getRuntime().getTransformedShape().bounds])
       AffineTransform transform = new AffineTransform()
       transform.concatenate context.g.transform
       transform.concatenate getRuntime().getLocalTransforms()
