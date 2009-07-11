@@ -170,6 +170,7 @@ class VisualGfxRuntime extends DrawableGfxRuntime {
          def s = _node.findLast { it instanceof StrokeProvider }
          def bw = getBorderWidth()
          if( s ){
+            s.apply(_context)
             _stroke = s.getStroke()
          }else if( bw ){
             def ps = _context.g.stroke

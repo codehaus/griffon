@@ -17,6 +17,7 @@
 package griffon.builder.gfx.factory
 
 import java.awt.Stroke
+import griffon.builder.gfx.DrawableNode
 import griffon.builder.gfx.ContainerNode
 import griffon.builder.gfx.StrokeProvider
 import griffon.builder.gfx.nodes.strokes.*
@@ -67,7 +68,7 @@ class ShapeStrokeFactory extends GfxBeanFactory {
     }
 
     public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-       if(child instanceof ContainerNode) {
+       if(child instanceof DrawableNode) {
           parent << child
        } else {
           throw new IllegalArgumentException("$child can not be nested inside $parent")

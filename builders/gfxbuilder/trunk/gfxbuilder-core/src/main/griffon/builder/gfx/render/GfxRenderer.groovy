@@ -141,7 +141,7 @@ final class GfxRenderer {
        def cb = g.clipBounds
        g.setClip( clip )
        context.g = g
-       node.execute( context )
+       node.apply(context)
        g.dispose()
        if( !cb ) g.setClip( cb )
        return dst

@@ -24,18 +24,18 @@ import griffon.builder.gfx.GfxAttribute
  */
 class BrushStrokeNode extends AbstractStrokeNode {
     @GfxAttribute(alias="w")  float width = 1f
-    @GfxAttribute(alias="t")  float thickness = 1f
-    @GfxAttribute(alias="a")  float angle = (Math.PI/2.0) as float
+    @GfxAttribute(alias="t")  float thickness = 1f /* 0..1 */
+    @GfxAttribute(alias="a")  float angle = Math.toRadians(90) as float
     @GfxAttribute(alias="rs") int randomSeed = 0i
 
     BrushStrokeNode() {
-       super( "brushStroke" )
+       super("brushStroke")
     }
 
     protected Stroke createStroke() {
         return new BrushStroke(width as float,
                                thickness as float,
-                               angle as float,
+                               Math.toRadians(angle) as float,
                                randomSeed as int)
     }
 }

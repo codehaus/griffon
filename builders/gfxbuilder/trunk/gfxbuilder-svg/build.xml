@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<project name="gfxbuilder-svg" default="package" basedir=".">
+   <property file="build.properties" />
+   <property file="${basedir}/../build-gfx.properties" />
+
+   <mkdir dir="${project.build.dir}/lib" />
+   <import file="${basedir}/../build/build-common.xml" />
+
+    <path id="build.classpath.local" >
+      <fileset dir="${project.lib.dir}">
+         <include name="**/*.jar"/>
+      </fileset>
+   </path>
+
+   <target name="init">
+      <property name="gfxbuilder-core-basedir" value="${basedir}/../gfxbuilder-core" />
+      <property name="gfxbuilder-core-jar" value="${gfxbuilder-core-basedir}/target/gfxbuilder-core-${project.version}.jar" />
+      <uptodate property="gfxbuilder-core-uptodate"
+                targetfile="${gfxbuilder-core-jar}">
+         <srcfiles dir="${gfxbuilder-core-basedir}/src/main/" includes="**/*" />
+         <srcfiles dir="${gfxbuilder-core-basedir}/target/classes" includes="**/*" />
+      </uptodate>
+      <if>
+         <uptodate targetfile="${gfxbuilder-core-jar}">
+            <srcfiles dir="${gfxbuilder-core-basedir}/src/main/" includes="**/*" />
+            <srcfiles dir="${gfxbuilder-core-basedir}/target/classes" includes="**/*" />
+         </uptodate>
+         <then>
+            <echo message="gfxbuilder-core-${project.version} is up to date" />
+         </then>
+         <else>
+            <echo message="gfxbuilder-core-${project.version} must be rebuilt" />
+            <ant antfile="${basedir}/../gfxbuilder-core/build.xml"
+                 inheritAll="false"
+                 dir="${basedir}/../gfxbuilder-core"
+                 target="package" />
+         </else>
+      </if>
+      <copy todir="${project.build.dir}/lib">
+         <fileset dir="${basedir}/../gfxbuilder-core/target">
+            <include name="*.jar" />
+         </fileset>
+      </copy>
+
+      <path id="build.classpath.local" >
+         <fileset dir="${project.lib.dir}">
+            <include name="**/*.jar"/>
+         </fileset>
+         <fileset dir="${project.build.dir}/lib">
+            <include name="**/*.jar"/>
+         </fileset>
+      </path>
+   </target>
+
+   <target name="-pre-package">
+      <copy todir="${project.build.output}">
+         <fileset dir="${basedir}/src/manifest">
+            <include name="**/*" />
+         </fileset>
+      </copy>
+   </target>
+
+</project>

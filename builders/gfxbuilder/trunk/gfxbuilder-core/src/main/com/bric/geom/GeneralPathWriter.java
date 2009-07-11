@@ -46,16 +46,16 @@ public class GeneralPathWriter extends PathWriter {
 	
 	/** This resets the underlying <code>GeneralPath</code>. */
 	public void reset() {
-		if(debug)
-			System.out.println("reset()");
+		//if(debug)
+			//System.out.println("reset()");
 		p.reset();
 		dataWritten = false;
 	}
 
 	public void curveTo(float cx1, float cy1, float cx2, float cy2, float x,
 			float y) {
-		if(debug)
-			System.out.println("curveTo( "+cx1+", "+cy1+", "+cx2+", "+cy2+", "+x+", "+y+")");
+		//if(debug)
+			//System.out.println("curveTo( "+cx1+", "+cy1+", "+cx2+", "+cy2+", "+x+", "+y+")");
 		p.curveTo(cx1,cy1,cx2,cy2,x,y);
 		lastX = x;
 		lastY = y;
@@ -65,8 +65,8 @@ public class GeneralPathWriter extends PathWriter {
 	public void lineTo(float x, float y) {
 		if(equals(lastX,x) && equals(lastY,y))
 			return;
-		if(debug)
-			System.out.println("lineTo( "+x+", "+y+")");
+		//if(debug)
+			//System.out.println("lineTo( "+x+", "+y+")");
 		p.lineTo(x,y);
 		lastX = x;
 		lastY = y;
@@ -75,8 +75,8 @@ public class GeneralPathWriter extends PathWriter {
 	
 	public void moveTo(float x, float y) {
 		p.moveTo(x,y);
-		if(debug)
-			System.out.println("moveTo( "+x+", "+y+")");
+		//if(debug)
+			//System.out.println("moveTo( "+x+", "+y+")");
 		lastX = x;
 		lastY = y;
 		dataWritten = true;
@@ -84,8 +84,8 @@ public class GeneralPathWriter extends PathWriter {
 
 	public void quadTo(float cx, float cy, float x, float y) {
 		p.quadTo(cx, cy, x, y);
-		if(debug)
-			System.out.println("quadTo( "+cx+", "+cy+", "+x+", "+y+")");
+		//if(debug)
+			//System.out.println("quadTo( "+cx+", "+cy+", "+x+", "+y+")");
 		lastX = x;
 		lastY = y;
 		dataWritten = true;
@@ -94,8 +94,8 @@ public class GeneralPathWriter extends PathWriter {
 	public void closePath() {
 		if(dataWritten) {
 			p.closePath();
-			if(debug)
-				System.out.println("closePath()");
+			//if(debug)
+				//System.out.println("closePath()");
 			dataWritten = false;
 		}
 	}

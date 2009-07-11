@@ -28,7 +28,7 @@ class BristleStrokeNode extends AbstractStrokeNode {
     @GfxAttribute(alias="rs") int randomSeed = 0i
 
     BristleStrokeNode() {
-       super( "bristleStroke" )
+       super("bristleStroke")
     }
 
     protected Stroke createStroke() {

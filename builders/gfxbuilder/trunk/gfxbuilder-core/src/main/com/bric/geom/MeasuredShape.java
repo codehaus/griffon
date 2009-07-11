@@ -685,7 +685,7 @@ public class MeasuredShape {
 			p-=segments[i].normalizedDistance;
 			i++;
 		}
-		System.err.println("p = "+p);
+		//System.err.println("p = "+p);
 		throw new RuntimeException("the position "+original+" could not be found.");
 	}
 }

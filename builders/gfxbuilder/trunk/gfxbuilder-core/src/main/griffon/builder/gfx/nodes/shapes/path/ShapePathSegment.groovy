@@ -19,6 +19,7 @@ import java.awt.Shape
 import java.awt.geom.GeneralPath
 import java.beans.PropertyChangeEvent
 import griffon.builder.gfx.GfxAttribute
+import griffon.builder.gfx.GfxContext
 import griffon.builder.gfx.DrawableNode
 
 /**
@@ -33,15 +34,15 @@ class ShapePathSegment extends AbstractPathSegment {
     }
 
     public void setShape(Shape shape){
-        shapes = shape
+       shapes = shape
     }
 
     public void setShape(DrawableNode node){
-        if(shape instanceof DrawableNode) {
-           shape.removePropertyChangeListener(this)
-        }
-        node.addPropertyChangeListener(this)
-        shape = node
+       if(shape instanceof DrawableNode) {
+          shape.removePropertyChangeListener(this)
+       }
+       node.addPropertyChangeListener(this)
+       shape = node
     }
 
    void propertyChanged(PropertyChangeEvent event) {
@@ -52,11 +53,17 @@ class ShapePathSegment extends AbstractPathSegment {
       }
    }
 
-    void apply( GeneralPath path ) {
-       if(shape instanceof Shape) {
-          path.append(shape, connect as boolean)
-       } else {
-          path.append(shape.localShape, connect as boolean)
-       }
-    }
+   void apply(GfxContext context) {
+      if(shape instanceof DrawableNode) {
+         shape.createRuntime(context)
+      }
+   }
+
+   void apply( GeneralPath path ) {
+      if(shape instanceof Shape) {
+         path.append(shape, connect as boolean)
+      } else {
+         path.append(shape.runtime.localShape, connect as boolean)
+      }
+   }
 }

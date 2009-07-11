@@ -18,6 +18,7 @@ package griffon.builder.gfx.nodes.strokes
 import java.awt.Stroke
 import com.bric.awt.CharcoalStroke
 import griffon.builder.gfx.GfxAttribute
+import griffon.builder.gfx.GfxContext
 import griffon.builder.gfx.StrokeProvider
 
 /**
@@ -31,23 +32,27 @@ class CharcoalStrokeNode extends AbstractStrokeNode implements ComposableStroke 
     @GfxAttribute(alias="rs") int randomSeed = 0
 
     CharcoalStrokeNode() {
-       super( "charcoalStroke" )
+       super("charcoalStroke")
     }
 
-    public void addStroke( Stroke stroke ){
-       setStroke( stroke )
+    public void addStroke(Stroke stroke) {
+       setStroke(stroke)
     }
 
-    public void addStroke( StrokeProvider stroke ){
-       setStroke( stroke )
+    public void addStroke(StrokeProvider stroke) {
+       setStroke(stroke)
     }
 
-    ComposableStroke leftShift( Stroke stroke ) {
+    ComposableStroke leftShift(Stroke stroke) {
        addStroke(stroke)
     }
 
-    ComposableStroke leftShift( StrokeProvider stroke ) {
+    ComposableStroke leftShift(StrokeProvider stroke) {
        addStroke(stroke)
+    }
+
+    void apply(GfxContext context) {
+       if(stroke instanceof StrokeProvider) stroke.apply(context)
     }
 
     protected Stroke createStroke() {

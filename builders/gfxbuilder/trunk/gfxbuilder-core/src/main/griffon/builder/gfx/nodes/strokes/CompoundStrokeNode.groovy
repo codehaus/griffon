@@ -20,6 +20,7 @@ import griffon.builder.gfx.StrokeProvider
 import java.awt.Stroke
 import com.jhlabs.awt.CompoundStroke
 import griffon.builder.gfx.GfxAttribute
+import griffon.builder.gfx.GfxContext
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -30,31 +31,36 @@ class CompoundStrokeNode extends AbstractStrokeNode implements ComposableStroke 
    @GfxAttribute(alias="op") def operation
 
    CompoundStrokeNode() {
-      super( "compoundStroke" )
+      super("compoundStroke")
    }
 
-   void addStroke( Stroke stroke ){
-      if( !stroke1 ){
+   void addStroke(Stroke stroke){
+      if(!stroke1){
          stroke1 = stroke
-      } else if( !stroke2 ){
+      } else if(!stroke2 && stroke != stroke1){
          stroke2 = stroke
       }
    }
 
-   void addStroke( StrokeProvider stroke ){
-      if( !stroke1 ){
+   void addStroke(StrokeProvider stroke){
+      if(!stroke1){
          stroke1 = stroke
-      } else if( !stroke2 ){
+      } else if(!stroke2 && stroke != stroke1){
          stroke2 = stroke
       }
    }
 
-   ComposableStroke leftShift( Stroke stroke ) {
+   ComposableStroke leftShift(Stroke stroke) {
       addStroke(stroke)
    }
 
-   ComposableStroke leftShift( StrokeProvider stroke ) {
+   ComposableStroke leftShift(StrokeProvider stroke) {
       addStroke(stroke)
+   }
+
+   void apply(GfxContext context) {
+      if(stroke1 instanceof StrokeProvider) stroke1.apply(context)
+      if(stroke2 instanceof StrokeProvider) stroke2.apply(context)
    }
 
     protected Stroke createStroke() {
@@ -63,23 +69,22 @@ class CompoundStrokeNode extends AbstractStrokeNode implements ComposableStroke 
         }
 
         def _s1 = stroke1 instanceof StrokeProvider ? stroke1.getStroke() : stroke1
-        def _s2 = stroke1 instanceof StrokeProvider ? stroke2.getStroke() : stroke2
+        def _s2 = stroke2 instanceof StrokeProvider ? stroke2.getStroke() : stroke2
         def o = operation
         if( o instanceof String ){
-           if( 'add'.equals(o) ){
+           if('add'.equalsIgnoreCase(o)){
               o = CompoundStroke.ADD
-           }else if( 'subtract'.equals(o) ){
+           } else if('subtract'.equalsIgnoreCase(o)){
               o = CompoundStroke.SUBTRACT
-           }else if( 'intersect'.equals(o) ){
+           } else if('intersect'.equalsIgnoreCase(o)){
               o = CompoundStroke.INTERSECT
-           }else if( 'xor'.equals(o) ){
+           } else if('xor'.equalsIgnoreCase(o)){
               o = CompoundStroke.DIFFERENCE
            }
         }
-        if( !(CompoundStroke.ADD..CompoundStroke.DIFFERENCE).contains(o) ){
+        if(!(CompoundStroke.ADD..CompoundStroke.DIFFERENCE).contains(o)){
            o = CompoundStroke.ADD
         }
-
         return new CompoundStroke(_s1, _s2, o)
     }
 }

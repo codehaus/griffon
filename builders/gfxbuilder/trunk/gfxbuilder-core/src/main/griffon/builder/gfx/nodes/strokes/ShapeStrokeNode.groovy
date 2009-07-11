@@ -22,6 +22,7 @@ import java.awt.Stroke
 import com.jhlabs.awt.ShapeStroke
 import java.beans.PropertyChangeEvent
 import griffon.builder.gfx.GfxAttribute
+import griffon.builder.gfx.GfxContext
 import griffon.builder.gfx.DrawableNode
 
 /**
@@ -29,10 +30,10 @@ import griffon.builder.gfx.DrawableNode
  */
 class ShapeStrokeNode extends AbstractStrokeNode {
    @GfxAttribute List shapes = []
-   @GfxAttribute float advance = 10f
+   @GfxAttribute(alias="ad") float advance = 10f
 
     ShapeStrokeNode() {
-        super( "shapeStroke" )
+        super("shapeStroke")
     }
 
     void addShape(Shape shape){
@@ -62,17 +63,25 @@ class ShapeStrokeNode extends AbstractStrokeNode {
       }
    }
 
-    protected Stroke createStroke() {
-        if( !shapes ) throw new IllegalArgumentException("shapeStroke requires at least one shape.")
-        def s = []
-        shapes.each { shape ->
-           if(shape instanceof Shape) s << shape
-           if(shape instanceof DrawableNode) {
-              def _s = shape.localShape
-              if(_s) s << _s
-           }
-        }
+   void apply(GfxContext context) {
+      shapes.each { shape ->
+         if(shape instanceof DrawableNode) {
+            shape.createRuntime(context)
+         }
+      }
+   }
 
-        return new ShapeStroke(s as Shape[], advance as float)
-    }
+   protected Stroke createStroke() {
+      if(!shapes) throw new IllegalArgumentException("shapeStroke requires at least one shape.")
+      def s = []
+      shapes.each { shape ->
+         if(shape instanceof Shape) s << shape
+         if(shape instanceof DrawableNode) {
+            def _s = shape.runtime.localShape
+            if(_s) s << _s
+         }
+      }
+
+      return new ShapeStroke(s as Shape[], advance as float)
+   }
 }

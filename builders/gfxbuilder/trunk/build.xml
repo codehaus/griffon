@@ -19,6 +19,7 @@
       <sequential>
          <run-module project="gfxbuilder-core" target="@{target}" />
          <run-module project="gfxbuilder-swingx" target="@{target}" />
+         <run-module project="gfxbuilder-svg" target="@{target}" />
       </sequential>
    </macrodef>
 
@@ -44,6 +45,7 @@
       <mkdir dir="${project.build.dir}" />
       <copy-package project="gfxbuilder-core" />
       <copy-package project="gfxbuilder-swingx" />
+      <copy-package project="gfxbuilder-svg" />
    </target>
 
 </project>

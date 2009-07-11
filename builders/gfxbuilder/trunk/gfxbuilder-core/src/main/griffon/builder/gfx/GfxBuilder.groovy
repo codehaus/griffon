@@ -244,7 +244,7 @@ class GfxBuilder extends FactoryBuilderSupport {
         registerFactory("bristleStroke", new StrokesFactory(BristleStrokeNode))
         registerFactory("brushStroke", new StrokesFactory(BrushStrokeNode))
         registerFactory("calligraphyStroke", new StrokesFactory(CalligraphyStrokeNode))
-        registerFactory("clarcoalStroke", new StrokesFactory(CharcoalStrokeNode,false))
+        registerFactory("charcoalStroke", new StrokesFactory(CharcoalStrokeNode,false))
     }
         //
         // filters

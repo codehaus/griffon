@@ -99,11 +99,11 @@ public abstract class PathSegment {
 		
 		public float[] getXCoeffs(AffineTransform transform) {
 			if(prev==null) {
-				System.err.println(this);
+				//System.err.println(this);
 				throw new NullPointerException("prev was null");
 			}
 			if(prev.data==null) {
-				System.err.println(this);
+				//System.err.println(this);
 				throw new NullPointerException("prev.data was null");
 			}
 			if(transform!=null && transform.isIdentity())
@@ -236,14 +236,14 @@ public abstract class PathSegment {
 				dx = 3*x_coeffs[0]*t*t+2*x_coeffs[1]*t+x_coeffs[2];
 				dy = 3*y_coeffs[0]*t*t+2*y_coeffs[1]*t+y_coeffs[2];
 			} else {
-				System.err.println("x_coeffs.length = "+x_coeffs.length);
-				System.err.println(this);
+				//System.err.println("x_coeffs.length = "+x_coeffs.length);
+				//System.err.println(this);
 				throw new RuntimeException("Unexpected condition.");
 			}
 			if(Math.abs(dx)<ZERO && Math.abs(dy)<ZERO)
 				return false;
-			System.out.println("\t\tdx = "+dx);
-			System.out.println("\t\tdy = "+dy);
+			//System.out.println("\t\tdx = "+dx);
+			//System.out.println("\t\tdy = "+dy);
 			return true;
 		}
 		
@@ -277,8 +277,8 @@ public abstract class PathSegment {
 				dx = 3*x_coeffs[0]*t*t+2*x_coeffs[1]*t+x_coeffs[2];
 				dy = 3*y_coeffs[0]*t*t+2*y_coeffs[1]*t+y_coeffs[2];
 			} else {
-				System.err.println("x_coeffs.length = "+x_coeffs.length);
-				System.err.println(this);
+				//System.err.println("x_coeffs.length = "+x_coeffs.length);
+				//System.err.println(this);
 				throw new RuntimeException("Unexpected condition.");
 			}
 			
@@ -352,8 +352,8 @@ public abstract class PathSegment {
 			} else if(x_coeffs.length==4) {
 				return x_coeffs[0]*t*t*t+x_coeffs[1]*t*t+x_coeffs[2]*t+x_coeffs[3];
 			} else {
-				System.err.println("x_coeffs.length = "+x_coeffs.length);
-				System.err.println(this);
+				//System.err.println("x_coeffs.length = "+x_coeffs.length);
+				//System.err.println(this);
 				throw new RuntimeException("Unexpected condition.");
 			}
 		}
@@ -367,8 +367,8 @@ public abstract class PathSegment {
 			} else if(y_coeffs.length==4) {
 				return y_coeffs[0]*t*t*t+y_coeffs[1]*t*t+y_coeffs[2]*t+y_coeffs[3];
 			} else {
-				System.err.println("y_coeffs.length = "+y_coeffs.length);
-				System.err.println(this);
+				//System.err.println("y_coeffs.length = "+y_coeffs.length);
+				//System.err.println(this);
 				throw new RuntimeException("Unexpected condition.");
 			}
 		}

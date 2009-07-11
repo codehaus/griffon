@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-209 the original author or authors.
+ * Copyright 2007-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,21 @@
 
 package griffon.builder.gfx.nodes.shapes.path
 
-import java.awt.geom.GeneralPath
+import org.apache.batik.ext.awt.geom.ExtendedGeneralPath
+import griffon.builder.gfx.GfxAttribute
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-class ClosePathSegment extends AbstractPathSegment {
-    ClosePathSegment(){
-       super("close")
+class LineToExtPathSegment extends AbstractExtPathSegment {
+    @GfxAttribute float x
+    @GfxAttribute float y
+
+    LineToExtPathSegment(){
+       super("xlineTo")
     }
 
-    void apply( GeneralPath path ) {
-       path.closePath()
+    void apply(ExtendedGeneralPath path) {
+       path.lineTo(x as float, y as float)
     }
 }

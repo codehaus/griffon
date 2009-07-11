@@ -24,13 +24,13 @@ import griffon.builder.gfx.GfxAttribute
  */
 class CalligraphyStrokeNode extends AbstractStrokeNode {
     @GfxAttribute(alias="w") float width = 1f
-    @GfxAttribute(alias="a") float angle = (Math.PI / 4.0 * 3.0) as float
+    @GfxAttribute(alias="a") float angle = Math.toRadians(135) as float
 
     CalligraphyStrokeNode() {
        super("calligraphyStroke")
     }
 
     protected Stroke createStroke() {
-        return new CalligraphyStroke(width, angle)
+        return new CalligraphyStroke(width, Math.toRadians(angle) as float)
     }
 }

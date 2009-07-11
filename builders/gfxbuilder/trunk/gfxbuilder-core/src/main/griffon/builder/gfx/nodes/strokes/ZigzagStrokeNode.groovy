@@ -20,6 +20,7 @@ import griffon.builder.gfx.StrokeProvider
 import java.awt.Stroke
 import com.jhlabs.awt.ZigzagStroke
 import griffon.builder.gfx.GfxAttribute
+import griffon.builder.gfx.GfxContext
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -33,20 +34,24 @@ public class ZigzagStrokeNode extends AbstractStrokeNode implements ComposableSt
        super( "zigzagStroke" )
     }
 
-    public void addStroke( Stroke stroke ){
-       setStroke( stroke )
+    public void addStroke(Stroke stroke) {
+       setStroke(stroke)
     }
 
-    public void addStroke( StrokeProvider stroke ){
-       setStroke( stroke )
+    public void addStroke(StrokeProvider stroke) {
+       setStroke(stroke)
     }
 
-   ComposableStroke leftShift( Stroke stroke ) {
+   ComposableStroke leftShift(Stroke stroke) {
       addStroke(stroke)
    }
 
-   ComposableStroke leftShift( StrokeProvider stroke ) {
+   ComposableStroke leftShift(StrokeProvider stroke) {
       addStroke(stroke)
+   }
+
+   void apply(GfxContext context) {
+      if(stroke instanceof StrokeProvider) stroke.apply(context)
    }
 
     protected Stroke createStroke() {

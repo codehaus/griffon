@@ -46,8 +46,8 @@ class EllipseNode extends AbstractShapeGfxNode {
 
     Shape calculateShape() {
        if(Double.isNaN(x) && Double.isNaN(y)) {
-           return new Ellipse2D.Double( (cx - radius) as double,
-                                        (cy - radius) as double,
+           return new Ellipse2D.Double( (cx - radiusX) as double,
+                                        (cy - radiusY) as double,
                                         (radiusX * 2) as double,
                                         (radiusY * 2) as double )
        }

@@ -46,7 +46,7 @@ class PathNode extends AbstractShapeGfxNode  {
 
    public void addPathSegment(PathSegment segment ) {
       if( !segment ) return
-      _segment << segment
+      _segments << segment
       segment.addPropertyChangeListener(this)
    }
 
@@ -56,6 +56,7 @@ class PathNode extends AbstractShapeGfxNode  {
       }
       GeneralPath path = new GeneralPath( getWindingRule() )
       _segments.each { segment ->
+         segment.apply(runtime.context)
          segment.apply(path)
       }
       if(close){

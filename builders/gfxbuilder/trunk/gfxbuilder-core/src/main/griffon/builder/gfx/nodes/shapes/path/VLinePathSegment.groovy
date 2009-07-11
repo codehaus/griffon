@@ -25,10 +25,10 @@ class VLinePathSegment extends AbstractPathSegment {
     @GfxAttribute double y
 
     VLinePathSegment(){
-       super("vline")
+       super("vlineTo")
     }
 
-    void apply( GeneralPath path) {
-       path.lineTo( path.currentPoint.x, y as double )
+    void apply(GeneralPath path) {
+       path.lineTo(path.currentPoint.x, y as double)
     }
 }
