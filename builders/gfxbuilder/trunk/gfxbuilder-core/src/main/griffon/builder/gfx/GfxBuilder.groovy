@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2008 the original author or authors.
+ * Copyright 2007-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,6 @@
 
 package griffon.builder.gfx
 
-// import java.awt.AlphaComposite
-// import java.awt.image.AffineTransformOp
-// 
 import groovy.swing.factory.BindFactory
 import groovy.swing.factory.BindProxyFactory
 import groovy.swing.factory.CollectionFactory
@@ -37,8 +34,6 @@ import java.lang.reflect.*
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class GfxBuilder extends FactoryBuilderSupport {
-    private Map shortcuts = [:]
-
     public static final String DELEGATE_PROPERTY_OBJECT_ID = "_delegateProperty:id";
     public static final String DEFAULT_DELEGATE_PROPERTY_OBJECT_ID = "id";
 
@@ -48,69 +43,86 @@ class GfxBuilder extends FactoryBuilderSupport {
         GfxUtils.enhanceBasicStroke()
     }
 
-    public GfxBuilder( boolean init = true ) {
-        super( false )
+    public GfxBuilder(boolean init = true) {
+        super(false)
         if(init) {
-           gfxbAutoRegiser()
+           gfxbAutoRegister()
         }
 
         this[DELEGATE_PROPERTY_OBJECT_ID] = DEFAULT_DELEGATE_PROPERTY_OBJECT_ID
     }
 
-    public gfxbAutoRegiser() {
+    public gfxbAutoRegister() {
         // if java did atomic blocks, this would be one
         synchronized (this) {
             if (autoRegistrationRunning || autoRegistrationComplete) {
                 // registration already done or in process, abort
-                return;
+                return
             }
         }
-        autoRegistrationRunning = true;
+        autoRegistrationRunning = true
         try {
-            gfxbCallAutoRegisterMethods(getClass());
+            gfxbCallAutoRegisterMethods(getClass())
         } finally {
-            autoRegistrationComplete = true;
-            autoRegistrationRunning = false;
+            autoRegistrationComplete = true
+            autoRegistrationRunning = false
         }
     }
 
     private void gfxbCallAutoRegisterMethods(Class declaredClass) {
         if (declaredClass == null) {
-            return;
+            return
         }
-        gfxbCallAutoRegisterMethods(declaredClass.getSuperclass());
+        gfxbCallAutoRegisterMethods(declaredClass.getSuperclass())
 
         for (Method method in declaredClass.getDeclaredMethods()) {
             if (method.getName().startsWith("register") && method.getParameterTypes().length == 0) {
-                registringGroupName = method.getName().substring("register".length());
-                registrationGroup.put(registringGroupName, new TreeSet<String>());
+                registringGroupName = method.getName().substring("register".length())
+                registrationGroup.put(registringGroupName, new TreeSet<String>())
                 try {
                     if (Modifier.isPublic(method.getModifiers())) {
-                        method.invoke(this);
+                        method.invoke(this)
                     }
                 } catch (IllegalAccessException e) {
-                    throw new RuntimeException("Cound not init " + getClass().getName() + " because of an access error in " + declaredClass.getName() + "." + method.getName(), e);
+                    throw new RuntimeException("Could not init ${this.class.name} because of an access error in ${declaredClass.name}.${method.name}", e)
                 } catch (InvocationTargetException e) {
-                    throw new RuntimeException("Cound not init " + getClass().getName() + " because of an exception in " + declaredClass.getName() + "." + method.getName(), e);
+                    throw new RuntimeException("Could not init ${this.class.name} because of an exception in ${declaredClass.name}.${method.name}", e)
                 } finally {
-                    registringGroupName = "";
+                    registringGroupName = ""
                 }
+            }
+        }
+
+        ServiceLoader.load(GfxBuilderPlugin)?.each { plugin ->
+            plugin.properties.each { name, closure ->
+               if (!name.startsWith("register")) return
+               registringGroupName = name.substring("register".length())
+               if (registrationGroup.get(registringGroupName) == null) {
+                  registrationGroup.put(registringGroupName, new TreeSet<String>())
+               }
+               try {
+                  closure.resolveStrategy = Closure.DELEGATE_FIRST
+                  closure.delegate = this
+                  closure()
+               } catch (Exception e) {
+                  throw new RuntimeException("Could not init ${this.class.name} because of an exception in ${plugin.class.name}.${property.name}", e)
+               } finally {
+                  registringGroupName = ""
+               }
             }
         }
     }
 
-    private registerGfxBeanFactory( String name, Class beanClass ){
-        registerFactory( name, new GfxBeanFactory(beanClass,false) )
+    private registerGfxBeanFactory(String name, Class beanClass) {
+        registerFactory(name, new GfxBeanFactory(beanClass,false))
     }
 
-    private registerGfxBeanFactory( String name, Class beanClass, boolean leaf ){
-        registerFactory( name, new GfxBeanFactory(beanClass,leaf) )
+    private registerGfxBeanFactory(String name, Class beanClass, boolean leaf) {
+        registerFactory(name, new GfxBeanFactory(beanClass,leaf))
     }
 
     void registerGfxSupportNodes() {
         addAttributeDelegate(GfxBuilder.&objectIDAttributeDelegate)
-//         addAttributeDelegate(GfxBuilder.&interpolationAttributeDelegate)
-//         addAttributeDelegate(GfxBuilder.&alphaCompositeAttributeDelegate)
 
 //         registerFactory( "draw", new DrawFactory() )
         registerFactory("font", new FontFactory())
@@ -125,13 +137,13 @@ class GfxBuilder extends FactoryBuilderSupport {
         addAttributeDelegate(bindFactory.&bindingAttributeDelegate)
         registerFactory("bindProxy", new BindProxyFactory())
 
-        registerGfxBeanFactory("image", ImageNode, false)
+        registerGfxBeanFactory("image", ImageNode)
         registerFactory("color", new ColorFactory())
         registerFactory("rgba", factories.color)
         registerFactory("hsl", new HSLColorFactory())
 //         registerFactory( "clip", new ClipFactory() )
         registerFactory("antialias", new AntialiasFactory())
-//         registerFactory( "alphaComposite", new AlphaCompositeFactory() )
+//         registerFactory("alphaComposite", new AlphaCompositeFactory())
 //         registerFactory( "viewBox", new ViewBoxFactory() )
         registerFactory("props", new PropsFactory())
         registerFactory("background", new BackgroundFactory())
@@ -213,7 +225,7 @@ class GfxBuilder extends FactoryBuilderSupport {
         registerGfxBeanFactory("gradientPaint", GradientPaintNode, true)
         registerFactory("multiPaint", new MultiPaintFactory())
 //         registerFactory( "paint", new PaintFactory() )
-//         registerGfxBeanFactory( "texturePaint", TexturePaintGfx, true )
+        registerGfxBeanFactory("texturePaint", TexturePaintNode, true)
         registerFactory("colorPaint", new ColorPaintFactory())
         registerFactory("stop", new GradientStopFactory())
         registerGfxBeanFactory("linearGradient", LinearGradientPaintNode)
@@ -239,25 +251,6 @@ class GfxBuilder extends FactoryBuilderSupport {
         //
 //         registerFactory( "filters", new FilterGroupFactory() )
 
-
-//         variables['angleNone'] = Triangle.NONE
-//         variables['angleAtStart'] = Triangle.ANGLE_AT_START
-//         variables['angleAtEnd'] = Triangle.ANGLE_AT_END
-
-//         variables['alphaClear'] = AlphaComposite.CLEAR
-//         variables['alphaDst'] = AlphaComposite.DST
-//         variables['alphaDstAtop'] = AlphaComposite.DST_ATOP
-//         variables['alphaDstIn'] = AlphaComposite.DST_IN
-//         variables['alphaDstOut'] = AlphaComposite.DST_OUT
-//         variables['alphaDstOver'] = AlphaComposite.DST_OVER
-//         variables['alphaSrc'] = AlphaComposite.SRC
-//         variables['alphaSrcAtop'] = AlphaComposite.SRC_ATOP
-//         variables['alphaSrcIn'] = AlphaComposite.SRC_IN
-//         variables['alphaSrcOut'] = AlphaComposite.SRC_OUT
-//         variables['alphaSrcOver'] = AlphaComposite.SRC_OVER
-//         variables['alphaXor'] = AlphaComposite.XOR
-//     }
-
     public static objectIDAttributeDelegate(def builder, def node, def attributes) {
        def idAttr = builder.getAt(DELEGATE_PROPERTY_OBJECT_ID) ?: DEFAULT_DELEGATE_PROPERTY_OBJECT_ID
        def theID = attributes.remove(idAttr)
@@ -265,42 +258,4 @@ class GfxBuilder extends FactoryBuilderSupport {
            builder.setVariable(theID, node)
        }
     }
-
-//     public static interpolationAttributeDelegate( def builder, def node, def attributes ) {
-//        def interpolation = attributes.remove("interpolation")
-//        switch( interpolation ){
-//           case "bicubic":  interpolation = AffineTransformOp.TYPE_BICUBIC; break;
-//           case "bilinear": interpolation = AffineTransformOp.TYPE_BILINEAR; break;
-//           case "nearest":  interpolation = AffineTransformOp.TYPE_NEAREST_NEIGHBOR; break;
-//        }
-//        if( interpolation != null ) node.interpolation = interpolation
-//     }
-
-//     public static alphaCompositeAttributeDelegate( def builder, def node, def attributes ) {
-//        def alphaComposite = attributes.remove("alphaComposite")
-//        if( alphaComposite ){
-//           if( alphaComposite instanceof AlphaComposite ){
-//              node.alphaComposite = alphaComposite
-//           }else if( alphaComposite instanceof Map ){
-//              def rule = getAlphaCompositeRule(alphaComposite.op)
-//              def alpha = alphaComposite.alpha
-//              if( alpha != null ){
-//                 node.alphaComposite = AlphaComposite.getInstance(rule,alpha as float)
-//              }else{
-//                 node.alphaComposite = AlphaComposite.getInstance(rule)
-//              }
-//           }
-//        }
-//     }
-
-//     private def getAlphaCompositeRule( value ){
-//        if( value == null ) {
-//           return AlphaComposite.SRC_OVER
-//        }else if( value instanceof Number ){
-//           return rule as int
-//        }else if( value instanceof String ){
-//           return AlphaComposite.@"${value.toUpperCase()}"
-//        }
-//        return AlphaComposite.SRC_OVER
-//     }
 }

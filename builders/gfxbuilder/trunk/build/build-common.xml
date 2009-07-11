@@ -8,6 +8,7 @@
    </path>
 
    <taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpathref="build.classpath" />
+   <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="build.classpath" />
 
    <target name="init" />
 
@@ -62,10 +63,15 @@
    <target name="package"
            depends="clean, compile"
            description="Binary jar">
+      <antcall target="-pre-package"/>
       <jar jarfile="${project.build.dir}/${project.final.name}.jar"
            basedir="${project.build.output}"
            excludes="**/package.html" />
+      <antcall target="-post-package"/>
    </target>
+
+   <target name="-pre-package" />
+   <target name="-post-package" />
 
    <target name="sources"
            depends="clean"

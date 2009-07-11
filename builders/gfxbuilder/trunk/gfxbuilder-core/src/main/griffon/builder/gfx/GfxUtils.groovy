@@ -223,12 +223,12 @@ class GfxUtils {
 
    static BufferedImage createCompatibleImage( int width, int height, boolean withAlpha ) {
       if( GraphicsEnvironment.isHeadless() ){
-         return new BufferedImage( width, height, BufferedImage.TYPE_INT_ARGB )
-         //return new BufferedImage( width, height, withAlpha ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB  )
+         //return new BufferedImage( width, height, BufferedImage.TYPE_INT_ARGB )
+         return new BufferedImage( width, height, withAlpha ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB  )
      }else{
         GraphicsConfiguration gc = GraphicsEnvironment.localGraphicsEnvironment.defaultScreenDevice.defaultConfiguration
-        return gc.createCompatibleImage( width as int, height as int, Transparency.BITMASK as int )
-        //return gc.createCompatibleImage( width as int, height as int, (withAlpha ? Transparency.TRANSLUCENT : Transparency.BITMASK) as int )
+        //return gc.createCompatibleImage( width as int, height as int, Transparency.BITMASK as int )
+        return gc.createCompatibleImage( width as int, height as int, (withAlpha ? Transparency.TRANSLUCENT : Transparency.BITMASK) as int )
      }
      throw new IllegalStateException("Couldn't create BufferedImage")
    }

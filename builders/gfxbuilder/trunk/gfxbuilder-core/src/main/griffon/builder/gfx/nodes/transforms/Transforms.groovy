@@ -36,6 +36,10 @@ class Transforms extends GfxNode {
        _transforms.addPropertyChangeListener(this)
     }
 
+    String toString() {
+      String str = "${super.toString()}$_transforms"
+    }
+
     void apply(GfxContext context) {
        if(!enabled()) return
        AffineTransform transform = new AffineTransform()
@@ -45,9 +49,9 @@ class Transforms extends GfxNode {
     }
 
     void concatenateTo(AffineTransform transform) {
-       if(!isEnabled()) return
+       if(!enabled()) return
        _transforms.each { t ->
-          if(t.transform) transform.concatenate t.transform
+          if(t.enabled && t.transform) transform.concatenate t.transform
        }
     }
 
@@ -59,6 +63,11 @@ class Transforms extends GfxNode {
        Transforms node = new Transforms(enabled: enabled)
        _transforms.each{ node.addTransform(it.clone()) }
        node
+    }
+
+    Transforms leftShift(Transform transform) {
+       addTransform(transform)
+       this
     }
 
     void addTransform(Transform transform) {
@@ -79,7 +88,7 @@ class Transforms extends GfxNode {
 
     boolean enabled() {
         def b = _transforms.any { it.enabled }
-        b ?: enabled
+        b ? enabled : false
     }
 
     boolean isEmpty() {
@@ -102,14 +111,14 @@ class Transforms extends GfxNode {
     }
 
     void propertyChange(PropertyChangeEvent event) {
-       if( event.source == _transforms ){
+       if(event.source == _transforms){
            handleElementEvent(event)
        } else {
            super.propertyChange(event)
        }
     }
 
-    protected void handleElementEvent( ElementEvent event ) {
+    protected void handleElementEvent(ElementEvent event) {
       switch( event.type ) {
          case ElementEvent.ADDED:
              event.newValue.addPropertyChangeListener(this)

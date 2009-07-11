@@ -31,7 +31,7 @@ import griffon.builder.gfx.nodes.transforms.Transforms
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener, DrawableNode, Transformable {
-   private Transforms _transforms
+   private Transforms _transforms = new Transforms()
    protected GfxRuntime _runtime
    private Graphics _previousGraphics
 
@@ -49,7 +49,7 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
 
    @GfxAttribute(alias="v")  boolean visible = true
    @GfxAttribute(alias="o")  double opacity = Double.NaN
-   @GfxAttribute(alias="c")  Composite composite = null
+//    @GfxAttribute(alias="c")  Composite composite = null
    @GfxAttribute(alias="pt") boolean passThrough = false
    @GfxAttribute(alias="tx") double translateX = Double.NaN
    @GfxAttribute(alias="ty") double translateY = Double.NaN
@@ -59,7 +59,6 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
 
    AbstractDrawableNode(String name) {
       super(name)
-      setTransforms(new Transforms())
    }
 
    void propertyChanged(PropertyChangeEvent event) {
@@ -155,6 +154,9 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
       if(!Double.isNaN(opacity)) {
          context.g.composite = AlphaComposite.SrcOver.derive(opacity as float)
       }
+//       if(composite) {
+//          context.g.composite = composite
+//       }
    }
 
    protected abstract void applyNode(GfxContext contex)

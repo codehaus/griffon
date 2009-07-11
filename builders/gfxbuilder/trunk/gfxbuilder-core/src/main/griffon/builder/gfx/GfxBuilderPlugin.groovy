@@ -13,22 +13,10 @@
  * See the License for the specific language governing permissions and
  */
 
-package griffon.builder.gfx.nodes.transforms
-
-import griffon.builder.gfx.GfxNode
-import griffon.builder.gfx.GfxContext
+package griffon.builder.gfx
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-abstract class AbstractTransform extends GfxNode implements Transform {
-    AbstractTransform(String name) {
-       super(name)
-    }
-
-    void apply(GfxContext context) {}
-
-    String toString() {
-       "[${super.toString()}, enabled: $enabled, tx: $transform]"
-    }
+interface GfxBuilderPlugin {
 }

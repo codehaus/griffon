@@ -34,7 +34,6 @@ import griffon.builder.gfx.nodes.transforms.*
 abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
    //private ObservableMap _drag = new ObservableMap()
    private Shape _shape
-   private Shape _localShape
 
    @GfxAttribute(alias="s")  boolean asShape = false
    @GfxAttribute(alias="bc") def/*Color*/ borderColor
@@ -43,11 +42,6 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
    //@GfxAttribute(alias="ad") boolean autoDrag = false
    @GfxAttribute(alias="p")  def/*Paint*/ paint = null
    @GfxAttribute(alias="st") def/*Stroke*/ stroke = null
-   @GfxAttribute(alias="tx") double translateX = Double.NaN
-   @GfxAttribute(alias="ty") double translateY = Double.NaN
-   @GfxAttribute(alias="ra") double rotateAngle = Double.NaN
-   @GfxAttribute(alias="sx") double scaleX = Double.NaN
-   @GfxAttribute(alias="sy") double scaleY = Double.NaN
 
    AbstractGfxNode(String name) {
       super(name)

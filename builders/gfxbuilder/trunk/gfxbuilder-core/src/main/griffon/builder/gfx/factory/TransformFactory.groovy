@@ -27,14 +27,6 @@ class TransformFactory extends GfxBeanFactory {
    TransformFactory(Class beanClass) {
       super(beanClass, true)
    }
-
-   public void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-      if(parent instanceof Transforms) {
-         parent.addTransform(node)
-      } else {
-         throw new RuntimeException("Node ${parent} does not accept nesting of ${child}.")
-      }
-   }
 }
 
 /**
@@ -45,17 +37,15 @@ class TransformsFactory extends GfxBeanFactory {
       super(Transforms, false)
    }
 
-   public void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
+   public void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {
       if(parent instanceof Transformable) {
          parent.transforms = node
-      } else {
-         throw new RuntimeException("Node ${parent} does not accept nesting of ${node}.")
       }
    }
 
    public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
       if(child instanceof Transform) {
-         parent.addTransform(child)
+         parent << child
       } else {
          throw new RuntimeException("Node ${parent} does not accept nesting of ${child}.")
       }
@@ -71,20 +61,12 @@ class TransformTransformFactory extends AbstractGfxFactory {
       if( value != null ){
          if( TransformTransform.class.isAssignableFrom(value.getClass()) ){
               return value
-          }else if( value instanceof AffineTransform ){
+          }else if(value instanceof AffineTransform){
               return new TransformTransform(transform: value)
           }
       }
 
       return new TransformTransform()
-   }
-
-   public void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-      if(parent instanceof Transforms) {
-         parent.addTransform(node)
-      } else {
-         throw new RuntimeException("Node ${parent} does not accept nesting of ${child}.")
-      }
    }
 
    public boolean isLeaf() {

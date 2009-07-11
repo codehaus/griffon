@@ -101,9 +101,7 @@ class DrawableGfxRuntime extends AbstractGfxRuntime {
          if(_transformedShape) {
             AffineTransform affineTransform = new AffineTransform()
             affineTransform.concatenate _context.g.transform
-            _node.transforms.each { t ->
-               if(t.transform) affineTransform.concatenate t.transform
-            }
+            _node.transforms.concatenateTo(affineTransform)
             _transformedShape = affineTransform.createTransformedShape(_transformedShape)
          }
       }

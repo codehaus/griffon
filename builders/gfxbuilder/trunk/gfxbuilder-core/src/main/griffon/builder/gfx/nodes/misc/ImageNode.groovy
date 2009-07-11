@@ -43,11 +43,6 @@ class ImageNode extends AbstractDrawableNode {
    @GfxAttribute double y = 0d
    @GfxAttribute(alias="w") double width = Double.NaN
    @GfxAttribute(alias="h") double height = Double.NaN
-   @GfxAttribute(alias="tx") double translateX = Double.NaN
-   @GfxAttribute(alias="ty") double translateY = Double.NaN
-   @GfxAttribute(alias="ra") double rotateAngle = Double.NaN
-   @GfxAttribute(alias="sx") double scaleX = Double.NaN
-   @GfxAttribute(alias="sy") double scaleY = Double.NaN
    @GfxAttribute def interpolation
 
    ImageNode() {
