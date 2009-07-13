@@ -41,14 +41,29 @@ class TimelineFactory extends AbstractFactory {
    }
 
    public boolean onHandleNodeAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
-
       builder.context.start = attributes.remove("start")
+      builder.context.loop = attributes.remove("loop")
+      if(builder.context.start && builder.context.loop) {
+         throw new IllegalArgumentException("You may specify either start: or loop: but not both")
+      }
       return true
    }
 
    public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
       if(builder.context.start) {
          node.play()
+      } else if(builder.context.loop) {
+         switch(builder.context.loop) {
+            case true:
+            case ~/(?i:loop)/:
+            case Timeline.RepeatBehavior.LOOP:
+               node.playLoop(Timeline.RepeatBehavior.LOOP)
+               break
+            case ~/(?i:reverse)/:
+            case Timeline.RepeatBehavior.REVERSE:
+               node.playLoop(Timeline.RepeatBehavior.REVERSE)
+               break
+         }
       }
    }
 }
@@ -232,6 +247,6 @@ class SplineEaseFactory extends EaseFactory {
       if( value < 0f && value > 1f ) {
          throw new RuntimeException("In $name amount must be in the range [0..1]")
       }
-      return new Spline(amount)
+      return new Spline(value)
    }
 }
