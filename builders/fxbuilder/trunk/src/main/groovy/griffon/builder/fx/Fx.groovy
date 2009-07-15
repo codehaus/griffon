@@ -78,7 +78,9 @@ class Fx {
                addChangeListener: [{String name, Closure closure -> Fx.addClosureChangeAdapter(delegate, name, closure)},
                                    {String name, PropertyChangeListener listener -> Fx.addPropertyChangeAdapter(delegate, name, listener)}],
                removeChangeListener: [{String name, Closure closure -> Fx.removeClosureChangeAdapter(delegate, name, closure)},
-                                      {String name, PropertyChangeListener listener -> Fx.removePropertyChangeAdapter(delegate, name, listener)}]
+                                      {String name, PropertyChangeListener listener -> Fx.removePropertyChangeAdapter(delegate, name, listener)}],
+               addPropertyChangeListener: {String name, PropertyChangeListener listener -> Fx.addPropertyChangeAdapter(delegate, name, listener)},
+               removePropertyChangeListener: {String name, PropertyChangeListener listener -> Fx.removePropertyChangeAdapter(delegate, name, listener)}
             ])
         }
 
