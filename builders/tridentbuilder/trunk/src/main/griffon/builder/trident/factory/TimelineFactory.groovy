@@ -43,7 +43,7 @@ class TimelineFactory extends AbstractFactory {
    public boolean onHandleNodeAttributes( FactoryBuilderSupport builder, Object node, Map attributes ) {
       builder.context.start = attributes.remove("start")
       builder.context.loop = attributes.remove("loop")
-      if(builder.context.start && builder.context.loop) {
+      if(builder.context.start != null && builder.context.loop != null) {
          throw new IllegalArgumentException("You may specify either start: or loop: but not both")
       }
       return true
