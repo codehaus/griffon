@@ -141,7 +141,7 @@ class GfxBuilder extends FactoryBuilderSupport {
         registerFactory("color", new ColorFactory())
         registerFactory("rgba", factories.color)
         registerFactory("hsl", new HSLColorFactory())
-//         registerFactory( "clip", new ClipFactory() )
+        registerFactory("clip", new ClipFactory())
         registerFactory("antialias", new AntialiasFactory())
 //         registerFactory("alphaComposite", new AlphaCompositeFactory())
 //         registerFactory( "viewBox", new ViewBoxFactory() )

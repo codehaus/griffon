@@ -148,7 +148,7 @@ class VisualGfxRuntime extends DrawableGfxRuntime {
                   case BorderPaintProvider: break;
                   case PaintProvider:
                   case MultiPaintProvider:
-                      _paint = n
+                      if(n.enabled) _paint = n
               }
           }
       }
@@ -169,7 +169,7 @@ class VisualGfxRuntime extends DrawableGfxRuntime {
       if( _stroke == null ){
          def s = _node.findLast { it instanceof StrokeProvider }
          def bw = getBorderWidth()
-         if( s ){
+         if(s && s.enabled){
             s.apply(_context)
             _stroke = s.getStroke()
          }else if( bw ){

@@ -48,6 +48,11 @@ abstract class CustomGfxNode extends AbstractDrawableNode {
 
    abstract DrawableNode createNode(GfxBuilder builder)
 
+   GfxRuntime getRuntime(GfxContext context) {
+      getNode().getRuntime(context)
+      super.getRuntime(context)
+   }
+
    Shape getShape() {
       getNode().getShape()
    }
@@ -67,12 +72,9 @@ abstract class CustomGfxNode extends AbstractDrawableNode {
 
    protected void beforeApply(GfxContext context) {
       super.beforeApply(context)
-      getNode().createRuntime(context)
    }
 
    protected void applyNode(GfxContext context) {
-//      getNode()
-//      if( shouldSkip(context) ) return
       AffineTransform transform = new AffineTransform()
       transform.concatenate context.g.transform
       transform.concatenate getRuntime().getLocalTransforms()
@@ -80,9 +82,8 @@ abstract class CustomGfxNode extends AbstractDrawableNode {
 
       _node.apply(context)
    }
-/*
+
    protected boolean shouldSkip(GfxContext context) {
-      !visible || _node.shouldSkip(context)
+      if(super.shouldSkip(context)) true
    }
-*/
 }

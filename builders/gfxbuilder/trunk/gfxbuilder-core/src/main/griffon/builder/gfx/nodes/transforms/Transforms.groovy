@@ -87,6 +87,7 @@ class Transforms extends GfxNode {
     }
 
     boolean enabled() {
+        if(_transforms.empty) return false
         def b = _transforms.any { it.enabled }
         b ? enabled : false
     }

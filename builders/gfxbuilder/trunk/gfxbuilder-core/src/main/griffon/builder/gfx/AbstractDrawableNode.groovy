@@ -18,6 +18,7 @@ package griffon.builder.gfx
 import java.awt.AlphaComposite
 import java.awt.Composite
 import java.awt.Graphics
+import java.awt.Shape
 import java.awt.geom.AffineTransform
 import java.beans.PropertyChangeEvent
 
@@ -89,9 +90,15 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
       _runtime
    }
 
-   GfxRuntime createRuntime(GfxContext context) {
-      _runtime = new DrawableGfxRuntime(this, context)
+   GfxRuntime getRuntime(GfxContext context) {
+      if(!_runtime) {
+         _runtime = createRuntime(context)
+      }
       _runtime
+   }
+
+   GfxRuntime createRuntime(GfxContext context) {
+      new DrawableGfxRuntime(this, context)
    }
 
    void keyPressed(GfxInputEvent e) {
@@ -141,16 +148,17 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
    final void apply(GfxContext context) {
        if(!visible || !enabled) return
        beforeApply(context)
-       applyNode(context)
-       afterApply(context)
+       if(!shouldSkip(context)) {
+          applyNode(context)
+          afterApply(context)
+       }
    }
 
    protected void beforeApply(GfxContext context) {
       _previousGraphics = context.g
       context.g = context.g.create()
       _transforms.apply(context)
-      createRuntime(context)
-      //if(shouldSkip(context)) return
+      getRuntime(context)
       if(!Double.isNaN(opacity)) {
          context.g.composite = AlphaComposite.SrcOver.derive(opacity as float)
       }
@@ -164,19 +172,19 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
    protected void afterApply(GfxContext context) {
       context.g.dispose()
       context.g = _previousGraphics
-      //if(shouldSkip(context)) return
       addAsEventTarget(context)
    }
 
    protected void addAsEventTarget(GfxContext context) {
-      if( visible || keyPressed || keyReleased || keyTyped || mouseClicked ||
+      if( keyPressed || keyReleased || keyTyped || mouseClicked ||
           mouseDragged || mouseEntered || mouseExited || mouseMoved ||
-          mousePressed || mouseReleased || mouseWheelMoved || enabled ){
+          mousePressed || mouseReleased || mouseWheelMoved ){
           context.eventTargets << this
       }
    }
 
    protected boolean shouldSkip(GfxContext context){
-      return false
+      Shape _shape = runtime.transformedShape
+      context.g.clipBounds ? !_shape.intersects(context.g.clipBounds) : false
    }
 }

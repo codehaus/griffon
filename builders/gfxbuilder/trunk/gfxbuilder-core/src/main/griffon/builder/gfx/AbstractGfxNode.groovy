@@ -55,8 +55,7 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
    }
 
    GfxRuntime createRuntime(GfxContext context) {
-      _runtime = new VisualGfxRuntime(this, context)
-      _runtime
+      new VisualGfxRuntime(this, context)
    }
 
    abstract Shape calculateShape()

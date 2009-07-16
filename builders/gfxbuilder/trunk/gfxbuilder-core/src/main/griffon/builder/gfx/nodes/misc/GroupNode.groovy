@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2008 the original author or authors.
+ * Copyright 2007-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,14 +37,19 @@ class GroupNode extends AbstractGfxNode  {
     }
 
     GfxRuntime createRuntime(GfxContext context) {
-        _runtime = new GroupGfxRuntime(this, context)
-        _runtime
+        new GroupGfxRuntime(this, context)
     }
 
     protected void beforeApply(GfxContext context) {
-       //createRuntime(context)
        super.beforeApply(context)
-       //if(shouldSkip(context)) return
+    }
+
+    protected void afterApply(GfxContext context) {
+       context.groupSettings = _previousGroupSettings
+       super.afterApply(context)
+    }
+
+    protected void applyThisNode(GfxContext context) {
        _previousGroupSettings = [:]
        _previousGroupSettings.putAll(context.groupSettings)
        if(borderColor != null) context.groupSettings.borderColor = borderColor
@@ -52,22 +57,7 @@ class GroupNode extends AbstractGfxNode  {
        if(fill != null) context.groupSettings.fill = fill
     }
 
-    protected void afterApply(GfxContext context) {
-       //if(shouldSkip(context)) return
-       context.groupSettings = _previousGroupSettings
-       super.afterApply(context)
-    }
-/*
-    protected boolean shouldSkip(GfxContext context){
-       return !visible
-    }
-*/
-    protected void applyThisNode(GfxContext context) {
-//       if(shouldSkip(context)) return
-    }
-
     protected void applyNestedNode(GfxNode node, GfxContext context) {
-//       if(shouldSkip(context)) return
        node.apply(context)
     }
 
@@ -78,10 +68,10 @@ class GroupNode extends AbstractGfxNode  {
        getNodes().each { node ->
           if(!node.enabled) return
           if(node instanceof DrawableNode) {
-             if(!node.visible) return
-             if(!node.getRuntime()) node.createRuntime(context)
+             if(!node.visible || !node.enabled) return
+             if(!node.getRuntime()) node.getRuntime(context)
              Graphics gcopy = null
-             if(node.txs.enabled && !node.txs.empty) {
+             if(node.txs.enabled()) {
                 gcopy = context.g
                 context.g = gcopy.create()
              }

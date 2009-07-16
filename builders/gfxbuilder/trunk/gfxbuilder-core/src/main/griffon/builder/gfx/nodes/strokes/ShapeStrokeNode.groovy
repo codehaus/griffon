@@ -66,7 +66,7 @@ class ShapeStrokeNode extends AbstractStrokeNode {
    void apply(GfxContext context) {
       shapes.each { shape ->
          if(shape instanceof DrawableNode) {
-            shape.createRuntime(context)
+            shape.getRuntime(context)
          }
       }
    }
