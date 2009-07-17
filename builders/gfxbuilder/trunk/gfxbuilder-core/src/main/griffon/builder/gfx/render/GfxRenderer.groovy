@@ -64,7 +64,7 @@ final class GfxRenderer {
      * @param node any GfxNode
      */
     public BufferedImage render(int width, int height, GfxNode node) {
-       return render( GfxUtils.createCompatibleImage( width, height ), node )
+       return render( GfxUtils.createCompatibleImage(width, height, true), node )
     }
 
     /**
@@ -89,7 +89,7 @@ final class GfxRenderer {
      * @param node any GfxNode
      */
     public BufferedImage render(Rectangle clip, GfxNode node) {
-       return render( GfxUtils.createCompatibleImage( clip.width as int, clip.height as int ), clip, node )
+       return render( GfxUtils.createCompatibleImage(clip.width as int, clip.height as int, true), clip, node )
     }
 
     /**
@@ -188,7 +188,7 @@ final class GfxRenderer {
      * @return a File reference to the written image
      */
     public File renderToFile(String filename, int width, int height, GfxNode node) {
-       return renderToFile( filename, GfxUtils.createCompatibleImage( width, height, filename ==~ /(?i).*[png|gif]/ ), node )
+       return renderToFile( filename, GfxUtils.createCompatibleImage(width, height, withAlpha(filename)), node )
     }
 
     /**
@@ -229,8 +229,8 @@ final class GfxRenderer {
      * @return a File reference to the written image
      */
     public File renderToFile(String filename, Rectangle clip, GfxNode node) {
-       return renderToFile( filename, GfxUtils.createCompatibleImage(
-             clip.width as int, clip.height as int, filename ==~ /(?i).*[png|gif]/ ), clip, node )
+       return renderToFile(filename, GfxUtils.createCompatibleImage(
+             clip.width as int, clip.height as int, withAlpha(filename)), clip, node)
     }
 
     /**
@@ -311,20 +311,24 @@ final class GfxRenderer {
        def file = null
        def extension = "png"
 
-       if( filename.lastIndexOf(fileSeparator) != -1 ){
+       if(filename.lastIndexOf(fileSeparator) != -1){
           def dirs = filename[0..(filename.lastIndexOf(fileSeparator)-1)]
           def fname = filename[(filename.lastIndexOf(fileSeparator)+1)..-1]
           extension = fname[(fname.lastIndexOf(".")+1)..-1]
           File parent = new File(dirs)
           parent.mkdirs()
           file = new File(parent,fname)
-       }else{
+       } else {
           file = new File(filename)
           extension = filename[(filename.lastIndexOf(".")+1)..-1]
        }
 
-       if( !dst ) dst = GfxUtils.createCompatibleImage( width, height, filename ==~ /(?i).*[png|gif]/ )
+       if(!dst) dst = GfxUtils.createCompatibleImage(width, height, withAlpha(filename))
        ImageIO.write(render(dst, clip, node), extension, file)
        return file
+    }
+
+    private boolean withAlpha(String filename) {
+       return filename.toLowerCase() ==~ /.*\.png/ || filename.toLowerCase() ==~ /.*\.gif/
     }
 }

@@ -55,7 +55,7 @@ class ShapeExtPathSegment extends AbstractExtPathSegment {
 
    void apply(GfxContext context) {
       if(shape instanceof DrawableNode) {
-         shape.createRuntime(context)
+         shape.getRuntime(context)
       }
    }
 

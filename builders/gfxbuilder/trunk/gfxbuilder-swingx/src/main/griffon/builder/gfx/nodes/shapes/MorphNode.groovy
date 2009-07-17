@@ -74,10 +74,10 @@ class MorphNode extends AbstractShapeGfxNode {
       def _s2 = s2
 
       if(s1 instanceof ShapeProvider) {
-         _s1 = s1.createRuntime(runtime.context).localShape
+         _s1 = s1.getRuntime(runtime.context).localShape
       }
       if(s2 instanceof ShapeProvider) {
-         _s2 = s2.createRuntime(runtime.context).localShape
+         _s2 = s2.getRuntime(runtime.context).localShape
       }
 
       Morphing2D morphedShape = new Morphing2D(_s1, _s2)
