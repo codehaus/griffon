@@ -26,7 +26,7 @@ class PolylineNode extends AbstractOutlineGfxNode {
     @GfxAttribute double points
 
     PolylineNode() {
-        super( "polyline" )
+        super("polyline")
     }
 
     Shape calculateShape() {

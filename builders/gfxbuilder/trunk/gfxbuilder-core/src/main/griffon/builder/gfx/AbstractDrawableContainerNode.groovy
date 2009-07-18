@@ -81,9 +81,9 @@ abstract class AbstractDrawableContainerNode extends AbstractDrawableNode implem
          case ElementEvent.UPDATED:
              break
       }
-      _dirty = true
+      // _dirty = true
       onDirty(event)
-      _dirty = false
+      // _dirty = false
    }
 
    protected def findLast(Closure cls) {

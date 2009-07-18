@@ -27,16 +27,16 @@ class FontNode extends GfxNode {
     @GfxAttribute(alias="f") Font font
 
     FontNode() {
-        super( "font" )
+        super("font")
     }
 
     FontNode(Font font) {
-        super( "font" )
+        super("font")
         this.font = font
     }
 
     void apply(GfxContext context) {
-        if( !font ) return
+        if(!font) return
         context.g.font = font
     }
 }

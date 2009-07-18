@@ -48,10 +48,10 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
    Closure mouseReleased
    Closure mouseWheelMoved
 
-   @GfxAttribute(alias="v")  boolean visible = true
-   @GfxAttribute(alias="o")  double opacity = Double.NaN
+   @GfxAttribute(alias="v", resets=false)  boolean visible = true
+   @GfxAttribute(alias="o", resets=false)  double opacity = Double.NaN
 //    @GfxAttribute(alias="c")  Composite composite = null
-   @GfxAttribute(alias="pt") boolean passThrough = false
+   @GfxAttribute(alias="pt", resets=false) boolean passThrough = false
    @GfxAttribute(alias="tx") double translateX = Double.NaN
    @GfxAttribute(alias="ty") double translateY = Double.NaN
    @GfxAttribute(alias="ra") double rotateAngle = Double.NaN
@@ -186,5 +186,10 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
    protected boolean shouldSkip(GfxContext context){
       Shape _shape = runtime.transformedShape
       context.g.clipBounds ? !_shape.intersects(context.g.clipBounds) : false
+   }
+
+   protected boolean triggersReset(PropertyChangeEvent event) {
+      if(event.source == _transforms) return true
+      super.triggersReset(event)
    }
 }

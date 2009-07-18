@@ -23,10 +23,10 @@ import griffon.builder.gfx.GfxAttribute
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class GradientStop {
-    @GfxAttribute(alias="c") Color color
-    @GfxAttribute(alias="s") float offset = 0f
-    @GfxAttribute(alias="o") float opacity = Float.NaN
-    @GfxAttribute(alias="n") String name
+    @GfxAttribute(alias="c", resets=false) Color color
+    @GfxAttribute(alias="s", resets=false) float offset = 0f
+    @GfxAttribute(alias="o", resets=false) float opacity = Float.NaN
+    @GfxAttribute(alias="n", resets=false) String name
 
 //     public void setColor(String color) {
 //        setColor((Color) Colors.getColor(color))

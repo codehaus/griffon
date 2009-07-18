@@ -29,11 +29,11 @@ class LineNode extends AbstractOutlineGfxNode {
     @GfxAttribute double y2 = 10
 
     LineNode() {
-        super( "line" )
+        super("line")
     }
 
     LineNode(Line2D, line) {
-        super( "line" )
+        super("line")
         x1 = line.x1
         x2 = line.x2
         y1 = line.y1

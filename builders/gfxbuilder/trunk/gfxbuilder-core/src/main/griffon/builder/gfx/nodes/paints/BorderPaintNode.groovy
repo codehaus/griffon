@@ -31,7 +31,7 @@ import griffon.builder.gfx.GfxContext
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 final class BorderPaintNode extends AbstractPaintNode implements BorderPaintProvider {
-    @GfxAttribute(alias="p") def/*Paint|PaintProvider*/ paint
+    @GfxAttribute(alias="p", resets=false) def/*Paint|PaintProvider*/ paint
 
     BorderPaintNode() {
         super("borderPaint")

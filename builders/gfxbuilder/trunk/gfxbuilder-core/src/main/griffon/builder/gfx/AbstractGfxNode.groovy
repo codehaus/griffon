@@ -35,12 +35,12 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
    //private ObservableMap _drag = new ObservableMap()
    private Shape _shape
 
-   @GfxAttribute(alias="s")  boolean asShape = false
-   @GfxAttribute(alias="bc") def/*Color*/ borderColor
+   @GfxAttribute(alias="s", resets=false)  boolean asShape = false
+   @GfxAttribute(alias="bc", resets=false) def/*Color*/ borderColor
    @GfxAttribute(alias="bw") double borderWidth = 1d
-   @GfxAttribute(alias="f")  def/*Color*/ fill
+   @GfxAttribute(alias="f", resets=false)  def/*Color*/ fill
    //@GfxAttribute(alias="ad") boolean autoDrag = false
-   @GfxAttribute(alias="p")  def/*Paint*/ paint = null
+   @GfxAttribute(alias="p", resets=false)  def/*Paint*/ paint = null
    @GfxAttribute(alias="st") def/*Stroke*/ stroke = null
 
    AbstractGfxNode(String name) {
@@ -50,6 +50,7 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
    Shape getShape() {
       if(!_shape) {
          _shape = calculateShape()
+println([this,_shape])
       }
       _shape
    }
@@ -60,8 +61,7 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
 
    abstract Shape calculateShape()
 
-   void onDirty( PropertyChangeEvent event ) {
-      super.onDirty(event)
+   protected void reset(PropertyChangeEvent event) {
       _shape = null
    }
 
@@ -86,21 +86,6 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
    protected void applyNestedNode(GfxNode node, GfxContext context) {
       // node.apply(context)
    }
-
-/*
-   protected boolean withinClipBounds(GfxContext context, Shape shape) {
-      context.g.clipBounds ? shape.intersects(context.g.clipBounds) : false
-   }
-
-
-   protected boolean shouldSkip(GfxContext context){
-      if(super.shouldSkip(context)) return true
-      Shape shape = runtime.transformedShape
-      if( !shape ) return false
-       // honor the clip
-      return asShape || !withinClipBounds(context, shape)
-   }
-*/
 
    protected void fill(GfxContext context, Shape shape){
        def __f = _runtime.fill

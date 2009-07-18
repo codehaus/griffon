@@ -24,8 +24,8 @@ import griffon.builder.gfx.GfxNode
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class RenderingHintNode extends GfxNode {
-    @GfxAttribute(alias="k") def key
-    @GfxAttribute(alias="v") def value
+    @GfxAttribute(alias="k", resets=false) def key
+    @GfxAttribute(alias="v", resets=false) def value
 
     RenderingHintNode() {
         super("renderingHint")

@@ -32,7 +32,6 @@ import griffon.builder.gfx.MultiPaintProvider
  */
 final class MultiPaintNode extends GfxNode implements MultiPaintProvider {
    private ObservableList/*<PaintProvider>*/ _paints = new ObservableList()
-   @GfxAttribute(alias="e") boolean enabled = true
 
    MultiPaintNode() {
       super("multiPaint")

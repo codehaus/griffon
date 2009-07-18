@@ -27,7 +27,7 @@ import griffon.builder.gfx.GfxContext
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 final class ColorPaintNode extends AbstractPaintNode {
-    @GfxAttribute(alias="c") def/*Color|String*/ color = Color.BLACK
+    @GfxAttribute(alias="c", resets=false) def/*Color|String*/ color = Color.BLACK
 
     ColorPaintNode(){
        super("colorPaint")

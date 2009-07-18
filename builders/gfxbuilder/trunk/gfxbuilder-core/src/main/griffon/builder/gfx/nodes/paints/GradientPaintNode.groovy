@@ -26,8 +26,8 @@ import griffon.builder.gfx.GfxAttribute
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class GradientPaintNode extends AbstractLinearGradientPaintNode {
-    @GfxAttribute(alias="c1") def color1 = Color.BLACK
-    @GfxAttribute(alias="c2") def color2 = Color.WHITE
+    @GfxAttribute(alias="c1", resets=false) def color1 = Color.BLACK
+    @GfxAttribute(alias="c2", resets=false) def color2 = Color.WHITE
 
     GradientPaintNode() {
        super("gradientPaint")

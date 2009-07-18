@@ -33,11 +33,11 @@ class CubicCurveNode extends AbstractOutlineGfxNode {
     @GfxAttribute double ctrly2
 
     CubicCurveNode() {
-        super( "cubicCurve" )
+        super("cubicCurve")
     }
 
     CubicCurveNode(CubicCurve2D, cubicCurve) {
-        super( "cubicCurve" )
+        super("cubicCurve")
         x1 = cubicCurve.x1
         x2 = cubicCurve.x2
         y1 = cubicCurve.y1

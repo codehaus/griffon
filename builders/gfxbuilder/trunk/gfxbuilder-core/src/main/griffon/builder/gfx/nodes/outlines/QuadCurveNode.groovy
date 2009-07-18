@@ -31,11 +31,11 @@ class QuadCurveNode extends AbstractOutlineGfxNode {
     @GfxAttribute double ctrly
 
     QuadCurveNode() {
-        super( "quadCurve" )
+        super("quadCurve")
     }
 
     QuadCurveNode(QuadCurveNode, quadCurve) {
-        super( "quadCurve" )
+        super("quadCurve")
         x1 = quadCurve.x1
         x2 = quadCurve.x2
         y1 = quadCurve.y1

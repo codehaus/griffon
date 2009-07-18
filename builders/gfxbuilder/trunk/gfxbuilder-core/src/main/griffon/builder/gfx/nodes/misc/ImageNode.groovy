@@ -43,7 +43,7 @@ class ImageNode extends AbstractDrawableNode {
    @GfxAttribute double y = 0d
    @GfxAttribute(alias="w") double width = Double.NaN
    @GfxAttribute(alias="h") double height = Double.NaN
-   @GfxAttribute def interpolation
+   @GfxAttribute(resets=false) def interpolation
 
    ImageNode() {
       super("image")
@@ -69,9 +69,8 @@ class ImageNode extends AbstractDrawableNode {
       this.classpath = classpath
    }
 
-   void onDirty(PropertyChangeEvent event) {
+   protected void reset(PropertyChangeEvent event) {
       _image = null
-      super.onDirty(event)
    }
 
    Image getImg() {

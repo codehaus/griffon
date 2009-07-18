@@ -44,4 +44,5 @@ import java.lang.annotation.Target;
 @GroovyASTTransformationClass("griffon.builder.gfx.ast.GfxAttributeASTTransformation")
 public @interface GfxAttribute {
    String alias() default "";
+   boolean resets() default true;
 }

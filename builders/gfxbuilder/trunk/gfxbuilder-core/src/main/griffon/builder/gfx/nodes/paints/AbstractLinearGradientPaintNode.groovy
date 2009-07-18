@@ -32,7 +32,7 @@ abstract class AbstractLinearGradientPaintNode extends AbstractPaintNode {
     @GfxAttribute double x2 = 100d
     @GfxAttribute double y1 = 0d
     @GfxAttribute double y2 = 0d
-    @GfxAttribute(alias="c") def cycle
+    @GfxAttribute(alias="c", resets=false) def cycle
     @GfxAttribute(alias="s") boolean stretch = false
     @GfxAttribute(alias="f") boolean fit = true
 

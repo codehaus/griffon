@@ -20,7 +20,6 @@ import java.awt.BasicStroke
 import java.awt.Stroke
 import java.awt.Shape
 
-//import griffon.builder.gfx.Colors
 import griffon.builder.gfx.GfxNode
 import griffon.builder.gfx.GfxUtils
 import griffon.builder.gfx.GfxContext
@@ -31,19 +30,17 @@ import griffon.builder.gfx.StrokeProvider
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-public class BasicStrokeNode extends AbstractStrokeNode {
+class BasicStrokeNode extends AbstractStrokeNode {
    @GfxAttribute(alias="w") float width = 1f
    @GfxAttribute int cap
    @GfxAttribute(alias="j") int join
    @GfxAttribute(alias="m") float miterlimit = 1
    @GfxAttribute(alias="d") def dash
    @GfxAttribute(alias="dp") float dashphase = 0
-   //@GfxAttribute(alias="c") def color
-   //@GfxAttribute(alias="o") float opacity = 1f
 
-    public BasicStrokeNode() {
-        super("basicStroke")
-    }
+   BasicStrokeNode() {
+      super("basicStroke")
+   }
 
     protected Stroke createStroke() {
         def _w = width
@@ -58,7 +55,7 @@ public class BasicStrokeNode extends AbstractStrokeNode {
         if( _m == null ) _m = 10
 
         if( _d != null && dashphase != null ){
-           return new BasicStroke(_w as float, _c as int, _j as int, _m as float, _d as float[], dashphase as float )
+           return new BasicStroke(_w as float, _c as int, _j as int, _m as float, _d as float[], dashphase as float)
         }else{
            return new BasicStroke(_w as float, _c as int, _j as int, _m as float)
         }

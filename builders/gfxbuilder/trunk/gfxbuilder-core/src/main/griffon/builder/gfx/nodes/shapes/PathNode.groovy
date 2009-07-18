@@ -44,6 +44,11 @@ class PathNode extends AbstractShapeGfxNode  {
       }
    }
 
+   protected boolean triggersReset(PropertyChangeEvent event) {
+      if(_segments.contains(event.source)) return true
+      super.triggersReset(event)
+   }
+
    public void addPathSegment(PathSegment segment ) {
       if( !segment ) return
       _segments << segment

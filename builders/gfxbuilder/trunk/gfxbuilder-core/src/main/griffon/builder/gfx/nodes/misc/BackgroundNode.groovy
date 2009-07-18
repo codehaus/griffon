@@ -25,7 +25,7 @@ import griffon.builder.gfx.GfxNode
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class BackgroundNode extends GfxNode {
-    @GfxAttribute(alias="c") def color
+    @GfxAttribute(alias="c", resets=false) def color
 
     BackgroundNode() {
         super( "background" )

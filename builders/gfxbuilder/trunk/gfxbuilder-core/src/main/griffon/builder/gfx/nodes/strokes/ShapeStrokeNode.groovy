@@ -76,7 +76,7 @@ class ShapeStrokeNode extends AbstractStrokeNode {
       def s = []
       shapes.each { shape ->
          if(shape instanceof Shape) s << shape
-         if(shape instanceof DrawableNode) {
+         if(shape instanceof DrawableNode && shape.enabled) {
             def _s = shape.runtime.localShape
             if(_s) s << _s
          }

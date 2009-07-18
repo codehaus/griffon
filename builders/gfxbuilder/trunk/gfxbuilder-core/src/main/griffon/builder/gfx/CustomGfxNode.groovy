@@ -65,9 +65,9 @@ abstract class CustomGfxNode extends AbstractDrawableNode {
       }
    }
 
-   void onDirty(PropertyChangeEvent event) {
-      _node = null
-      super.onDirty(event)
+   protected boolean triggersReset(PropertyChangeEvent event) {
+      if(event.source == _node) return _node.triggersReset(event)
+      super.triggersReset(event)
    }
 
    protected void beforeApply(GfxContext context) {
@@ -83,7 +83,7 @@ abstract class CustomGfxNode extends AbstractDrawableNode {
       _node.apply(context)
    }
 
-   protected boolean shouldSkip(GfxContext context) {
-      if(super.shouldSkip(context)) true
-   }
+//    protected boolean shouldSkip(GfxContext context) {
+//       if(super.shouldSkip(context)) true
+//    }
 }
