@@ -12,11 +12,19 @@
 includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
-if(!metadata['addon.gsql']) {
-   metadata['addon.gsql'] = 'griffon.gsql.GsqlAddon'
-   metadataFile.withOutputStream { out ->
-     metadata.store out, 'utf-8'
-   }
+o = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
+boolean addonIsSet
+o.each() { prefix, v ->
+    v.each { key, views ->
+        addonIsSet = addonIsSet || 'griffon.gsql.GsqlAddon' == key
+    }
+}
+
+if (!addonIsSet) {
+    println 'Adding GSQLAddon to Builders.groovy'
+    new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
+root.'griffon.gsql.GsqlAddon'.controller = '*'
+""")
 }
 
 if(!new File("${basedir}/griffon-app/conf/DataSource.groovy").exists()) {
