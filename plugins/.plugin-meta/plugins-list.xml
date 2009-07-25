@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="834">
+<plugins revision="849">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -134,6 +134,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_2/griffon-flamingo-builder-0.2.zip</file>
         </release>
     </plugin>
+    <plugin latest-release="0.1" name="fx-builder">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Enables JavaFX on your Griffon application</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/FxBuilder+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-fx-builder/tags/RELEASE_0_1/griffon-fx-builder-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="gfx-builder">
         <release tag="trunk" type="svn" version="0.1-SNAPSHOT">
             <title>Gfx Builder Plugin</title>
@@ -144,7 +154,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gfx-builder/trunk/griffon-gfx-builder-0.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
-    <plugin name="gsql"/>
+    <plugin name="gsql">
+        <release tag="trunk" type="svn" version="0.1-SNAPSHOT">
+            <title>Gsql powered DataSource</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/trunk/griffon-gsql-0.1-SNAPSHOT.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.3" name="installer">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Allows creating installers for your Griffon application</title>
