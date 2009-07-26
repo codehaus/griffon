@@ -251,6 +251,10 @@ class GfxBuilder extends FactoryBuilderSupport {
         //
 //         registerFactory( "filters", new FilterGroupFactory() )
 
+    void registerGfxSwing() {
+         registerFactory("gfxpanel", new GfxPanelFactory())
+    }
+
     public static objectIDAttributeDelegate(def builder, def node, def attributes) {
        def idAttr = builder.getAt(DELEGATE_PROPERTY_OBJECT_ID) ?: DEFAULT_DELEGATE_PROPERTY_OBJECT_ID
        def theID = attributes.remove(idAttr)

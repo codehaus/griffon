@@ -133,8 +133,8 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
          }
      }
 
-     public void propertyChange( PropertyChangeEvent event ){
-         if(animate && visible){
+     public void propertyChange(PropertyChangeEvent event){
+         if(event.source instanceof GfxNode && animate && visible){
              repaint()
          }
      }

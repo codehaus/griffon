@@ -50,7 +50,6 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
    Shape getShape() {
       if(!_shape) {
          _shape = calculateShape()
-println([this,_shape])
       }
       _shape
    }
