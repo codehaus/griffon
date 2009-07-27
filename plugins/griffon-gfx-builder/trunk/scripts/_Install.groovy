@@ -11,13 +11,6 @@
 
 includeTargets << griffonScript("_GriffonInit")
 
-if(!metadata['addon.gfx']) {
-   metadata['addon.gfx'] = 'griffon.gfx.GfxAddon'
-   metadataFile.withOutputStream { out ->
-     metadata.store out, 'utf-8'
-   }
-}
-
 // check to see if we already have a GfxBuilder
 ConfigSlurper configSlurper = new ConfigSlurper()
 o = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())

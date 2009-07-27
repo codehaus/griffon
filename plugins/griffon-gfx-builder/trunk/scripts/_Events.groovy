@@ -1,24 +1,18 @@
 import org.codehaus.griffon.cli.GriffonScriptRunner as GSR
 import org.codehaus.griffon.plugins.GriffonPluginUtils
 
-eventPackagePluginStart = { pluginName, plugin ->
-    def destFileName = "lib/griffon-${pluginName}-addon-${plugin.version}.jar"
-    ant.delete(dir: destFileName, quiet: false, failOnError: false)
-    ant.jar(destfile: destFileName) {
-        fileset(dir: classesDirPath) {
-            exclude(name:'_*.class')
-            exclude(name:'*GriffonPlugin.class')
-        }
-    }
-}
+includeTargets << griffonScript("_GriffonInit")
 
 eventCopyLibsEnd = { jardir ->
-    ant.fileset(dir:"${getPluginDirForName('gfx').file}/lib/", includes:"*.jar").each {
+    def gfxlibs = "${getPluginDirForName('gfx').file}/lib"
+    ant.fileset(dir: gfxlibs, includes: "*.jar").each {
         griffonCopyDist(it.toString(), jardir)
     }
-}
-
-getPluginDirForName = { String pluginName ->
-    // pluginsHome = griffonSettings.projectPluginsDir.path
-    GriffonPluginUtils.getPluginDirForName(pluginsHome, pluginName)
+    ["swingx","svg"].each { ext ->
+        if(config?.griffon?.gfx[(ext)]?.enabled ?: false) {
+            ant.fileset(dir: "${gfxlibs}/$ext", includes: "*.jar").each {
+                griffonCopyDist(it.toString(), jardir)
+            }
+        }
+    }
 }
