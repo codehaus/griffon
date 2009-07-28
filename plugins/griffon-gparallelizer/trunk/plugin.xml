@@ -1,0 +1,6 @@
+<plugin name='gparallelizer' version='0.1' jdk='1.5'>
+  <author>Vaclav Pech</author>
+  <title>GParallelizer Plugin</title>
+  <documentation>http://griffon.codehaus.org/Gparallelizer+Plugin</documentation>
+  <dependencies />
+</plugin>
