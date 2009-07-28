@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="863">
+<plugins revision="870">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -152,6 +152,16 @@
             <description/>
             <documentation>http://griffon.codehaus.org/GfxBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gfx-builder/tags/RELEASE_0_1/griffon-gfx-builder-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin latest-release="0.1" name="gparallelizer">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>GParallelizer Plugin</title>
+            <author>Vaclav Pech</author>
+            <authorEmail/>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Gparallelizer+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-gparallelizer/tags/RELEASE_0_1/griffon-gparallelizer-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="gsql">
