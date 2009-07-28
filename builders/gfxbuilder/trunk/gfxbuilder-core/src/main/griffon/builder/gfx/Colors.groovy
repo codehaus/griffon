@@ -16,6 +16,7 @@
 package griffon.builder.gfx
 
 import java.awt.Color
+import com.camick.awt.HSLColor
 
 /**
  * A collection of named colors.<br>
@@ -118,17 +119,17 @@ public class Colors {
     private Color _getColor(String name) {
         if(!name) return null
         Color color = customColors[normalize(name)]
-        if( color == null ){
+        if( color == null ) {
             color = standardColors[normalize(name)]
         }
-        if( color == null && name.startsWith("#") ){
+        if( color == null && name.startsWith("#") ) {
            def cdef = name[1..-1]
-           if( cdef.length() == 3 ){
+           if( cdef.length() == 3 ) {
               color = new Color( Integer.parseInt("${cdef[0]}${cdef[0]}",16),
                                  Integer.parseInt("${cdef[1]}${cdef[1]}",16),
                                  Integer.parseInt("${cdef[2]}${cdef[2]}",16))
               customColors[normalize(name)] = color
-           }else if( cdef.length() == 6 ){
+           }else if( cdef.length() == 6 ) {
               color = new Color( Integer.parseInt(cdef[0..1],16),
                                  Integer.parseInt(cdef[2..3],16),
                                  Integer.parseInt(cdef[4..5],16))
@@ -138,29 +139,32 @@ public class Colors {
         return color
     }
 
-    private Color _getColor(Color color){
+    private Color _getColor(Color color) {
        return color
     }
 
-    private Color _getColor(Number value){
-       return new Color( value.intValue(), true )
+    private Color _getColor(Number value) {
+       return new Color(value.intValue(), true)
     }
 
-    private Color _getColor(Map map){
-        if(map.red == null)   map.red =   map.remove("r")
-        if(map.green == null) map.green = map.remove("g")
-        if(map.blue == null)  map.blue =  map.remove("b")
-        if(map.alpha == null) map.alpha = map.remove("a")
+    private Color _getColor(Map map) {
+        if(map.red == null)        map.red        = map.remove("r")
+        if(map.green == null)      map.green      = map.remove("g")
+        if(map.blue == null)       map.blue       = map.remove("b")
+        if(map.alpha == null)      map.alpha      = map.remove("a")
+        if(map.hue == null)        map.hue        = map.remove("h")
+        if(map.saturation == null) map.saturation = map.remove("s")
+        if(map.luminance == null)  map.luminance  = map.remove("l")
 
-        if( map.containsKey( "red" )   ||
-            map.containsKey( "green" ) ||
-            map.containsKey( "blue" )  ||
-            map.containsKey( "alpha") ){
+        if( map.containsKey("red")   ||
+            map.containsKey("green") ||
+            map.containsKey("blue")  ||
+            map.containsKey("alpha") ) {
 
-            def red = map.remove( "red" )
-            def green = map.remove( "green" )
-            def blue = map.remove( "blue" )
-            def alpha = map.remove( "alpha" )
+            def red = map.remove("red")
+            def green = map.remove("green")
+            def blue = map.remove("blue")
+            def alpha = map.remove("alpha")
 
             red = red != null ? red : 0
             green = green != null ? green : 0
@@ -173,6 +177,27 @@ public class Colors {
             alpha = alpha > 1 ? alpha/255 : alpha
 
             return new Color(red as float, green as float, blue as float, alpha as float)
+        } else if( map.containsKey("hue")        ||
+                   map.containsKey("saturation") ||
+                   map.containsKey("luminance") ) {
+            HSLColor hsl = new HSLColor(Color.BLACK)
+
+            def h = map.remove("hue")
+            def s = map.remove("saturation")
+            def l = map.remove("luminance")
+            def a = map.remove("alpha")
+            def shade = map.remove("shade")
+            def tone = map.remove("tone")
+
+            def _h = h != null ? h : hsl.hue
+            def _s = s != null ? s : hsl.saturation
+            def _l = l != null ? l : hsl.luminance
+            def _a = a != null ? a : hsl.alpha
+
+            hsl = new HSLColor(_h as float, _s as float, _l as float, _a as float)
+            if(shade != null) hsl = new HSLColor(hsl.adjustShade(shade as float))
+            if(tone != null) hsl = new HSLColor(hsl.adjustTone(tone as float))
+            return hsl.getRGB()
         }
     }
 

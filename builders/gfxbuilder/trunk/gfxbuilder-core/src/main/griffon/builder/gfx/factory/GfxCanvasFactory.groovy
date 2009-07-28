@@ -16,19 +16,19 @@
 package griffon.builder.gfx.factory
 
 import groovy.swing.factory.ComponentFactory
-import griffon.builder.gfx.swing.GfxPanel
+import griffon.builder.gfx.swing.GfxCanvas
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
-class GfxPanelFactory extends ComponentFactory {
-   GfxPanelFactory() {
-      super(GfxPanel, false)
+class GfxCanvasFactory extends ComponentFactory {
+   GfxCanvasFactory() {
+      super(GfxCanvas, false)
    }
 
    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
-      return new GfxPanel()
+      return new GfxCanvas()
    }
 
    public boolean isHandlesNodeChildren() {

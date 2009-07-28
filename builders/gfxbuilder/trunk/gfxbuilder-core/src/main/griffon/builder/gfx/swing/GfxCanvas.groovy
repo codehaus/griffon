@@ -18,7 +18,6 @@ package griffon.builder.gfx.swing
 import java.awt.Graphics
 import java.awt.GraphicsConfiguration
 import java.awt.GraphicsEnvironment
-import java.awt.LayoutManager
 import java.awt.Transparency
 import java.awt.image.BufferedImage
 import java.awt.event.KeyEvent
@@ -30,7 +29,7 @@ import java.awt.event.MouseWheelEvent
 import java.awt.event.MouseWheelListener
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
-import javax.swing.JPanel
+import javax.swing.JComponent
 import griffon.builder.gfx.*
 import griffon.builder.gfx.event.*
 
@@ -39,7 +38,7 @@ import griffon.builder.gfx.event.*
  *
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
+class GfxCanvas extends JComponent implements PropertyChangeListener, MouseListener,
    MouseMotionListener, MouseWheelListener, KeyListener {
      private GfxNode _node
      private GfxContext _context = new GfxContext()
@@ -49,16 +48,11 @@ class GfxPanel extends JPanel implements PropertyChangeListener, MouseListener,
 
      boolean animate
 
-     GfxPanel(){
-         super(null)
+     GfxCanvas(){
          addMouseListener(this)
          addMouseMotionListener(this)
          addMouseWheelListener(this)
          addKeyListener(this)
-     }
-
-     public void setLayout(LayoutManager mgr){
-         // do not allow the layout to be changed
      }
 
      /**

@@ -252,7 +252,7 @@ class GfxBuilder extends FactoryBuilderSupport {
 //         registerFactory( "filters", new FilterGroupFactory() )
 
     void registerGfxSwing() {
-         registerFactory("gfxpanel", new GfxPanelFactory())
+         registerFactory("canvas", new GfxCanvasFactory())
     }
 
     public static objectIDAttributeDelegate(def builder, def node, def attributes) {
