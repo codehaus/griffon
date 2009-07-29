@@ -40,8 +40,8 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
    @GfxAttribute(alias="bw") double borderWidth = 1d
    @GfxAttribute(alias="f", resets=false)  def/*Color*/ fill
    //@GfxAttribute(alias="ad") boolean autoDrag = false
-   @GfxAttribute(alias="p", resets=false)  def/*Paint*/ paint = null
-   @GfxAttribute(alias="st") def/*Stroke*/ stroke = null
+   //@GfxAttribute(alias="p", resets=false)  def/*Paint*/ paint = null
+   //@GfxAttribute(alias="st") def/*Stroke*/ stroke = null
 
    AbstractGfxNode(String name) {
       super(name)
@@ -60,8 +60,19 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
 
    abstract Shape calculateShape()
 
+   protected boolean triggersReset(PropertyChangeEvent event) {
+      switch(event.propertyName) {
+         case "borderColor":
+         case "borderWidth":
+         case "fill":
+            runtime?.reset(event)
+      }
+      return super.triggersReset(event)
+   }
+
    protected void reset(PropertyChangeEvent event) {
       _shape = null
+      runtime?.reset()
    }
 
 //    void setBorderColor(String color) {
@@ -130,10 +141,10 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
        def __st = _runtime.stroke
        def __bp = findLast{ it instanceof BorderPaintProvider }
 
-       if(__bp && __bp.paint){
+       if(__bp && __bp.paint) {
           if(!__bp.paint.enabled) return
           def __ss = __st.createStrokedShape(shape)
-          if(__bp.paint instanceof MultiPaintProvider){
+          if(__bp.paint instanceof MultiPaintProvider) {
              __bp.apply(context,__ss)
           } else {
              def __p = g.paint
@@ -141,7 +152,7 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
              g.fill(__ss)
              g.paint = __p
           }
-       }else if(__bc){
+       } else if(__bc) {
           def __pc = g.color
           def __ps = g.stroke
           g.color = __bc
@@ -149,7 +160,7 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
           g.draw(shape)
           g.color = __pc
           if(__st) g.stroke = __ps
-       }else{
+       } else {
           // don't draw the shape
        }
    }

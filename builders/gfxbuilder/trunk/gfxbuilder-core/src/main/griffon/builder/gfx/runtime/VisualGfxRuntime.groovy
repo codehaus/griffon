@@ -21,6 +21,7 @@ import java.awt.BasicStroke
 import java.awt.Stroke
 import java.awt.Shape
 import java.awt.geom.Area
+import java.beans.PropertyChangeEvent
 import griffon.builder.gfx.*
 
 import griffon.builder.gfx.nodes.transforms.Transform
@@ -38,6 +39,41 @@ class VisualGfxRuntime extends DrawableGfxRuntime {
 
    VisualGfxRuntime(GfxNode node, GfxContext context){
       super(node, context)
+   }
+
+   void reset(PropertyChangeEvent event = null) {
+      super.reset(event)
+      if(event == null) {
+         _fill = null
+         _paint = null
+         _borderColor = null
+         _borderWidth = null
+         _stroke = null
+         _boundingShape = null
+         return
+      }
+      switch(event.propertyName) {
+         case "fill":
+            _fill = null
+            break
+         case "borderColor":
+            _borderColor = null
+            break
+         case "borderWidth":
+            _borderWidth = null
+            _stroke = null
+            break
+      }
+      switch(event.source) {
+         case BorderPaintProvider: break;
+         case PaintProvider:
+         case MultiPaintProvider:
+            _fill = null
+            _paint = null
+            break
+         case StrokeProvider:
+            _stroke = null;
+      }
    }
 
    /**

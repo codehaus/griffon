@@ -19,6 +19,7 @@ import java.awt.Image
 import java.awt.Shape
 import java.awt.image.BufferedImage
 import java.awt.geom.Rectangle2D
+import java.beans.PropertyChangeEvent
 import javax.imageio.ImageIO
 import griffon.builder.gfx.GfxNode
 import griffon.builder.gfx.GfxContext
@@ -31,6 +32,13 @@ class ImageGfxRuntime extends DrawableGfxRuntime {
 
    ImageGfxRuntime(GfxNode node, GfxContext context){
       super(node, context)
+   }
+
+   void reset(PropertyChangeEvent event = null) {
+      if(event == null) {
+         _image = null
+      }
+      super.reset(event)
    }
 
    public def getImage() {

@@ -32,6 +32,7 @@ import griffon.builder.gfx.nodes.transforms.Transforms
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener, DrawableNode, Transformable {
+   private boolean _applying = false
    private Transforms _transforms = new Transforms()
    protected GfxRuntime _runtime
    private Graphics _previousGraphics
@@ -146,12 +147,17 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
    }
 
    final void apply(GfxContext context) {
-       if(!visible || !enabled) return
-       beforeApply(context)
-       if(!shouldSkip(context)) {
-          applyNode(context)
-          afterApply(context)
-       }
+      if(!visible || !enabled) return
+      _applying = true
+      try {
+         beforeApply(context)
+         if(!shouldSkip(context)) {
+            applyNode(context)
+            afterApply(context)
+         }
+      } finally {
+         _applying = false
+      }
    }
 
    protected void beforeApply(GfxContext context) {
@@ -184,12 +190,21 @@ abstract class AbstractDrawableNode extends GfxNode implements GfxInputListener,
    }
 
    protected boolean shouldSkip(GfxContext context){
-      Shape _shape = runtime.transformedShape
-      context.g.clipBounds ? !_shape.intersects(context.g.clipBounds) : false
+      Shape _shape = runtime?.transformedShape
+      context.g.clipBounds && _shape ? !_shape.intersects(context.g.clipBounds) : false
+   }
+
+   protected void onDirty(PropertyChangeEvent event) {
+      if(_applying) return
+      super.onDirty(event)
    }
 
    protected boolean triggersReset(PropertyChangeEvent event) {
       if(event.source == _transforms) return true
-      super.triggersReset(event)
+      return super.triggersReset(event)
+   }
+
+   protected void reset(PropertyChangeEvent event) {
+      _runtime?.reset()
    }
 }

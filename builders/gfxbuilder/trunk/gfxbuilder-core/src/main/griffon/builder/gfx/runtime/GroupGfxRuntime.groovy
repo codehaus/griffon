@@ -17,6 +17,7 @@ package griffon.builder.gfx.runtime
 
 import java.awt.Shape
 import java.awt.geom.AffineTransform
+import java.beans.PropertyChangeEvent
 import griffon.builder.gfx.*
 
 /**
@@ -26,12 +27,27 @@ class GroupGfxRuntime extends DrawableGfxRuntime {
    GroupGfxRuntime(GfxNode node, GfxContext context){
       super(node, context)
    }
-
+/*
    public Shape getLocalShape() {
       getShape()
    }
 
    public Shape getTransformedShape() {
       getShape()
+   }
+*/
+
+   void reset(PropertyChangeEvent event = null) {
+      super.reset(event)
+      switch(event?.propertyName) {
+         case "fill":
+         case "borderColor":
+         case "borderWidth":
+            _node.nodes.each { n ->
+               if(n instanceof DrawableNode) {
+                  n.runtime?.reset(event)
+               }
+            }
+      }
    }
 }

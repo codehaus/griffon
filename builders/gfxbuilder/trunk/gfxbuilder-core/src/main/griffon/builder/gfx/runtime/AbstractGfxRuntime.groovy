@@ -25,12 +25,12 @@ abstract class AbstractGfxRuntime implements GfxRuntime {
    protected GfxContext _context
    protected GfxNode _node
 
-   AbstractGfxRuntime(GfxNode node, GfxContext context){
+   AbstractGfxRuntime(GfxNode node, GfxContext context) {
       _node = node
       _context = context
    }
 
-   public GfxContext getContext() {
+   final GfxContext getContext() {
       _context
    }
 }

@@ -55,6 +55,10 @@ class GroupNode extends AbstractGfxNode  {
        if(borderColor != null) context.groupSettings.borderColor = borderColor
        if(borderWidth != null) context.groupSettings.borderWidth = borderWidth
        if(fill != null) context.groupSettings.fill = fill
+       AffineTransform affineTransform = new AffineTransform()
+       affineTransform.concatenate context.g.transform
+       affineTransform.concatenate runtime.getLocalTransforms()
+       context.g.transform = affineTransform
     }
 
     protected void applyNestedNode(GfxNode node, GfxContext context) {

@@ -17,6 +17,7 @@ package griffon.builder.gfx.runtime
 
 import java.awt.Shape
 import java.awt.geom.AffineTransform
+import java.beans.PropertyChangeEvent
 import griffon.builder.gfx.*
 import static java.lang.Math.abs
 import static java.lang.Math.sin
@@ -27,7 +28,6 @@ import static java.lang.Math.toRadians
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class DrawableGfxRuntime extends AbstractGfxRuntime {
-   protected Shape _shape
    protected Shape _localShape
    protected Shape _transformedShape
    protected AffineTransform _localTransforms
@@ -38,6 +38,18 @@ class DrawableGfxRuntime extends AbstractGfxRuntime {
 
    DrawableGfxRuntime(GfxNode node, GfxContext context){
       super(node, context)
+   }
+
+   void reset(PropertyChangeEvent event = null) {
+      if(event == null) {
+         _localShape = null
+         _transformedShape = null
+         _localTransforms = null
+         _cx = Double.NaN
+         _cy = Double.NaN
+         _x = Double.NaN
+         _y = Double.NaN
+      }
    }
 
    AffineTransform getLocalTransforms() {
@@ -79,10 +91,7 @@ class DrawableGfxRuntime extends AbstractGfxRuntime {
    }
 
    Shape getShape() {
-      if( !_shape ){
-         _shape = _node.getShape()
-      }
-      _shape
+      _node.getShape()
    }
 
    Shape getLocalShape() {

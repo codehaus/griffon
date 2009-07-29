@@ -48,7 +48,7 @@ class GfxCanvas extends JComponent implements PropertyChangeListener, MouseListe
 
      boolean animate
 
-     GfxCanvas(){
+     GfxCanvas() {
          addMouseListener(this)
          addMouseMotionListener(this)
          addMouseWheelListener(this)
@@ -59,7 +59,7 @@ class GfxCanvas extends JComponent implements PropertyChangeListener, MouseListe
       * Returns the current GfxNode of this Panel
       * @return the current GfxNode of this Panel
       */
-     public GfxNode getNode(){
+     GfxNode getNode() {
          return _node
      }
 
@@ -67,20 +67,20 @@ class GfxCanvas extends JComponent implements PropertyChangeListener, MouseListe
       * Sets the GfxNode for this Panel.<br>
       * If the panel is visible, a <code>repaint()</code> will be ensued
       */
-     public void setNode(GfxNode node){
-         if( node ){
-             if(_node){
+     void setNode(GfxNode node) {
+         if( node ) {
+             if(_node) {
                 _node.removePropertyChangeListener(this)
              }
              _node = node
              _node.addPropertyChangeListener(this)
-             if(visible){
+             if(visible) {
                  repaint()
              }
          }
      }
 
-     public void paintComponent(Graphics g){
+     public void paintComponent(Graphics g) {
          if(!visible) return
          if(!_node) {
             super.paintComponent(g)
@@ -88,17 +88,17 @@ class GfxCanvas extends JComponent implements PropertyChangeListener, MouseListe
          }
          _context.component = this
          if(_node) {
-             //def img = createCompatibleImage(getWidth(), getHeight())
-             //_context.g = img.getGraphics()
-             //_context.g.clip = g.clip
-             //_context.g.color = g.color
-             _context.g = g
+             def img = createCompatibleImage(getWidth(), getHeight())
+             _context.g = img.getGraphics()
+             _context.g.clip = g.clip
+             _context.g.color = getBackground()
              _context.g.clearRect(0, 0, getWidth() as int, getHeight() as int)
+             _context.g.color = g.color
              try {
                  _context.eventTargets = []
                  _context.groupSettings = [:]
                  _node.apply(_context)
-                 //g.drawImage(img, 0, 0, this)
+                 g.drawImage(img, 0, 0, this)
                  _context.g.dispose()
              } catch(Exception e) {
                  fireGfxErrorEvent(e)
@@ -106,16 +106,16 @@ class GfxCanvas extends JComponent implements PropertyChangeListener, MouseListe
          }
      }
 
-     public void addGfxErrorListener(GfxErrorListener listener){
+     void addGfxErrorListener(GfxErrorListener listener) {
          if( !listener || errorListeners.contains(listener) ) return
          errorListeners.add( listener )
      }
 
-     public void removeGfxErrorListener(GfxErrorListener listener){
+     void removeGfxErrorListener(GfxErrorListener listener) {
          if( listener ) errorListeners.remove( listener )
      }
 
-     public List getGfxErrorListeners(){
+     List getGfxErrorListeners() {
          return Collections.unmodifiableList(errorListeners)
      }
 
@@ -127,44 +127,44 @@ class GfxCanvas extends JComponent implements PropertyChangeListener, MouseListe
          }
      }
 
-     public void propertyChange(PropertyChangeEvent event){
-         if(event.source instanceof GfxNode && animate && visible){
+     public void propertyChange(PropertyChangeEvent event) {
+         if(event.source instanceof GfxNode && animate && visible) {
              repaint()
          }
      }
 
      /* ===== MouseListener ===== */
 
-     public void mouseEntered(MouseEvent e){
+     public void mouseEntered(MouseEvent e) {
          lastTargets.clear()
      }
 
-     public void mouseExited(MouseEvent e){
+     public void mouseExited(MouseEvent e) {
          lastTargets.clear()
      }
 
-     public void mousePressed(MouseEvent e){
-         fireMouseEvent( e, "mousePressed" )
+     public void mousePressed(MouseEvent e) {
+         fireMouseEvent(e, "mousePressed")
      }
 
-     public void mouseReleased(MouseEvent e){
-         fireMouseEvent( e, "mouseReleased" )
+     public void mouseReleased(MouseEvent e) {
+         fireMouseEvent(e, "mouseReleased")
      }
 
-     public void mouseClicked(MouseEvent e){
-         fireMouseEvent( e, "mouseClicked" )
+     public void mouseClicked(MouseEvent e) {
+         fireMouseEvent(e, "mouseClicked")
      }
 
      /* ===== MouseMotionListener ===== */
 
-     public void mouseMoved(MouseEvent e){
+     public void mouseMoved(MouseEvent e) {
          if( !_context.eventTargets ) return
          def targets = getTargets(e)
-         if( targets ){
+         if( targets ) {
             def oldTargets = []
             def visitedTargets = []
             lastTargets.each { target ->
-               if( !targets.contains(target) ){
+               if( !targets.contains(target) ) {
                   oldTargets << target
                }else{
                   visitedTargets << target
@@ -176,7 +176,7 @@ class GfxCanvas extends JComponent implements PropertyChangeListener, MouseListe
             targets.each { t -> t.mouseMoved(new GfxInputEvent(this, e, t)) }
             lastTargets = targets
 //                 def inputEvent = new GfxInputEvent( this, e, target )
-//                 if( target != lastTarget ){
+//                 if( target != lastTarget ) {
 //                    if( lastTarget ) lastTarget.mouseExited( new GfxInputEvent( this, e, target ) )
 //                    lastTarget = target
 //                    target.mouseEntered( inputEvent )
@@ -188,48 +188,48 @@ class GfxCanvas extends JComponent implements PropertyChangeListener, MouseListe
          }
      }
 
-     public void mouseDragged(MouseEvent e){
-         fireMouseEvent( e, "mouseDragged" )
+     public void mouseDragged(MouseEvent e) {
+         fireMouseEvent(e, "mouseDragged")
      }
 
      /* ===== MouseWheelListener ===== */
 
-     public void mouseWheelMoved(MouseWheelEvent e){
-         fireMouseEvent( e, "mouseWheelMoved" )
+     public void mouseWheelMoved(MouseWheelEvent e) {
+         fireMouseEvent(e, "mouseWheelMoved")
      }
 
      /* ===== KeyListener ===== */
 
-     public void keyPressed(KeyEvent e){
+     public void keyPressed(KeyEvent e) {
 
      }
 
-     public void keyReleased(KeyEvent e){
+     public void keyReleased(KeyEvent e) {
 
      }
 
-     public void keyTyped(KeyEvent e){
+     public void keyTyped(KeyEvent e) {
 
      }
 
      /* ===== PRIVATE ===== */
 
-     private void fireMouseEvent(MouseEvent e, String mouseEventMethod){
+     private void fireMouseEvent(MouseEvent e, String mouseEventMethod) {
          if( !_context.eventTargets ) return
          getTargets(e).each { target ->
             def inputEvent = new GfxInputEvent(this, e, target)
-            target."$mouseEventMethod"( inputEvent )
+            target."$mouseEventMethod"(inputEvent)
          }
      }
 
-     private def getTargets(MouseEvent e){
+     private def getTargets(MouseEvent e) {
          List targets = []
          def eventTargets = _context.eventTargets
-         for(target in eventTargets.reverse()){
+         for(target in eventTargets.reverse()) {
              //def bp = target.getBoundingShape(_context)
              //def s = target.runtime.transformedShape
              def s = target.runtime.getBoundingShape()
-             if(s && s.contains(e.point)){
+             if(s && s.contains(e.point)) {
                  targets << target
                  if(!target.passThrough) break
              }

@@ -67,7 +67,12 @@ abstract class CustomGfxNode extends AbstractDrawableNode {
 
    protected boolean triggersReset(PropertyChangeEvent event) {
       if(event.source == _node) return _node.triggersReset(event)
-      super.triggersReset(event)
+      return super.triggersReset(event)
+   }
+
+   protected void reset(PropertyChangeEvent event) {
+      _node?.reset()
+      runtime?.reset()
    }
 
    protected void beforeApply(GfxContext context) {

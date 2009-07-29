@@ -54,7 +54,7 @@ abstract class AbstractDrawableContainerNode extends AbstractDrawableNode implem
 
    protected final void applyNode(GfxContext context) {
        applyThisNode(context)
-       if( !_nodes.empty ){
+       if(!_nodes.empty) {
           _nodes.each { n -> applyNestedNode(n, context) }
        }
    }
@@ -66,7 +66,7 @@ abstract class AbstractDrawableContainerNode extends AbstractDrawableNode implem
    }
 
    protected void handleElementEvent(ElementEvent event) {
-      switch( event.type ) {
+      switch(event.type) {
          case ElementEvent.ADDED:
              event.newValue.addPropertyChangeListener(this)
              break
@@ -87,6 +87,11 @@ abstract class AbstractDrawableContainerNode extends AbstractDrawableNode implem
    }
 
    protected def findLast(Closure cls) {
-      _nodes.reverse().find( cls )
+      _nodes.reverse().find(cls)
+   }
+
+   protected boolean triggersReset(PropertyChangeEvent event) {
+      if(event.source == _nodes || _nodes.contains(event.source)) return true
+      return super.triggersReset(event)
    }
 }

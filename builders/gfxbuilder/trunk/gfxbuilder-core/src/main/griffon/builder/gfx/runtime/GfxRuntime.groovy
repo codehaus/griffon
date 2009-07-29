@@ -15,6 +15,7 @@
 
 package griffon.builder.gfx.runtime
 
+import java.beans.PropertyChangeEvent
 import griffon.builder.gfx.GfxContext
 
 /**
@@ -22,4 +23,6 @@ import griffon.builder.gfx.GfxContext
  */
 public interface GfxRuntime {
    GfxContext getContext()
+
+   void reset(PropertyChangeEvent event)
 }
