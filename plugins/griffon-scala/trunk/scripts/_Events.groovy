@@ -4,11 +4,14 @@ import org.codehaus.griffon.plugins.GriffonPluginUtils
 ant.property(environment: "env")
 scalaHome = ant.antProject.properties."env.SCALA_HOME"
 
+includeTargets << pluginScript("lang-bridge","CompileInterfaces")
+//includePluginScript("lang-bridge","CompileInterfaces")
+
 eventSetClasspath = { classLoader ->
     if( compilingScalaPlugin() ) return
 
     adjustScalaHome()
-    println "[scala-plugin] Using SCALA_HOME => ${scalaHome}"
+    ant.echo(message: "[scala] Using SCALA_HOME => ${scalaHome}")
 
     ant.fileset(dir:"${scalaHome}/lib/", includes:"*.jar").each { jar ->
         classLoader.addURL( jar.file.toURI().toURL() )
@@ -18,7 +21,7 @@ eventSetClasspath = { classLoader ->
 eventCopyLibsEnd = { jardir ->
     if( compilingScalaPlugin() ) return
     adjustScalaHome()
-    println "[scala-plugin] Copying Scala jar files from ${scalaHome}/lib"
+    ant.echo(message: "[scala] Copying Scala jar files from ${scalaHome}/lib")
 
     ant.fileset(dir:"${scalaHome}/lib/", includes:"*.jar").each {
         griffonCopyDist(it.toString(), jardir)
@@ -30,11 +33,12 @@ eventCompileStart = { type ->
     if( type != "source" ) return
     adjustScalaHome()
     def scalaSrc = "${basedir}/src/scala"
-    // if( !new File(scalaSrc).exists() ) return
+    if(!new File(scalaSrc).exists()) return
 
+    compileInterfaces()
     def scalaDir = resolveResources("file:${scalaHome}/lib/*")
     if (!scalaDir) {
-       println "[scala-plugin] No Scala jar files found at ${scalaHome}"
+       ant.echo(message: "[scala] No Scala jar files found at ${scalaHome}")
        return
     }
     ant.path(id : "scalaJarSet") {
@@ -49,7 +53,7 @@ eventCompileStart = { type ->
 
     def scalaSrcEncoding = buildConfig.scala?.src?.encoding ?: 'UTF-8'
 
-    println "[scala-plugin] Compiling Scala sources with SCALA_HOME=${scalaHome} to $classesDirPath"
+    ant.echo(message: "[scala] Compiling Scala sources with SCALA_HOME=${scalaHome} to $classesDirPath")
     try {
         ant.scalac(destdir: classesDirPath,
                    classpathref: "scala.compile.classpath",

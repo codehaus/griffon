@@ -1,7 +1,7 @@
 class FxBuilderGriffonPlugin {
-    def version = 0.1
+    def version = 0.2
     def canBeGlobal = false
-    def dependsOn = [:]
+    def dependsOn = ["lang-bridge": 0.1]
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@user.sourceforge.net"

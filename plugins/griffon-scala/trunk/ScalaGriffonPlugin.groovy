@@ -1,7 +1,7 @@
 class ScalaGriffonPlugin {
-    def version = "0.2"
+    def version = "0.3"
     def canBeGlobal = true
-    def dependsOn = [:]
+    def dependsOn = ["lang-bridge": 0.1]
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"

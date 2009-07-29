@@ -5,11 +5,13 @@ ant.property(environment: "env")
 javafxHome = ant.antProject.properties."env.JAVAFX_HOME"
 
 includeTargets << griffonScript("Package")
+includeTargets << pluginScript("lang-bridge","CompileInterfaces")
+//includePluginScript("lang-bridge","CompileInterfaces")
 
 eventCopyLibsEnd = { jardir ->
     if( compilingJavaFXPlugin() ) return
     verifyJavaFXHome()
-    println "  [griffon-fx] Copying FX jar files from ${getPluginDirForName('fx').file}/lib"
+    ant.echo(message: "[fx] Copying FX jar files from ${getPluginDirForName('fx').file}/lib")
 
     ant.fileset(dir:"${getPluginDirForName('fx').file}/lib/", includes: "*.jar").each {
         griffonCopyDist(it.toString(), jardir)
@@ -21,7 +23,8 @@ eventCompileStart = { type ->
     if( type != "source" ) return
     verifyJavaFXHome()
     def javafxSrc = "${basedir}/src/javafx"
-    // if( !new File(javafxSrc).exists() ) return
+    if(!new File(javafxSrc).exists()) return
+    compileInterfaces()
 
     def javafxlibs = ant.fileset(dir: "${javafxHome}/lib/shared", includes: "*.jar")
     ant.project.references["griffon.compile.classpath"].addFileset(javafxlibs)
@@ -36,7 +39,7 @@ eventCompileStart = { type ->
 
     def javafxSrcEncoding = buildConfig.javafx?.src?.encoding ?: 'UTF-8'
 
-    println "  [griffon-fx] Compiling JavaFX sources with JAVAFX_HOME=${javafxHome} to $classesDirPath"
+    ant.echo(message: "[fx] Compiling JavaFX sources with JAVAFX_HOME=${javafxHome} to $classesDirPath")
     try {
         ant.javafxc(destdir: classesDirPath,
                     classpathref: "griffon.compile.classpath",
@@ -50,7 +53,7 @@ eventCompileStart = { type ->
 }
 
 eventRunAppStart = {
-    println "  [griffon-fx] Copying additional JavaFX jars to $jardir"
+    ant.echo(message: "[fx] Copying additional JavaFX jars to $jardir")
     ant.fileset(dir: "${javafxHome}/lib/shared", includes: "*.jar").each {
         griffonCopyDist(it.toString(), jardir)
     }
@@ -60,7 +63,7 @@ eventRunAppStart = {
 }
 
 eventRunAppEnd = {
-    println "  [griffon-fx] Deleting $jardir"
+    ant.echo(message: "[fx] Deleting $jardir")
     ant.delete(dir: jardir)
 }
 

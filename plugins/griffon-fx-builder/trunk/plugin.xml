@@ -1,7 +1,9 @@
-<plugin name='fx-builder' version='0.1' jdk='1.5'>
+<plugin name='fx-builder' version='0.2' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
   <title>Enables JavaFX on your Griffon application</title>
   <documentation>http://griffon.codehaus.org/FxBuilder+Plugin</documentation>
-  <dependencies />
+  <dependencies>
+    <plugin name='lang-bridge' version='0.1' />
+  </dependencies>
 </plugin>
