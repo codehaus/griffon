@@ -1,7 +1,8 @@
 class GfxBuilderGriffonPlugin {
-    def version = "0.1"
+    def version = "0.2-SNAPSHOT"
     def canBeGlobal = false
     def dependsOn = [:]
+    def jdk = "1.6"
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
