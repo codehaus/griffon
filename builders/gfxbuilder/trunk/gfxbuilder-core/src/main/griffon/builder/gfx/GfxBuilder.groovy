@@ -148,6 +148,7 @@ class GfxBuilder extends FactoryBuilderSupport {
         registerFactory("props", new PropsFactory())
         registerFactory("background", new BackgroundFactory())
         registerFactory("customNode", new CustomNodeFactory())
+        registerFactory("rawNode", new RawFactory())
 
         // variables
         variables['on'] = true
