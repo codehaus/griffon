@@ -1,0 +1,7 @@
+<plugin name='splash' version='0.1.3' jdk='1.5'>
+  <author>Jim Shingler</author>
+  <authorEmail>ShinglerJim@gmail.com</authorEmail>
+  <title>A Griffon Splash Screen Plugin</title>
+  <documentation>http://griffon.codehaus.org/Splash+Plugin</documentation>
+  <dependencies />
+</plugin>
