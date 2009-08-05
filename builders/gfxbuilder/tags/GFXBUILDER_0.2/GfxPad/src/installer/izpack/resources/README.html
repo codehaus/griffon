@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Readme</title>
+</head>
+<body>
+
+<h3>Welcome to GfxPad!</h3>
+This will install and setup <b>GfxPad</b>, an exploratory tool for GraphicsBuilder.<br>
+<p><a href="http://groovy.codehaus.org/GraphicsBuilder">GraphicsBuilder</a> provides an easy way to create Java2D graphics in a similar manner as <a href="https://openjfx.dev.java.net/">JavaFX Script</a> but in a groovier way. <!--Here is the Groovy logo (kind of) drawn with GraphicsBuilder using the built-in GraphicsPad application</p>
+<center><img src="resources/groovy-logo-gb.png"/></center>
+<pre>
+// turn on antialias
+antialias( 'on' )
+// create the Groovy star
+star( ir: 40, or: 100, cx: 160, cy: 120, borderWidth: 4,
+      fill: [118,167,183] as Color ){
+   transformations{
+      scale( y: 0.6 )
+   }
+}
+// load the swingtime font, get it? Swing
+def fontFile = new File("SWINM___.TTF")
+font( Font.createFont(Font.TRUETYPE_FONT,fontFile).deriveFont(50.0f) )
+// draw the text
+text( text: 'Groovy', borderWidth: 4, fill: 'white' ){
+   transformations{
+       translate( x:80, y:30 )
+       scale( y: 1.2 )
+    }
+}
+</pre>-->
+
+<h3>About this Distribution</h3>
+This installer was created using
+IzPack (see <a href="http://izpack.org/">http://izpack.org/</a>).
+
+</body>
+<html>
