@@ -1,4 +1,4 @@
-<plugin name='gfx-builder' version='0.2-SNAPSHOT' jdk='1.6'>
+<plugin name='gfx-builder' version='0.2' jdk='1.6'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Gfx Builder Plugin</title>
