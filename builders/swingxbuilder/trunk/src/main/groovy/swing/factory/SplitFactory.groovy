@@ -17,37 +17,51 @@
 
 package groovy.swing.factory
 
-import groovy.swing.GroovySplit
 import groovy.swing.SwingBuilder
 import org.jdesktop.swingx.JXMultiSplitPane
 import org.jdesktop.swingx.MultiSplitLayout.Leaf
-
+import org.jdesktop.swingx.MultiSplitLayout.Split
+import org.jdesktop.swingx.MultiSplitLayout.RowSplit
 
 public class SplitFactory extends AbstractFactory {
+	def children = []
     public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map properties) throws InstantiationException, IllegalAccessException {
-        if (SwingBuilder.checkValueIsType(value, name, GroovySplit.class)) {
+        if (SwingBuilder.checkValueIsType(value, name, Split.class)) {
             return value
         }
-        def split = new GroovySplit(new Leaf("center"))
-        def children = properties.remove("children")
-
-        if (children != null && children.size() > 0) {
-            if (children instanceof List)
-                split = new GroovySplit(children)
-        }
+		println properties
+		
+		def split
+		def rowLayout = properties.remove("rowLayout")
+		if (rowLayout !=null) {
+			if (rowLayout == false) {
+				split = new Split()
+			} else {
+				split = new RowSplit()
+			}
+		} else split = new Split()
+        
         return split
     }
 
     public void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {
-        node.setChildren()
+		node.setChildren(children)
+		println parent + " | " + node
         if (parent instanceof JXMultiSplitPane) {
             parent.getMultiSplitLayout().setModel(node)
         }
     }
-
+	
+	public void setParent(FactoryBuilderSupport builder, Object parent, Object child) {
+		println "parent:"+ parent+" child:"+child
+		def children = parent.getChildren()
+		children.add(child)
+		parent.setChildren(children)
+    }
 
     public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-        parent.nodes.add(child)
+		println "child:"+child
+		children.add(child)
     }
 
 }

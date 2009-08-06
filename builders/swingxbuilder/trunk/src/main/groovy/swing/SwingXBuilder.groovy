@@ -209,10 +209,10 @@ public class SwingXBuilder extends SwingBuilder {
         registerBeanFactory("dropShadowBorder", DropShadowBorder)
         registerBeanFactory("iconBorder", IconBorder)
         registerBeanFactory("painterGlasspane", PainterGlasspane)
-        registerBeanFactory("leaf", Leaf)
-        registerBeanFactory("divider", Divider)
-        registerFactory("split", new SplitFactory())
-        registerBeanFactory("multiSplitPane", JXMultiSplitPane)
+       // registerBeanFactory("leaf", Leaf)
+       // registerBeanFactory("divider", Divider)
+       // registerFactory("split", new SplitFactory())
+       // registerBeanFactory("multiSplitPane", JXMultiSplitPane)
     }
 
     def registerThreading() {
