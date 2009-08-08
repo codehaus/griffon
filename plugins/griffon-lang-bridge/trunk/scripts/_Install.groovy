@@ -9,5 +9,10 @@
 //    ant.mkdir(dir:"${basedir}/griffon-app/jobs")
 //
 
-ant.property(environment: "env")
-ant.mkdir(dir: "${basedir}/src/interfaces")
+File oldsrc = new File("${basedir}/src/interfaces")
+if(oldsrc.exists()) {
+    ant.move(file: "${basedir}/src/interfaces",
+             tofile: "${basedir}/src/commons")
+} else {
+    ant.mkdir(dir: "${basedir}/src/commons")
+}

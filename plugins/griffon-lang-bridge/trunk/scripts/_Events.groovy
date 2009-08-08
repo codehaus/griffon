@@ -15,39 +15,22 @@
  */
 
 /**
- * Compiles sources under ${basedir}/src/interfaces
+ * Compiles sources under ${basedir}/src/commons
  *
  * @author Andres Almiray
  *
- * @since 0.1
+ * @since 0.2
  */
 
 ant.property(environment:"env")
 griffonHome = ant.antProject.properties."env.GRIFFON_HOME"
 
-includeTargets << griffonScript("Compile")
+includeTargets << pluginScript("lang-bridge", "CompileCommons")
 
 eventCompileStart = { type ->
     if(compilingLangBridgePlugin()) return
     if(type != "source") return
-    def interfaces = "${basedir}/src/interfaces"
-    def interfacesdir = new File(interfaces)
-    if(!interfacesdir.exists()) return
-
-    ant.mkdir(dir: classesDirPath)
-    ant.echo(message: "Compiling interface sources to $classesDirPath")
-    try {
-        String classpathId = "griffon.compile.classpath"
-        ant.groovyc(destdir: classesDirPath,
-                    classpathref: classpathId) {
-            src(path: interfaces)
-            javac(classpathref: classpathId)
-        }
-    }
-    catch (Exception e) {
-        event("StatusFinal", ["Compilation error: ${e.message}"])
-        ant.fail(message: "Could not compile interface sources: " + e.class.simpleName + ": " + e.message)
-    }
+    compileCommons()
 }
 
 /**

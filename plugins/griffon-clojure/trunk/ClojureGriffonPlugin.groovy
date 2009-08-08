@@ -1,7 +1,7 @@
 class ClojureGriffonPlugin {
-    def version = "0.1"
+    def version = "0.2"
     def canBeGlobal = false
-    def dependsOn = ["lang-bridge": 0.1]
+    def dependsOn = ["lang-bridge": 0.2]
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"

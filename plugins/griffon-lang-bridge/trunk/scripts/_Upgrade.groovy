@@ -8,3 +8,8 @@
 //
 //    ant.mkdir(dir:"${basedir}/griffon-app/jobs")
 //
+File oldsrc = new File("${basedir}/src/interfaces")
+if(oldsrc.exists()) {
+    ant.move(file: "${basedir}/src/interfaces",
+             tofile: "${basedir}/src/commons")
+}

@@ -4,8 +4,8 @@ import org.codehaus.griffon.plugins.GriffonPluginUtils
 ant.property(environment: "env")
 scalaHome = ant.antProject.properties."env.SCALA_HOME"
 
-includeTargets << pluginScript("lang-bridge","CompileInterfaces")
-//includePluginScript("lang-bridge","CompileInterfaces")
+//includeTargets << pluginScript("lang-bridge","CompileInterfaces")
+includePluginScript("lang-bridge","CompileInterfaces")
 
 eventSetClasspath = { classLoader ->
     if( compilingScalaPlugin() ) return
@@ -35,7 +35,9 @@ eventCompileStart = { type ->
     def scalaSrc = "${basedir}/src/scala"
     if(!new File(scalaSrc).exists()) return
 
-    compileInterfaces()
+    compileCommons()
+    if(sourcesUpToDate(scalaSrc, classesDirPath, ".scala")) return
+
     def scalaDir = resolveResources("file:${scalaHome}/lib/*")
     if (!scalaDir) {
        ant.echo(message: "[scala] No Scala jar files found at ${scalaHome}")
@@ -78,7 +80,9 @@ private void adjustScalaHome() {
     if( !scalaHome || (buildConfig.scala?.useBundledLibs) ) scalaHome = getPluginDirForName("scala").file
 }
 
+/*
 getPluginDirForName = { String pluginName ->
     // pluginsHome = griffonSettings.projectPluginsDir.path
     GriffonPluginUtils.getPluginDirForName(pluginsHome, pluginName)
 }
+*/

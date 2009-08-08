@@ -1,6 +1,6 @@
 includeTargets << griffonScript("Init")
-includeTargets << pluginScript("lang-bridge","CompileInterfaces")
-//includePluginScript("lang-bridge","CompileInterfaces")
+//includeTargets << pluginScript("lang-bridge","CompileInterfaces")
+includePluginScript("lang-bridge","CompileInterfaces")
 
 eventCopyLibsEnd = { jardir ->
     ant.fileset(dir: "${getPluginDirForName('clojure').file}/lib/", includes: "*.jar").each {
@@ -11,10 +11,12 @@ eventCopyLibsEnd = { jardir ->
 eventCompileStart = { type ->
     if(compilingClojurePlugin()) return
     if(type != "source") return
-    compileInterfaces()
+    compileCommons()
     def clojuresrc = "${basedir}/src/clojure"
     def clojuresrcdir = new File(clojuresrc)
     if(!clojuresrcdir.exists()) return
+
+    if(sourcesUpToDate("${basedir}/src/clojure", classesDirPath, ".clj")) return
 
     ant.echo(message: "[clojure] Compiling Clojure sources to $classesDirPath")
     try {
