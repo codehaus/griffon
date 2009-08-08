@@ -5,8 +5,9 @@ ant.property(environment: "env")
 javafxHome = ant.antProject.properties."env.JAVAFX_HOME"
 
 includeTargets << griffonScript("Package")
-includeTargets << pluginScript("lang-bridge","CompileInterfaces")
-//includePluginScript("lang-bridge","CompileInterfaces")
+//includeTargets << pluginScript("lang-bridge","CompileInterfaces")
+includePluginScript("lang-bridge","CompileInterfaces")
+javaFxUrl = "http://dl.javafx.com/1.2/javafx-rt.jnlp"
 
 eventCopyLibsEnd = { jardir ->
     if( compilingJavaFXPlugin() ) return
@@ -16,6 +17,10 @@ eventCopyLibsEnd = { jardir ->
     ant.fileset(dir:"${getPluginDirForName('fx').file}/lib/", includes: "*.jar").each {
         griffonCopyDist(it.toString(), jardir)
     }
+
+    if(!config.griffon.extensions.jnlpUrls.contains(javaFxUrl)) {
+        config.griffon.extensions.jnlpUrls << javaFxUrl
+    }
 }
 
 eventCompileStart = { type ->
@@ -24,7 +29,8 @@ eventCompileStart = { type ->
     verifyJavaFXHome()
     def javafxSrc = "${basedir}/src/javafx"
     if(!new File(javafxSrc).exists()) return
-    compileInterfaces()
+    compileCommons()
+    if(sourcesUpToDate(javafxSrc, classesDirPath, ".fx")) return
 
     def javafxlibs = ant.fileset(dir: "${javafxHome}/lib/shared", includes: "*.jar")
     ant.project.references["griffon.compile.classpath"].addFileset(javafxlibs)
