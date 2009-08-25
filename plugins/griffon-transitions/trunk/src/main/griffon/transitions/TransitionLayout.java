@@ -1,3 +1,18 @@
+/*
+ * Copyright 2009 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ */
+
 package griffon.transitions;
 
 import org.pushingpixels.trident.Timeline;
@@ -21,6 +36,9 @@ import java.util.Map;
 import java.util.LinkedHashMap;
 import javax.swing.JComponent;
 
+/**
+ * @author Andres Almiray <aalmiray@users.sourceforge.net>
+ */
 public class TransitionLayout extends CardLayout {
    public static final String NAME = "name";
    public static final String TRANSITION = "transition";
@@ -71,6 +89,18 @@ public class TransitionLayout extends CardLayout {
       _mirrorTransition = mirrorTransition;
    }
 
+   /**
+    * Adds the specified component to this card layout's internal table of names.<p>
+    * The object specified by constraints may be a string or a Map.
+    * This layout stores the string as a key-value pair that can be used for random
+    * access to a particular card. By calling the show method, an application can
+    * display the component with the specified name.<p>
+    * If the constraints object is a Map it must contain the following keys:<ul>
+    * <li>name - String: required</li>
+    * <li>transition - Transition2D: optional</li>
+    * <li>duration - long: optional</li>
+    * </ul>
+    */
    public void addLayoutComponent(Component component, Object constraints) {
       String name = null;
       Transition2D transition = null;
@@ -319,17 +349,17 @@ public class TransitionLayout extends CardLayout {
       private final BufferedImage _img2;
       private final Transition2D _transition;
       private float _progress = 0f;
-   
+
       public TransitionPanel(Component c1, Component c2, Transition2D transition) {
          _img1 = grabImage(c1);
          _img2 = grabImage(c2);
          _transition = transition;
       }
-   
+
       public void setProgress(float progress) {
          _progress = progress;
       }
-   
+
       public void paintComponent(Graphics g) {
          Graphics2D g2d = (Graphics2D) g;
          g2d.setRenderingHints(getRenderingHints());
