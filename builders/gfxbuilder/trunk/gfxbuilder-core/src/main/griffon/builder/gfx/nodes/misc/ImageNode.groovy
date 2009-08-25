@@ -71,6 +71,7 @@ class ImageNode extends AbstractDrawableNode {
 
    protected void reset(PropertyChangeEvent event) {
       _image = null
+      _shape = null
    }
 
    Image getImg() {
