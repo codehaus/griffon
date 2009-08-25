@@ -169,19 +169,19 @@ class Fx {
 
     static removeClosureChangeAdapter(FXObject target, String propertyName, Closure closure) {
        if( !propertyName || !closure) return
-       def variable = fxGetLocation(target, propertyName)
+       def variable = fxLocation(target, propertyName)
        variable.removeChangeListener(new FxClosureChangeAdapter(target, propertyName, closure))
     }
 
     static addPropertyChangeAdapter(FXObject target, String propertyName, PropertyChangeListener listener) {
        if( !propertyName || !listener) return
-       def variable = fxGetLocation(target, propertyName)
+       def variable = fxLocation(target, propertyName)
        variable.addChangeListener(new FxPropertyChangeAdapter(target, propertyName, listener))
     }
 
     static removePropertyChangeAdapter(FXObject target, String propertyName, PropertyChangeListener listener) {
        if( !propertyName || !listener) return
-       def variable = fxGetLocation(target, propertyName)
+       def variable = fxLocation(target, propertyName)
        variable.removeChangeListener(new FxPropertyChangeAdapter(target, propertyName, listener))
     }
 

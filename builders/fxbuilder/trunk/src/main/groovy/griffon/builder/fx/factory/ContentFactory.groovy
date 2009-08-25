@@ -31,7 +31,7 @@ class ContentFactory extends AbstractFxFactory {
     }
 
     public void doSetChild( FactoryBuilderSupport builder, Object parent, Object child ) {
-        parent << child
+        if(child instanceof FXObject) parent << child
     }
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {

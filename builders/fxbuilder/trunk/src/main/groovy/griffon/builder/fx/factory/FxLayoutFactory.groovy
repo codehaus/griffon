@@ -31,7 +31,7 @@ class FxLayoutFactory extends FxBeanFactory {
 
     public void doSetChild( FactoryBuilderSupport builder, Object parent, Object child ) {
         if(!builder.parentContext.children) builder.parentContext.children = []
-        builder.parentContext.children << child
+        if(child instanceof Node) builder.parentContext.children << child
     }
 
     public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
