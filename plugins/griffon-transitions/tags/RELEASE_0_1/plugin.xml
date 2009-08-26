@@ -1,0 +1,9 @@
+<plugin name='transitions' version='0.1' jdk='1.6'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Adds animated transitions capabilities</title>
+  <documentation>http://griffon.codehaus.org/Transitions+Plugin</documentation>
+  <dependencies>
+    <plugin name='trident-builder' version='0.1' />
+  </dependencies>
+</plugin>
