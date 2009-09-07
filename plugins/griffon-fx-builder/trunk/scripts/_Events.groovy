@@ -5,8 +5,7 @@ ant.property(environment: "env")
 javafxHome = ant.antProject.properties."env.JAVAFX_HOME"
 
 includeTargets << griffonScript("Package")
-//includeTargets << pluginScript("lang-bridge","CompileInterfaces")
-includePluginScript("lang-bridge","CompileInterfaces")
+includePluginScript("lang-bridge", "CompileCommons")
 javaFxUrl = "http://dl.javafx.com/1.2/javafx-rt.jnlp"
 
 eventCopyLibsEnd = { jardir ->
