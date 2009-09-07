@@ -4,8 +4,7 @@ import org.codehaus.griffon.plugins.GriffonPluginUtils
 ant.property(environment: "env")
 scalaHome = ant.antProject.properties."env.SCALA_HOME"
 
-//includeTargets << pluginScript("lang-bridge","CompileInterfaces")
-includePluginScript("lang-bridge","CompileInterfaces")
+includePluginScript("lang-bridge", "CompileCommons")
 
 eventSetClasspath = { classLoader ->
     if( compilingScalaPlugin() ) return
