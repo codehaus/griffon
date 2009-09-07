@@ -1,6 +1,16 @@
 includeTargets << griffonScript("Init")
-//includeTargets << pluginScript("lang-bridge","CompileInterfaces")
-includePluginScript("lang-bridge","CompileInterfaces")
+includePluginScript("lang-bridge", "CompileCommons")
+
+eventPackagePluginStart = { pluginName, plugin ->
+    def destFileName = "lib/griffon-${pluginName}-addon-${plugin.version}.jar"
+    ant.delete(dir: destFileName, quiet: false, failOnError: false)
+    ant.jar(destfile: destFileName) {
+        fileset(dir: classesDirPath) {
+            exclude(name: '_*.class')
+            exclude(name: '*GriffonPlugin.class')
+        }
+    }
+}
 
 eventCopyLibsEnd = { jardir ->
     ant.fileset(dir: "${getPluginDirForName('clojure').file}/lib/", includes: "*.jar").each {

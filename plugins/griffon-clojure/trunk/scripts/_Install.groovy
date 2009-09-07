@@ -9,5 +9,22 @@
 //    ant.mkdir(dir:"${basedir}/griffon-app/jobs")
 //
 
-ant.property(environment: "env")
+includeTargets << griffonScript("_GriffonInit")
+
+o = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
+boolean addonIsSet
+o.each() { prefix, v ->
+    v.each { key, views ->
+        addonIsSet = addonIsSet || 'griffon.clojure.ClojureAddon' == key
+    }
+}
+
+if (!addonIsSet) {
+    println 'Adding GSQLAddon to Builders.groovy'
+    new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
+root.'griffon.clojure.ClojureAddon'.controller = '*'
+""")
+}
+
 ant.mkdir(dir: "${basedir}/src/clojure")
+ant.mkdir(dir: "${basedir}/griffon-app/resources/clj")
