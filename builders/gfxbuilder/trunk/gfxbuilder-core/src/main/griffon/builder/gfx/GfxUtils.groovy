@@ -197,7 +197,7 @@ class GfxUtils {
              throw new IllegalArgumentException( "dash[${index}] is not a Number" );
          }
       }
-       eturn array
+      return array
    }
 
    static int getJoinValue( join ) {
