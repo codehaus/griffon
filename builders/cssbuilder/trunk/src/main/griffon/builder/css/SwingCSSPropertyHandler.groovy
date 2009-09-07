@@ -85,7 +85,7 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                case "border-right-width":
                   component.setBorder(calculateMatteBorder(component.border,propertyName,7,normalizeSize(propertyName,propertyValue)))
                   break;
-               case "-swing-row-height":
+               case "swing-row-height":
                   switch(component) {
                      case JTable:
                      case JTree:
@@ -96,15 +96,15 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                        }
                   }
                   break;
-               case "-swing-client-property":
+               case "swing-client-property":
                   propertyValue = propertyValue.trim()[1..-2] // strip quotes
                   try {
                      Eval.me(propertyValue).each{ k, v -> component.putClientProperty(k,v) }
                   } catch (CompilationFailedException e) {
-                     logger.log(Level.WARNING, "-swing-client-property value ('${propertyValue}') not supported",e)
+                     logger.log(Level.WARNING, "swing-client-property value ('${propertyValue}') not supported",e)
                   }
                   break;
-               case "-swing-halign":
+               case "swing-halign":
                   switch(component) {
                      case JLabel:
                      case AbstractButton:
@@ -112,14 +112,14 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                         component.setHorizontalAlignment(getHorizontalAlignment(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-valign":
+               case "swing-valign":
                   switch(component) {
                      case JLabel:
                      case AbstractButton:
                         component.setVerticalAlignment(getVerticalAlignment(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-cell-height":
+               case "swing-cell-height":
                   switch(component) {
                      case JList:
                        try {
@@ -129,7 +129,7 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                        }
                   }
                   break;
-               case "-swing-cell-width":
+               case "swing-cell-width":
                   switch(component) {
                      case JList:
                        try {
@@ -139,20 +139,20 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                        }
                   }
                   break;
-               case "-swing-row-margin":
+               case "swing-row-margin":
                   switch(component) {
                      case JTable:
                         n = normalizeSize(propertyName,propertyValue)
                         if( n > -1 ) component.setRowMargin(n)
                   }
                   break;
-               case "-swing-grid-color":
+               case "swing-grid-color":
                   switch(component) {
                      case JTable:
                         component.setGridColor(getColor(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-selection-color":
+               case "swing-selection-color":
                   switch(component) {
                      case JTable:
                      case JList:
@@ -162,69 +162,69 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                         component.setSelectionColor(getColor(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-selection-background-color":
+               case "swing-selection-background-color":
                   switch(component) {
                      case JTable:
                      case JList:
                         component.setSelectionBackground(getColor(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-row-selection-allowed":
+               case "swing-row-selection-allowed":
                   switch(component) {
                      case JTable:
                         component.setRowSelectionAllowed(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-column-selection-allowed":
+               case "swing-column-selection-allowed":
                   switch(component) {
                      case JTable:
                         component.setColumnSelectionAllowed(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-auto-resize-mode":
+               case "swing-auto-resize-mode":
                   switch(component) {
                      case JTable:
                         component.setAutoResizeMode(getAutoResizeMode(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-show-grid":
+               case "swing-show-grid":
                   switch(component) {
                      case JTable:
                         component.setShowGrid(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-show-vertical-lines":
+               case "swing-show-vertical-lines":
                   switch(component) {
                      case JTable:
                         component.setShowVerticalLines(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-cell-selection-enabled":
+               case "swing-cell-selection-enabled":
                   switch(component) {
                      case JTable:
                         component.setCellSelectionEnabled(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-show-horizontal-lines":
+               case "swing-show-horizontal-lines":
                   switch(component) {
                      case JTable:
                         component.setShowHorizontalLines(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-fills-viewport-height":
+               case "swing-fills-viewport-height":
                   switch(component) {
                      case JTable:
                         component.setFillsViewportHeight(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-selection-mode":
+               case "swing-selection-mode":
                   switch(component) {
                      case JTable:
                      case JList:
                         component.setSelectionMode(getSelectionMode(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-border-painted":
+               case "swing-border-painted":
                   switch(component) {
                      case JToolBar:
                      case JMenuBar:
@@ -232,13 +232,13 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                         component.setBorderPainted(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-floatable":
+               case "swing-floatable":
                   switch(component) {
                      case JToolBar:
                         component.setFloatable(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-margin":
+               case "swing-margin":
                   switch(component) {
                      case JToolBar:
                      case JMenuBar:
@@ -246,7 +246,7 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                         component.setMargin(newInsets(propertyName,propertyValue.split(" ")))
                   }
                   break;
-               case "-swing-orientation":
+               case "swing-orientation":
                   switch(component) {
                      case JToolBar:
                      case JProgressBar:
@@ -257,13 +257,13 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                         component.setOrientation(getOrientation(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-rollover":
+               case "swing-rollover":
                   switch(component) {
                      case JToolBar:
                         component.setRollover(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-columns":
+               case "swing-columns":
                   switch(component) {
                      case JTextField:
                      case JTextArea:
@@ -271,63 +271,63 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                         if( n > -1 ) component.setColumns(n)
                   }
                   break;
-               case "-swing-rows":
+               case "swing-rows":
                   switch(component) {
                      case JTextArea:
                         n = normalizeSize(propertyName,propertyValue)
                         if( n > -1 ) component.setRows(n)
                   }
                   break;
-               case "-swing-line-wrap":
+               case "swing-line-wrap":
                   switch(component) {
                      case JTextArea:
                         component.setLineWrap(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-tab-size":
+               case "swing-tab-size":
                   switch(component) {
                      case JTextArea:
                         n = normalizeSize(propertyName,propertyValue)
                         if( n > -1 ) component.setTabSize(n)
                   }
                   break;
-               case "-swing-tab-placement":
+               case "swing-tab-placement":
                   switch(component) {
                      case JTabbedPane:
                         component.setTabPlacement(getTabPlacement(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-tab-layout-policy":
+               case "swing-tab-layout-policy":
                   switch(component) {
                      case JTabbedPane:
                         component.setTabLayoutPolicy(getTabLayoutPolicy(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-wrap-style-word":
+               case "swing-wrap-style-word":
                   switch(component) {
                      case JTextArea:
                         component.setWrapStyleWord(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-caret-color":
+               case "swing-caret-color":
                   switch(component) {
                      case JTextComponent:
                         component.setCaretColor(getColor(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-disabled-text-color":
+               case "swing-disabled-text-color":
                   switch(component) {
                      case JTextComponent:
                         component.setDisabledTextColor(getColor(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-selected-text-color":
+               case "swing-selected-text-color":
                   switch(component) {
                      case JTextComponent:
                         component.setSelectedTextColor(getColor(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-editable":
+               case "swing-editable":
                   switch(component) {
                      case JTextComponent:
                      case JComboBox:
@@ -335,61 +335,61 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                         component.setEditable(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-horizontal-scrollbar-policy":
+               case "swing-horizontal-scrollbar-policy":
                   switch(component) {
                      case JScrollPane:
                         component.setHorizontalScrollBarPolicy(getHorizontalScrollBarPolicy(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-vertical-scrollbar-policy":
+               case "swing-vertical-scrollbar-policy":
                   switch(component) {
                      case JScrollPane:
                         component.setVerticalScrollBarPolicy(getVerticalScrollBarPolicy(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-viewport-border-color":
+               case "swing-viewport-border-color":
                   switch(component) {
                      case JScrollPane:
                         component.setViewportBorder(calculateMatteBorder(component.viewportBorder, getColor(propertyName,propertyValue)))
                   }
                   break;
-               case "-swing-viewport-border-width":
+               case "swing-viewport-border-width":
                   switch(component) {
                      case JScrollPane:
                         component.setViewportBorder(calculateMatteBorder(component.viewportBorder, normalizeSize(propertyName,propertyValue)))
                   }
                   break;
-               case "-swing-viewport-border-top-width":
-               case "-swing-viewport-border-left-width":
-               case "-swing-viewport-border-bottom-width":
-               case "-swing-viewport-border-right-width":
+               case "swing-viewport-border-top-width":
+               case "swing-viewport-border-left-width":
+               case "swing-viewport-border-bottom-width":
+               case "swing-viewport-border-right-width":
                   switch(component) {
                      case JScrollPane:
                         component.setViewportBorder(calculateMatteBorder(component.viewportBorder,propertyName,22,normalizeSize(propertyName,propertyValue)))
                   }
                   break;
-               case "-swing-horizontal-text-position":
+               case "swing-horizontal-text-position":
                   switch(component) {
                      case JLabel:
                      case AbstractButton:
                         component.setHorizontalTextPosition(getHorizontalTextPosition(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-vertical-text-position":
+               case "swing-vertical-text-position":
                   switch(component) {
                      case JLabel:
                      case AbstractButton:
                         component.setVerticalTextPosition(getVerticalTextPosition(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-icon-text-gap":
+               case "swing-icon-text-gap":
                   switch(component) {
                      case JLabel:
                         n = normalizeSize(propertyName,propertyValue)
                         if( n > -1 ) component.setIconTextGap(n)
                   }
                   break;
-               case "-swing-resizable":
+               case "swing-resizable":
                   switch(component) {
                      case JFrame:
                      case JDialog:
@@ -397,13 +397,13 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                         component.setResizable(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-indeterminate":
+               case "swing-indeterminate":
                   switch(component) {
                      case JProgressBar:
                         component.setIndeterminate(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-minimum":
+               case "swing-minimum":
                   switch(component) {
                      case JProgressBar:
                      case JScrollBar:
@@ -412,7 +412,7 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                         if( n > -1 ) component.setMinimum(n)
                   }
                   break;
-               case "-swing-maximum":
+               case "swing-maximum":
                   switch(component) {
                      case JProgressBar:
                      case JScrollBar:
@@ -421,31 +421,31 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
                         if( n > -1 ) component.setMaximum(n)
                   }
                   break;
-               case "-swing-inverted":
+               case "swing-inverted":
                   switch(component) {
                      case JSlider:
                         component.setInverted(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-paint-labels":
+               case "swing-paint-labels":
                   switch(component) {
                      case JSlider:
                         component.setPaintLabels(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-paint-ticks":
+               case "swing-paint-ticks":
                   switch(component) {
                      case JSlider:
                         component.setPaintTicks(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-paint-tracks":
+               case "swing-paint-tracks":
                   switch(component) {
                      case JSlider:
                          component.setPaintTracks(getBoolean(propertyName,propertyValue))
                   }
                   break;
-               case "-swing-snap-to-ticks":
+               case "swing-snap-to-ticks":
                   switch(component) {
                      case JSlider:
                          component.setSnapToTicks(getBoolean(propertyName,propertyValue))
@@ -481,61 +481,61 @@ class SwingCSSPropertyHandler implements CSSPropertyHandler {
               "border-left-width",
               "border-bottom-width",
               "border-right-width",
-              "-swing-row-height",
-              "-swing-client-property",
-              "-swing-halign",
-              "-swing-valign",
-              "-swing-cell-height",
-              "-swing-cell-width",
-              "-swing-row-margin",
-              "-swing-grid-color",
-              "-swing-selection-color",
-              "-swing-selection-background-color",
-              "-swing-row-selection-allowed",
-              "-swing-column-selection-allowed",
-              "-swing-auto-resize-mode",
-              "-swing-show-grid",
-              "-swing-show-vertical-lines",
-              "-swing-cell-selection-enabled",
-              "-swing-show-horizontal-lines",
-              "-swing-fills-viewport-height",
-              "-swing-selection-mode",
-              "-swing-border-painted",
-              "-swing-floatable",
-              "-swing-margin",
-              "-swing-orientation",
-              "-swing-rollover",
-              "-swing-columns",
-              "-swing-rows",
-              "-swing-line-wrap",
-              "-swing-tab-size",
-              "-swing-tab-placement",
-              "-swing-tab-layout-policy",
-              "-swing-wrap-style-word",
-              "-swing-caret-color",
-              "-swing-disabled-text-color",
-              "-swing-selected-text-color",
-              "-swing-editable",
-              "-swing-horizontal-scrollbar-policy",
-              "-swing-vertical-scrollbar-policy",
-              "-swing-viewport-border-color",
-              "-swing-viewport-border-width",
-              "-swing-viewport-border-top-width",
-              "-swing-viewport-border-left-width",
-              "-swing-viewport-border-bottom-width",
-              "-swing-viewport-border-right-width",
-              "-swing-horizontal-text-position",
-              "-swing-vertical-text-position",
-              "-swing-icon-text-gap",
-              "-swing-resizable",
-              "-swing-indeterminate",
-              "-swing-minimum",
-              "-swing-maximum",
-              "-swing-inverted",
-              "-swing-paint-labels",
-              "-swing-paint-ticks",
-              "-swing-paint-tracks",
-              "-swing-snap-to-ticks"
+              "swing-row-height",
+              "swing-client-property",
+              "swing-halign",
+              "swing-valign",
+              "swing-cell-height",
+              "swing-cell-width",
+              "swing-row-margin",
+              "swing-grid-color",
+              "swing-selection-color",
+              "swing-selection-background-color",
+              "swing-row-selection-allowed",
+              "swing-column-selection-allowed",
+              "swing-auto-resize-mode",
+              "swing-show-grid",
+              "swing-show-vertical-lines",
+              "swing-cell-selection-enabled",
+              "swing-show-horizontal-lines",
+              "swing-fills-viewport-height",
+              "swing-selection-mode",
+              "swing-border-painted",
+              "swing-floatable",
+              "swing-margin",
+              "swing-orientation",
+              "swing-rollover",
+              "swing-columns",
+              "swing-rows",
+              "swing-line-wrap",
+              "swing-tab-size",
+              "swing-tab-placement",
+              "swing-tab-layout-policy",
+              "swing-wrap-style-word",
+              "swing-caret-color",
+              "swing-disabled-text-color",
+              "swing-selected-text-color",
+              "swing-editable",
+              "swing-horizontal-scrollbar-policy",
+              "swing-vertical-scrollbar-policy",
+              "swing-viewport-border-color",
+              "swing-viewport-border-width",
+              "swing-viewport-border-top-width",
+              "swing-viewport-border-left-width",
+              "swing-viewport-border-bottom-width",
+              "swing-viewport-border-right-width",
+              "swing-horizontal-text-position",
+              "swing-vertical-text-position",
+              "swing-icon-text-gap",
+              "swing-resizable",
+              "swing-indeterminate",
+              "swing-minimum",
+              "swing-maximum",
+              "swing-inverted",
+              "swing-paint-labels",
+              "swing-paint-ticks",
+              "swing-paint-tracks",
+              "swing-snap-to-ticks"
            ] as String[]
     }
 
