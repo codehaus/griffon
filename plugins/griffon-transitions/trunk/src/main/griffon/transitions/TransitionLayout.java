@@ -53,6 +53,7 @@ public class TransitionLayout extends CardLayout {
    private long _defaultDuration = DEFAULT_DURATION;
    private Transition2D _defaultTransition = DEFAULT_TRANSITION;
    private boolean _mirrorTransition = true;
+   private boolean _skipTransitions = false;
 
    // fields
    private TransitionAnimator _transitionAnimator;
@@ -89,6 +90,14 @@ public class TransitionLayout extends CardLayout {
       _mirrorTransition = mirrorTransition;
    }
 
+   public boolean isSkipTransitions() {
+      return _skipTransitions;
+   }
+
+   public void setSkipTransitions(boolean skipTransitions) {
+      _skipTransitions = skipTransitions;
+   }
+
    /**
     * Adds the specified component to this card layout's internal table of names.<p>
     * The object specified by constraints may be a string or a Map.
@@ -119,6 +128,7 @@ public class TransitionLayout extends CardLayout {
          }
       } else {
          name = String.valueOf(constraints);
+         if("null".equals(name)) name = "card" + _components.size();
       }
       if(transition == null) transition = NullTransition.getInstance();
       if(!(component instanceof TransitionPanel)) {
@@ -140,16 +150,23 @@ public class TransitionLayout extends CardLayout {
    }
 
    public void first(Container parent) {
+      if(_skipTransitions) {
+         super.first(parent);
+         return;
+      }
       if(isAnimating()) return;
       synchronized(parent.getTreeLock()) {
          int currentCardIndex = getCurrentCardIndex(parent);
          if(currentCardIndex == 0) return;
          triggerTransition(parent, 0, currentCardIndex, Direction.REVERSE);
-//          triggerTransition(parent, currentCardIndex, 0, Direction.REVERSE);
       }
    }
 
    public void next(Container parent) {
+      if(_skipTransitions) {
+         super.next(parent);
+         return;
+      }
       if(isAnimating()) return;
       synchronized (parent.getTreeLock()) {
          int currentCardIndex = getCurrentCardIndex(parent);
@@ -160,17 +177,24 @@ public class TransitionLayout extends CardLayout {
    }
 
    public void previous(Container parent) {
+      if(_skipTransitions) {
+         super.previous(parent);
+         return;
+      }
       if(isAnimating()) return;
       synchronized (parent.getTreeLock()) {
          int currentCardIndex = getCurrentCardIndex(parent);
          int nextCardIndex = currentCardIndex > 0 ? currentCardIndex - 1 : _components.size() - 1;
          if(currentCardIndex == nextCardIndex) return;
          triggerTransition(parent, nextCardIndex, currentCardIndex, Direction.REVERSE);
-//          triggerTransition(parent, currentCardIndex, nextCardIndex, Direction.REVERSE);
       }
    }
 
    public void last(Container parent) {
+      if(_skipTransitions) {
+         super.last(parent);
+         return;
+      }
       if(isAnimating()) return;
       synchronized (parent.getTreeLock()) {
          int currentCardIndex = getCurrentCardIndex(parent);
@@ -181,8 +205,11 @@ public class TransitionLayout extends CardLayout {
    }
 
    public void show(Container parent, String name) {
+      if(_skipTransitions) {
+         super.show(parent, name);
+         return;
+      }
       if(isAnimating()) return;
-      //super.show(parent, name);
       synchronized (parent.getTreeLock()) {
          int nextCardIndex = cardIndexOf(name);
          int currentCardIndex = getCurrentCardIndex(parent);
