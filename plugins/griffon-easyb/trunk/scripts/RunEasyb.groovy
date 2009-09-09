@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2008 the original author or authors.
+ * Copyright 2004-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,11 +47,11 @@ target(runEasyb:"Run Easyb stories") {
     depends(checkVersion, configureProxy, clean, packageApp, parseArguments, classpath)
     checkEasybStoriesSources()
     if( !_easyb_skip ) {
-        initCobertura()
+//        initCobertura()
         loadApp()
         configureApp()
         runEasybStories()
-        finishCobertura()
+//        finishCobertura()
     }
 }
 
