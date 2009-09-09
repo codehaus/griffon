@@ -1,5 +1,5 @@
 class GfxBuilderGriffonPlugin {
-    def version = "0.2"
+    def version = "0.2.1"
     def canBeGlobal = false
     def dependsOn = [:]
     def jdk = "1.6"
@@ -8,7 +8,7 @@ class GfxBuilderGriffonPlugin {
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Gfx Builder Plugin"
     def description = '''\\
-Brings de GfxBuilder libraries into a Griffon Build
+Brings de GfxBuilder libraries into a Griffon application
 '''
 
     // URL to the plugin's documentation
