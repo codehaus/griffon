@@ -1,5 +1,5 @@
 class TransitionsGriffonPlugin {
-    def version = "0.2-SNAPSHOT"
+    def version = "0.1.1"
     def canBeGlobal = false
     def dependsOn = ["trident-builder": 0.1]
     def jdk = "1.6"
