@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="988">
+<plugins revision="1025">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -10,7 +10,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-abeilleform-builder/tags/RELEASE_0_1/griffon-abeilleform-builder-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="clojure">
+    <plugin latest-release="0.2" name="clojure">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables Clojure</title>
             <author>Andres Almiray</author>
@@ -19,8 +19,16 @@
             <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_1/griffon-clojure-0.1.zip</file>
         </release>
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
+            <title>Enables Clojure</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_2/griffon-clojure-0.2.zip</file>
+        </release>
     </plugin>
-    <plugin latest-release="0.2.1" name="code-coverage">
+    <plugin latest-release="0.3" name="code-coverage">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generates Code Coverage reports</title>
             <author>Andres Allmiray</author>
@@ -44,6 +52,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_2_1/griffon-code-coverage-0.2.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
+            <title>Generates Code Coverage reports</title>
+            <author>Andres Allmiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_3/griffon-code-coverage-0.3.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.2" name="codenarc">
@@ -214,14 +230,14 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gparallelizer/tags/RELEASE_0_2/griffon-gparallelizer-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="gsql">
-        <release tag="trunk" type="svn" version="0.1-SNAPSHOT">
+    <plugin latest-release="0.1" name="gsql">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gsql powered DataSource</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description/>
             <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/trunk/griffon-gsql-0.1-SNAPSHOT.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_1/griffon-gsql-0.1.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.4" name="installer">
@@ -318,7 +334,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jide-builder/tags/RELEASE_0_2/griffon-jide-builder-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="lang-bridge">
+    <plugin latest-release="0.2" name="lang-bridge">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables interoperability between JVM languages</title>
             <author>Andres Almiray</author>
@@ -326,6 +342,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/LangBridge+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lang-bridge/tags/RELEASE_0_1/griffon-lang-bridge-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
+            <title>Enables interoperability between JVM languages</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/LangBridge+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lang-bridge/tags/RELEASE_0_2/griffon-lang-bridge-0.2.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.2.1" name="macwidgets-builder">
@@ -354,7 +378,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-macwidgets-builder/tags/RELEASE_0_2_1/griffon-macwidgets-builder-0.2.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="scala">
+    <plugin latest-release="0.4" name="scala">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Brings the Scala language compiler and libraries</title>
             <author>Andres Almiray</author>
@@ -386,6 +410,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_3/griffon-scala-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
+            <title>Brings the Scala language compiler and libraries</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_4/griffon-scala-0.4.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1.3" name="splash">
