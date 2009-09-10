@@ -1,6 +1,14 @@
 includeTargets << griffonScript("Init")
 includePluginScript("lang-bridge", "CompileCommons")
 
+eventSetClasspath = { classLoader ->
+    if(compilingClojurePlugin()) return
+
+    ant.fileset(dir: "${getPluginDirForName('clojure').file}/lib", includes: "*.jar").each {
+        classLoader.addURL( jar.file.toURI().toURL() )
+    }
+}
+
 eventPackagePluginStart = { pluginName, plugin ->
     def destFileName = "lib/griffon-${pluginName}-addon-${plugin.version}.jar"
     ant.delete(dir: destFileName, quiet: false, failOnError: false)
@@ -13,7 +21,7 @@ eventPackagePluginStart = { pluginName, plugin ->
 }
 
 eventCopyLibsEnd = { jardir ->
-    ant.fileset(dir: "${getPluginDirForName('clojure').file}/lib/", includes: "*.jar").each {
+    ant.fileset(dir: "${getPluginDirForName('clojure').file}/lib", includes: "*.jar").each {
         griffonCopyDist(it.toString(), jardir)
     }
 }
@@ -41,6 +49,7 @@ eventCompileStart = { type ->
         }
         ant.path(id: "clojure.compile.classpath") {
             path(refid: "griffon.compile.classpath")
+            fileset(dir: "${getPluginDirForName('clojure').file}/lib", includes: "*.jar")
             path(location: classesDirPath)
             path(location: clojuresrc)
         }

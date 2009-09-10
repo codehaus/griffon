@@ -11,6 +11,8 @@
 
 includeTargets << griffonScript("_GriffonInit")
 
+// check if ClojureAddon needs to be defined
+/*
 o = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
 boolean addonIsSet
 o.each() { prefix, v ->
@@ -18,11 +20,42 @@ o.each() { prefix, v ->
         addonIsSet = addonIsSet || 'griffon.clojure.ClojureAddon' == key
     }
 }
-
 if (!addonIsSet) {
-    println 'Adding GSQLAddon to Builders.groovy'
+    println 'Adding ClojureAddon to Builders.groovy'
     new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
 root.'griffon.clojure.ClojureAddon'.controller = '*'
+""")
+}
+*/
+
+def checkOptionIsSet = { where, option ->
+   boolean optionIsSet = false
+   where.each { prefix, v ->
+       v.each { key, views ->
+           optionIsSet = optionIsSet || option == key
+       }
+   }
+   optionIsSet
+}
+
+builderConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
+if(!checkOptionIsSet(builderConfig, "griffon.clojure.ClojureAddon")) {
+    println 'Adding ClojureAddon to Builders.groovy'
+    new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
+root.'griffon.clojure.ClojureAddon'.controller = '*'
+""")
+}
+
+// append hints for config options if not present
+appConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Application.groovy").toURL())
+if(!checkOptionIsSet(appConfig, "griffon.clojure.dynamicProperty")) {
+    new File("${basedir}/griffon-app/conf/Application.groovy").append("""
+griffon.clojure.dynamicPropertyName = "clj"
+""")
+}
+if(!checkOptionIsSet(appConfig, "griffon.clojure.injectInto")) {
+    new File("${basedir}/griffon-app/conf/Application.groovy").append("""
+griffon.clojure.injectInto = ["controller"]
 """)
 }
 
