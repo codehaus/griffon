@@ -8,6 +8,19 @@ includeTargets << griffonScript("Package")
 includePluginScript("lang-bridge", "CompileCommons")
 javaFxUrl = "http://dl.javafx.com/1.2/javafx-rt.jnlp"
 
+/*
+eventPackagePluginStart = { pluginName, plugin ->
+    def destFileName = "lib/griffon-${pluginName}-addon-${plugin.version}.jar"
+    ant.delete(dir: destFileName, quiet: false, failOnError: false)
+    ant.jar(destfile: destFileName) {
+        fileset(dir: classesDirPath) {
+            exclude(name: '_*.class')
+            exclude(name: '*GriffonPlugin.class')
+        }
+    }
+}
+*/
+
 eventCopyLibsEnd = { jardir ->
     if( compilingJavaFXPlugin() ) return
     verifyJavaFXHome()
@@ -23,18 +36,14 @@ eventCopyLibsEnd = { jardir ->
 }
 
 eventCompileStart = { type ->
-    if( compilingJavaFXPlugin() ) return
-    if( type != "source" ) return
     verifyJavaFXHome()
-    def javafxSrc = "${basedir}/src/javafx"
-    if(!new File(javafxSrc).exists()) return
-    compileCommons()
-    if(sourcesUpToDate(javafxSrc, classesDirPath, ".fx")) return
 
     def javafxlibs = ant.fileset(dir: "${javafxHome}/lib/shared", includes: "*.jar")
     ant.project.references["griffon.compile.classpath"].addFileset(javafxlibs)
     javafxlibs = ant.fileset(dir: "${javafxHome}/lib/desktop", excludes: "*rt15.jar, *.so")
     ant.project.references["griffon.compile.classpath"].addFileset(javafxlibs)
+
+    if( compilingJavaFXPlugin() ) return
 
     ant.taskdef(resource: "javafxc-ant-task.properties",
                 classpathref: "griffon.compile.classpath")
@@ -42,6 +51,13 @@ eventCompileStart = { type ->
     ant.property(name: "javafx.compiler.classpath", refid: "griffon.compile.classpath")
     def javafxCompilerClasspath = ant.antProject.properties.'javafx.compiler.classpath'
 
+
+    if( type != "source" ) return
+    def javafxSrc = "${basedir}/src/javafx"
+    if(!new File(javafxSrc).exists()) return
+    compileCommons()
+
+    if(sourcesUpToDate(javafxSrc, classesDirPath, ".fx")) return
     def javafxSrcEncoding = buildConfig.javafx?.src?.encoding ?: 'UTF-8'
 
     ant.echo(message: "[fx] Compiling JavaFX sources with JAVAFX_HOME=${javafxHome} to $classesDirPath")
