@@ -12,6 +12,7 @@
 includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
+ConfigSlurper configSluper = new ConfigSlurper()
 o = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
 boolean addonIsSet
 o.each() { prefix, v ->
