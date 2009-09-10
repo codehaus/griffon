@@ -21,6 +21,8 @@ def checkOptionIsSet = { where, option ->
    optionIsSet
 }
 
+ConfigSlurper configSlurper = new ConfigSlurper()
+
 // check if ClojureAddon needs to be defined
 builderConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
 if(!checkOptionIsSet(builderConfig, "griffon.clojure.ClojureAddon")) {
