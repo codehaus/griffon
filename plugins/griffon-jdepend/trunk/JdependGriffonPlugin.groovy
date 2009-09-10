@@ -1,5 +1,5 @@
 class JdependGriffonPlugin {
-    def version = "0.2-SNAPSHOT"
+    def version = "0.2"
     def canBeGlobal = true
     def dependsOn = [:]
 
