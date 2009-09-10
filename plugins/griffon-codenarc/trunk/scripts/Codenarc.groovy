@@ -23,31 +23,27 @@
 
 includeTargets << griffonScript('Compile')
 
-codenarcPluginBase = getPluginDirForName('codenarc').file as String
+target('default': 'Run CodeNarc') {
+   depends(compile)
 
-ant.path( id : "codenarcJarSet" ) {
-    fileset( dir: "${codenarcPluginBase}/lib" , includes : "*.jar" )
+   runCodenarc()
 }
 
-ant.taskdef( name: "codenarc",
-             classname: "org.codenarc.ant.CodeNarcTask",
-             classpathref: "codenarcJarSet" )
-
-target('runCodenarc': 'Run CodeNarc') {
-    depends(compile)
+private void runCodenarc() {
+    ant.taskdef(name: "codenarc", classname: "org.codenarc.ant.CodeNarcTask")
 
     def config = loadConfig()
 
-    String reportName = config.reportName ?: 'CodeNarcAntReport.html'
+    String reportName = config.reportName ?: 'CodeNarcReport.html'
     String reportType = config.reportType ?: 'html'
     String reportTitle = config.reportTitle ?: ''
     int maxPriority1Violations = getConfigInt(config, 'maxPriority1Violations', Integer.MAX_VALUE)
     int maxPriority2Violations = getConfigInt(config, 'maxPriority2Violations', Integer.MAX_VALUE)
     int maxPriority3Violations = getConfigInt(config, 'maxPriority3Violations', Integer.MAX_VALUE)
-    String ruleSetFiles = config.ruleSetFiles ?: 'rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml'
+    String ruleSetFiles = config.ruleSetFiles ?: 'rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml,rulesets/unused.xml'
     List includes = configureIncludes(config)
 
-    println "Running CodeNarc ..."
+    ant.echo(message: "[codenarc] Running CodeNarc ...")
     ant.codenarc(ruleSetFiles: ruleSetFiles,
             maxPriority1Violations: maxPriority1Violations,
             maxPriority2Violations: maxPriority2Violations,
@@ -56,7 +52,7 @@ target('runCodenarc': 'Run CodeNarc') {
         fileset(dir: '.', includes: includes.join(','))
     }
 
-    println "CodeNarc finished; report generated: $reportName"
+    ant.echo(message: "[codenarc] CodeNarc finished; report generated: $reportName")
 }
 
 private ConfigObject loadConfig() {
@@ -94,11 +90,17 @@ private List configureIncludes(config) {
         includes << 'griffon-app/views/**/*.groovy'
     }
 
+    if (getConfigBoolean(config, 'processTestUnit')) {
+        includes << 'test/unit/**/*.groovy'
+    }
+
+    if (getConfigBoolean(config, 'processTestIntegration')) {
+        includes << 'test/integration/**/*.groovy'
+    }
+
     for (includeDir in config.extraIncludeDirs) {
         includes << "$includeDir/**/*.groovy"
     }
 
     return includes
 }
-
-setDefaultTarget(runCodenarc)
