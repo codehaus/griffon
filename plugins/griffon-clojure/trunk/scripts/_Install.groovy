@@ -34,7 +34,7 @@ root.'griffon.clojure.ClojureAddon'.controller = '*'
 
 // append hints for config options if not present
 appConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Application.groovy").toURL())
-if(!checkOptionIsSet(appConfig, "griffon.clojure.dynamicProperty")) {
+if(!checkOptionIsSet(appConfig, "griffon.clojure.dynamicPropertyName")) {
     new File("${basedir}/griffon-app/conf/Application.groovy").append("""
 griffon.clojure.dynamicPropertyName = "clj"
 """)
