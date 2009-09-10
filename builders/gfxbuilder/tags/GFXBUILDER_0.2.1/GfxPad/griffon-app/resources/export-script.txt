@@ -1,0 +1,24 @@
+import groovy.swing.SwingBuilder
+import groovy.swing.j2d.*
+
+// You'll require the following imports
+// depending on the drawing code you wrote
+//
+//import java.awt.*
+//import java.awt.geom.*
+//import javax.swing.*
+//import groovy.swing.j2d.geom.*
+//import org.jdesktop.swingx.geom.*
+
+def gb = new GraphicsBuilder()
+
+def graphicsOperation = gb.group {
+   ${source}
+}
+
+def swing = SwingBuilder.build {
+   frame( title: '${title}', size: [600,480],
+          locationRelativeTo: null, show: true ){
+      panel( new GraphicsPanel(), graphicsOperation: graphicsOperation )
+   }
+}

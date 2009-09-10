@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<project name="gfxbuilder" default="package" basedir=".">
+
+   <property file="build-gfx.properties" />
+
+   <macrodef name="run-module">
+      <attribute name="project" />
+      <attribute name="target" />
+      <sequential>
+         <ant antfile="${basedir}/@{project}/build.xml" 
+              inheritAll="false"
+              dir="${basedir}/@{project}" 
+              target="@{target}" />
+      </sequential>
+   </macrodef>
+
+   <macrodef name="run-target">
+      <attribute name="target" />
+      <sequential>
+         <run-module project="gfxbuilder-core" target="@{target}" />
+         <run-module project="gfxbuilder-swingx" target="@{target}" />
+         <run-module project="gfxbuilder-svg" target="@{target}" />
+      </sequential>
+   </macrodef>
+
+   <macrodef name="copy-package">
+      <attribute name="project" />
+      <sequential>
+         <copy file="@{project}/target/@{project}-${project.version}.jar" 
+               todir="${project.build.dir}" />
+      </sequential>
+   </macrodef>
+
+   <target name="clean">
+      <delete dir="${project.build.dir}" />
+      <run-target target="clean" />
+   </target>
+
+   <target name="compile">
+      <run-target target="compile" />
+   </target>
+
+   <target name="package">
+      <run-target target="package" />
+      <mkdir dir="${project.build.dir}" />
+      <copy-package project="gfxbuilder-core" />
+      <copy-package project="gfxbuilder-swingx" />
+      <copy-package project="gfxbuilder-svg" />
+   </target>
+
+</project>
