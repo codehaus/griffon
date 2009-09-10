@@ -66,8 +66,8 @@ target(runJdepend: "Run JDepend metrics") {
         exclude( name: "groovy.lang" )
         exclude( name: "groovy.util" )
         exclude( name: "org.codehaus.groovy.*" )
-        if( config?.excludes && config.excludes instanceof List ) {
-            config.excludes.each { x -> exclude( name: x ) }
+        if( config.griffon?.jdepend?.excludes && config.griffon?.jdepend?.excludes instanceof List ) {
+            config.griffon.jdepend.excludes.each { x -> exclude( name: x ) }
         }
         classespath {
            pathelement( location: jdependWorkDir )
