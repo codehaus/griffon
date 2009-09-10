@@ -11,23 +11,6 @@
 
 includeTargets << griffonScript("_GriffonInit")
 
-// check if ClojureAddon needs to be defined
-/*
-o = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
-boolean addonIsSet
-o.each() { prefix, v ->
-    v.each { key, views ->
-        addonIsSet = addonIsSet || 'griffon.clojure.ClojureAddon' == key
-    }
-}
-if (!addonIsSet) {
-    println 'Adding ClojureAddon to Builders.groovy'
-    new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
-root.'griffon.clojure.ClojureAddon'.controller = '*'
-""")
-}
-*/
-
 def checkOptionIsSet = { where, option ->
    boolean optionIsSet = false
    where.each { prefix, v ->
@@ -38,6 +21,7 @@ def checkOptionIsSet = { where, option ->
    optionIsSet
 }
 
+// check if ClojureAddon needs to be defined
 builderConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
 if(!checkOptionIsSet(builderConfig, "griffon.clojure.ClojureAddon")) {
     println 'Adding ClojureAddon to Builders.groovy'
