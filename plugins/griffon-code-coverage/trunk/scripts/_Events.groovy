@@ -1,16 +1,9 @@
-/*
-eventSetClasspath = { rootLoader ->
-    if (System.properties.'cobertura.code.coverage') {
-        new File("${pluginHome}/lib/cobertura").eachFile {
-            rootLoader.addURL(it.toURL())
-        }
-    }
-}
-*/
 dataFile = "cobertura.ser"
 
 codeCoverageExclusionList = [
         "**/*BootStrap*",
+        "Application*",
+        "Builder*",
         "Config*",
         "**/*DataSource*",
         "**/*resources*",
@@ -18,6 +11,7 @@ codeCoverageExclusionList = [
         "**/griffon/test/**",
         "**/org/codehaus/griffon/**",
         "**/PreInit*",
+        "**/*Schema*",
         "*GriffonPlugin*"]
 
 
@@ -51,6 +45,12 @@ eventTestPhasesEnd = {
 
         event("StatusFinal", ["Cobertura Code Coverage Complete (view reports in: ${coverageReportDir})"])
     }
+}
+
+// HACK! move griffonApp.realize() to test-app
+eventTestSuiteStart = { type ->
+   if (type != "integration") return
+   if (!griffonApp.views) griffonApp.realize()
 }
 
 def createCoverageReports() {
@@ -95,27 +95,36 @@ def defineCoberturaPathAndTasks() {
 def replaceClosureNamesInReports() {
     if (!argsMap.nopost) {
         def startTime = new Date().time
-        replaceClosureNames(griffonApp?.controllerClasses)
+        replaceClosureNames(griffonApp?.controllers)
+        replaceClosureNames(griffonApp?.models)
         def endTime = new Date().time
-        println "Done with post processing reports in ${endTime - startTime}ms"
+        ant.echo(message: "[cobertura] Done with post processing reports in ${endTime - startTime}ms")
     }
 }
 
 def replaceClosureNames(artefacts) {
     artefacts?.each {artefact ->
-        def closures = [:]
-        artefact.reference.propertyDescriptors.each {propertyDescriptor ->
-            def closureClassName = artefact.getPropertyOrStaticPropertyOrFieldValue(propertyDescriptor.name, Closure)?.class?.name
-            if (closureClassName) {
-                // the name in the reports is sans package; subtract the package name
-                def nameToReplace = closureClassName - "${artefact.packageName}."
+        def klass = artefact.value.class
+        def packageName = ""
+        def shortName = klass.name.toString()
+        def lastdot = klass.name.toString().lastIndexOf(".")
+        if (lastdot != -1) {
+            packageName = klass.toString()[0..lastdot]
+            shortName = klass.name.toString[(lastdot+1)..-1]
+        }
+        def beanInfo = java.beans.Introspector.getBeanInfo(klass)
+        beanInfo.propertyDescriptors.each {propertyDescriptor ->
+            def property = artefact.value."${propertyDescriptor.name}"
+            if(!(property instanceof Closure)) return
+            def closureClassName = property.class.name 
+            // the name in the reports is sans package; subtract the package name
+            def nameToReplace = closureClassName - packageName
 
-                ant.replace(dir: "${coverageReportDir}",
-                        token: ">${nameToReplace}<",
-                        value: ">${artefact.shortName}.${propertyDescriptor.name}<") {
-                    include(name: "**/*${artefact.fullName}.html")
-                    include(name: "frame-summary*.html")
-                }
+            ant.replace(dir: "${coverageReportDir}",
+                    token: ">${nameToReplace}<",
+                    value: ">${shortName}.${propertyDescriptor.name}<") {
+                include(name: "**/*${klass.toString()}.html")
+                include(name: "frame-summary*.html")
             }
         }
     }
