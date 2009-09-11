@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1049">
+<plugins revision="1056">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -168,7 +168,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_2/griffon-flamingo-builder-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="fx-builder">
+    <plugin latest-release="0.3" name="fx-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables JavaFX on your Griffon application</title>
             <author>Andres Almiray</author>
@@ -184,6 +184,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/FxBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fx-builder/tags/RELEASE_0_2/griffon-fx-builder-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
+            <title>Enables JavaFX on your Griffon application</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/FxBuilder+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-fx-builder/tags/RELEASE_0_3/griffon-fx-builder-0.3.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.2.1" name="gfx-builder">
