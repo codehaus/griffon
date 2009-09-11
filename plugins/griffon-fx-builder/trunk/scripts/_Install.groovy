@@ -12,18 +12,31 @@
 ant.property(environment: "env")
 ant.mkdir(dir: "${basedir}/src/javafx")
 
-ConfigSlurper configSlurper = new ConfigSlurper()
-o = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
-boolean builderIsSet
-o.each() { prefix, v ->
-    v.each { builder, views ->
-        builderIsSet = builderIsSet || 'griffon.builder.fx.FxBuilder' == builder
-    }
+def checkOptionIsSet = { where, option ->
+   boolean optionIsSet = false
+   where.each { prefix, v ->
+       v.each { key, views ->
+           optionIsSet = optionIsSet || option == key
+       }
+   }
+   optionIsSet
 }
 
-if (!builderIsSet) {
+ConfigSlurper configSlurper = new ConfigSlurper()
+
+builderConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
+if(!checkOptionIsSet(builderConfig, "griffon.builder.fx.FxBuilder")) {
     println 'Adding FxBuilder to Builders.groovy'
     new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
 fx.'griffon.builder.fx.FxBuilder'.view = '*'
 """)
 }
+
+/*
+if(!checkOptionIsSet(builderConfig, "griffon.javafx.ApplicationBuilder")) {
+    println 'Adding FxBuilder to Builders.groovy'
+    new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
+fx.'griffon.javafx.ApplicationBuilder'.view = '*'
+""")
+}
+*/
