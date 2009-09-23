@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1068">
+<plugins revision="1073">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -324,7 +324,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jdepend/tags/RELEASE_0_2/griffon-jdepend-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="jgoodies-forms"/>
+    <plugin latest-release="0.1" name="jgoodies-forms">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>JGoodies Forms</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/JgoodiesForms+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jgoodies-forms/tags/RELEASE_0_1/griffon-jgoodies-forms-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.2" name="jide-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Jide Builder Plugin</title>
