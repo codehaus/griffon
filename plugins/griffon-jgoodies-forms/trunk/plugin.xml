@@ -1,0 +1,7 @@
+<plugin name='jgoodies-forms' version='0.1' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>JGoodies Forms</title>
+  <documentation>http://griffon.codehaus.org/JgoodiesForms+Plugin</documentation>
+  <dependencies />
+</plugin>
