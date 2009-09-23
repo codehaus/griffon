@@ -150,6 +150,7 @@ public class TransitionLayout extends CardLayout {
    }
 
    public void first(Container parent) {
+      if(_components.size() == 0) return;
       if(_skipTransitions) {
          super.first(parent);
          return;
@@ -163,6 +164,7 @@ public class TransitionLayout extends CardLayout {
    }
 
    public void next(Container parent) {
+      if(_components.size() == 0) return;
       if(_skipTransitions) {
          super.next(parent);
          return;
@@ -177,6 +179,7 @@ public class TransitionLayout extends CardLayout {
    }
 
    public void previous(Container parent) {
+      if(_components.size() == 0) return;
       if(_skipTransitions) {
          super.previous(parent);
          return;
@@ -191,6 +194,7 @@ public class TransitionLayout extends CardLayout {
    }
 
    public void last(Container parent) {
+      if(_components.size() == 0) return;
       if(_skipTransitions) {
          super.last(parent);
          return;
@@ -205,6 +209,7 @@ public class TransitionLayout extends CardLayout {
    }
 
    public void show(Container parent, String name) {
+      if(_components.size() == 0) return;
       if(_skipTransitions) {
          super.show(parent, name);
          return;
