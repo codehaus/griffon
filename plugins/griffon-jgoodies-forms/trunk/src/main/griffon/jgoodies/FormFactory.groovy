@@ -33,12 +33,13 @@ class FormFactory extends AbstractFactory {
             switch(value) {
                 case JPanel:
                     target = value
+                    layout = resolveLayout(builder, name, attributes.remove("layout"))
                     break
                 case String:
                     layout = new FormLayout(value,"")
                     break
                 case List:
-                    layout = new FormLayout(value[0].toString(), value[1].toString())
+                    layout = resolveLayout(builder, name, value)
                     break
                 case FormLayout:
                     layout = value
@@ -46,26 +47,39 @@ class FormFactory extends AbstractFactory {
                 default:
                     throw new IllegalArgumentException("$name does not know how to handle $value as value.")
             }
+            if(layout && attributes.containsKey("layout")) {
+                 throw new IllegalArgumentException("$name does not know how to handle a FormLayout as value and layout:, specify only one.")
+            }
         } else {
             target = attributes.remove("target")
-            def l = attributes.remove("layout")
-            switch(l) {
-                case String:
-                    layout = new FormLayout(l,"")
-                    break
-                case List:
-                    layout = new FormLayout(l[0].toString(), l[1].toString())
-                    break
-                case FormLayout:
-                    layout = l
-                    break
-                default:
-                    throw new IllegalArgumentException("$name does not know how to handle $value as layout: value")
-            }
+            layout = resolveLayout(builder, name, attributes.remove("layout"))
         }
         ResourceBundle bundle = attributes.remove("resourceBundle")
         builder.context.formBuilder = newFormBuilder(layout, bundle, target)
         return builder.context.formBuilder.panel
+    }
+
+    private static resolveLayout(FactoryBuilderSupport builder, Object name, layoutValue ) {
+        if(!layoutValue) throw new IllegalArgumentException("Must specify a value for ${name}.layout:")
+        def layout
+        switch(layoutValue) {
+            case String:
+                layout = new FormLayout(layoutValue,"")
+                break
+            case List:
+                switch(layoutValue.size()) {
+                    case 1: layout = new FormLayout(layoutValue[0]?.toString()); break
+                    case 2: layout = new FormLayout(layoutValue[0]?.toString(), layoutValue[1]?.toString()); break
+                    default: throw new IllegalArgumentException("Too many arguments in ${name}.layout:, specify 1 or 2 elements.")
+                }
+                break
+            case FormLayout:
+                layout = layoutValue
+                break
+            default:
+                throw new IllegalArgumentException("$name does not know how to handle $layoutValue as layout: value")
+        }
+        return layout
     }
 
     private static newFormBuilder(FormLayout layout, ResourceBundle bundle, JPanel panel) {
