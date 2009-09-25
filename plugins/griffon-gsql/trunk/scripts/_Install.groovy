@@ -12,21 +12,33 @@
 includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
-ConfigSlurper configSluper = new ConfigSlurper()
-o = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
-boolean addonIsSet
-o.each() { prefix, v ->
-    v.each { key, views ->
-        addonIsSet = addonIsSet || 'griffon.gsql.GsqlAddon' == key
-    }
+def checkOptionIsSet = { where, option ->
+   boolean optionIsSet = false
+   where.each { prefix, v ->
+       v.each { key, views ->
+           optionIsSet = optionIsSet || option == key
+       }
+   }
+   optionIsSet
 }
 
-if (!addonIsSet) {
-    println 'Adding GSQLAddon to Builders.groovy'
+ConfigSlurper configSlurper = new ConfigSlurper()
+builderConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
+if(!checkOptionIsSet(builderConfig, "griffon.gsql.GsqlAddon")) {
+    println 'Adding GsqlAddon to Builders.groovy'
     new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
 root.'griffon.gsql.GsqlAddon'.controller = '*'
 """)
 }
+
+// append hints for config options if not present
+appConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Application.groovy").toURL())
+if(!checkOptionIsSet(appConfig, "griffon.gsql.injectInto")) {
+    new File("${basedir}/griffon-app/conf/Application.groovy").append("""
+griffon.gsql.injectInto = ["controller"]
+""")
+}
+
 
 if(!new File("${basedir}/griffon-app/conf/DataSource.groovy").exists()) {
    createArtifact(

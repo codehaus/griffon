@@ -29,12 +29,15 @@ import org.apache.commons.dbcp.PoolingDataSource
 import org.apache.commons.dbcp.PoolableConnectionFactory
 import org.apache.commons.dbcp.DriverManagerConnectionFactory
 
+import griffon.util.IGriffonApplication
+
 /**
  * @author Andres.Almiray
  */
 class GsqlAddon {
    private def bootstrap
    private DataSource dataSource
+   private IGriffonApplication application
 
    private static final String ENVIRONMENT = "griffon.env"
    private static final String ENVIRONMENT_DEV = "dev"
@@ -43,6 +46,7 @@ class GsqlAddon {
    private static final String ENVIRONMENT_PROD_LONG = "production"
 
    def addonInit = { app ->
+      application = app
       app.addApplicationEventListener(this)
    }
 
@@ -68,8 +72,9 @@ class GsqlAddon {
    }
 
    def onNewInstance = { klass, type, instance ->
-      if(type != "controller") return
-      instance.metaClass.withSql = this.withSql
+      def types = application.config.griffon?.gsql?.injectInto ?: ["controller"]
+      if(!types.contains(type)) return
+      instance.metaClass.withSql = withSql
    }
 
    // ======================================================
