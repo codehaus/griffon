@@ -19,9 +19,6 @@ import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.RESTClient
 import griffon.util.IGriffonApplication
 
-import java.util.logging.Level
-import java.util.logging.Logger
-import java.lang.reflect.Constructor
 import java.lang.reflect.InvocationTargetException
 
 /**
@@ -29,29 +26,6 @@ import java.lang.reflect.InvocationTargetException
  */
 class RestGriffonAddon {
    private IGriffonApplication application
-
-/*
-   private static final Class[] ZERO_ARGS = []
-   private static final Class[] ONE_ARG = [Object]
-   private static final Class[] TWO_ARGS = [Object, Object]
-   private static final Constructor[] HTTP_CTORS = new Constructor[3]
-   private static final Constructor[] REST_CTORS = new Constructor[3]
-
-   static {
-      try {
-         [[klass: HTTPBuilder, ctors: HTTP_CTORS],
-          [klass: RESTClient,  ctors: REST_CTORS]].each { entry ->
-             entry.ctors[0] = entry.klass.getConstructor(ZERO_ARGS)
-             entry.ctors[1] = entry.klass.getConstructor(ONE_ARG)
-             entry.ctors[2] = entry.klass.getConstructor(TWO_ARGS)
-         }
-      } catch(NoSuchMethodException ex) {
-         Logger.getLogger("global").log(Level.INFO, null, ex)
-      } catch(SecurityException ex) {
-         Logger.getLogger("global").log(Level.SEVERE, null, ex)
-      }
-   }
-*/
 
    def addonInit = { app ->
       application = app
@@ -61,8 +35,6 @@ class RestGriffonAddon {
    def onNewInstance = { klass, type, instance ->
       def types = application.config.griffon?.rest?.injectInto ?: ["controller"]
       if(!types.contains(type)) return
-      // instance.metaClass.withHttp = withClient.curry(HTTP_CTORS, instance)
-      // instance.metaClass.withRest = withClient.curry(REST_CTORS, instance)
       instance.metaClass.withAsyncHttp = withClient.curry(AsyncHTTPBuilder, instance)
       instance.metaClass.withHttp = withClient.curry(HTTPBuilder, instance)
       instance.metaClass.withRest = withClient.curry(RESTClient, instance)
@@ -70,7 +42,6 @@ class RestGriffonAddon {
 
    // ======================================================
 
-   //private withClient = { Constructor[] ctors, Object instance, Map params, Closure closure ->
    private withClient = { Class klass, Object instance, Map params, Closure closure ->
       def client = null
       if(params.id) {
@@ -78,12 +49,10 @@ class RestGriffonAddon {
          if(instance.metaClass.hasProperty(instance, id)) {
             client = instance."$id"
          } else {
-            // client = makeClient(ctors, params) 
             client = makeClient(klass, params) 
             instance.metaClass."$id" = client
          }
       } else {
-        // client = makeClient(ctors, params) 
         client = makeClient(klass, params) 
       }
 
@@ -93,29 +62,14 @@ class RestGriffonAddon {
          client.setProxy(proxyArgs.host, proxyArgs.port as int, proxyArgs.scheme)
       }
 
-      closure.delegate = client
-      closure.resolveStrategy = Closure.DELEGATE_FIRST
-      closure()
+      if(closure) {
+         closure.delegate = client
+         closure.resolveStrategy = Closure.DELEGATE_FIRST
+         closure()
+      }
    }
 
-   // private makeClient(Constructor[] ctors, Map params) {
    private makeClient(Class klass, Map params) {
-      /*
-      def args = []
-      if(params.uri) {
-         args << params.remove("uri")
-         if(params.contentType) {
-            args << params.remove("contentType")
-         }
-      }
-      try {
-         return ctors[args.size()].newInstance(*args)
-      } catch (IllegalArgumentException e) {
-         throw new RuntimeException("Failed to create ${(ctors == HTTP_CTORS? 'http' : 'rest')} client reason: $e", e)
-      } catch (InvocationTargetException e) {
-         throw new RuntimeException("Failed to create ${(ctors == HTTP_CTORS? 'http' : 'rest')} client reason: $e", e)
-      }
-      */
       if(klass == AsyncHTTPBuilder) {
          try {
             Map args = [:]
