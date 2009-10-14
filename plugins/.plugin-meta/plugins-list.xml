@@ -414,6 +414,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-macwidgets-builder/tags/RELEASE_0_2_1/griffon-macwidgets-builder-0.2.1.zip</file>
         </release>
     </plugin>
+    <plugin latest-release="0.1" name="rest">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>REST client libraries</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Rest+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-rest/tags/RELEASE_0_1/griffon-rest-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.4" name="scala">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Brings the Scala language compiler and libraries</title>
