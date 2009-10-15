@@ -20,8 +20,11 @@ import java.awt.image.BufferedImage
 import javax.swing.UIManager
 import javax.imageio.ImageIO
 
+import griffon.builder.wizard.WizardAddon
+
 import org.netbeans.spi.wizard.Wizard
 import org.netbeans.spi.wizard.WizardPage
+import org.netbeans.spi.wizard.WizardPage.WizardResultProducer
 import griffon.builder.wizard.impl.GriffonBranchingWizard
 import griffon.builder.wizard.impl.GriffonWizardPage
 import griffon.builder.wizard.impl.GriffonWizardPanelProvider
@@ -31,6 +34,8 @@ import griffon.builder.wizard.impl.WizardResultProducerImpl
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
 class WizardFactory extends AbstractFactory {
+   protected final WizardAddon addon
+
    static final Map PAGES_PER_WIZARD = new WeakHashMap()
 
    static {
@@ -39,6 +44,10 @@ class WizardFactory extends AbstractFactory {
             if( page instanceof GriffonWizardPage ) page.init()
          }
       }
+   }
+
+   WizardFactory(WizardAddon addon) {
+      this.addon = addon
    }
 
    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
@@ -80,30 +89,30 @@ class WizardFactory extends AbstractFactory {
    }
 
 
-   static handleWizardPanelProvider( FactoryBuilderSupport builder, Object name, Object value, Map attributes ) {
+   GriffonWizardPanelProvider handleWizardPanelProvider( FactoryBuilderSupport builder, Object name, Object value, Map attributes ) {
+      String val = ""
       if( value instanceof String || value instanceof GString ) {
-         value = value.toString()
+         val = value.toString()
       } else if ( attributes.containsKey("panelProvider") ) {
-         value = attributes.remove("panelProvider")
+         val = attributes.remove("panelProvider")?.toString()
       }
 
-      if( !value ) return null
+      if( !val ) return null
 
       GriffonWizardPanelProvider wpp = null
-      if( !value.endsWith("WizardPanelProvider") ) value += "WizardPanelProvider"
-      def wppd = (value as Class).newInstance()
-      wpp = new GriffonWizardPanelProvider(wppd, builder)
-      return wpp
+      if( !val.endsWith("WizardPanelProvider") ) val += "WizardPanelProvider"
+      def wppd = addon.newInstance(val as Class, "wizardPanelProvider")
+      return new GriffonWizardPanelProvider(wppd, builder)
    }
 
-   static handleWizardPages( FactoryBuilderSupport builder, Object name, Map attributes ) {
+   GriffonWizardPage[] handleWizardPages( FactoryBuilderSupport builder, Object name, Map attributes ) {
       def pages = attributes.remove("pages")
 
       if( pages instanceof List ) {
          if ( pages.every{ it instanceof String } ) {
-            pages = pages.collect { n ->
+            pages = pages.collect { String n ->
             if( !n.endsWith("WizardPage") ) n += "WizardPage"
-               def pd = (n as Class).newInstance()
+               def pd = addon.newInstance(n as Class, "wizardPage")
                GriffonWizardPage page = new GriffonWizardPage(pd, builder)
                return page
             } as GriffonWizardPage[]
@@ -116,7 +125,7 @@ class WizardFactory extends AbstractFactory {
       return pages
    }
 
-   static void handleWizardImage( FactoryBuilderSupport builder, Object name, Map attributes ) {
+   void handleWizardImage( FactoryBuilderSupport builder, Object name, Map attributes ) {
       def value = null
 
       if (attributes.containsKey("url")) {
@@ -166,7 +175,7 @@ class WizardFactory extends AbstractFactory {
       }
    }
 
-   static handleResultProducer( FactoryBuilderSupport builder, Object name, Map attributes ) {
+   WizardResultProducer handleResultProducer( FactoryBuilderSupport builder, Object name, Map attributes ) {
       def resultProducer = attributes.remove("resultProducer")
       if( resultProducer != null ) {
          if( resultProducer instanceof Map && resultProducer.cancel && resultProducer.finish ) {
@@ -187,16 +196,20 @@ class WizardFactory extends AbstractFactory {
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
 class BranchingWizardFactory extends WizardFactory {
+   BranchingWizardFactory( WizardAddon addon ) {
+      super(addon)
+   }
+
    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
-      value = String.valueOf(value)
-      if( !value.endsWith("BranchingWizard") ) value += "BranchingWizard"
-      def bw = (value as Class).newInstance()
+      String val = String.valueOf(value)
+      if( !val.endsWith("BranchingWizard") ) val += "BranchingWizard"
+      def bw = addon.newInstance(val as Class, "branchingWizard")
       bw.builder = builder
 
       GriffonWizardPanelProvider wpp = null
       if( bw.metaClass.hasProperty(bw,"initialPanelProvider") ) {
-         wpp = handleWizardPanelProvider(builder, bw.initialPanelProvider, value, attributes)
+         wpp = handleWizardPanelProvider(builder, bw.initialPanelProvider, val, attributes)
       }
       def pages = null
       if( !wpp && bw.metaClass.hasProperty(bw,"initialPages") ) {

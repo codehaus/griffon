@@ -8,6 +8,18 @@
 //
 //    ant.mkdir(dir:"${basedir}/griffon-app/jobs")
 //
+
+includeTargets << griffonScript("_GriffonInit")
+includeTargets << griffonScript("_GriffonCreateArtifacts")
+
+if(!metadata['addon.wizard']) {
+   metadata['addon.wizard'] = 'griffon.builder.wizard.WizardAddon'
+   metadataFile.withOutputStream { out ->
+     metadata.store out, 'utf-8'
+   }
+}
+
+/*
 o = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
 boolean builderIsSet
 o.each() { prefix, v ->
@@ -23,4 +35,6 @@ root.'griffon.builder.wizard.WizardBuilder'.view = '*'
 root.'griffon.builder.wizard.WizardBuilder'.controller = ['Wizard']
 """)
 }
+*/
+
 ant.mkdir(dir: "${basedir}/griffon-app/wizards")
