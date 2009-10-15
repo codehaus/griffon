@@ -6,35 +6,14 @@ scalaHome = ant.antProject.properties."env.SCALA_HOME"
 
 includePluginScript("lang-bridge", "CompileCommons")
 
-/*
-eventSetClasspath = { classLoader ->
-    if( compilingScalaPlugin() ) return
-
-    adjustScalaHome()
-    ant.echo(message: "[scala] Using SCALA_HOME => ${scalaHome}")
-
-    ant.fileset(dir:"${scalaHome}/lib/", includes:"*.jar").each { jar ->
-        classLoader.addURL( jar.file.toURI().toURL() )
-    }
-}
-*/
-
-/*
-eventCopyLibsEnd = { jardir ->
-    if( compilingScalaPlugin() ) return
-    adjustScalaHome()
-    ant.echo(message: "[scala] Copying Scala jar files from ${scalaHome}/lib")
-
-    ant.fileset(dir:"${scalaHome}/lib/", includes:"*.jar").each {
-        griffonCopyDist(it.toString(), jardir)
-    }
-}
-*/
-
 target(compileScalaSrc: "") {
     adjustScalaHome()
     def scalaSrc = "${basedir}/src/scala"
-    if(!new File(scalaSrc).exists()) return
+    def scalaSrcDir = new File(scalaSrc)
+    if(!scalaSrcDir.exists() || !scalaSrcDir.list().size()) {
+        ant.echo(message: "[scala] No Scala sources were found.")
+        return
+    }
 
     compileCommons()
     if(sourcesUpToDate(scalaSrc, classesDirPath, ".scala")) return
@@ -66,7 +45,11 @@ target(compileScalaSrc: "") {
 target(compileScalaTest: "") {
     adjustScalaHome()
     def scalaTestSrc = "${basedir}/test/scala"
-    if(!new File(scalaTestSrc).exists()) return
+    def scalaTestDir = new File(scalaTestSrc)
+    if(!scalaTestDir.exists() || !scalaTestDir.list().size()) {
+        ant.echo(message: "[scala] No Scala tests sources were found.")
+        return
+    }
 
     def destDir = new File(griffonSettings.testClassesDir, "scala")
     ant.mkdir(dir: destDir)
@@ -86,8 +69,6 @@ target(compileScalaTest: "") {
         ant.scalac(destdir: destDir,
                    classpathref: "scala.test.classpath",
                    encoding: scalaSrcEncoding) {
-            // joint compile java sources
-            // src(path: "${basedir}/src/main")
             src(path: scalaTestSrc)
         }
     }
@@ -122,9 +103,9 @@ target(defineScalaTestPathAndTask: "") {
                 classname: "org.scalatest.tools.ScalaTestAntTask")
 }
 
-private boolean compilingScalaPlugin() { getPluginDirForName("scala") == null }
-
-private void adjustScalaHome() {
+target(adjustScalaHome: "") {
     if( compilingScalaPlugin() ) return
     if( !scalaHome || (buildConfig.scala?.useBundledLibs) ) scalaHome = getPluginDirForName("scala").file
 }
+
+private boolean compilingScalaPlugin() { getPluginDirForName("scala") == null }

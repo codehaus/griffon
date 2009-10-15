@@ -7,8 +7,12 @@ includePluginScript("scala", "_ScalaCommon")
 testReportsDir = griffonSettings.testReportsDir
 
 target(default: "Run Scala tests") {
+    depends(parseArguments)
     def scalaTestSrc = new File("${basedir}/test/scala")
-    if(!scalaTestSrc.exists()) return
+    if(!scalaTestSrc.exists() || !scalaTestSrc.list().size()) {
+        ant.echo(message: "[scala] No Scala test sources were found.")
+        return
+    }
     compileScalaTest()
     ant.mkdir(dir: testReportsDir)
 
@@ -31,14 +35,44 @@ target(default: "Run Scala tests") {
         pathelement(location: "${scalaTestClassesDir.absolutePath}")
     }
 
-    ant.scalatest {
+    // TODO include/exclude tags
+    Map scalaTestParams = [:]
+    if(buildConfig.scala?.test?.parallel) scalaTestParams.parallel = true
+    if(buildConfig.scala?.test?.numthreads) scalaTestParams.numthreads = buildConfig.scala.test.numthreads
+    if(buildConfig.scala?.test?.haltonfailure) scalaTestParams.haltonfailure = true
+    if(buildConfig.scala?.test?.fork) scalaTestParams.fork = true
+    if(buildConfig.scala?.test?.maxmemory) scalaTestParams.maxmemory = buildConfig.scala.test.maxmemory
+    if(buildConfig.scala?.test?.membersonly) scalaTestParams.membersonly = buildConfig.scala.test.membersonly
+    if(buildConfig.scala?.test?.wildcard) scalaTestParams.wildcard = buildConfig.scala.test.wildcard
+    def stdoutConfig = buildConfig.scala?.test?.reporter?.stdout ?: "FAB"
+    def scalaConfig = buildConfig.scala?.test?.config ?: [:]
+
+    ant.scalatest(scalaTestParams){
+        scalaConfig.each { k, v ->
+            config(name: k, value: v)
+        }
         runpath {
             ant.project.references["scala.run.classpath"].each { p ->
                 pathelement(location: p)
             }
         }
-        suites.each{ classname -> suite(classname: classname) }
+        if(argsMap.suite) {
+            suite(classname: argsMap.suite)
+        } else {
+            suites.each{ classname -> suite(classname: classname) }
+        }
+        if(buildConfig.scala?.test?.jvmargs) { 
+            buildConfig.scala.test.jvmargs.each { jvmargvalue ->
+                jvmarg(value: jvmargvalue)
+            }
+        }
         reporter(type: "xml", directory: testReportsDir)
-        reporter(type: "stdout", config: "FAB")
+        reporter(type: "stdout", config: stdoutConfig)
+        if(buildConfig.scala?.test?.reporter?.file) { 
+            reporter(type: "file", filename: buildConfig.scala.test.reporter.file)
+        }
+        if(buildConfig.scala?.test?.reporter?.reporterclass) { 
+            reporter(type: "reporterclass", classname: buildConfig.scala.test.reporter.reporterclass)
+        }
     }
 }
