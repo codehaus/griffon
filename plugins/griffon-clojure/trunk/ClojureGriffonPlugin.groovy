@@ -1,5 +1,5 @@
 class ClojureGriffonPlugin {
-    def version = "0.2"
+    def version = "0.3-SNAPSHOT"
     def canBeGlobal = false
     def dependsOn = ["lang-bridge": 0.2]
 
