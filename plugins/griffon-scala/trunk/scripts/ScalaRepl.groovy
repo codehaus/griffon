@@ -1,6 +1,6 @@
 import org.codehaus.griffon.cli.GriffonScriptRunner as GSR
 import org.codehaus.griffon.plugins.GriffonPluginUtils
- import scala.tools.nsc.MainGenericRunner
+import scala.tools.nsc.MainGenericRunner
 
 includeTargets << griffonScript("_GriffonBootstrap")
 includePluginScript("scala", "_ScalaCommon")

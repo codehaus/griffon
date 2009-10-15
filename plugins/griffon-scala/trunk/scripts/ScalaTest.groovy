@@ -16,18 +16,6 @@ target(default: "Run Scala tests") {
     compileScalaTest()
     ant.mkdir(dir: testReportsDir)
 
-    def pattern = ~/.*Tests\.scala/
-    def suites = []
-    def findSuites
-    findSuites = {
-        it.eachFileMatch(pattern) { f ->
-            def suite = f.absolutePath - scalaTestSrc.absolutePath - File.separator - ".scala"
-            suites << suite.replaceAll(File.separator,".")
-        }
-        it.eachDir(findSuites)
-    } 
-    findSuites(scalaTestSrc)
-
     def scalaTestClassesDir = new File(griffonSettings.testClassesDir, "scala")
     ant.path(id: "scala.run.classpath") {
         path(refid: "scala.test.classpath")
@@ -45,7 +33,27 @@ target(default: "Run Scala tests") {
     if(buildConfig.scala?.test?.membersonly) scalaTestParams.membersonly = buildConfig.scala.test.membersonly
     if(buildConfig.scala?.test?.wildcard) scalaTestParams.wildcard = buildConfig.scala.test.wildcard
     def stdoutConfig = buildConfig.scala?.test?.reporter?.stdout ?: "FAB"
+    if(argsMap.stdout) stdoutConfig = argsMap.stdout
+    def filename = buildConfig.scala?.test?.reporter?.file ?: null
+    if(argsMap.file) filename = argsMap.file
+    def reporterclass = buildConfig.scala?.test?.reporter?.reporterclass ?: null
+    if(argsMap.reporterclass) reporterclass = argsMap.reporterclass
     def scalaConfig = buildConfig.scala?.test?.config ?: [:]
+
+    def suites = []
+    if(!argsMap.suite) {
+        // TODO externalize pattern ?
+        def pattern = ~/.*Tests\.scala/
+        def findSuites
+        findSuites = {
+            it.eachFileMatch(pattern) { f ->
+                def suite = f.absolutePath - scalaTestSrc.absolutePath - File.separator - ".scala"
+                suites << suite.replaceAll(File.separator,".")
+            }
+            it.eachDir(findSuites)
+        }
+        findSuites(scalaTestSrc)
+    }
 
     ant.scalatest(scalaTestParams){
         scalaConfig.each { k, v ->
@@ -68,11 +76,13 @@ target(default: "Run Scala tests") {
         }
         reporter(type: "xml", directory: testReportsDir)
         reporter(type: "stdout", config: stdoutConfig)
-        if(buildConfig.scala?.test?.reporter?.file) { 
-            reporter(type: "file", filename: buildConfig.scala.test.reporter.file)
+        if(filename) {
+            def file = new File(filename)
+            if(!file.absolute) file = new File(testReportsDir, filename)
+            reporter(type: "file", filename: file)
         }
-        if(buildConfig.scala?.test?.reporter?.reporterclass) { 
-            reporter(type: "reporterclass", classname: buildConfig.scala.test.reporter.reporterclass)
+        if(reporterclass) {
+            reporter(type: "reporterclass", classname: reporterclass)
         }
     }
 }
