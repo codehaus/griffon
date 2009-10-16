@@ -47,3 +47,4 @@ griffon.clojure.injectInto = ["controller"]
 
 ant.mkdir(dir: "${basedir}/src/clojure")
 ant.mkdir(dir: "${basedir}/griffon-app/resources/clj")
+ant.mkdir(dir: "${basedir}/test/tap")
