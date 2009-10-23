@@ -5,4 +5,3 @@ eventCopyLibsEnd = { jardir ->
         }
     }
 }
-
