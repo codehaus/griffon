@@ -1,0 +1,7 @@
+<plugin name='xmlrpc' version='0.1-SNAPSHOT' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>XML-RPC client &amp; libraries</title>
+  <documentation>http://griffon.codehaus.org/Xmlrpc+Plugin</documentation>
+  <dependencies />
+</plugin>
