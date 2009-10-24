@@ -21,25 +21,22 @@ def checkOptionIsSet = { where, option ->
    optionIsSet
 }
 
-ConfigSlurper configSlurper = new ConfigSlurper()
-
-// check if ClojureAddon needs to be defined
-builderConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
-if(!checkOptionIsSet(builderConfig, "griffon.clojure.ClojureAddon")) {
-    println 'Adding ClojureAddon to Builders.groovy'
-    new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
-root.'griffon.clojure.ClojureAddon'.controller = '*'
-""")
+def checkConfigOptionIsSet = { where, option ->
+   boolean optionIsSet = false
+   where.each { key, value ->
+       optionIsSet = optionIsSet || option == key
+   }
+   optionIsSet
 }
 
 // append hints for config options if not present
 appConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Application.groovy").toURL())
-if(!checkOptionIsSet(appConfig, "griffon.clojure.dynamicPropertyName")) {
+if(!checkConfigOptionIsSet(appConfig, "griffon.clojure.dynamicPropertyName")) {
     new File("${basedir}/griffon-app/conf/Application.groovy").append("""
 griffon.clojure.dynamicPropertyName = "clj"
 """)
 }
-if(!checkOptionIsSet(appConfig, "griffon.clojure.injectInto")) {
+if(!checkConfigOptionIsSet(appConfig, "griffon.clojure.injectInto")) {
     new File("${basedir}/griffon-app/conf/Application.groovy").append("""
 griffon.clojure.injectInto = ["controller"]
 """)
@@ -48,3 +45,20 @@ griffon.clojure.injectInto = ["controller"]
 ant.mkdir(dir: "${basedir}/src/clojure")
 ant.mkdir(dir: "${basedir}/griffon-app/resources/clj")
 ant.mkdir(dir: "${basedir}/test/tap")
+
+// check to see if we already have a ClojureGriffonAddon
+ConfigSlurper configSlurper1 = new ConfigSlurper()
+def slurpedBuilder1 = configSlurper1.parse(new File("$basedir/griffon-app/conf/Builder.groovy").toURL())
+boolean addonIsSet1
+slurpedBuilder1.each() { prefix, v ->
+    v.each { builder, views ->
+        addonIsSet1 = addonIsSet1 || 'ClojureGriffonAddon' == builder
+    }
+}
+
+if (!addonIsSet1) {
+    println 'Adding ClojureGriffonAddon to Builders.groovy'
+    new File("$basedir/griffon-app/conf/Builder.groovy").append('''
+root.'ClojureGriffonAddon'.addon=true
+''')
+}

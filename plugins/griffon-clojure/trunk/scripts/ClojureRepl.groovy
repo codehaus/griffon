@@ -8,8 +8,8 @@ target(default: "Run Clojure REPL") {
     depends(checkVersion, configureProxy, packageApp, classpath)
     
     def cl = new GroovyClassLoader(classLoader)
-    File stagingdir = new File(jardir)
-    stagingdir.eachFileMatch(~/.*\.jar/) { f -> println "${f.class} $f"; cl.addURL(f.toURI().toURL()) }
+    // File stagingdir = new File(jardir)
+    // stagingdir.eachFileMatch(~/.*\.jar/) { f -> println "${f.class} $f"; cl.addURL(f.toURI().toURL()) }
 
     cl.loadClass("clojure.lang.Repl").main([] as String[])
 /*

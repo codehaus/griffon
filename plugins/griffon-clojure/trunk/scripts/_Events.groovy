@@ -5,24 +5,17 @@ eventSetClasspath = { classLoader ->
     if(compilingClojurePlugin()) return
 
     ant.fileset(dir: "${getPluginDirForName('clojure').file}/lib", includes: "*.jar").each {
-        classLoader.addURL( jar.file.toURI().toURL() )
+        classLoader.addURL(jar.file.toURI().toURL())
     }
 }
 
-eventPackagePluginStart = { pluginName, plugin ->
-    def destFileName = "lib/griffon-${pluginName}-addon-${plugin.version}.jar"
-    ant.delete(dir: destFileName, quiet: false, failOnError: false)
-    ant.jar(destfile: destFileName) {
-        fileset(dir: classesDirPath) {
-            exclude(name: '_*.class')
-            exclude(name: '*GriffonPlugin.class')
-        }
-    }
-}
-
+def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
 eventCopyLibsEnd = { jardir ->
-    ant.fileset(dir: "${getPluginDirForName('clojure').file}/lib", includes: "*.jar").each {
-        griffonCopyDist(it.toString(), jardir)
+    eventClosure1(jardir)
+    if (!isPluginProject) {
+        ant.fileset(dir:"${getPluginDirForName('clojure').file}/lib/", includes:"*.jar").each {
+            griffonCopyDist(it.toString(), jardir)
+        }
     }
 }
 
