@@ -24,8 +24,12 @@ import com.caucho.burlap.client.BurlapProxyFactory
 class BurlapProxy extends AbstractCauchoProxy {
    private final BurlapProxyFactory burlapFactory = new BurlapProxyFactory()
 
-   BurlapProxy(String url) {
-      super(url)
+   BurlapProxy(String url, Class serviceClass) {
+      super(url, serviceClass)
+   }
+
+   BurlapProxy(String url, String serviceClassName) {
+      super(url, serviceClassName)
    }
 
    def getFactory() {

@@ -20,48 +20,29 @@ package griffon.hessian
  * @author Andres.Almiray
  */
 abstract class AbstractCauchoProxy {
-   private final Map services = [:]
    private final String url
+   private final Class serviceClass
+   private service
 
-   AbstractCauchoProxy(String url) {
-      this.url = url.endsWith("/") ? url : url + "/"
+   AbstractCauchoProxy(String url, Class serviceClass) {
+      this.url = url
+      this.serviceClass = serviceClass
    }
 
-   def service(String serviceClassName, Closure closure) {
-      Class serviceClass = null
+   AbstractCauchoProxy(String url, String serviceClassName) {
+      this.url = url
       try {
-         serviceClass = serviceClassName as Class // TODO chain classLoaders ?
+         this.serviceClass = serviceClassName as Class // TODO chain classLoaders ?
       } catch(ClassNotFoundException cnfe) {
          throw new RuntimeException("Invalid service className ${serviceClassName}: $cnfe", cnfe)
       }
-      return service(serviceClass, closure)
    }
 
-   def service(Class serviceClass, Closure closure) {
-      if(!serviceClass) return null
-      def service = services.get(serviceClass.name)
+   def methodMissing(String methodName, args) {
       if(!service) {
-         service = getFactory().create(serviceClass, url + serviceClass.simpleName)
-         services.put(serviceClass.name, service)
+         service = getFactory().create(serviceClass, url)
       }
-      closure.resolveStrategy = Closure.DELEGATE_FIRST
-      closure.delegate = service
-      closure()
-   }
-
-   def release(Class serviceClass) {
-      if(!serviceClass) return
-      services.remove(serviceClass.name)
-   }
-
-   def release(String serviceClassName) {
-      if(!serviceClassName) return
-      services.remove(serviceClassName)
-   }
-
-   def methodMissing(String serviceClassName, args) {
-      // TODO validate params
-      service(serviceClassName, args[0])
+      service."$methodName"(*args)
    }
 
    protected abstract getFactory()

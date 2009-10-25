@@ -24,8 +24,12 @@ import com.caucho.hessian.client.HessianProxyFactory
 class HessianProxy extends AbstractCauchoProxy {
    private final HessianProxyFactory hessianFactory = new HessianProxyFactory()
 
-   HessianProxy(String url) {
-      super(url)
+   HessianProxy(String url, Class serviceClass) {
+      super(url, serviceClass)
+   }
+
+   HessianProxy(String url, String serviceClassName) {
+      super(url, serviceClassName)
    }
 
    def getFactory() {
