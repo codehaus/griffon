@@ -29,3 +29,21 @@ eventCompileStart = { type ->
  * Detects whether we're compiling the Clojure plugin itself
  */
 private boolean compilingClojurePlugin() { getPluginDirForName("clojure") == null }
+
+eventStatsStart = { pathToInfo ->
+    if(!pathToInfo.find{ it.path == "src.commons"} ) {
+        pathToInfo << [name: "Common Sources", path: "src.commons", filetype: [".groovy",".java"]]
+    }
+    // TODO -- match multiline comments -> (comment ...)
+    if(!pathToInfo.find{ it.path == "src.clojure"} ) {
+        def EMPTY = /^\s*$/
+        pathToInfo << [name: "Clojure Sources", path: "src.clojure", filetype: [".clj"], locmatcher: {file ->
+            def loc = 0
+            file.eachLine { line ->
+                if(line ==~ EMPTY || line ==~ /^\s*\;.*/) return
+                loc++
+            }
+            loc
+        }]
+    }
+}
