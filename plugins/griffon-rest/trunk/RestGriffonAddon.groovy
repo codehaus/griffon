@@ -77,10 +77,10 @@ class RestGriffonAddon {
                if(params[(arg)] != null) args[(arg)] = params[(arg)]
             }
             return klass.newInstance(args)
-         } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Failed to create async http client reason: $e", e)
-         } catch (InvocationTargetException e) {
-            throw new RuntimeException("Failed to create async http client reason: $e", e)
+         } catch(IllegalArgumentException e) {
+            throw new RuntimeException("Failed to create async http client, reason: $e", e)
+         } catch(InvocationTargetException e) {
+            throw new RuntimeException("Failed to create async http client, reason: $e", e)
          }
       }
       try {
@@ -88,10 +88,10 @@ class RestGriffonAddon {
          if(params.uri) client.uri = params.remove("uri")
          if(params.contentType) client.contentType = params.remove("contentType")
          return client
-      } catch (IllegalArgumentException e) {
-         throw new RuntimeException("Failed to create ${(klass == HTTPBuilder? 'http' : 'rest')} client reason: $e", e)
-      } catch (InvocationTargetException e) {
-         throw new RuntimeException("Failed to create ${(klass == HTTPBuilder? 'http' : 'rest')} client reason: $e", e)
+      } catch(IllegalArgumentException e) {
+         throw new RuntimeException("Failed to create ${(klass == HTTPBuilder? 'http' : 'rest')} client, reason: $e", e)
+      } catch(InvocationTargetException e) {
+         throw new RuntimeException("Failed to create ${(klass == HTTPBuilder? 'http' : 'rest')} client, reason: $e", e)
       }
    }
 }

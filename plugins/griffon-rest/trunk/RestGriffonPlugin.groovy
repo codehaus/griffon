@@ -1,5 +1,5 @@
 class RestGriffonPlugin {
-    def version = "0.2-SNAPSHOT"
+    def version = "0.2"
     def canBeGlobal = false
     def dependsOn = [:]
 
