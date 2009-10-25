@@ -35,3 +35,12 @@ eventTestPhasesStart = { phasesToRun ->
 */
 
 private boolean compilingScalaPlugin() { getPluginDirForName("scala") == null }
+
+eventStatsStart = { pathToInfo ->
+    if(!pathToInfo.find{ it.path == "src.commons"} ) {
+        pathToInfo << [name: "Common Sources", path: "src.commons", filetype: [".groovy",".java"]]
+    }
+    if(!pathToInfo.find{ it.path == "src.scala"} ) {
+        pathToInfo << [name: "Scala Sources", path: "src.scala", filetype: [".scala"]]
+    }
+}
