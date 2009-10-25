@@ -23,8 +23,6 @@ import org.jivesoftware.smack.PacketListener
 import org.jivesoftware.smack.XMPPConnection
 import org.jivesoftware.smack.proxy.ProxyInfo
 import org.jivesoftware.smack.packet.Message
-import org.jivesoftware.smack.packet.Packet
-import org.jivesoftware.smack.filter.PacketTypeFilter
 
 /**
  * @author Andres.Almiray
@@ -32,13 +30,6 @@ import org.jivesoftware.smack.filter.PacketTypeFilter
 class JabberGriffonAddon {
    private IGriffonApplication application
    private static final Map CHATS = [:]
-   private static final MessageListener MESSAGE_LISTENER
-
-   JabberGriffonAddon() {
-      MESSAGE_LISTENER = { Chat chat, Message message ->
-         application.event("JabberMessage", [message])
-      } as MessageListener
-   }
 
    def addonInit = { app ->
       application = app
@@ -48,13 +39,12 @@ class JabberGriffonAddon {
    def onNewInstance = { klass, type, instance ->
       def types = application.config.griffon?.jabber?.injectInto ?: ["controller"]
       if(!types.contains(type)) return
-      instance.metaClass.jabberConnect = jabberConnect
-      instance.metaClass.jabberChat = jabberChat
+      instance.metaClass.jabberConnect = jabberConnect.curry(instance)
    }
 
    // ======================================================
 
-   private jabberConnect = { Map options ->
+   private jabberConnect = { Object instance, Map options ->
       def serviceName = options.remove("serviceName")
       def host = options.remove("host")
       def port = options.remove("port")
@@ -66,7 +56,7 @@ class JabberGriffonAddon {
           Map proxyOptions = options.remove("proxy")
           proxy = new ProxyInfo(ProxyInfo.ProxyType.valueOf((proxyOptions.remove("type") ?: "HTTP").toUpperCase()),
                                 proxyOptions.remove("host").toString(),
-                                proxyOptions.remove("port") as int,
+                                (proxyOptions.remove("port") ?: 80) as int,
                                 proxyOptions.remove("username") ?: "",
                                 proxyOptions.remove("password") ?: "")
       }
@@ -79,28 +69,43 @@ class JabberGriffonAddon {
       XMPPConnection conn = new XMPPConnection(config)
       conn.connect()
       conn.login(username, password, username + Long.toHexString(System.currentTimeMillis()))
-      conn.metaClass.chatWith = jabberChat.curry(username, password)
-      conn.addPacketListener({ Packet packet ->
-         println "Received message from ${packet.from}, subject: ${packet.subject}, body: ${packet.body}"
-      } as PacketListener, new PacketTypeFilter(Message))
+      conn.metaClass.chatWith = jabberChat.curry(instance, username, password)
       conn
    }
    
-   private jabberChat = { String username, String password, String participant, String message ->
+   private jabberChat = { Object instance, String username, String password, String participant, String message ->
       def conn = delegate
       if(!conn.connected) {
          conn.connect()
          conn.login(username, password, username + Long.toHexString(System.currentTimeMillis()))
-         CHATS[participant]?.removeMessageListener(MESSAGE_LISTENER)
+         CHATS[participant]?.chat?.removeMessageListener(CHATS[participant]?.listener)
          CHATS[participant] = null
       }
 
-      Chat chat = CHATS[participant]
+      Chat chat = CHATS[participant]?.chat
       if(!chat) {
-         chat = conn.chatManager.createChat(participant, MESSAGE_LISTENER)
-         CHATS[participant] = chat
+         def listener = { Chat c, Message m ->
+             notifyListener(instance, "onJabberMessage", [m]) 
+         } as MessageListener
+         chat = conn.chatManager.createChat(participant, listener)
+         CHATS[participant] = [chat: chat, listener: listener]
       }
 
       chat.sendMessage(message)
    }
+
+   private void notifyListener(Object instance, String eventHandler, List params) {
+      def mp = instance.metaClass.getMetaProperty(eventHandler)
+      if(mp && mp.getProperty(instance)) {
+         mp.getProperty(instance)(*params)
+         return
+      }
+
+      Class[] argTypes = MetaClassHelper.convertToTypeArray(params as Object[])
+      def mm = instance.metaClass.pickMethod(eventHandler,argTypes)
+      if(mm) {
+         mm.invoke(instance,*params)
+      }
+   }
+
 }
