@@ -59,14 +59,14 @@ class XmlrpcGriffonAddon {
 
    private makeClient(Map params) {
       def url = params.remove("url")
-      def detectEncoding = params.remove("detectEncoding") ?: false
+      // def detectEncoding = params.remove("detectEncoding") ?: false
       if(!url) {
-         throw new RuntimeException("Failed to create xml-rpc client. Reason: url: parameter is null or invalid.")
+         throw new RuntimeException("Failed to create xml-rpc client, url: parameter is null or invalid.")
       }
       try {
-         return new XMLRPCServerProxy(url, detectEncoding)
-      } catch( MalformedURLException mue) {
-         throw new RuntimeException("Failed to create xml-rpc client. Reason: $mue.", mue)
+         return new XMLRPCServerProxy(url/*, detectEncoding*/)
+      } catch(MalformedURLException mue) {
+         throw new RuntimeException("Failed to create xml-rpc client, reason: $mue", mue)
       }
    }
 }
