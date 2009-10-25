@@ -18,16 +18,15 @@
  * @author Andres.Almiray
  */
 class CoverflowGriffonPlugin {
-    def version = 0.1
+    def version = 0.1.1
     def canBeGlobal = false
     def dependsOn = [:]
 
-    // TODO Fill in these fields
-    def author = "Your name"
-    def authorEmail = ""
-    def title = "Plugin summary/headline"
+    def author = "Andres Almiray"
+    def authorEmail = "aalmiray@users.sourceforge.net"
+    def title = "Provides a coverflow component"
     def description = '''\\
-Brief description of the plugin.
+Provides a coverflow component.
 '''
 
     // URL to the plugin's documentation
