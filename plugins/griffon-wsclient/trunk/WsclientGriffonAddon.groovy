@@ -71,7 +71,7 @@ class WsclientGriffonAddon {
       def wsdl = params.remove("wsdl")
       def classLoader = params.remove("classLoader") ?: getClass().classLoader
       if(!wsdl) {
-         throw new RuntimeException("Failed to create ws client. Reason: wsdl: parameter is null or invalid.")
+         throw new RuntimeException("Failed to create ws client, wsdl: parameter is null or invalid.")
       }
       try {
          def soapVersion = params.remove("soapVersion") ?: "1.1"
@@ -84,7 +84,7 @@ class WsclientGriffonAddon {
          wsclient.initialize()
          return wsclient
       } catch(Exception e) {
-         throw new RuntimeException("Failed to create ws client. Reason: $e.", e)
+         throw new RuntimeException("Failed to create ws client, reason: $e", e)
       }
    }
 }
