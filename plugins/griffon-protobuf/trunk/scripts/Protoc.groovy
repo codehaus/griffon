@@ -27,6 +27,19 @@ google.protobuf.protoc = "/path/to/protoc"''')
         System.exit(0)
     }
 
+    boolean uptodate = true
+    def skipIt = new RuntimeException()
+    try {
+        ant.fileset(dir: protobufsrcDir, includes: "**/*.proto").each { protofile ->
+            File markerFile = new File(gensrcDir, "." + (protofile.toString() - protobufsrc).substring(1))
+            if(!markerFile.exists() || protofile.file.lastModified() > markerFile.lastModified()) throw skipIt
+        }
+    } catch(x) {
+       if(x == skipIt) uptodate = false
+       else throw x
+    }
+    if(uptodate) return
+
     println "[protoc] Invoking $protocExecutable on $protobufsrc"
     println "[protoc] Generated sources will be placed at $gensrcDir"
     ant.fileset(dir: protobufsrcDir, includes: "**/*.proto").each { protofile ->
@@ -34,5 +47,7 @@ google.protobuf.protoc = "/path/to/protoc"''')
         Process protoc = "$protocExecutable -I=$protobufsrc --java_out=$gensrcDir $protofile".execute([] as String[], new File(basedir))
         protoc.consumeProcessOutput(System.out, System.err)
         protoc.waitFor()
+        File markerFile = new File(gensrcDirPath.absolutePath + "/." + (protofile.toString() - protobufsrc).substring(1))
+        ant.touch(file: markerFile)
     }
 }
