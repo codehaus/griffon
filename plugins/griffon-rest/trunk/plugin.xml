@@ -1,4 +1,4 @@
-<plugin name='rest' version='0.2-SNAPSHOT' jdk='1.5'>
+<plugin name='rest' version='0.2' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>REST client libraries</title>
