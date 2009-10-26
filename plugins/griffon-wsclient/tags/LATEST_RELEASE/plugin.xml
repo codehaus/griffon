@@ -1,0 +1,7 @@
+<plugin name='wsclient' version='0.1' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>WS client &amp; libraries</title>
+  <documentation>http://griffon.codehaus.org/Wsclient+Plugin</documentation>
+  <dependencies />
+</plugin>
