@@ -1,0 +1,7 @@
+<plugin name='rmi' version='0.1' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>RMI client</title>
+  <documentation>http://griffon.codehaus.org/Rmi+Plugin</documentation>
+  <dependencies />
+</plugin>
