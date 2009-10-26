@@ -44,14 +44,14 @@ target(compileScalaSrc: "") {
  
 target(compileScalaTest: "") {
     adjustScalaHome()
-    def scalaTestSrc = "${basedir}/test/scala"
+    def scalaTestSrc = "${basedir}/test/scalatest"
     def scalaTestDir = new File(scalaTestSrc)
     if(!scalaTestDir.exists() || !scalaTestDir.list().size()) {
         ant.echo(message: "[scala] No Scala tests sources were found.")
         return
     }
 
-    def destDir = new File(griffonSettings.testClassesDir, "scala")
+    def destDir = new File(griffonSettings.testClassesDir, "scalatest")
     ant.mkdir(dir: destDir)
 
     def scalaDir = resolveResources("file:${scalaHome}/lib/*")
@@ -76,7 +76,42 @@ target(compileScalaTest: "") {
         ant.fail(message: "Could not compile Scala tests: " + e.class.simpleName + ": " + e.message)
     }
 }
- 
+
+target(compileScalaCheck: "") {
+    adjustScalaHome()
+    def scalaCheckSrc = "${basedir}/test/scalacheck"
+    def scalaCheckDir = new File(scalaCheckSrc)
+    if(!scalaCheckDir.exists() || !scalaCheckDir.list().size()) {
+        ant.echo(message: "[scala] No ScalaCheck tests sources were found.")
+        return
+    }
+
+    def destDir = new File(griffonSettings.testClassesDir, "scalacheck")
+    ant.mkdir(dir: destDir)
+
+    def scalaDir = resolveResources("file:${scalaHome}/lib/*")
+    if (!scalaDir) {
+       ant.echo(message: "[scala] No Scala jar files found at ${scalaHome}")
+       return
+    }
+    defineScalaCheckPathAndTask()
+
+    if(sourcesUpToDate(scalaCheckSrc, destDir.absolutePath, ".scala")) return
+    def scalaSrcEncoding = buildConfig.scala?.src?.encoding ?: 'UTF-8'
+
+    ant.echo(message: "[scala] Compiling ScalaCheck tests with SCALA_HOME=${scalaHome} to $destDir")
+    try {
+        ant.scalac(destdir: destDir,
+                   classpathref: "scala.check.classpath",
+                   encoding: scalaSrcEncoding) {
+            src(path: scalaCheckSrc)
+        }
+    }
+    catch (Exception e) {
+        ant.fail(message: "Could not compile ScalaCheck tests: " + e.class.simpleName + ": " + e.message)
+    }
+}
+
 target(defineScalaCompilePathAndTask: "") {
     ant.path(id : "scalaJarSet") {
        fileset(dir: "${scalaHome}/lib", includes: "*.jar")
@@ -101,6 +136,20 @@ target(defineScalaTestPathAndTask: "") {
     ant.taskdef(name: "scalatest",
                 classpathref: "scala.test.classpath",
                 classname: "org.scalatest.tools.ScalaTestAntTask")
+}
+
+target(defineScalaCheckPathAndTask: "") {
+    defineScalaCompilePathAndTask()
+    ant.path(id: "scala.check.classpath") {
+        path(refid:"scala.compile.classpath")
+        fileset(dir: "${scalaPluginDir}/lib/check") {
+            include(name: "*.jar")
+        }
+    }
+
+    ant.taskdef(name: "scalacheck",
+                classpathref: "scala.check.classpath",
+                classname: "griffon.scalacheck.ScalacheckTask")
 }
 
 target(adjustScalaHome: "") {

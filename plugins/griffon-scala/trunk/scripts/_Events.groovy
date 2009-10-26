@@ -4,6 +4,17 @@ import org.codehaus.griffon.plugins.GriffonPluginUtils
 includeTargets << griffonScript("Init")
 includePluginScript("scala", "_ScalaCommon")
 
+eventPackagePluginStart = { pluginName, plugin ->
+    def destFileName = "lib/check/scalacheck-tasks.jar"
+    ant.delete(dir: destFileName, quiet: false, failOnError: false)
+    ant.jar(destfile: destFileName) {
+        fileset(dir: classesDirPath) {
+            exclude(name: '_*.class')
+            exclude(name: '*GriffonPlugin.class')
+        }
+    }
+}
+
 eventCopyLibsEnd = { jardir ->
     if(compilingScalaPlugin()) return
     adjustScalaHome()

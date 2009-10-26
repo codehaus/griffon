@@ -8,7 +8,7 @@ testReportsDir = griffonSettings.testReportsDir
 
 target(default: "Run Scala tests") {
     depends(parseArguments)
-    def scalaTestSrc = new File("${basedir}/test/scala")
+    def scalaTestSrc = new File("${basedir}/test/scalatest")
     if(!scalaTestSrc.exists() || !scalaTestSrc.list().size()) {
         ant.echo(message: "[scala] No Scala test sources were found.")
         return
@@ -16,8 +16,8 @@ target(default: "Run Scala tests") {
     compileScalaTest()
     ant.mkdir(dir: testReportsDir)
 
-    def scalaTestClassesDir = new File(griffonSettings.testClassesDir, "scala")
-    ant.path(id: "scala.run.classpath") {
+    def scalaTestClassesDir = new File(griffonSettings.testClassesDir, "scalatest")
+    ant.path(id: "scala.test.run.classpath") {
         path(refid: "scala.test.classpath")
         pathelement(location: "${classesDir.absolutePath}")
         pathelement(location: "${scalaTestClassesDir.absolutePath}")
@@ -60,7 +60,7 @@ target(default: "Run Scala tests") {
             config(name: k, value: v)
         }
         runpath {
-            ant.project.references["scala.run.classpath"].each { p ->
+            ant.project.references["scala.test.run.classpath"].each { p ->
                 pathelement(location: p)
             }
         }
