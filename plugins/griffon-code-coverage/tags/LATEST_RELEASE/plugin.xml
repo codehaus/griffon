@@ -1,7 +1,0 @@
-<plugin name='code-coverage' version='0.3' jdk='1.5'>
-  <author>Andres Allmiray</author>
-  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-  <title>Generates Code Coverage reports</title>
-  <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
-  <dependencies />
-</plugin>
