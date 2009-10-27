@@ -1,9 +1,9 @@
 class CodeCoverageGriffonPlugin {
-    def version = "0.3"
+    def version = "0.3.1"
     def canBeGlobal = true
     def dependsOn = [:]
 
-    def author = "Andres Allmiray"
+    def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Generates Code Coverage reports"
     def description = """

@@ -11,9 +11,9 @@ codeCoverageExclusionList = [
         "**/griffon/test/**",
         "**/org/codehaus/griffon/**",
         "**/PreInit*",
-        "**/*Schema*",
+        "**/*\$_run_closure*",
+        "*GriffonAddon*",
         "*GriffonPlugin*"]
-
 
 eventTestPhasesStart = {
     if (isCoverageEnabled()) {
@@ -47,12 +47,6 @@ eventTestPhasesEnd = {
     }
 }
 
-// HACK! move griffonApp.realize() to test-app
-eventTestSuiteStart = { type ->
-   if (type != "integration") return
-   if (!griffonApp.views) griffonApp.realize()
-}
-
 def createCoverageReports() {
     coverageReportDir = "${config.griffon.testing.reports.destDir ?: testReportsDir}/cobertura"
 
@@ -67,7 +61,7 @@ def createCoverageReports() {
         ant.'cobertura-report'(destDir: "${coverageReportDir}", datafile: "${dataFile}", format: reportFormat) {
             //load all these dirs independently so the dir structure is flattened,
             //otherwise the source isn't found for the reports
-            def exclusions = ["conf","lifecycle","i18n","resources"]
+            def exclusions = ["conf", "i18n", "resources"]
             new File("${basedir}/griffon-app").list().each { f ->
                 if(f in exclusions) return
                 fileset(dir: "${basedir}/griffon-app/${f}")
@@ -93,18 +87,42 @@ def defineCoberturaPathAndTasks() {
 }
 
 def replaceClosureNamesInReports() {
-    if (!argsMap.nopost) {
+    if (!argsMap.nopost || !buildConfig.coverage.noPost) {
         def startTime = new Date().time
-        replaceClosureNames(griffonApp?.controllers)
-        replaceClosureNames(griffonApp?.models)
+		classLoader.parent.addURL(classesDir.toURI().toURL())
+        replaceClosureNames(findArtefacts("controllers"))
+        replaceClosureNames(findArtefacts("models"))
         def endTime = new Date().time
         ant.echo(message: "[cobertura] Done with post processing reports in ${endTime - startTime}ms")
     }
 }
 
+def findArtefacts(String type) {
+    def artefacts = []
+	if(griffonApp) {
+		griffonApp."$type".each { a ->
+			artefacts << artefact
+		}
+		return artefacts
+	}
+
+	File searchDir = new File("${basedir}/griffon-app/$type")
+    def pattern = ~/.*\.groovy/
+    def artefactFinder
+	artefactFinder = {
+		it.eachFileMatch(pattern) { f ->
+			def artefact = f.absolutePath - searchDir.absolutePath - File.separator - ".groovy"
+			artefacts << artefact.replaceAll(File.separator, ".")
+		}
+		it.eachDir(artefactFinder)
+	}
+	artefactFinder(searchDir)
+	artefacts.collect([]){ a -> classLoader.loadClass(a).newInstance() }
+}
+
 def replaceClosureNames(artefacts) {
-    artefacts?.each {artefact ->
-        def klass = artefact.value.class
+    artefacts?.each { artefact ->
+		def klass = artefact.class
         def packageName = ""
         def shortName = klass.name.toString()
         def lastdot = klass.name.toString().lastIndexOf(".")
@@ -114,15 +132,15 @@ def replaceClosureNames(artefacts) {
         }
         def beanInfo = java.beans.Introspector.getBeanInfo(klass)
         beanInfo.propertyDescriptors.each {propertyDescriptor ->
-            def property = artefact.value."${propertyDescriptor.name}"
+            def property = artefact."${propertyDescriptor.name}"
             if(!(property instanceof Closure)) return
             def closureClassName = property.class.name 
             // the name in the reports is sans package; subtract the package name
             def nameToReplace = closureClassName - packageName
 
             ant.replace(dir: "${coverageReportDir}",
-                    token: ">${nameToReplace}<",
-                    value: ">${shortName}.${propertyDescriptor.name}<") {
+				token: ">${nameToReplace}<",
+				value: ">${shortName}.${propertyDescriptor.name}<") {
                 include(name: "**/*${klass.toString()}.html")
                 include(name: "frame-summary*.html")
             }
