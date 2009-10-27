@@ -23,7 +23,7 @@ import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
-target (createFestTest: "Creates a new Griffon FEST test") {
+target (default: "Creates a new Griffon FEST test") {
    depends(checkVersion,parseArguments)
    promptForName(type: "FEST Test")
    def (pkg, name) = extractArtifactName(argsMap["params"][0])
@@ -31,9 +31,7 @@ target (createFestTest: "Creates a new Griffon FEST test") {
 
    createArtifact(
       name: fqn,
-      suffix: "Test",
+      suffix: "Tests",
       type: "FestTest",
       path: "test/fest")
 }
-
-setDefaultTarget(createFestTest)

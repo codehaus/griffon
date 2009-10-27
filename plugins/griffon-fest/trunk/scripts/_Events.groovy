@@ -1,24 +1,38 @@
-import org.codehaus.griffon.cli.GriffonScriptRunner as GSR
+import griffon.test.support.GriffonFestTestHelper
+import org.codehaus.griffon.cli.support.GriffonRootLoader
 
-eventCleanEnd = {
-    ant.delete(dir: "${projectWorkDir}/fest-classes", failonerror: false)
-    ant.delete(dir: "${basedir}/test/fest-reports", failonerror: false)
+includeTargets << griffonScript("Init")
+includeTargets << griffonScript("Package")
+
+eventPackagePluginStart = { pluginName, plugin ->
+    def destFileName = "lib/griffon-fest-support.jar"
+    ant.delete(dir: destFileName, quiet: false, failOnError: false)
+    ant.jar(destfile: destFileName) {
+        fileset(dir: classesDirPath) {
+            exclude(name: '_*.class')
+            exclude(name: '*GriffonPlugin.class')
+        }
+    }
 }
 
-/*
-eventAllTestsStart = {
-   // perform any cleanup before running fest tests here!
+eventTestPhasesStart = { phasesToRun ->
+    parseArguments()
+    if(argsMap.fest) {
+        if(!argsMap.unit) phasesToRun.remove("unit")
+        if(!argsMap.integration) phasesToRun.remove("integration")
+        if(!argsMap.other) phasesToRun.remove("other")
+        if(!phasesToRun.contains("fest")) phasesToRun << "fest"
+    }
 }
 
-eventAllTestsEnd = {
-   if( unitOnly || integrationOnly ) return
+binding.festTests = ["fest"]
 
-   // call run-fest after all other tests have run
-   GSR.callPluginOrGriffonScript("RunFest")
+binding.festTestsPreparation = {
+    createConfig()
+    classLoader.parent.addURL(classesDir.toURI().toURL())
+    classLoader.parent.addURL("file:${basedir}/griffon-app/resources/".toURL())
+    classLoader.parent.addURL("file:${basedir}/griffon-app/i18n/".toURL())
+    return new GriffonFestTestHelper(griffonSettings, classLoader, resolveResources, config)
 }
-*/
 
-eventJarFilesStart = {
-   // make sure FestGriffonPlugin.class is not added to app jar
-   ant.delete(file: "${projectWorkDir}/classes/FestGriffonPlugin.class", failonerror: false)
-}
+binding.festTestsCleanUp = { }
