@@ -1,0 +1,7 @@
+<plugin name='font-jiggler' version='0.1' jdk='1.5'>
+  <author>Hamlet D'Arcy</author>
+  <authorEmail>hamletdrc@gmail.com</authorEmail>
+  <title>FontJiggler - Adds a Font API to Swing Components</title>
+  <documentation>http://griffon.codehaus.org/FontJiggler+Plugin</documentation>
+  <dependencies />
+</plugin>
