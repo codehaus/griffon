@@ -1,0 +1,7 @@
+<plugin name='fast-translate' version='0.1' jdk='1.5'>
+  <author>Hamlet D'Arcy'</author>
+  <authorEmail>hamletdrc@gmail.com</authorEmail>
+  <title>Provides fast translation services for human language. Backed by Google Translate.</title>
+  <documentation>http://griffon.codehaus.org/FastTranslate+Plugin</documentation>
+  <dependencies />
+</plugin>
