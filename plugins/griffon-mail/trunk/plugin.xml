@@ -1,4 +1,4 @@
-<plugin name='mail' version='0.1' jdk='1.5'>
+<plugin name='mail' version='0.2' jdk='1.5'>
   <author>Josh Reed</author>
   <authorEmail>jareed@andrill.org</authorEmail>
   <title>Send email from your Griffon app</title>
