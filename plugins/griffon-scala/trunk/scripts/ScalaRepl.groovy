@@ -1,22 +1,22 @@
 import org.codehaus.griffon.cli.GriffonScriptRunner as GSR
 import org.codehaus.griffon.plugins.GriffonPluginUtils
-import scala.tools.nsc.MainGenericRunner
 
-includeTargets << griffonScript("_GriffonBootstrap")
+includeTargets << griffonScript("Compile")
 includePluginScript("scala", "_ScalaCommon")
 
 target(default: "Run Scala REPL") {
-    depends(checkVersion, configureProxy, packageApp, classpath, adjustScalaHome)
+    depends(checkVersion, configureProxy, compile, classpath, adjustScalaHome)
     ant.echo(message: "[scala] Using SCALA_HOME => ${scalaHome}")
 
     ant.fileset(dir:"${scalaHome}/lib/", includes:"*.jar").each { jar ->
         classLoader.addURL(jar.file.toURI().toURL())
     }
+    classLoader.parent.addURL(classesDir.toURI().toURL())
+    classLoader.parent.addURL("file:${basedir}/griffon-app/resources/".toURL())
+    classLoader.parent.addURL("file:${basedir}/griffon-app/i18n/".toURL())
 
-    File stagingdir = new File(jardir)
-    runtimeJars = []
-    stagingdir.eachFileMatch(~/.*\.jar/) {f -> runtimeJars += f }
-    def scalaClasspath = ([stagingdir.absolutePath] + runtimeJars).join(File.pathSeparator)
+    def scalaClasspath = classLoader.getURLs().collect([]){ it.toString() }
+    classLoader.parent.getURLs().collect(scalaClasspath){ it.toString() }
 
-    MainGenericRunner.main(["-cp", scalaClasspath] as String[])
+    classLoader.loadClass("scala.tools.nsc.MainGenericRunner").main(["-cp", scalaClasspath.join(File.pathSeparator)] as String[])
 }

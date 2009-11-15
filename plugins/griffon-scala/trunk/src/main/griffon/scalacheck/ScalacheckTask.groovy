@@ -26,10 +26,10 @@ import org.apache.tools.ant.taskdefs.Java
  */
 public class ScalacheckTask extends Task {
     boolean fork
-	String maxMemory
-	String destdir
+    String maxMemory
+    String destdir
     Path classpath
-	private List specifications = []
+    private List specifications = []
 
     public Path createClasspath() {
         if(!classpath) {
@@ -42,30 +42,30 @@ public class ScalacheckTask extends Task {
         createClasspath().setRefid(ref)
     }
 
-	public void addConfiguredSpecification(Specification spec) {
-		specifications << spec.name
-	}
+    public void addConfiguredSpecification(Specification spec) {
+        specifications << spec.name
+    }
 
-	public void execute() {
-		def java = new Java()
-		java.bindToOwner(this)
-		java.init()
-		java.fork = fork
-		java.setClassname("griffon.scalacheck.ScalacheckRunner")
-		Path path = java.createClasspath()
-		path.setPath(classpath.toString())
+    public void execute() {
+        def java = new Java()
+        java.bindToOwner(this)
+        java.init()
+        java.fork = fork
+        java.setClassname("griffon.scalacheck.ScalacheckRunner")
+        Path path = java.createClasspath()
+        path.setPath(classpath.toString())
 
-		if(maxMemory) java.createJvmarg.setValue("-Xmx" + maxMemory)
-		java.createArg().value = "--o=$destdir"
-		specifications.each{ java.createArg().value = it }
+        if(maxMemory) java.createJvmarg.setValue("-Xmx" + maxMemory)
+        java.createArg().value = "--o=$destdir"
+        specifications.each{ java.createArg().value = it }
 
-		java.executeJava()
-	}
+        java.executeJava()
+    }
 }
 
 /**
  * @author Andres.Almiray
  */
 class Specification {
-	String name
+    String name
 }
