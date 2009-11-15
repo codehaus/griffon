@@ -1,5 +1,5 @@
 class GfxBuilderGriffonPlugin {
-    def version = "0.2.1"
+    def version = "0.2.2"
     def canBeGlobal = false
     def dependsOn = [:]
     def jdk = "1.6"
