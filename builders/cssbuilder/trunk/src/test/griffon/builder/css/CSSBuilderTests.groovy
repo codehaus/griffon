@@ -628,4 +628,18 @@ public class CSSBuilderTests extends GroovySwingTestCase {
          assert size.height == 30
       }
    }
+
+   void testExpression() {
+      testInEDT {
+         def panel = builder.panel {
+            button(id: "button1", name: "button1")
+         }
+         CSSBindings.instance.active = false
+         CSSDecorator.decorate("griffon/builder/css/expressions", panel)
+         assert builder.button1.foreground == Color.BLACK
+         CSSBindings.instance.active = true
+         CSSDecorator.decorate("griffon/builder/css/expressions", panel)
+         assert builder.button1.foreground == Color.RED
+      }
+   }
 }

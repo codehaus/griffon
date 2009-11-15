@@ -82,7 +82,7 @@ public class DefaultCSSPropertyHandler implements CSSPropertyHandler {
 
                         int p = 100;
                         try {
-                            p = Integer.valueOf(perc);
+                            p = Double.valueOf(perc).intValue();
                         } catch (Exception e) {
                             logger.log(Level.WARNING, String.format("font-size value ('%1$s') was an invalid percentage", propertyValue), e);
                         }
@@ -98,7 +98,7 @@ public class DefaultCSSPropertyHandler implements CSSPropertyHandler {
                     if (propertyValue.endsWith("pt")) s = propertyValue.substring(0, propertyValue.length() - 2);
 
                     try {
-                        size = Integer.valueOf(s);
+                        size = Double.valueOf(s).intValue();
                     } catch (NumberFormatException e) {
                         logger.log(Level.WARNING, String.format("font-size value ('%1$s') not supported; 'pt' is the only supported length and is implicit", propertyValue), e);
                     }

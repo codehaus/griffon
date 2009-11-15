@@ -44,6 +44,8 @@ import java.util.logging.Level;
 import javax.swing.JComponent;
 import javax.swing.JList;
 
+import groovy.lang.Binding;
+import groovy.lang.GroovyShell;
 
 /**
  *
@@ -52,11 +54,12 @@ import javax.swing.JList;
  */
 public class CSSDecorator {
     private static final Logger logger = Logger.getLogger(CSSDecorator.class.getName());
+    private static final GroovyShell shell = new GroovyShell(CSSBindings.getInstance());
 
     public static void applyStyle(String style, Container root) {
         try {
             applyStylesheet(new InputSource(new StringReader(style)), SwingUtils.getAllJComponents(root));
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.log(Level.WARNING, String.format("Couldn't apply stylesheet '%1$s'", style), e);
         }
     }
@@ -64,7 +67,7 @@ public class CSSDecorator {
     public static void applyStyle(String style, List<JComponent> allComponents) {
         try {
             applyStylesheet(new InputSource(new StringReader(style)), allComponents);
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.log(Level.WARNING, String.format("Couldn't apply stylesheet '%1$s'", style), e);
         }
     }
@@ -127,14 +130,14 @@ public class CSSDecorator {
             }
             try {
                 applyStylesheet( new InputSource(new InputStreamReader(in)), allComponents);
-            } catch (IOException e) {
+            } catch(Exception e) {
                 logger.log(Level.WARNING, String.format("Couldn't load stylesheet '%1$s'", cssName), e);
                 continue;
             }
         }
     }
 
-    private static void applyStylesheet( InputSource is, List<JComponent> allComponents ) throws IOException {
+    private static void applyStylesheet(InputSource is, List<JComponent> allComponents) throws IOException {
         CSSOMParser parser = new CSSOMParser();
         CSSStyleSheet stylesheet = stylesheet = parser.parseStyleSheet(is,null,null);
 
@@ -147,7 +150,14 @@ public class CSSDecorator {
 
             CSSStyleDeclaration style = rule.getStyle();
             for (int j = 0; j < style.getLength(); j++) {
-                boolean result = CSSPropertyHandlers.getInstance().handle(components, style.item(j), style.getPropertyValue(style.item(j)));
+                String value = style.getPropertyValue(style.item(j));
+                if(value != null && value.contains("$")) {
+                    Object output = shell.evaluate(value);
+                    if(output != null) value = String.valueOf(output);
+                    if(value.startsWith("\"")) value = value.substring(1);
+                    if(value.endsWith("\"")) value = value.substring(0, value.length() - 2);
+                }
+                boolean result = CSSPropertyHandlers.getInstance().handle(components, style.item(j), value);
                 if (!result) {
                     logger.warning(String.format("CSS property '%1$s' in selector '%2$s' not supported", style.item(j), selector));
                 }
