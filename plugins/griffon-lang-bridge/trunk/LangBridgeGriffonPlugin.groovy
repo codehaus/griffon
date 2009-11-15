@@ -1,5 +1,5 @@
 class LangBridgeGriffonPlugin {
-    def version = 0.2
+    def version = "0.2.1"
     def canBeGlobal = false
     def dependsOn = [:]
 

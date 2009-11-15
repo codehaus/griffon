@@ -27,6 +27,10 @@ griffonHome = ant.antProject.properties."env.GRIFFON_HOME"
 
 includeTargets << griffonScript("Compile")
 
+target(default: "Compile common sources") {
+    depends(compileCommons)
+}
+
 target(compileCommons: "Compile common sources") {
     depends(checkVersion, parseArguments, classpath)
     def commons = "${basedir}/src/commons"
@@ -90,5 +94,3 @@ sourcesUpToDate = { src, dest, srcsfx = ".java", destsfx = ".class" ->
     }
     return true
 }
-
-setDefaultTarget(compileCommons)
