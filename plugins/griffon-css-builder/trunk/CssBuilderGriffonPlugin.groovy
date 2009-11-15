@@ -1,5 +1,5 @@
 class CssBuilderGriffonPlugin {
-    def version = 0.2
+    def version = 0.3
     def canBeGlobal = false
     def dependsOn = [:]
 
