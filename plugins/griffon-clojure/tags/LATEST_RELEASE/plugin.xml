@@ -1,9 +1,0 @@
-<plugin name='clojure' version='0.2' jdk='1.5'>
-  <author>Andres Almiray</author>
-  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-  <title>Enables Clojure</title>
-  <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
-  <dependencies>
-    <plugin name='lang-bridge' version='0.2' />
-  </dependencies>
-</plugin>
