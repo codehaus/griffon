@@ -17,7 +17,8 @@ package griffon.builder.gfx.nodes.shapes
 
 import java.awt.Shape
 import java.awt.geom.Area
-import griffon.builder.gfx.ShapeProvider
+import griffon.builder.gfx.*
+import griffon.builder.gfx.runtime.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -36,12 +37,17 @@ class AreaNode extends AbstractShapeGfxNode {
            throw new IllegalArgumentException("No nested shapes on ${this}")
         }
 
+        GfxContext context = getRuntime().getContext()
         List shapes = []
         for(node in shapeNodes) {
-           def s = node.localShape
+           if(!node.visible || !node.enabled) continue
+           if(!node.getRuntime()) node.getRuntime(context)
+           def s = node.runtime.localShape
            if(s) shapes << s
         }
 
+        if(!shapes) return null
+        if(shapes.size() == 1) return shapes[0]
         Area area = new Area(shapes[0])
         shapes[1..-1].each { s ->
            area."$areaMethod"(s instanceof Area ? s : new Area(s))

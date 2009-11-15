@@ -53,6 +53,6 @@ class RaysNode extends AbstractShapeGfxNode {
                         rays as int,
                         angle as float,
                         extent as float,
-                        roundness as boolean )
+                        rounded as boolean )
     }
 }
