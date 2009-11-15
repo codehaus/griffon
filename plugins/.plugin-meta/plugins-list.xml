@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1219">
+<plugins revision="1226">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -256,7 +256,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fx-builder/tags/RELEASE_0_3/griffon-fx-builder-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2.1" name="gfx-builder">
+    <plugin latest-release="0.2.2" name="gfx-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gfx Builder Plugin</title>
             <author>Andres Almiray</author>
@@ -280,6 +280,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/GfxBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gfx-builder/tags/RELEASE_0_2_1/griffon-gfx-builder-0.2.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2_2" type="svn" version="0.2.2">
+            <title>Gfx Builder Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/GfxBuilder+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-gfx-builder/tags/RELEASE_0_2_2/griffon-gfx-builder-0.2.2.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.3" name="gparallelizer">
