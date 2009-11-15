@@ -46,12 +46,18 @@ class ClojureProxy {
             convertArg(it)
         } as Object[]
     }
-    
+
     def methodMissing(String name, args) {
-        def impl = { Object[] a = new Object[0] ->
-            def var = RT.var(delegate.ns, name)
-            var.invoke (*convertArgs(a))
-        }
+        def impl  = { Object[] a = new Object[0] ->
+                def var = RT.var(delegate.ns, name)
+                def res = var.invoke (*convertArgs(a))
+                if (var.isMacro() 
+                    && res instanceof clojure.lang.ISeq
+                    && res.size() > 0)
+                {
+                    clojure.lang.Var.find(res.first()).invoke(*res.more())
+                } else { res }
+            }
         ClojureProxy.metaClass."${name}" = impl
         impl(args)
     }
