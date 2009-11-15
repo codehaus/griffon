@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<project>
+   <path id="build.classpath" >
+      <fileset dir="${basedir}/../build/lib">
+         <include name="**/*.jar"/>
+      </fileset>
+      <path refid="build.classpath.local" />
+   </path>
+
+   <taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpathref="build.classpath" />
+   <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="build.classpath" />
+
+   <target name="init" />
+
+   <target name="clean"
+          description="Clean the output directory">
+      <delete dir="${project.build.dir}" />
+   </target>
+
+   <target name="compile.java"
+           description="Compile Java code">
+      <mkdir dir="${project.build.output}" />
+      <javac destdir="${project.build.output}"
+             excludes="**/package.html"
+             source="${javac.source}"
+             target="${javac.target}" 
+             classpathref="build.classpath">
+         <src path="${project.src.dir}" />
+         <!--
+         <classpath refid="build.classpath" />
+         -->
+      </javac>
+   </target>
+
+   <target name="compile.groovy"
+           description="Compile the code">
+     <mkdir dir="${project.build.output}" />
+     <groovyc fork="false"
+              includeantruntime="false"
+              destdir="${project.build.output}"
+              srcdir="${project.src.dir}"
+              includes="**/*.groovy"
+              excludes="**/package.html" >
+         <classpath>
+            <pathelement path="${project.build.output}" />
+            <path refid="build.classpath"/>
+         </classpath>
+         <!--
+         <src path="${project.src.dir}" />
+         <javac deprecation="on"
+                debug="${javac.debug}"
+                source="1.5"
+                target="1.5" />
+         -->
+      </groovyc>
+   </target>
+
+   <target name="compile" depends="init">
+     <antcall target="compile.java" />
+     <antcall target="compile.groovy" />
+   </target>
+
+   <target name="package"
+           depends="clean, compile"
+           description="Binary jar">
+      <antcall target="-pre-package"/>
+      <jar jarfile="${project.build.dir}/${project.final.name}.jar"
+           basedir="${project.build.output}"
+           excludes="**/package.html" />
+      <antcall target="-post-package"/>
+   </target>
+
+   <target name="-pre-package" />
+   <target name="-post-package" />
+
+   <target name="sources"
+           depends="clean"
+           description="Source jar">
+      <mkdir dir="${project.build.dir}/source" />
+      <copy todir="${project.build.dir}/source">
+         <fileset dir="${project.src.dir}">
+            <include name="${project.src.includes}" />
+         </fileset>
+      </copy>
+      <jar jarfile="${project.build.dir}/${project.final.name}-sources.jar"
+           basedir="${project.build.dir}/source" />
+   </target>
+
+<!--
+   <target name="javadoc"
+           depends="init"
+           description="Build javadocs">
+      <mkdir dir="${project.javadoc.dir}" />
+      <mkdir dir="${project.build.dir}/source" />
+      <copy todir="${project.build.dir}/source">
+         <fileset dir="${project.src.dir}">
+            <include name="**/*" />
+         </fileset>
+      </copy>
+      <javadoc destdir="${project.javadoc.dir}"
+               windowtitle="Overview ${project.final.name} API"
+               useexternalfile="true">
+         <packageset dir="${project.build.dir}/source">
+            <include name="**/*" />
+         </packageset>
+         <classpath>
+            <path refid="build.classpath" />
+         </classpath>
+         <link href="http://java.sun.com/j2se/1.5.0/docs/api/" />
+      </javadoc>
+      <jar jarfile="${project.build.dir}/${project.final.name}-javadoc.jar"
+           basedir="${project.javadoc.dir}" />
+   </target>
+-->
+
+</project>

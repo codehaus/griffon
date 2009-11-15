@@ -1,0 +1,80 @@
+def width = 300
+def height = width*3/4
+
+antialias on
+// base background shape
+rect( x: 0, y: 0, width: width, height: height, arcWidth: 40, arcHeight: 40, 
+      asShape: true, id: 'r' )
+// clip everything outside of the background shape
+clip( r )
+draw( r, borderColor: false ){
+   gradientPaint( x1: 0, y1: 0, x2: 50, y2: 50, color1: color('blue'), color2: color('cyan') )
+}
+rays( cx: width/2, cy: height/2, radius: width*2, rays: 30, extent: 0.4, borderColor: false,
+   angle: animate(0..360, startDelay: 2000, interval: 3, duration: 15000 ) ){
+   multiPaint {
+      colorPaint( color('black').derive(alpha:0.5) )
+      radialGradient( cx: width/2, cy: height/2, radius: width/3 ){
+         stop( offset: 0, color: color('white').derive(alpha:0.5) )
+         stop( offset: 1, color: color('white').derive(alpha:0.0) )
+      }
+   }
+}
+
+// star highlights
+rays( cx: width/2, cy: height/2, radius: height*4/5, rays: 5, extent: 0.75, 
+      angle: 45-(360/10*0.5), bc: no ){
+   radialGradient( cx: (width/2)+10, cy: (height/2)-10, radius: height/2 ){
+      stop( offset: 0, color: color('white').derive(alpha:0.5) )
+      stop( offset: 1, color: color('gray').derive(alpha:0.0) )
+      transformations { translate( x: 10, y: 10 ) }
+   }
+}
+star( cx: width/2, cy: height/2, or: 30, ir: 15, borderColor: 'white' ){
+   basicStroke( width: 2 )
+   multiPaint {
+      colorPaint( color('white') )
+      radialGradient( cx: (width/2)+10, cy: (height/2)-10, radius: 50 ){
+         stop( offset: 0, color: color('cyan').derive(alpha:0.4) )
+         stop( offset: 1, color: color('gray').derive(alpha:0.0) )
+         transformations { translate( x: 10, y: 10 ) }
+      }
+   }
+}
+
+font( size: 58, style: 'bold' )
+intersect( asShape: true, id: 'gback' ) {
+   rect(width: 300, height: 100 )
+   text( text: 'Groovy', x: 10, y: 20 )
+}
+intersect( asShape: true, id: 'rback' ) {
+   rect(width: 300, height: 100 )
+   text( text: 'Rocks!', x: 10, y: 20 )
+}
+draw( gback, borderColor: 'white', borderWidth:6, fill: 'white' ){
+   transformations{ translate(x: (width/5)-10, y: (height/10)-10) }
+}
+
+text( text: 'Groovy', x: (width/5)-12, y: (height/10)-10, borderColor: false ){
+   multiPaint {
+      colorPaint( color('blue') )
+      linearGradient( x2: 0, y2: 50 ){
+         stop( offset: 0, color: color('cyan').derive(alpha:0.3) )
+         stop( offset: 1, color: color('cyan').derive(alpha:0.8) )
+      }
+   }
+}
+draw( rback, borderColor: 'white', borderWidth:6, fill: 'white' ){
+   transformations{ translate(x: (width/4)-15, y: height*7/10) }
+}
+text( text: 'Rocks!', x: (width/4)-20, y: (height*7/10)+2, borderColor: false ){
+   multiPaint {
+      colorPaint( color('blue') )
+      linearGradient( x2: 0, y2: 50 ){
+         stop( offset: 0, color: color('cyan').derive(alpha:0.8) )
+         stop( offset: 1, color: color('cyan').derive(alpha:0.3) )
+      }
+   }
+}
+
+transformations { translate( x: 10, y: 10 ) }
