@@ -1,0 +1,7 @@
+<plugin name='jung' version='0.1.1' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Graph visualizations and algorithms via JUNG2</title>
+  <documentation>http://griffon.codehaus.org/Jung+Plugin</documentation>
+  <dependencies />
+</plugin>
