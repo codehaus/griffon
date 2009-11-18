@@ -1,5 +1,5 @@
 class ScalaGriffonPlugin {
-    def version = "0.6-SNAPSHOT"
+    def version = "0.5.1"
     def canBeGlobal = true
     def dependsOn = ["lang-bridge": "0.2.1"]
 
