@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1249">
+<plugins revision="1254">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -589,7 +589,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rmi/tags/RELEASE_0_1/griffon-rmi-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.5" name="scala">
+    <plugin latest-release="0.5.1" name="scala">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Brings the Scala language compiler and libraries</title>
             <author>Andres Almiray</author>
@@ -637,6 +637,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_5/griffon-scala-0.5.zip</file>
+        </release>
+        <release tag="RELEASE_0_5_1" type="svn" version="0.5.1">
+            <title>Brings the Scala language compiler and libraries</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_5_1/griffon-scala-0.5.1.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1.3" name="splash">
