@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1254">
+<plugins revision="1260">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -560,7 +560,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-mail/tags/RELEASE_0_1/griffon-mail-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="protobuf"/>
+    <plugin latest-release="0.1" name="protobuf">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Adds Protocol Buffers support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Protobuf+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-protobuf/tags/RELEASE_0_1/griffon-protobuf-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.2" name="rest">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>REST client libraries</title>
