@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1260">
+<plugins revision="1273">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -560,6 +560,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-mail/tags/RELEASE_0_1/griffon-mail-0.1.zip</file>
         </release>
     </plugin>
+    <plugin latest-release="0.1" name="mongo-db">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Plugin summary/headline</title>
+            <author>Your name</author>
+            <authorEmail/>
+            <description/>
+            <documentation>http://griffon.codehaus.org/MongoDB+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-mongo-db/tags/RELEASE_0_1/griffon-mongo-db-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.1" name="protobuf">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Adds Protocol Buffers support</title>
@@ -698,6 +708,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-splash/tags/RELEASE_0_1_3/griffon-splash-0.1.3.zip</file>
         </release>
     </plugin>
+    <plugin name="spring"/>
     <plugin latest-release="0.1" name="swingx-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>SwingX Builder Plugin</title>
