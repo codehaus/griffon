@@ -1,5 +1,5 @@
 class TrayBuilderGriffonPlugin {
-    def version = "0.1.1"
+    def version = "0.2"
     def canBeGlobal = false
     def dependsOn = [:]
     def jdk = "1.6"
@@ -8,7 +8,7 @@ class TrayBuilderGriffonPlugin {
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "TrayBuilder Plugin"
     def description = '''\\
-Brings the TrayBuilder libraries into a Griffon Build
+Enables Swing components on SystemTray.
 '''
 
     // URL to the plugin's documentation

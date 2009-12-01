@@ -17,16 +17,25 @@
    ---------------------------------------------------------------------
 */
 
-package griffon.builder.tray.factory
+package griffon.builder.tray.impl
 
-import java.awt.SystemTray
+import org.codehaus.groovy.runtime.NullObject
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
  */
-class SystemTrayFactory extends AbstractFactory {
-    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
-            throws InstantiationException, IllegalAccessException {
-        SystemTray.systemTray
+class DummyTrayObject {
+    private final storage = [:]
+
+    void setProperty(String name, value) {
+        storage[name] = value
+    }
+
+    def getProperty(String name) {
+        storage[name]
+    }
+
+    def methodMissing(String name, args) {
+        return NullObject.getNullObject()
     }
 }
