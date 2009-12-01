@@ -51,7 +51,7 @@ class TrayBuilderGriffonAddon {
         os += System.getProperty("os.arch") ?: " "
         os += System.getProperty("os.version") ?: ""
         // TODO use logging instead
-        println("SystemTray is not supported on ${os.trim()}")
+        println("SystemTray is not supported on ${os.trim()} - JVM ${System.getProperty('java.version')}")
         props.systemTray = [
             get: { new DummyTrayObject() },
             set: { }
