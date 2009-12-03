@@ -1,0 +1,10 @@
+<plugin name='gorm' version='0.1' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>GORM for Griffon</title>
+  <documentation>http://griffon.codehaus.org/Gorm+Plugin</documentation>
+  <plugin name='spring' version='0.1' />
+  <dependencies>
+    <plugin name='spring' version='0.1' />
+  </dependencies>
+</plugin>
