@@ -17,21 +17,19 @@
 package griffon.spring.artifact
 
 import griffon.core.ArtifactInfo
-// import grails.spring.BeanBuilder
-// import griffon.spring.factory.support.ArtifactFactoryBean;
 
 /**
  * @author Andres Almiray (aalmiray)
  */
 class SpringDomainArtifactHandler extends SpringArtifactHandlerAdapter {
+    static final String TYPE ="domain"
+
     SpringDomainArtifactHandler() {
-        super("domain")
+        super(TYPE)
     }
 
-    void initialize(ArtifactInfo[] artifacts) {
-        super.initialize(artifacts)
-        if(!artifacts) return
-        // registerArtifactBeans(artifacts)
+    protected void registerArtifactBeans(ArtifactInfo[] artifacts) {
+        // empty
     }
 
     public ArtifactInfo findArtifact(String name) {
@@ -46,17 +44,4 @@ class SpringDomainArtifactHandler extends SpringArtifactHandlerAdapter {
         }
         return null
     }
-/*
-    protected void registerArtifactBeans(ArtifactInfo[] artifacts) {
-        doWithBeanBuilder { 
-            artifacts.each { art ->
-                "${art.simpleName}"(ArtifactFactoryBean) { bean ->
-                    bean.scope = "singleton"
-                    bean.autowire = "byName"
-                    artifact = art
-                }
-            }
-        }
-    }
-*/
 }

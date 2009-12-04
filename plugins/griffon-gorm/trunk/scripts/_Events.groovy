@@ -14,3 +14,8 @@ eventCopyLibsEnd = { jardir ->
     }
 }
 
+eventStatsStart = { pathToInfo ->
+    if(!pathToInfo.find{ it.path == "domain"} ) {
+        pathToInfo << [name: "Domain Classes", path: "domain", filetype: [".groovy",".java"]]
+    }
+}
