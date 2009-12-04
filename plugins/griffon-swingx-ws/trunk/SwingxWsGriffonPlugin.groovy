@@ -3,12 +3,11 @@ class SwingxWsGriffonPlugin {
     def canBeGlobal = false
     def dependsOn = [:]
 
-    // TODO Fill in these fields
-    def author = "Your name"
-    def authorEmail = ""
-    def title = "Plugin summary/headline"
+    def author = "Andres Almiray"
+    def authorEmail = "aalmiray@users.sourceforge.net"
+    def title = "Map visualizations with Swingx-ws"
     def description = '''\\
-Brief description of the plugin.
+Map visualizations with Swingx.ws
 '''
 
     // URL to the plugin's documentation
