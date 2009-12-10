@@ -44,6 +44,8 @@ class TextNode extends AbstractShapeGfxNode {
     @GfxAttribute(alias="t") String text = "Groovy"
     @GfxAttribute double x = 0d
     @GfxAttribute double y = 0d
+    @GfxAttribute double cx = Double.NaN
+    @GfxAttribute double cy = Double.NaN
     @GfxAttribute double spacing = 0d
     @GfxAttribute def halign = 'left'
     @GfxAttribute def valign = 'bottom'
@@ -62,10 +64,10 @@ class TextNode extends AbstractShapeGfxNode {
         def __t = text.split(/\n/)
         if(__t.size() == 1){
            // single row text
-           return calculateSingleRowOutline()
+           return center(calculateSingleRowOutline())
         }else{
            // multiple row text
-           return calculateMultipleRowOutline(context, __t)
+           return center(calculateMultipleRowOutline(context, __t))
         }
     }
 
@@ -73,23 +75,26 @@ class TextNode extends AbstractShapeGfxNode {
        GfxContext context = getRuntime()?.getContext()
        if(!context) return null
 
+       FontNode fontNode = nodes.reverse().find{ it instanceof FontNode }
+       fontNode?.apply(context)
+
        def g = context.g
        def frc = g.getFontRenderContext()
        def fm = g.fontMetrics
 
-       def layout = new TextLayout( text, g.font, frc )
+       def layout = new TextLayout(text, g.font, frc)
 
        def dx = 0
        def dy = 0
        def sb = fm.getStringBounds(text,g)
 
-       switch( getHalignValue() ){
+       switch(getHalignValue()){
           case LEFT: dx = x; break;
           case CENTER: dx = x - sb.width/2; break;
           case RIGHT: dx = x - sb.width; break;
        }
 
-       switch( getValignValue() ){
+       switch(getValignValue()){
           case BOTTOM: dy = y + fm.ascent*2 - fm.height; break;
           case MIDDLE: dy = y + fm.height - fm.ascent; break;
           case TOP: dy = y - fm.height + fm.ascent; break;
@@ -103,6 +108,9 @@ class TextNode extends AbstractShapeGfxNode {
        GfxContext context = getRuntime()?.getContext()
        if(!context) return null
 
+       FontNode fontNode = nodes.reverse().find{ it instanceof FontNode }
+       fontNode?.apply(context)
+
        def g = context.g
        def frc = g.getFontRenderContext()
        def fm = g.fontMetrics
@@ -111,7 +119,7 @@ class TextNode extends AbstractShapeGfxNode {
        def dy = fm.ascent*2 - fm.height
        outline = new Area(layout.getOutline(AffineTransform.getTranslateInstance( x, y + dy )))
 
-       if( textRows.size() > 1 ){
+       if(textRows.size() > 1){
           textRows[1..-1].inject(y+fm.ascent) { ny, txt ->
              layout = new TextLayout( txt, g.font, frc )
              def py = ny + spacing + dy
@@ -124,13 +132,13 @@ class TextNode extends AbstractShapeGfxNode {
        def dx = 0
        def sb = outline.bounds2D
 
-       switch( getHalignValue() ){
+       switch(getHalignValue()){
           case LEFT: dx = 0; break;
           case CENTER: dx = 0 - sb.width/2; break;
           case RIGHT: dx = 0 - sb.width; break;
        }
 
-       switch( getValignValue() ){
+       switch(getValignValue()){
           case BOTTOM: dy = 0; break;
           case BASELINE:
           case MIDDLE: dy = 0 - sb.height/2; break;
@@ -140,12 +148,20 @@ class TextNode extends AbstractShapeGfxNode {
        return AffineTransform.getTranslateInstance(dx,dy).createTransformedShape(outline)
     }
 
+    private Shape center(Shape input) {
+       if(Double.isNaN(cx) && Double.isNaN(cy)) return input
+       def bounds = input.bounds
+       def bcx = bounds.x + (bounds.width/2)
+       def bcy = bounds.y + (bounds.height/2)
+       return AffineTransform.getTranslateInstance(cx - bcx, cy - bcy).createTransformedShape(input)
+    }
+
     private def getHalignValue(){
-       if( !halign ) return LEFT
-       if( halign instanceof Number ){
+       if(!halign) return LEFT
+       if(halign instanceof Number){
           return halign.intValue()
        }
-       switch( halign ){
+       switch(halign){
           case "left": return LEFT
           case "center": return CENTER
           case "right": return RIGHT

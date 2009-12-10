@@ -47,6 +47,7 @@ class GfxCanvas extends JComponent implements PropertyChangeListener, MouseListe
      private List lastTargets = []
 
      boolean animate
+     boolean optimize = true
 
      GfxCanvas() {
          addMouseListener(this)
@@ -74,14 +75,14 @@ class GfxCanvas extends JComponent implements PropertyChangeListener, MouseListe
              }
              _node = node
              _node.addPropertyChangeListener(this)
-             if(visible) {
+             if(!optimize || visible) {
                  repaint()
              }
          }
      }
 
      public void paintComponent(Graphics g) {
-         if(!visible) return
+         if(optimize && !visible) return
          if(!_node) {
             super.paintComponent(g)
             return
@@ -128,7 +129,7 @@ class GfxCanvas extends JComponent implements PropertyChangeListener, MouseListe
      }
 
      public void propertyChange(PropertyChangeEvent event) {
-         if(event.source instanceof GfxNode && animate && visible) {
+         if(event.source instanceof GfxNode && animate && (!optimize || visible)) {
              repaint()
          }
      }
