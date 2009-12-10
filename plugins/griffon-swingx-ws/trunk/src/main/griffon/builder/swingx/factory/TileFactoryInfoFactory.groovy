@@ -29,6 +29,8 @@ class TileFactoryInfoFactory extends AbstractFactory {
     ]
     private static final DEFAULTS = [
         minimumZoomLevel: 1, 
+        maximumZoomLevel: 15, 
+        totalMapZoom: 17, 
         tileSize: 256, 
         xparam: 'x', 
         yparam: 'y', 

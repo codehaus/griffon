@@ -18,6 +18,7 @@ import groovy.swing.factory.ComponentFactory
 import org.jdesktop.swingx.JXMapKit
 import org.jdesktop.swingx.JXMapViewer
 
+import griffon.builder.swingx.WaypointUtils
 import griffon.builder.swingx.factory.JXMapKitFactory
 import griffon.builder.swingx.factory.JXMapViewerFactory
 import griffon.builder.swingx.factory.JXHtmlFormFactory
@@ -40,5 +41,9 @@ class SwingxWsGriffonAddon {
         waypoint: new WaypointFactory(),
         tileFactory: new TileFactoryFactory(),
         tileFactoryInfo: new TileFactoryInfoFactory()
+    ]
+
+    def methods = [
+        findWaypointPainter: { target -> WaypointUtils.findWaypointPainter(target, false) }
     ]
 }

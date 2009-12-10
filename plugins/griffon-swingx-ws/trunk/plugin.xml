@@ -1,6 +1,7 @@
 <plugin name='swingx-ws' version='0.1' jdk='1.5'>
-  <author>Your name</author>
-  <title>Plugin summary/headline</title>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Map visualizations with Swingx-ws</title>
   <documentation>http://griffon.codehaus.org/SwingxWs+Plugin</documentation>
   <dependencies />
 </plugin>
