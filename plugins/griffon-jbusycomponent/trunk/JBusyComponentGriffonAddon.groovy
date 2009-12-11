@@ -16,15 +16,23 @@
 
 import org.divxdede.swing.busy.*
 import groovy.swing.factory.BeanFactory
-import griffon.jbusycomponent.JBusyComponentFactory
+import griffon.jbusycomponent.factory.*
+import org.jdesktop.jxlayer.plaf.ext.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class JBusyComponentGriffonAddon {
    def factories = [
-      "busyComponent": new JBusyComponentFactory(),
-      "busyModel": new BeanFactory(DefaultBusyModel, true),
-      "futureBusyModel": new BeanFactory(FutureBusyModel, true)
+       busyComponent: new JBusyComponentFactory(),
+       busyModel: new BeanFactory(DefaultBusyModel, true),
+       futureBusyModel: new BeanFactory(FutureBusyModel, true),
+       jxlayer: new JXLayerFactory(),
+       buttonPanelUI: new BeanFactory(ButtonPanelUI, true),
+       debugRepaintingUI: new BeanFactory(DebugRepaintingUI, true),
+       mouseScrollableUI: new BeanFactory(MouseScrollableUI, true),
+       spotLightUI: new SpotLightUIFactory(),
+       lockableUI: new LockableUIFactory(),
+       bufferedImageOpEffect: new BufferedImageOpEffectFactory(),
    ]
 }

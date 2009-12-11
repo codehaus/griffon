@@ -1,4 +1,4 @@
-<plugin name='jbusycomponent' version='0.1' jdk='1.5'>
+<plugin name='jbusycomponent' version='0.2' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Enhance any swing components with a 'busy' state</title>

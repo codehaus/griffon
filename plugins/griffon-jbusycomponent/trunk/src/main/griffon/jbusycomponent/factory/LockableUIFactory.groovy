@@ -13,27 +13,30 @@
  * See the License for the specific language governing permissions and
  */
 
-package griffon.jbusycomponent
+package griffon.jbusycomponent.factory
 
-import groovy.swing.factory.ComponentFactory
-import org.divxdede.swing.busy.*
-import javax.swing.JComponent
+import groovy.swing.factory.BeanFactory
+import java.awt.Cursor
+import org.jdesktop.jxlayer.plaf.ext.LockableUI
+import org.jdesktop.jxlayer.plaf.effect.LayerEffect
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
-class JBusyComponentFactory extends ComponentFactory {
-   JBusyComponentFactory() {
-      super(JBusyComponent)
+class LockableUIFactory extends BeanFactory {
+   LockableUIFactory() {
+      super(LockableUI)
    }
 
    void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-      if(child instanceof JComponent) {
-         parent.view = child
-      } else if(child instanceof BusyModel) {
-         parent.busyModel = child
+      if(child instanceof Cursor) {
+         parent.lockedCursor = child
+      } else if(child instanceof LayerEffect) {
+         def effects = parent.lockedEffects.toList()
+         effects << child
+         parent.lockedEffects = (effects as LayerEffect[])
       } else {
-         throw new IllegalArgumentException("You cannot nest ${child?.getClass()?.name} inside JBusyComponent.")
+         throw new IllegalArgumentException("You cannot nest ${child?.getClass()?.name} inside LockableUI.")
       }
    }
 }
