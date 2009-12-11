@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1308">
+<plugins revision="1320">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -416,7 +416,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jabber/tags/RELEASE_0_1/griffon-jabber-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="jbusycomponent">
+    <plugin latest-release="0.2" name="jbusycomponent">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enhance any swing components with a 'busy' state</title>
             <author>Andres Almiray</author>
@@ -424,6 +424,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/JBusyComponent+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jbusycomponent/tags/RELEASE_0_1/griffon-jbusycomponent-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
+            <title>Enhance any swing components with a 'busy' state</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/JBusyComponent+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jbusycomponent/tags/RELEASE_0_2/griffon-jbusycomponent-0.2.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.2" name="jdepend">
