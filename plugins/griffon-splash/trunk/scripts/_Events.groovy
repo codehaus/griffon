@@ -27,9 +27,11 @@ eventCopyLibsEnd = { jardir ->
 }
 
 eventPluginInstalled = { fullPluginName ->
-	//Ant.echo( "XXXXXXXXXXXXXXX ${basedir}/griffon-app/resources")
-	//Ant.echo( "YYYYYYYYYYYYYYY ${getPluginDirForName('splash').file}/griffon-app/resources/")
-	Ant.copy(todir:"${basedir}/griffon-app/resources") {
-            fileset(dir:"${getPluginDirForName('splash').file}/griffon-app/resources/", includes:"**/*.*")
-    }
+	//println "Plugin: ${fullPluginName} Installed"
+	if (!fullPluginName.startsWith("splash")) {
+		println "Splash Install: Copying Resources"
+		ant.copy(todir:"${basedir}/griffon-app/resources") {
+			fileset(dir:"${getPluginDirForName('splash').file}/griffon-app/resources/", includes:"**/*.*")
+		}
+	}
 }
