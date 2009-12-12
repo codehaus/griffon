@@ -29,11 +29,11 @@ class GeoPositionFactory extends AbstractFactory {
 
     public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes)
             throws InstantiationException, IllegalAccessException {
+        if(!value && attributes.empty) return new GeoPosition(0d, 0d)
         if(FactoryBuilderSupport.checkValueIsTypeNotString(value, name, GeoPosition)) {
             return value
         }
 
-        if(attributes.empty) return new GeoPosition(0d, 0d)
         def args = []
         Map params = [:]
         params.putAll(attributes)

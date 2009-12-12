@@ -62,7 +62,7 @@ class WaypointUtils {
         waypointPainter 
     }
 
-    private WaypointPainter updatePainters(CompoundPainter painter, Closure closure) {
+    private static WaypointPainter updatePainters(CompoundPainter painter, Closure closure) {
         def newPainters = []
         newPainters.addAll(painter.painters.toList())
         def waypointPainter = closure(newPainters)
@@ -71,13 +71,13 @@ class WaypointUtils {
         return waypointPainter
     }
 
-    private void copyWaypoints(WaypointPainter src, WaypointPainter dest) {
+    static void copyWaypoints(WaypointPainter src, WaypointPainter dest) {
         Set<Waypoint> waypoints = new HashSet<Waypoint>()
         waypoints.addAll(src.waypoints)
         dest.waypoints = waypoints
     }
 
-    private void addWaypoint(WaypointPainter waypointPainter, Waypoint waypoint) {
+    static void addWaypoint(WaypointPainter waypointPainter, Waypoint waypoint) {
         Set<Waypoint> waypoints = new HashSet<Waypoint>()
         waypoints.addAll(waypointPainter.waypoints)
         waypoints << waypoint
