@@ -20,16 +20,5 @@ eventCopyLibsEnd = { jardir ->
                 griffonCopyDist(it.toString(), jardir)
             }
         }
-
-/*
-        if(!(packagingType in ['applet', 'webstart'])) {
-            ant.fileset(dir: "${getPluginDirForName('jmonkeyengine').file}/lib", includes: "*.jar").each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-            def jmonkeyengineLibDir = "${getPluginDirForName('jmonkeyengine').file}/lib".toString()
-            copyPlatformJars(jmonkeyengineLibDir, jardir)
-            copyNativeLibs(jmonkeyengineLibDir, jardir)
-        }
     }
-*/
 }

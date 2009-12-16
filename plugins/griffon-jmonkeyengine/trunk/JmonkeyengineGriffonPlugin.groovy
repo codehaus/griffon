@@ -1,7 +1,7 @@
 class JmonkeyengineGriffonPlugin {
     def version = 0.1
     def canBeGlobal = false
-    def dependsOn = [jogl: 0.1, lwjgl: 0.1]
+    def dependsOn = [lwjgl: 0.1]
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
