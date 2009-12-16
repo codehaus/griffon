@@ -54,7 +54,7 @@ class SimpleGameGriffonApplication extends SimpleGame implements IGriffonApplica
     }
 
     private SimpleGameDelegate resolveGameDelegate() {
-        String delegateClassName = config?.jme?.gameDelegate ?: 'griffon.jme.app.SimpleGameDelegate'
+        String delegateClassName = config?.jme?.simpleGameDelegate ?: 'griffon.jme.app.SimpleGameDelegate'
         try {
             Class delegateClass = getClass().classLoader.loadClass(delegateClassName)
             return delegateClass.getDeclaredConstructor([SimpleGameGriffonApplication] as Class[]).newInstance([this] as Object[])

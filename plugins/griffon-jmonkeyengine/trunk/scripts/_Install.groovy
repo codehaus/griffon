@@ -25,3 +25,22 @@ if (!addonIsSet1) {
 root.'JmonkeyengineGriffonAddon'.addon=true
 ''')
 }
+
+def simpleGameAppClass = "griffon.jme.app.SimpleGameGriffonApplication"
+def simpleGameDelegate = "MySimpleGameDelegate"
+def buildconf = configSlurper1.parse(new File("$basedir/griffon-app/conf/Config.groovy").toURL())
+if(!(simpleGameAppClass in buildconf.flatten().'griffon.application.mainClass')) {
+    println "Setting '$simpleGameAppClass' as main class"
+    new File("$basedir/griffon-app/conf/Config.groovy").append("""
+griffon.application.mainClass = "$simpleGameAppClass"
+""")
+}
+def appconf = configSlurper1.parse(new File("$basedir/griffon-app/conf/Application.groovy").toURL())
+if(!(simpleGameDelegate in appconf.flatten().'jme.simpleGameDelegate')) {
+    println "Setting '$simpleGameDelegate' as jme.simpleGameDelegate"
+    new File("$basedir/griffon-app/conf/Application.groovy").append("""
+jme.simpleGameDelegate = "$simpleGameDelegate"
+""")
+}
+
+ant.copy(file: "${getPluginDirForName('jmonkeyengine').file}/src/templates/MySimpleGameDelegate.groovy", todir: "${basedir}/src/main")
