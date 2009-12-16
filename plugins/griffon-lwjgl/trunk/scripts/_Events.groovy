@@ -1,4 +1,4 @@
-import org.codehaus.griffon.util.BuildeSettings
+import org.codehaus.griffon.util.BuildSettings
 
 packagingType = ''
 eventPackageStart = { type ->
@@ -35,15 +35,15 @@ eventCopyLibsEnd = { jardir ->
 
 doWithPlatform = { platformOs ->
     ant.fileset(dir: "${getPluginDirForName('lwjgl').file}/lib/webstart", includes: "*${platformOs}.jar").each {
-        griffonCopyDist(it.toString(), new File(jardir.toString(), 'webstart'))
+        griffonCopyDist(it.toString(), new File(jardir.toString(), 'webstart').absolutePath)
     }
-    if(!config?.extensions?.resources) config.extensions.resources = []
-    def rs = config.extensions.resources?.find{ it.os == PLATFORMS[platformOs].webstartName}
+    if(!config?.griffon?.extensions?.resources) config.griffon.extensions.resources = []
+    def rs = config.griffon.extensions.resources.find{ it.os == PLATFORMS[platformOs].webstartName}
     if(!rs) {
         def nativelibs = config.lwjgl.jnlp.resources.find{it.os == platformOs}.nativelibs
-        config.extensions.resources << [
-           os: PLATFORMS[platformOs].webstartName],
-           nativeLibs: nativeLibs
+        config.griffon.extensions.resources << [
+           os: PLATFORMS[platformOs].webstartName,
+           nativelibs: nativelibs
         ]
     } else {
        if(!rs.nativeLibs) rs.nativeLibs = [] 
