@@ -24,7 +24,9 @@ abstract class AbstractModelFactory extends AbstractFactory {
         return true
     }
 
+/*
     void setParent(FactoryBuilderSupport builder, Object parent, Object child) {
         parent.setModel(child)
     }
+*/
 }
