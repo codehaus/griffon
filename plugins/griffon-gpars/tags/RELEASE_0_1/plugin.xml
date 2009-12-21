@@ -1,0 +1,7 @@
+<plugin name='gpars' version='0.1' jdk='1.5'>
+  <author>Vaclav Pech</author>
+  <authorEmail>vaclav@vaclavpech.eu</authorEmail>
+  <title>GPars Plugin</title>
+  <documentation>http://griffon.codehaus.org/Gpars+Plugin</documentation>
+  <dependencies />
+</plugin>
