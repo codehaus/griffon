@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1375">
+<plugins revision="1383">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -343,7 +343,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gparallelizer/tags/RELEASE_0_3/griffon-gparallelizer-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="gpars"/>
+    <plugin latest-release="0.1" name="gpars">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>GPars Plugin</title>
+            <author>Vaclav Pech</author>
+            <authorEmail>vaclav@vaclavpech.eu</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Gpars+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-gpars/tags/RELEASE_0_1/griffon-gpars-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.1" name="gsql">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gsql powered DataSource</title>
