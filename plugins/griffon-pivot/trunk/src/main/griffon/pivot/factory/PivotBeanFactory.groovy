@@ -46,7 +46,7 @@ class PivotBeanFactory extends BeanFactory {
     boolean onHandleNodeAttributes(FactoryBuilderSupport builder, Object node, Map attributes) {
         if(!(node instanceof Component)) return true
         attributes.each { property, value ->
-            if(!PivotUtils.applyAsEventListener(property, value, node)) {
+            if(!PivotUtils.applyAsEventListener(builder, property, value, node)) {
                 PivotUtils.setBeanProperty(property, value, node)
             }
         }

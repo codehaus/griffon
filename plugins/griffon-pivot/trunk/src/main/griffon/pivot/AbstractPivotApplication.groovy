@@ -17,17 +17,13 @@
 package griffon.pivot
 
 import griffon.core.BaseGriffonApplication
-// import griffon.application.StandaloneGriffonApplication
 import griffon.util.GriffonApplicationHelper
-import griffon.util.GriffonExceptionHandler
 import griffon.util.UIThreadHelper
 
 import org.apache.pivot.collections.Map as PivotMap
 import org.apache.pivot.wtk.Application
 import org.apache.pivot.wtk.ApplicationContext
-import org.apache.pivot.wtk.DesktopApplicationContext
 import org.apache.pivot.wtk.Display
-import org.apache.pivot.wtk.Window
 import org.apache.pivot.wtk.Alert
 import org.apache.pivot.wtk.Component
 import org.apache.pivot.wtk.DialogCloseListener
@@ -42,13 +38,11 @@ import griffon.util.EventRouter
 /**
  * @author Andres.Almiray
  */
-class PivotApplication implements /*StandaloneGriffonApplication,*/ Application, GriffonApplication {
+abstract class AbstractPivotApplication implements Application, GriffonApplication {
 //    @Delegate private final BaseGriffonApplication _base
-    private Display display
+    protected Display display
 
-    List windows = []
-
-    PivotApplication() {
+    AbstractPivotApplication() {
         UIThreadHelper.instance.setUIThreadHandler(new PivotUIThreadHandler())
 //        _base = new BaseGriffonApplication(this)
     }
@@ -133,23 +127,18 @@ class PivotApplication implements /*StandaloneGriffonApplication,*/ Application,
 
     // ------------------------------------------
 
-    private void bootstrap() {
+    protected void bootstrap() {
         applicationProperties = new Properties()
         applicationProperties.load(getClass().getResourceAsStream('/application.properties'))
         GriffonApplicationHelper.prepare(this)
         event("BootstrapEnd",[this])
     }
 
-    private void realize() {
+    protected void realize() {
         GriffonApplicationHelper.startup(this)
     }
 
-    private void show() {
-        if(windows.size() > 0) {
-            UIThreadHelper.instance.executeSync {
-                windows[0].open(display)
-            }
-        }
+    protected void show() {
         ready()
     }
 
@@ -162,23 +151,6 @@ class PivotApplication implements /*StandaloneGriffonApplication,*/ Application,
     public void shutdown() {
 //        _base.shutdown()
         doShutdown()
-        windows.each {
-            window -> window.close()
-        }
-    }
-
-    public Object createApplicationContainer() {
-        def appContainer = null
-        UIThreadHelper.instance.executeSync {
-            appContainer = new Window()
-            windows << appContainer
-        }
-        return appContainer
-    }
-
-    public static void main(String[] args) {
-        GriffonExceptionHandler.registerExceptionHandler()
-        DesktopApplicationContext.main(PivotApplication, args)
     }
 
     // ==============================================================

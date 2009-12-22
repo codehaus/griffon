@@ -23,8 +23,10 @@ import org.apache.pivot.collections.Map as PivotMap
 import org.apache.pivot.collections.Dictionary 
 import org.apache.pivot.collections.Sequence
 import org.apache.pivot.util.ListenerList
+
 import griffon.app.AbstractSyntheticMetaMethods
 import griffon.pivot.impl.FixedIterator
+import griffon.pivot.adapters.*
 
 /**
  * @author Andres Almiray
@@ -73,18 +75,26 @@ final class PivotUtils {
         }
     }
 
-    static boolean applyAsEventListener(String propertyName, value, bean) {
+    static boolean applyAsEventListener(FactoryBuilderSupport builder, String propertyName, value, bean) {
         List<Class> listenerTypes = EVENT_TO_LISTENER_MAP[propertyName]
         if(!listenerTypes || !(value instanceof Closure)) return false
         for(type in listenerTypes) {
             String getListenersMethod = "get" + type.simpleName + "s"
             if(!bean.metaClass.respondsTo(bean, getListenersMethod)) continue
-            bean."$getListenersMethod"().add([
-               (propertyName): value
-            ].asType(type))
+            bean."$getListenersMethod"().add(makeAdapter(builder, type, propertyName, value))
             return true
         }
         return false
+    }
+
+    private static final Class[] PARAMS = [FactoryBuilderSupport] as Class[]
+
+    private static makeAdapter(FactoryBuilderSupport builder, Class type, String propertyName, Closure callback) {
+        String adapterClassName = (type.memberClass? type.enclosingClass.simpleName + type.simpleName : type.SimpleName) + 'Adapter'
+        Class adapterClass = getClass().classLoader.loadClass(adapterClassName)
+        def adapter = adapterClass.getDeclaredConstructor(PARAMS).newInstance([builder] as Object[])
+        adapter."on${propertyName[0].toUpperCase()}${propertyName[1..-1]}"(callback)
+        return adapter
     }
 
     private static final Map EVENT_TO_LISTENER_MAP = [
@@ -94,7 +104,7 @@ final class PivotUtils {
         actionMappingsRemoved: [WindowActionMappingListener],
         actionRemoved: [ActionClassListener],
         actionUpdated: [ActionClassListener],
-        activeChanged: [WindowListener, ActivityIndicatorListener], // Menu$ItemListener MenuBar$ItemListener
+        activeChanged: [WindowListener, ActivityIndicatorListener, Menu.ItemListener, MenuBar.ItemListener],
         activeItemChanged: [MenuListener, MenuBarListener],
         activeWindowChanged: [WindowClassListener],
         asynchronousChanged: [ImageViewListener],
@@ -110,7 +120,7 @@ final class PivotUtils {
         cellInserted: [TablePaneListener, GridPaneListener],
         cellUpdated: [TablePaneListener, GridPaneListener],
         cellsRemoved: [TablePaneListener, GridPaneListener],
-        // changesSaved: [TreeView$NodeEditorListener, TableView$RowEditorListener, ListView$ItemEditorListener],
+        changesSaved: [TreeView.NodeEditorListener, TableView.RowEditorListener, ListView.ItemEditorListener],
         charactersInserted: [TextAreaCharacterListener, TextInputCharacterListener],
         charactersRemoved: [TextAreaCharacterListener, TextInputCharacterListener],
         checkmarksEnabledChanged: [TreeViewListener, ListViewListener],
@@ -152,10 +162,10 @@ final class PivotUtils {
         documentChanged: [TextAreaListener],
         dragSourceChanged: [ComponentListener],
         dropTargetChanged: [ComponentListener],
-        // editCancelled: [TreeView$NodeEditorListener, TableView$RowEditorListener, ListView$ItemEditorListener],
-        // editItemVetoed: [ListView$ItemEditorListener],
-        // editNodeVetoed: [TreeView$NodeEditorListener],
-        // editRowVetoed: [TableView$RowEditorListener],
+        editCancelled: [TreeView.NodeEditorListener, TableView.RowEditorListener, ListView.ItemEditorListener],
+        editItemVetoed: [ListView.ItemEditorListener],
+        editNodeVetoed: [TreeView.NodeEditorListener],
+        editRowVetoed: [TableView.RowEditorListener],
         editableChanged: [TextAreaListener],
         enabledChanged: [ComponentStateListener, ActionListener],
         expandedChangeVetoed: [RollupStateListener, ExpanderListener],
@@ -173,14 +183,14 @@ final class PivotUtils {
         imageChanged: [ImageViewListener],
         imageKeyChanged: [ImageViewListener],
         itemCheckedChanged: [ListViewItemStateListener],
-        // itemEditing: [ListView$ItemEditorListener],
+        itemEditing: [ListView.ItemEditorListener],
         itemEditorChanged: [ListViewListener],
-        itemInserted: [ListViewItemListener, SpinnerItemListener, MenuBarListener], // Menu$SectionListener
+        itemInserted: [ListViewItemListener, SpinnerItemListener, MenuBarListener, Menu.SectionListener],
         itemRendererChanged: [ListButtonListener, SpinnerListener, ListViewListener],
         itemSelected: [MenuItemSelectionListener],
         itemUpdated: [ListViewItemListener, SpinnerItemListener],
         itemsCleared: [ListViewItemListener, SpinnerItemListener],
-        itemsRemoved: [ListViewItemListener, SpinnerItemListener, MenuBarListener], // Menu$SectionListener
+        itemsRemoved: [ListViewItemListener, SpinnerItemListener, MenuBarListener, Menu.SectionListener],
         itemsSorted: [ListViewItemListener, SpinnerItemListener],
         keyPressed: [ComponentKeyListener],
         keyReleased: [ComponentKeyListener],
@@ -194,7 +204,7 @@ final class PivotUtils {
         maximizedChanged: [WindowListener],
         maximumLengthChanged: [TextInputListener],
         menuBarChanged: [FrameListener],
-        menuChanged: [MenuButtonListener, /*MenuBar$ItemListener, Menu$ItemListener,*/ MenuPopupListener],
+        menuChanged: [MenuButtonListener, MenuBar.ItemListener, Menu.ItemListener, MenuPopupListener],
         menuHandlerChanged: [ComponentListener],
         menuPopupCloseVetoed: [MenuPopupStateListener],
         menuPopupClosed: [MenuPopupStateListener],
@@ -208,9 +218,9 @@ final class PivotUtils {
         mouseWheel: [ContainerMouseListener, ComponentMouseWheelListener],
         movieChanged: [MovieViewListener],
         multiSelectChanged: [FileBrowserListener],
-        // nameChanged: [Menu$ItemListener, Menu$SectionListener],
+        nameChanged: [Menu.ItemListener, Menu.SectionListener],
         nodeCheckStateChanged: [TreeViewNodeStateListener],
-        // nodeEditing: [TreeView$NodeEditorListener],
+        nodeEditing: [TreeView.NodeEditorListener],
         nodeEditorChanged: [TreeViewListener],
         nodeInserted: [TreeViewNodeListener],
         nodeRendererChanged: [TreeViewListener],
@@ -228,12 +238,12 @@ final class PivotUtils {
         preferredSizeChanged: [ComponentListener],
         preferredWidthLimitsChanged: [ComponentListener],
         previewDialogClose: [DialogStateListener],
-        // previewEditItem: [ListView$ItemEditorListener],
-        // previewEditNode: [TreeView$NodeEditorListener],
-        // previewEditRow: [TableView$RowEditorListener],
+        previewEditItem: [ListView.ItemEditorListener],
+        previewEditNode: [TreeView.NodeEditorListener],
+        previewEditRow: [TableView.RowEditorListener],
         previewExpandedChange: [RollupStateListener, ExpanderListener],
         previewMenuPopupClose: [MenuPopupStateListener],
-        // previewSaveChanges: [TreeView$NodeEditorListener, TableView$RowEditorListener, ListView$ItemEditorListener],
+        previewSaveChanges: [TreeView.NodeEditorListener, TableView.RowEditorListener, ListView.ItemEditorListener],
         previewSelectedIndexChange: [CardPaneListener, AccordionSelectionListener, TabPaneSelectionListener],
         previewSheetClose: [SheetStateListener],
         previewWindowClose: [WindowStateListener],
@@ -244,7 +254,7 @@ final class PivotUtils {
         repeatableChanged: [MenuButtonListener],
         resizeModeChanged: [SplitPaneListener],
         rootDirectoryChanged: [FileBrowserSheetListener, FileBrowserListener],
-        // rowEditing: [TableView$RowEditorListener],
+        rowEditing: [TableView.RowEditorListener],
         rowEditorChanged: [TableViewListener],
         rowHeaderChanged: [ScrollPaneListener],
         rowHeightChanged: [TablePaneListener],
@@ -255,7 +265,7 @@ final class PivotUtils {
         rowsCleared: [TableViewRowListener],
         rowsRemoved: [TablePaneListener, TableViewRowListener, GridPaneListener],
         rowsSorted: [TableViewRowListener],
-        // saveChangesVetoed: [TreeView$NodeEditorListener, TableView$RowEditorListener, ListView$ItemEditorListener],
+        saveChangesVetoed: [TreeView.NodeEditorListener, TableView.RowEditorListener, ListView.ItemEditorListener],
         scopeChanged: [ScrollBarListener],
         scrollLeftChanged: [ViewportListener],
         scrollTopChanged: [ViewportListener],

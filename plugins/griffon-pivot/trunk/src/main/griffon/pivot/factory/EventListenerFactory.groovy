@@ -25,10 +25,10 @@ class EventListenerFactory extends AbstractFactory {
     final parents = []
     final String getListenersMethod
  
-    EventListenerFactory(Class adapterClass, Class[] parents, String listeners) {
+    EventListenerFactory(Class adapterClass, Class[] parents, String listenersMethod) {
         this.adapterClass = adapterClass
-        this.parents.addAll(parents)
-        this.getListenerMethod = 'get' + listeners[0].toUpperCase() + listeners[1..-1] + 's'
+        this.parents.addAll(parents*.name)
+        this.getListenersMethod = listenersMethod
     }
  
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes)
@@ -48,7 +48,7 @@ class EventListenerFactory extends AbstractFactory {
     }
 
     void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-        if(parent?.getClass() in parents) {
+        if(parents.contains(parent?.getClass()?.name)) {
             parent."$getListenersMethod"().add(node)
         }       
     }
