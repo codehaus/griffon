@@ -42,9 +42,9 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerFactory('buttonGroup', new ButtonGroupFactory())
         addAttributeDelegate(ButtonGroupFactory.&buttonGroupAttributeDelegate)
 
-        registerFactory('dimensions', new PairFactory(Dimensions))
-        registerFactory('point', new PairFactory(point))
-        registerFactory('span', new PairFactory(span))
+        registerFactory('dimensions', new PairFactory(Dimensions, 'width', 'height'))
+        registerFactory('point', new PairFactory(Point, 'x', 'y'))
+        registerFactory('span', new PairFactory(Span, 'start', 'end'))
     }
 
     def registerPivotPassThruNodes() {
