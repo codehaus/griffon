@@ -91,6 +91,15 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerFactory('button', button)
         registerFactory('pushButton', button)
         registerFactory('radioButton', new ButtonFactory(RadioButton))
+
+        registerFactory('buttonDataRenderer', new ButtonDataRendererFactory(ButtonDataRenderer))
+        registerFactory('calendarButtonDataRenderer', new ButtonDataRendererFactory(CalendarButtonDataRenderer))
+        registerFactory('linkButtonDataRenderer', new ButtonDataRendererFactory(LinkButtonDataRenderer))
+        registerFactory('listButtonColorItemRenderer', new ButtonDataRendererFactory(ListButtonColorItemRenderer))
+        registerFactory('listButtonDataRenderer', new ButtonDataRendererFactory(ListButtonDataRenderer))
+        registerFactory('menuButtonDataRenderer', new ButtonDataRendererFactory(MenuButtonDataRenderer))
+        registerFactory('buttonDataRenderer', new ButtonDataRendererFactory(ButtonDataRenderer))
+        registerFactory('buttonDataRenderer', new ButtonDataRendererFactory(ButtonDataRenderer))
     }
 
     void registerPivotMenus() {
@@ -99,13 +108,15 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerFactory('menuBar', new MenuBarFactory())
         registerFactory('menuBarItem', new MenuBarItemFactory())
         registerPivotComponentFactory('menuPopup', MenuPopup, false)
+        registerFactory('menuBarItemDataRenderer', new ButtonDataRendererFactory(MenuBarItemDataRenderer))
+        registerFactory('menuItemDataRenderer', new ButtonDataRendererFactory(MenuItemDataRenderer))
     }
 
     void registerPivotPanes() {
         def hbox = new BoxPaneFactory(Orientation.HORIZONTAL)
-        registerContainerFactory('boxPane', hbox)
-        registerContainerFactory('hbox', hbox)
-        registerContainerFactory('vbox', new BoxPaneFactory(Orientation.VERTICAL))
+        registerFactory('boxPane', hbox)
+        registerFactory('hbox', hbox)
+        registerFactory('vbox', new BoxPaneFactory(Orientation.VERTICAL))
         registerPivotContainerFactory('boxPane', BoxPane)
         registerPivotContainerFactory('cardPane', CardPane)
         registerPivotContainerFactory('flowPane', FlowPane)

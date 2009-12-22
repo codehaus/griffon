@@ -17,12 +17,50 @@
 package griffon.pivot
 
 import org.apache.pivot.wtk.*
+import org.apache.pivot.collections.List as PivotList
+import org.apache.pivot.collections.Set as PivotSet
+import org.apache.pivot.collections.Map as PivotMap
+import org.apache.pivot.collections.Dictionary 
+import org.apache.pivot.collections.Sequence
+import org.apache.pivot.util.ListenerList
+import griffon.app.AbstractSyntheticMetaMethods
+import griffon.pivot.impl.FixedIterator
 
 /**
  * @author Andres Almiray
  */
 final class PivotUtils {
     private PivotUtils() {}
+
+    static enhanceClasses() {
+        AbstractSyntheticMetaMethods.enhance(Sequence, [
+            iterator: { -> new FixedIterator(delegate, true) },
+            size: { -> delegate.getLength() },
+            getAt: { i -> delegate.get(i) },
+            putAt: { i, e -> delegate.update(i,e) }
+        ])
+        AbstractSyntheticMetaMethods.enhance(ListenerList, [
+            leftShift: { e -> delegate.add(e) }
+        ])
+        AbstractSyntheticMetaMethods.enhance(PivotList, [
+            leftShift: { e -> delegate.add(e) }
+        ])
+        AbstractSyntheticMetaMethods.enhance(PivotSet, [
+            leftShift: { e -> delegate.add(e) },
+            size: { -> delegate.getCount() }
+        ])
+        AbstractSyntheticMetaMethods.enhance(Dictionary, [
+            putAt: { k, v -> delegate.put(k, v) },
+            getAt: { k -> delegate.get(k) }
+        ])
+        AbstractSyntheticMetaMethods.enhance(PivotMap, [
+            size: { -> delegate.getCount() }
+        ])
+        AbstractSyntheticMetaMethods.enhance(Span, [
+            asRange: { -> new IntRange(delegate.start, delegate.end) },
+            size: { -> delegate.getLength() }
+        ])
+    }
 
     static void setBeanProperty(String propertyName, value, bean) {
         try {

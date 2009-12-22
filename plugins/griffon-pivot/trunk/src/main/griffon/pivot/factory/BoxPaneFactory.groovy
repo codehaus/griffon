@@ -22,7 +22,7 @@ import org.apache.pivot.wtk.Orientation
 /**
  * @author Andres Almiray
  */
-class BoxPaneFactory extends PivotBeanFactory {
+class BoxPaneFactory extends ContainerFactory {
     private final Orientation orientation
 
     BoxPaneFactory(Orientation orientation = Orientation.HORIZONTAL) {
@@ -32,7 +32,7 @@ class BoxPaneFactory extends PivotBeanFactory {
 
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
         Object bean = super.newInstance(builder, name, value, attributes)
-        if(!attributes.containesKey('orientation')) bean.orientation = orientation
+        if(!attributes.containsKey('orientation')) bean.orientation = orientation
         return bean
     }
 }

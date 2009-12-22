@@ -14,25 +14,19 @@
  * limitations under the License.
  */
 
-import griffon.pivot.ApplicationFactory
-import griffon.pivot.PivotUtils
-import griffon.util.UIThreadHelper
+package griffon.pivot.factory
+
+import org.apache.pivot.wtk.Button
 
 /**
  * @author Andres Almiray
  */
-class PivotGriffonAddon {
-    PivotGriffonAddon() {
-        PivotUtils.enhanceClasses()
+class ButtonDataRendererFactory extends PivotBeanFactory {
+    ButtonDataRendererFactory(Class rendererClass) {
+        super(rendererClass, false)
     }
 
-    def factories = [
-        application: new ApplicationFactory()
-    ]
-
-    def methods = [
-        execAsync: UIThreadHelper.instance.&executeAsync,
-        execSync: UIThreadHelper.instance.&executeSync,
-        execOutside: UIThreadHelper.instance.&executeOutside
-    ]
+    void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
+        if(parent instanceof Button) parent.dataRenderer = node
+    }
 }

@@ -27,6 +27,6 @@ class FileBrowserSheetFactory extends PivotBeanFactory {
     }
 
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
-        new FileBrowserSheet(attributes.remove('mode') :? FileBrowserSheet.Mode.OPEN)
+        new FileBrowserSheet(attributes.remove('mode') ?: FileBrowserSheet.Mode.OPEN)
     }
 }

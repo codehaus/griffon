@@ -16,7 +16,7 @@
 
 package griffon.pivot.factory
 
-import org.apache.pivot.wtkx.XMLSerializer
+import org.apache.pivot.wtkx.WTKXSerializer
 import java.lang.reflect.Field
 
 /**

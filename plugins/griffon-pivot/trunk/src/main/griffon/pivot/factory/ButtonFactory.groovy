@@ -16,8 +16,6 @@
 
 package griffon.pivot.factory
 
-import org.apache.pivot.wtk.*
-
 /**
  * @author Andres Almiray
  */
@@ -36,16 +34,10 @@ class ButtonFactory extends PivotBeanFactory {
             return value
         }
         Object bean = beanClass.newInstance()
-        if (value instanceof String) {
-            try {
-                bean.buttonData = value
-            } catch (MissingPropertyException mpe) {
-                throw new RuntimeException("In $name value argument of type String cannot be applied to property buttonData:");
-            }
-        }
+        if(value instanceof String) bean.buttonData = value
 
         if(attributes.containsKey('actionId')) {
-            bean.setAction((String) attributes.remove('actionId').toString())
+            bean.setAction(attributes.remove('actionId').toString())
         }
 
         return bean

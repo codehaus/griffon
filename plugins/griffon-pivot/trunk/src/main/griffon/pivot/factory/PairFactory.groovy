@@ -45,6 +45,6 @@ class PairFactory extends AbstractFactory {
         int value1 = (attributes.remove(prop1) ?: 0) as int
         int value2 = (attributes.remove(prop2) ?: 0) as int
 
-        beanClass.getDeclaredConstructor(PARAMS).newInstance([value1, value2] as Object[]))
+        beanClass.getDeclaredConstructor(PARAMS).newInstance([value1, value2] as Object[])
     }
 }

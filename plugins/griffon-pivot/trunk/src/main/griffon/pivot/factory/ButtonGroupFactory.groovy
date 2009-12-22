@@ -17,6 +17,7 @@
 package griffon.pivot.factory
 
 import org.apache.pivot.wtk.Button
+import org.apache.pivot.wtk.RadioButton
 import org.apache.pivot.wtk.ButtonGroup
 
 /**
@@ -43,6 +44,7 @@ class ButtonGroupFactory extends BeanFactory {
         if (attributes.containsKey(buttonGroupAttr)) {
             def o = attributes.get(buttonGroupAttr)
             if ((o instanceof ButtonGroup) && (node instanceof Button)) {
+                if(!(node instanceof RadioButton)) node.toggleButton = true
                 node.buttonGroup = o
                 attributes.remove(buttonGroupAttr)
             }

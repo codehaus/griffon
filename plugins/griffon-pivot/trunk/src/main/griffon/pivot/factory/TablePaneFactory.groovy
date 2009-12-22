@@ -17,6 +17,7 @@
 package griffon.pivot.factory
 
 import org.apache.pivot.wtk.Component
+import org.apache.pivot.wtk.TablePane
 
 /**
  * @author Andres Almiray
@@ -94,7 +95,7 @@ class TablePaneColumnFactory extends PivotBeanFactory {
  * @author Andres Almiray
  */
 class TablePaneRowFactory extends PivotBeanFactory {
-    TablePaneRowactory() {
+    TablePaneRowFactory() {
         super(TablePane.Row)
     }
 
