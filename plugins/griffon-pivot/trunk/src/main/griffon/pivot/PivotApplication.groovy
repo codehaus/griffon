@@ -24,6 +24,7 @@ import griffon.util.UIThreadHelper
 
 import org.apache.pivot.collections.Map as PivotMap
 import org.apache.pivot.wtk.Application
+import org.apache.pivot.wtk.ApplicationContext
 import org.apache.pivot.wtk.DesktopApplicationContext
 import org.apache.pivot.wtk.Display
 import org.apache.pivot.wtk.Window
@@ -33,6 +34,7 @@ import org.apache.pivot.wtk.DialogCloseListener
 import org.apache.pivot.wtk.MessageType
 import org.apache.pivot.wtk.Prompt
 import org.apache.pivot.wtk.SheetCloseListener
+import org.apache.pivot.wtk.BoxPane
 
 import griffon.core.GriffonApplication
 import griffon.util.EventRouter
@@ -85,7 +87,9 @@ class PivotApplication implements /*StandaloneGriffonApplication,*/ Application,
         if(params.body && !(params.body instanceof Component)) {
             throw new IllegalArgumentException("In alert() you must define a value body: of type ${Component.class.name}")
         }
-        realArgs << params.body
+        BoxPane realBody = new BoxPane()
+        realBody.add(params.body)
+        realArgs << realBody
         realArgs << (params.display ? params.display : params.owner)
         realArgs << params.listener instanceof DialogCloseListener ? params.listener : (params.listener as DialogCloseListener)
         Alert.alert(*realArgs) 
@@ -101,10 +105,30 @@ class PivotApplication implements /*StandaloneGriffonApplication,*/ Application,
         if(params.body && !(params.body instanceof Component)) {
             throw new IllegalArgumentException("In prompt() you must define a value body: of type ${Component.class.name}")
         }
-        realArgs << params.body
+        BoxPane realBody = new BoxPane()
+        realBody.add(params.body)
+        realArgs << realBody
         realArgs << (params.display ? params.display : params.owner)
         realArgs << params.listener instanceof SheetCloseListener ? params.listener : (params.listener as SheetCloseListener)
         Prompt.prompt(*realArgs) 
+    }
+
+    // ------------------------------------------
+
+    void schedule(long delay, Closure callback) {
+        ApplicationContext.scheduleCallback(callback, delay)
+    }
+
+    void scheduleRecurring(long period, Closure callback) {
+        ApplicationContext.scheduleRecurringCallback(callback, period)
+    }
+
+    void scheduleRecurring(long delay, long period, Closure callback) {
+        ApplicationContext.scheduleRecurringCallback(callback, delay, period)
+    }
+
+    void queue(boolean wait = false, Closure callback) {
+        ApplicationContext.queueCallback(callback, wait)
     }
 
     // ------------------------------------------

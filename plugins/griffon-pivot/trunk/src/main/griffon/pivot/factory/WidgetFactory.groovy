@@ -1,11 +1,11 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2003-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,27 +20,33 @@ import griffon.pivot.PivotUtils
 import org.apache.pivot.wtk.Component
 
 /**
+ * Copied from SwingBuilder to avoid dependency on Swing module.
+ *
+ * @author Danno Ferrin
  * @author Andres Almiray
  */
-class PivotBeanFactory extends BeanFactory {
-    PivotBeanFactory(Class beanClass) {
-        super(beanClass, false)
+class WidgetFactory extends AbstractFactory {
+    final Class restrictedType
+    protected final boolean leaf
+
+    public WidgetFactory(Class restrictedType, boolean leaf) {
+        this.restrictedType = restrictedType
+        this.leaf = leaf
     }
 
-    PivotBeanFactory(Class beanClass, boolean leaf) {
-        super(beanClass, leaf)
+    boolean isLeaf() {
+        return leaf
     }
 
-    Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
-        Object bean = super.newInstance(builder, name, value, attributes)
-        if (value instanceof String) {
-            try {
-                bean.text = value
-            } catch (MissingPropertyException mpe) {
-                throw new RuntimeException("In $name value argument of type String cannot be applied to property text:");
-            }
+    public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
+        if(value == null) {
+            value = attributes.remove(name)
         }
-        return bean
+        if((value != null) && FactoryBuilderSupport.checkValueIsType(value, name, restrictedType)) {
+            return value
+        } else {
+            throw new RuntimeException("$name must have either a value argument or an attribute named $name that must be of type $restrictedType.name")
+        }
     }
 
     boolean onHandleNodeAttributes(FactoryBuilderSupport builder, Object node, Map attributes) {
@@ -50,7 +56,7 @@ class PivotBeanFactory extends BeanFactory {
                 PivotUtils.setBeanProperty(property, value, node)
             }
         }
-       
+
         return false
     }
 }

@@ -33,25 +33,44 @@ class PivotBuilder extends FactoryBuilderSupport {
         this[DELEGATE_PROPERTY_OBJECT_ID] = DEFAULT_DELEGATE_PROPERTY_OBJECT_ID
     }
  
-    public void registerPivotSupportNodes() {
+    void registerPivotSupportNodes() {
         registerPivotBeanFactory('action', DefaultAction)
         registerFactory('actions', new JavaCollectionFactory())
         registerFactory('noparent', new JavaCollectionFactory())
+        registerFactory('wtkx', new WTKXFactory())
         addAttributeDelegate(PivotBuilder.&objectIDAttributeDelegate)
         registerFactory('buttonGroup', new ButtonGroupFactory())
         addAttributeDelegate(ButtonGroupFactory.&buttonGroupAttributeDelegate)
+
+        registerFactory('dimensions', new PairFactory(Dimensions))
+        registerFactory('point', new PairFactory(point))
+        registerFactory('span', new PairFactory(span))
+    }
+
+    def registerPivotPassThruNodes() {
+        registerFactory("widget", new WidgetFactory(Component, true))
+        registerFactory("container", new WidgetFactory(Component, false))
+        registerFactory("bean", new WidgetFactory(Object, true))
     }
  
-    public void registerPivotWidgets() {
+    void registerPivotWidgets() {
         registerPivotComponentFactory('activityIndicator', ActivityIndicator)
+        registerPivotComponentFactory('fileBrowser', FileBrowser)
         registerPivotComponentFactory('label', Label)
         registerPivotComponentFactory('meter', Meter)
         registerPivotComponentFactory('separator', Separator)
         registerPivotComponentFactory('textArea', TextArea)
         registerPivotComponentFactory('textInput', TextInput)
+
+        registerFactory('slider', new SliderFactory())
+        registerPivotComponentFactory('spinner', Spinner, false)
+        registerFactory('numericSpinnerData', new NumericSpinnerDataFactory())
+        registerFactory('calendarDateSpinnerData', new CalendarDateSpinnerDataFactory())
+        registerPivotComponentFactory('scrollBar', ScrollBar)
+        registerFactory('scrollBarScope', new ScrollBarScopeFactory())
     }
 
-    public void registerPivotViews() {
+    void registerPivotViews() {
         registerPivotComponentFactory('listView', ListView)
         registerPivotComponentFactory('imageView', ImageView)
         // registerPivotComponentFactory('movieView', MovieView)
@@ -60,7 +79,7 @@ class PivotBuilder extends FactoryBuilderSupport {
         // registerPivotComponentFactory('treeView', TreeView)
     }
 
-    public void registerPivotButtons() {
+    void registerPivotButtons() {
         registerFactory('buttonData', new ButtonDataFactory())
         registerFactory('calendarButton', new ButtonFactory(CalendarButton))
         registerFactory('checkbox', new ButtonFactory(Checkbox))
@@ -68,54 +87,62 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerFactory('linkButton', new ButtonFactory(LinkButton))
         registerFactory('listButton', new ButtonFactory(ListButton))
         registerFactory('menuButton', new ButtonFactory(MenuButton))
-        registerFactory('pushButton', new ButtonFactory(PushButton))
+        def button = new ButtonFactory(PushButton)
+        registerFactory('button', button)
+        registerFactory('pushButton', button)
         registerFactory('radioButton', new ButtonFactory(RadioButton))
     }
 
-    public void registerPivotMenus() {
-        // registerFactory('menu', new MenuFactory())
-        // registerFactory('menuItem', new MenuItemFactory())
-        // registerFactory('menuBar', new MenuBarFactory())
-        registerPivotContainerFactory('menuPopup', MenuPopup)
+    void registerPivotMenus() {
+        registerFactory('menu', new MenuFactory())
+        registerFactory('menuItem', new MenuItemFactory())
+        registerFactory('menuBar', new MenuBarFactory())
+        registerFactory('menuBarItem', new MenuBarItemFactory())
+        registerPivotComponentFactory('menuPopup', MenuPopup, false)
     }
 
-    public void registerPivotPanes() {
+    void registerPivotPanes() {
+        def hbox = new BoxPaneFactory(Orientation.HORIZONTAL)
+        registerContainerFactory('boxPane', hbox)
+        registerContainerFactory('hbox', hbox)
+        registerContainerFactory('vbox', new BoxPaneFactory(Orientation.VERTICAL))
         registerPivotContainerFactory('boxPane', BoxPane)
         registerPivotContainerFactory('cardPane', CardPane)
         registerPivotContainerFactory('flowPane', FlowPane)
-        // registerPivotContainerFactory('gridPane', GridPane)
+        registerFactory('gridPane', new GridPaneFactory())
+        registerFactory('gridRow', new GridPaneRowFactory())
+        registerPivotContainerFactory('gridFiller', GridPane.Filler)
         registerFactory('scrollPane', new ScrollPaneFactory())
         registerFactory('splitPane', new SplitPaneFactory())
         registerPivotContainerFactory('stackPane', StackPane)
         registerFactory('tabPane', new TabPaneFactory())
-        registerPivotContainerFactory('tablePane', TablePane)
+        registerFactory('tablePane', new TablePaneFactory())
+        registerFactory('tablePaneColumn', new TablePaneColumnFactory())
+        registerFactory('tablePaneRow', new TablePaneRowFactory())
+        registerPivotContainerFactory('tablePaneFiller', TablePane.Filler)
     }
 
-    public void registerPivotContainers() {
-        // registerPivotContainerFactory('accordion', Accordion)
+    void registerPivotContainers() {
+        registerFactory('accordion', new AccordionFactory())
         registerPivotContainerFactory('border', Border, true)
         registerPivotContainerFactory('calendar', Calendar)
         registerPivotContainerFactory('colorChooser', ColorChooser)
         registerPivotContainerFactory('expander', Expander, true)
-        registerPivotContainerFactory('fileBrowser', FileBrowser)
-        // registerPivotContainerFactory('fileBrowserSheet', FileBrowserSheet)
         // registerPivotContainerFactory('form', Form)
-        registerPivotContainerFactory('palette', Palette)
         registerPivotContainerFactory('panel', Panel)
         registerFactory('panorama', new ViewportFactory(Panorama))
-        registerPivotContainerFactory('rollup', Rollup)
-        registerPivotContainerFactory('scrollBar', ScrollBar)
-        registerPivotContainerFactory('slider', Slider)
-        registerPivotContainerFactory('spinner', Spinner)
-        registerPivotContainerFactory('tooltip', Tooltip)
+        registerFactory('rollup', new RollupFactory())
     }
 
-    public void registerPivotWindows() {
+    void registerPivotWindows() {
         // registerPivotContainerFactory('alert', Alert)
         // registerPivotContainerFactory('prompt', Prompt)
         registerPivotContainerFactory('dialog', Dialog, true)
         registerPivotContainerFactory('frame', Frame, true)
+        registerFactory('fileBrowserSheet', new FileBrowserSheetFactory())
+        registerPivotContainerFactory('palette', Palette, true)
         registerPivotContainerFactory('sheet', Sheet, true)
+        registerPivotContainerFactory('tooltip', Tooltip, true)
         registerPivotContainerFactory('window', Window, true)
     }
 
