@@ -23,7 +23,7 @@ import org.apache.pivot.wtk.FileBrowserSheet
  */
 class FileBrowserSheetFactory extends PivotBeanFactory {
     FileBrowserSheetFactory() {
-        super(FileBrowserSheet, true)
+        super(FileBrowserSheet, false)
     }
 
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {

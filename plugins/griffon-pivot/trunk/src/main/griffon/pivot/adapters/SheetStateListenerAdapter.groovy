@@ -27,6 +27,7 @@ import org.apache.pivot.wtk.SheetStateListener
 class SheetStateListenerAdapter extends BuilderDelegate implements SheetStateListener {
     private Closure onPreviewSheetClose
     private Closure onSheetCloseVetoed
+    private Closure onSheetd
  
     SheetStateListenerAdapter(FactoryBuilderSupport builder) {
         super(builder)
@@ -42,11 +43,20 @@ class SheetStateListenerAdapter extends BuilderDelegate implements SheetStateLis
         onSheetCloseVetoed.delegate = this
     }
 
+    void onSheetClosed(Closure callback) {
+        onSheetClosed = callback
+        onSheetClosed.delegate = this
+    }
+
     Vote previewSheetClose(Sheet arg0, boolean arg1) {
         if(onPreviewSheetClose) onPreviewSheetClose(arg0, arg1); else Vote.APPROVE
     }
 
     void sheetCloseVetoed(Sheet arg0, Vote arg1) {
         if(onSheetCloseVetoed) onSheetCloseVetoed(arg0, arg1)
+    }
+
+    void sheetClosed(Sheet arg0) {
+        if(onSheetd) onSheetClosed(arg0)
     }
 }

@@ -18,6 +18,7 @@ package griffon.pivot
 
 // import griffon.application.StandaloneGriffonApplication
 import griffon.util.GriffonExceptionHandler
+import griffon.util.UIThreadHelper
 
 import org.apache.pivot.wtk.DesktopApplicationContext
 import org.apache.pivot.wtk.Window
@@ -30,9 +31,9 @@ class DesktopPivotApplication extends AbstractPivotApplication /*implements Stan
 
     protected void show() {
         if(windows.size() > 0) {
-            UIThreadHelper.instance.executeSync {
+//            UIThreadHelper.instance.executeSync {
                 windows[0].open(display)
-            }
+//            }
         }
         super.show()
     }

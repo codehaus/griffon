@@ -21,11 +21,11 @@ package griffon.pivot.factory
  */
 class EventListenerFactory extends AbstractFactory {
     private static final Class[] PARAMS = [FactoryBuilderSupport] as Class[]
-    final adapterClass
-    final parents = []
+    final Class adapterClass
+    final List<Class> parents = []
     final String getListenersMethod
  
-    EventListenerFactory(Class adapterClass, Class[] parents, String listenersMethod) {
+    EventListenerFactory(Class adapterClass, List<Class> parents, String listenersMethod) {
         this.adapterClass = adapterClass
         this.parents.addAll(parents*.name)
         this.getListenersMethod = listenersMethod
@@ -33,7 +33,7 @@ class EventListenerFactory extends AbstractFactory {
  
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes)
              throws InstantiationException, IllegalAccessException {
-        adapterClass.getDeclaredConstructor(PARAMS).newInstannce([builder] as Object[])
+        adapterClass.getDeclaredConstructor(PARAMS).newInstance([builder] as Object[])
     }
 
     boolean isHandlesNodeChildren() {

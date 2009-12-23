@@ -31,7 +31,7 @@ class ButtonGroupFactory extends BeanFactory {
     public static final String DEFAULT_DELEGATE_PROPERTY_BUTTON_GROUP = "buttonGroup";
 
     public ButtonGroupFactory() {
-        super(ButtonGroup, true)
+        super(ButtonGroup, false)
     }
 
     public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {

@@ -27,6 +27,7 @@ import org.apache.pivot.wtk.DialogStateListener
 class DialogStateListenerAdapter extends BuilderDelegate implements DialogStateListener {
     private Closure onPreviewDialogClose
     private Closure onDialogCloseVetoed
+    private Closure onDialogClosed
  
     DialogStateListenerAdapter(FactoryBuilderSupport builder) {
         super(builder)
@@ -42,11 +43,20 @@ class DialogStateListenerAdapter extends BuilderDelegate implements DialogStateL
         onDialogCloseVetoed.delegate = this
     }
 
+    void onDialogClosed(Closure callback) {
+        onDialogClosed = callback
+        onDialogClosed.delegate = this
+    }
+
     Vote previewDialogClose(Dialog arg0, boolean arg1) {
         if(onPreviewDialogClose) onPreviewDialogClose(arg0, arg1); else Vote.APPROVE
     }
 
     void dialogCloseVetoed(Dialog arg0, Vote arg1) {
         if(onDialogCloseVetoed) onDialogCloseVetoed(arg0, arg1)
+    }
+ 
+    void dialogClosed(Dialog arg0, boolean arg1) {
+        if(onDialogClosed) onDialogClosed(arg0, arg1)
     }
 }

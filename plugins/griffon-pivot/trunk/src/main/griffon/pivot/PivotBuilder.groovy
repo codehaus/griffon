@@ -64,7 +64,7 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerPivotComponentFactory('textInput', TextInput)
 
         registerFactory('slider', new SliderFactory())
-        registerPivotComponentFactory('spinner', Spinner, false)
+        registerPivotComponentFactory('spinner', Spinner)
         registerFactory('numericSpinnerData', new NumericSpinnerDataFactory())
         registerFactory('calendarDateSpinnerData', new CalendarDateSpinnerDataFactory())
         registerPivotComponentFactory('scrollBar', ScrollBar)
@@ -108,7 +108,7 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerFactory('menuItem', new MenuItemFactory())
         registerFactory('menuBar', new MenuBarFactory())
         registerFactory('menuBarItem', new MenuBarItemFactory())
-        registerPivotComponentFactory('menuPopup', MenuPopup, false)
+        registerPivotComponentFactory('menuPopup', MenuPopup)
         registerFactory('menuBarItemDataRenderer', new ButtonDataRendererFactory(MenuBarItemDataRenderer))
         registerFactory('menuItemDataRenderer', new ButtonDataRendererFactory(MenuItemDataRenderer))
     }
@@ -271,7 +271,7 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerFactory(name, new BeanFactory(pivotBeanClass, leaf))
     }
 
-    private void registerPivotComponentFactory(String name, Class pivotBeanClass, boolean leaf = true) {
+    private void registerPivotComponentFactory(String name, Class pivotBeanClass, boolean leaf = false) {
         registerFactory(name, new PivotBeanFactory(pivotBeanClass, leaf))
     }
  

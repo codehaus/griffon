@@ -68,7 +68,7 @@ final class PivotUtils {
         try {
             // use setter method instead of property access
             // workaround to multiple property setters & single property getter
-            String setter = 'set' + propertyName[0].toUpperCase() + propertyName[1..-1]
+            String setter = 'set' + (propertyName.length() == 1 ? propertyName.toUpperCase() : propertyName[0].toUpperCase() + propertyName[1..-1])
             bean."$setter"(value)
         } catch(MissingPropertyException mpe) {
             bean.styles.put(propertyName, value)

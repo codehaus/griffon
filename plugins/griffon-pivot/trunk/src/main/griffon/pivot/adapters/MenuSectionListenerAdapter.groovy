@@ -17,9 +17,10 @@
 package griffon.pivot.adapters
  
 import griffon.pivot.impl.BuilderDelegate
-import org.apache.pivot.wtk.Menu.Section
 import org.apache.pivot.collections.Sequence
-import org.apache.pivot.wtk.Menu.SectionListener
+import org.apache.pivot.wtk.Menu
+import org.apache.pivot.wtk.Menu.Section
+//import org.apache.pivot.wtk.Menu.SectionListener
 
 /**
  * @author Andres Almiray

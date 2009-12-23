@@ -31,6 +31,7 @@ import org.apache.pivot.wtk.MessageType
 import org.apache.pivot.wtk.Prompt
 import org.apache.pivot.wtk.SheetCloseListener
 import org.apache.pivot.wtk.BoxPane
+import org.apache.pivot.wtk.media.Image
 
 import griffon.core.GriffonApplication
 import griffon.util.EventRouter
@@ -123,6 +124,14 @@ abstract class AbstractPivotApplication implements Application, GriffonApplicati
 
     void queue(boolean wait = false, Closure callback) {
         ApplicationContext.queueCallback(callback, wait)
+    }
+
+    ApplicationContext.ResourceCacheDictionary getResourceCache() {
+        ApplicationContext.getResourceCache()
+    }
+
+    Image loadImage(URL imageURL) {
+        Image.load(imageURL)
     }
 
     // ------------------------------------------

@@ -39,8 +39,9 @@ root.'griffon.pivot.PivotBuilder'.view = '*'
 root.'PivotGriffonAddon'.addon = true
 """
 
-def mainClass = "griffon.pivot.DesktopPivotApplication"
-def appletClass = "org.apache.pivot.wtk.BrowserApplicationContext$HostApplet"
+def mainClass = 'griffon.pivot.DesktopPivotApplication'
+def appletClass = 'org.apache.pivot.wtk.BrowserApplicationContext$HostApplet'
+def appletClass1 = 'org.apache.pivot.wtk.BrowserApplicationContext[:]'
 def configSlurper1 = new ConfigSlurper()
 def buildconf = configSlurper1.parse(new File("$basedir/griffon-app/conf/Config.groovy").toURL())
 if(!(mainClass in buildconf.flatten().'griffon.application.mainClass')) {
@@ -49,7 +50,7 @@ if(!(mainClass in buildconf.flatten().'griffon.application.mainClass')) {
 griffon.application.mainClass = "$mainClass"
 """)
 }
-if(!(appletClass in buildconf.flatten().'griffon.applet.mainClass')) {
+if(appletClass1.toString() != buildconf.flatten().'griffon.applet.mainClass') {
     println "Setting '$appletClass' as applet class"
     new File("$basedir/griffon-app/conf/Config.groovy").append("""
 griffon.applet.mainClass = "$appletClass"
