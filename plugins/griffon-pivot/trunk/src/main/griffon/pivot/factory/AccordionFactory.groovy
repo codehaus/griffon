@@ -58,11 +58,14 @@ class AccordionFactory extends ViewportFactory {
     }
 
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-        if(!(child instanceof Component)) return
-        def settings = builder.context[CONTEXT_DATA_KEY]?.get(child) ?: [null, null]
-        parent.panels.add(child)
-        if(settings[0]) Accordion.setIcon(child, settings[0])
-        if(settings[1]) Accordion.setLabel(child, settings[1])
+        if(child instanceof Component) {
+            def settings = builder.context[CONTEXT_DATA_KEY]?.get(child) ?: [null, null]
+            parent.panels.add(child)
+            if(settings[0]) Accordion.setIcon(child, settings[0])
+            if(settings[1]) Accordion.setLabel(child, settings[1])
+        } else {
+            super.setChild(builder, parent, child)
+        }
     }
 
     public void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {

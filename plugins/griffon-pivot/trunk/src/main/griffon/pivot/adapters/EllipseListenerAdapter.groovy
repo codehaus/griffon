@@ -14,19 +14,28 @@
  * limitations under the License.
  */
 
-package griffon.pivot.factory
-
-import org.apache.pivot.wtk.Button
+package griffon.pivot.adapters
+ 
+import griffon.pivot.impl.BuilderDelegate
+import org.apache.pivot.wtk.media.drawing.Ellipse
+import org.apache.pivot.wtk.media.drawing.EllipseListener
 
 /**
  * @author Andres Almiray
  */
-class ButtonDataRendererFactory extends ContainerFactory {
-    ButtonDataRendererFactory(Class rendererClass) {
-        super(rendererClass, false)
+class EllipseListenerAdapter extends BuilderDelegate implements EllipseListener {
+    private Closure onSizeChanged
+ 
+    EllipseListenerAdapter(FactoryBuilderSupport builder) {
+        super(builder)
     }
 
-    void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-        if(parent instanceof Button) parent.dataRenderer = node
+    void onSizeChanged(Closure callback) {
+        onSizeChanged = callback
+        onSizeChanged.delegate = this
+    }
+
+    void sizeChanged(Ellipse arg0, int arg1, int arg2) {
+        if(onSizeChanged) onSizeChanged(arg0, arg1, arg2)
     }
 }

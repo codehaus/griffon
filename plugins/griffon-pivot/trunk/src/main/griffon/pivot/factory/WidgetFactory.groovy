@@ -17,7 +17,6 @@
 package griffon.pivot.factory
 
 import griffon.pivot.PivotUtils
-import org.apache.pivot.wtk.Component
 
 /**
  * Copied from SwingBuilder to avoid dependency on Swing module.
@@ -25,7 +24,7 @@ import org.apache.pivot.wtk.Component
  * @author Danno Ferrin
  * @author Andres Almiray
  */
-class WidgetFactory extends AbstractFactory {
+class WidgetFactory extends ComponentFactory {
     final Class restrictedType
     protected final boolean leaf
 
@@ -47,16 +46,5 @@ class WidgetFactory extends AbstractFactory {
         } else {
             throw new RuntimeException("$name must have either a value argument or an attribute named $name that must be of type $restrictedType.name")
         }
-    }
-
-    boolean onHandleNodeAttributes(FactoryBuilderSupport builder, Object node, Map attributes) {
-        if(!(node instanceof Component)) return true
-        attributes.each { property, value ->
-            if(!PivotUtils.applyAsEventListener(builder, property, value, node)) {
-                PivotUtils.setBeanProperty(property, value, node)
-            }
-        }
-
-        return false
     }
 }

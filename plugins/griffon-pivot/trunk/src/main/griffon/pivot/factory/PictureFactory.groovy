@@ -17,17 +17,22 @@
 package griffon.pivot.factory
 
 import griffon.pivot.PivotUtils
+import java.awt.image.BufferedImage
+import org.apache.pivot.wtk.media.Picture
 
 /**
  * @author Andres Almiray
  */
-class PivotBeanFactory extends BeanFactory {
-    PivotBeanFactory(Class beanClass) {
-        super(beanClass, false)
+class PictureFactory extends AbstractFactory {
+    PictureFactory() {
+        super(Picture)
     }
 
-    PivotBeanFactory(Class beanClass, boolean leaf) {
-        super(beanClass, leaf)
+    Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
+        if(value instanceof Picture) return value
+        if(value instanceof BufferedImage) return new Picture(value)
+        if(!value && attributes.containsKey('image')) return new Picture(attributes.remove('image'))
+        throw new IllegalArgumentException("In $name you must define a value or a property image: of type ${BufferedImage.class.name}")
     }
 
     boolean onHandleNodeAttributes(FactoryBuilderSupport builder, Object node, Map attributes) {

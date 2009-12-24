@@ -16,17 +16,26 @@
 
 package griffon.pivot.factory
 
-import org.apache.pivot.wtk.Button
-
 /**
  * @author Andres Almiray
  */
-class ButtonDataRendererFactory extends ContainerFactory {
-    ButtonDataRendererFactory(Class rendererClass) {
-        super(rendererClass, false)
+class TextComponentFactory extends ComponentFactory {
+    TextComponentFactory(Class beanClass) {
+        super(beanClass, false)
     }
 
-    void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-        if(parent instanceof Button) parent.dataRenderer = node
+    TextComponentFactory(Class beanClass, boolean leaf) {
+        super(beanClass, leaf)
+    }
+
+    Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
+        if(value instanceof GString) value = value as String
+        if(FactoryBuilderSupport.checkValueIsTypeNotString(value, name, beanClass)) {
+            return value
+        }
+        Object bean = beanClass.newInstance()
+        if(value instanceof String) bean.text = value
+
+        return bean
     }
 }

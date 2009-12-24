@@ -22,25 +22,27 @@ import org.apache.pivot.wtk.GridPane
 /**
  * @author Andres Almiray
  */
-class GridPaneFactory extends PivotBeanFactory {
+class GridPaneFactory extends ComponentFactory {
     GridPaneFactory() {
         super(GridPane)
     }
 
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
         if(child instanceof GridPane.Row) parent.rows.add(child)
+        else super.setChild(builder, parent, child)
     }
 }
 
 /**
  * @author Andres Almiray
  */
-class GridPaneRowFactory extends PivotBeanFactory {
+class GridPaneRowFactory extends ComponentFactory {
     GridPaneRowFactory() {
         super(GridPane.Row)
     }
 
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
         if(child instanceof Component) parent.add(child)
+        else super.setChild(builder, parent, child)
     }
 }

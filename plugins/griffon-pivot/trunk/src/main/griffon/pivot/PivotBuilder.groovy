@@ -21,6 +21,11 @@ import griffon.pivot.impl.*
 import griffon.pivot.adapters.*
 import org.apache.pivot.wtk.*
 import org.apache.pivot.wtk.content.*
+import org.apache.pivot.wtk.effects.*
+import org.apache.pivot.wtk.effects.easing.*
+import org.apache.pivot.wtk.media.*
+import org.apache.pivot.wtk.media.drawing.*
+import org.apache.pivot.wtk.text.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
@@ -46,6 +51,8 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerFactory('dimensions', new PairFactory(Dimensions, 'width', 'height'))
         registerFactory('point', new PairFactory(Point, 'x', 'y'))
         registerFactory('span', new PairFactory(Span, 'start', 'end'))
+        registerFactory('insets', new InsetsFactory())
+        registerFactory('bounds', new BoundsFactory())
     }
 
     def registerPivotPassThruNodes() {
@@ -57,11 +64,11 @@ class PivotBuilder extends FactoryBuilderSupport {
     void registerPivotWidgets() {
         registerPivotComponentFactory('activityIndicator', ActivityIndicator)
         registerPivotComponentFactory('fileBrowser', FileBrowser)
-        registerPivotComponentFactory('label', Label)
-        registerPivotComponentFactory('meter', Meter)
+        registerFactory('label', new TextComponentFactory(Label))
+        registerFactory('meter', new TextComponentFactory(Meter))
         registerPivotComponentFactory('separator', Separator)
-        registerPivotComponentFactory('textArea', TextArea)
-        registerPivotComponentFactory('textInput', TextInput)
+        registerFactory('textArea', new TextComponentFactory(TextArea))
+        registerFactory('textInput', new TextComponentFactory(TextInput))
 
         registerFactory('slider', new SliderFactory())
         registerPivotComponentFactory('spinner', Spinner)
@@ -73,7 +80,7 @@ class PivotBuilder extends FactoryBuilderSupport {
 
     void registerPivotViews() {
         registerPivotComponentFactory('listView', ListView)
-        registerPivotComponentFactory('imageView', ImageView)
+        registerFactory('imageView', new ImageViewFactory())
         // registerPivotComponentFactory('movieView', MovieView)
         // registerPivotComponentFactory('tableView', TableView)
         // registerPivotComponentFactory('tableViewHeader', TableViewHeader)
@@ -154,8 +161,84 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerFactory('fileBrowserSheet', new FileBrowserSheetFactory())
         registerPivotContainerFactory('palette', Palette, true)
         registerPivotContainerFactory('sheet', Sheet, true)
-        registerPivotContainerFactory('tooltip', Tooltip, true)
+        registerFactory('tooltip', new TextComponentFactory(Tooltip))
         registerPivotContainerFactory('window', Window, true)
+    }
+
+    void registerPivotEffects() {
+        registerPivotBeanFactory('baselineDecorator', BaselineDecorator)
+        registerPivotBeanFactory('blurDecorator', BlurDecorator)
+        registerPivotBeanFactory('clipDecorator', ClipDecorator)
+        registerPivotBeanFactory('dropShadowDecorator', DropShadowDecorator)
+        registerPivotBeanFactory('fadeDecorator', fadeDecorator)
+        registerPivotBeanFactory('grayscaleDecorator', GrayscaleDecorator)
+        registerPivotBeanFactory('reflectionDecorator', ReflectionDecorator)
+        registerPivotBeanFactory('rotationDecorator', RotationDecorator)
+        registerPivotBeanFactory('saturationDecorator', SaturationDecorator)
+        registerPivotBeanFactory('scaleDecorator', ScaleDecorator)
+        registerPivotBeanFactory('shadeDecorator', ShadeDecorator)
+        registerPivotBeanFactory('translationDecorator', TranslationDecorator)
+        registerFactory('overlayDecorator', new SingleElementContainerFactory(OverlayDecorator, 'component', Component))
+        registerFactory('tagDecorator', new SingleElementContainerFactory(TagDecorator, 'tag', Visual))
+        registerFactory('watermarkDecorator', new SingleElementContainerFactory(WatermarkDecorator, 'image', Image))
+
+        registerBeanFactory('easingCircular', Circular)
+        registerBeanFactory('easingCubic', Cubic)
+        registerBeanFactory('easingExponential', Exponential)
+        registerBeanFactory('easingLinear', Linear)
+        registerBeanFactory('easingQuadratic', Quadratic)
+        registerBeanFactory('easingQuartic', Quartic)
+        registerBeanFactory('easingQuintic', Quintic)
+        registerBeanFactory('easingSine', Sine)
+    }
+
+    void registerPivotMedia() {
+        registerPivotComponentFactory('drawing', Drawing)
+        registerFactory('picture', new PictureFactory())
+
+        registerFactory('canvas', new GroupFactory(Canvas))
+        registerFactory('group', new GroupFactory(Group))
+        registerPivotComponentFactory('arc', Arc)
+        registerPivotComponentFactory('cubicCurve', CubicCurve)
+        registerPivotComponentFactory('ellipse', Elllipse)
+        registerPivotComponentFactory('line', Line)
+        registerPivotComponentFactory('quadCurve', QuadCurve)
+        registerPivotComponentFactory('rectangle', Rectangle)
+        registerPivotComponentFactory('rect', Rectangle)
+        registerPivotComponentFactory('text', Text)
+        registerFactory('path', new PathFactory())
+        registerPivotComponentFactory('moveTo', Path.MoveTo)
+        registerPivotComponentFactory('lineTo', Path.LineTo)
+        registerPivotComponentFactory('curveTo', Path.CurveTo)
+        registerPivotComponentFactory('quadTo', Path.QuadTo)
+        registerFactory('transforms', new TransformsFactory())
+        registerPivotComponentFactory('rotate', Shape.Rotate, true)
+        registerPivotComponentFactory('scale', Shape.Scale, true)
+        registerPivotComponentFactory('translate', Shape.Translate, true)
+
+        registerFactory('drawingListener', new EventListenerFactory(DrawingListenerAdapter, [Drawing], 'getDrawingListeners'))
+        registerFactory('imageListener', new EventListenerFactory(ImageListenerAdapter, [Image], 'getImageListeners'))
+        registerFactory('movieListener', new EventListenerFactory(MovieListenerAdapter, [Movie], 'getMovieListeners'))
+
+        registerFactory('arcListener', new EventListenerFactory(ArcListenerAdapter, [Arc], 'getArcListeners'))
+        registerFactory('canvasListener', new EventListenerFactory(CanvasListenerAdapter, [Canvas], 'getCanvasListeners'))
+        registerFactory('cubicCurveListener', new EventListenerFactory(CubicCurveListenerAdapter, [CubicCurve], 'getCubicCurveListeners'))
+        registerFactory('ellipseListener', new EventListenerFactory(EllipseListenerAdapter, [Ellipse], 'getEllipseListeners'))
+        registerFactory('groupListener', new EventListenerFactory(GroupListenerAdapter, [Group], 'getGroupListeners'))
+        registerFactory('lineListener', new EventListenerFactory(LineListenerAdapter, [Line], 'getLineListeners'))
+        registerFactory('pathListener', new EventListenerFactory(PathListenerAdapter, [Path], 'getPathListeners'))
+        registerFactory('quadCurveListener', new EventListenerFactory(QuadCurveListenerAdapter, [QuadCurve], 'getQuadCurveListeners'))
+        registerFactory('rectangleListener', new EventListenerFactory(RectangleListenerAdapter, [Rectangle], 'getRectangleListeners'))
+        registerFactory('shapeListener', new EventListenerFactory(ShapeListenerAdapter, [Shape], 'getShapeListeners'))
+        registerFactory('shapeTransformListener', new EventListenerFactory(ShapeTransformListenerAdapter, [Shape], 'getShapeTransformListeners'))
+        registerFactory('textListener', new EventListenerFactory(TextListenerAdapter, [Text], 'getTextListeners'))
+    }
+
+    void registerPivotText() {
+        registerFactory('elementListener', new EventListenerFactory(ElementListenerAdapter, [Element], 'getElementListeners'))
+        registerFactory('imageNodeListener', new EventListenerFactory(ImageNodeListenerAdapter, [ImageNode], 'getImageNodeListeners'))
+        registerFactory('nodeListener', new EventListenerFactory(NodeListenerAdapter, [Node], 'getNodeListeners'))
+        registerFactory('textNodeListener', new EventListenerFactory(TextNodeListenerAdapter, [TextNode], 'getTextNodeListeners'))
     }
 
     void registerPivotListeners() {
@@ -267,12 +350,16 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerFactory('windowStateListener', new EventListenerFactory(WindowStateListenerAdapter, [Window], 'getWindowStateListeners'))
     }
 
-    private void registerPivotBeanFactory(String name, Class pivotBeanClass, boolean leaf = true) {
+    private void registerBeanFactory(String name, Class pivotBeanClass, boolean leaf = true) {
         registerFactory(name, new BeanFactory(pivotBeanClass, leaf))
     }
 
-    private void registerPivotComponentFactory(String name, Class pivotBeanClass, boolean leaf = false) {
+    private void registerPivotBeanFactory(String name, Class pivotBeanClass, boolean leaf = true) {
         registerFactory(name, new PivotBeanFactory(pivotBeanClass, leaf))
+    }
+
+    private void registerPivotComponentFactory(String name, Class pivotBeanClass, boolean leaf = false) {
+        registerFactory(name, new ComponentFactory(pivotBeanClass, leaf))
     }
  
     private void registerPivotContainerFactory(String name, Class pivotBeanClass, boolean singleElement = false) {

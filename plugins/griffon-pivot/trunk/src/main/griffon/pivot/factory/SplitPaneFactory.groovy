@@ -22,7 +22,7 @@ import org.apache.pivot.wtk.SplitPane
 /**
  * @author Andres Almiray
  */
-class SplitPaneFactory extends PivotBeanFactory {
+class SplitPaneFactory extends ComponentFactory {
     SplitPaneFactory() {
         super(SplitPane)
     }
@@ -35,11 +35,14 @@ class SplitPaneFactory extends PivotBeanFactory {
     }
 
     void setChild(FactoryBuilderSupport factory, Object parent, Object child) {
-        if(!(child instanceof Component)) return
-        if(parent.getTopLeft() == null) {
-            parent.setTopLeft(child)
+        if(child instanceof Component) {
+            if(parent.getTopLeft() == null) {
+                parent.setTopLeft(child)
+            } else {
+                parent.setBottomRight(child)
+            }
         } else {
-            parent.setBottomRight(child)
+            super.setChild(builder, parent, node)
         }
     }
 }

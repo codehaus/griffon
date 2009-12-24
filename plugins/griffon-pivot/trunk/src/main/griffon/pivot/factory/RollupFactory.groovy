@@ -22,7 +22,7 @@ import org.apache.pivot.wtk.Rollup
 /**
  * @author Andres Almiray
  */
-class RollupFactory extends PivotBeanFactory {
+class RollupFactory extends ComponentFactory {
     public static final String DELEGATE_PROPERTY_HEADER = "_delegateProperty:header"
     public static final String DEFAULT_DELEGATE_PROPERTY_HEADER = "header"
     public static final String CONTEXT_DATA_KEY = "RollupFactoryData"
@@ -53,10 +53,13 @@ class RollupFactory extends PivotBeanFactory {
     }
 
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-        if(!(child instanceof Component)) return
-        def settings = builder.context[CONTEXT_DATA_KEY]?.get(child) ?: [null]
-        if(settings[0]) parent.header = child
-        else parent.content = child
+        if(child instanceof Component) {
+            def settings = builder.context[CONTEXT_DATA_KEY]?.get(child) ?: [null]
+            if(settings[0]) parent.header = child
+            else parent.content = child
+        } else {
+            super.setChild(builder, parent, child)
+        }
     }
 
     public void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {

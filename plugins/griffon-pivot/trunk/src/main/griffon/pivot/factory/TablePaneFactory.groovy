@@ -22,7 +22,7 @@ import org.apache.pivot.wtk.TablePane
 /**
  * @author Andres Almiray
  */
-class TablePaneFactory extends PivotBeanFactory {
+class TablePaneFactory extends ComponentFactory {
     public static final String DELEGATE_PROPERTY_COLUMN_SPAN = "_delegateProperty:columnSpan"
     public static final String DEFAULT_DELEGATE_PROPERTY_COLUMN_SPAN = "columnSpan"
     public static final String DELEGATE_PROPERTY_ROW_SPAN = "_delegateProperty:rowSpan"
@@ -59,11 +59,14 @@ class TablePaneFactory extends PivotBeanFactory {
     }
 
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-        if(!(child instanceof Component)) return
-        def settings = builder.context[CONTEXT_DATA_KEY]?.get(child) ?: [null, null]
-        parent.panels.add(child)
-        if(settings[0] != null) TablePane.setColumnSpan(child, settings[0])
-        if(settings[1] != null) TablePane.setRowSpan(child, settings[1])
+        if(child instanceof Component) {
+            def settings = builder.context[CONTEXT_DATA_KEY]?.get(child) ?: [null, null]
+            parent.panels.add(child)
+            if(settings[0] != null) TablePane.setColumnSpan(child, settings[0])
+            if(settings[1] != null) TablePane.setRowSpan(child, settings[1])
+        } else {
+            super.setChild(builder, parent, node)
+        }
     }
 
     public void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {
@@ -81,7 +84,7 @@ class TablePaneFactory extends PivotBeanFactory {
 /**
  * @author Andres Almiray
  */
-class TablePaneColumnFactory extends PivotBeanFactory {
+class TablePaneColumnFactory extends ComponentFactory {
     TablePaneColumnFactory() {
         super(TablePane.Column)
     }
@@ -94,7 +97,7 @@ class TablePaneColumnFactory extends PivotBeanFactory {
 /**
  * @author Andres Almiray
  */
-class TablePaneRowFactory extends PivotBeanFactory {
+class TablePaneRowFactory extends ComponentFactory {
     TablePaneRowFactory() {
         super(TablePane.Row)
     }

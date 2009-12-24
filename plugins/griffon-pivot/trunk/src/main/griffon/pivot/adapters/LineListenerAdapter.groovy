@@ -14,29 +14,28 @@
  * limitations under the License.
  */
 
-package griffon.pivot.factory
-
-import griffon.pivot.PivotUtils
+package griffon.pivot.adapters
+ 
+import griffon.pivot.impl.BuilderDelegate
+import org.apache.pivot.wtk.media.drawing.Line
+import org.apache.pivot.wtk.media.drawing.LineListener
 
 /**
  * @author Andres Almiray
  */
-class PivotBeanFactory extends BeanFactory {
-    PivotBeanFactory(Class beanClass) {
-        super(beanClass, false)
+class LineListenerAdapter extends BuilderDelegate implements LineListener {
+    private Closure onEndpointsChanged
+ 
+    LineListenerAdapter(FactoryBuilderSupport builder) {
+        super(builder)
     }
 
-    PivotBeanFactory(Class beanClass, boolean leaf) {
-        super(beanClass, leaf)
+    void onEndpointsChanged(Closure callback) {
+        onEndpointsChanged = callback
+        onEndpointsChanged.delegate = this
     }
 
-    boolean onHandleNodeAttributes(FactoryBuilderSupport builder, Object node, Map attributes) {
-        attributes.each { property, value ->
-            if(!PivotUtils.applyAsEventListener(builder, property, value, node)) {
-                PivotUtils.setBeanProperty(property, value, node)
-            }
-        }
-       
-        return false
+    void endpointsChanged(Line arg0, int arg1, int arg2, int arg3, int arg4) {
+        if(onEndpointsChanged) onEndpointsChanged(arg0, arg1, arg2, arg3, arg4)
     }
 }

@@ -25,7 +25,7 @@ import org.apache.pivot.wtk.Frame
 /**
  * @author Andres Almiray
  */
-class MenuFactory extends PivotBeanFactory {
+class MenuFactory extends ComponentFactory {
     MenuFactory() {
         super(Menu)
     }
@@ -65,7 +65,7 @@ class MenuFactory extends PivotBeanFactory {
 /**
  * @author Andres Almiray
  */
-class MenuItemFactory extends PivotBeanFactory {
+class MenuItemFactory extends ComponentFactory {
     MenuItemFactory() {
         super(Menu.Item, false)
     }
@@ -95,7 +95,7 @@ class MenuItemFactory extends PivotBeanFactory {
 /**
  * @author Andres Almiray
  */
-class MenuBarFactory extends PivotBeanFactory {
+class MenuBarFactory extends ComponentFactory {
     MenuBarFactory() {
         super(MenuBar, false)
     }
@@ -109,7 +109,7 @@ class MenuBarFactory extends PivotBeanFactory {
 /**
  * @author Andres Almiray
  */
-class MenuBarItemFactory extends PivotBeanFactory {
+class MenuBarItemFactory extends ComponentFactory {
     MenuBarItemFactory() {
         super(MenuBar.Item, false)
     }

@@ -21,7 +21,7 @@ import org.apache.pivot.wtk.FileBrowserSheet
 /**
  * @author Andres Almiray
  */
-class FileBrowserSheetFactory extends PivotBeanFactory {
+class FileBrowserSheetFactory extends ComponentFactory {
     FileBrowserSheetFactory() {
         super(FileBrowserSheet, false)
     }

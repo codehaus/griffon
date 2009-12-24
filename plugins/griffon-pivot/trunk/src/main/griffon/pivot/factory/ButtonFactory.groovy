@@ -19,7 +19,7 @@ package griffon.pivot.factory
 /**
  * @author Andres Almiray
  */
-class ButtonFactory extends PivotBeanFactory {
+class ButtonFactory extends ComponentFactory {
     ButtonFactory(Class beanClass) {
         super(beanClass, false)
     }

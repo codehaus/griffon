@@ -22,15 +22,13 @@ import org.apache.pivot.wtk.Component
 /**
  * @author Andres Almiray
  */
-class ContainerFactory extends PivotBeanFactory {
-    final Class beanClass
-
+class ContainerFactory extends ComponentFactory {
     ContainerFactory(Class beanClass) {
         super(beanClass)
     }
 
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-        if(!(child instanceof Component)) return
-        parent.add(child)
+        if(child instanceof Component) parent.add(child)
+        else super.setChild(builder, parent, child)
     }
 }

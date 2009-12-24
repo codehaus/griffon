@@ -61,12 +61,15 @@ class ScrollPaneFactory extends ViewportFactory {
     }
 
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-        if(!(child instanceof Component)) return
-        def settings = builder.context[CONTEXT_DATA_KEY]?.get(child) ?: [false, false, false]
-        if(settings[0]) parent.columnHeader = child
-        else if(settings[1]) parent.rowHeader = child
-        else if(settings[2]) parent.corner = child
-        else parent.view = child
+        if(child instanceof Component) {
+            def settings = builder.context[CONTEXT_DATA_KEY]?.get(child) ?: [false, false, false]
+            if(settings[0]) parent.columnHeader = child
+            else if(settings[1]) parent.rowHeader = child
+            else if(settings[2]) parent.corner = child
+            else parent.view = child
+        } else {
+            super.setChild(builder, parent, node)
+        }
     }
 
     public void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {

@@ -17,17 +17,30 @@
 package griffon.pivot.factory
 
 import griffon.pivot.PivotUtils
+import org.apache.pivot.wtk.ImageView
+import org.apache.pivot.wtk.media.Image
 
 /**
  * @author Andres Almiray
  */
-class PivotBeanFactory extends BeanFactory {
-    PivotBeanFactory(Class beanClass) {
-        super(beanClass, false)
+class ImageViewFactory extends ComponentFactory {
+    ImageViewFactory() {
+        super(ImageView)
     }
 
-    PivotBeanFactory(Class beanClass, boolean leaf) {
-        super(beanClass, leaf)
+    Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
+        if(value instanceof GString) value = value as String
+        if(value instanceof String || value instanceof URL || value instanceof Image) {
+            ImageView view = new ImageView()
+            view.setImage(value)
+            return view
+        }
+
+        if (FactoryBuilderSupport.checkValueIsTypeNotString(value, name, ImageView)) {
+            return value
+        }
+
+        return new ImageView()
     }
 
     boolean onHandleNodeAttributes(FactoryBuilderSupport builder, Object node, Map attributes) {
@@ -38,5 +51,10 @@ class PivotBeanFactory extends BeanFactory {
         }
        
         return false
+    }
+
+    void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
+        if(child instanceof Image) parent.setImage(image)
+        else super.setChild(builder, parent, child)
     }
 }

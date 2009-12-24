@@ -22,7 +22,7 @@ import org.apache.pivot.wtk.Span
 /**
  * @author Andres Almiray
  */
-class SliderFactory extends PivotBeanFactory {
+class SliderFactory extends ComponentFactory {
     SliderFactory() {
         super(Slider)
     }

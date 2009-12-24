@@ -66,15 +66,18 @@ class TabPaneFactory extends ViewportFactory {
     }
 
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-        if(!(child instanceof Component)) return
-        def settings = builder.context[CONTEXT_DATA_KEY]?.get(child) ?: [null, null, null, false]
-        if(settings[3]) {
-            parent.corner = child
+        if(child instanceof Component) {
+            def settings = builder.context[CONTEXT_DATA_KEY]?.get(child) ?: [null, null, null, false]
+            if(settings[3]) {
+                parent.corner = child
+            } else {
+                parent.tabs.add(child)
+                if(settings[0]) TabPane.setIcon(child, settings[0])
+                if(settings[1]) TabPane.setLabel(child, settings[1])
+                if(settings[2] != null) TabPane.setCloseable(child, settings[2])
+            }
         } else {
-            parent.tabs.add(child)
-            if(settings[0]) TabPane.setIcon(child, settings[0])
-            if(settings[1]) TabPane.setLabel(child, settings[1])
-            if(settings[2] != null) TabPane.setCloseable(child, settings[2])
+            super.setChild(builder, parent, node)
         }
     }
 

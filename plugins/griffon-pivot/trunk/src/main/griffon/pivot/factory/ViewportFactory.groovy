@@ -21,13 +21,13 @@ import org.apache.pivot.wtk.Component
 /**
  * @author Andres Almiray
  */
-class ViewportFactory extends PivotBeanFactory {
+class ViewportFactory extends ComponentFactory {
     ViewportFactory(Class viewportClass) {
         super(viewportClass)
     }
 
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-        if(!(child instanceof Component)) return
-        parent.view = child
+        if(child instanceof Component) parent.view = child
+        else super.setChild(builder, parent, child)
     }
 }

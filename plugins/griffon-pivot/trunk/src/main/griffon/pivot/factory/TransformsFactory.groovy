@@ -16,36 +16,22 @@
 
 package griffon.pivot.factory
 
+import org.apache.pivot.wtk.media.drawing.Shape
+
 /**
- * This returns a mutable java.util.Collection of some sort, to which items are added.
- *
- * @author Danno Ferrin
  * @author Andres Almiray
  */
-class JavaCollectionFactory extends AbstractFactory {
-    private Class collectionClass
-
-    JavaCollectionFactory() {
-        this(ArrayList)
-    }
-
-    JavaCollectionFactory(Class collectionClass) {
-        this.collectionClass = collectionClass
-    }
-
+class TransformsFactory extends AbstractFactory {
     public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
         FactoryBuilderSupport.checkValueIsNull(value, name)
-        if (attributes.isEmpty()) {
-            return collectionClass.newInstance()
-        } else {
-            def item = attributes.entrySet().iterator().next()
-            throw new MissingPropertyException(
-                "The builder element '$name' is a collections element and accepts no attributes",
-                item.key as String, item.value as Class)
-        }
+        []
+    }
+
+    public void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
+        if(node instanceof Shape) node.each { parent.transforms.add(it) }
     }
 
     public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-        parent.add(child)
+        if(child instanceof Shape.Transform) parent << child
     }
 }

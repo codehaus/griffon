@@ -14,19 +14,29 @@
  * limitations under the License.
  */
 
-package griffon.pivot.factory
-
-import org.apache.pivot.wtk.Button
+package griffon.pivot.adapters
+ 
+import griffon.pivot.impl.BuilderDelegate
+import org.apache.pivot.wtk.media.Image
+import org.apache.pivot.wtk.text.ImageNode
+import org.apache.pivot.wtk.text.ImageNodeListener
 
 /**
  * @author Andres Almiray
  */
-class ButtonDataRendererFactory extends ContainerFactory {
-    ButtonDataRendererFactory(Class rendererClass) {
-        super(rendererClass, false)
+class ImageNodeListenerAdapter extends BuilderDelegate implements ImageNodeListener {
+    private Closure onImageChanged
+ 
+    ImageNodeListenerAdapter(FactoryBuilderSupport builder) {
+        super(builder)
     }
 
-    void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-        if(parent instanceof Button) parent.dataRenderer = node
+    void onImageChanged(Closure callback) {
+        onImageChanged = callback
+        onImageChanged.delegate = this
+    }
+
+    void imageChanged(ImageNode arg0, Image arg1) {
+        if(onImageChanged) onImageChanged(arg0, arg1)
     }
 }

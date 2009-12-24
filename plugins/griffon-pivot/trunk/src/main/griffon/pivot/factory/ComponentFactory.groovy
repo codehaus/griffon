@@ -16,17 +16,21 @@
 
 package griffon.pivot.factory
 
-import org.apache.pivot.wtk.Button
+import org.apache.pivot.wtk.effects.Decorator
 
 /**
  * @author Andres Almiray
  */
-class ButtonDataRendererFactory extends ContainerFactory {
-    ButtonDataRendererFactory(Class rendererClass) {
-        super(rendererClass, false)
+class ComponentFactory extends PivotBeanFactory {
+    ComponentFactory(Class beanClass) {
+        super(beanClass, false)
     }
 
-    void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-        if(parent instanceof Button) parent.dataRenderer = node
+    ComponentFactory(Class beanClass, boolean leaf) {
+        super(beanClass, leaf)
+    }
+
+    void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
+        if(child instanceof Decorator) parent.decorators.add(child)
     }
 }
