@@ -23,7 +23,7 @@ import org.apache.pivot.wtk.media.Picture
 /**
  * @author Andres Almiray
  */
-class PictureFactory extends AbstractFactory {
+class PictureFactory extends PivotBeanFactory {
     PictureFactory() {
         super(Picture)
     }

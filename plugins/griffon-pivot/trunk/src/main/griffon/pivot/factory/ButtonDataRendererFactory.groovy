@@ -23,7 +23,7 @@ import org.apache.pivot.wtk.Button
  */
 class ButtonDataRendererFactory extends ContainerFactory {
     ButtonDataRendererFactory(Class rendererClass) {
-        super(rendererClass, false)
+        super(rendererClass)
     }
 
     void setParent(FactoryBuilderSupport builder, Object parent, Object node) {

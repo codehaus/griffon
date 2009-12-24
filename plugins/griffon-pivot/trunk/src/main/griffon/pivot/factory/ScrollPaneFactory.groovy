@@ -68,7 +68,7 @@ class ScrollPaneFactory extends ViewportFactory {
             else if(settings[2]) parent.corner = child
             else parent.view = child
         } else {
-            super.setChild(builder, parent, node)
+            super.setChild(builder, parent, child)
         }
     }
 

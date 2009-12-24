@@ -147,7 +147,9 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerPivotContainerFactory('calendar', Calendar)
         registerPivotContainerFactory('colorChooser', ColorChooser)
         registerPivotContainerFactory('expander', Expander, true)
-        // registerPivotContainerFactory('form', Form)
+        registerPivotComponentFactory('form', Form)
+        registerFactory('formSection', new FormSectionFactory())
+        registerFactory('formFlag', new FormFlagFactory())
         registerPivotContainerFactory('panel', Panel)
         registerFactory('panorama', new ViewportFactory(Panorama))
         registerFactory('rollup', new RollupFactory())
@@ -170,7 +172,7 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerPivotBeanFactory('blurDecorator', BlurDecorator)
         registerPivotBeanFactory('clipDecorator', ClipDecorator)
         registerPivotBeanFactory('dropShadowDecorator', DropShadowDecorator)
-        registerPivotBeanFactory('fadeDecorator', fadeDecorator)
+        registerPivotBeanFactory('fadeDecorator', FadeDecorator)
         registerPivotBeanFactory('grayscaleDecorator', GrayscaleDecorator)
         registerPivotBeanFactory('reflectionDecorator', ReflectionDecorator)
         registerPivotBeanFactory('rotationDecorator', RotationDecorator)
@@ -200,7 +202,7 @@ class PivotBuilder extends FactoryBuilderSupport {
         registerFactory('group', new GroupFactory(Group))
         registerPivotComponentFactory('arc', Arc)
         registerPivotComponentFactory('cubicCurve', CubicCurve)
-        registerPivotComponentFactory('ellipse', Elllipse)
+        registerPivotComponentFactory('ellipse', Ellipse)
         registerPivotComponentFactory('line', Line)
         registerPivotComponentFactory('quadCurve', QuadCurve)
         registerPivotComponentFactory('rectangle', Rectangle)
@@ -363,7 +365,7 @@ class PivotBuilder extends FactoryBuilderSupport {
     }
  
     private void registerPivotContainerFactory(String name, Class pivotBeanClass, boolean singleElement = false) {
-        registerFactory(name, singleElement ? new SingleElementContainerFactory(pivotBeanClass) : new ContainerFactory(pivotBeanClass))
+        registerFactory(name, singleElement ? new SingleElementContainerFactory(pivotBeanClass, 'content', Component) : new ContainerFactory(pivotBeanClass))
     }
  
     // taken from groovy.swing.SwingBuilder

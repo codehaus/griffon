@@ -29,6 +29,7 @@ class WidgetFactory extends ComponentFactory {
     protected final boolean leaf
 
     public WidgetFactory(Class restrictedType, boolean leaf) {
+        super(restrictedType)
         this.restrictedType = restrictedType
         this.leaf = leaf
     }

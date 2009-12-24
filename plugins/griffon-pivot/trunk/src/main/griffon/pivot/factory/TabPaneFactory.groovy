@@ -77,7 +77,7 @@ class TabPaneFactory extends ViewportFactory {
                 if(settings[2] != null) TabPane.setCloseable(child, settings[2])
             }
         } else {
-            super.setChild(builder, parent, node)
+            super.setChild(builder, parent, child)
         }
     }
 

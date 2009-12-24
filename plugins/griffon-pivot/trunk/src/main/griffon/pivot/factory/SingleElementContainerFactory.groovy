@@ -25,14 +25,14 @@ class SingleElementContainerFactory extends ComponentFactory {
     private final String setter
     private final Class constrainedType
 
-    SingleElementContainerFactory(Class containerClass, String property = 'content', Class constrainedClass = Component) {
+    SingleElementContainerFactory(Class containerClass, String property = 'content', Class constrainedType = Component) {
         super(containerClass)
         this.constrainedType = constrainedType
         this.setter = 'set' + property[0].toUpperCase() + property[1..-1]
     }
 
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-        if(constrainedType.isAssignableFrom(child?.getClass())) parent."$setter"(child)
+        if(child && constrainedType.isAssignableFrom(child.getClass())) parent."$setter"(child)
         else super.setChild(builder, parent, child)
     }
 }

@@ -65,7 +65,7 @@ class TablePaneFactory extends ComponentFactory {
             if(settings[0] != null) TablePane.setColumnSpan(child, settings[0])
             if(settings[1] != null) TablePane.setRowSpan(child, settings[1])
         } else {
-            super.setChild(builder, parent, node)
+            super.setChild(builder, parent, child)
         }
     }
 

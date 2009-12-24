@@ -42,7 +42,7 @@ class SplitPaneFactory extends ComponentFactory {
                 parent.setBottomRight(child)
             }
         } else {
-            super.setChild(builder, parent, node)
+            super.setChild(builder, parent, child)
         }
     }
 }

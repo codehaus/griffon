@@ -27,12 +27,13 @@ class EventListenerFactory extends AbstractFactory {
  
     EventListenerFactory(Class adapterClass, List<Class> parents, String listenersMethod) {
         this.adapterClass = adapterClass
-        this.parents.addAll(parents*.name)
+        this.parents.addAll(parents)
         this.getListenersMethod = listenersMethod
     }
  
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes)
              throws InstantiationException, IllegalAccessException {
+        if(value && adapterClass.isAssignableFrom(value.getClass())) return value
         adapterClass.getDeclaredConstructor(PARAMS).newInstance([builder] as Object[])
     }
 
@@ -48,8 +49,12 @@ class EventListenerFactory extends AbstractFactory {
     }
 
     void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-        if(parents.contains(parent?.getClass()?.name)) {
-            parent."$getListenersMethod"().add(node)
-        }       
+        if(!parent) return
+        for(candidate in parents) {
+            if(candidate.isAssignableFrom(parent.getClass())) {
+                parent."$getListenersMethod"().add(node)
+                break
+            }
+        }
     }
 }
