@@ -1,5 +1,5 @@
 class GlazedlistsGriffonPlugin {
-    def version = 0.1
+    def version = 0.2
     def canBeGlobal = false
     def dependsOn = [:]
 
