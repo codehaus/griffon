@@ -36,8 +36,6 @@ eventCopyLibsEnd = { jardir ->
 }
 
 doWithPlatform = { platformOs ->
-println platformOs
-try {
     ant.fileset(dir: "${getPluginDirForName('lwjgl').file}/lib/webstart", includes: "*${platformOs}.jar").each {
         griffonCopyDist(it.toString(), new File(jardir.toString(), 'webstart').absolutePath)
     }
@@ -51,19 +49,4 @@ try {
         if(!rs.nativeLibs) rs.nativeLibs = [] 
         rs.nativeLibs.addAll(nativeLibs)
     }
-println config.griffon.extensions.resources
-/*
-    def rs = config.griffon.extensions.resources.find{ it.os == PLATFORMS[platformOs].webstartName}
-    if(!rs) {
-        def nativelibs = config.lwjgl.jnlp.resources.find{it.os == platformOs}.nativelibs
-        config.griffon.extensions.resources << [
-           os: PLATFORMS[platformOs].webstartName,
-           nativelibs: nativelibs
-        ]
-    } else {
-       if(!rs.nativeLibs) rs.nativeLibs = [] 
-       rs.nativeLibs.addall(nativeLibs)
-    }
-*/
-}catch(x){x.printStackTrace()}
 }
