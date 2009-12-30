@@ -55,7 +55,7 @@ class @artifact.name@ {
 		// check to see if the document is already open
 		def open = openDocuments.find { it.model.id == id }
 		if (open) {
-			tabs.selectedIndex = model.openDocuments.indexOf(open)
+			tabs.selectedIndex = openDocuments.indexOf(open)
 		} else {
 			def document = GAH.buildMVCGroup(app, [id: id, name: name, file: file, tabs: tabs], '@document.group@', id)
 			if (document.controller.open()) {
