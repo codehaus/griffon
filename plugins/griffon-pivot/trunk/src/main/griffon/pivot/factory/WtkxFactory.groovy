@@ -36,12 +36,13 @@ class WTKXFactory extends AbstractFactory {
 
         def wtkx = new WTKXSerializer()
         def root = wtkx.readObject(builder.app, value)
-        def rootId = attributes['id'] ? attributes['id'] + '.' : ''
+        def rootId = attributes['id'] ? attributes['id'] + '_' : ''
 
-        Field nameObjectsField = WTKXSerializer.class.getDeclaredField('namedObjects')
-        namedObjectsField.setAccesible(true)
-        namedObjectsField.get(wtkx).each { id, widget ->
-            builder.setVariable(rootId + id, widget)
+        Field namedObjectsField = WTKXSerializer.class.getDeclaredField('namedObjects')
+        namedObjectsField.setAccessible(true)
+        def pivotMap = namedObjectsField.get(wtkx)
+        pivotMap.each { id ->
+            builder.setVariable(rootId + id, pivotMap.get(id))
         }
 
         return root

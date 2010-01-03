@@ -31,9 +31,9 @@ class DesktopPivotApplication extends AbstractPivotApplication /*implements Stan
 
     protected void show() {
         if(windows.size() > 0) {
-//            UIThreadHelper.instance.executeSync {
+            UIThreadHelper.instance.executeSync {
                 windows[0].open(display)
-//            }
+            }
         }
         super.show()
     }
@@ -47,10 +47,10 @@ class DesktopPivotApplication extends AbstractPivotApplication /*implements Stan
 
     public Object createApplicationContainer() {
         def appContainer = null
-//        UIThreadHelper.instance.executeSync {
+        UIThreadHelper.instance.executeSync {
             appContainer = new Window()
             windows << appContainer
-//        }
+        }
         return appContainer
     }
 

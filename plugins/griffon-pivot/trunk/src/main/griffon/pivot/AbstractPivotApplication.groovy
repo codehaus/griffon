@@ -35,6 +35,7 @@ import org.apache.pivot.wtk.media.Image
 
 import griffon.core.GriffonApplication
 import griffon.util.EventRouter
+import griffon.util.Metadata
 
 /**
  * @author Andres.Almiray
@@ -46,6 +47,7 @@ abstract class AbstractPivotApplication implements Application, GriffonApplicati
     AbstractPivotApplication() {
         UIThreadHelper.instance.setUIThreadHandler(new PivotUIThreadHandler())
 //        _base = new BaseGriffonApplication(this)
+        loadApplicationProperties()
     }
 
     void startup(Display display, PivotMap<String, String> properties) {
@@ -83,7 +85,7 @@ abstract class AbstractPivotApplication implements Application, GriffonApplicati
             throw new IllegalArgumentException("In alert() you must define a value body: of type ${Component.class.name}")
         }
         BoxPane realBody = new BoxPane()
-        realBody.add(params.body)
+        if(params.body) realBody.add(params.body)
         realArgs << realBody
         realArgs << (params.display ? params.display : params.owner)
         realArgs << params.listener instanceof DialogCloseListener ? params.listener : (params.listener as DialogCloseListener)
@@ -101,7 +103,7 @@ abstract class AbstractPivotApplication implements Application, GriffonApplicati
             throw new IllegalArgumentException("In prompt() you must define a value body: of type ${Component.class.name}")
         }
         BoxPane realBody = new BoxPane()
-        realBody.add(params.body)
+        if(params.body) realBody.add(params.body)
         realArgs << realBody
         realArgs << (params.display ? params.display : params.owner)
         realArgs << params.listener instanceof SheetCloseListener ? params.listener : (params.listener as SheetCloseListener)
@@ -137,8 +139,6 @@ abstract class AbstractPivotApplication implements Application, GriffonApplicati
     // ------------------------------------------
 
     protected void bootstrap() {
-        applicationProperties = new Properties()
-        applicationProperties.load(getClass().getResourceAsStream('/application.properties'))
         GriffonApplicationHelper.prepare(this)
         event("BootstrapEnd",[this])
     }
@@ -189,6 +189,9 @@ abstract class AbstractPivotApplication implements Application, GriffonApplicati
     }
     public void setApplicationProperties(Properties applicationProperties) {
         this.applicationProperties = applicationProperties
+    }
+    public void loadApplicationProperties() {
+        this.applicationProperties = Metadata.getCurrent()
     }
 
     public Class getConfigClass() {

@@ -1,11 +1,11 @@
 /*
- * Copyright 2003-2010 the original author or authors.
+ * Copyright 2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,17 +16,21 @@
 
 package griffon.pivot.factory
 
-import org.apache.pivot.wtk.media.drawing.Path
+import org.apache.pivot.wtk.media.Drawing
+import org.apache.pivot.wtk.media.drawing.Canvas
+import org.apache.pivot.wtk.media.drawing.Shape
 
 /**
  * @author Andres Almiray
  */
-class PathFactory extends PivotBeanFactory {
-    PathFactory() {
-        super(Factory)
+class DrawingFactory extends PivotBeanFactory {
+    DrawingFactory() {
+        super(Drawing)
     }
 
-    public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-        if(child instanceof Path.Operation) parent.add(child)
+    void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
+        if(child instanceof Canvas) parent.canvas = child
+        else if(child instanceof Shape) parent.canvas.add(child)
+        else super.setChild(builder, parent, child)
     }
 }

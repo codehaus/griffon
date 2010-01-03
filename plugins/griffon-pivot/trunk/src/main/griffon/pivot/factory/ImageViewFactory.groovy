@@ -54,7 +54,7 @@ class ImageViewFactory extends ComponentFactory {
     }
 
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-        if(child instanceof Image) parent.setImage(image)
+        if(child instanceof Image) parent.setImage(child)
         else super.setChild(builder, parent, child)
     }
 }

@@ -56,8 +56,8 @@ class PivotBuilder extends FactoryBuilderSupport {
     }
 
     def registerPivotPassThruNodes() {
-        registerFactory("widget", new WidgetFactory(Component, true))
-        registerFactory("container", new WidgetFactory(Component, false))
+        registerFactory("widget", new WidgetFactory(Component, false))
+        registerFactory("container", new WidgetFactory(Container, false))
         registerFactory("bean", new WidgetFactory(Object, true))
     }
  
@@ -195,7 +195,7 @@ class PivotBuilder extends FactoryBuilderSupport {
     }
 
     void registerPivotMedia() {
-        registerPivotComponentFactory('drawing', Drawing)
+        registerFactory('drawing', new DrawingFactory())
         registerFactory('picture', new PictureFactory())
 
         registerFactory('canvas', new GroupFactory(Canvas))

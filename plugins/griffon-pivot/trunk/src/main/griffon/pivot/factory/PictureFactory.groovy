@@ -16,7 +16,6 @@
 
 package griffon.pivot.factory
 
-import griffon.pivot.PivotUtils
 import java.awt.image.BufferedImage
 import org.apache.pivot.wtk.media.Picture
 
@@ -33,15 +32,5 @@ class PictureFactory extends PivotBeanFactory {
         if(value instanceof BufferedImage) return new Picture(value)
         if(!value && attributes.containsKey('image')) return new Picture(attributes.remove('image'))
         throw new IllegalArgumentException("In $name you must define a value or a property image: of type ${BufferedImage.class.name}")
-    }
-
-    boolean onHandleNodeAttributes(FactoryBuilderSupport builder, Object node, Map attributes) {
-        attributes.each { property, value ->
-            if(!PivotUtils.applyAsEventListener(builder, property, value, node)) {
-                PivotUtils.setBeanProperty(property, value, node)
-            }
-        }
-       
-        return false
     }
 }

@@ -67,7 +67,7 @@ final class PivotUtils {
         ])
         AbstractSyntheticMetaMethods.enhance(Component, [
             setFormLabel: { label -> Form.setLabel(delegate, label? label.toString(): null) },
-            setFormFlag: { flag -> Form.setFlag(delegate, flag? flag: (String)null) },
+            setFormFlag: { flag -> flag? Form.setFlag(delegate, flag) : Form.setFlag(delegate, (Form.Flag) null) },
             setTabLabel: { label -> TabPane.setLabel(delegate, label? label.toString(): null) },
         ])
     }
@@ -84,7 +84,7 @@ final class PivotUtils {
     }
 
     static boolean applyAsEventListener(FactoryBuilderSupport builder, String propertyName, value, bean) {
-        List<Class> listenerTypes = EVENT_TO_LISTENER_MAP[propertyName]
+        def listenerTypes = EVENT_TO_LISTENER_MAP[propertyName]
         if(!listenerTypes || !(value instanceof Closure)) return false
         for(type in listenerTypes) {
             String getListenersMethod = "get" + type.simpleName + "s"
@@ -98,8 +98,8 @@ final class PivotUtils {
     private static final Class[] PARAMS = [FactoryBuilderSupport] as Class[]
 
     private static makeAdapter(FactoryBuilderSupport builder, Class type, String propertyName, Closure callback) {
-        String adapterClassName = (type.memberClass? type.enclosingClass.simpleName + type.simpleName : type.SimpleName) + 'Adapter'
-        Class adapterClass = getClass().classLoader.loadClass(adapterClassName)
+        String adapterClassName = 'griffon.pivot.adapters.' + (type.memberClass? type.enclosingClass.simpleName + type.simpleName : type.simpleName) + 'Adapter'
+        Class adapterClass = PivotUtils.classLoader.loadClass(adapterClassName)
         def adapter = adapterClass.getDeclaredConstructor(PARAMS).newInstance([builder] as Object[])
         adapter."on${propertyName[0].toUpperCase()}${propertyName[1..-1]}"(callback)
         return adapter
