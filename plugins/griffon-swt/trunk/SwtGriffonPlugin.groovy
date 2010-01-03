@@ -22,7 +22,6 @@ class SwtGriffonPlugin {
     def canBeGlobal = false
     def dependsOn = [:]
     def toolkits = ['swt']
-    def platforms = ['linux', 'windows']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
