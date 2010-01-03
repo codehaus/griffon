@@ -1,5 +1,5 @@
 /*
- * Copyright 2008-2009 the original author or authors.
+ * Copyright 2009-2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,10 @@ import org.eclipse.swt.widgets.Shell
 
 import griffon.core.GriffonApplication
 import griffon.util.EventRouter
+import griffon.util.Metadata
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 class SWTApplication implements StandaloneGriffonApplication, GriffonApplication {
 //    @Delegate private final BaseGriffonApplication _base
@@ -41,12 +42,11 @@ class SWTApplication implements StandaloneGriffonApplication, GriffonApplication
     SWTApplication() {
         UIThreadHelper.instance.setUIThreadHandler(new SWTUIThreadHandler())
 //        _base = new BaseGriffonApplication(this)
+        loadApplicationProperties()
         defaultDisplay = Display.default
     }
 
     public void bootstrap() {
-        applicationProperties = new Properties()
-        applicationProperties.load(getClass().getResourceAsStream('/application.properties'))
         GriffonApplicationHelper.prepare(this)
         event("BootstrapEnd",[this])
     }
@@ -129,6 +129,9 @@ class SWTApplication implements StandaloneGriffonApplication, GriffonApplication
     }
     public void setApplicationProperties(Properties applicationProperties) {
         this.applicationProperties = applicationProperties
+    }
+    public void loadApplicationProperties() {
+        this.applicationProperties = Metadata.getCurrent()
     }
 
     public Class getConfigClass() {

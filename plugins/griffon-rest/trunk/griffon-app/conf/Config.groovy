@@ -1,5 +1,5 @@
 griffon {}
 
-griffon.jars.destDir='lib'
+griffon.jars.destDir='dist/addon'
 
-griffon.jars.jarName='RestGriffonAddon.jar'
+// griffon.jars.jarName='RestGriffonAddon.jar'

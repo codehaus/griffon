@@ -1,13 +1,35 @@
+/*
+ * Copyright 2009-2010 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package griffon.jme.app
 
 import com.jme.app.SimpleHeadlessApp
 // import griffon.util.BaseGriffonApplication
+import griffon.core.GriffonApplication
 import griffon.util.GriffonApplicationHelper
-import griffon.util.IGriffonApplication
 import griffon.util.GriffonExceptionHandler
 import griffon.util.EventRouter
+import griffon.util.Metadata
+import griffon.util.UIThreadHelper
+import java.awt.Toolkit
 
-class SimpleHeadlessGriffonApplication extends SimpleHeadlessApp implements IGriffonApplication {
+/**
+ * @author Andres Almiray
+ */
+class SimpleHeadlessGriffonApplication extends SimpleHeadlessApp implements GriffonApplication {
     // @Delegate private final BaseGriffonApplication _base
 
     List appFrames  = []
@@ -16,11 +38,10 @@ class SimpleHeadlessGriffonApplication extends SimpleHeadlessApp implements IGri
     SimpleHeadlessGriffonApplication() {
        super()
        // _base = new BaseGriffonApplication(this)
+       loadApplicationProperties()
     }
 
     void bootstrap() {
-        applicationProperties = new Properties()
-        applicationProperties.load(getClass().getResourceAsStream('/application.properties'))
         GriffonApplicationHelper.prepare(this)
         headlessDelegate = resolveHeadlessDelegate()
         event("BootstrapEnd",[this])
@@ -31,7 +52,7 @@ class SimpleHeadlessGriffonApplication extends SimpleHeadlessApp implements IGri
     }
 
     void show() {
-        GriffonApplicationHelper.callReady(this)
+        callReady()
         start()
     }
 
@@ -87,6 +108,21 @@ class SimpleHeadlessGriffonApplication extends SimpleHeadlessApp implements IGri
 
     // ==================================================
 
+    /**
+     * Calls the ready lifecycle mhetod after the UI thread calms down
+     */
+    private void callReady() {
+        // wait for EDT to empty out.... somehow
+        boolean empty = false
+        while (true) {
+            UIThreadHelper.instance.executeSync {empty = Toolkit.defaultToolkit.systemEventQueue.peekEvent() == null}
+            if (empty) break
+            sleep(100)
+        }
+
+        ready();
+    }
+
     Map<String, ?> addons = [:]
     Map<String, String> addonPrefixes = [:]
 
@@ -112,6 +148,9 @@ class SimpleHeadlessGriffonApplication extends SimpleHeadlessApp implements IGri
     }
     void setApplicationProperties(Properties applicationProperties) {
         this.applicationProperties = applicationProperties
+    }
+    public void loadApplicationProperties() {
+        this.applicationProperties = Metadata.getCurrent()
     }
 
     Class getConfigClass() {

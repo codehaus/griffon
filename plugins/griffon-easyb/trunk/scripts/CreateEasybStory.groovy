@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2008 the original author or authors.
+ * Copyright 2004-2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 /**
  * Gant script that creates a new Easyb story
+ *
+ * @author Andres Almiray
  */
 
 import org.codehaus.griffon.commons.GriffonClassUtils as GCU
@@ -23,7 +25,7 @@ import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
-target (createEasybStory: "Creates a new Griffon Easyb story") {
+target(default: "Creates a new Griffon Easyb story") {
    depends(checkVersion, parseArguments)
    promptForName(type: "Easyb Story")
    def (pkg, name) = extractArtifactName(argsMap["params"][0])
@@ -35,5 +37,3 @@ target (createEasybStory: "Creates a new Griffon Easyb story") {
       type: "EasybStory",
       path: "test/easyb")
 }
-
-setDefaultTarget(createEasybStory)

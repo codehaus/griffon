@@ -1,5 +1,5 @@
 /*
-* Copyright 2009 the original author or authors.
+* Copyright 2009-2010 the original author or authors.
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package griffon.spring.artifact
 import griffon.core.ArtifactInfo
 
 /**
- * @author Andres Almiray (aalmiray)
+ * @author Andres Almiray
  */
 class SpringDomainArtifactHandler extends SpringArtifactHandlerAdapter {
     static final String TYPE ="domain"

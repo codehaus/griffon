@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2009-2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import org.apache.commons.dbcp.PoolingDataSource
 import org.apache.commons.dbcp.PoolableConnectionFactory
 import org.apache.commons.dbcp.DriverManagerConnectionFactory
 
-import griffon.util.IGriffonApplication
+import griffon.core.GriffonApplication
 
 /**
  * @author Andres.Almiray
@@ -37,7 +37,7 @@ import griffon.util.IGriffonApplication
 class GsqlAddon {
    private def bootstrap
    private DataSource dataSource
-   private IGriffonApplication application
+   private GriffonApplication application
 
    private static final String ENVIRONMENT = "griffon.env"
    private static final String ENVIRONMENT_DEV = "dev"

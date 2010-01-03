@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2009-2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import griffon.builder.wizard.impl.GriffonWizardPanelProvider
 import griffon.builder.wizard.impl.WizardResultProducerImpl
 
 /**
- * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ * @author Andres Almiray
  */
 class WizardFactory extends AbstractFactory {
    protected final WizardAddon addon

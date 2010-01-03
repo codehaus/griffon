@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2009-2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import griffon.util.IGriffonApplication
+import griffon.core.GriffonApplication
 import org.jivesoftware.smack.ConnectionConfiguration
 import org.jivesoftware.smack.Chat
 import org.jivesoftware.smack.ChatManagerListener
@@ -28,7 +28,7 @@ import org.jivesoftware.smack.packet.Message
  * @author Andres.Almiray
  */
 class JabberGriffonAddon {
-   private IGriffonApplication application
+   private GriffonApplication application
    private static final Map CHATS = [:]
 
    def addonInit = { app ->

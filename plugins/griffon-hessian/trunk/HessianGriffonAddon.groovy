@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2009-2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-import griffon.util.IGriffonApplication
+import griffon.core.GriffonApplication
 import griffon.hessian.HessianProxy
 import griffon.hessian.BurlapProxy
 
 import java.lang.reflect.InvocationTargetException
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 class HessianGriffonAddon {
-   private IGriffonApplication application
+   private GriffonApplication application
    private static final Class[] CTOR_ARGS1 = [String, Class] as Class[]
    private static final Class[] CTOR_ARGS2 = [String, String] as Class[]
 

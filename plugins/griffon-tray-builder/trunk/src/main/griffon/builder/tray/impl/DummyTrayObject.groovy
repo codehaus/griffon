@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------
    TrayBuilder
-   Copyright (C) 2008-2009 Andres Almiray
+   Copyright (C) 2008-2010 Andres Almiray
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
@@ -22,7 +22,7 @@ package griffon.builder.tray.impl
 import org.codehaus.groovy.runtime.NullObject
 
 /**
- * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ * @author Andres Almiray
  */
 class DummyTrayObject {
     private final storage = [:]

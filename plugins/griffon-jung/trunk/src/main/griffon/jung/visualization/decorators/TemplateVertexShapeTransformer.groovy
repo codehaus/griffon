@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 the original author or authors.
+ * Copyright 2009-2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import java.awt.Shape
 import java.awt.geom.Rectangle2D
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 class TemplateVertexShapeTransformer<V> extends BasicVertexShapeTransformer<V> {
    TemplateVertexShapeTransformer(Shape template = new Rectangle2D.Double(0d, 0d, 1d, 1d)) {

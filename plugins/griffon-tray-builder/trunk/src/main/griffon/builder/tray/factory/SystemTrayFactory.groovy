@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------------
    TrayBuilder
-   Copyright (C) 2008-2009 Andres Almiray
+   Copyright (C) 2008-2010 Andres Almiray
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
@@ -22,7 +22,7 @@ package griffon.builder.tray.factory
 import java.awt.SystemTray
 
 /**
- * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ * @author Andres Almiray
  */
 class SystemTrayFactory extends AbstractFactory {
     public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )

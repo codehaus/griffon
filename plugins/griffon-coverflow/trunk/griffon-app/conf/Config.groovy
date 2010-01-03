@@ -1,5 +1,5 @@
 griffon {}
 
-griffon.jars.destDir='lib'
+griffon.jars.destDir='dist/addon'
 
-griffon.jars.jarName='CoverflowGriffonAddon.jar'
+// griffon.jars.jarName='CoverflowGriffonAddon.jar'
