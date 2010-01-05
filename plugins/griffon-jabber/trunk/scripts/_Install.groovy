@@ -45,3 +45,17 @@ if (!addonIsSet1) {
 root.'JabberGriffonAddon'.addon=true
 ''')
 }
+
+def checkConfigOptionIsSet = { where, option ->
+   boolean optionIsSet = false
+   where.each { key, value ->
+       optionIsSet = optionIsSet || option == key
+   }
+   optionIsSet
+}
+
+if(!checkConfigOptionIsSet(appConfig, "griffon.jabber.injectInto")) {
+    new File("${basedir}/griffon-app/conf/Application.groovy").append("""
+griffon.jabber.injectInto = ["controller"]
+""")
+}
