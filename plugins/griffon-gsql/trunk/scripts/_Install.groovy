@@ -32,28 +32,32 @@
 includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
-def checkOptionIsSet = { where, option ->
+// check to see if we already have a GsqlGriffonAddon
+ConfigSlurper configSlurper1 = new ConfigSlurper()
+def slurpedBuilder1 = configSlurper1.parse(new File("$basedir/griffon-app/conf/Builder.groovy").toURL())
+boolean addonIsSet1
+slurpedBuilder1.each() { prefix, v ->
+    v.each { builder, views ->
+        addonIsSet1 = addonIsSet1 || 'GsqlGriffonAddon' == builder
+    }
+}
+
+if (!addonIsSet1) {
+    println 'Adding GsqlGriffonAddon to Builders.groovy'
+    new File("$basedir/griffon-app/conf/Builder.groovy").append('''
+root.'GsqlGriffonAddon'.addon=true
+''')
+}
+
+def checkConfigOptionIsSet = { where, option ->
    boolean optionIsSet = false
-   where.each { prefix, v ->
-       v.each { key, views ->
-           optionIsSet = optionIsSet || option == key
-       }
+   where.each { key, value ->
+       optionIsSet = optionIsSet || option == key
    }
    optionIsSet
 }
 
-ConfigSlurper configSlurper = new ConfigSlurper()
-builderConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
-if(!checkOptionIsSet(builderConfig, "GsqlGriffonAddon")) {
-    println 'Adding GsqlAddon to Builder.groovy'
-    new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
-root.'GsqlGriffonAddon'.addon=true
-""")
-}
-
-// append hints for config options if not present
-appConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Application.groovy").toURL())
-if(!checkOptionIsSet(appConfig, "griffon.gsql.injectInto")) {
+if(!checkConfigOptionIsSet(appConfig, "griffon.gsql.injectInto")) {
     new File("${basedir}/griffon-app/conf/Application.groovy").append("""
 griffon.gsql.injectInto = ["controller"]
 """)
@@ -76,10 +80,5 @@ if(!new File("${basedir}/griffon-app/conf/BootStrapGsql.groovy").exists()) {
       path: "griffon-app/conf")
 }
 
-if(!new File("${basedir}/griffon-app/conf/Schema.groovy").exists()) {
-   createArtifact(
-      name: "Schema",
-      suffix: "",
-      type: "Schema",
-      path: "griffon-app/conf")
-}
+printFrame("""You may need to create an schema.ddl file depending on your settings,
+if so, place it in griffon-app/resources.""")
