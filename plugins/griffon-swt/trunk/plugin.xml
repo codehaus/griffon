@@ -1,6 +1,8 @@
 <plugin name='swt' version='0.1' jdk='1.5'>
-  <author>Your name</author>
-  <title>Plugin summary/headline</title>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>SWT UI toolkit plugin</title>
   <documentation>http://griffon.codehaus.org/Swt+Plugin</documentation>
+  <toolkits>swt</toolkits>
   <dependencies />
 </plugin>

@@ -1,6 +1,8 @@
 <plugin name='pivot' version='0.1' jdk='1.5'>
-  <author>Your name</author>
-  <title>Plugin summary/headline</title>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Pivot UI toolkit plugin</title>
   <documentation>http://griffon.codehaus.org/Pivot+Plugin</documentation>
+  <toolkits>pivot</toolkits>
   <dependencies />
 </plugin>

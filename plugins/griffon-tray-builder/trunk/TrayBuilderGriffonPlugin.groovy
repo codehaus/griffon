@@ -21,10 +21,11 @@
  * @author Andres Almiray
  */
 class TrayBuilderGriffonPlugin {
-    def version = "0.2"
+    def version = "0.3"
     def canBeGlobal = false
     def dependsOn = [:]
     def jdk = "1.6"
+    def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"

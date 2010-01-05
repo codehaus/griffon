@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class ClojureGriffonPlugin {
-    def version = "0.4"
+    def version = "0.4.1"
     def canBeGlobal = false
     def dependsOn = ["lang-bridge": "0.2.1"]
 

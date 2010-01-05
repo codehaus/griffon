@@ -42,7 +42,7 @@ o.each() { prefix, v ->
 }
 
 if (!builderIsSet) {
-    println 'Adding GfxBuilder to Builders.groovy'
+    println 'Adding GfxBuilder to Builder.groovy'
     new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
 root.'griffon.builder.gfx.GfxBuilder'.view = '*'
 """)

@@ -18,9 +18,10 @@
  * @author Andres Almiray
  */
 class TridentBuilderGriffonPlugin {
-    def version = "0.1"
+    def version = "0.2"
     def canBeGlobal = false
     def dependsOn = [:]
+    def toolkits = ['swing', 'swt']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"

@@ -22,6 +22,12 @@ import org.codehaus.griffon.util.BuildSettings
 
 includeTargets << griffonScript("_GriffonSettings")
 
+lwjglJnlpResources = []
+def lwjgl_version = "2.2.1"
+for(os in ['linux', 'macosx', 'windows', 'solaris']) {
+    lwjglJnlpResources << [os: os, nativelibs: ["webstart/lwjgl-${lwjgl_version}-native-${os}.jar"]]
+}
+
 packagingType = ''
 eventPackageStart = { type ->
     packagingType = type
@@ -63,10 +69,11 @@ doWithPlatform = { platformOs ->
     def rs = config.griffon.extensions.resources[platformOs]
     if(!rs) {
         def co = new ConfigObject()
-        co.nativelibs = config.lwjgl.jnlp.resources.find{it.os == platformOs}.nativelibs
+        co.nativelibs = lwjglJnlpResources.find{it.os == platformOs}.nativelibs
         config.griffon.extensions.resources[platformOs] = co
     } else {
         if(!rs.nativeLibs) rs.nativeLibs = [] 
         rs.nativeLibs.addAll(nativeLibs)
     }
 }
+

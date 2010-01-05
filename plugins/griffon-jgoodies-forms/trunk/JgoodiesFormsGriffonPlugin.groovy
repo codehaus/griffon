@@ -18,9 +18,10 @@
  * @author Andres Almiray
  */
 class JgoodiesFormsGriffonPlugin {
-    def version = 0.1
+    def version = 0.2
     def canBeGlobal = true
     def dependsOn = [:]
+    def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"

@@ -32,7 +32,7 @@ o.each() { prefix, v ->
 }
 
 if (!builderIsSet) {
-    println 'Adding JideBuilder to Builders.groovy'
+    println 'Adding JideBuilder to Builder.groovy'
     new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
 root.'griffon.builder.jide.JideBuilder'.view = '*'
 """)

@@ -29,38 +29,51 @@
 //    ant.mkdir(dir:"${basedir}/griffon-app/jobs")
 //
 
-// Clobber griffon-app/conf/Builder.groovy
-println 'Setting SwtBuilder on Builders.groovy'
-println 'Setting SWTGriffonAddon on Builders.groovy'
-new File("${basedir}/griffon-app/conf/Builder.groovy").text = """
-root.'groovy.swt.SwtBuilder'.view = '*'
-root.'SWTGriffonAddon'.addon = true
-"""
+includeTargets << griffonScript('_GriffonArgParsing')
 
-def mainClass = "griffon.swt.SWTApplication"
-def configSlurper1 = new ConfigSlurper()
-def buildconf = configSlurper1.parse(new File("$basedir/griffon-app/conf/Config.groovy").toURL())
-if(!(mainClass in buildconf.flatten().'griffon.application.mainClass')) {
-    println "Setting '$mainClass' as main class"
-    new File("$basedir/griffon-app/conf/Config.groovy").append("""
-griffon.application.mainClass = "$mainClass"
-""")
+appToolkits = metadata.'app.toolkits'
+if(!appToolkits) appToolkits = ''
+appToolkits = appToolkits.split(',').toList()
+firstTime = !appToolkits.contains('swt')
+
+updateMetadata('app.toolkits': 'swt')
+
+if(firstTime) {
+    def builderConfigFile = new File("${basedir}/griffon-app/conf/Builder.groovy")
+    def addonPattern = ~/^.+\.addon=true$/
+    def addonsCopied = false
+    def builderConf = new StringBuffer("/* SWT_PLUGIN_COMMENT_START\n")
+    builderConf.append(builderConfigFile.text)
+    builderConf.append("SWT_PLUGIN_COMMENT_END */\n")
+    builderConf.append("// ADDED_BY_SWT_PLUGIN_START\n")
+    builderConf.append("root.'groovy.swt.SwtBuilder'.view = '*'\n")
+    builderConf.append("root.'SWTGriffonAddon'.addon=true\n")
+    builderConfigFile.text.eachLine { line ->
+        if(line =~ addonPattern) {
+            addonsCopied = true
+            builderConf.append(line).append('\n')
+        }
+    }
+    builderConf.append("\n// ADDED_BY_SWT_PLUGIN_END\n")
+    builderConfigFile.text = builderConf.toString()
+    
+    if(addonsCopied) {
+        printFramed("""Please review griffon-app/conf/Builder.groovy as some addons
+were relocated. Make sure any ommisions are inserted in the
+same block as SwtGriffonAddon.""")
+    }
 }
 
-confirmInput = {String message ->
-    ant.input(message: message, addproperty: "confirm.message", validargs: "y,n")
-    ant.antProject.properties."confirm.message"
-}
-
-// Replace Swing views
+// Replace views
 new File("${basedir}/griffon-app/views").eachFileMatch(~/.*View\.groovy/) { view ->
     if(view.text =~ /application\(/) {
-        if(confirmInput("Would you like to replace ${view.name} with an SWT view?")) {
+        askAndDoNoNag("Would you like to replace ${view.name} with a Swt view?") {
+            println "Replacing ${view.name} with Swt code..."
             view.text = """import org.eclipse.swt.layout.GridData
 
 application(text: "SWT shell", location:[100,100], size:[280, 70]) {
     gridLayout(numColumns:1)
-    cLabel(background: "#fff777", "The quick brown fox jumps over the lazy dog\nThe quick brown fox jumps over the lazy dog",
+    cLabel(background: "#fff777", "The quick brown fox jumps over the lazy dog\\nThe quick brown fox jumps over the lazy dog",
            layoutData: gridData(horizontalAlignment: GridData.FILL, grabExcessHorizontalSpace:true))
 }
 """

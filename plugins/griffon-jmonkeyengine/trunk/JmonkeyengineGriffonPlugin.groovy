@@ -21,6 +21,7 @@ class JmonkeyengineGriffonPlugin {
     def version = 0.1
     def canBeGlobal = false
     def dependsOn = [lwjgl: 0.1]
+    def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"

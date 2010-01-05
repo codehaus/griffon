@@ -40,17 +40,8 @@ slurpedBuilder1.each() { prefix, v ->
 }
 
 if (!addonIsSet1) {
-    println 'Adding JoglGriffonAddon to Builders.groovy'
+    println 'Adding JoglGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'JoglGriffonAddon'.addon=true
 ''')
-}
-
-def joglJnlp = "http://download.java.net/media/jogl/builds/archive/jsr-231-1.x-webstart-next/jogl.jnlp"
-def buildconf = configSlurper1.parse(new File("$basedir/griffon-app/conf/Config.groovy").toURL())
-if(!(joglJnlp in buildconf.flatten().'griffon.extensions.jnlpUrls')) {
-    println "Adding JOGL jnlp extension to configuration"
-    new File("$basedir/griffon-app/conf/Config.groovy").append("""
-griffon.extensions.jnlpUrls << "$joglJnlp"
-""")
 }

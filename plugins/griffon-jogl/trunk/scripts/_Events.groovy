@@ -23,6 +23,10 @@ eventPackageStart = { type ->
     packagingType = type
 }
 
+eventCreateConfigEnd = {
+    config.griffon.extensions.jnlpUrls << "http://download.java.net/media/jogl/builds/archive/jsr-231-1.x-webstart-next/jogl.jnlp"
+}
+
 def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
 eventCopyLibsEnd = { jardir ->
     eventClosure1(jardir)

@@ -18,9 +18,10 @@
  * @author Andres Almiray
  */
 class MacwidgetsBuilderGriffonPlugin {
-    def version = "0.2.1"
+    def version = "0.3"
     def canBeGlobal = false
     def dependsOn = [:]
+    def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"

@@ -40,7 +40,7 @@ slurpedBuilder1.each() { prefix, v ->
 }
 
 if (!addonIsSet1) {
-    println 'Adding GlazedlistsGriffonAddon to Builders.groovy'
+    println 'Adding GlazedlistsGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'GlazedlistsGriffonAddon'.addon=true
 ''')

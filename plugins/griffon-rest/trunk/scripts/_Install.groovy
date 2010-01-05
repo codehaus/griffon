@@ -40,7 +40,7 @@ slurpedBuilder1.each() { prefix, v ->
 }
 
 if (!addonIsSet1) {
-    println 'Adding RestGriffonAddon to Builders.groovy'
+    println 'Adding RestGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'RestGriffonAddon'.addon=true
 ''')

@@ -1,6 +1,8 @@
-<plugin name='coverflow' version='0.1' jdk='1.5'>
-  <author>Your name</author>
-  <title>Plugin summary/headline</title>
+<plugin name='coverflow' version='0.2' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Provides a coverflow component</title>
   <documentation>http://griffon.codehaus.org/Coverflow+Plugin</documentation>
+  <toolkits>swing</toolkits>
   <dependencies />
 </plugin>

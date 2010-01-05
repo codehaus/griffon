@@ -29,5 +29,4 @@
 //    ant.mkdir(dir:"${basedir}/griffon-app/jobs")
 //
 
-ant.property(environment: "env")
 ant.mkdir(dir: "${basedir}/src/scala")

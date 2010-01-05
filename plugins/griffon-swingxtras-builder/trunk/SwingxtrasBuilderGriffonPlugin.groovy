@@ -18,11 +18,11 @@
  * @author Andres Almiray
  */
 class SwingxtrasBuilderGriffonPlugin {
-    def version = "0.1.1"
+    def version = "0.2"
     def canBeGlobal = false
     def dependsOn = [:]
+    def toolkits = ['swing']
 
-    // TODO Fill in these fields
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Swingxtras Builder Plugin"

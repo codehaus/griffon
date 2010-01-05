@@ -40,7 +40,7 @@ slurpedBuilder1.each() { prefix, v ->
 }
 
 if (!addonIsSet1) {
-    println 'Adding SwingxWsGriffonAddon to Builders.groovy'
+    println 'Adding SwingxWsGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'SwingxWsGriffonAddon'.addon=true
 ''')

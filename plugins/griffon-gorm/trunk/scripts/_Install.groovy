@@ -43,7 +43,7 @@ slurpedBuilder1.each() { prefix, v ->
 }
 
 if (!addonIsSet1) {
-    println 'Adding GormGriffonAddon to Builders.groovy'
+    println 'Adding GormGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'GormGriffonAddon'.addon=true
 ''')

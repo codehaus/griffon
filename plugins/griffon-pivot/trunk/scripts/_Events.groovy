@@ -22,6 +22,11 @@ eventPackageStart = { type ->
     packagingType = type
 }
 
+eventCreateConfigEnd = {
+    config.griffon.application.mainClass = 'griffon.pivot.DesktopPivotApplication'
+    config.griffon.applet.mainClass = 'org.apache.pivot.wtk.BrowserApplicationContext$HostApplet'
+}
+
 def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
 eventCopyLibsEnd = { jardir ->
     eventClosure1(jardir)

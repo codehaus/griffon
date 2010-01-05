@@ -40,21 +40,13 @@ slurpedBuilder1.each() { prefix, v ->
 }
 
 if (!addonIsSet1) {
-    println 'Adding JmonkeyengineGriffonAddon to Builders.groovy'
+    println 'Adding JmonkeyengineGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'JmonkeyengineGriffonAddon'.addon=true
 ''')
 }
 
-def simpleGameAppClass = "griffon.jme.app.SimpleGameGriffonApplication"
 def simpleGameDelegate = "MySimpleGameDelegate"
-def buildconf = configSlurper1.parse(new File("$basedir/griffon-app/conf/Config.groovy").toURL())
-if(!(simpleGameAppClass in buildconf.flatten().'griffon.application.mainClass')) {
-    println "Setting '$simpleGameAppClass' as main class"
-    new File("$basedir/griffon-app/conf/Config.groovy").append("""
-griffon.application.mainClass = "$simpleGameAppClass"
-""")
-}
 def appconf = configSlurper1.parse(new File("$basedir/griffon-app/conf/Application.groovy").toURL())
 if(!(simpleGameDelegate in appconf.flatten().'jme.simpleGameDelegate')) {
     println "Setting '$simpleGameDelegate' as jme.simpleGameDelegate"

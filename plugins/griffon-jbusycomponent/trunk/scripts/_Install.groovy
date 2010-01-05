@@ -40,7 +40,7 @@ slurpedBuilder1.each() { prefix, v ->
 }
 
 if (!addonIsSet1) {
-    println 'Adding JBusyComponentGriffonAddon to Builders.groovy'
+    println 'Adding JBusyComponentGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'JBusyComponentGriffonAddon'.addon=true
 ''')

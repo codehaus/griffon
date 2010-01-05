@@ -32,7 +32,7 @@ o.each() { prefix, v ->
 }
 
 if (!builderIsSet) {
-    println 'Adding FlamingoBuilder to Builders.groovy'
+    println 'Adding FlamingoBuilder to Builder.groovy'
     new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
 root.'griffon.builder.flamingo.FlamingoBuilder'.view = '*'
 """)

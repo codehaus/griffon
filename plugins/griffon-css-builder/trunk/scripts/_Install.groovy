@@ -32,7 +32,7 @@ o.each() { prefix, v ->
 }
 
 if (!builderIsSet) {
-    println 'Adding CSSBuilder to Builders.groovy'
+    println 'Adding CSSBuilder to Builder.groovy'
     new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
 root.'griffon.builder.css.CSSBuilder'.view = '*'
 root.'griffon.builder.css.CSSBuilder'.controller = ['CSS']

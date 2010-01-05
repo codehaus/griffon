@@ -46,7 +46,7 @@ ConfigSlurper configSlurper = new ConfigSlurper()
 
 builderConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
 if(!checkOptionIsSet(builderConfig, "griffon.builder.fx.FxBuilder")) {
-    println 'Adding FxBuilder to Builders.groovy'
+    println 'Adding FxBuilder to Builder.groovy'
     new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
 fx.'griffon.builder.fx.FxBuilder'.view = '*'
 """)

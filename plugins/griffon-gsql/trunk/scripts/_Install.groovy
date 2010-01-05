@@ -44,10 +44,10 @@ def checkOptionIsSet = { where, option ->
 
 ConfigSlurper configSlurper = new ConfigSlurper()
 builderConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
-if(!checkOptionIsSet(builderConfig, "griffon.gsql.GsqlAddon")) {
-    println 'Adding GsqlAddon to Builders.groovy'
+if(!checkOptionIsSet(builderConfig, "GsqlGriffonAddon")) {
+    println 'Adding GsqlAddon to Builder.groovy'
     new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
-root.'griffon.gsql.GsqlAddon'.controller = '*'
+root.'GsqlGriffonAddon'.addon=true
 """)
 }
 

@@ -42,11 +42,11 @@ def checkOptionIsSet = { where, option ->
 
 ConfigSlurper configSlurper = new ConfigSlurper()
 
-// check if JGoodiesFormsAddon needs to be defined
+// check if JGoodiesFormsGriffonAddon needs to be defined
 builderConfig = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
-if(!checkOptionIsSet(builderConfig, "griffon.jgoodies.JGoodiesFormsAddon")) {
-    println 'Adding JGoodiesFormsAddon to Builders.groovy'
+if(!checkOptionIsSet(builderConfig, "JGoodiesFormsGriffonAddon")) {
+    println 'Adding JGoodiesFormsAddon to Builder.groovy'
     new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
-root.'griffon.jgoodies.JGoodiesFormsAddon'.view = '*'
+root.'JGoodiesFormsGriffonAddon'.addon=true
 """)
 }

@@ -23,6 +23,10 @@ eventPackageStart = { type ->
     packagingType = type
 }
 
+eventCreateConfigEnd = {
+    config.griffon.application.mainClass = "griffon.jme.app.SimpleGameGriffonApplication"
+}
+
 def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
 eventCopyLibsEnd = { jardir ->
     eventClosure1(jardir)

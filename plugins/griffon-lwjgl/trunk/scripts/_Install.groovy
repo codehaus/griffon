@@ -40,20 +40,8 @@ slurpedBuilder1.each() { prefix, v ->
 }
 
 if (!addonIsSet1) {
-    println 'Adding LwjglGriffonAddon to Builders.groovy'
+    println 'Adding LwjglGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'LwjglGriffonAddon'.addon=true
 ''')
-}
-
-def lwjgl_version = "2.2.1"
-def buildconf = configSlurper1.parse(new File("$basedir/griffon-app/conf/Config.groovy").toURL())
-if(!buildconf.flatten().'lwjgl.jnlp.resources') {
-    println "Adding LWJGL jnlp extension to configuration"
-    def output = "lwjgl.jnlp.resources = ["
-    for(os in ['linux', 'macosx', 'windows', 'solaris']) {
-        output += """\n    [os: '$os', nativelibs: ["webstart/lwjgl-${lwjgl_version}-native-${os}.jar"]],"""
-    } 
-    output += "\n]\n"
-    new File("$basedir/griffon-app/conf/Config.groovy").append("\n"+output)
 }

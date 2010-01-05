@@ -18,9 +18,10 @@
  * @author Andres Almiray
  */
 class FestGriffonPlugin {
-    def version = '0.3'
+    def version = '0.4'
     def canBeGlobal = true
     def dependsOn = [:]
+    def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"

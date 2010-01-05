@@ -40,18 +40,8 @@ slurpedBuilder1.each() { prefix, v ->
 }
 
 if (!addonIsSet1) {
-    println 'Adding WorldwindGriffonAddon to Builders.groovy'
+    println 'Adding WorldwindGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'WorldwindGriffonAddon'.addon=true
 ''')
 }
-
-def worldwindJnlp = "http://worldwind.arc.nasa.gov/java/0.3.0/webstart/worldwind.jnlp"
-def buildconf = configSlurper1.parse(new File("$basedir/griffon-app/conf/Config.groovy").toURL())
-if(!(worldwindJnlp in buildconf.flatten().'griffon.extensions.jnlpUrls')) {
-    println "Adding WordlWind jnlp extension to configuration"
-    new File("$basedir/griffon-app/conf/Config.groovy").append("""
-griffon.extensions.jnlpUrls << "$worldwindJnlp"
-""")
-}
-

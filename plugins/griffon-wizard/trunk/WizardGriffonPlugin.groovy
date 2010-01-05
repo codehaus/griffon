@@ -18,9 +18,10 @@
  * @author Andres Almiray
  */
 class WizardGriffonPlugin {
-    def version = "0.3-SNAPSHOT"
+    def version = "0.3"
     def canBeGlobal = false
     def dependsOn = [:]
+    def toolkits = ['swing']
 
     // TODO Fill in these fields
     def author = "Andres Almiray"

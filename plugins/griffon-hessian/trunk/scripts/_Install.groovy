@@ -40,7 +40,7 @@ slurpedBuilder1.each() { prefix, v ->
 }
 
 if (!addonIsSet1) {
-    println 'Adding HessianGriffonAddon to Builders.groovy'
+    println 'Adding HessianGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'HessianGriffonAddon'.addon=true
 ''')
