@@ -45,5 +45,6 @@ if (!addonIsSet1) {
     println 'Adding WizardGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'WizardGriffonAddon'.addon=true
+root.'WizardGriffonAddon'.controller=['wizard', 'branchingWizard', 'showWizard']
 ''')
 }

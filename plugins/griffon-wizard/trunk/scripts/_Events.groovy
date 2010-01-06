@@ -18,30 +18,7 @@
  * @author Andres Almiray
  */
 
-import org.codehaus.griffon.plugins.GriffonPluginUtils
 
-eventPackagePluginStart = { pluginName, plugin ->
-    def destFileName = "lib/griffon-${pluginName}-addon-${plugin.version}.jar"
-    ant.delete(dir: destFileName, quiet: false, failOnError: false)
-    ant.jar(destfile: destFileName) {
-        fileset(dir: classesDirPath) {
-            exclude(name:'CreateWizard*')
-            exclude(name:'_*.class')
-            exclude(name:'*GriffonPlugin.class')
-        }
-    }
-}
-
-eventCopyLibsEnd = { jardir ->
-    ant.fileset(dir:"${getPluginDirForName('wizard').file}/lib/", includes:"*.jar").each {
-        griffonCopyDist(it.toString(), jardir)
-    }
-}
-
-getPluginDirForName = { String pluginName ->
-    // pluginsHome = griffonSettings.projectPluginsDir.path
-    GriffonPluginUtils.getPluginDirForName(pluginsHome, pluginName)
-}
 def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
 eventCopyLibsEnd = { jardir ->
     eventClosure1(jardir)
@@ -52,3 +29,17 @@ eventCopyLibsEnd = { jardir ->
     }
 }
 
+eventCollectArtifacts = { artifactsInfo ->
+    if(!artifactsInfo.find{ it.type == "wizardPage" }) {
+        artifactsInfo << [type: "wizardPage", path: "wizards", suffix: "WizardPage"]
+    }
+    if(!artifactsInfo.find{ it.type == "wizardPanelProvider" }) {
+        artifactsInfo << [type: "wizardPanelProvider", path: "wizards", suffix: "WizardPanelProvider"]
+    }
+}
+
+eventStatsStart = { pathToInfo ->
+    if(!pathToInfo.find{ it.path == "wizards"} ) {
+        pathToInfo << [name: "Wizards", path: "wizards", filetype: [".groovy",".java"]]
+    }
+}

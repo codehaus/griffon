@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package griffon.builder.wizard.impl
+package griffon.wizard.impl
 
 import org.netbeans.spi.wizard.Wizard
 import org.netbeans.spi.wizard.WizardController

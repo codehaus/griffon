@@ -25,7 +25,7 @@ import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
-target (createBranchingWizard: "Creates a new BranchingWizard") {
+target(default: "Creates a new BranchingWizard") {
    depends(checkVersion, parseArguments)
    promptForName(type: "Branching Wizarde")
    def (pkg, name) = extractArtifactName(argsMap["params"][0])
@@ -37,5 +37,3 @@ target (createBranchingWizard: "Creates a new BranchingWizard") {
       type: "BranchingWizard",
       path: "griffon-app/wizards")
 }
-
-setDefaultTarget(createBranchingWizard)

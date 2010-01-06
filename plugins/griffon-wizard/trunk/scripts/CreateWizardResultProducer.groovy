@@ -25,7 +25,7 @@ import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
-target (createWizardResultProducer: "Creates a new WizardResultProducer") {
+target(default: "Creates a new WizardResultProducer") {
    depends(checkVersion, parseArguments)
    promptForName(type: "Wizard result producer")
    def (pkg, name) = extractArtifactName(argsMap["params"][0])
@@ -37,5 +37,3 @@ target (createWizardResultProducer: "Creates a new WizardResultProducer") {
       type: "WizardResultProducer",
       path: "griffon-app/wizards")
 }
-
-setDefaultTarget(createWizardResultProducer)

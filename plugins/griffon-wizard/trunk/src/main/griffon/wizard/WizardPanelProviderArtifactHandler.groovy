@@ -14,26 +14,17 @@
  * limitations under the License.
  */
 
+package griffon.wizard
+
+import griffon.core.ArtifactHandlerAdapter
+
 /**
- * Gant script that creates a new WizardPage
- * 
  * @author Andres Almiray
  */
+class WizardPanelProviderArtifactHandler extends ArtifactHandlerAdapter {
+    static final String TYPE = "wizardPanelProvider"
 
-import org.codehaus.griffon.commons.GriffonClassUtils as GCU
-
-includeTargets << griffonScript("Init")
-includeTargets << griffonScript("CreateIntegrationTest")
-
-target(default: "Creates a new WizardPanelProvider") {
-   depends(checkVersion, parseArguments)
-   promptForName(type: "Wizard panel provider")
-   def (pkg, name) = extractArtifactName(argsMap["params"][0])
-   def fqn = "${pkg?pkg:''}${pkg?'.':''}${GCU.getClassNameRepresentation(name)}"
-
-   createArtifact(
-      name: fqn,
-      suffix: "WizardPanelProvider",
-      type: "WizardPanelProvider",
-      path: "griffon-app/wizards")
+    WizardPanelProviderArtifactHandler() {
+        super(TYPE)
+    }
 }

@@ -37,4 +37,5 @@ slurpedBuilder1.each() { prefix, v ->
 if(addonIsSet1) {
     def builderConfigFile1 = new File("${basedir}/griffon-app/conf/Builder.groovy")
     builderConfigFile1.text = builderConfigFile1.text - "root.'WizardGriffonAddon'.addon=true\n"
+    builderConfigFile1.text = builderConfigFile1.text - "root.'WizardGriffonAddon'.controller=['wizard', 'branchingWizard', 'showWizard']\n"
 }
