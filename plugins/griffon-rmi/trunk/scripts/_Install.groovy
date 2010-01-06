@@ -46,15 +46,8 @@ root.'RmiGriffonAddon'.addon=true
 ''')
 }
 
-def checkConfigOptionIsSet = { where, option ->
-   boolean optionIsSet = false
-   where.each { key, value ->
-       optionIsSet = optionIsSet || option == key
-   }
-   optionIsSet
-}
-
-if(!checkConfigOptionIsSet(appConfig, "griffon.rmi.injectInto")) {
+appConfig = configSlurper1.parse(new File("$basedir/griffon-app/conf/Application.groovy").toURL())
+if(!(appConfig.flatten().'griffon.rmi.injectInto')) {
     new File("${basedir}/griffon-app/conf/Application.groovy").append("""
 griffon.rmi.injectInto = ["controller"]
 """)

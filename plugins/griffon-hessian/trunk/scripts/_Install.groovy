@@ -45,15 +45,9 @@ if (!addonIsSet1) {
 root.'HessianGriffonAddon'.addon=true
 ''')
 }
-def checkConfigOptionIsSet = { where, option ->
-   boolean optionIsSet = false
-   where.each { key, value ->
-       optionIsSet = optionIsSet || option == key
-   }
-   optionIsSet
-}
 
-if(!checkConfigOptionIsSet(appConfig, "griffon.hessian.injectInto")) {
+appConfig = configSlurper1.parse(new File("$basedir/griffon-app/conf/Application.groovy").toURL())
+if(!(appConfig.flatten().'griffon.hessian.injectInto')) {
     new File("${basedir}/griffon-app/conf/Application.groovy").append("""
 griffon.hessian.injectInto = ["controller"]
 """)

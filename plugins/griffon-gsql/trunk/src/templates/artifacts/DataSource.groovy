@@ -3,16 +3,19 @@ dataSource {
     driverClassName = "org.hsqldb.jdbcDriver"
     username = "sa"
     password = ""
+    tokenizeddl = false // set this to true if using MySQL or any other
+                        // RDBMS that requires execution of DDL statements
+                        // on separate calls
 }
 pool {
-  maxWait = 60000
-  maxIdle = 5
-  maxActive = 8
+    maxWait = 60000
+    maxIdle = 5
+    maxActive = 8
 }
 environments {
     development {
         dataSource {
-            dbCreate = "create" // one of 'create', 'create-drop', 'skip'
+            dbCreate = "create" // one of ['create', 'skip']
             url = "jdbc:hsqldb:mem:devDB"
         }
     }

@@ -28,7 +28,7 @@ import org.apache.commons.dbcp.DriverManagerConnectionFactory
 
 import griffon.core.GriffonApplication
 import griffon.util.Environment
-import griffo.gsql.DataSourceHolder
+import griffon.gsql.DataSourceHolder
 
 import java.util.logging.Level
 import java.util.logging.Logger
@@ -37,10 +37,10 @@ import java.util.logging.Logger
  * @author Andres.Almiray
  */
 class GsqlGriffonAddon {
-    private static final Loggger LOG = new Logger(GsqlGriffonAddon.class.name)
+    private static final Logger LOG = new Logger(GsqlGriffonAddon.class.name)
 
     private def bootstrap
-    private IGriffonApplication application
+    private GriffonApplication application
  
     def addonInit = { app ->
         application = app
@@ -54,13 +54,11 @@ class GsqlGriffonAddon {
             bootstrapInit()
         },
         ShutdownStart: { app ->
-            bootstrapDestroy()
             Connection connection = null
             try {
                 connection = DataSourceHolder.instance.dataSource.getConnection()
                 bootstrap.destroy(new Sql(connection))
-                def dbName = connection.metaData.databaseProductName
-                if(dbName == 'HSQL Database Engine') {
+                if(connection.metaData.databaseProductName == 'HSQL Database Engine') {
                     connection.createStatement().executeUpdate('SHUTDOWN')
                 }
             } finally {
@@ -68,16 +66,16 @@ class GsqlGriffonAddon {
             }
         },
         NewInstance: { klass, type, instance ->
-            def types = application.config.griffon?.gsql?.injectInto ?: ["controller"]
+            def types = application.config.griffon?.gsql?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             instance.metaClass.withSql = withSql
         }
-    }
+    ]
 
     // ======================================================
 
     private parseConfig() {
-        def dataSourceClass = this.class.classLoader.loadClass("DataSource")
+        def dataSourceClass = this.class.classLoader.loadClass('DataSource')
         return new ConfigSlurper(Environment.current.name).parse(dataSourceClass)
     }
 
@@ -96,7 +94,7 @@ class GsqlGriffonAddon {
         String username = config.dataSource.username.toString()
         String password = config.dataSource.password.toString()
         ConnectionFactory connectionFactory = null
-        if( username ) {
+        if(username) {
             connectionFactory = new DriverManagerConnectionFactory(url, username, password)
         } else {
             connectionFactory = new DriverManagerConnectionFactory(url, null)
@@ -111,27 +109,31 @@ class GsqlGriffonAddon {
  
         URL ddl = getClass().classLoader.getResource('schema.ddl')
         if(!ddl) {
-            LOG.log(Level.WARNING, "DataSource.dbCreate was set to 'create' but schema.ddl was found on the classpath.") 
+            LOG.log(Level.WARNING, "DataSource.dbCreate was set to 'create' but schema.ddl was not found in classpath.") 
             return
         }
  
-        withSql { sql -> sql.execute(ddl.txt) }
+        boolean tokenizeddl = config.dataSource?.tokenizeddl ?: false
+        withSql { sql -> 
+            if(!tokenizeddl) {
+                sql.execute(ddl.text)
+            } else {
+                ddl.text.split(';').each { stmnt ->
+                    if(stmnt?.trim()) sql.execute(stmnt + ';')
+                }
+            }
+        }
     }
 
     private void bootstrapInit() {
-        bootstrap = this.class.classLoader.loadClass("BootStrapGsql").newInstance()
-        withSql { sql -> bootstrap.init(sql) }
-    }
-
-    private void bootstrapDestroy() {
-        withSql { sql -> bootstrap.destroy(sql) }
+        bootstrap = this.class.classLoader.loadClass('BootStrapGsql').newInstance()
+        withSql { sql -> bootstrap?.init(sql) }
     }
 
     private withSql = { Closure closure ->
-        Connection connection = dataSource.getConnection()
-        Sql sql = new Sql(connection)
+        Connection connection = DataSourceHolder.instance.dataSource.getConnection()
         try {
-            closure(sql)
+            closure(new Sql(connection))
         } finally {
             connection.close()
         }

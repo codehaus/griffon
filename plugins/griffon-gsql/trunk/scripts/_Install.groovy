@@ -49,17 +49,10 @@ root.'GsqlGriffonAddon'.addon=true
 ''')
 }
 
-def checkConfigOptionIsSet = { where, option ->
-   boolean optionIsSet = false
-   where.each { key, value ->
-       optionIsSet = optionIsSet || option == key
-   }
-   optionIsSet
-}
-
-if(!checkConfigOptionIsSet(appConfig, "griffon.gsql.injectInto")) {
+appConfig = configSlurper1.parse(new File("$basedir/griffon-app/conf/Application.groovy").toURL())
+if(!(appConfig.flatten().'griffon.gsql.injectInto')) {
     new File("${basedir}/griffon-app/conf/Application.groovy").append("""
-griffon.gsql.injectInto = ["controller"]
+griffon.gsql.injectInto = ['controller']
 """)
 }
 
@@ -80,5 +73,5 @@ if(!new File("${basedir}/griffon-app/conf/BootStrapGsql.groovy").exists()) {
       path: "griffon-app/conf")
 }
 
-printFrame("""You may need to create an schema.ddl file depending on your settings,
-if so, place it in griffon-app/resources.""")
+printFramed("""You may need to create an schema.ddl file depending on your settings.
+If so, place it in griffon-app/resources.""")

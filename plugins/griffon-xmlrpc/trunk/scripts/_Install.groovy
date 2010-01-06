@@ -46,15 +46,8 @@ root.'XmlrpcGriffonAddon'.addon=true
 ''')
 }
 
-def checkConfigOptionIsSet = { where, option ->
-   boolean optionIsSet = false
-   where.each { key, value ->
-       optionIsSet = optionIsSet || option == key
-   }
-   optionIsSet
-}
-
-if(!checkConfigOptionIsSet(appConfig, "griffon.xmlrpc.injectInto")) {
+appConfig = configSlurper1.parse(new File("$basedir/griffon-app/conf/Application.groovy").toURL())
+if(!(appConfig.flatten().'griffon.xmlrpc.injectInto')) {
     new File("${basedir}/griffon-app/conf/Application.groovy").append("""
 griffon.xmlrpc.injectInto = ["controller"]
 """)
