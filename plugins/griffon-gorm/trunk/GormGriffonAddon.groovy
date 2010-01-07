@@ -40,7 +40,7 @@ import org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtracto
 import org.codehaus.groovy.grails.orm.hibernate.support.HibernateDialectDetectorFactoryBean
 import org.codehaus.groovy.grails.orm.hibernate.support.SpringLobHandlerDetectorFactoryBean
 
-import griffon.util.IGriffonApplication
+import griffon.core.GriffonApplication
 import griffon.spring.factory.support.ObjectFactoryBean
 import griffon.spring.artifact.SpringDomainArtifactHandler
 
@@ -59,12 +59,11 @@ class GormGriffonAddon {
     static config = [:]
     static hibProps = [:]
 
-    private IGriffonApplication app
+    private GriffonApplication app
     private bootstrap
 
     def addonInit(app) {
         this.app = app
-        app.event("SpringAddon", [this])
         app.artifactManager.registerArtifactHandler(new SpringDomainArtifactHandler())
         config = parseConfig()
     }

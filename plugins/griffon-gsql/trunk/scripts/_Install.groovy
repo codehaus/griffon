@@ -43,7 +43,7 @@ slurpedBuilder1.each() { prefix, v ->
 }
 
 if (!addonIsSet1) {
-    println 'Adding GsqlGriffonAddon to Builders.groovy'
+    println 'Adding GsqlGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'GsqlGriffonAddon'.addon=true
 ''')
@@ -55,7 +55,6 @@ if(!(appConfig.flatten().'griffon.gsql.injectInto')) {
 griffon.gsql.injectInto = ['controller']
 """)
 }
-
 
 if(!new File("${basedir}/griffon-app/conf/DataSource.groovy").exists()) {
    createArtifact(
@@ -71,6 +70,19 @@ if(!new File("${basedir}/griffon-app/conf/BootStrapGsql.groovy").exists()) {
       suffix: "",
       type: "BootStrapGsql",
       path: "griffon-app/conf")
+}
+
+def printFramed = { message, c = '*', padded = false ->
+    def pieces = message.split('\n').collect { it.replace('\t',' ') }
+    def length = pieces*.size().max() + 4
+    def frame = c * length
+    def result = pieces.collect {
+        def blank = ' ' * (length - 4 - it.size())
+        "${c} ${it}${blank} ${c}\n"
+    }.join()
+    result = "${frame}\n${result}${frame}\n"
+    if (padded) result = "\n${result}\n"
+    print result
 }
 
 printFramed("""You may need to create an schema.ddl file depending on your settings.
