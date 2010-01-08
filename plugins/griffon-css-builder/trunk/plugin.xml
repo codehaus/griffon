@@ -1,4 +1,4 @@
-<plugin name='css-builder' version='0.3' jdk='1.5'>
+<plugin name='css-builder' version='0.4' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>CSS for Swing</title>
