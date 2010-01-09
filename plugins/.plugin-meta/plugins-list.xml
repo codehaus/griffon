@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1477">
+<plugins revision="1478">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -541,7 +541,7 @@
         </release>
     </plugin>
     <plugin name="jmonkeyengine"/>
-    <plugin latest-release="0.1" name="jogl"/>
+    <plugin latest-release="0.1" name="jogl">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JOGL support</title>
             <author>Andres Almiray</author>
