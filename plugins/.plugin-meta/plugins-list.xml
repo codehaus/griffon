@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1454">
+<plugins revision="1465">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -106,7 +106,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-coverflow/tags/RELEASE_0_1/griffon-coverflow-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="css-builder" latest-release="0.2">
+    <plugin name="css-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>CSS for Swing</title>
             <author>Andres Almiray</author>
@@ -361,7 +361,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gpars/tags/RELEASE_0_1/griffon-gpars-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="gsql" latest-release="0.1">
+    <plugin name="gsql">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gsql powered DataSource</title>
             <author>Andres Almiray</author>
