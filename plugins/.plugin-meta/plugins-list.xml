@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1476">
+<plugins revision="1477">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -541,7 +541,16 @@
         </release>
     </plugin>
     <plugin name="jmonkeyengine"/>
-    <plugin name="jogl"/>
+    <plugin latest-release="0.1" name="jogl"/>
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>JOGL support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Jogl+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jogl/tags/RELEASE_0_1/griffon-jogl-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.1.1" name="jung">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Graph visualizations and algorithms via JUNG2</title>
@@ -586,7 +595,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lang-bridge/tags/RELEASE_0_2_1/griffon-lang-bridge-0.2.1.zip</file>
         </release>
     </plugin>
-    <plugin name="lwjgl"/>
+    <plugin latest-release="0.1" name="lwjgl">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>LWJGL support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Lwjgl+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lwjgl/tags/RELEASE_0_1/griffon-lwjgl-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="mac-menus"/>
     <plugin latest-release="0.2.1" name="macwidgets-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
@@ -790,7 +808,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-splash/tags/RELEASE_0_1_4/griffon-splash-0.1.4.zip</file>
         </release>
     </plugin>
-    <plugin name="spring"/>
+    <plugin latest-release="0.1" name="spring">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Spring framework libraries and helpers</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Spring+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_1/griffon-spring-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.1" name="swingx-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>SwingX Builder Plugin</title>
@@ -934,7 +961,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wizard/tags/RELEASE_0_2_1/griffon-wizard-0.2.1.zip</file>
         </release>
     </plugin>
-    <plugin name="worldwind"/>
+    <plugin latest-release="0.1" name="worldwind">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>NASA WorldWind (3D Maps)</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Worldwind+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-worldwind/tags/RELEASE_0_1/griffon-worldwind-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.1" name="wsclient">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>WS client &amp; libraries</title>
