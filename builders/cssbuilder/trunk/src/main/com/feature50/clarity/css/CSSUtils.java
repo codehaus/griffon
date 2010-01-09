@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 The original author or authors.
+ * Copyright 2009-2010 The original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -129,7 +129,7 @@ public final class CSSUtils {
                     values[j] = String.valueOf(Math.round((float) 255 * factor));
                 }
             }
-            return new Color(Integer.parseInt(values[0]), Integer.parseInt(values[1]), Integer.parseInt(values[2]));
+            return new Color(Integer.parseInt(values[0].trim()), Integer.parseInt(values[1].trim()), Integer.parseInt(values[2].trim()));
         } catch (Exception e) {
             logger.log(Level.WARNING, String.format("%1$s value ('%2$s') not understood", propertyName, cssColor), e);
             return null;
@@ -223,7 +223,7 @@ public final class CSSUtils {
     }
 
     private static Color rgbToColor(String colorValue) {
-        if (colorValue.startsWith("#")) colorValue = colorValue.substring(1);
+        if (colorValue.startsWith("#")) colorValue = colorValue.substring(1).trim();
         return Color.decode("0x" + colorValue);
     }
 }
