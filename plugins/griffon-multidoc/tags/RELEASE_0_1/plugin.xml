@@ -1,0 +1,7 @@
+<plugin name='multidoc' version='0.1' jdk='1.5'>
+  <author>Josh Reed</author>
+  <authorEmail>jareed@andrill.org</authorEmail>
+  <title>Multi-Document Support</title>
+  <documentation>http://griffon.codehaus.org/Multidoc+Plugin</documentation>
+  <dependencies />
+</plugin>
