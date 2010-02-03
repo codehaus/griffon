@@ -18,12 +18,15 @@ import griffon.core.GriffonApplication
 import griffon.util.Environment
 import griffon.domain.DomainClassEnhancer
 import com.db4o.*
+import com.db4o.cs.*
+import griffon.domain.db4o.Db4oDomainClassEnhancerDelegate
 
 /**
  * @author Andres Almiray
  */
 class Db4oGriffonAddon {
-    private ObjectContainer db
+    private ObjectContainer objectContainer
+    private ObjectServer objectServer
     private dbConfig
     private bootstrap
 
@@ -32,17 +35,25 @@ class Db4oGriffonAddon {
         ShutdownStart: { app -> shutdownObjectContainer(app) },
     ]
 
-    private void startupObjectContainer(GriffonApplication app)
+    private void startupObjectContainer(GriffonApplication app) {
         dbConfig = parseConfig()
-        db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dbConfig.database.name)
-        DomainClassEnhancer.instance.enhance(app, new Db4oDomainClassEnhancer(db))
+        int serverPort = Integer.parseInt(dbConfig?.dataSource?.server?.port ?: '65321')
+        String dbfileName = dbConfig?.dataSource?.name ?: 'db.db4o'
+        File dbfile = new File(dbfileName)
+        if(!dbfile.absolute) dbfile = new File(System.getProperty('griffon.start.dir'), dbfileName)
+        // db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dbfile.absolutePath)
+        // db = Db4oEmbedded.openFile(dbfile.canonicalPath)
+        objectServer = Db4oClientServer.openServer(dbfile.canonicalPath, serverPort)
+        objectContainer = objectServer.openClient()
+        DomainClassEnhancer.instance.enhance(app, new Db4oDomainClassEnhancerDelegate(app, objectContainer))
         bootstrap = app.class.classLoader.loadClass("BootstrapDb4o").newInstance()
         bootstrap.init(app)
     }
 
     private void shutdownObjectContainer(GriffonApplication app) {
         bootstrap.destroy(app)
-        db.close()
+        objectContainer.close()
+        objectServer.close()
     }
 
     private parseConfig() {

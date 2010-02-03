@@ -47,3 +47,11 @@ if(!new File("${basedir}/griffon-app/conf/Db4oConfig.groovy").exists()) {
       type: "Db4oConfig",
       path: "griffon-app/conf")
 }
+
+if(!new File("${basedir}/griffon-app/conf/BootstrapDb4o.groovy").exists()) {
+   createArtifact(
+      name: "BootstrapDb4o",
+      suffix: "",
+      type: "BootstrapDb4o",
+      path: "griffon-app/conf")
+}

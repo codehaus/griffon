@@ -19,7 +19,7 @@
  */
 class Db4oGriffonPlugin {
     def version = 0.1
-    def griffonVersion = '0.3-BETA-1 > *'
+    def griffonVersion = '0.3-SNAPSHOT > *'
     def dependsOn = [domain: 0.1]
 
     def author = "Andres Almiray"
