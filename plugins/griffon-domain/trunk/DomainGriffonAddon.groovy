@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import griffon.domain.DomainArtifactHandler
+import griffon.domain.DomainClassArtifactHandler
 // import griffon.core.GriffonApplication
 
 /**
@@ -22,7 +22,7 @@ import griffon.domain.DomainArtifactHandler
  */
 class DomainGriffonAddon {
     def addonInit(app) {
-        app.artifactManager.registerArtifactHandler(new DomainArtifactHandler())
+        app.artifactManager.registerArtifactHandler(new DomainClassArtifactHandler())
     }
 
 /*

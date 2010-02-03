@@ -22,10 +22,10 @@ import griffon.core.ArtifactInfo
 /**
  * @author Andres Almiray
  */
-class DomainArtifactHandler extends ArtifactHandlerAdapter {
-    static final String TYPE ="domain"
+class DomainClassArtifactHandler extends ArtifactHandlerAdapter {
+    static final String TYPE = "domain"
 
-    DomainArtifactHandler() {
+    DomainClassArtifactHandler() {
         super(TYPE)
     }
 

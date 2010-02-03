@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
+package griffon.domain
+
 /**
  * @author Andres Almiray
  */
-class DomainGriffonPlugin {
-    def version = 0.1
-    def griffonVersion = '0.3-SNAPSHOT > *'
-    def dependsOn = [:]
+interface DomainClassEnhancerDelegate {
+    Collection findAllBy(Class klass, String propertyName, value, String methodName)
+    Object findBy(Class klass, String propertyName, value, String methodName)
 
-    def author = "Andres Almiray"
-    def authorEmail = "aalmiray@users.sourceforge.net"
-    def title = "Domain class support"
-    def description = '''
-Domain class support
-'''
+    Collection findAllWhere(Map args)
+    Object findWhere(Map args)
 
-    // URL to the plugin's documentation
-    def documentation = "http://griffon.codehaus.org/Domain+Plugin"
+    Collection list()
+    int count()
+    int countBy(Class klass, String propertyName, value, String methodName)
+
+    Object saveOrUpdate(Object instance)
+    Object delete(Object instance)
 }
