@@ -34,7 +34,7 @@ includeTargets << griffonScript('_GriffonArgParsing')
 appToolkits = metadata.'app.toolkits'
 if(!appToolkits) appToolkits = ''
 appToolkits = appToolkits.split(',').toList()
-firstTime = !appToolkits.contains('gtk')
+firstTime = !metadata.'plugins.gtk'
 
 updateMetadata('app.toolkits': 'gtk')
 

@@ -47,7 +47,7 @@ eventCopyLibsEnd = { jardir ->
             // java-gnome expects the native lib to be in the same dir
             // as the jar so we have to move it
             ant.move(todir: "${jardir}/linux") {
-                fileset(dir: "${jardir}/linux/native", includes: "*.so")
+                fileset(dir: "${jardir}/linux/native", includes: "libgtk*.so")
             }
         }
     }

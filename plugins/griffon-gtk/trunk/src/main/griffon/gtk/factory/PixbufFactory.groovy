@@ -40,7 +40,7 @@ class PixbufFactory extends GtkBeanFactory {
         if(!value) value = attributes.remove('resource')
         if(value instanceof String || value instanceof URL) {
             String str = value.toString()
-            String suffix = str.substring(value.lastIndexOf('.')) ?: '.png'
+            String suffix = str.substring(str.lastIndexOf('.')) ?: '.png'
             File temp = GtkUtils.createTempResource(value, suffix)
             if(!attributes) {
                 return new Pixbuf(temp.absolutePath)

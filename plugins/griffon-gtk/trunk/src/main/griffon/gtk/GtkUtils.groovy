@@ -34,7 +34,7 @@ final class GtkUtils {
     }
 
     static File createTempResource(String classpathResource, String suffix = '.gtk', String prefix = 'griffon') {
-        return createTempResource(GtkUtils.class.classLoader.getResource(classpathResource), suffix, prefix)
+        return createTempResource((URL) GtkUtils.class.classLoader.getResource(classpathResource), suffix, prefix)
     }
 
     static File createTempResource(URL resource, String suffix = '.gtk', String prefix = 'grffon') {
@@ -45,12 +45,22 @@ final class GtkUtils {
     }
 
     static Stock parseStock(value, defaultValue = null ) {
-        def fieldName = value.toUpperCase().replace(' ','_')
+        if(value instanceof Stock) return value
         try {
+            String fieldName = value?.toString()?.toUpperCase()?.replace(' ','_')
             return Stock."$fieldName"
         } catch(Exception e) {
             return defaultValue
         }
+    }
+
+    static Orientation parseOrientation(value) {
+        if(!value) return Orientation.HORIZONTAL
+        if(value instanceof Orientation) return value
+        if(value instanceof GString) value = value.toString()
+        if('horizontal'.equalsIgnoreCase(value)) return Orientation.HORIZONTAL
+        if('vertical'.equalsIgnoreCase(value)) return Orientation.VERTICAL
+        return Orientation.HORIZONTAL
     }
 
     static boolean applyAsSignalHandler(FactoryBuilderSupport builder, String propertyName, value, bean) {

@@ -18,14 +18,20 @@ package griffon.gtk.factory
 
 import griffon.gtk.GtkUtils
 import org.gnome.glade.Glade
+import org.gnome.gtk.Container
+import org.gnome.gtk.Widget
 import java.util.logging.Level
 import java.util.logging.Logger
 
 /**
  * @author Andres Almiray
  */
-class GladeFactory extends AbstractGtkFactory {
+class GladeFactory extends GtkBeanFactory {
     private static final Logger LOG = Logger.getLogger(GladeFactory.class.name)
+
+    GladeFactory() {
+        super(Widget)
+    }
 
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
         def source = null
@@ -36,20 +42,25 @@ class GladeFactory extends AbstractGtkFactory {
         if(!source && attributes.containsKey('text')) text = attributes.remove('text')
 
         if(source) {
-            parseGlade(builder, GtkUtils.createTempResource(source, '.glade'), attributes.remove('root'), attributes.id)
+            return parseGlade(builder, GtkUtils.createTempResource(source, '.glade'), attributes)
         } else if(text) {
             def tmp = File.createTempFile('griffon', '.glade')
             tmp.deleteOnExit()
             tmp.text = text
-            parseGlade(builder, tmp, attributes.remove('root'), attributes.id)
+            return parseGlade(builder, tmp, attributes)
         } else {
             throw new IllegalArgumentException("In $name you must define a value for source: (a resource) or text: (an XML string).")
         }
-        return new Object()
     }
 
-    private void parseGlade(FactoryBuilderSupport builder, File source, String root, String rootId) {
-        rootId = rootId ? rootId + '_' : ''
+    void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
+        if(parent instanceof Container && child instanceof Widget) parent.add(child)
+        else super.setChild(builder, parent, child)
+    }
+
+    private parseGlade(FactoryBuilderSupport builder, File source, Map attributes) {
+        String root = attributes.remove('root')
+        String rootId = attributes.id ? attributes.id + '_' : ''
         def widgets = Glade.parse(source.absolutePath, root)
         def xml = new XmlSlurper().parseText(source.text)
         def ids = xml.'**'.grep{ it.@id != '' }.'@id'*.text()
@@ -59,6 +70,11 @@ class GladeFactory extends AbstractGtkFactory {
             } catch(Exception e) {
                 LOG.log(Level.INFO, "Could not retrieve widget with id $id", e)
             }
+        }
+        if(attributes.embed) {
+            return builder.getVariable(rootId + attributes.remove('embed'))
+        } else {
+            return new Object()
         } 
     }
 }
