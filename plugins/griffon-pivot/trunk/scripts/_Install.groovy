@@ -34,7 +34,7 @@ includeTargets << griffonScript('_GriffonArgParsing')
 appToolkits = metadata.'app.toolkits'
 if(!appToolkits) appToolkits = ''
 appToolkits = appToolkits.split(',').toList()
-firstTime = !appToolkits.contains('pivot')
+firstTime = !metadata.'plugins.pivot'
 
 updateMetadata('app.toolkits': 'pivot')
 
@@ -69,7 +69,7 @@ new File("${basedir}/griffon-app/views").eachFileMatch(~/.*View\.groovy/) { view
     if(view.text =~ /application\(/) {
         askAndDoNoNag("Would you like to replace ${view.name} with a Pivot view?") {
             println "Replacing ${view.name} with Pivot code..."
-            view.text = """application(title: "Pivot Window", maximized: true) {
+            view.text = """application(title: '$griffonAppName', maximized: true) {
     label('Hello Griffon!', styles: "{font:'Arial bold 24', color:'#ff0000', horizontalAlignment:'center', verticalAlignment:'center'}")
 }
 """

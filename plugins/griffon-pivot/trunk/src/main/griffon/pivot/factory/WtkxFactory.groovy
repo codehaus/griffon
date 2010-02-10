@@ -16,6 +16,7 @@
 
 package griffon.pivot.factory
 
+import griffon.pivot.PivotUtils
 import org.apache.pivot.wtkx.WTKXSerializer
 import java.lang.reflect.Field
 
@@ -46,5 +47,15 @@ class WTKXFactory extends AbstractFactory {
         }
 
         return root
+    }
+
+    boolean onHandleNodeAttributes(FactoryBuilderSupport builder, Object node, Map attributes) {
+        attributes.each { property, value ->
+            if(!PivotUtils.applyAsEventListener(builder, property, value, node)) {
+                PivotUtils.setBeanProperty(property, value, node)
+            }
+        }
+
+        return false
     }
 }
