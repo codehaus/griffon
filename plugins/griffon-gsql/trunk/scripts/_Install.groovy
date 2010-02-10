@@ -72,18 +72,5 @@ if(!new File("${basedir}/griffon-app/conf/BootStrapGsql.groovy").exists()) {
       path: "griffon-app/conf")
 }
 
-def printFramed = { message, c = '*', padded = false ->
-    def pieces = message.split('\n').collect { it.replace('\t',' ') }
-    def length = pieces*.size().max() + 4
-    def frame = c * length
-    def result = pieces.collect {
-        def blank = ' ' * (length - 4 - it.size())
-        "${c} ${it}${blank} ${c}\n"
-    }.join()
-    result = "${frame}\n${result}${frame}\n"
-    if (padded) result = "\n${result}\n"
-    print result
-}
-
 printFramed("""You may need to create an schema.ddl file depending on your settings.
 If so, place it in griffon-app/resources.""")
