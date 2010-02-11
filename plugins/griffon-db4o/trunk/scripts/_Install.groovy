@@ -32,13 +32,18 @@ slurpedBuilder1.each() { prefix, v ->
 }
 
 if (!addonIsSet1) {
-    println 'Adding Db4oGriffonAddon to Builders.groovy'
+    println 'Adding Db4oGriffonAddon to Builder.groovy'
     new File("$basedir/griffon-app/conf/Builder.groovy").append('''
 root.'Db4oGriffonAddon'.addon=true
 ''')
 }
 
-ant.mkdir(dir: "${basedir}/griffon-app/domain")
+appConfig = configSlurper1.parse(new File("$basedir/griffon-app/conf/Application.groovy").toURL())
+if(!(appConfig.flatten().'griffon.db4o.injectInto')) {
+    new File("${basedir}/griffon-app/conf/Application.groovy").append("""
+griffon.db4o.injectInto = ['controller']
+""")
+}
 
 if(!new File("${basedir}/griffon-app/conf/Db4oConfig.groovy").exists()) {
    createArtifact(

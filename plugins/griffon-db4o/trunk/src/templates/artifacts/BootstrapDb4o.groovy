@@ -1,7 +1,9 @@
+import com.db4o.ObjectContainer
+
 class BootstrapDb4o {
-    def init = { app -> 
+    def init = { ObjectContainer db -> 
     }
 
-    def destroy = { app ->
+    def destroy = { ObjectContainer db ->
     }
 } 

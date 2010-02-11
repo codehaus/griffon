@@ -3,17 +3,17 @@ dataSource {
 environments {
     development {
         dataSource {
-            name = "devDb.db4o"
+            name = "devDb.yarv"
         }
     }
     test {
         dataSource {
-            name = "testDb.db4o"
+            name = "testDb.yarv"
         }
     }
     production {
         dataSource {
-            name = "prodDb.db4o"
+            name = "prodDb.yarv"
         }
     }
 }

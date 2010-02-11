@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
+package griffon.db4o
+
+import com.db4o.ObjectContainer
+
 /**
  * @author Andres Almiray
  */
+@Singleton
+class ObjectContainerHolder {
+    ObjectContainer objectContainer
 
-// check to see if we already have a Db4oGriffonAddon
-ConfigSlurper configSlurper1 = new ConfigSlurper()
-def slurpedBuilder1 = configSlurper1.parse(new File("$basedir/griffon-app/conf/Builder.groovy").toURL())
-boolean addonIsSet1
-slurpedBuilder1.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'Db4oGriffonAddon' == builder
+    def withDb4o = { Closure closure ->
+        closure(objectContainer)
     }
 }
-
-if(addonIsSet1) {
-    def builderConfigFile1 = new File("${basedir}/griffon-app/conf/Builder.groovy")
-    builderConfigFile1.text = builderConfigFile1.text - "root.'Db4oGriffonAddon'.addon=true\n"
-}
-

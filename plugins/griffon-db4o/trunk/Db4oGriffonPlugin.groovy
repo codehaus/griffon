@@ -20,13 +20,13 @@
 class Db4oGriffonPlugin {
     def version = 0.1
     def griffonVersion = '0.3-SNAPSHOT > *'
-    def dependsOn = [domain: 0.1]
+    def dependsOn = [:]
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
-    def title = "Domain class persistence with db4o"
+    def title = "Db4o support"
     def description = '''
-Domain class persistence with db4o
+Db4o support
 '''
 
     // URL to the plugin's documentation
