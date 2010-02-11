@@ -17,113 +17,258 @@
 package griffon.domain
 
 import griffon.core.GriffonApplication
+import griffon.core.ArtifactInfo
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * @author Andres Almiray
  */
 @Singleton
 class DomainClassEnhancer {
-    final enhance(GriffonApplication app, DomainClassEnhancerDelegate enhancerDelegate) {
-        Map methods = [
-            "static": [
-                make: { Map args = [:] ->
-                    def instance = app.newInstance(app, delegate, DomainClassArtifactEnhancer.TYPE)
-                    args?.each { k, v ->
-                        try {
-                            instance[k] = v
-                        } catch(MissingPropertyException mpe) {
-                            // ignore ??
-                        }
-                    }
-                    return instance
-                },
-                count: { ->
-                    enhancerDelegate.count() ?: 0
-                },
-                list: { ->
-                    enhancerDelegate.list() ?: []
-                },
-                findAllWhere: { Map args ->
-                    enhancerDelegate.findAllWhere(args) ?: []
-                },
-                findWhere: { Map args ->
-                    enhancerDelegate.findWhere(args)
-                },
-                methodMissing: { String methodName, args ->
-                    def propertyName = methodName =~ /^findAllBy(\w+)$/
-                    if(propertyName) {
-                        normalizePropertyName(propertyName)
-                        return enhancerDelegate.findAllBy(delegate.getClass(), propertyName, args, methodName)
-                    }
-                    propertyName = methodName =~ /^findBy(\w+)$/
-                    if(propertyName){
-                        normalizePropertyName(propertyName)
-                        return enhancerDelegate.findBy(delegate.getClass(), propertyName, args, methodName)
-                    }
-                    propertyName = methodName =~ /^countBy(\w+)$/
-                    if(propertyName){
-                        normalizePropertyName(propertyName)
-                        return enhancerDelegate.countBy(delegate.getClass(), propertyName, args, methodName)
-                    }
-                    throw new MissingMethodException(methodName, Object, args)
-                }
-            ],
-            save: { -> enhancerDelegate.saveOrUpdate(delegate) },
-            delete: { -> enhancerDelegate.delete(delegate) }
-        ]
-
-        app.artifactManager.domainArtifacts.each { domain ->
-            enhance(domain.klass, methods)
+    private static DOMAIN_INITIALIZERS = new ConcurrentHashMap()
+    private static initializeDomain(Class c) {
+        synchronized(c) {
+             // enhance domain class only once, initializer is removed after calling
+             DOMAIN_INITIALIZERS.remove(c)?.call()
         }
     }
 
-    // ----------------------------------------------------------
-
-    private normalizePropertyName(propertyName) {
-        propertyName = propertyName[0][1]
-        return propertyName[0].toLowerCase() + propertyName[1..-1]
-    }
-
-    private static final String ENHANCED = "_ENHANCED_METACLASS_"
-
-    private boolean hasBeenEnhanced(Class klass) {
-        MetaClassRegistry mcr = GroovySystem.metaClassRegistry
-        MetaClass mc = mcr.getMetaClass(klass)
-        if(!(mc instanceof ExpandoMetaClass)) return false
-        return mc.hasMetaProperty(ENHANCED)
-    }
-
-    private void enhance(Class klass, Map enhancedMethods) {
-        MetaClassRegistry mcr = GroovySystem.metaClassRegistry
-        MetaClass mc = mcr.getMetaClass(klass)
-        boolean init = false
-        if(!(mc instanceof ExpandoMetaClass) ||
-            (mc instanceof ExpandoMetaClass && !mc.isModified())) {
-            mcr.removeMetaClass klass
-            mc = new ExpandoMetaClass(klass, true, true)
-            init = true
+    final enhance(GriffonApplication app, DomainClassEnhancerDelegate enhancer) {
+        def lazyInit = {ArtifactInfo dc ->
+            registerDynamicMethods(dc, app, enhancer)
+            MetaClass emc = GroovySystem.metaClassRegistry.getMetaClass(dc.klass)
         }
-        // if mc is an EMC that was initialized previously
-        // with additional methods/properties and it does
-        // not allow modifications after init, then the next
-        // block will throw an exception
-        enhancedMethods.each {methodName, method ->
-            if(methodName == "static") {
-                method.each { staticMethodName, staticMethod ->
-                    if (mc.getMetaMethod(staticMethodName) == null) {
-                        mc.registerStaticMethod(staticMethodName, staticMethod)
-                    }
+
+        def initializeDomainOnceClosure = {ArtifactInfo dc ->
+            initializeDomain(dc.klass)
+        }
+
+        app.artifactManager.domainArtifacts.each {dc ->
+            MetaClass mc = dc.klass.metaClass
+            DOMAIN_INITIALIZERS[dc.klass] = lazyInit.curry(dc)
+            def initDomainClassOnce = initializeDomainOnceClosure.curry(dc)
+            // these need to be eagerly initialised here, otherwise Groovy's findAll from the DGM is called
+            if(providesDynamicMethod(DynamicMethod.FIND_ALL, enhancer)) {
+                def findAllMethod = fetchDynamicMethod(DynamicMethod.FIND_ALL, enhancer, app, dc)
+                mc.static.findAll = {->
+                    findAllMethod.invoke(dc.klass, 'findAll', [] as Object[])
                 }
-            } else {
-                if (mc.getMetaMethod(methodName) == null) {
-                    mc.registerInstanceMethod(methodName, method)
+                mc.static.findAll = {Object example ->
+                    findAllMethod.invoke(dc.klass, 'findAll', [example] as Object[])
                 }
+                // mc.static.findAll = {Object example, Map args -> findAllMethod.invoke(dc.klass, 'findAll', [example, args] as Object[])}
+            }
+
+            mc.methodMissing = { String name, args ->
+                initDomainClassOnce()
+                mc.invokeMethod(delegate, name, args)
+            }
+            mc.static.methodMissing = {String name, args ->
+                initDomainClassOnce()
+                def result
+                if(delegate instanceof Class) {
+                    result = mc.invokeStaticMethod(delegate, name, args)
+                } else {
+                    result = mc.invokeMethod(delegate, name, args)
+                }
+                result
             }
         }
-        mc.registerBeanProperty(ENHANCED,true)
-        if (init) {
-            mc.initialize()
-            mcr.setMetaClass(klass, mc)
+    }
+
+    private static providesDynamicMethod(DynamicMethod method, DomainClassEnhancerDelegate enhancer) {
+        MetaClass mc = enhancer.metaClass
+        mc.hasProperty(enhancer, method.methodName)
+    }
+
+    private static fetchDynamicMethod(DynamicMethod method, DomainClassEnhancerDelegate enhancer, GriffonApplication app, ArtifactInfo dc) {
+        return enhancer."${method.methodName}"(app, dc)
+    }
+
+    private static registerDynamicMethods(ArtifactInfo dc, GriffonApplication app, DomainClassEnhancerDelegate enhancer) {
+        addBasicPersistenceMethods(dc, app, enhancer)
+        addQueryMethods(dc, app, enhancer)
+        addDynamicFinderSupport(dc, app, enhancer)
+        enhancer.enhance(dc, app)
+    }
+
+    private static addBasicPersistenceMethods(ArtifactInfo dc, GriffonApplication app, DomainClassEnhancerDelegate enhancer) {
+        def mc = dc.klass.metaClass
+
+        def makeMethod = fetchDynamicMethod(DynamicMethod.MAKE, enhancer, app, dc)
+        mc.static.make = {->
+            makeMethod.invoke(delegate, 'make', [] as Object[])
         }
+        mc.static.make = {Map args->
+            makeMethod.invoke(delegate, 'make', [args] as Object[])
+        }
+    
+        if(providesDynamicMethod(DynamicMethod.SAVE, enhancer)) {
+            def saveMethod = fetchDynamicMethod(DynamicMethod.SAVE, enhancer, app, dc)
+            mc.save = {Boolean validate ->
+                saveMethod.invoke(delegate, 'save', [validate] as Object[])
+            }
+            mc.save = {Map args ->
+                saveMethod.invoke(delegate, 'save', [args] as Object[])
+            }
+            mc.save = {->
+                saveMethod.invoke(delegate, 'save', [] as Object[])
+            }
+        }
+
+        if(providesDynamicMethod(DynamicMethod.DELETE, enhancer)) {
+            def deleteMethod = fetchDynamicMethod(DynamicMethod.DELETE, enhancer, app, dc)
+            mc.delete = {->
+                deleteMethod.invoke(delegate, 'delete', [] as Object[])
+            }
+        }
+
+        if(providesDynamicMethod(DynamicMethod.COUNT, enhancer)) {
+            def countMethod = fetchDynamicMethod(DynamicMethod.COUNT, enhancer, app, dc)
+            mc.static.count = {->
+                countMethod.invoke(delegate, 'count', [] as Object[])
+            }
+        }
+    
+        if(providesDynamicMethod(DynamicMethod.FETCH, enhancer)) {
+            def fetchMethod = fetchDynamicMethod(DynamicMethod.FETCH, enhancer, app, dc)
+            mc.static.fetch = {Object arg->
+                fetchMethod.invoke(delegate, 'fetch', [arg] as Object[])
+            }
+        }
+    }
+
+    private static addQueryMethods(ArtifactInfo dc, GriffonApplication app, DomainClassEnhancerDelegate enhancer) {
+        def mc = dc.klass.metaClass
+
+        if(providesDynamicMethod(DynamicMethod.FIND_ALL, enhancer)) {
+            def findAllMethod = fetchDynamicMethod(DynamicMethod.FIND_ALL, enhancer, app, dc)
+            mc.static.findAll = {String query ->
+                findAllMethod.invoke(dc.klass, 'findAll', [query] as Object[])
+            }
+            mc.static.findAll = {String query, Collection positionalParams ->
+                findAllMethod.invoke(dc.klass, 'findAll', [query, positionalParams] as Object[])
+            }
+            mc.static.findAll = {String query, Collection positionalParams, Map paginateParams ->
+                findAllMethod.invoke(dc.klass, 'findAll', [query, positionalParams, paginateParams] as Object[])
+            }
+            mc.static.findAll = {String query, Map namedArgs ->
+                findAllMethod.invoke(dc.klass, 'findAll', [query, namedArgs] as Object[])
+            }
+            mc.static.findAll = {String query, Map namedArgs, Map paginateParams ->
+                findAllMethod.invoke(dc.klass, 'findAll', [query, namedArgs, paginateParams] as Object[])
+            }
+        }
+
+        if(providesDynamicMethod(DynamicMethod.FIND, enhancer)) {
+            def findMethod = fetchDynamicMethod(DynamicMethod.FIND, enhancer, app, dc)
+            mc.static.find = {String query ->
+                findMethod.invoke(dc.klass, 'find', [query] as Object[])
+            }
+            mc.static.find = {String query, Collection args ->
+                findMethod.invoke(dc.klass, 'find', [query, args] as Object[])
+            }
+            mc.static.find = {String query, Map namedArgs ->
+                findMethod.invoke(dc.klass, 'find', [query, namedArgs] as Object[])
+            }
+            mc.static.find = {Object example ->
+                findMethod.invoke(dc.klass, 'find', [example] as Object[])
+            }
+        }
+
+        if(providesDynamicMethod(DynamicMethod.EXECUTE_QUERY, enhancer)) {
+            def executeQueryMethod = fetchDynamicMethod(DynamicMethod.EXECUTE_QUERY, enhancer, app, dc)
+            mc.static.executeQuery = {String query ->
+                executeQueryMethod.invoke(dc.klass, 'executequery', [query] as Object[])
+            }
+            mc.static.executeQuery = {String query, Collection positionalParams ->
+                executeQueryMethod.invoke(dc.klass, 'executequery', [query, positionalParams] as Object[])
+            }
+            mc.static.executeQuery = {String query, Collection positionalParams, Map paginateParams ->
+                executeQueryMethod.invoke(dc.klass, 'executequery', [query, positionalParams, paginateParams] as Object[])
+            }
+            mc.static.executeQuery = {String query, Map namedParams ->
+                executeQueryMethod.invoke(dc.klass, 'executequery', [query, namedParams] as Object[])
+            }
+            mc.static.executeQuery = {String query, Map namedParams, Map paginateParams ->
+                executeQueryMethod.invoke(dc.klass, 'executequery', [query, namedParams, paginateParams] as Object[])
+            }
+        }
+
+        if(providesDynamicMethod(DynamicMethod.LIST, enhancer)) {
+            def listMethod = fetchDynamicMethod(DynamicMethod.LIST, enhancer, app, dc)
+            mc.static.list = {->
+                listMethod.invoke(dc.klass, 'list', [] as Object[])
+            }
+            mc.static.list = {Map args ->
+                listMethod.invoke(dc.klass, 'list', [args] as Object[])
+            }
+        }
+
+        if(providesDynamicMethod(DynamicMethod.FIND_WHERE, enhancer)) {
+            def findWhereMethod = fetchDynamicMethod(DynamicMethod.FIND_WHERE, enhancer, app, dc)
+            mc.static.findWhere = {Map args ->
+                Map queryArgs = filterQueryArgumentMap(query)
+                findWhereMethod.invoke(dc.klass, 'findWhere', [queryArgs] as Object[])
+            }
+        }
+
+        if(providesDynamicMethod(DynamicMethod.FIND_ALL_WHERE, enhancer)) {
+            def findWhereAllMethod = fetchDynamicMethod(DynamicMethod.FIND_ALL_WHERE, enhancer, app, dc)
+            mc.static.findAllWhere = {Map args ->
+                Map queryArgs = filterQueryArgumentMap(query)
+                findWhereAllMethod.invoke(dc.klass, 'findAllWhere', [queryArgs] as Object[])
+            }
+        }
+    }
+
+    private static addDynamicFinderSupport(ArtifactInfo dc, GriffonApplication app, DomainClassEnhancerDelegate enhancer) {
+/*
+        def mc = dc.klass.metaClass
+
+        def dynamicMethods = []
+        if(providesDynamicMethod(DynamicMethod.FIND_BY, enhancer)) {
+            dynamicMethods << fetchDynamicMethod(DynamicMethod.FIND_BY, enhancer, app, dc)
+        }
+        if(providesDynamicMethod(DynamicMethod.FIND_ALL_BY, enhancer)) {
+            dynamicMethods << fetchDynamicMethod(DynamicMethod.FIND_ALL_BY, enhancer, app, dc)
+        }
+        if(providesDynamicMethod(DynamicMethod.COUNT_BY, enhancer)) {
+            dynamicMethods << fetchDynamicMethod(DynamicMethod.COUNT_BY, enhancer, app, dc)
+        }
+
+        // This is the code that deals with dynamic finders. It looks up a static method, if it exists it invokes it
+        // otherwise it trys to match the method invocation to one of the dynamic methods. If it matches it will
+        // register a new method with the ExpandoMetaClass so the next time it is invoked it doesn't have this overhead.
+        mc.static.methodMissing = {String methodName, args ->
+            def result = null            
+            def method = dynamicMethods.find {it.isMethodMatch(methodName)}
+            if(method) {
+                // register the method invocation for next time
+                synchronized(this) {
+                    mc.static."$methodName" = {List varArgs ->
+                        method.invoke(dc.klass, methodName, varArgs)
+                    }
+                }
+                result = method.invoke(dc.klass, methodName, args)
+            } else {
+                throw new MissingMethodException(methodName, delegate, args)
+            }
+            result
+        }
+*/
+    }
+
+    static Map filterQueryArgumentMap(Map query) {
+        def queryArgs = [:]
+        for (entry in query) {
+            if (entry.value instanceof CharSequence) {
+                queryArgs[entry.key] = entry.value.toString()
+            }
+            else {
+                queryArgs[entry.key] = entry.value
+            }
+        }
+        return queryArgs
     }
 }

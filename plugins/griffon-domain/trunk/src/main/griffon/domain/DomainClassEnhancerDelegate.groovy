@@ -16,20 +16,13 @@
 
 package griffon.domain
 
+import griffon.core.GriffonApplication
+import griffon.core.ArtifactInfo
+
 /**
  * @author Andres Almiray
  */
-interface DomainClassEnhancerDelegate {
-    Collection findAllBy(Class klass, String propertyName, value, String methodName)
-    Object findBy(Class klass, String propertyName, value, String methodName)
-
-    Collection findAllWhere(Map args)
-    Object findWhere(Map args)
-
-    Collection list()
-    int count()
-    int countBy(Class klass, String propertyName, value, String methodName)
-
-    Object saveOrUpdate(Object instance)
-    Object delete(Object instance)
+abstract class DomainClassEnhancerDelegate {
+    void enhance(ArtifactInfo domainClass, GriffonApplication app) {
+    }
 }

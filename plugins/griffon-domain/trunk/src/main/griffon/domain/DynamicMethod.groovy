@@ -14,15 +14,26 @@
  * limitations under the License.
  */
 
-import griffon.domain.DomainClassHelper
-import griffon.domain.DomainClassArtifactHandler
+package griffon.domain
 
 /**
  * @author Andres Almiray
  */
-class DomainGriffonAddon {
-    def addonInit(app) {
-        app.artifactManager.registerArtifactHandler(new DomainClassArtifactHandler())
-        DomainClassHelper.instance.init(app)
+enum DynamicMethod {
+    LIST, COUNT, COUNT_BY('countBy'),
+    FIND, FIND_ALL('findAll'),
+    FIND_BY('findBy'), FIND_WHERE('findWhere'),
+    FIND_ALL_BY('findAllBy'), FIND_ALL_WHERE('findAllWhere'),
+    EXECUTE_QUERY('executeQuery'),
+    MAKE, SAVE, DELETE, FETCH;
+
+    final String methodName
+
+    DynamicMethod(String methodName = null) {
+        this.methodName = methodName ?: name().toLowerCase()
+    }
+
+    String toString() {
+        this.methodName
     }
 }

@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-import griffon.domain.DomainClassHelper
-import griffon.domain.DomainClassArtifactHandler
+package griffon.domain.orm;
 
 /**
  * @author Andres Almiray
  */
-class DomainGriffonAddon {
-    def addonInit(app) {
-        app.artifactManager.registerArtifactHandler(new DomainClassArtifactHandler())
-        DomainClassHelper.instance.init(app)
-    }
+public interface Criterion {
+    
 }

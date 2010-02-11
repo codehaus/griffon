@@ -29,13 +29,21 @@ eventCopyLibsEnd = { jardir ->
 }
 
 eventCollectArtifacts = { artifactsInfo ->
-    if(!artifactsInfo.find{ it.type == "domain" }) {
-        artifactsInfo << [type: "domain", path: "domain", suffix: ""]
+    if(!artifactsInfo.find{ it.type == 'domain' }) {
+        artifactsInfo << [type: 'domain', path: 'domain', suffix: '']
     }
 }
 
+/*
+eventCollectArtifactClasses = { artifactClasses ->
+    if(!artifactClasses.domain) {
+        artifactClasses.domain = 'griffon.domain.artifacts.DefaultGriffonDomainArtifactClass'
+    }
+}
+*/
+
 eventStatsStart = { pathToInfo ->
-    if(!pathToInfo.find{ it.path == "domain"} ) {
-        pathToInfo << [name: "Domain Classes", path: "domain", filetype: [".groovy",".java"]]
+    if(!pathToInfo.find{ it.path == 'domain'} ) {
+        pathToInfo << [name: 'Domain Classes', path: 'domain', filetype: ['.groovy','.java']]
     }
 }

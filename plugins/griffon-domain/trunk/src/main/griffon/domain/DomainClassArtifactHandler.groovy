@@ -18,12 +18,14 @@ package griffon.domain
 
 import griffon.core.ArtifactHandlerAdapter
 import griffon.core.ArtifactInfo
+import griffon.core.ArtifactManager
 
 /**
  * @author Andres Almiray
  */
 class DomainClassArtifactHandler extends ArtifactHandlerAdapter {
-    static final String TYPE = "domain"
+    public static final String TYPE = 'domain'
+    public static final String TRAILING = ''
 
     DomainClassArtifactHandler() {
         super(TYPE)
@@ -40,5 +42,10 @@ class DomainClassArtifactHandler extends ArtifactHandlerAdapter {
             if(artifactInfo.simpleName == simpleName) return artifactInfo
         }
         return null
+    }
+
+    public static boolean isDomainClass(Class clazz) {
+        if(!clazz) return false
+        return ArtifactManager.instance.getArtifactsOfType(TYPE).find { it.klass.name == clazz.name } ? true : false
     }
 }

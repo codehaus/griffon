@@ -14,15 +14,33 @@
  * limitations under the License.
  */
 
-import griffon.domain.DomainClassHelper
-import griffon.domain.DomainClassArtifactHandler
+package griffon.domain.orm;
 
 /**
  * @author Andres Almiray
  */
-class DomainGriffonAddon {
-    def addonInit(app) {
-        app.artifactManager.registerArtifactHandler(new DomainClassArtifactHandler())
-        DomainClassHelper.instance.init(app)
+public enum Operator {
+    EQUAL("="), NOT_EQUAL("<>"),
+    GREATER_THAN(">"), GREATER_THAN_OR_EQUAL(">="),
+    LESS_THAN("<"), LESS_THAN_OR_EQUAL("<="),
+    LIKE("LIKE"), NOT_LIKE("NOT LIKE"),
+    IS_NULL("IS NULL"), IS_NOT_NULL("IS NOT NULL");
+
+    private final String op;
+
+    Operator(String op) {
+        this.op = op;
+    }
+
+    public String getOp() {
+        return op;
+    }
+
+    public String op() {
+        return op;
+    }
+
+    public String toString() {
+        return this.op;
     }
 }
