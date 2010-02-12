@@ -1,0 +1,12 @@
+<plugin name='domain-db4o' version='0.1' griffonVersion='0.3-SNAPSHOT &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Domain class support via Db4o</title>
+  <documentation>http://griffon.codehaus.org/DomainDb4o+Plugin</documentation>
+  <plugin name='db4o' version='0.1' />
+  <plugin name='domain' version='0.1' />
+  <dependencies>
+    <plugin name='db4o' version='0.1' />
+    <plugin name='domain' version='0.1' />
+  </dependencies>
+</plugin>
