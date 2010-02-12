@@ -27,7 +27,7 @@ class Db4oGriffonAddon {
     private bootstrap
 
     def events = [
-        LoadAddonEnd: { name, addon, app -> if(addon instanceof Db4oGriffonAddon) start(app) },
+        BootstrapEnd: { app -> start(app) },
         ShutdownStart: { app -> stop(app) },
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.db4o?.injectInto ?: ['controller']

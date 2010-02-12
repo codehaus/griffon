@@ -26,7 +26,7 @@ import griffon.gsql.GsqlHelper
  * @author Andres.Almiray
  */
 class GsqlGriffonAddon {
-    private def bootstrap
+    private bootstrap
  
     def addonPostInit = { app ->
         def config = GsqlHelper.instance.parseConfig()
@@ -62,6 +62,7 @@ class GsqlGriffonAddon {
 
     private void bootstrapInit() {
         bootstrap = this.class.classLoader.loadClass('BootStrapGsql').newInstance()
+        bootstrap.metaClass.app = app
         GsqlHelper.instance.withSql { sql -> bootstrap?.init(sql) }
     }
 }

@@ -1,12 +1,12 @@
 <plugin name='domain' version='0.1' griffonVersion='0.3-SNAPSHOT &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-  <title>Domain class support via GSQL</title>
-  <documentation>http://griffon.codehaus.org/DomainGsql+Plugin</documentation>
-  <plugin name='gsql' version='0.3' />
-  <plugin name='domain' version='0.1' />
+  <title>Domain class support</title>
+  <documentation>http://griffon.codehaus.org/Domain+Plugin</documentation>
+  <plugin name='i18n' version='0.1' />
+  <plugin name='artifacts' version='0.1' />
   <dependencies>
-    <plugin name='gsql' version='0.3' />
-    <plugin name='domain' version='0.1' />
+    <plugin name='i18n' version='0.1' />
+    <plugin name='artifacts' version='0.1' />
   </dependencies>
 </plugin>
