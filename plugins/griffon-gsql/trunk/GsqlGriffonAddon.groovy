@@ -61,7 +61,7 @@ class GsqlGriffonAddon {
     // ======================================================
 
     private void bootstrapInit() {
-        bootstrap = this.class.classLoader.loadClass('BootStrapGsql').newInstance()
+        bootstrap = this.class.classLoader.loadClass('BootstrapGsql').newInstance()
         bootstrap.metaClass.app = app
         GsqlHelper.instance.withSql { sql -> bootstrap?.init(sql) }
     }

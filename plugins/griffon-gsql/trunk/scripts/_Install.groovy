@@ -64,11 +64,11 @@ if(!new File("${basedir}/griffon-app/conf/DataSource.groovy").exists()) {
       path: "griffon-app/conf")
 }
 
-if(!new File("${basedir}/griffon-app/conf/BootStrapGsql.groovy").exists()) {
+if(!new File("${basedir}/griffon-app/conf/BootstrapGsql.groovy").exists()) {
    createArtifact(
-      name: "BootStrapGsql",
+      name: "BootstrapGsql",
       suffix: "",
-      type: "BootStrapGsql",
+      type: "BootstrapGsql",
       path: "griffon-app/conf")
 }
 

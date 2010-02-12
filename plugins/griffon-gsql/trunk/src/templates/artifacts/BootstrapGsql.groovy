@@ -1,6 +1,6 @@
 import groovy.sql.Sql
 
-class BootStrapGsql {
+class BootstrapGsql {
     def init = { Sql sql ->
     }
 
