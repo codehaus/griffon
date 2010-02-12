@@ -46,6 +46,7 @@ class Db4oGriffonAddon {
 
     private void stop(GriffonApplication app) {
         bootstrap.destroy(ObjectContainerHolder.instance.objectContainer)
-        ObjectContainerHolder.instance.objectContainer.close()
+        def dbConfig = Db4oHelper.instance.parseConfig(app)
+        Db4oHelper.instance.stopObjectContainer(dbConfig)
     }
 }

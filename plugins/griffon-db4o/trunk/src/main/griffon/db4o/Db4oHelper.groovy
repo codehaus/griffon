@@ -36,6 +36,19 @@ final class Db4oHelper {
         ObjectContainerHolder.instance.objectContainer = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dbfile.absolutePath)
     }
 
+    void stopObjectContainer(dbConfig) {
+        ObjectContainerHolder.instance.objectContainer.close()
+
+        String dbfileName = dbConfig?.dataSource?.name ?: 'db.yarv'
+        File dbfile = new File(dbfileName)
+        if(!dbfile.absolute) dbfile = new File(System.getProperty('griffon.start.dir'), dbfileName)
+        switch(Environment.current) {
+            case Environment.DEVELOPMENT:
+            case Environment.TEST:
+                dbfile.delete()
+        }
+    }
+
     def withDb4o = { Closure closure ->
         closure(ObjectContainerHolder.instance.objectContainer)
     }
