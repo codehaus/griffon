@@ -34,7 +34,7 @@ includeTargets << griffonScript('_GriffonArgParsing')
 appToolkits = metadata.'app.toolkits'
 if(!appToolkits) appToolkits = ''
 appToolkits = appToolkits.split(',').toList()
-firstTime = !appToolkits.contains('swt')
+firstTime = !metadata.'plugins.swt'
 
 updateMetadata('app.toolkits': 'swt')
 
@@ -71,7 +71,7 @@ new File("${basedir}/griffon-app/views").eachFileMatch(~/.*View\.groovy/) { view
             println "Replacing ${view.name} with Swt code..."
             view.text = """import org.eclipse.swt.layout.GridData
 
-application(text: "SWT shell", location:[100,100], size:[280, 70]) {
+application(text: '$griffonAppName', location:[100,100], size:[280, 70]) {
     gridLayout(numColumns:1)
     cLabel(background: "#fff777", "The quick brown fox jumps over the lazy dog\\nThe quick brown fox jumps over the lazy dog",
            layoutData: gridData(horizontalAlignment: GridData.FILL, grabExcessHorizontalSpace:true))
