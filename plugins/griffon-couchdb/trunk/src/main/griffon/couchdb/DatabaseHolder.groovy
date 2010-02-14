@@ -25,7 +25,7 @@ import org.jcouchdb.db.Database
 class DatabaseHolder {
     Database db
 
-    def withDb4o = { Closure closure ->
+    def withCouchdb = { Closure closure ->
         closure(db)
     }
 }
