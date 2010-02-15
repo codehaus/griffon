@@ -37,9 +37,9 @@ import org.svenson.JSONParser
 import org.svenson.converter.DefaultTypeConverterRepository
 
 /**
- * Containes code from grails-couchdb 
+ * Contains code from grails-couchdb 
  *
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 @Singleton
 final class CouchdbHelper {
@@ -94,6 +94,11 @@ final class CouchdbHelper {
 
         db.jsonConfig = new JSONConfig(generator, parser)
         DatabaseHolder.instance.db = db
+
+        // setup views
+        ClasspathCouchDBUpdater updater = new ClasspathCouchDBUpdater()
+        updater.setDatabase(db)
+        updater.updateDesignDocuments()
     }
 
     def withCouchdb = { Closure closure ->

@@ -49,7 +49,7 @@ root.'CouchdbGriffonAddon'.addon=true
 ''')
 }
 
-ant.mkdir(dir:"${basedir}/src/couchdb")
+ant.mkdir(dir:"${basedir}/griffon-app/resources/couchdb/views")
 
 appConfig = configSlurper1.parse(new File("$basedir/griffon-app/conf/Application.groovy").toURL())
 if(!(appConfig.flatten().'griffon.couchdb.injectInto')) {
