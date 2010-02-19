@@ -43,15 +43,23 @@ class JmxGriffonAddon {
         MBeanExporter exporter = ctx.getBean("exporter")
         
         // exporting mbeans
-        exportConfigBeans(exporter, domain, ctx)
-        // exportLogger(ctx, exporter, domain)
+        exportAddonBeans(exporter, domain, ctx)
         exportServices(exporter, domain, ctx)
         exportConfiguredObjects(exporter, domain, ctx)
         registerMBeans(exporter)
     }
 
-    private def exportConfigBeans(MBeanExporter exporter, domain, ctx) {
-        // export datasources
+    private def exportAddonBeans(MBeanExporter exporter, domain, ctx) {
+        app.addons.each { name, addon ->
+            def addonMetaClass = addon.metaClass
+            def exportWithJmx = addonMetaClass.getMetaProperty('exportWithJmx')
+            if(exportWithJmx) {
+                def export = addon.exportWithJmx
+                if(export instanceof Closure) {
+                    export(exporter, domain, ctx)
+                }
+            }
+        }
     }
 
     private def exportServices(MBeanExporter exporter, domain, ctx) {
