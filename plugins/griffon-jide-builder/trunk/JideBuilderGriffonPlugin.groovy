@@ -19,13 +19,13 @@
  */
 class JideBuilderGriffonPlugin {
     def version = "0.3"
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Jide Builder Plugin"
-    def description = '''\\
+    def description = '''
 Brings the Jide Builder libraries into a Griffon Build 
 '''
 

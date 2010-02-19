@@ -19,14 +19,14 @@
  */
 class JmonkeyengineGriffonPlugin {
     def version = 0.1
-    def canBeGlobal = false
-    def dependsOn = [lwjgl: 0.1]
+    def griffonVersion = '0.3 > *'
+    def dependsOn = [lwjgl: 0.2]
     def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "JMonkeyEngine support"
-    def description = '''\\
+    def description = '''
 JMonkeyEngine support.
 '''
 

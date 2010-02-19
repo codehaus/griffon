@@ -19,7 +19,7 @@
  */
 class DomainGriffonPlugin {
     def version = 0.1
-    def griffonVersion = '0.3-SNAPSHOT > *'
+    def griffonVersion = '0.3 > *'
     def dependsOn = [i18n: 0.1, artifacts: 0.1]
 
     def author = "Andres Almiray"

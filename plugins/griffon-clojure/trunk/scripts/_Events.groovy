@@ -25,6 +25,7 @@ eventSetClasspath = { classLoader ->
     if(compilingClojurePlugin()) return
 
     ant.fileset(dir: "${getPluginDirForName('clojure').file}/lib", includes: "*.jar").each {
+        if(getPluginDirForName('spring')?.file && it.toString() =~ "spring") return
         classLoader.addURL(jar.file.toURI().toURL())
     }
 }
@@ -34,6 +35,7 @@ eventCopyLibsEnd = { jardir ->
     eventClosure1(jardir)
     if (!isPluginProject) {
         ant.fileset(dir:"${getPluginDirForName('clojure').file}/lib/", includes:"*.jar").each {
+            if(getPluginDirForName('spring')?.file && it.toString() =~ "spring") return
             griffonCopyDist(it.toString(), jardir)
         }
     }

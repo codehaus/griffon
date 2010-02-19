@@ -19,14 +19,14 @@
  */
 class GlazedlistsGriffonPlugin {
     def version = 0.3
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "GlazedLists library and components"
-    def description = '''\\
+    def description = '''
 Adds GlazedLists support to your Griffon application.
 '''
 

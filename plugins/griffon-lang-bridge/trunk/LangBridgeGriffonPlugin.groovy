@@ -18,8 +18,8 @@
  * @author Andres Almiray
  */
 class LangBridgeGriffonPlugin {
-    def version = "0.2.1"
-    def canBeGlobal = false
+    def version = "0.3"
+    def griffonVersion = "0.3 > *"
     def dependsOn = [:]
 
     def author = "Andres Almiray"

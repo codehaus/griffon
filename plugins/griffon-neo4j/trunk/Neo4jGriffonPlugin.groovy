@@ -19,7 +19,7 @@
  */
 class Neo4jGriffonPlugin {
     def version = 0.1
-    def griffonVersion = '0.3-SNAPSHOT > *'
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
 
     def author = "Andres Almiray"

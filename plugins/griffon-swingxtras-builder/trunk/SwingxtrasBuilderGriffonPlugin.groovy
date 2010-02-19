@@ -19,14 +19,14 @@
  */
 class SwingxtrasBuilderGriffonPlugin {
     def version = "0.2"
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Swingxtras Builder Plugin"
-    def description = '''\\
+    def description = '''
 Brings the Swingxtras Builder libraries into a Griffon Build
 '''
 

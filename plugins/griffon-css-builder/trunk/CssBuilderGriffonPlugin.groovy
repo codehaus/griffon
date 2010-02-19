@@ -18,8 +18,8 @@
  * @author Andres Almiray
  */
 class CssBuilderGriffonPlugin {
-    def version = 0.4
-    def canBeGlobal = false
+    def version = 0.5
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swing']
 

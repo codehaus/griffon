@@ -19,14 +19,14 @@
  */
 class TridentBuilderGriffonPlugin {
     def version = "0.2"
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swing', 'swt']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Trident Builder Plugin"
-    def description = '''\\
+    def description = '''
 Brings de Trident Builder libraries into a Griffon Build
 '''
 

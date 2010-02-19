@@ -122,7 +122,7 @@ class ArtifactClassManager {
         def artifactType = propertyName =~ /^(\w+)ArtifactClasses$/
         if(artifactType) {
             artifactType = artifactType[0][1]
-            ArtifactClassManager.metaClass."$methodName" = this.&getArtifactClassesOfType.curry(artifactType)
+            ArtifactClassManager.metaClass."$propertyName" = this.&getArtifactClassesOfType.curry(artifactType)
             return getArtifactClassesOfType(artifactType)
         }
 

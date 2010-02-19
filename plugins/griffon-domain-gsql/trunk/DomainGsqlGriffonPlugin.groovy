@@ -19,7 +19,7 @@
  */
 class DomainGsqlGriffonPlugin {
     def version = 0.1
-    def griffonVersion = '0.3-SNAPSHOT > *'
+    def griffonVersion = '0.3 > *'
     def dependsOn = [gsql: 0.3, domain: 0.1]
 
     def author = "Andres Almiray"

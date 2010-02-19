@@ -22,7 +22,7 @@
  */
 class TrayBuilderGriffonPlugin {
     def version = "0.3"
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def jdk = "1.6"
     def toolkits = ['swing']
@@ -30,7 +30,7 @@ class TrayBuilderGriffonPlugin {
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "TrayBuilder Plugin"
-    def description = '''\\
+    def description = '''
 Enables Swing components on SystemTray.
 '''
 

@@ -18,15 +18,15 @@
  * @author Andres Almiray
  */
 class WorldwindGriffonPlugin {
-    def version = 0.1
-    def canBeGlobal = false
-    def dependsOn = [jogl: 0.1]
+    def version = 0.2
+    def griffonVersion = '0.3 > *'
+    def dependsOn = [jogl: 0.2]
     def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "NASA WolrdWind (3D Maps)"
-    def description = '''\\
+    def description = '''
 NASA WorldWind (3D Maps)
 '''
 

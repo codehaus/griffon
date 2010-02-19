@@ -19,15 +19,15 @@
  */
 class SwingxWsGriffonPlugin {
     def version = 0.2
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Map visualizations with Swingx-ws"
-    def description = '''\\
-Map visualizations with Swingx.ws
+    def description = '''
+Map visualizations with Swingx-ws
 '''
 
     // URL to the plugin's documentation

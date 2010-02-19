@@ -19,14 +19,14 @@
  */
 class FxBuilderGriffonPlugin {
     def version = "0.4"
-    def canBeGlobal = false
-    def dependsOn = ["lang-bridge": 0.2.1]
+    def griffonVersion = '0.3 > *'
+    def dependsOn = ["lang-bridge": 0.3]
     def toolkits = ["javafx, swing"]
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@user.sourceforge.net"
     def title = "Enables JavaFX on your Griffon application"
-    def description = '''\\
+    def description = '''
 Enables JavaFX on your Griffon application. Brings the FxBuilder and dependencies libraries, enables
 the usage of the JavaFX Script compiler on your application.
 '''

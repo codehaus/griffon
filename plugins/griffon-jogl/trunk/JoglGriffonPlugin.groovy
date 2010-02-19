@@ -19,14 +19,14 @@
  */
 class JoglGriffonPlugin {
     def version = 0.2
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "JOGL support"
-    def description = '''\\
+    def description = '''
 JOGL support
 '''
 

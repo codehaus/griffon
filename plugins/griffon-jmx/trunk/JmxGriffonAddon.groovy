@@ -66,16 +66,15 @@ class JmxGriffonAddon {
         handleExcludeMethods(exporter, excludeMethods)
     }
     
-    private handleExcludeMethods(MBeanExporter exporter, excludeMethods)
-    {
+    private handleExcludeMethods(MBeanExporter exporter, excludeMethods) {
         if (excludeMethods.size() > 0) {
-        def assembler = new MethodExclusionMBeanInfoAssembler();
-        assembler.setIgnoredMethodMappings(excludeMethods)
-        exporter.setAssembler(assembler)
+            def assembler = new MethodExclusionMBeanInfoAssembler();
+            assembler.setIgnoredMethodMappings(excludeMethods)
+            exporter.setAssembler(assembler)
+        }
     }
 
-    private exportClass(MBeanExporter exporter, domain, ctx, serviceClass, serviceName, propertyName, excludeMethods, type)
-    {
+    private exportClass(MBeanExporter exporter, domain, ctx, serviceClass, serviceName, propertyName, excludeMethods, type) {
         def objectName = "$type=$serviceName,type=$type"
 
         def exposeList = GCU.getStaticPropertyValue(serviceClass, 'expose')

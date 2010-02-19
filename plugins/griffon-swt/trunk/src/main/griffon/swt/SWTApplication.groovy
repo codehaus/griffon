@@ -134,6 +134,10 @@ class SWTApplication implements StandaloneGriffonApplication, GriffonApplication
         this.applicationProperties = Metadata.getCurrent()
     }
 
+    public Metadata getMetadata() {
+        Metadata.current
+    }
+
     public Class getConfigClass() {
         return getClass().classLoader.loadClass("Application")
     }

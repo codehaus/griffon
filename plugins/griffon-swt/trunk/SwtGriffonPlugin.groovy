@@ -19,14 +19,14 @@
  */
 class SwtGriffonPlugin {
     def version = 0.1
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swt']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "SWT UI toolkit plugin"
-    def description = '''\\
+    def description = '''
 Use SWT as the default UI toolkit on your application
 '''
 

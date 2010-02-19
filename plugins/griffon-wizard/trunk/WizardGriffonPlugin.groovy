@@ -19,15 +19,14 @@
  */
 class WizardGriffonPlugin {
     def version = "0.3"
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swing']
 
-    // TODO Fill in these fields
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Adds a Wizard facility to your Griffon apps"
-    def description = '''\\
+    def description = '''
 Enables a Wizard facility based on https://wizard.dev.java.net/
 '''
 

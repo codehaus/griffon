@@ -18,14 +18,14 @@
  * @author Andres Almiray
  */
 class ClojureGriffonPlugin {
-    def version = "0.4.1"
-    def canBeGlobal = false
-    def dependsOn = ["lang-bridge": "0.2.1"]
+    def version = "0.5"
+    def griffonVersion = "0.3 > *"
+    def dependsOn = ["lang-bridge": "0.3"]
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Enables Clojure"
-    def description = '''\\
+    def description = '''
 Enables the usage of Clojure on your Griffon application.
 '''
 

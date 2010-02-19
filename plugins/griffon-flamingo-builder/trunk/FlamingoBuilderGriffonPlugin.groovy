@@ -18,8 +18,8 @@
  * @author Andres Almiray
  */
 class FlamingoBuilderGriffonPlugin {
-    def version = "0.3"
-    def canBeGlobal = false
+    def version = "0.2.1"
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def jdk = "1.6"
     def toolkits = ['swing']

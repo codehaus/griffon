@@ -19,7 +19,7 @@
  */
 class GsqlGriffonPlugin {
     def version = '0.3'
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
 
     def author = "Andres Almiray"

@@ -19,13 +19,13 @@
  */
 class HessianGriffonPlugin {
     def version = "0.2"
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Hessian client & libraries"
-    def description = '''\\
+    def description = '''
 Hessian client & libraries.
 '''
 

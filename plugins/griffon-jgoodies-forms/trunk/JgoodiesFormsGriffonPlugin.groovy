@@ -19,14 +19,14 @@
  */
 class JgoodiesFormsGriffonPlugin {
     def version = 0.2
-    def canBeGlobal = true
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "JGoodies Forms"
-    def description = '''\\
+    def description = '''
 Enables the usage of JGoodies FormLayout and friends
 '''
 

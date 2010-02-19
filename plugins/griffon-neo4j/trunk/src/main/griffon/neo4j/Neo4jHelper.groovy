@@ -52,14 +52,12 @@ final class Neo4jHelper {
         switch(Environment.current) {
             case Environment.DEVELOPMENT:
             case Environment.TEST:
-                Runtime.getRuntime().addShutdownHook(new Thread() {
-                    public void run() {
-                        storeDir?.eachFileRecurse { f -> 
-                            try { if(f?.exists()) f.delete() }
-                            catch(IOException ioe) { /* ignore */ }
-                        }
+                Runtime.getRuntime().addShutdownHook {
+                    storeDir?.eachFileRecurse { f -> 
+                        try { if(f?.exists()) f.delete() }
+                        catch(IOException ioe) { /* ignore */ }
                     }
-                })
+                }
         }
 
         GraphDatabaseService db = new EmbeddedGraphDatabase(storeDir.absolutePath)

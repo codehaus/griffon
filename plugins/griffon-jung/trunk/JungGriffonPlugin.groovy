@@ -19,14 +19,14 @@
  */
 class JungGriffonPlugin {
     def version = "0.2"
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Graph visualizations and algorithms via JUNG2"
-    def description = '''\\
+    def description = '''
 Graph visualizations and algorithms via JUNG2.
 See http://jung.sourceforge.net for more information about JUNG2
 '''

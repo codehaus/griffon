@@ -25,7 +25,7 @@ class EasybGriffonPlugin {
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Enables BDD testing with Easyb"
-    def description = '''\
+    def description = '''
 Enables BDD testing with Easyb (http://easyb.org)
 '''
 

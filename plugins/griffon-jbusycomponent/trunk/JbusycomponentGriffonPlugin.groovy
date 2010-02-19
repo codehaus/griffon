@@ -19,14 +19,14 @@
  */
 class JbusycomponentGriffonPlugin {
     def version = "0.3"
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = ["swingx-builder": "0.1"]
     def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Enhance any swing components with a 'busy' state"
-    def description = '''\\
+    def description = '''
 JBusyComponent: Enhance any swing components with a "busy" state.
 http://code.google.com/p/jbusycomponent
 '''

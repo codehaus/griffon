@@ -18,14 +18,14 @@
  * @author Andres Almiray
  */
 class ProtobufGriffonPlugin {
-    def version = 0.1
-    def canBeGlobal = false
+    def version = 0.2
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Adds Protocol Buffers support"
-    def description = '''\\
+    def description = '''
 Adds Protocol Buffers support.
 '''
 

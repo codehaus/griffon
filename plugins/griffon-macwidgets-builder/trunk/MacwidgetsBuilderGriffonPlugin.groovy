@@ -19,14 +19,14 @@
  */
 class MacwidgetsBuilderGriffonPlugin {
     def version = "0.3"
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swing']
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "MacWidgetsBuilder Plugin"
-    def description = '''\\
+    def description = '''
 Brings the MacWidgetsBuilder libraries into a Griffon Build
 '''
 

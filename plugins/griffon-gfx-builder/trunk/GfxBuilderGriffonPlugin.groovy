@@ -19,7 +19,7 @@
  */
 class GfxBuilderGriffonPlugin {
     def version = "0.3"
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def jdk = "1.6"
     def toolkits = ['swing']
@@ -27,7 +27,7 @@ class GfxBuilderGriffonPlugin {
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Gfx Builder Plugin"
-    def description = '''\\
+    def description = '''
 Brings de GfxBuilder libraries into a Griffon application
 '''
 

@@ -19,13 +19,13 @@
  */
 class RestGriffonPlugin {
     def version = "0.3"
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "REST client libraries"
-    def description = '''\\
+    def description = '''
 Adds REST capabilities to your Griffon application.
 '''
 

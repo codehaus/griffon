@@ -18,14 +18,14 @@
  * @author Andres Almiray
  */
 class ScalaGriffonPlugin {
-    def version = "0.5.2"
-    def canBeGlobal = true
-    def dependsOn = ["lang-bridge": "0.2.1"]
+    def version = "0.6"
+    def griffonVersion = '0.3 > *'
+    def dependsOn = ["lang-bridge": 0.3]
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Brings the Scala language compiler and libraries"
-    def description = '''\\
+    def description = '''
 This plugin enables the usage of Scala classes in your Griffon application.
 '''
 

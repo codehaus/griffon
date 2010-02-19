@@ -19,7 +19,7 @@
  */
 class GtkGriffonPlugin {
     def version = 0.1
-    def canBeGlobal = false
+    def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['gtk']
     def platforms = ['linux']
@@ -27,7 +27,7 @@ class GtkGriffonPlugin {
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Gtk UI toolkit plugin"
-    def description = '''\\
+    def description = '''
 Use Gtk as the default UI toolkit on your application
 '''
 
