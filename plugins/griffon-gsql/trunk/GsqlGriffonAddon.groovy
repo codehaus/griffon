@@ -58,6 +58,10 @@ class GsqlGriffonAddon {
         }
     ]
 
+    def exportwithJmx = { exporter, domain, ctx ->
+        exporter.beans."${domain}:service=datasource,type=configuration" = DataSourceHolder.instance.dataSource
+    }
+
     // ======================================================
 
     private void bootstrapInit() {
