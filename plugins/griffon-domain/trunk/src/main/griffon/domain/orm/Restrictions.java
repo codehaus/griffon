@@ -21,59 +21,59 @@ package griffon.domain.orm;
  */
 public final class Restrictions {
     public static BinaryExpression eq(String propertyName, Object value) {
-        return new BinaryExpression(propertyName, value, Operator.EQUAL);
+        return new BinaryExpression(propertyName, Operator.EQUAL, value);
     }
 
     public static BinaryExpression ne(String propertyName, Object value) {
-        return new BinaryExpression(propertyName, value, Operator.NOT_EQUAL);
+        return new BinaryExpression(propertyName, Operator.NOT_EQUAL, value);
     }
 
     public static BinaryExpression gt(String propertyName, Object value) {
-        return new BinaryExpression(propertyName, value, Operator.GREATER_THAN);
+        return new BinaryExpression(propertyName, Operator.GREATER_THAN, value);
     }
 
     public static BinaryExpression ge(String propertyName, Object value) {
-        return new BinaryExpression(propertyName, value, Operator.GREATER_THAN_OR_EQUAL);
+        return new BinaryExpression(propertyName, Operator.GREATER_THAN_OR_EQUAL, value);
     }
 
     public static BinaryExpression lt(String propertyName, Object value) {
-        return new BinaryExpression(propertyName, value, Operator.LESS_THAN);
+        return new BinaryExpression(propertyName, Operator.LESS_THAN, value);
     }
 
     public static BinaryExpression le(String propertyName, Object value) {
-        return new BinaryExpression(propertyName, value, Operator.LESS_THAN_OR_EQUAL);
+        return new BinaryExpression(propertyName, Operator.LESS_THAN_OR_EQUAL, value);
     }
 
     public static BinaryExpression like(String propertyName, Object value) {
-        return new BinaryExpression(propertyName, value, Operator.LIKE);
+        return new BinaryExpression(propertyName, Operator.LIKE, value);
     }
 
     public static BinaryExpression notLike(String propertyName, Object value) {
-        return new BinaryExpression(propertyName, value, Operator.NOT_LIKE);
+        return new BinaryExpression(propertyName, Operator.NOT_LIKE, value);
     }
 
     public static PropertyExpression eqProperty(String propertyName, String otherPropertyValue) {
-        return new PropertyExpression(propertyName, otherPropertyValue, Operator.EQUAL);
+        return new PropertyExpression(propertyName, Operator.EQUAL, otherPropertyValue);
     }
 
     public static PropertyExpression neProperty(String propertyName, String otherPropertyValue) {
-        return new PropertyExpression(propertyName, otherPropertyValue, Operator.NOT_EQUAL);
+        return new PropertyExpression(propertyName, Operator.NOT_EQUAL, otherPropertyValue);
     }
 
     public static PropertyExpression gtProperty(String propertyName, String otherPropertyValue) {
-        return new PropertyExpression(propertyName, otherPropertyValue, Operator.GREATER_THAN);
+        return new PropertyExpression(propertyName, Operator.GREATER_THAN, otherPropertyValue);
     }
 
     public static PropertyExpression geProperty(String propertyName, String otherPropertyValue) {
-        return new PropertyExpression(propertyName, otherPropertyValue, Operator.GREATER_THAN_OR_EQUAL);
+        return new PropertyExpression(propertyName, Operator.GREATER_THAN_OR_EQUAL, otherPropertyValue);
     }
 
     public static PropertyExpression ltProperty(String propertyName, String otherPropertyValue) {
-        return new PropertyExpression(propertyName, otherPropertyValue, Operator.LESS_THAN);
+        return new PropertyExpression(propertyName, Operator.LESS_THAN, otherPropertyValue);
     }
 
     public static PropertyExpression leProperty(String propertyName, String otherPropertyValue) {
-        return new PropertyExpression(propertyName, otherPropertyValue, Operator.LESS_THAN_OR_EQUAL);
+        return new PropertyExpression(propertyName, Operator.LESS_THAN_OR_EQUAL, otherPropertyValue);
     }
 
     public static UnaryExpression isNull(String propertyName) {

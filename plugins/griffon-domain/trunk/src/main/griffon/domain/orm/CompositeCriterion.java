@@ -28,10 +28,10 @@ public final class CompositeCriterion implements Criterion {
     private final operator operator;
 
     public CompositeCriterion(Criterion[] criteria) {
-        this(criteria, Operator.AND);
+        this(Operator.AND, criteria);
     }
 
-    public CompositeCriterion(Criterion[] criteria, Operator operator) {
+    public CompositeCriterion(Operator, operator, Criterion[] criteria) {
          if(criteria == null) {
              this.criteria = new Criterion[0];
          } else {

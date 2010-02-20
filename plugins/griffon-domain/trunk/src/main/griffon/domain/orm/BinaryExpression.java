@@ -24,13 +24,13 @@ import org.apache.commons.lang.builder.EqualsBuilder;
  */
 public class BinaryExpression implements Criterion {
     private final String propertyName;
-    private final Object value;
     private final Operator operator;
+    private final Object value;
 
-    public BinaryExpression(String propertyName, Object value, Operator operator) {
+    public BinaryExpression(String propertyName, Operator operator, Object value) {
         this.propertyName = propertyName; 
-        this.value = value; 
         this.operator = operator; 
+        this.value = value; 
     }
 
     public String getPropertyName() {
@@ -52,8 +52,8 @@ public class BinaryExpression implements Criterion {
     public int hashCode() {
        return new HashCodeBuilder(17, 37)
            .append(propertyName)
-           .append(value)
            .append(operator)
+           .append(value)
            .toHashCode();
     }
 
@@ -65,8 +65,8 @@ public class BinaryExpression implements Criterion {
         return new EqualsBuilder()
                       .appendSuper(super.equals(obj))
                       .append(propertyName, rhs.propertyName)
-                      .append(value, rhs.value)
                       .append(operator, rhs.operator)
+                      .append(value, rhs.value)
                       .isEquals();
     } 
 }
