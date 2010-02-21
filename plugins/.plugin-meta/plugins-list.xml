@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1486">
+<plugins revision="1530">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -10,6 +10,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-abeilleform-builder/tags/RELEASE_0_1/griffon-abeilleform-builder-0.1.zip</file>
         </release>
     </plugin>
+    <plugin name="artifacts"/>
     <plugin latest-release="0.3" name="clojure">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables Clojure</title>
@@ -96,6 +97,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_2/griffon-codenarc-0.2.zip</file>
         </release>
     </plugin>
+    <plugin name="couchdb"/>
     <plugin latest-release="0.1" name="coverflow">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
@@ -140,6 +142,10 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-css-builder/tags/RELEASE_0_4/griffon-css-builder-0.4.zip</file>
         </release>
     </plugin>
+    <plugin name="db4o"/>
+    <plugin name="domain"/>
+    <plugin name="domain-db4o"/>
+    <plugin name="domain-gsql"/>
     <plugin latest-release="0.1.1" name="easyb">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables BDD testing with Easyb</title>
@@ -389,7 +395,7 @@
         </release>
     </plugin>
     <plugin name="gtk"/>
-    <plugin latest-release="0.1" name="guice">
+    <plugin name="guice">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Google Guice Plugin</title>
             <author>James Williams</author>
@@ -409,6 +415,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-hessian/tags/RELEASE_0_1/griffon-hessian-0.1.zip</file>
         </release>
     </plugin>
+    <plugin name="i18n"/>
     <plugin latest-release="0.4" name="installer">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Allows creating installers for your Griffon application</title>
@@ -542,6 +549,7 @@
         </release>
     </plugin>
     <plugin name="jmonkeyengine"/>
+    <plugin name="jmx"/>
     <plugin latest-release="0.1" name="jogl">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JOGL support</title>
@@ -662,7 +670,9 @@
         </release>
     </plugin>
     <plugin name="multidoc"/>
+    <plugin name="neo4j"/>
     <plugin name="pivot"/>
+    <plugin name="processing"/>
     <plugin latest-release="0.1" name="protobuf">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Adds Protocol Buffers support</title>
@@ -759,6 +769,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_5_1/griffon-scala-0.5.1.zip</file>
         </release>
     </plugin>
+    <plugin name="serial"/>
     <plugin latest-release="0.1.4" name="splash">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Griffon Splash Screen Plugin</title>
