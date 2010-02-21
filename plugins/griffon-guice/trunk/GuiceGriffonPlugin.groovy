@@ -1,7 +1,7 @@
 class GuiceGriffonPlugin {
-    def version = 0.1
-    def canBeGlobal = false
+    def version = '0.1.1'
     def dependsOn = [:]
+    def griffonVersion = '0.3 > *'
 
     // TODO Fill in these fields
     def author = "James Williams"
