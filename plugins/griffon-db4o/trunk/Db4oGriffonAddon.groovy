@@ -39,7 +39,7 @@ class Db4oGriffonAddon {
     private void start(GriffonApplication app) {
         def dbConfig = Db4oHelper.instance.parseConfig(app)
         Db4oHelper.instance.startObjectContainer(dbConfig)
-        bootstrap = app.class.classLoader.loadClass("BootstrapDb4o").newInstance()
+        bootstrap = app.class.classLoader.loadClass('BootstrapDb4o').newInstance()
         bootstrap.metaClass.app = app
         bootstrap.init(ObjectContainerHolder.instance.objectContainer)
     }

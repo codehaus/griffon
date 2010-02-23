@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import griffon.core.GriffonApplication
 import griffon.core.artifacts.ArtifactClassManager
 
 /**

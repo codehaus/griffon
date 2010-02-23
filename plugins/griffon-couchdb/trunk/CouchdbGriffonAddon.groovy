@@ -38,7 +38,7 @@ class CouchdbGriffonAddon {
     private void startCouchdb(GriffonApplication app) {
         def dbConfig = CouchdbHelper.instance.parseConfig(app)
         CouchdbHelper.instance.startCouchdb(dbConfig)
-        bootstrap = app.class.classLoader.loadClass("BootstrapCouchdb").newInstance()
+        bootstrap = app.class.classLoader.loadClass('BootstrapCouchdb').newInstance()
         bootstrap.metaClass.app = app
         bootstrap.init(DatabaseHolder.instance.db)
     }

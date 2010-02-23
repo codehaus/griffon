@@ -14,32 +14,26 @@
  * limitations under the License.
  */
 
-import griffon.util.IGriffonApplication
 import groovy.net.xmlrpc.XMLRPCServerProxy
 
 /**
  * @author Andres Almiray
  */
 class XmlrpcGriffonAddon {
-   private IGriffonApplication application
-
-   def addonInit = { app ->
-      application = app
-      app.addApplicationEventListener(this)
-   }
-
-   def onNewInstance = { klass, type, instance ->
-      def types = application.config.griffon?.xmlrpc?.injectInto ?: ["controller"]
-      if(!types.contains(type)) return
-      instance.metaClass.withXmlrpc = withClient.curry(instance)
-   }
+   def events = [
+      NewInstance: { klass, type, instance ->
+         def types = app.config.griffon?.xmlrpc?.injectInto ?: ['controller']
+         if(!types.contains(type)) return
+         instance.metaClass.withXmlrpc = withClient.curry(instance)
+      }
+   ]
 
    // ======================================================
 
    private withClient = { Object instance, Map params, Closure closure ->
       def client = null
       if(params.id) {
-         String id = params.remove("id").toString()
+         String id = params.remove('id').toString()
          if(instance.metaClass.hasProperty(instance, id)) {
             client = instance."$id"
          } else {
@@ -58,8 +52,8 @@ class XmlrpcGriffonAddon {
    }
 
    private makeClient(Map params) {
-      def url = params.remove("url")
-      // def detectEncoding = params.remove("detectEncoding") ?: false
+      def url = params.remove('url')
+      // def detectEncoding = params.remove('detectEncoding') ?: false
       if(!url) {
          throw new RuntimeException("Failed to create xml-rpc client, url: parameter is null or invalid.")
       }

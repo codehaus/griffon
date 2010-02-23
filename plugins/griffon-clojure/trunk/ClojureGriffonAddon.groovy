@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import griffon.util.IGriffonApplication
-import clojure.lang.Compiler
+// import clojure.lang.Compiler
+import griffon.core.GriffonApplication
 import griffon.clojure.ClojureProxy
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 
@@ -25,36 +25,34 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 class ClojureGriffonAddon {
    private final ClojureProxy CLJ_PROXY = new ClojureProxy()
    private String clojurePropertyName
-   private IGriffonApplication application
 
    def addonInit = { app ->
-      application = app
-      app.addApplicationEventListener(this)
-      clojurePropertyName = app.config.griffon?.clojure?.dynamicPropertyName ?: "clj"
+      clojurePropertyName = app.config.griffon?.clojure?.dynamicPropertyName ?: 'clj'
       if(clojurePropertyName) {
           clojurePropertyName = clojurePropertyName[0].toUpperCase() + clojurePropertyName[1..-1]
       } else {
-          clojurePropertyName = "Clj"
+          clojurePropertyName = 'Clj'
       }
    }
 
-   def onBootstrapEnd = { app ->
-      loadSources("classpath*:/clj/**/*.clj")
-   }
+   def events = [
+      BootstrapEnd: { app ->
+          loadSources(app, 'classpath*:/clj/**/*.clj')
+      },
+      NewInstance: { klass, type, instance ->
+         def types = app.config.griffon?.clojure?.injectInto ?: ['controller']
+         if(!types.contains(type)) return
+         instance.metaClass."get${clojurePropertyName}" = { CLJ_PROXY }
+         instance.metaClass."${clojurePropertyName[0].toLowerCase() + clojurePropertyName[1..-1]}Load" = loadSources.curry(app)
+      }
+   ]
 
-   def onNewInstance = { klass, type, instance ->
-      def types = application.config.griffon?.clojure?.injectInto ?: ["controller"]
-      if(!types.contains(type)) return
-      instance.metaClass."get${clojurePropertyName}" = { CLJ_PROXY }
-      instance.metaClass."${clojurePropertyName[0].toLowerCase() + clojurePropertyName[1..-1]}Load" = loadSources
-   }
-
-   private loadSources = { String path ->
-      def pathResolver = new PathMatchingResourcePatternResolver(application.class.classLoader)
-      application.class.classLoader.loadClass("clojure.lang.Compiler")
+   private loadSources = { GriffonApplication app, String path ->
+      def pathResolver = new PathMatchingResourcePatternResolver(app.class.classLoader)
+      Class compilerClass = app.class.classLoader.loadClass('clojure.lang.Compiler')
       pathResolver.getResources(path).each {
          it.getURL().withReader { reader ->
-            Compiler.load reader
+            compilerClass.load reader
          }
       }
    }

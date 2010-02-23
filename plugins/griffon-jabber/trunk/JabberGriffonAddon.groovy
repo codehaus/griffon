@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import griffon.core.GriffonApplication
 import org.jivesoftware.smack.ConnectionConfiguration
 import org.jivesoftware.smack.Chat
 import org.jivesoftware.smack.ChatManagerListener
@@ -28,37 +27,33 @@ import org.jivesoftware.smack.packet.Message
  * @author Andres.Almiray
  */
 class JabberGriffonAddon {
-   private GriffonApplication application
    private static final Map CHATS = [:]
 
-   def addonInit = { app ->
-      application = app
-      app.addApplicationEventListener(this)
-   }
-
-   def onNewInstance = { klass, type, instance ->
-      def types = application.config.griffon?.jabber?.injectInto ?: ["controller"]
-      if(!types.contains(type)) return
-      instance.metaClass.jabberConnect = jabberConnect.curry(instance)
-   }
+   def events = [
+      NewInstance: { klass, type, instance ->
+         def types = app.config.griffon?.jabber?.injectInto ?: ['controller']
+         if(!types.contains(type)) return
+         instance.metaClass.jabberConnect = jabberConnect.curry(instance)
+      }
+   ]
 
    // ======================================================
 
    private jabberConnect = { Object instance, Map options ->
-      def serviceName = options.remove("serviceName")
-      def host = options.remove("host")
-      def port = options.remove("port")
-      def username = options.remove("username")
-      def password = options.remove("password")
-      if(!options.containsKey("SASLAuthenticationEnabled")) options["SASLAuthenticationEnabled"] = false
+      def serviceName = options.remove('serviceName')
+      def host = options.remove('host')
+      def port = options.remove('port')
+      def username = options.remove('username')
+      def password = options.remove('password')
+      if(!options.containsKey('SASLAuthenticationEnabled')) options['SASLAuthenticationEnabled'] = false
       def proxy = null
-      if(options.containsKey("proxy")) {
-          Map proxyOptions = options.remove("proxy")
-          proxy = new ProxyInfo(ProxyInfo.ProxyType.valueOf((proxyOptions.remove("type") ?: "HTTP").toUpperCase()),
-                                proxyOptions.remove("host").toString(),
-                                (proxyOptions.remove("port") ?: 80) as int,
-                                proxyOptions.remove("username") ?: "",
-                                proxyOptions.remove("password") ?: "")
+      if(options.containsKey('proxy')) {
+          Map proxyOptions = options.remove('proxy')
+          proxy = new ProxyInfo(ProxyInfo.ProxyType.valueOf((proxyOptions.remove('type') ?: 'HTTP').toUpperCase()),
+                                proxyOptions.remove('host').toString(),
+                                (proxyOptions.remove('port') ?: 80) as int,
+                                proxyOptions.remove('username') ?: '',
+                                proxyOptions.remove('password') ?: '')
       }
 
       def config = !proxy ? new ConnectionConfiguration(host, port as int, serviceName) : new ConnectionConfiguration(host, port as int, serviceName, proxy)
@@ -85,7 +80,7 @@ class JabberGriffonAddon {
       Chat chat = CHATS[participant]?.chat
       if(!chat) {
          def listener = { Chat c, Message m ->
-             notifyListener(instance, "onJabberMessage", [m]) 
+             notifyListener(instance, 'onJabberMessage', [m]) 
          } as MessageListener
          chat = conn.chatManager.createChat(participant, listener)
          CHATS[participant] = [chat: chat, listener: listener]
@@ -107,5 +102,4 @@ class JabberGriffonAddon {
          mm.invoke(instance,*params)
       }
    }
-
 }

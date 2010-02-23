@@ -14,32 +14,26 @@
  * limitations under the License.
  */
 
-import griffon.util.IGriffonApplication
 import griffon.rmi.RMIClient
 
 /**
  * @author Andres Almiray
  */
 class RmiGriffonAddon {
-   private IGriffonApplication application
-
-   def addonInit = { app ->
-      application = app
-      app.addApplicationEventListener(this)
-   }
-
-   def onNewInstance = { klass, type, instance ->
-      def types = application.config.griffon?.rmi?.injectInto ?: ["controller"]
-      if(!types.contains(type)) return
-      instance.metaClass.withRmi = withClient.curry(instance)
-   }
+   def events = [
+      NewInstance: { klass, type, instance ->
+         def types = app.config.griffon?.rmi?.injectInto ?: ['controller']
+         if(!types.contains(type)) return
+         instance.metaClass.withRmi = withClient.curry(instance)
+      }
+   ]
 
    // ======================================================
 
    private withClient = { Object instance, Map params, Closure closure ->
       def client = null
       if(params.id) {
-         String id = params.remove("id").toString()
+         String id = params.remove('id').toString()
          if(instance.metaClass.hasProperty(instance, id)) {
             client = instance."$id"
          } else {
@@ -58,7 +52,7 @@ class RmiGriffonAddon {
    }
 
    private makeClient(Map params) {
-      def host = params.remove("host") ?: "localhost"
+      def host = params.remove("host") ?: 'localhost'
       def port = params.remove("port") ?: 1199
       def lazy = params.remove("lazy") ?: true
       try {

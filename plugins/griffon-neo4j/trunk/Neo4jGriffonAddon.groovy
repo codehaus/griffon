@@ -56,7 +56,7 @@ class Neo4jGriffonAddon {
     private void startNeo4j(GriffonApplication app) {
         def dbConfig = Neo4jHelper.instance.parseConfig(app)
         Neo4jHelper.instance.startNeo4j(dbConfig)
-        bootstrap = app.class.classLoader.loadClass("BootstrapNeo4j").newInstance()
+        bootstrap = app.class.classLoader.loadClass('BootstrapNeo4j').newInstance()
         bootstrap.metaClass.app = app
         bootstrap.init(DatabaseHolder.instance.db)
     }

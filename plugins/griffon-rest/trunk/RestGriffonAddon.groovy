@@ -17,7 +17,6 @@
 import groovyx.net.http.AsyncHTTPBuilder
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.RESTClient
-import griffon.util.IGriffonApplication
 
 import java.lang.reflect.InvocationTargetException
 
@@ -25,27 +24,22 @@ import java.lang.reflect.InvocationTargetException
  * @author Andres Almiray
  */
 class RestGriffonAddon {
-   private IGriffonApplication application
-
-   def addonInit = { app ->
-      application = app
-      app.addApplicationEventListener(this)
-   }
-
-   def onNewInstance = { klass, type, instance ->
-      def types = application.config.griffon?.rest?.injectInto ?: ["controller"]
-      if(!types.contains(type)) return
-      instance.metaClass.withAsyncHttp = withClient.curry(AsyncHTTPBuilder, instance)
-      instance.metaClass.withHttp = withClient.curry(HTTPBuilder, instance)
-      instance.metaClass.withRest = withClient.curry(RESTClient, instance)
-   }
+   def events = [
+      NewInstance: { klass, type, instance ->
+         def types = app.config.griffon?.rest?.injectInto ?: ['controller']
+         if(!types.contains(type)) return
+         instance.metaClass.withAsyncHttp = withClient.curry(AsyncHTTPBuilder, instance)
+         instance.metaClass.withHttp = withClient.curry(HTTPBuilder, instance)
+         instance.metaClass.withRest = withClient.curry(RESTClient, instance)
+      }
+   ]
 
    // ======================================================
 
    private withClient = { Class klass, Object instance, Map params, Closure closure ->
       def client = null
       if(params.id) {
-         String id = params.remove("id").toString()
+         String id = params.remove('id').toString()
          if(instance.metaClass.hasProperty(instance, id)) {
             client = instance."$id"
          } else {
@@ -56,9 +50,9 @@ class RestGriffonAddon {
         client = makeClient(klass, params) 
       }
 
-      if(params.containsKey("proxy")) {
-         Map proxyArgs = [scheme: "http", port: 80] + params.remove("proxy")
-         if(!proxyArgs.host) throw new IllegalArgumentException("proxy.host cannot be null!")
+      if(params.containsKey('proxy')) {
+         Map proxyArgs = [scheme: 'http', port: 80] + params.remove('proxy')
+         if(!proxyArgs.host) throw new IllegalArgumentException('proxy.host cannot be null!')
          client.setProxy(proxyArgs.host, proxyArgs.port as int, proxyArgs.scheme)
       }
 
@@ -73,7 +67,7 @@ class RestGriffonAddon {
       if(klass == AsyncHTTPBuilder) {
          try {
             Map args = [:]
-            ["threadPool", "poolSize", "uri", "contentType", "timeout"].each { arg ->
+            ['threadPool', 'poolSize', 'uri', 'contentType', 'timeout'].each { arg ->
                if(params[(arg)] != null) args[(arg)] = params[(arg)]
             }
             return klass.newInstance(args)
@@ -85,8 +79,8 @@ class RestGriffonAddon {
       }
       try {
          def client =  klass.newInstance()
-         if(params.uri) client.uri = params.remove("uri")
-         if(params.contentType) client.contentType = params.remove("contentType")
+         if(params.uri) client.uri = params.remove('uri')
+         if(params.contentType) client.contentType = params.remove('contentType')
          return client
       } catch(IllegalArgumentException e) {
          throw new RuntimeException("Failed to create ${(klass == HTTPBuilder? 'http' : 'rest')} client, reason: $e", e)

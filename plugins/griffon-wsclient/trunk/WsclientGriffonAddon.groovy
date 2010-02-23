@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import griffon.util.IGriffonApplication
 import groovyx.net.ws.*
 import groovyx.net.ws.cxf.*
 
@@ -22,25 +21,20 @@ import groovyx.net.ws.cxf.*
  * @author Andres Almiray
  */
 class WsclientGriffonAddon {
-   private IGriffonApplication application
-
-   def addonInit = { app ->
-      application = app
-      app.addApplicationEventListener(this)
-   }
-
-   def onNewInstance = { klass, type, instance ->
-      def types = application.config.griffon?.ws?.injectInto ?: ["controller"]
-      if(!types.contains(type)) return
-      instance.metaClass.withWs = withClient.curry(instance)
-   }
+   def events = [
+      NewInstance = { klass, type, instance ->
+         def types = app.config.griffon?.ws?.injectInto ?: ['controller']
+         if(!types.contains(type)) return
+         instance.metaClass.withWs = withClient.curry(instance)
+      }
+   ]
 
    // ======================================================
 
    private withClient = { Object instance, Map params, Closure closure ->
       def client = null
       if(params.id) {
-         String id = params.remove("id").toString()
+         String id = params.remove('id').toString()
          if(instance.metaClass.hasProperty(instance, id)) {
             client = instance."$id"
          } else {
@@ -51,13 +45,13 @@ class WsclientGriffonAddon {
         client = makeClient(params) 
       }
 
-      if(params.containsKey("proxy")) client.setProxyProperties(params.remove("proxy"))
-      if(params.containsKey("ssl")) client.setSSLProperties(params.remove("ssl"))
-      if(params.containsKey("timeout")) client.setConnectionTimeout(params.remove("timeout"))
-      if(params.containsKey("mtom")) client.setMtom(params.remove("mtom"))
-      if(params.containsKey("basicAuth")) {
-         Map basicAuth = params.remove("basicAuth")
-         client.setBasicAuthentication(basicAuth.username ?: "", basicAuth.password ?: "")
+      if(params.containsKey('proxy')) client.setProxyProperties(params.remove('proxy'))
+      if(params.containsKey('ssl')) client.setSSLProperties(params.remove('ssl'))
+      if(params.containsKey('timeout')) client.setConnectionTimeout(params.remove('timeout'))
+      if(params.containsKey('mtom')) client.setMtom(params.remove('mtom'))
+      if(params.containsKey('basicAuth')) {
+         Map basicAuth = params.remove('basicAuth')
+         client.setBasicAuthentication(basicAuth.username ?: '', basicAuth.password ?: '')
       }
 
       if(closure) {
@@ -68,16 +62,16 @@ class WsclientGriffonAddon {
    }
 
    private makeClient(Map params) {
-      def wsdl = params.remove("wsdl")
-      def classLoader = params.remove("classLoader") ?: getClass().classLoader
+      def wsdl = params.remove('wsdl')
+      def classLoader = params.remove('classLoader') ?: getClass().classLoader
       if(!wsdl) {
          throw new RuntimeException("Failed to create ws client, wsdl: parameter is null or invalid.")
       }
       try {
-         def soapVersion = params.remove("soapVersion") ?: "1.1"
+         def soapVersion = params.remove('soapVersion') ?: '1.1'
          switch(soapVersion) {
-            case "1.1": soapVersion = SoapVersion.SOAP_1_1; break
-            case "1.2": soapVersion = SoapVersion.SOAP_1_2; break
+            case '1.1': soapVersion = SoapVersion.SOAP_1_1; break
+            case '1.2': soapVersion = SoapVersion.SOAP_1_2; break
             default: throw new IllegalArgumentException("Invalid soapVersion: value. Must be either '1.1' or '1.2'")
          }
          def wsclient = new WSClient(wsdl, classLoader, soapVersion)
