@@ -18,9 +18,10 @@ package griffon.domain.metaclass;
 import griffon.core.GriffonApplication;
 import griffon.core.ArtifactInfo;
 import griffon.domain.DynamicMethod;
-import griffon.domain.GriffonPersistenceUtil;
-import griffon.util.GriffonClassUtils;
+import griffon.domain.orm.Criterion;
+import griffon.domain.orm.CriteriaBuilder;
 
+import groovy.lang.Closure;
 import groovy.lang.MissingMethodException;
 
 import java.util.Map;
@@ -33,57 +34,35 @@ import java.util.regex.Pattern;
  * @author Andres Almiray
  */
 public abstract class AbstractFindPersistentMethod extends AbstractStaticPersistentMethod {
+    private static final CriteriaBuilder BUILDER = new CriteriaBuilder();
+
     public AbstractFindPersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
         super(app, domainClass, Pattern.compile("^"+ DynamicMethod.FIND.getMethodName() +"$"));
     }
 
-    protected final Object doInvokeInternal(Class clazz, String methodName, Object[] arguments) {
+    protected Object doInvokeInternal(Class clazz, String methodName, Object[] arguments) {
         if(arguments.length == 0) {
             throw new MissingMethodException(methodName, clazz, arguments);
         }
-        final Object arg = arguments[0] instanceof CharSequence ? arguments[0].toString() : arguments[0];
-        if(arg instanceof String) {
-            String query = ((String) arg).trim();
-            Object[] queryArgs = null;
-            Map queryNamedArgs = null;
-
-            if(arguments.length > 1) {
-                if (arguments[1] instanceof Collection) {
-                    queryArgs = GriffonClassUtils.collectionToObjectArray((Collection) arguments[1]);
-                } else if (arguments[1].getClass().isArray()) {
-                    queryArgs = (Object[]) arguments[1];
-                } else if (arguments[1] instanceof Map) {
-                    queryNamedArgs = (Map) arguments[1];
-                }
+        final Object arg = arguments[0];
+        if(arg instanceof Criterion) {
+            if(arguments.length == 1) {
+                return findByCriterion((Criterion)arg, Collections.emptyMap());
+            } else if(arguments[1] instanceof Map) {
+                return findByCriterion((Criterion)arg, (Map) arguments[1]);
             }
-
-            if(queryNamedArgs != null) {
-                for(Iterator it = queryNamedArgs.entrySet().iterator(); it.hasNext();) {
-                    Map.Entry entry = (Map.Entry) it.next();
-                    if(!(entry.getKey() instanceof String))
-                        throw new IllegalArgumentException("Named parameter's name must be String: " + queryNamedArgs.toString());
-                }
-            }
-
-            if(queryNamedArgs != null) {
-                return findWithNamedArgs(query, queryNamedArgs); 
-            } else {
-                return findWithQueryArgs(query, queryArgs != null ? queryArgs : GriffonPersistenceUtil.EMPTY_ARRAY); 
-            }
+        } else if(arg instanceof Closure) {
+            return findByCriterion(buildCriterion((Closure)arg), Collections.emptyMap());
         } else if(arg instanceof Map) {
-            return findByProperties((Map) arg);
+            if(arguments.length == 1) {
+                return findByProperties((Map) arg);
+            } else if(arguments[1] instanceof Closure) {
+                return findByCriterion(buildCriterion((Closure)arguments[1]), (Map) arg);
+            }
         } else if(getDomainClass().getKlass().isAssignableFrom(clazz) ) {
             return findByExample(arg);
         }
         throw new MissingMethodException(methodName, clazz, arguments);
-    }
-
-    protected Object findWithQueryArgs(String query, Object[] queryArgs) {
-        return null;
-    }
-
-    protected Object findWithNamedArgs(String query, Map namedArgs) {
-        return null;
     }
 
     protected Object findByProperties(Map properties) {
@@ -92,5 +71,14 @@ public abstract class AbstractFindPersistentMethod extends AbstractStaticPersist
 
     protected Object findByExample(Object example) {
         return null;
+    }
+
+    protected Object findByCriterion(Criterion criterion, Map options) {
+        return null;
+    }
+
+    protected final Criterion buildCriterion(Closure criteria) {
+        criteria.setDelegate(BUILDER);
+        return (Criterion) criteria.call();
     }
 }

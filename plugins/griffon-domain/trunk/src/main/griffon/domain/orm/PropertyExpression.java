@@ -24,13 +24,13 @@ import org.apache.commons.lang.builder.EqualsBuilder;
  */
 public class PropertyExpression implements Criterion {
     private final String propertyName;
-    private final String otherPropertyName;
     private final Operator operator;
+    private final String otherPropertyName;
 
-    public PropertyExpression(String propertyName, String otherPropertyName, Operator operator) {
+    public PropertyExpression(String propertyName, Operator operator, String otherPropertyName) {
         this.propertyName = propertyName; 
-        this.otherPropertyName = otherPropertyName; 
         this.operator = operator; 
+        this.otherPropertyName = otherPropertyName; 
     }
 
     public String getPropertyName() {
@@ -52,8 +52,8 @@ public class PropertyExpression implements Criterion {
     public int hashCode() {
        return new HashCodeBuilder(17, 37)
            .append(propertyName)
-           .append(otherPropertyName)
            .append(operator)
+           .append(otherPropertyName)
            .toHashCode();
     }
 
@@ -63,10 +63,10 @@ public class PropertyExpression implements Criterion {
         if(obj.getClass() != getClass()) return false; 
         PropertyExpression rhs = (PropertyExpression) obj;
         return new EqualsBuilder()
-                      .appendSuper(super.equals(obj))
+                      // .appendSuper(super.equals(obj))
                       .append(propertyName, rhs.propertyName)
-                      .append(otherPropertyName, rhs.otherPropertyName)
                       .append(operator, rhs.operator)
+                      .append(otherPropertyName, rhs.otherPropertyName)
                       .isEquals();
     } 
 }

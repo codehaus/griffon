@@ -18,25 +18,25 @@ package griffon.domain.orm;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.toStringBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * @author Andres Almiray
  */
 public final class CompositeCriterion implements Criterion {
     private final Criterion[] criteria;
-    private final operator operator;
+    private final Operator operator;
 
     public CompositeCriterion(Criterion[] criteria) {
         this(Operator.AND, criteria);
     }
 
-    public CompositeCriterion(Operator, operator, Criterion[] criteria) {
+    public CompositeCriterion(Operator  operator, Criterion[] criteria) {
          if(criteria == null) {
              this.criteria = new Criterion[0];
          } else {
              this.criteria = new Criterion[criteria.length];
-             System.arrayCopy(criteria, 0, this.criteria, 0, criteria.length);
+             System.arraycopy(criteria, 0, this.criteria, 0, criteria.length);
          }
 
          operator = operator == null ? Operator.AND : operator;
@@ -48,7 +48,7 @@ public final class CompositeCriterion implements Criterion {
     
     public Criterion[] getCriteria() {
         Criterion [] tmp = new Criterion[criteria.length];
-        System.arrayCopy(criteria, 0, tmp, 0, criteria.length);
+        System.arraycopy(criteria, 0, tmp, 0, criteria.length);
         return tmp;
     }
 
@@ -57,7 +57,7 @@ public final class CompositeCriterion implements Criterion {
     }
 
     public String toString() {
-        return new ToStrongBuilder(this)
+        return new ToStringBuilder(this)
            .append("operator", operator)
            .append("criteria", criteria)
            .toString();

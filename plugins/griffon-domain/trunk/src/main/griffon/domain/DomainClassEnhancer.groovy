@@ -19,6 +19,7 @@ package griffon.domain
 import griffon.core.GriffonApplication
 import griffon.core.ArtifactInfo
 import java.util.concurrent.ConcurrentHashMap
+import griffon.domain.orm.Criterion
 
 /**
  * @author Andres Almiray
@@ -50,13 +51,24 @@ class DomainClassEnhancer {
             // these need to be eagerly initialised here, otherwise Groovy's findAll from the DGM is called
             if(providesDynamicMethod(DynamicMethod.FIND_ALL, enhancer)) {
                 def findAllMethod = fetchDynamicMethod(DynamicMethod.FIND_ALL, enhancer, app, dc)
-                mc.static.findAll = {->
-                    findAllMethod.invoke(dc.klass, 'findAll', [] as Object[])
+                mc.static.findAll = {Criterion criterion ->
+                    findAllMethod.invoke(dc.klass, 'findAll', [criterion] as Object[])
+                }
+                mc.static.findAll = {Criterion criterion, Map options ->
+                    findAllMethod.invoke(dc.klass, 'findAll', [criterion, options] as Object[])
+                }
+                mc.static.findAll = {Closure criteria ->
+                    findAllMethod.invoke(dc.klass, 'findAll', [criteria] as Object[])
+                }
+                mc.static.findAll = {Map options, Closure criteria ->
+                    findAllMethod.invoke(dc.klass, 'findAll', [criteria, options] as Object[])
                 }
                 mc.static.findAll = {Object example ->
                     findAllMethod.invoke(dc.klass, 'findAll', [example] as Object[])
                 }
-                // mc.static.findAll = {Object example, Map args -> findAllMethod.invoke(dc.klass, 'findAll', [example, args] as Object[])}
+                mc.static.findAll = {->
+                    findAllMethod.invoke(dc.klass, 'findAll', [] as Object[])
+                }
             }
 
             mc.methodMissing = { String name, args ->
@@ -89,28 +101,30 @@ class DomainClassEnhancer {
         addBasicPersistenceMethods(dc, app, enhancer)
         addQueryMethods(dc, app, enhancer)
         addDynamicFinderSupport(dc, app, enhancer)
-        enhancer.enhance(dc, app)
+        enhancer.enhance(app, dc)
     }
 
     private static addBasicPersistenceMethods(ArtifactInfo dc, GriffonApplication app, DomainClassEnhancerDelegate enhancer) {
         def mc = dc.klass.metaClass
 
-        def makeMethod = fetchDynamicMethod(DynamicMethod.MAKE, enhancer, app, dc)
-        mc.static.make = {->
-            makeMethod.invoke(delegate, 'make', [] as Object[])
-        }
-        mc.static.make = {Map args->
-            makeMethod.invoke(delegate, 'make', [args] as Object[])
+        if(providesDynamicMethod(DynamicMethod.MAKE, enhancer)) {
+            def makeMethod = fetchDynamicMethod(DynamicMethod.MAKE, enhancer, app, dc)
+            mc.static.make = {Map args->
+                makeMethod.invoke(delegate, 'make', [args] as Object[])
+            }
+            mc.static.make = {->
+                makeMethod.invoke(delegate, 'make', [] as Object[])
+            }
         }
     
         if(providesDynamicMethod(DynamicMethod.SAVE, enhancer)) {
             def saveMethod = fetchDynamicMethod(DynamicMethod.SAVE, enhancer, app, dc)
-            mc.save = {Boolean validate ->
-                saveMethod.invoke(delegate, 'save', [validate] as Object[])
-            }
-            mc.save = {Map args ->
-                saveMethod.invoke(delegate, 'save', [args] as Object[])
-            }
+            // mc.save = {Boolean validate ->
+            //     saveMethod.invoke(delegate, 'save', [validate] as Object[])
+            // }
+            // mc.save = {Map args ->
+            //     saveMethod.invoke(delegate, 'save', [args] as Object[])
+            // }
             mc.save = {->
                 saveMethod.invoke(delegate, 'save', [] as Object[])
             }
@@ -143,57 +157,81 @@ class DomainClassEnhancer {
 
         if(providesDynamicMethod(DynamicMethod.FIND_ALL, enhancer)) {
             def findAllMethod = fetchDynamicMethod(DynamicMethod.FIND_ALL, enhancer, app, dc)
-            mc.static.findAll = {String query ->
-                findAllMethod.invoke(dc.klass, 'findAll', [query] as Object[])
+            // mc.static.findAll = {String query ->
+            //     findAllMethod.invoke(dc.klass, 'findAll', [query] as Object[])
+            // }
+            // mc.static.findAll = {String query, Collection positionalParams ->
+            //     findAllMethod.invoke(dc.klass, 'findAll', [query, positionalParams] as Object[])
+            // }
+            // mc.static.findAll = {String query, Collection positionalParams, Map paginateParams ->
+            //     findAllMethod.invoke(dc.klass, 'findAll', [query, positionalParams, paginateParams] as Object[])
+            // }
+            // mc.static.findAll = {String query, Map namedArgs ->
+            //     findAllMethod.invoke(dc.klass, 'findAll', [query, namedArgs] as Object[])
+            // }
+            // mc.static.findAll = {String query, Map namedArgs, Map paginateParams ->
+            //     findAllMethod.invoke(dc.klass, 'findAll', [query, namedArgs, paginateParams] as Object[])
+            // }
+            mc.static.findAll = {Criterion criterion ->
+                findAllMethod.invoke(dc.klass, 'findAll', [criterion] as Object[])
             }
-            mc.static.findAll = {String query, Collection positionalParams ->
-                findAllMethod.invoke(dc.klass, 'findAll', [query, positionalParams] as Object[])
+            mc.static.findAll = {Criterion criterion, Map options ->
+                findAllMethod.invoke(dc.klass, 'findAll', [criterion, options] as Object[])
             }
-            mc.static.findAll = {String query, Collection positionalParams, Map paginateParams ->
-                findAllMethod.invoke(dc.klass, 'findAll', [query, positionalParams, paginateParams] as Object[])
+            mc.static.findAll = {Closure criteria ->
+                findAllMethod.invoke(dc.klass, 'findAll', [criteria] as Object[])
             }
-            mc.static.findAll = {String query, Map namedArgs ->
-                findAllMethod.invoke(dc.klass, 'findAll', [query, namedArgs] as Object[])
-            }
-            mc.static.findAll = {String query, Map namedArgs, Map paginateParams ->
-                findAllMethod.invoke(dc.klass, 'findAll', [query, namedArgs, paginateParams] as Object[])
+            mc.static.findAll = {Closure criteria, Map options ->
+                findAllMethod.invoke(dc.klass, 'findAll', [criteria, options] as Object[])
             }
         }
 
         if(providesDynamicMethod(DynamicMethod.FIND, enhancer)) {
             def findMethod = fetchDynamicMethod(DynamicMethod.FIND, enhancer, app, dc)
-            mc.static.find = {String query ->
-                findMethod.invoke(dc.klass, 'find', [query] as Object[])
+            // mc.static.find = {String query ->
+            //     findMethod.invoke(dc.klass, 'find', [query] as Object[])
+            // }
+            // mc.static.find = {String query, Collection args ->
+            //     findMethod.invoke(dc.klass, 'find', [query, args] as Object[])
+            // }
+            // mc.static.find = {String query, Map namedArgs ->
+            //     findMethod.invoke(dc.klass, 'find', [query, namedArgs] as Object[])
+            // }
+            mc.static.find = {Criterion criterion ->
+                findMethod.invoke(dc.klass, 'find', [criterion] as Object[])
             }
-            mc.static.find = {String query, Collection args ->
-                findMethod.invoke(dc.klass, 'find', [query, args] as Object[])
+            mc.static.find = {Criterion criterion, Map options ->
+                findMethod.invoke(dc.klass, 'find', [criterion, options] as Object[])
             }
-            mc.static.find = {String query, Map namedArgs ->
-                findMethod.invoke(dc.klass, 'find', [query, namedArgs] as Object[])
+            mc.static.find = {Closure criteria ->
+                findMethod.invoke(dc.klass, 'find', [criteria] as Object[])
+            }
+            mc.static.find = {Closure criteria, Map options ->
+                findMethod.invoke(dc.klass, 'find', [criteria, options] as Object[])
             }
             mc.static.find = {Object example ->
                 findMethod.invoke(dc.klass, 'find', [example] as Object[])
             }
         }
 
-        if(providesDynamicMethod(DynamicMethod.EXECUTE_QUERY, enhancer)) {
-            def executeQueryMethod = fetchDynamicMethod(DynamicMethod.EXECUTE_QUERY, enhancer, app, dc)
-            mc.static.executeQuery = {String query ->
-                executeQueryMethod.invoke(dc.klass, 'executequery', [query] as Object[])
-            }
-            mc.static.executeQuery = {String query, Collection positionalParams ->
-                executeQueryMethod.invoke(dc.klass, 'executequery', [query, positionalParams] as Object[])
-            }
-            mc.static.executeQuery = {String query, Collection positionalParams, Map paginateParams ->
-                executeQueryMethod.invoke(dc.klass, 'executequery', [query, positionalParams, paginateParams] as Object[])
-            }
-            mc.static.executeQuery = {String query, Map namedParams ->
-                executeQueryMethod.invoke(dc.klass, 'executequery', [query, namedParams] as Object[])
-            }
-            mc.static.executeQuery = {String query, Map namedParams, Map paginateParams ->
-                executeQueryMethod.invoke(dc.klass, 'executequery', [query, namedParams, paginateParams] as Object[])
-            }
-        }
+        // if(providesDynamicMethod(DynamicMethod.EXECUTE_QUERY, enhancer)) {
+        //     def executeQueryMethod = fetchDynamicMethod(DynamicMethod.EXECUTE_QUERY, enhancer, app, dc)
+        //     mc.static.executeQuery = {String query ->
+        //         executeQueryMethod.invoke(dc.klass, 'executequery', [query] as Object[])
+        //     }
+        //     mc.static.executeQuery = {String query, Collection positionalParams ->
+        //         executeQueryMethod.invoke(dc.klass, 'executequery', [query, positionalParams] as Object[])
+        //     }
+        //     mc.static.executeQuery = {String query, Collection positionalParams, Map paginateParams ->
+        //         executeQueryMethod.invoke(dc.klass, 'executequery', [query, positionalParams, paginateParams] as Object[])
+        //     }
+        //     mc.static.executeQuery = {String query, Map namedParams ->
+        //         executeQueryMethod.invoke(dc.klass, 'executequery', [query, namedParams] as Object[])
+        //     }
+        //     mc.static.executeQuery = {String query, Map namedParams, Map paginateParams ->
+        //         executeQueryMethod.invoke(dc.klass, 'executequery', [query, namedParams, paginateParams] as Object[])
+        //     }
+        // }
 
         if(providesDynamicMethod(DynamicMethod.LIST, enhancer)) {
             def listMethod = fetchDynamicMethod(DynamicMethod.LIST, enhancer, app, dc)

@@ -25,7 +25,7 @@ public enum Operator {
     LESS_THAN("<"), LESS_THAN_OR_EQUAL("<="),
     LIKE("LIKE"), NOT_LIKE("NOT LIKE"),
     IS_NULL("IS NULL"), IS_NOT_NULL("IS NOT NULL"),
-    AND, OR, NOT;
+    AND("AND"), OR("OR"), NOT("NOT");
 
     private final String op;
 

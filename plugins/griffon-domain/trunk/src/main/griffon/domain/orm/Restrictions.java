@@ -20,6 +20,14 @@ package griffon.domain.orm;
  * @author Andres Almiray
  */
 public final class Restrictions {
+    public static CompositeCriterion and(Criterion lhs, Criterion rhs) {
+        return new CompositeCriterion(Operator.AND, new Criterion[]{lhs, rhs});
+    }
+
+    public static CompositeCriterion or(Criterion lhs, Criterion rhs) {
+        return new CompositeCriterion(Operator.OR, new Criterion[]{lhs, rhs});
+    }
+
     public static BinaryExpression eq(String propertyName, Object value) {
         return new BinaryExpression(propertyName, Operator.EQUAL, value);
     }
