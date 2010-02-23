@@ -1,0 +1,7 @@
+<plugin name='erlang' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
+  <title>Erlang support</title>
+  <documentation>http://griffon.codehaus.org/Erlang+Plugin</documentation>
+  <dependencies />
+</plugin>
