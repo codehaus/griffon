@@ -43,8 +43,8 @@ class JmxGriffonAddon {
         MBeanExporter exporter = ctx.getBean("exporter")
         
         // exporting mbeans
-        exportAddonBeans(exporter, domain, ctx)
         exportServices(exporter, domain, ctx)
+        exportAddonBeans(exporter, domain, ctx)
         exportConfiguredObjects(exporter, domain, ctx)
         registerMBeans(exporter)
     }
