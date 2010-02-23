@@ -1,5 +1,5 @@
 /*
- * Copyright 2008-2010 the original author or authors.
+ * Copyright 2009-2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,8 @@
 
 package griffon.pivot
 
-// import griffon.application.StandaloneGriffonApplication
+import griffon.application.StandaloneGriffonApplication
+import griffon.util.GriffonApplicationHelper
 import griffon.util.GriffonExceptionHandler
 import griffon.util.UIThreadHelper
 
@@ -26,23 +27,32 @@ import org.apache.pivot.wtk.Window
 /**
  * @author Andres.Almiray
  */
-class DesktopPivotApplication extends AbstractPivotApplication /*implements StandaloneGriffonApplication*/ {
+class DesktopPivotApplication extends AbstractPivotApplication implements StandaloneGriffonApplication {
     List windows = []
 
-    protected void show() {
+    void bootstrap() {
+        GriffonApplicationHelper.prepare(this)
+        event("BootstrapEnd",[this])
+    }
+
+    void realize() {
+        GriffonApplicationHelper.startup(this)
+    }
+
+    void show() {
         if(windows.size() > 0) {
             UIThreadHelper.instance.executeSync {
                 windows[0].open(display)
             }
         }
-        super.show()
+        ready()
     }
 
-    protected void shutdown() {
-        super.shutdown()
+    void shutdown() {
         windows.each {
             window -> window.close()
         }
+        super.shutdown()
     }
 
     public Object createApplicationContainer() {

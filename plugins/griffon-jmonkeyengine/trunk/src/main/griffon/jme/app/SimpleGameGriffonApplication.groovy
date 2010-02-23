@@ -17,8 +17,9 @@
 package griffon.jme.app
 
 import com.jme.app.SimpleGame
-// import griffon.util.BaseGriffonApplication
+import griffon.core.BaseGriffonApplication
 import griffon.core.GriffonApplication
+import griffon.application.StandaloneGriffonApplication
 import griffon.util.GriffonApplicationHelper
 import griffon.util.GriffonExceptionHandler
 import griffon.util.EventRouter
@@ -29,15 +30,14 @@ import java.awt.Toolkit
 /**
  * @author Andres Almiray
  */
-class SimpleGameGriffonApplication extends SimpleGame implements GriffonApplication {
-    // @Delegate private final BaseGriffonApplication _base
+class SimpleGameGriffonApplication extends SimpleGame implements StandaloneGriffonApplication {
+    @Delegate private final BaseGriffonApplication _base
 
     List appFrames  = []
     SimpleGameDelegate gameDelegate
 
     SimpleGameGriffonApplication() {
-       super()
-       // _base = new BaseGriffonApplication(this)
+       _base = new BaseGriffonApplication(this)
        loadApplicationProperties()
     }
 
@@ -52,17 +52,15 @@ class SimpleGameGriffonApplication extends SimpleGame implements GriffonApplicat
     }
 
     void show() {
-        callReady()
+        ready()
         start()
     }
 
-/*
     void shutdown() {
         stop()
         _base.shutdown()
         System.exit(0)
     }
-*/
 
     Object createApplicationContainer() {
         def appContainer = GriffonApplicationHelper.createJFrameApplication(this)
@@ -100,121 +98,5 @@ class SimpleGameGriffonApplication extends SimpleGame implements GriffonApplicat
         sgga.bootstrap()
         sgga.realize()
         sgga.show()
-    }
-
-    // ==================================================
-
-    /**
-     * Calls the ready lifecycle mhetod after the UI thread calms down
-     */
-    private void callReady() {
-        // wait for EDT to empty out.... somehow
-        boolean empty = false
-        while (true) {
-            UIThreadHelper.instance.executeSync {empty = Toolkit.defaultToolkit.systemEventQueue.peekEvent() == null}
-            if (empty) break
-            sleep(100)
-        }
-
-        ready();
-    }
-
-    Map<String, ?> addons = [:]
-    Map<String, String> addonPrefixes = [:]
-
-    Map<String, Map<String, String>> mvcGroups = [:]
-    Map models      = [:]
-    Map views       = [:]
-    Map controllers = [:]
-    Map builders    = [:]
-    Map groups      = [:]
-
-    Binding bindings = new Binding()
-    Properties applicationProperties
-    ConfigObject config
-    ConfigObject builderConfig
-    Object eventsConfig
-
-    private final EventRouter eventRouter = new EventRouter()
-
-    // define getter/setter otherwise it will be treated as a read-only property
-    // because only the getter was defined in IGriffonApplication
-    Properties getApplicationProperties() {
-        return applicationProperties
-    }
-    void setApplicationProperties(Properties applicationProperties) {
-        this.applicationProperties = applicationProperties
-    }
-    public void loadApplicationProperties() {
-        this.applicationProperties = Metadata.getCurrent()
-    }
-
-    Class getConfigClass() {
-        return getClass().classLoader.loadClass("Application")
-    }
-
-    Class getBuilderClass() {
-        return getClass().classLoader.loadClass("Builder")
-    }
-
-    Class getEventsClass() {
-        try{
-           return getClass().classLoader.loadClass("Events")
-        } catch( ignored ) {
-           // ignore - no global event handler will be used
-        }
-        return null
-    }
-
-    void initialize() {
-        GriffonApplicationHelper.runScriptInsideEDT("Initialize", this)
-    }
-
-    void ready() {
-        event("ReadyStart",[this])
-        GriffonApplicationHelper.runScriptInsideEDT("Ready", this)
-        event("ReadyEnd",[this])
-    }
-
-    void shutdown() {
-        event("ShutdownStart",[this])
-        stop()
-        List mvcNames = []
-        mvcNames.addAll(groups.keySet())
-        mvcNames.each {
-            GriffonApplicationHelper.destroyMVCGroup(this, it)
-        }
-        GriffonApplicationHelper.runScriptInsideEDT("Shutdown", this)
-        System.exit()
-    }
-
-    void startup() {
-        event("StartupStart",[this])
-        GriffonApplicationHelper.runScriptInsideEDT("Startup", this)
-        event("StartupEnd",[this])
-    }
-
-    void event( String eventName, List params = [] ) {
-        eventRouter.publish(eventName, params)
-    }
-
-    void addApplicationEventListener( listener ) {
-       eventRouter.addEventListener(listener)
-    }
-
-    void removeApplicationEventListener( listener ) {
-       eventRouter.removeEventListener(listener)
-    }
-
-    void addApplicationEventListener( String eventName, Closure listener ) {
-       eventRouter.addEventListener(eventName,listener)
-    }
-
-    void removeApplicationEventListener( String eventName, Closure listener ) {
-       eventRouter.removeEventListener(eventName,listener)
-    }
-
-    void addMvcGroup(String mvcType, Map<String, String> mvcPortions) {
-       mvcGroups[mvcType] = mvcPortions
     }
 }

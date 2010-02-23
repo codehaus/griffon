@@ -26,22 +26,18 @@ import org.eclipse.swt.SWT
 import org.eclipse.swt.widgets.Display
 import org.eclipse.swt.widgets.Shell
 
-import griffon.core.GriffonApplication
-import griffon.util.EventRouter
-import griffon.util.Metadata
-
 /**
  * @author Andres Almiray
  */
-class SWTApplication implements StandaloneGriffonApplication, GriffonApplication {
-//    @Delegate private final BaseGriffonApplication _base
+class SWTApplication implements StandaloneGriffonApplication {
+    @Delegate private final BaseGriffonApplication _base
     private final Display defaultDisplay
 
     List shells = []
 
     SWTApplication() {
+        _base = new BaseGriffonApplication(this)
         UIThreadHelper.instance.setUIThreadHandler(new SWTUIThreadHandler())
-//        _base = new BaseGriffonApplication(this)
         loadApplicationProperties()
         defaultDisplay = Display.default
     }
@@ -77,11 +73,11 @@ class SWTApplication implements StandaloneGriffonApplication, GriffonApplication
     }
 
     public void shutdown() {
-//        _base.shutdown()
         doShutdown()
         UIThreadHelper.instance.executeSync { 
             defaultDisplay.shells?.each { it.dispose() }
         }
+        _base.shutdown()
         System.exit(0)
     }
 
@@ -100,102 +96,5 @@ class SWTApplication implements StandaloneGriffonApplication, GriffonApplication
         sa.bootstrap()
         sa.realize()
         sa.show()
-    }
-
-    // ==============================================================
-
-    Map<String, ?> addons = [:]
-    Map<String, String> addonPrefixes = [:]
-
-    Map<String, Map<String, String>> mvcGroups = [:]
-    Map models      = [:]
-    Map views       = [:]
-    Map controllers = [:]
-    Map builders    = [:]
-    Map groups      = [:]
-
-    Binding bindings = new Binding()
-    Properties applicationProperties
-    ConfigObject config
-    ConfigObject builderConfig
-    Object eventsConfig
-
-    private final EventRouter eventRouter = new EventRouter()
-
-    // define getter/setter otherwise it will be treated as a read-only property
-    // because only the getter was defined in GriffonApplication
-    public Properties getApplicationProperties() {
-        return applicationProperties
-    }
-    public void setApplicationProperties(Properties applicationProperties) {
-        this.applicationProperties = applicationProperties
-    }
-    public void loadApplicationProperties() {
-        this.applicationProperties = Metadata.getCurrent()
-    }
-
-    public Metadata getMetadata() {
-        Metadata.current
-    }
-
-    public Class getConfigClass() {
-        return getClass().classLoader.loadClass("Application")
-    }
-
-    public Class getBuilderClass() {
-        return getClass().classLoader.loadClass("Builder")
-    }
-
-    public Class getEventsClass() {
-        try{
-           return getClass().classLoader.loadClass("Events")
-        } catch( ignored ) {
-           // ignore - no global event handler will be used
-        }
-        return null
-    }
-
-    public void initialize() {
-        GriffonApplicationHelper.runScriptInsideUIThread("Initialize", this)
-    }
-
-    private void doShutdown() {
-        event("ShutdownStart",[this])
-        List mvcNames = []
-        mvcNames.addAll(groups.keySet())
-        mvcNames.each { 
-            GriffonApplicationHelper.destroyMVCGroup(this, it)
-        }
-        GriffonApplicationHelper.runScriptInsideUIThread("Shutdown", this)
-    }
-
-    public void startup() {
-        event("StartupStart",[this])
-        GriffonApplicationHelper.runScriptInsideUIThread("Startup", this)
-        event("StartupEnd",[this])
-    }
-
-    public void event( String eventName, List params = [] ) {
-        eventRouter.publish(eventName, params)
-    }
-
-    public void addApplicationEventListener( listener ) {
-       eventRouter.addEventListener(listener)
-    }
-
-    public void removeApplicationEventListener( listener ) {
-       eventRouter.removeEventListener(listener)
-    }
-
-    public void addApplicationEventListener( String eventName, Closure listener ) {
-       eventRouter.addEventListener(eventName,listener)
-    }
-
-    public void removeApplicationEventListener( String eventName, Closure listener ) {
-       eventRouter.removeEventListener(eventName,listener)
-    }
-
-    public void addMvcGroup(String mvcType, Map<String, String> mvcPortions) {
-       mvcGroups[mvcType] = mvcPortions
     }
 }
