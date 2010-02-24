@@ -31,12 +31,14 @@ class BerkeleydbGriffonAddon {
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.berkeleydb?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            instance.metaClass.withBerkeleydb = BerkeleydbHelper.instance.withBerkeleydb
+            instance.metaClass.withBerkeleyEnv = BerkeleydbHelper.instance.withBerkeleyEnv
+            instance.metaClass.withBerkeleyDb = BerkeleydbHelper.instance.withBerkeleyDb
             instance.metaClass.withEntityStore = BerkeleydbHelper.instance.withEntityStore
         }
     ]
 
     private void start(GriffonApplication app) {
+        BerkeleydbHelper.instance.metaClass.app = app
         def dbConfig = BerkeleydbHelper.instance.parseConfig(app)
         BerkeleydbHelper.instance.startEnvironment(dbConfig)
         bootstrap = app.class.classLoader.loadClass('BootstrapBerkeleydb').newInstance()

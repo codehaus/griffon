@@ -22,9 +22,9 @@ import com.sleepycat.je.Environment
  */
 @Singleton
 class EnvironmentHolder {
-    Envrionment environment
+    Environment environment
 
-    def withBerkeleydb = { Closure closure ->
+    def withBerkeleyEnv = { Closure closure ->
         closure(environment)
     }
 }

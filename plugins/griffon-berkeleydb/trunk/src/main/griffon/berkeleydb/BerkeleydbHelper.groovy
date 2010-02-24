@@ -16,17 +16,24 @@
 package griffon.berkeleydb
 
 import griffon.core.GriffonApplication
-import griffon.util.Environment GE
+import griffon.util.Environment as GE
 import com.sleepycat.je.*
 import com.sleepycat.persist.*
 import java.util.concurrent.ConcurrentHashMap
+
+import org.apache.commons.logging.Log
+import org.apache.commons.logging.LogFactory
 
 /**
  * @author Andres.Almiray
  */
 @Singleton
 final class BerkeleydbHelper {
-    private final Map ENTIY_STORES = [:]
+    private final Map ENTITY_STORES = new ConcurrentHashMap()
+    private final Map DATABASES = new ConcurrentHashMap()
+    private static final Log LOG = LogFactory.getLog(BerkeleydbHelper)
+
+    final EnvironmentConfig envConfig = new EnvironmentConfig()
 
     def parseConfig(GriffonApplication app) {
         def berkeleydbConfigClass = app.class.classLoader.loadClass('BerkeleydbConfig')
@@ -36,9 +43,9 @@ final class BerkeleydbHelper {
     void startEnvironment(dbConfig) {
         String envhome = dbConfig.environment?.home ?: 'bdb_home'
         File envhomeDir = new File(envhome)
-        if(!envhomeDir.absolute) envhomeDir = new File(System.getProperty('griffon.start.dir'), envhomeDir)
-        EnvironmentConfig envConfig = new EnvironmentConfig()
-        dbconfig.environment.each { key, value ->
+        if(!envhomeDir.absolute) envhomeDir = new File(System.getProperty('griffon.start.dir'), envhome)
+        envhomeDir.mkdirs()
+        dbConfig.environment.each { key, value ->
             if(key == 'home') return
 
             // 1 - attempt direct property setter
@@ -51,7 +58,7 @@ final class BerkeleydbHelper {
 
             // 2 - attempt field resolution
             try {
-                String rkey = EnvironmentConfig.@"${key.toUpperCase()).replaceAll(' ','_')}"
+                String rkey = EnvironmentConfig.@"${key.toUpperCase().replaceAll(' ','_')}"
                 envConfig.setConfigParam(rkey, value?.toString())
                 return
             } catch(Exception mpe) {
@@ -61,18 +68,116 @@ final class BerkeleydbHelper {
             // 3 - assume key is a valid config param
             envConfig.setConfigParam(key, value?.toString())
         }
+        Environment.metaClass.withEntityStore = this.withEntityStore
+        Environment.metaClass.withBerkeleyDb = this.withBerkeleyDb
         EnvironmentHolder.instance.environment = new Environment(envhomeDir, envConfig)
     }
 
     void stopEnvironment(dbConfig) {
-        EnvironmentHelper.instance.environment.close()
+        ENTITY_STORES.each { id, storeBucket -> storeBucket.store.close() }
+        DATABASES.each { id, dbBucket ->
+            dbBucket.db.with {
+                sync()
+                close()
+            }
+        }
+        EnvironmentHolder.instance.environment.with {
+            cleanLog()
+            close()
+        }
     }
 
-    def withBerkeleydb = { Closure closure ->
-        EnvironmentHolder.instance.withBerkeleydb(closure)
+    def withBerkeleyEnv = { Closure closure ->
+        EnvironmentHolder.instance.withBerkeleyEnv(closure)
     }
 
     def withEntityStore = { Map params = [:], Closure closure ->
+        if(!params.id) {
+            throw new IllegalArgumentException('You must specify a value for id: when using withEntityStore().')
+        }
 
+        Map storeBucket = ENTITY_STORES[params.id]
+        if(!storeBucket) {
+            storeBucket = createStoreBucket(params.id)
+            ENTITY_STORES[params.id] = storeBucket
+        }
+
+        if(storeBucket.store.config.transactional) {
+            TransactionConfig txnconfig = params.txnconfig ?: storeBucket.txnconfig
+            Transaction txn = EnvironmentHolder.instance.environment.beginTransaction(null, txnconfig)
+            try {
+                closure(storeBucket.store, txn)
+                txn.commit()
+            } catch(Exception ex) {
+                txn.abort()
+                throw ex
+            }
+        } else {
+            closure(storeBucket.store, null)
+        }
+    }
+
+    def withBerkeleyDb = { Map params = [:], Closure closure ->
+        if(!params.id) {
+            throw new IllegalArgumentException('You must specify a value for id: when using withBerkeleyDb().')
+        }
+
+        Map dbBucket = DATABASES[params.id]
+        if(!dbBucket) {
+            dbBucket = createDatabaseBucket(params.id)
+            DATABASES[params.id] = dbBucket
+        }
+
+        if(dbBucket.db.config.transactional) {
+            TransactionConfig txnconfig = params.txnconfig ?: dbBucket.txnconfig
+            Transaction txn = EnvironmentHolder.instance.environment.beginTransaction(null, txnconfig)
+            try {
+                closure(dbBucket.db, txn)
+                txn.commit()
+            } catch(Exception ex) {
+                txn.abort()
+                throw ex
+            }
+        } else {
+            closure(dbBucket.db, null)
+        }
+    }
+
+    private Map createStoreBucket(String storeId) {
+        def dbconfig = parseConfig(app)
+        StoreConfig storeconfig = new StoreConfig()
+        TransactionConfig txnconfig = new TransactionConfig()
+
+        dbconfig.entityStores?.get(storeId)?.each { skey, svalue ->
+            if(skey == 'transactionConfig') {
+                svalue.each { tkey, tvalue ->
+                    txnconfig[tkey] = tvalue
+                }
+            } else {
+                storeconfig[skey] = svalue
+            }
+        }
+
+        [store: new EntityStore(EnvironmentHolder.instance.environment, storeId, storeconfig),
+         txnconfig: txnconfig]
+    }
+
+    private Map createDatabaseBucket(String dbId) {
+        def config = parseConfig(app)
+        DatabaseConfig dbconfig = new DatabaseConfig()
+        TransactionConfig txnconfig = new TransactionConfig()
+
+        config.databases?.get(dbId)?.each { skey, svalue ->
+            if(skey == 'transactionConfig') {
+                svalue.each { tkey, tvalue ->
+                    txnconfig[tkey] = tvalue
+                }
+            } else {
+                dbconfig[skey] = svalue
+            }
+        }
+
+        [db: new Database(EnvironmentHolder.instance.environment, dbId, dbconfig),
+         txnconfig: txnconfig]
     }
 }
