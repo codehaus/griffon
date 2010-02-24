@@ -36,16 +36,16 @@ final class BerkeleydbHelper {
     final EnvironmentConfig envConfig = new EnvironmentConfig()
 
     def parseConfig(GriffonApplication app) {
-        def berkeleydbConfigClass = app.class.classLoader.loadClass('BerkeleydbConfig')
-        return new ConfigSlurper(GE.current.name).parse(berkeleydbConfigClass)
+        def configClass = app.class.classLoader.loadClass('BerkeleydbConfig')
+        return new ConfigSlurper(GE.current.name).parse(configClass)
     }
 
-    void startEnvironment(dbConfig) {
-        String envhome = dbConfig.environment?.home ?: 'bdb_home'
+    void startEnvironment(config) {
+        String envhome = config.environment?.home ?: 'bdb_home'
         File envhomeDir = new File(envhome)
         if(!envhomeDir.absolute) envhomeDir = new File(System.getProperty('griffon.start.dir'), envhome)
         envhomeDir.mkdirs()
-        dbConfig.environment.each { key, value ->
+        config.environment.each { key, value ->
             if(key == 'home') return
 
             // 1 - attempt direct property setter
@@ -70,10 +70,11 @@ final class BerkeleydbHelper {
         }
         Environment.metaClass.withEntityStore = this.withEntityStore
         Environment.metaClass.withBerkeleyDb = this.withBerkeleyDb
+        Environment.metaClass.withBerkeleyCursor = this.withBerkeleyCursor
         EnvironmentHolder.instance.environment = new Environment(envhomeDir, envConfig)
     }
 
-    void stopEnvironment(dbConfig) {
+    void stopEnvironment(config) {
         ENTITY_STORES.each { id, storeBucket -> storeBucket.store.close() }
         DATABASES.each { id, dbBucket ->
             dbBucket.db.with {
@@ -103,8 +104,8 @@ final class BerkeleydbHelper {
         }
 
         if(storeBucket.store.config.transactional) {
-            TransactionConfig txnconfig = params.txnconfig ?: storeBucket.txnconfig
-            Transaction txn = EnvironmentHolder.instance.environment.beginTransaction(null, txnconfig)
+            TransactionConfig txnConfig = params.txnConfig ?: storeBucket.txnConfig
+            Transaction txn = EnvironmentHolder.instance.environment.beginTransaction(null, txnConfig)
             try {
                 closure(storeBucket.store, txn)
                 txn.commit()
@@ -129,8 +130,8 @@ final class BerkeleydbHelper {
         }
 
         if(dbBucket.db.config.transactional) {
-            TransactionConfig txnconfig = params.txnconfig ?: dbBucket.txnconfig
-            Transaction txn = EnvironmentHolder.instance.environment.beginTransaction(null, txnconfig)
+            TransactionConfig txnConfig = params.txnConfig ?: dbBucket.txnConfig
+            Transaction txn = EnvironmentHolder.instance.environment.beginTransaction(null, txnConfig)
             try {
                 closure(dbBucket.db, txn)
                 txn.commit()
@@ -143,41 +144,73 @@ final class BerkeleydbHelper {
         }
     }
 
-    private Map createStoreBucket(String storeId) {
-        def dbconfig = parseConfig(app)
-        StoreConfig storeconfig = new StoreConfig()
-        TransactionConfig txnconfig = new TransactionConfig()
+    def withBerkeleyCursor = { Map params = [:], Closure closure ->
+        if(!params.id) {
+            throw new IllegalArgumentException('You must specify a value for id: when using withBerkeleyCursor().')
+        }
 
-        dbconfig.entityStores?.get(storeId)?.each { skey, svalue ->
+        Map dbBucket = DATABASES[params.id]
+        if(!dbBucket) {
+            dbBucket = createDatabaseBucket(params.id)
+            DATABASES[params.id] = dbBucket
+        }
+
+        if(dbBucket.db.config.transactional) {
+            TransactionConfig txnConfig = params.txnConfig ?: dbBucket.txnConfig
+            CursorConfig cursorConfig = params.cursorConfig ?: dbBucket.cursorConfig
+            Transaction txn = EnvironmentHolder.instance.environment.beginTransaction(null, txnConfig)
+            try {
+                closure(dbBucket.db.openCursor(txn, cursorConfig), txn)
+                txn.commit()
+            } catch(Exception ex) {
+                txn.abort()
+                throw ex
+            }
+        } else {
+            closure(dbBucket.db.openCursor(null, cursorConfig), null)
+        }
+    }
+
+    private Map createStoreBucket(String storeId) {
+        def config = parseConfig(app)
+        StoreConfig storeConfig = new StoreConfig()
+        TransactionConfig txnConfig = new TransactionConfig()
+
+        config.entityStores?.get(storeId)?.each { skey, svalue ->
             if(skey == 'transactionConfig') {
                 svalue.each { tkey, tvalue ->
-                    txnconfig[tkey] = tvalue
+                    txnConfig[tkey] = tvalue
                 }
             } else {
-                storeconfig[skey] = svalue
+                storeConfig[skey] = svalue
             }
         }
 
-        [store: new EntityStore(EnvironmentHolder.instance.environment, storeId, storeconfig),
-         txnconfig: txnconfig]
+        [store: new EntityStore(EnvironmentHolder.instance.environment, storeId, storeConfig),
+         txnConfig: txnConfig]
     }
 
     private Map createDatabaseBucket(String dbId) {
         def config = parseConfig(app)
-        DatabaseConfig dbconfig = new DatabaseConfig()
-        TransactionConfig txnconfig = new TransactionConfig()
+        DatabaseConfig dbConfig = new DatabaseConfig()
+        TransactionConfig txnConfig = new TransactionConfig()
+        CursorConfig cursorConfig = new CursorConfig()
 
         config.databases?.get(dbId)?.each { skey, svalue ->
             if(skey == 'transactionConfig') {
                 svalue.each { tkey, tvalue ->
-                    txnconfig[tkey] = tvalue
+                    txnConfig[tkey] = tvalue
+                }
+            } else if(skey == 'cursorConfig') {
+                svalue.each { ckey, cvalue ->
+                    cursorConfig[ckey] = cvalue
                 }
             } else {
-                dbconfig[skey] = svalue
+                dbConfig[skey] = svalue
             }
         }
 
-        [db: new Database(EnvironmentHolder.instance.environment, dbId, dbconfig),
-         txnconfig: txnconfig]
+        [db: new Database(EnvironmentHolder.instance.environment, dbId, dbConfig),
+         txnConfig: txnConfig, cursorConfig: cursorConfig]
     }
 }

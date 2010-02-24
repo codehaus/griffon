@@ -33,6 +33,7 @@ class BerkeleydbGriffonAddon {
             if(!types.contains(type)) return
             instance.metaClass.withBerkeleyEnv = BerkeleydbHelper.instance.withBerkeleyEnv
             instance.metaClass.withBerkeleyDb = BerkeleydbHelper.instance.withBerkeleyDb
+            instance.metaClass.withBerkeleyCursor = BerkeleydbHelper.instance.withBerkeleyCursor
             instance.metaClass.withEntityStore = BerkeleydbHelper.instance.withEntityStore
         }
     ]
