@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package griffon.riak
+
+import com.basho.riak.client.raw.RawClient
 
 /**
  * @author Andres Almiray
  */
+@Singleton
+class RawClientHolder {
+    RawClient rawClient
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        ant.fileset(dir:"${getPluginDirForName('riak').file}/lib/", includes:"*.jar").each {
-            griffonCopyDist(it.toString(), jardir)
-        }
+    def withRiak = { Closure closure ->
+        closure(rawClient)
     }
 }
-

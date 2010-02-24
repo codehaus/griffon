@@ -1,75 +1,52 @@
+/*
+ * Copyright 2010 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import griffon.core.GriffonApplication
+import griffon.util.Environment
+import griffon.riak.RiakHelper
+import griffon.riak.RawClientHolder
+
+/**
+ * @author Andres Almiray
+ */
 class RiakGriffonAddon {
+    private bootstrap
 
+    def events = [
+        BootstrapEnd: { app -> start(app) },
+        ShutdownStart: { app -> stop(app) },
+        NewInstance: { klass, type, instance ->
+            def types = app.config.griffon?.riak?.injectInto ?: ['controller']
+            if(!types.contains(type)) return
+            instance.metaClass.withRiak = RiakHelper.instance.withRiak
+        }
+    ]
 
-    // lifecycle methods
+    private void start(GriffonApplication app) {
+        RiakHelper.instance.metaClass.app = app
+        def riakConfig = RiakHelper.instance.parseConfig(app)
+        RiakHelper.instance.startRiak(riakConfig)
+        bootstrap = app.class.classLoader.loadClass('BootstrapRiak').newInstance()
+        bootstrap.metaClass.app = app
+        bootstrap.init(RawClientHolder.instance.rawClient)
+    }
 
-    // called once, after the addon is created
-    //def addonInit(app) {
-    //}
-
-    // called once, after all addons have been inited
-    //def addonPostInit(app) {
-    //}
-
-    // called many times, after creating a builder
-    //def addonBuilderInit(app) {
-    //}
-
-    // called many times, after creating a builder and after
-    // all addons have been inited
-    //def addonBuilderPostInit(app) {
-    //}
-
-
-    // to add MVC Groups use create-mvc
-
-
-    // builder fields, these are added to all builders.
-    // closures can either be literal { it -> println it}
-    // or they can be method closures: this.&method
-
-    // adds methods to all builders
-    //def methods = [
-    //    methodName: { /*Closure*/ }
-    //]
-
-    // adds properties to all builders
-    //def props = [
-    //    propertyName: [
-    //        get: { /* optional getter closure */ },
-    //        set: {val-> /* optional setter closure */ },
-    //  ]
-    //]
-
-    // adds new factories to all builders
-    //def factories = [
-    //    factory : /*instance that extends Factory*/
-    //]
-
-    // adds application event handlers
-    //def events = [
-    //    "StartupStart": {app -> /* event hadler code */ }
-    //]
-
-    // handle synthetic node properties or
-    // intercept existing ones
-    //def attributeDelegates = [
-    //    {builder, node, attributes -> /*handler code*/ }
-    //]
-
-    // called before a node is instantiated
-    //def preInstantiateDelegates = [
-    //    {builder, attributes, value -> /*handler code*/ }
-    //]
-
-    // called after the node was instantiated
-    //def postInstantiateDelegates = [
-    //    {builder, attributes, node -> /*handler code*/ }
-    //]
-
-    // called after the node has been fully
-    // processed, including child content
-    //def postNodeCompletionDelegates = [
-    //    {builder, parent, node -> /*handler code*/ }
-    //]
+    private void stop(GriffonApplication app) {
+        bootstrap.destroy(RawClientHolder.instance.rawClient)
+        def riakConfig = RiakHelper.instance.parseConfig(app)
+        RiakHelper.instance.stopRiak(riakConfig)
+    }
 }
