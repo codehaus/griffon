@@ -59,7 +59,10 @@ Make sure you have a similar setting on your griffon-app/conf/BuildSettings.groo
        if(x == skipIt) uptodate = false
        else throw x
     }
-    if(uptodate) return
+    if(uptodate) {
+       ant.echo(message: "[protoc] Protobuf sources are up to date")
+       return
+    }
 
     ant.echo(message: "[protoc] Invoking $protocExecutable on $protobufsrc")
     ant.echo(message: "[protoc] Generated sources will be placed in $gensrcDir")
