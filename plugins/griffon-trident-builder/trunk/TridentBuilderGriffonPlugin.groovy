@@ -22,6 +22,7 @@ class TridentBuilderGriffonPlugin {
     def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swing', 'swt']
+    def jdk = "1.6"
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
