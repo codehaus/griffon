@@ -68,7 +68,7 @@ Make sure you have a similar setting on your griffon-app/conf/BuildSettings.groo
     ant.echo(message: "[thrift] Generated sources will be placed in ${gensrcDirPath.absolutePath}")
     ant.fileset(dir: thriftsrcDir, includes: "**/*.thrift").each { thriftfile ->
         ant.echo(message: "[thrift] Compiling $thriftfile")
-        Process thrift = "$thriftExecutable -I $thriftsrc -o $gensrcDir --gen java $thriftfile".execute([] as String[], new File(basedir))
+        Process thrift = "$thriftExecutable -I $thriftsrc -o $gensrcDir --gen java:hashcode,beans $thriftfile".execute([] as String[], new File(basedir))
         thrift.consumeProcessOutput(System.out, System.err)
         thrift.waitFor()
         File markerFile = new File(gensrcDirPath.absolutePath + File.separator + '.' + (thriftfile.toString() - thriftsrc).substring(1))
