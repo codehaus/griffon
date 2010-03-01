@@ -1,4 +1,4 @@
-<plugin name='lang-bridge' version='0.2.1' jdk='1.5'>
+<plugin name='lang-bridge' version='0.3' griffonVersion='0.3 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
   <title>Enables interoperability between JVM languages</title>

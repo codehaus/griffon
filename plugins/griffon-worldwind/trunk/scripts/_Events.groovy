@@ -24,9 +24,10 @@ eventPackageStart = { type ->
 }
 
 eventCreateConfigEnd = {
-    config.griffon.extensions.jnlpUrls << "http://worldwind.arc.nasa.gov/java/0.3.0/webstart/worldwind.jnlp"
+    if(config.griffon.extensions) {
+        config.griffon.extensions.jnlpUrls << "http://worldwind.arc.nasa.gov/java/0.3.0/webstart/worldwind.jnlp"
+    }
 }
-
 
 def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
 eventCopyLibsEnd = { jardir ->

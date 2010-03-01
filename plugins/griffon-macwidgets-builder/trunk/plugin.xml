@@ -1,7 +1,8 @@
-<plugin name='macwidgets-builder' version='0.2.1' jdk='1.5'>
+<plugin name='macwidgets-builder' version='0.3' griffonVersion='0.3 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>MacWidgetsBuilder Plugin</title>
   <documentation>http://griffon.codehaus.org/MacWidgetsBuilder+Plugin</documentation>
+  <toolkits>swing</toolkits>
   <dependencies />
 </plugin>

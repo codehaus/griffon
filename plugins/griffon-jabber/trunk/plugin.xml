@@ -1,9 +1,10 @@
-<plugin name='jabber' version='0.1' jdk='1.5'>
+<plugin name='jabber' version='0.2' griffonVersion='0.3 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Jabber client &amp; libraries</title>
   <documentation>http://griffon.codehaus.org/Jabber+Plugin</documentation>
+  <plugin name='xmlrpc' version='0.2' />
   <dependencies>
-    <plugin name='xmlrpc' version='0.1' />
+    <plugin name='xmlrpc' version='0.2' />
   </dependencies>
 </plugin>

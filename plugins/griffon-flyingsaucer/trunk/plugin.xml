@@ -1,0 +1,8 @@
+<plugin name='flyingsaucer' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Provides XHTML rendering capabilities</title>
+  <documentation>http://griffon.codehaus.org/Flyingsaucer+Plugin</documentation>
+  <toolkits>swing</toolkits>
+  <dependencies />
+</plugin>

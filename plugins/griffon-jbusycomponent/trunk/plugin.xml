@@ -1,8 +1,10 @@
-<plugin name='jbusycomponent' version='0.2' jdk='1.5'>
+<plugin name='jbusycomponent' version='0.3' griffonVersion='0.3 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Enhance any swing components with a 'busy' state</title>
   <documentation>http://griffon.codehaus.org/JBusyComponent+Plugin</documentation>
+  <toolkits>swing</toolkits>
+  <plugin name='swingx-builder' version='0.1' />
   <dependencies>
     <plugin name='swingx-builder' version='0.1' />
   </dependencies>

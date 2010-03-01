@@ -1,0 +1,12 @@
+<plugin name='jmx' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>JMX support</title>
+  <documentation>http://griffon.codehaus.org/Jmx+Plugin</documentation>
+  <plugin name='artifacts' version='0.1' />
+  <plugin name='spring' version='0.2' />
+  <dependencies>
+    <plugin name='artifacts' version='0.1' />
+    <plugin name='spring' version='0.2' />
+  </dependencies>
+</plugin>

@@ -1,9 +1,10 @@
-<plugin name='clojure' version='0.3' jdk='1.5'>
+<plugin name='clojure' version='0.5' griffonVersion='0.3 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Enables Clojure</title>
   <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
+  <plugin name='lang-bridge' version='0.3' />
   <dependencies>
-    <plugin name='lang-bridge' version='0.2' />
+    <plugin name='lang-bridge' version='0.3' />
   </dependencies>
 </plugin>

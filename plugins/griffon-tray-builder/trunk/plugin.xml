@@ -1,7 +1,8 @@
-<plugin name='tray-builder' version='0.2' jdk='1.6'>
+<plugin name='tray-builder' version='0.3' griffonVersion='0.3 &gt; *' jdk='1.6'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>TrayBuilder Plugin</title>
   <documentation>http://griffon.codehaus.org/TrayBuilder+Plugin</documentation>
+  <toolkits>swing</toolkits>
   <dependencies />
 </plugin>
