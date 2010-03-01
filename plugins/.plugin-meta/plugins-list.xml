@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1586">
+<plugins revision="1590">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -454,7 +454,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gpars/tags/RELEASE_0_1/griffon-gpars-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="gsql">
+    <plugin latest-release="0.3" name="gsql">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gsql powered DataSource</title>
             <author>Andres Almiray</author>
@@ -470,6 +470,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_2/griffon-gsql-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
+            <title>Gsql powered DataSource</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_3/griffon-gsql-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="gtk"/>
