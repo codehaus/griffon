@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1634">
+<plugins revision="1638">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -747,7 +747,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jung/tags/RELEASE_0_2/griffon-jung-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2.1" name="lang-bridge">
+    <plugin latest-release="0.3" name="lang-bridge">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables interoperability between JVM languages</title>
             <author>Andres Almiray</author>
@@ -771,6 +771,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/LangBridge+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lang-bridge/tags/RELEASE_0_2_1/griffon-lang-bridge-0.2.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
+            <title>Enables interoperability between JVM languages</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/LangBridge+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lang-bridge/tags/RELEASE_0_3/griffon-lang-bridge-0.3.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1" name="lwjgl">
