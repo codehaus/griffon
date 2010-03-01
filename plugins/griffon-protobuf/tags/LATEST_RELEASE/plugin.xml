@@ -1,7 +1,0 @@
-<plugin name='protobuf' version='0.1' jdk='1.5'>
-  <author>Andres Almiray</author>
-  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-  <title>Adds Protocol Buffers support</title>
-  <documentation>http://griffon.codehaus.org/Protobuf+Plugin</documentation>
-  <dependencies />
-</plugin>
