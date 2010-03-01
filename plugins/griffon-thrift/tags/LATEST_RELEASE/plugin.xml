@@ -1,0 +1,7 @@
+<plugin name='thrift' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Apache Thrift support</title>
+  <documentation>http://griffon.codehaus.org/Thrift+Plugin</documentation>
+  <dependencies />
+</plugin>
