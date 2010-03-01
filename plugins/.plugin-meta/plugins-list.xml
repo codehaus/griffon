@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1626">
+<plugins revision="1630">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -703,7 +703,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmx/tags/RELEASE_0_1/griffon-jmx-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="jogl">
+    <plugin latest-release="0.2" name="jogl">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JOGL support</title>
             <author>Andres Almiray</author>
@@ -711,6 +711,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/Jogl+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jogl/tags/RELEASE_0_1/griffon-jogl-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
+            <title>JOGL support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Jogl+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jogl/tags/RELEASE_0_2/griffon-jogl-0.2.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1.1" name="jung">
