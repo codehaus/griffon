@@ -1,0 +1,7 @@
+<plugin name='artifacts' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Artifacts API enhancements</title>
+  <documentation>http://griffon.codehaus.org/Artifacts+Plugin</documentation>
+  <dependencies />
+</plugin>
