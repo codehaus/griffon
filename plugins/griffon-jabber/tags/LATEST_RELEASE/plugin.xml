@@ -1,9 +1,0 @@
-<plugin name='jabber' version='0.1' jdk='1.5'>
-  <author>Andres Almiray</author>
-  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-  <title>Jabber client &amp; libraries</title>
-  <documentation>http://griffon.codehaus.org/Jabber+Plugin</documentation>
-  <dependencies>
-    <plugin name='xmlrpc' version='0.1' />
-  </dependencies>
-</plugin>
