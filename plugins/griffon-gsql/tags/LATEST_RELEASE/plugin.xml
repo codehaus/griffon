@@ -1,0 +1,7 @@
+<plugin name='gsql' version='0.3' griffonVersion='0.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Gsql powered DataSource</title>
+  <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
+  <dependencies />
+</plugin>
