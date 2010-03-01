@@ -1,0 +1,8 @@
+<plugin name='serial' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Serial port communication libraries</title>
+  <documentation>http://griffon.codehaus.org/Serial+Plugin</documentation>
+  <platforms>linux,windows,macosx</platforms>
+  <dependencies />
+</plugin>
