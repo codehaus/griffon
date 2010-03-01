@@ -1,0 +1,8 @@
+<plugin name='css-builder' version='0.5' griffonVersion='0.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>CSS for Swing</title>
+  <documentation>http://griffon.codehaus.org/CssBuilder+Plugin</documentation>
+  <toolkits>swing</toolkits>
+  <dependencies />
+</plugin>
