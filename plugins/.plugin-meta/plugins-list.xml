@@ -55,6 +55,14 @@
             <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_3/griffon-clojure-0.3.zip</file>
         </release>
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
+            <title>Enables Clojure</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_4/griffon-clojure-0.4.zip</file>
+        </release>
         <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>Enables Clojure</title>
             <author>Andres Almiray</author>
@@ -127,7 +135,7 @@
     <plugin name="couchdb"/>
     <plugin latest-release="0.2" name="coverflow">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Plugin summary/headline</title>
+            <title>Provides a coverflow component</title>
             <author>Your name</author>
             <authorEmail/>
             <description/>
@@ -143,7 +151,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-coverflow/tags/RELEASE_0_2/griffon-coverflow-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.4" name="css-builder">
+    <plugin latest-release="0.5" name="css-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>CSS for Swing</title>
             <author>Andres Almiray</author>
@@ -175,6 +183,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/CssBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-css-builder/tags/RELEASE_0_4/griffon-css-builder-0.4.zip</file>
+        </release>
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
+            <title>CSS for Swing</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/CssBuilder+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-css-builder/tags/RELEASE_0_5/griffon-css-builder-0.5.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1" name="db4o">
@@ -703,6 +719,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmx/tags/RELEASE_0_1/griffon-jmx-0.1.zip</file>
         </release>
     </plugin>
+    <plugin latest-release="0.1" name="jmx">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>JMX support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Jmx+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jmx/tags/RELEASE_0_1/griffon-jmx-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.2" name="jogl">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JOGL support</title>
@@ -1119,7 +1145,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/tags/RELEASE_0_1-SNAPSHOT/griffon-swingx-builder-0.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="swingx-ws">
+    <plugin latest-release="0.2" name="swingx-ws">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Map visualizations with Swingx-ws</title>
             <author>Andres Almiray</author>
@@ -1127,6 +1153,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/SwingxWs+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-ws/tags/RELEASE_0_1/griffon-swingx-ws-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
+            <title>Map visualizations with Swingx-ws</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/SwingxWs+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-ws/tags/RELEASE_0_2/griffon-swingx-ws-0.2.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.2" name="swingxtras-builder">
@@ -1157,7 +1191,7 @@
     </plugin>
     <plugin latest-release="0.1" name="swt">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>SWT UI toolkit plugin</title>
+            <title>Swt UI toolkit support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description/>
