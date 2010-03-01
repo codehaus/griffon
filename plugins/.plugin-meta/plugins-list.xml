@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1618">
+<plugins revision="1622">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -966,7 +966,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-splash/tags/RELEASE_0_1_4/griffon-splash-0.1.4.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="spring">
+    <plugin latest-release="0.2" name="spring">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Spring framework libraries and helpers</title>
             <author>Andres Almiray</author>
@@ -974,6 +974,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/Spring+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_1/griffon-spring-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
+            <title>Spring framework libraries and helpers</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Spring+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_2/griffon-spring-0.2.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1" name="swingx-builder">
