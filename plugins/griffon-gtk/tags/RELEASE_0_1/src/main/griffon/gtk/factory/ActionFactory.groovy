@@ -1,0 +1,55 @@
+/*
+ * Copyright 2009-2010 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package griffon.gtk.factory
+
+import griffon.gtk.GtkUtils
+import org.gnome.gtk.Action
+import org.gnome.gtk.Widget
+import org.gnome.gtk.Stock
+
+/**
+ * @author Andres Almiray
+ */
+class ActionFactory extends GtkBeanFactory {
+    ActionFactory() {
+        super(Action)
+    }
+
+    Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
+        if(FactoryBuilderSupport.checkValueIsTypeNotString(value, name, Action)) {
+            return value
+        }
+
+        String actionName = (attributes.remove('name') ?: '').toString()
+        def label = attributes.remove('label')
+        def tooltip = attributes.remove('tooltip')
+        Stock stock = GtkUtils.parseStock(attributes.remove('stock'))
+        def handler = attributes.remove('handler')
+
+        if(!label) {
+            return new Action(actionName, stock)
+        } else if(!tooltip) {
+            return new Action(actionName, label)
+        } else {
+            return new Action(actionName, label, tooltip, stock)
+        }
+    }
+
+    void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
+        if(parent instanceof Widget) node.connectProxy(parent)
+    }
+}
