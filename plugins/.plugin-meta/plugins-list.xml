@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1590">
+<plugins revision="1594">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -480,7 +480,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_3/griffon-gsql-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="gtk"/>
+    <plugin latest-release="0.1" name="gtk">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Gtk UI toolkit plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Gtk+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-gtk/tags/RELEASE_0_1/griffon-gtk-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="guice">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Google Guice Plugin</title>
