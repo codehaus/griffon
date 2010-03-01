@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1650">
+<plugins revision="1654">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -874,7 +874,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-p6spy/tags/RELEASE_0_1/griffon-p6spy-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="pivot"/>
+    <plugin latest-release="0.1" name="pivot">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Pivot UI toolkit plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Pivot+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-pivot/tags/RELEASE_0_1/griffon-pivot-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="processing"/>
     <plugin latest-release="0.1" name="protobuf">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
