@@ -75,7 +75,7 @@ final class GsqlHelper {
  
         URL ddl = getClass().classLoader.getResource('schema.ddl')
         if(!ddl) {
-            LOG.warning("DataSource.dbCreate was set to 'create' but schema.ddl was not found in classpath.") 
+            LOG.warn("DataSource.dbCreate was set to 'create' but schema.ddl was not found in classpath.") 
             return
         }
  
