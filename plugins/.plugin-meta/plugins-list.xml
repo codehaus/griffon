@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1582">
+<plugins revision="1586">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -391,7 +391,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gfx-builder/tags/RELEASE_0_3/griffon-gfx-builder-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="glazedlists">
+    <plugin latest-release="0.3" name="glazedlists">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>GlazedLists library and components</title>
             <author>Andres Almiray</author>
@@ -407,6 +407,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_2/griffon-glazedlists-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
+            <title>GlazedLists library and components</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_3/griffon-glazedlists-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="gorm"/>
