@@ -516,6 +516,14 @@
             <documentation>http://docs.codehaus.org/display/GRIFFON/Guice+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-guice/tags/RELEASE_0_1/griffon-guice-0.1.zip</file>
         </release>
+	<release tag="RELEASE_0_1_1" type="svn" version="0.1.1">
+            <title>Google Guice Plugin</title>
+            <author>James Williams</author>
+            <authorEmail>james.l.williams@gmail.com</authorEmail>
+            <description/>
+            <documentation>http://docs.codehaus.org/display/GRIFFON/Guice+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-guice/tags/RELEASE_0_1_1/griffon-guice-0.1.1.zip</file>
+        </release>
     </plugin>
     <plugin latest-release="0.2" name="hessian">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
