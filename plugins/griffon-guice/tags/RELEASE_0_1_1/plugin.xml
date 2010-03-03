@@ -1,7 +1,0 @@
-<plugin name='guice' version='0.1.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
-  <author>James Williams</author>
-  <authorEmail>james.l.williams@gmail.com</authorEmail>
-  <title>Google Guice Plugin</title>
-  <documentation>http://docs.codehaus.org/display/GRIFFON/Guice+Plugin</documentation>
-  <dependencies />
-</plugin>
