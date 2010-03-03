@@ -16,13 +16,13 @@
  
 import java.util.ArrayList
 import com.google.inject.*
-import griffon.util.IGriffonApplication
+import griffon.core.BaseGriffonApplication
  
  /**
   * @author jwill
   */
 class GuiceGriffonAddon {
-    private IGriffonApplication application
+    private BaseGriffonApplication application
 	private boolean modulesLoaded = false
     private modules = new ArrayList<Module>()
     
