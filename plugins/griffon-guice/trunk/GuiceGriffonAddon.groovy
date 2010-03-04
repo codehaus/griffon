@@ -22,32 +22,31 @@ import griffon.core.BaseGriffonApplication
   * @author jwill
   */
 class GuiceGriffonAddon {
-    private BaseGriffonApplication application
 	private boolean modulesLoaded = false
     private modules = new ArrayList<Module>()
     
-    def addonInit = { app ->
-        application = app
-        app.addApplicationEventListener(this)
+    def addonInit(app) {
+    
     }
     
-    def onNewInstance = { klass, type, instance ->
-        def types = application.config.guice?.injectInto ?: ["controller"]
-        
-        if (!types.contains(type)) return
-        
-        getModules()
-        def injector
-        injector = (modules.size() == 0) ? Guice.createInjector() : Guice.createInjector(modules)
-        def membersInjector = injector.getMembersInjector(instance.class)
-        instance.metaClass.injector = membersInjector
+    def addonPostInit = { app ->
+	   	def controllers = app.artifactManager.controllerClasses
+		getModules()
+	
+		def injector = (modules.size() == 0) ? Guice.createInjector() : Guice.createInjector(modules)
+		controllers.each { c ->
+				
+				def membersInjector = injector.getMembersInjector(c)
+				c.metaClass.injector = membersInjector
+			}
+	
     }
     
     // ===============================================
     def getModules = {
         if (modulesLoaded) return
         
-        def map = application.config.guice
+        def map = app.config.guice
         if (map) {
 			map.modules?.each {
 				def moduleClass = getClass().classLoader.loadClass(it)
