@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class WsclientGriffonPlugin {
-    def version = "0.2"
+    def version = "0.2.1"
     def griffonVersion = '0.3 > *'
     def dependsOn = [:]
 

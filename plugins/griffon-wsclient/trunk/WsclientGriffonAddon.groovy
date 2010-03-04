@@ -22,7 +22,7 @@ import groovyx.net.ws.cxf.*
  */
 class WsclientGriffonAddon {
    def events = [
-      NewInstance = { klass, type, instance ->
+      NewInstance: { klass, type, instance ->
          def types = app.config.griffon?.ws?.injectInto ?: ['controller']
          if(!types.contains(type)) return
          instance.metaClass.withWs = withClient.curry(instance)
