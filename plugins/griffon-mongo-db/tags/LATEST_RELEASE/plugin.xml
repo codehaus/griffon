@@ -1,8 +1,0 @@
-<plugin name='mongo-db' version='0.1' jdk='1.5'>
-  <author>Your name</author>
-  <title>Plugin summary/headline</title>
-  <documentation>http://griffon.codehaus.org/MongoDB+Plugin</documentation>
-  <dependencies>
-    <plugin name='guice' version='0.1' />
-  </dependencies>
-</plugin>
