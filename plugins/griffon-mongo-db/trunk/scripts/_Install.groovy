@@ -25,3 +25,19 @@ if (!addonIsSet1) {
 root.'MongoDBGriffonAddon'.addon=true
 ''')
 }
+// check to see if we already have a TestGriffonAddon
+ConfigSlurper configSlurper2 = new ConfigSlurper()
+def slurpedBuilder2 = configSlurper2.parse(new File("$basedir/griffon-app/conf/Builder.groovy").toURL())
+boolean addonIsSet2
+slurpedBuilder2.each() { prefix, v ->
+    v.each { builder, views ->
+        addonIsSet2 = addonIsSet2 || 'TestGriffonAddon' == builder
+    }
+}
+
+if (!addonIsSet2) {
+    println 'Adding TestGriffonAddon to Builder.groovy'
+    new File("$basedir/griffon-app/conf/Builder.groovy").append('''
+root.'TestGriffonAddon'.addon=true
+''')
+}
