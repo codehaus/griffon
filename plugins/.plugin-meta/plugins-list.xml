@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1754">
+<plugins revision="1760">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1362,7 +1362,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-worldwind/tags/RELEASE_0_2/griffon-worldwind-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="wsclient">
+    <plugin latest-release="0.2.1" name="wsclient">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>WS client &amp; libraries</title>
             <author>Andres Almiray</author>
@@ -1378,6 +1378,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/Wsclient+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wsclient/tags/RELEASE_0_2/griffon-wsclient-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_2_1" type="svn" version="0.2.1">
+            <title>WS client &amp; libraries</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Wsclient+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-wsclient/tags/RELEASE_0_2_1/griffon-wsclient-0.2.1.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.2" name="xmlrpc">
