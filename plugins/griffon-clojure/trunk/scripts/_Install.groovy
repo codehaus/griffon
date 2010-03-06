@@ -21,6 +21,7 @@
 includeTargets << griffonScript("_GriffonInit")
 
 // append hints for config options if not present
+ConfigSlurper configSlurper1 = new ConfigSlurper()
 appConfig = configSlurper1.parse(new File("$basedir/griffon-app/conf/Application.groovy").toURL())
 if(!(appConfig.flatten().'griffon.clojure.dynamicPropertyName')) {
     new File("${basedir}/griffon-app/conf/Application.groovy").append("""
@@ -38,7 +39,6 @@ ant.mkdir(dir: "${basedir}/griffon-app/resources/clj")
 ant.mkdir(dir: "${basedir}/test/tap")
 
 // check to see if we already have a ClojureGriffonAddon
-ConfigSlurper configSlurper1 = new ConfigSlurper()
 def slurpedBuilder1 = configSlurper1.parse(new File("$basedir/griffon-app/conf/Builder.groovy").toURL())
 boolean addonIsSet1
 slurpedBuilder1.each() { prefix, v ->
