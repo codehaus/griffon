@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1760">
+<plugins revision="1767">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -905,6 +905,16 @@
     </plugin>
     <plugin name="multidoc"/>
     <plugin name="neo4j"/>
+    <plugin latest-release="0.1" name="neodatis">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Neodatis support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Neodatis+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-neodatis/tags/RELEASE_0_1/griffon-neodatis-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.1" name="p6spy">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>P6spy support</title>
