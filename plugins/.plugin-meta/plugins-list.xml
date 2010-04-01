@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1783">
+<plugins revision="1788">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -132,16 +132,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_2/griffon-codenarc-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="couchdb">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>CouchDB support</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description/>
-            <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_1/griffon-couchdb-0.1.zip</file>
-        </release>
-    </plugin>
+    <plugin name="couchdb"/>
     <plugin latest-release="0.2" name="coverflow">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
@@ -1327,6 +1318,16 @@
             <description/>
             <documentation>http://griffon.codehaus.org/TridentBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-trident-builder/tags/RELEASE_0_2/griffon-trident-builder-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin latest-release="0.1" name="validation">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Griffon Validation Plugin</title>
+            <author>Nick Zhu</author>
+            <authorEmail>nzhu@jointsource.com</authorEmail>
+            <description/>
+            <documentation>http://gvalidation.sourceforge.net/</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_1/griffon-validation-0.1.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.3" name="wizard">
