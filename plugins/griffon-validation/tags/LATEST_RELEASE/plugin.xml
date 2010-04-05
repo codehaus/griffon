@@ -1,7 +1,0 @@
-<plugin name='validation' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
-  <author>Nick Zhu</author>
-  <authorEmail>nzhu@jointsource.com</authorEmail>
-  <title>Griffon Validation Plugin</title>
-  <documentation>http://gvalidation.sourceforge.net/</documentation>
-  <dependencies />
-</plugin>
