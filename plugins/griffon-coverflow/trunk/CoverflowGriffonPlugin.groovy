@@ -18,7 +18,7 @@
  * @author Andres.Almiray
  */
 class CoverflowGriffonPlugin {
-    def version = '0.2'
+    def version = '0.3'
     def griffonVersion = '0.3 > *'
     def dependsOn = [:]
     def toolkits = ['swing']
@@ -26,7 +26,7 @@ class CoverflowGriffonPlugin {
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"
     def title = "Provides a coverflow component"
-    def description = '''\\
+    def description = '''
 Provides a coverflow component.
 '''
 

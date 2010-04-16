@@ -1,4 +1,4 @@
-<plugin name='coverflow' version='0.2' griffonVersion='0.3 &gt; *' jdk='1.5'>
+<plugin name='coverflow' version='0.3' griffonVersion='0.3 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Provides a coverflow component</title>
