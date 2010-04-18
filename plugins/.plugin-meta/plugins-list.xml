@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1812">
+<plugins revision="1821">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -20,6 +20,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-artifacts/tags/RELEASE_0_1/griffon-artifacts-0.1.zip</file>
         </release>
     </plugin>
+    <plugin name="avro"/>
     <plugin latest-release="0.1" name="berkeleydb">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Berkeleydb support</title>
@@ -1320,7 +1321,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-trident-builder/tags/RELEASE_0_2/griffon-trident-builder-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="validation">
+    <plugin name="validation">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon Validation Plugin</title>
             <author>Nick Zhu</author>
@@ -1328,14 +1329,6 @@
             <description/>
             <documentation>http://gvalidation.sourceforge.net/</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_1/griffon-validation-0.1.zip</file>
-        </release>
-        <release tag="RELEASE_0_2" type="svn" version="0.2">
-            <title>Griffon Validation Plugin</title>
-            <author>Nick Zhu</author>
-            <authorEmail>nzhu@jointsource.com</authorEmail>
-            <description/>
-            <documentation>http://gvalidation.sourceforge.net/</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_2/griffon-validation-0.2.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.3" name="wizard">
