@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1822">
+<plugins revision="1823">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -142,7 +142,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_2/griffon-codenarc-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="couchdb"/>
+    <plugin latest-release="0.1" name="couchdb">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Apache Couchdb support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_1/griffon-couchdb-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.2" name="coverflow">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
@@ -914,7 +923,16 @@
         </release>
     </plugin>
     <plugin name="multidoc"/>
-    <plugin name="neo4j"/>
+    <plugin latest-release="0.1" name="neo4j">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Neo4j support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Neo4j+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-neo4j/tags/RELEASE_0_1/griffon-neo4j-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin latest-release="0.1" name="neodatis">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Neodatis support</title>
