@@ -1,4 +1,4 @@
-<plugin name='neo4j' version='0.1' griffonVersion='0.3-SNAPSHOT &gt; *' jdk='1.5'>
+<plugin name='neo4j' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Neo4j support</title>
