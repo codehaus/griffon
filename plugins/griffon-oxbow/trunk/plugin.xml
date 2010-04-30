@@ -1,0 +1,7 @@
+<plugin name='oxbow' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
+  <author>Ixchel Ruiz</author>
+  <authorEmail>ixchelruiz@yahoo.com</authorEmail>
+  <title>based on Oxbow project</title>
+  <documentation>http://griffon.codehaus.org/Oxbow+Plugin</documentation>
+  <dependencies />
+</plugin>
