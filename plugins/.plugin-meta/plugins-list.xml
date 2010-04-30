@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1830">
+<plugins revision="1838">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -951,6 +951,16 @@
             <description/>
             <documentation>http://griffon.codehaus.org/Neodatis+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neodatis/tags/RELEASE_0_1/griffon-neodatis-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin latest-release="0.1" name="oxbow">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>based on Oxbow project</title>
+            <author>Ixchel Ruiz</author>
+            <authorEmail>ixchelruiz@yahoo.com</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Oxbow+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-oxbow/tags/RELEASE_0_1/griffon-oxbow-0.1.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1" name="p6spy">
