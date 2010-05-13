@@ -10,7 +10,7 @@ class MinValidator extends ValidatorClosure {
     }
 
     def doCall(property, bean, min){
-        if(!property)
+        if(property == null)
             return true
         
         def valid = false
@@ -19,7 +19,7 @@ class MinValidator extends ValidatorClosure {
             valid = property > min
         }
 
-        if(!min)
+        if(min == null)
             valid = true
 
         return valid
