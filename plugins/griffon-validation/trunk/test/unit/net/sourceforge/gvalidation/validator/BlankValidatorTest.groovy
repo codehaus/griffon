@@ -7,7 +7,7 @@ import net.sourceforge.gvalidation.validator.BlankValidator
  */
 class BlankValidatorTest extends GroovyTestCase {
 
-    public void testBlankValidation(){
+    public void testBlankValidation() {
         BlankValidator blank = new BlankValidator(this)
 
         assertTrue("Should allow blank", (boolean) blank.call("", this, true))
@@ -16,6 +16,14 @@ class BlankValidatorTest extends GroovyTestCase {
         assertFalse("Should not allow blank", (boolean) blank.call("", this, false))
         assertFalse("Should not allow blank", (boolean) blank.call(" ", this, false))
         assertTrue("Should be successful", (boolean) blank.call(" something ", this, false))
+    }
+
+    // bug #2983285
+    public void testValidatingNonStrings() {
+        BlankValidator blank = new BlankValidator(this)
+
+        assertTrue("Should allow blank", (boolean) blank.call(10, this, true))
+        assertTrue("Should not allow blank", (boolean) blank.call(10, this, false))
     }
 
 }

@@ -15,6 +15,9 @@ class BlankValidator extends Closure {
         if (allowBlank)
             return true
 
+        if (propertyValue && !(propertyValue instanceof String))
+            return true
+
         return StringUtils.isNotBlank(propertyValue)
     }
 }
