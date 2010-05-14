@@ -99,6 +99,20 @@ class ErrorsTest extends GroovyTestCase {
         assertEquals "Field error args is incorrect", fieldError.arguments[1], "arg2"
     }
 
+    public void testRejectValueWithArgsAndDefaultMessage() {
+        Errors errors = new Errors()
+
+        errors.rejectValue("field", "errorCode", "defaultErrorCode", [10, "arg2"])
+
+        def fieldError = errors.getFieldError("field")
+
+        assertEquals "Field error field value is incorrect", fieldError.field, "field"
+        assertEquals "Error code is incorrect", fieldError.errorCode, "errorCode"
+        assertEquals "Default error code is incorrect", fieldError.defaultErrorCode, "defaultErrorCode"
+        assertEquals "Field error args is incorrect", fieldError.arguments[0], 10
+        assertEquals "Field error args is incorrect", fieldError.arguments[1], "arg2"
+    }
+
     public void testIterator() {
         def pass = false
 
