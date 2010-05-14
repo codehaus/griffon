@@ -52,6 +52,19 @@ class ErrorsTest extends GroovyTestCase {
         assertEquals "Error args is incorrect", "arg2", globalErrors.first().arguments[1]
     }
 
+    public void testRejectWithArgsAndDefaultMessage() {
+        Errors errors = new Errors()
+
+        errors.reject("errorCode", "defaultErrorCode", [10, "arg2"])
+
+        def globalErrors = errors.getGlobalErrors()
+
+        assertEquals "Error code is incorrect", globalErrors.first().errorCode, "errorCode"
+        assertEquals "Default error code is incorrect", globalErrors.first().defaultErrorCode, "defaultErrorCode"        
+        assertEquals "Error args is incorrect", 10, globalErrors.first().arguments[0]
+        assertEquals "Error args is incorrect", "arg2", globalErrors.first().arguments[1]
+    }
+
     public void testRejectValue() {
         Errors errors = new Errors()
 
