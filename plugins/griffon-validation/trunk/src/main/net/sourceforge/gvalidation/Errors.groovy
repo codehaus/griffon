@@ -11,8 +11,16 @@ class Errors {
         reject(errorCode, [])
     }
 
-    def reject(errorCode, arguments) {
-        globalErrors.add(new SimpleError(errorCode: errorCode, arguments: arguments))
+    def reject(errorCode, defaultErrorCode) {
+        reject(errorCode, defaultErrorCode, [])
+    }
+
+    def reject(errorCode, List arguments) {
+        reject(errorCode, null, arguments)                                                    
+    }
+
+    def reject(errorCode, defaultErrorCode, List arguments) {
+        globalErrors.add(new SimpleError(errorCode: errorCode, defaultErrorCode: defaultErrorCode, arguments: arguments))
     }
 
     def hasGlobalErrors() {
@@ -74,10 +82,11 @@ class FieldError extends SimpleError {
 }
 
 class SimpleError {
+    def defaultErrorCode
     def errorCode
     def arguments
 
     public String toString() {
-        return "Error[${errorCode}] with args[${arguments}]"
+        return "Error[${errorCode}:${defaultErrorCode}] with args[${arguments}]"
     }
 }

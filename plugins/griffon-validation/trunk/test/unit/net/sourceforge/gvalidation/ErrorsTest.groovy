@@ -29,6 +29,17 @@ class ErrorsTest extends GroovyTestCase {
         assertTrue "Should have global error", errors.hasGlobalErrors()
     }
 
+    public void testRejectWithDefaultMessage() {
+        Errors errors = new Errors()
+
+        errors.reject("errorCode", "defaultErrorCode")
+
+        assertTrue "Should have global error", errors.hasGlobalErrors()
+        errors.each{
+            assertEquals "Default error code is not correct", "defaultErrorCode", it.defaultErrorCode
+        }
+    }
+
     public void testRejectWithArgs() {
         Errors errors = new Errors()
 
@@ -37,8 +48,8 @@ class ErrorsTest extends GroovyTestCase {
         def globalErrors = errors.getGlobalErrors()
 
         assertEquals "Error code is incorrect", globalErrors.first().errorCode, "errorCode"
-        assertEquals "Error args is incorrect", globalErrors.first().arguments[0], 10
-        assertEquals "Error args is incorrect", globalErrors.first().arguments[1], "arg2"
+        assertEquals "Error args is incorrect", 10, globalErrors.first().arguments[0]
+        assertEquals "Error args is incorrect", "arg2", globalErrors.first().arguments[1]
     }
 
     public void testRejectValue() {
