@@ -19,6 +19,7 @@ class ValidationEnhancerTest extends GroovyTestCase {
         def fieldError = model.errors.getFieldError('id')
 
         assertEquals("Error code is not correct", "modelBean.id.nullable.message", fieldError.errorCode)
+        assertEquals("Default error code is not correct", "default.nullable.message", fieldError.defaultErrorCode)
         assertEquals("Error arg is not correct", "id", fieldError.arguments[0])
         assertEquals("Error arg is not correct", "ModelBean", fieldError.arguments[1])
         assertEquals("Error arg is not correct", "null", fieldError.arguments[2])

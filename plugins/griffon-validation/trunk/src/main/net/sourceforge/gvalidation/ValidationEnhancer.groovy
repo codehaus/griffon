@@ -118,7 +118,7 @@ class ValidationEnhancer {
             return true
 
         model.errors.rejectValue(name,
-                buildErrorCode(name, constraint), buildErrorArguments(name, model, propertyValue))
+                buildErrorCode(name, constraint), buildDefaultErrorCode(constraint), buildErrorArguments(name, model, propertyValue))
 
         return false
     }
@@ -127,7 +127,11 @@ class ValidationEnhancer {
         return true
     }
 
-    private GString buildErrorCode(fieldName, constraint) {
+    private def buildDefaultErrorCode(constraint) {
+        return "default.${constraint}.message"
+    }
+
+    private def buildErrorCode(fieldName, constraint) {
         def className = StringUtils.uncapitalize(getShortClassName(model))
 
         return "${className}.${fieldName}.${constraint}.message"

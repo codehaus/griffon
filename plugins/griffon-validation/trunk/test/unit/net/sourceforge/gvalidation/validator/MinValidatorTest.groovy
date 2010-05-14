@@ -41,6 +41,12 @@ class MinValidatorTest extends GroovyTestCase {
         assertTrue("Should ignore null", (boolean) min.call(null, this, 80))
     }
 
+    public void testBlanks() {
+        MinValidator min = new MinValidator(this)
+        
+        assertTrue("Should be valid", (boolean) min.call("", this, 1))
+    }
+
     // bug #2984137
     public void testLessThanMin() {
         MinValidator min = new MinValidator(this)
