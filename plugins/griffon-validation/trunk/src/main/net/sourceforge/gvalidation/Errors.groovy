@@ -31,11 +31,19 @@ class Errors {
         rejectValue(field, errorCode, [])
     }
 
-    def rejectValue(field, errorCode, arguments) {
+    def rejectValue(field, errorCode, defaultErrorCode) {
+        rejectValue(field, errorCode, defaultErrorCode, [])
+    }
+
+    def rejectValue(field, errorCode, List arguments) {
+         rejectValue(field, errorCode, null, arguments)   
+    }
+
+    def rejectValue(field, errorCode, defaultErrorCode, List arguments) {
         if (!fieldErrors[field])
             fieldErrors[field] = []
 
-        fieldErrors[field].add new FieldError(field: field, errorCode: errorCode, arguments: arguments)
+        fieldErrors[field].add new FieldError(field: field, errorCode: errorCode, defaultErrorCode: defaultErrorCode, arguments: arguments)
     }
 
     def hasFieldErrors() {

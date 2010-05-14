@@ -74,6 +74,18 @@ class ErrorsTest extends GroovyTestCase {
         assertTrue "Field should have error", errors.hasFieldErrors("field")
     }
 
+    public void testRejectValueWithDefaultMessage() {
+        Errors errors = new Errors()
+
+        errors.rejectValue("field", "errorCode", "defaultErrorCode")
+
+        assertTrue "Should have field error", errors.hasFieldErrors()
+        assertTrue "Field should have error", errors.hasFieldErrors("field")
+        errors.each{
+            assertEquals "Default error message is not set", "defaultErrorCode", it.defaultErrorCode
+        }
+    }
+
     public void testRejectValueWithArgs() {
         Errors errors = new Errors()
 
