@@ -5,6 +5,7 @@ import javax.swing.border.CompoundBorder
 import javax.swing.border.EmptyBorder
 import net.sourceforge.gvalidation.swing.ErrorMessagePanel
 import net.sourceforge.gvalidation.Errors
+import org.springframework.context.NoSuchMessageException
 
 /**
  * Created by nick.zhu
@@ -49,5 +50,31 @@ class ErrorMessagePanelTest extends GroovyTestCase {
 
         assertEquals "Error panel should be empty", 0, errorPanel.getContentPanel().components.size()
         assertTrue "Error border was not generated", errorPanel.getContentPanel().getBorder() instanceof EmptyBorder
+    }
+
+    public void testLabelCreation(){
+        def messageSource = [getMessage: {code, args -> return "errorMessage" }]
+        ErrorMessagePanel errorPanel = new ErrorMessagePanel(messageSource)
+
+        JLabel label = errorPanel.createErrorLabel([errorCode:'errorCode', arguments:[]])
+
+        assertEquals "Label message is incorrect", " - errorMessage", label.getText()
+    }
+
+    public void testLabelCreationWithDefaultMessage(){
+        def messageSource = [getMessage: {code, args ->
+            if(code == "errorCode")
+                throw new NoSuchMessageException("")
+            else if(code == "defaultErrorCode")
+                return "defaultMessage"
+            else
+                throw new IllegalArgumentException()
+        }]
+        
+        ErrorMessagePanel errorPanel = new ErrorMessagePanel(messageSource)
+
+        JLabel label = errorPanel.createErrorLabel([errorCode:'errorCode', defaultErrorCode:'defaultErrorCode', arguments:[]])
+
+        assertEquals "Label message is incorrect", " - defaultMessage", label.getText()
     }
 }

@@ -5,6 +5,7 @@ import java.awt.Color
 import javax.swing.*
 import static javax.swing.SwingConstants.LEFT
 import net.sourceforge.gvalidation.Errors
+import org.springframework.context.NoSuchMessageException
 
 /**
  * Created by nick.zhu
@@ -55,10 +56,19 @@ class ErrorMessagePanel extends JPanel {
         contentPanel.setBorder BorderFactory.createCompoundBorder(errorHighlightBorder, paddingBorder)
     }
 
-    private JLabel createErrorLabel(error) {
-        def errorMessage = messageSource.getMessage(error.errorCode, error.arguments)
+    def createErrorLabel(error) {
+        def errorMessage = ""
+
+        try {
+            errorMessage = messageSource.getMessage(error.errorCode, error.arguments)
+        } catch (NoSuchMessageException ex) {
+            errorMessage = messageSource.getMessage(error.defaultErrorCode, error.arguments)                
+        }
+
         def errorLabel = new JLabel(" - ${errorMessage}", LEFT)
+        
         errorLabel.setForeground Color.RED
+
         return errorLabel
     }
 

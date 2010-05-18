@@ -118,7 +118,9 @@ class ValidationEnhancer {
             return true
 
         model.errors.rejectValue(name,
-                buildErrorCode(name, constraint), buildDefaultErrorCode(constraint), buildErrorArguments(name, model, propertyValue))
+                buildErrorCode(name, constraint),
+                buildDefaultErrorCode(constraint),
+                buildErrorArguments(name, model, propertyValue, config))
 
         return false
     }
@@ -137,8 +139,8 @@ class ValidationEnhancer {
         return "${className}.${fieldName}.${constraint}.message"
     }
 
-    private List buildErrorArguments(String name, model, propertyValue) {
-        return [name, getShortClassName(model), "${propertyValue}"]
+    private List buildErrorArguments(String name, model, propertyValue, config) {
+        return [name, getShortClassName(model), "${propertyValue}", config]
     }
 
     private String getShortClassName(model) {
