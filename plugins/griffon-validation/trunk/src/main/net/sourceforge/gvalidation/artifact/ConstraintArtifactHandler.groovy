@@ -13,19 +13,18 @@
  *  limitations under the License.
  */
 
-import net.sourceforge.gvalidation.ValidationEnhancer
-import net.sourceforge.gvalidation.artifact.ConstraintArtifactHandler
+package net.sourceforge.gvalidation.artifact
 
-class ValidationGriffonAddon {
-    
-    def addonInit = {app ->
-        app.addApplicationEventListener(this)
-        app.artifactManager.registerArtifactHandler(new ConstraintArtifactHandler())
-    }
+import griffon.core.ArtifactHandlerAdapter
 
-    def onNewInstance = {klass, type, instance ->
-        if (type == "model")
-            ValidationEnhancer.enhance(instance)
+/**
+ * Created by nick.zhu
+ */
+class ConstraintArtifactHandler extends ArtifactHandlerAdapter {
+    public static final String TYPE = "constraint"
+    public static final String TRAILING = "Constraint"
+
+    ConstraintArtifactHandler() {
+        super(TYPE)
     }
-    
 }
