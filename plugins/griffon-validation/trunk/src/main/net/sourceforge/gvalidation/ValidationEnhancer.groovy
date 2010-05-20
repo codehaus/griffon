@@ -108,7 +108,13 @@ class ValidationEnhancer {
     }
 
     private def executeValidator(validator, propertyValue, config, name, constraint) {
-        def success = validator.call(propertyValue, model, config)
+        def success = false
+
+        if (validator instanceof Closure) {
+            success = validator.call(propertyValue, model, config)
+        } else {
+            success = validator.validate(propertyValue, model, config)
+        }
 
         if (success)
             return true

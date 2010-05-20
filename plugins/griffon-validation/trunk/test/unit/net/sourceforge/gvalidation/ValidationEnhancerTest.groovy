@@ -20,6 +20,7 @@ import net.sourceforge.gvalidation.models.UnknownConstraintModelBean
 import net.sourceforge.gvalidation.models.NullToleranceModelBean
 import net.sourceforge.gvalidation.models.NoConstraintModelBean
 import net.sourceforge.gvalidation.models.InvalidConstraintModelBean
+import net.sourceforge.gvalidation.models.CustomConstraintModelBean
 
 /**
  * Created by nick.zhu
@@ -108,6 +109,19 @@ class ValidationEnhancerTest extends GroovyTestCase {
         }
 
         assertTrue("Validation result should be true", result)
+    }
+
+    public void testCustomValidator(){
+        ConstraintRepository.instance.register('magic',
+                [validate:{property, bean, parameter-> false}])
+
+        def model = new CustomConstraintModelBean()
+
+        ValidationEnhancer.enhance(model)
+
+        boolean result = model.validate()
+
+        assertFalse "Custom validation should have failed", result
     }
 
 }
