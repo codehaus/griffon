@@ -122,6 +122,11 @@ class ValidationEnhancerTest extends GroovyTestCase {
         boolean result = model.validate()
 
         assertFalse "Custom validation should have failed", result
+
+        def fieldError = model.errors.getFieldError('number')
+
+        assertEquals("Error code is not correct", "customConstraintModelBean.number.magic.message", fieldError.errorCode)
+        assertEquals("Default error code is not correct", "default.magic.message", fieldError.defaultErrorCode)
     }
 
 }
