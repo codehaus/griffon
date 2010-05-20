@@ -29,12 +29,12 @@ eventCopyLibsEnd = { jardir ->
 
 eventCollectArtifacts = { artifactsInfo ->
     if(!artifactsInfo.find{ it.type == 'constraint' }) {
-        artifactsInfo << [type: 'constraint', path: 'constraints', suffix: 'constraint']
+        artifactsInfo << [type: 'constraint', path: 'constraints', suffix: 'Constraint']
     }
 }
 
 eventStatsStart = { pathToInfo ->
-    if(!pathToInfo.find{ it.path == 'constraint'} ) {
+    if(!pathToInfo.find{ it.path == 'constraints'} ) {
         pathToInfo << [name: 'Constraint', path: 'constraints', filetype: ['.groovy','.java']]
     }
 }
