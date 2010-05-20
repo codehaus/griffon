@@ -25,3 +25,5 @@ if (!addonIsSet1) {
 root.'ValidationGriffonAddon'.addon=true
 ''')
 }
+
+ant.mkdir(dir: "${basedir}/griffon-app/constraints")
