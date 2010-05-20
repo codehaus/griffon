@@ -40,25 +40,6 @@ import net.sourceforge.gvalidation.validator.InetAddressValidator
 class ValidationEnhancer {
     static final def CONSTRAINT_PROPERTY_NAME = "constraints"
 
-    static def validators = Collections.unmodifiableMap([
-            nullable: new NullableValidator(this),
-            blank: new BlankValidator(this),
-            email: new EmailValidator(this),
-            creditCard: new CreditCardValidator(this),
-            inList: new InListValidator(this),
-            matches: new MatchesValidator(this),
-            max: new MaxValidator(this),
-            maxSize: new MaxSizeValidator(this),
-            min: new MinValidator(this),
-            minSize: new MinSizeValidator(this),
-            notEqual: new NotEqualValidator(this),
-            range: new RangeValidator(this),
-            size: new SizeValidator(this),
-            url: new UrlValidator(this),
-            inetAddress: new InetAddressValidator(this),
-            validator: new ClosureValidator(this)
-    ])
-
     static def enhance(bean) {
         new ValidationEnhancer(bean)
     }
@@ -117,7 +98,7 @@ class ValidationEnhancer {
     }
 
     private def validate(constraint, propertyValue, config, name) {
-        def validator = validators[constraint]
+        def validator = ConstraintRepository.instance.getValidator(constraint)
 
         if (validator) {
             return executeValidator(validator, propertyValue, config, name, constraint)
