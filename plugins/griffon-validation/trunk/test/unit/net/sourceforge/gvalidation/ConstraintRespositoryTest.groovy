@@ -18,5 +18,25 @@ package net.sourceforge.gvalidation
 /**
  * Created by nick.zhu
  */
-class ConstraintRespositoryTest {
+class ConstraintRespositoryTest extends GroovyTestCase {
+
+    public void testBuiltInConstraint(){
+        ConstraintRepository repo = ConstraintRepository.instance
+
+        assertNotNull "Builtin constraint nullable not found", repo.getValidators().nullable
+        assertTrue "Builtin constraint email not found", repo.getValidators().containsKey('email')
+    }
+
+    public void testCustomConstraintRegistration(){
+        ConstraintRepository repo = ConstraintRepository.instance
+
+        repo.register('custom', new TestConstraint())
+
+        assertNotNull "Custom constraint not found", repo.getValidators().custom        
+    }
+
+}
+
+class TestConstraint {
+    // empty test constraint
 }

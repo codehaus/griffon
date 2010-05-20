@@ -40,7 +40,7 @@ import net.sourceforge.gvalidation.validator.NullableValidator
  */
 @Singleton
 class ConstraintRepository {
-    private def validators = Collections.unmodifiableMap([
+    private def validators = [
             nullable: new NullableValidator(this),
             blank: new BlankValidator(this),
             email: new EmailValidator(this),
@@ -57,7 +57,7 @@ class ConstraintRepository {
             url: new UrlValidator(this),
             inetAddress: new InetAddressValidator(this),
             validator: new ClosureValidator(this)
-    ])
+    ]
 
     def getValidators() {
         def results = [:]
@@ -69,5 +69,9 @@ class ConstraintRepository {
 
     def getValidator(name){
         return validators[name]
+    }
+
+    def register(name, constraint){
+        validators.put(name, constraint)
     }
 }
