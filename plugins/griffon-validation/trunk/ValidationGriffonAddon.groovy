@@ -15,12 +15,14 @@
 
 import net.sourceforge.gvalidation.ValidationEnhancer
 import net.sourceforge.gvalidation.artifact.ConstraintArtifactHandler
+import net.sourceforge.gvalidation.ConstraintRepository
 
 class ValidationGriffonAddon {
     
     def addonInit = {app ->
         app.addApplicationEventListener(this)
         app.artifactManager.registerArtifactHandler(new ConstraintArtifactHandler())
+        ConstraintRepository.instance.initialize(app)
     }
 
     def onNewInstance = {klass, type, instance ->

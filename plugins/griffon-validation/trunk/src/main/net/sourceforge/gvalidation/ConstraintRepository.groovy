@@ -31,6 +31,7 @@ import net.sourceforge.gvalidation.validator.CreditCardValidator
 import net.sourceforge.gvalidation.validator.EmailValidator
 import net.sourceforge.gvalidation.validator.BlankValidator
 import net.sourceforge.gvalidation.validator.NullableValidator
+import griffon.core.GriffonApplication
 
 /**
  * Repository class for managing and configure both built-in and custom constraints 
@@ -59,6 +60,13 @@ class ConstraintRepository {
             validator: new ClosureValidator(this)
     ]
 
+    def initialize(app) {
+        app.artifactManager.constraintArtifacts.each { artifactInfo ->
+            def constraintName = artifactInfo.simpleName?.replace('Constraint', '')
+            register(constraintName, artifactInfo.newInstance())
+        }
+    }
+
     def getValidators() {
         def results = [:]
 
@@ -67,11 +75,15 @@ class ConstraintRepository {
         return Collections.unmodifiableMap(results)
     }
 
-    def getValidator(name){
+    def getValidator(name) {
         return validators[name]
     }
 
-    def register(name, constraint){
+    def register(name, constraint) {
         validators.put(name, constraint)
+    }
+
+    def containsConstraint(name) {
+        return validators.containsKey(name)
     }
 }

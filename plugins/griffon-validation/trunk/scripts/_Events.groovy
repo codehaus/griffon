@@ -35,7 +35,7 @@ eventCollectArtifacts = { artifactsInfo ->
 
 eventStatsStart = { pathToInfo ->
     if(!pathToInfo.find{ it.path == 'constraints'} ) {
-        pathToInfo << [name: 'Constraint', path: 'constraints', filetype: ['.groovy','.java']]
+        pathToInfo << [name: 'Constraints', path: 'constraints', filetype: ['.groovy','.java']]
     }
 }
 

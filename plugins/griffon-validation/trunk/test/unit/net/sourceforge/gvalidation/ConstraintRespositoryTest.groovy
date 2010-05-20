@@ -35,6 +35,22 @@ class ConstraintRespositoryTest extends GroovyTestCase {
         assertNotNull "Custom constraint not found", repo.getValidators().custom        
     }
 
+    public void testInitialization(){
+        ConstraintRepository repo = ConstraintRepository.instance
+
+        def artifactInfos = [
+                [simpleName:'customConstraint', newInstance:{new TestConstraint()}],
+                [simpleName:'magicConstraint', newInstance:{new TestConstraint()}]                
+        ]
+        
+        def app = [artifactManager: [constraintArtifacts:artifactInfos]] 
+
+        repo.initialize(app)
+
+        assertTrue "Custom constraint not registered", repo.containsConstraint('custom')
+        assertTrue "Magic constraint not registered", repo.containsConstraint('magic')
+    }
+
 }
 
 class TestConstraint {
