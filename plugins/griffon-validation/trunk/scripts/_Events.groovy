@@ -13,7 +13,9 @@
  *  limitations under the License.
  */
 
-
+/**
+ * @author nick.zhu
+ */
 
 def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
 eventCopyLibsEnd = { jardir ->
@@ -22,6 +24,18 @@ eventCopyLibsEnd = { jardir ->
         ant.fileset(dir:"${getPluginDirForName('validation').file}/lib/", includes:"*.jar").each {
             griffonCopyDist(it.toString(), jardir)
         }
+    }
+}
+
+eventCollectArtifacts = { artifactsInfo ->
+    if(!artifactsInfo.find{ it.type == 'constraint' }) {
+        artifactsInfo << [type: 'constraint', path: 'constraints', suffix: 'constraint']
+    }
+}
+
+eventStatsStart = { pathToInfo ->
+    if(!pathToInfo.find{ it.path == 'constraint'} ) {
+        pathToInfo << [name: 'Constraint', path: 'constraints', filetype: ['.groovy','.java']]
     }
 }
 
