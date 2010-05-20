@@ -15,6 +15,12 @@
 
 package net.sourceforge.gvalidation
 
+import net.sourceforge.gvalidation.models.ModelBean
+import net.sourceforge.gvalidation.models.UnknownConstraintModelBean
+import net.sourceforge.gvalidation.models.NullToleranceModelBean
+import net.sourceforge.gvalidation.models.NoConstraintModelBean
+import net.sourceforge.gvalidation.models.InvalidConstraintModelBean
+
 /**
  * Created by nick.zhu
  */
@@ -104,74 +110,4 @@ class ValidationEnhancerTest extends GroovyTestCase {
         assertTrue("Validation result should be true", result)
     }
 
-}
-
-
-class ModelBean {
-    String id
-
-    static constraints = {
-        id(nullable: false)
-    }
-}
-
-class NoConstraintModelBean {
-}
-
-class InvalidConstraintModelBean {
-    String id
-
-    static constraints = {
-        missing(nullable: false)
-    }
-}
-
-class UnknownConstraintModelBean {
-    String id
-
-    static constraints = {
-        id(missing: false)
-    }
-}
-
-class NullToleranceModelBean {
-    String nullable
-    String blank = ''
-
-    static constraints = {
-        nullable(
-                nullable: true,
-                blank: true,
-                creditCard: true,
-                email: true,
-                inetAddress: true,
-                inList: ["a"],
-                matches: /a-zA-Z/,
-                maxSize: 10,
-                max: 10,
-                minSize: 5,
-                min: 5,
-                notEqual: "a",
-                range: 1..10,
-                size: 1..10,
-                url: true
-        )
-        blank(
-                nullable: false,
-                blank: true,
-                creditCard: true,
-                email: true,
-                inetAddress: true,
-                inList: ["a"],
-                matches: /a-zA-Z/,
-                maxSize: 10,
-                max: 10,
-                minSize: 5,
-                min: 5,
-                notEqual: "a",
-                range: 1..10,
-                size: 1..10,
-                url: true
-        )
-    }
 }
