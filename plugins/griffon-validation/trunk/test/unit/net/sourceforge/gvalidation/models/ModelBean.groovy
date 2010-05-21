@@ -20,8 +20,10 @@ package net.sourceforge.gvalidation.models
  */
 class ModelBean {
     String id
+    String email
 
     static constraints = {
         id(nullable: false)
+        email(email: true)
     }
 }

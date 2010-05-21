@@ -17,22 +17,6 @@ package net.sourceforge.gvalidation
 
 import org.apache.commons.lang.StringUtils
 import org.apache.commons.lang.ClassUtils
-import net.sourceforge.gvalidation.validator.SizeValidator
-import net.sourceforge.gvalidation.validator.NullableValidator
-import net.sourceforge.gvalidation.validator.NotEqualValidator
-import net.sourceforge.gvalidation.validator.EmailValidator
-import net.sourceforge.gvalidation.validator.MaxValidator
-import net.sourceforge.gvalidation.validator.ClosureValidator
-import net.sourceforge.gvalidation.validator.MinSizeValidator
-import net.sourceforge.gvalidation.validator.CreditCardValidator
-import net.sourceforge.gvalidation.validator.MatchesValidator
-import net.sourceforge.gvalidation.validator.BlankValidator
-import net.sourceforge.gvalidation.validator.UrlValidator
-import net.sourceforge.gvalidation.validator.MaxSizeValidator
-import net.sourceforge.gvalidation.validator.RangeValidator
-import net.sourceforge.gvalidation.validator.MinValidator
-import net.sourceforge.gvalidation.validator.InListValidator
-import net.sourceforge.gvalidation.validator.InetAddressValidator
 
 /**
  * Created by nick.zhu
@@ -44,32 +28,46 @@ class ValidationEnhancer {
         new ValidationEnhancer(bean)
     }
 
+    private List fields
+
     def model
 
     public ValidationEnhancer(bean) {
         model = bean
 
-        bean.metaClass.validate = {
-            validate()
+        bean.metaClass.validate = { fields = null ->
+            doValidate(fields)
         }
 
         bean.metaClass.errors = new Errors()
         bean.metaClass.hasErrors = { model.errors.hasErrors() }
     }
 
-    def validate() {
+    def doValidate = {List fields = null ->
+        this.fields = fields
+
         model.errors.clear()
 
-        if (!model.hasProperty(CONSTRAINT_PROPERTY_NAME))
+        if (hasNoConstraintsDefined())
             return true
 
-        Closure constraints = model.getProperty(CONSTRAINT_PROPERTY_NAME)
+        Closure constraints = extractConstraints()
 
         constraints.delegate = this
 
         constraints.call()
 
+        this.fields = null
+
         return !model.hasErrors()
+    }
+
+    private boolean hasNoConstraintsDefined() {
+        return !model.hasProperty(CONSTRAINT_PROPERTY_NAME)
+    }
+
+    private def extractConstraints() {
+        model.getProperty(CONSTRAINT_PROPERTY_NAME)
     }
 
     def methodMissing(String name, args) {
@@ -86,18 +84,25 @@ class ValidationEnhancer {
     }
 
     private boolean processConstraints(args, propertyValue, String name) {
+        if (noValidationForField(name))
+            return true
+
         boolean valid = true
 
         def constraintsMap = args[0]
 
         constraintsMap.each {constraint, config ->
-            valid = validate(constraint, propertyValue, config, name)
+            valid = performValidation(constraint, propertyValue, config, name)
         }
 
         return valid
     }
 
-    private def validate(constraint, propertyValue, config, name) {
+    private boolean noValidationForField(String name) {
+        return fields && !fields.contains(name)
+    }
+
+    private def performValidation(constraint, propertyValue, config, name) {
         def validator = ConstraintRepository.instance.getValidator(constraint)
 
         if (validator) {

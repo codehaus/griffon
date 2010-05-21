@@ -129,4 +129,19 @@ class ValidationEnhancerTest extends GroovyTestCase {
         assertEquals("Default error code is not correct", "default.magic.message", fieldError.defaultErrorCode)
     }
 
+    public void testFieldLevelValidation(){
+        def model = new ModelBean(email:'invalidEmail')
+
+        ValidationEnhancer.enhance(model)
+
+        boolean result = model.validate(['email'])
+
+        assertFalse "Field validation should have failed", result
+
+        def fieldError = model.errors.getFieldError('email')
+
+        assertEquals("Error code is not correct", "modelBean.email.email.message", fieldError.errorCode)
+        assertEquals("Default error code is not correct", "default.email.message", fieldError.defaultErrorCode)
+    }
+
 }
