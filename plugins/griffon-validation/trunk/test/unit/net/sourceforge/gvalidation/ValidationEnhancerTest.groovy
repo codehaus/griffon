@@ -181,4 +181,17 @@ class ValidationEnhancerTest extends GroovyTestCase {
         assertTrue model.errors.hasFieldErrors('email')
     }
 
+    public void testFieldLevelValidationWithSingleString(){
+        def model = new ModelBean(email:'invalidEmail')
+
+        ValidationEnhancer.enhance(model)
+
+        boolean result = model.validate('email')
+
+        assertFalse "Field validation should have failed", result
+
+        assertFalse model.errors.hasFieldErrors('id')
+        assertTrue model.errors.hasFieldErrors('email')
+    }
+
 }

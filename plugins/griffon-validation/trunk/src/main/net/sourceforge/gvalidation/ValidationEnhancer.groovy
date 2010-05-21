@@ -43,8 +43,8 @@ class ValidationEnhancer {
         bean.metaClass.hasErrors = { model.errors.hasErrors() }
     }
 
-    def doValidate = {List fields = null ->
-        this.fields = fields
+    def doValidate = {params = null ->
+        this.fields = generateTargetFields(params)
 
         try {
             model.errors.clear()
@@ -60,6 +60,17 @@ class ValidationEnhancer {
         }
 
         return !model.hasErrors()
+    }
+
+    private List generateTargetFields(params) {
+        List targets = null
+
+        if (params instanceof List)
+            targets = params
+        else if (params != null)
+            targets = [params]
+        
+        return targets
     }
 
     private boolean hasNoConstraintsDefined() {
