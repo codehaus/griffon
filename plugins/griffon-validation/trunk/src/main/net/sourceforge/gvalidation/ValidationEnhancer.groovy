@@ -43,6 +43,10 @@ class ValidationEnhancer {
         bean.metaClass.hasErrors = { model.errors.hasErrors() }
     }
 
+    /**
+     * This closure gets invoked when validate method on the model is
+     * executed each time
+     */
     def doValidate = {params = null ->
         this.fields = generateTargetFields(params)
 
@@ -69,7 +73,7 @@ class ValidationEnhancer {
             targets = params
         else if (params != null)
             targets = [params]
-        
+
         return targets
     }
 
@@ -81,6 +85,12 @@ class ValidationEnhancer {
         model.getProperty(CONSTRAINT_PROPERTY_NAME)
     }
 
+    /**
+     * Method missing here is used to capture all constraint invocation on a model
+     *
+     * @param name property name
+     * @param args constraint config
+     */
     def methodMissing(String name, args) {
         if (!model.hasProperty(name)) {
             throw new IllegalStateException("""Invalid constraint configuration detected.
