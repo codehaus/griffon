@@ -138,10 +138,47 @@ class ValidationEnhancerTest extends GroovyTestCase {
 
         assertFalse "Field validation should have failed", result
 
+        assertFalse model.errors.hasFieldErrors('id')
+        assertTrue model.errors.hasFieldErrors('email')
+
         def fieldError = model.errors.getFieldError('email')
 
         assertEquals("Error code is not correct", "modelBean.email.email.message", fieldError.errorCode)
         assertEquals("Default error code is not correct", "default.email.message", fieldError.defaultErrorCode)
+    }
+
+    public void testFieldLevelValidationWithMultipleExecution(){
+        def model = new ModelBean(email:'invalidEmail')
+
+        ValidationEnhancer.enhance(model)
+
+        model.validate(['email'])
+
+        boolean result = model.validate(['id'])
+
+        assertFalse "Field validation should have failed", result
+
+        def fieldError = model.errors.getFieldError('id')
+
+        assertEquals("Error code is not correct", "modelBean.id.nullable.message", fieldError.errorCode)
+        assertEquals("Default error code is not correct", "default.nullable.message", fieldError.defaultErrorCode)
+
+        model.email = "somebody@email.com"
+
+        assertTrue "Email should be valid", model.validate(['email'])
+    }
+
+    public void testFieldLevelValidationWithMultipleFields(){
+        def model = new ModelBean(email:'invalidEmail')
+
+        ValidationEnhancer.enhance(model)
+
+        boolean result = model.validate(['id', 'email'])
+
+        assertFalse "Field validation should have failed", result
+
+        assertTrue model.errors.hasFieldErrors('id')
+        assertTrue model.errors.hasFieldErrors('email')
     }
 
 }

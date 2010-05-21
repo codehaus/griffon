@@ -46,18 +46,18 @@ class ValidationEnhancer {
     def doValidate = {List fields = null ->
         this.fields = fields
 
-        model.errors.clear()
+        try {
+            model.errors.clear()
 
-        if (hasNoConstraintsDefined())
-            return true
+            if (hasNoConstraintsDefined())
+                return true
 
-        Closure constraints = extractConstraints()
-
-        constraints.delegate = this
-
-        constraints.call()
-
-        this.fields = null
+            Closure constraints = extractConstraints()
+            constraints.delegate = this
+            constraints.call()
+        } finally {
+            this.fields = null
+        }
 
         return !model.hasErrors()
     }
