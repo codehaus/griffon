@@ -18,9 +18,8 @@
  * @author Andres Almiray
  */
 class SwtGriffonPlugin {
-    def version = 0.1
-    def griffonVersion = '0.3 > *'
-    def dependsOn = [:]
+    def version = 0.2
+    def griffonVersion = '0.3.2 > *'
     def toolkits = ['swt']
 
     def author = "Andres Almiray"
