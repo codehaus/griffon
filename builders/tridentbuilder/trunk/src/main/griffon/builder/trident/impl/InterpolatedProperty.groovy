@@ -17,38 +17,72 @@
 package griffon.builder.trident.impl
 
 import org.pushingpixels.trident.Timeline
+import org.pushingpixels.trident.TimelinePropertyBuilder
+import org.pushingpixels.trident.TimelinePropertyBuilder.PropertyGetter
+import org.pushingpixels.trident.TimelinePropertyBuilder.PropertySetter
+import org.pushingpixels.trident.TimelinePropertyBuilder.PropertyAccessor
 import org.pushingpixels.trident.interpolator.PropertyInterpolator
+import org.pushingpixels.trident.interpolator.KeyFrames
 
 /**
- * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ * @author Andres Almiray
  */
 class InterpolatedProperty {
-   final Object target
-   final String property
-   final def from
-   final def to
-   final PropertyInterpolator interpolator
+	private final TimelinePropertyBuilder propertyBuilder
 
-   InterpolatedProperty( Object target, String property, from, to, PropertyInterpolator interpolator ) {
-      this.target = target
-      this.property = property
-      this.from = from
-      this.to = to
-      this.interpolator = interpolator
-   }
+    InterpolatedProperty(String property) {
+        propertyBuilder = new TimelinePropertyBuilder(property)
+    }
 
-   public String toString() {
-      return "[property: property, from: $from, to: $to, interpolator: $interpolator, target: $target]"
-   }
+    void setFrom(from) {
+	    if(from != null) propertyBuilder.from(from)
+    }
 
-   public void addToTimeline( Timeline timeline ) {
-      def args = []
-      if(target) args << target
-      args << property
-      if(from != null ) args << from
-      args << to
-      if(interpolator) args << interpolator
+    void setFromCurrent(boolean fromCurrent) {
+	    if(fromCurrent) propertyBuilder.fromCurrent()
+    }
 
-      from != null ? timeline.addPropertyToInterpolate(*args) : timeline.addPropertyToInterpolateTo(*args)
-   }
+    void setTo(to) {
+	     if(to != null) propertyBuilder.to(to)
+    }
+
+    void setOn(target) {
+	    if(on) propertyBuilder.on(target)
+    }
+
+    void setInterpolator(PropertyInterpolator interpolator) {
+	    if(interpolator) propertyBuilder.interpolateWith(interpolator)
+    }
+
+    void setSet(setter) {
+	    if(setter instanceof PropertySetter) {
+		    propertyBuilder.setWith(setter)
+		} else if(setter instanceof Closure) {
+			propertyBuilder.setWith(setter as PropertySetter)
+		}
+    }
+	
+    void setGet(getter) {
+	    if(getter instanceof PropertyGetter) {
+		    propertyBuilder.getWith(getter)
+		} else if(getter instanceof Closure) {
+			propertyBuilder.getWith(getter as PropertySetter)
+		}
+    }
+	
+    void setAccess(access) {
+	    if(access instanceof PropertyAccessor) {
+		    propertyBuilder.setWith(access)
+		} else if(access instanceof Map) {
+			propertyBuilder.accessWith(access as PropertyAccessor)
+		}
+    }
+
+    void setKeyFrames(KeyFrames keyFrames) {
+	    if(keyFrames) propertyBuilder.goingThrough(keyFrames)
+    }
+
+    void addToTimeline(Timeline timeline) {
+        timeline.addPropertyToInterpolate(propertyBuilder)
+    }
 }

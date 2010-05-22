@@ -19,12 +19,11 @@ package griffon.builder.trident.impl
 import org.pushingpixels.trident.callback.TimelineScenarioCallback
 
 /**
- * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ * @author Andres Almiray
  */
 class MutableTimelineScenarioCallback implements TimelineScenarioCallback {
    Closure onDoneClosure
 
-   private delegate
    private final builder
 
    MutableTimelineScenarioCallback( FactoryBuilderSupport builder ) {
@@ -32,7 +31,7 @@ class MutableTimelineScenarioCallback implements TimelineScenarioCallback {
    }
 
    public void onTimelineScenarioDone() {
-      if(onDoneClosure) onDoneClosure()
+      execClosure(onDoneClosure)
    }
 
    public void setOnDone( Closure closure ) {
@@ -41,50 +40,74 @@ class MutableTimelineScenarioCallback implements TimelineScenarioCallback {
 
    public void onDone( Closure closure ) {
       onDoneClosure = closure
-      onDoneClosure.delegate = this
+   }
+
+   // =====================
+
+   private closureDelegate
+   Closure closure
+   private boolean initialized
+
+   private void init() {
+       synchronized(this) {
+	       if(initialized) return
+       }
+       initialized = true
+       closureDelegate = closure.delegate
+       closure.resolveStrategy = Closure.DELEGATE_FIRST
+       closure.delegate = this
+       closure()
+   }
+
+   private void execClosure(Closure cls) {
+       init()
+       if(!cls) return
+       cls.resolveStrategy = Closure.DELEGATE_FIRST
+       cls.delegate = this
+       cls()
    }
 
    def methodMissing( String name, Object value ) {
       // try the builder first
       try {
-         return builder."$name"(value)
+	     callPropertyOrMethod(builder, name, value)
       }catch( MissingMethodException mme ) {
-         // try original delegate if != builder
-         if( delegate && delegate != builder ){
-            return delegate."$name"(value)
-         }else{
-            throw mme
-         }
+         callPropertyOrMethod(closureDelegate, name, value)
       }
+   }
+
+   def callPropertyOrMethod(target, name, args) {	
+	   try {
+	       def cls = target.getProperty(name)
+	       if(args?.getClass()?.isArray() || args instanceof List) {
+		       return cls(*args)
+	       } else {
+		       return cls(args)
+	       }	
+	   } catch(MissingPropertyException mpe) {
+	       if(args?.getClass()?.isArray() || args instanceof List) {
+		       return target."$name"(*args)
+	       } else {
+		       return target."$name"(args)
+	       }		
+	   }
    }
 
    def propertyMissing( String name ) {
       // try the builder first
       try {
-         return builder."$name"
+         return builder.getProperty(name)
       }catch( MissingPropertyException mpe ) {
-         // try original delegate if != builder
-         if( delegate && delegate != builder ){
-            return delegate."$name"
-         }else{
-            throw mpe
-         }
+         return closureDelegate."$name"
       }
    }
 
    def propertyMissing( String name, Object value ) {
       // try the builder first
       try {
-         builder."$name" = value
-         return
+         builder.setProperty(name, value)
       }catch( MissingMethodException mpe ) {
-         // try original delegate if != builder
-         if( delegate && delegate != builder ){
-            delegate."$name" = value
-            return
-         }else{
-            throw mpe
-         }
+         closureDelegate."$name" = value
       }
    }
 }

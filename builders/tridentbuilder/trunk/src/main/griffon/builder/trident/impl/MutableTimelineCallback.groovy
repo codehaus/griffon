@@ -20,13 +20,12 @@ import org.pushingpixels.trident.Timeline.TimelineState
 import org.pushingpixels.trident.callback.*
 
 /**
- * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ * @author Andres Almiray
  */
 class MutableTimelineCallback implements TimelineCallback {
    Closure timelineStateChangedClosure
    Closure timelinePulseClosure
 
-   private delegate
    private final builder
 
    MutableTimelineCallback( FactoryBuilderSupport builder ) {
@@ -36,11 +35,11 @@ class MutableTimelineCallback implements TimelineCallback {
    public void onTimelineStateChanged(TimelineState oldState,
          TimelineState newState, float durationFraction,
          float timelinePosition) {
-      if(timelineStateChangedClosure) timelineStateChangedClosure(oldState, newState, durationFraction, timelinePosition)
+      execClosure(timelineStateChangedClosure, oldState, newState, durationFraction, timelinePosition)
    }
 
    public void onTimelinePulse(float durationFraction, float timelinePosition) {
-      if(timelinePulseClosure) timelinePulseClosure(durationFraction, timelinePosition)
+      execClosure(timelinePulseClosure, durationFraction, timelinePosition)
    }
 
    public void setTimelineStateChanged( Closure closure ) {
@@ -49,7 +48,6 @@ class MutableTimelineCallback implements TimelineCallback {
 
    public void timelineStateChanged( Closure closure ) {
       timelineStateChangedClosure = closure
-      timelineStateChangedClosure.delegate = this
    }
 
    public void setTimelinePulse( Closure closure ) {
@@ -58,50 +56,74 @@ class MutableTimelineCallback implements TimelineCallback {
 
    public void timelinePulse( Closure closure ) {
       timelinePulseClosure = closure
-      timelinePulseClosure.delegate = this
+   }
+
+   // =====================
+
+   private closureDelegate
+   Closure closure
+   private boolean initialized
+
+   private void init() {
+       synchronized(this) {
+	       if(initialized) return
+       }
+       initialized = true
+       closureDelegate = closure.delegate
+       closure.resolveStrategy = Closure.DELEGATE_FIRST
+       closure.delegate = this
+       closure()
+   }
+
+   private void execClosure(Closure cls, Object... args) {
+       init()
+       if(!cls) return
+       cls.resolveStrategy = Closure.DELEGATE_FIRST
+       cls.delegate = this
+       cls(*args)
    }
 
    def methodMissing( String name, Object value ) {
       // try the builder first
       try {
-         return builder."$name"(value)
+	     callPropertyOrMethod(builder, name, value)
       }catch( MissingMethodException mme ) {
-         // try original delegate if != builder
-         if( delegate && delegate != builder ){
-            return delegate."$name"(value)
-         }else{
-            throw mme
-         }
+         callPropertyOrMethod(closureDelegate, name, value)
       }
+   }
+
+   def callPropertyOrMethod(target, name, args) {	
+	   try {
+	       def cls = target.getProperty(name)
+	       if(args?.getClass()?.isArray() || args instanceof List) {
+		       return cls(*args)
+	       } else {
+		       return cls(args)
+	       }	
+	   } catch(MissingPropertyException mpe) {
+	       if(args?.getClass()?.isArray() || args instanceof List) {
+		       return target."$name"(*args)
+	       } else {
+		       return target."$name"(args)
+	       }		
+	   }
    }
 
    def propertyMissing( String name ) {
       // try the builder first
       try {
-         return builder."$name"
+         return builder.getProperty(name)
       }catch( MissingPropertyException mpe ) {
-         // try original delegate if != builder
-         if( delegate && delegate != builder ){
-            return delegate."$name"
-         }else{
-            throw mpe
-         }
+         return closureDelegate."$name"
       }
    }
 
    def propertyMissing( String name, Object value ) {
       // try the builder first
       try {
-         builder."$name" = value
-         return
+         builder.setProperty(name, value)
       }catch( MissingMethodException mpe ) {
-         // try original delegate if != builder
-         if( delegate && delegate != builder ){
-            delegate."$name" = value
-            return
-         }else{
-            throw mpe
-         }
+         closureDelegate."$name" = value
       }
    }
 }

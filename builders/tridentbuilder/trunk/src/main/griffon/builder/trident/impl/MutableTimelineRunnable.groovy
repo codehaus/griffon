@@ -19,12 +19,9 @@ package griffon.builder.trident.impl
 import org.pushingpixels.trident.TimelineRunnable
 
 /**
- * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ * @author Andres Almiray
  */
 class MutableTimelineRunnable extends TimelineRunnable {
-   Closure closure
-
-   private delegate
    private final builder
 
    MutableTimelineRunnable( FactoryBuilderSupport builder ) {
@@ -32,55 +29,58 @@ class MutableTimelineRunnable extends TimelineRunnable {
    }
 
    public void run() {
-      if(closure) closure()
+      if(closure) {
+	      closure.delegate = this
+	      closure()
+      }
    }
 
-   public void setClosure( Closure closure ) {
-      this.closure = closure
-      this.closure.delegate = this
-   }
+   // =====================
+
+   private closureDelegate
+   Closure closure
 
    def methodMissing( String name, Object value ) {
       // try the builder first
       try {
-         return builder."$name"(value)
+	     callPropertyOrMethod(builder, name, value)
       }catch( MissingMethodException mme ) {
-         // try original delegate if != builder
-         if( delegate && delegate != builder ){
-            return delegate."$name"(value)
-         }else{
-            throw mme
-         }
+         callPropertyOrMethod(closureDelegate, name, value)
       }
+   }
+
+   def callPropertyOrMethod(target, name, args) {	
+	   try {
+	       def cls = target.getProperty(name)
+	       if(args?.getClass()?.isArray() || args instanceof List) {
+		       return cls(*args)
+	       } else {
+		       return cls(args)
+	       }	
+	   } catch(MissingPropertyException mpe) {
+	       if(args?.getClass()?.isArray() || args instanceof List) {
+		       return target."$name"(*args)
+	       } else {
+		       return target."$name"(args)
+	       }		
+	   }
    }
 
    def propertyMissing( String name ) {
       // try the builder first
       try {
-         return builder."$name"
+         return builder.getProperty(name)
       }catch( MissingPropertyException mpe ) {
-         // try original delegate if != builder
-         if( delegate && delegate != builder ){
-            return delegate."$name"
-         }else{
-            throw mpe
-         }
+         return closureDelegate."$name"
       }
    }
 
    def propertyMissing( String name, Object value ) {
       // try the builder first
       try {
-         builder."$name" = value
-         return
+         builder.setProperty(name, value)
       }catch( MissingMethodException mpe ) {
-         // try original delegate if != builder
-         if( delegate && delegate != builder ){
-            delegate."$name" = value
-            return
-         }else{
-            throw mpe
-         }
+         closureDelegate."$name" = value
       }
    }
 }

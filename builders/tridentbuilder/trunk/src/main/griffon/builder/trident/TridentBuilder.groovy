@@ -22,7 +22,7 @@ import org.pushingpixels.trident.*
 import org.pushingpixels.trident.ease.*
 
 /**
- * @author Andres Almiray <aalmiray@users.sourceforge.net>
+ * @author Andres Almiray
  */
 public class TridentBuilder extends FactoryBuilderSupport {
    public static final String DELEGATE_PROPERTY_OBJECT_ID = "_delegateProperty:id";
@@ -45,6 +45,7 @@ public class TridentBuilder extends FactoryBuilderSupport {
    def registerTrident() {
       registerFactory("timeline", new TimelineFactory())
       registerFactory("timelineCallback", new TimelineCallbackFactory())
+      registerFactory("uiThreadTimelineCallback", new UIThreadTimelineCallbackFactory())
       registerFactory("interpolatedProperty", new InterpolatedPropertyFactory())
       registerFactory("keyFrames", new KeyFramesFactory())
       registerFactory("keyFrame", new KeyFrameFactory())

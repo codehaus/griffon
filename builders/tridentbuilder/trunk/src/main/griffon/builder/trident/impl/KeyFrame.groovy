@@ -19,15 +19,15 @@ package griffon.builder.trident.impl
 import org.pushingpixels.trident.ease.TimelineEase
 
 /**
- * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ * @author Andres Almiray
  */
 class KeyFrame {
    final float offset
    final def value
    final TimelineEase ease
 
-   KeyFrame( float offset, value, TimelineEase ease ) {
-      this.offset = offset
+   KeyFrame(float offset, value, TimelineEase ease) {
+      this.offset = offset ?: 0f
       this.value = value
       this.ease = ease
    }

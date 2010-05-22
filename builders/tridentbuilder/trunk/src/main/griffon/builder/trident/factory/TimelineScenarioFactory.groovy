@@ -22,7 +22,7 @@ import org.pushingpixels.trident.ease.*
 import griffon.builder.trident.impl.*
 
 /**
- * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ * @author Andres Almiray
  */
 class TimelineScenarioFactory extends AbstractFactory {
    private final scenarioClass
@@ -51,7 +51,7 @@ class TimelineScenarioFactory extends AbstractFactory {
 }
 
 /**
- * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ * @author Andres Almiray
  */
 class TimelineRunnableFactory extends AbstractFactory {
    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
@@ -67,7 +67,7 @@ class TimelineRunnableFactory extends AbstractFactory {
    }
 
    public boolean onNodeChildren( FactoryBuilderSupport builder, Object node, Closure childContent ) {
-      node.closure = childContente
+      node.closure = childContent
       return false
    }
 
@@ -79,7 +79,7 @@ class TimelineRunnableFactory extends AbstractFactory {
 }
 
 /**
- * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ * @author Andres Almiray
  */
 class TimelineScenarioCallbackFactory extends AbstractFactory {
    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
@@ -95,9 +95,7 @@ class TimelineScenarioCallbackFactory extends AbstractFactory {
    }
 
    public boolean onNodeChildren( FactoryBuilderSupport builder, Object node, Closure childContent ) {
-      node.delegate = childContent.delegate
-      childContent.delegate = node
-      childContent()
+      node.closure = childContent
       return false
    }
 }
