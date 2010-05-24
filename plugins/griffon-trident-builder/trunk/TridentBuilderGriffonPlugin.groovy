@@ -18,8 +18,8 @@
  * @author Andres Almiray
  */
 class TridentBuilderGriffonPlugin {
-    def version = '0.2'
-    def griffonVersion = '0.3 > *'
+    def version = '0.3'
+    def griffonVersion = '0.3.1 > *'
     def dependsOn = [:]
     def toolkits = ['swing']
     def jdk = '1.6'
