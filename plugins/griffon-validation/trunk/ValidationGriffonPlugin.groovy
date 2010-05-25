@@ -25,7 +25,7 @@ class ValidationGriffonPlugin {
     def author = "Nick Zhu"
     def authorEmail = "nzhu@jointsource.com"
     def title = "Griffon Validation Plugin"
-    def description = '''\\
+    def description = '''
 A validation plugin that provides Grails like validation capability using constraint
 declaration without depending on Spring
 '''
