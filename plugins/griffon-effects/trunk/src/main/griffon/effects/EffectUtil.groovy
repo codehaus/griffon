@@ -75,14 +75,14 @@ final class EffectUtil {
         }
     }
 
-    static void setupChainCallback(final Effect effect, Timeline timeline) {
-        if(effect.chainCallback) {
+    static void setupAfterCallback(final Effect effect, Timeline timeline) {
+        if(effect.afterCallback) {
             timeline.addCallback(new UIThreadTimelineCallbackAdapter() {
                 @Override
                 public void onTimelineStateChanged(TimelineState oldState,
                       TimelineState newState, float durationFraction, float timelinePosition) {
                     if (newState == TimelineState.DONE) {
-                        effect.chainCallback()
+                        effect.afterCallback()
                     }
                 }
             });
@@ -163,5 +163,14 @@ final class EffectUtil {
             return toFloat(awtUtilities.getWindowOpacity(window))
         }
         return 1.0f
+    }
+
+    static void setWindowOpacity(Window window, float opacity) {
+        if(isJdk17) {
+            window.setOpacity(opacity)
+        } else if(isJdk16) {
+            Class awtUtilities = Class.forName('com.sun.awt.AWTUtilities')
+            awtUtilities.setWindowOpacity(window, opacity)
+        }
     }
 }

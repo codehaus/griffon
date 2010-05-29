@@ -84,13 +84,11 @@ class Opacity extends AbstractBasicEffect {
         if(isJdk17) {
             timeline.addPropertyToInterpolate(p)
         } else if(isJdk16) {
-            Class awtUtilities = Class.forName('com.sun.awt.AWTUtilities')
-   
             timeline.addPropertyToInterpolate(p.setWith(
                 new PropertySetter<Float>() {
                     @Override
                     public void set(Object obj, String fieldName, Float value) {
-                        awtUtilities.setWindowOpacity(obj, value)
+                        EffectUtil.setWindowOpacity(obj, value)
                     }
                 }));
         }

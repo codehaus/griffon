@@ -189,8 +189,7 @@ class Effects {
     /**
      * Fades and moves a window.<p>
      * <ul>
-     *    <li><b>anchor</b>: Anchor, anchoring point. default: Anchor.TOP<br/>
-              Accepts Anchor.TOP, Anchor.LEFT and Anchor.TOP_LEFT only.</li>
+     *    <li><b>anchor</b>: Anchor, anchoring point. default: Anchor.BOTTOM</li>
      * </ul>
      *
      * @param params - set of options
@@ -199,6 +198,20 @@ class Effects {
      */ 
     static void dropOut(Map params = [:], Window window, Closure callback = null) {
         new DropOut(params, window, callback).run()
+    }
+
+    /**
+     * Fades in and centers a window.<p>
+     * <ul>
+     *    <li><b>anchor</b>: Anchor, anchoring point. default: Anchor.TOP</li>
+     * </ul>
+     *
+     * @param params - set of options
+     * @param window - the window to animate
+     * @param callback - an optional callback to be executed at the end of the animation
+     */ 
+    static void dropIn(Map params = [:], Window window, Closure callback = null) {
+        new DropIn(params, window, callback).run()
     }
 
     /**
@@ -217,18 +230,18 @@ class Effects {
 
         copy.eachWithIndex { effect, index ->
             if(index < count - 1) {
-                def oldChainCallback = effect.chainCallback
+                def oldAfterCallback = effect.afterCallback
                 def runEffectCls = runEffect.curry(copy[index + 1])
-                effect.chainCallback = {
-                    if(oldChainCallback) oldChainCallback()
+                effect.afterCallback = {
+                    if(oldAfterCallback) oldAfterCallback()
                     runEffectCls()
                 }
             }
         }
         def lastEffect = copy[-1]
-        def oldChainCallback = lastEffect.chainCallback
-        lastEffect.chainCallback = {
-            if(oldChainCallback) oldChainCallback()
+        def oldAfterCallback = lastEffect.afterCallback
+        lastEffect.afterCallback = {
+            if(oldAfterCallback) oldAfterCallback()
             if(callback) callback(lastEffect.component, lastEffect.params)
         }
         copy[0].run()

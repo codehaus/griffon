@@ -55,22 +55,4 @@ abstract class AbstractBasicEffect extends AbstractEffect implements BasicEffect
     AbstractBasicEffect(Map params = [:], Component component, Closure callback = null) {
         super(params, component, callback)
     }
-
-    /**
-     * Runs the timeline.<p>
-     * Creates and setups the timeline and callbacks, then plays the timeline.<p>
-     *
-     * <p>If a callback was supplied it will be called at the end of the animation,
-     * with the component and supplied parameters as arguments.</p>
-     *
-     * If this effect is chained (there is a chainCallback) then it will call
-     * said callback at the end of the animation.</p>
-     */
-    void run() {
-        Timeline timeline = EffectUtil.newTimeline(this)
-        setupTimeline(timeline)
-        EffectUtil.setupCallback(this, timeline)
-        EffectUtil.setupChainCallback(this, timeline)
-        timeline.play()
-    }
 }

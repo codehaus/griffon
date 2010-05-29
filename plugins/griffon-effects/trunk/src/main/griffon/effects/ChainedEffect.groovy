@@ -71,15 +71,16 @@ abstract class ChainedEffect extends AbstractEffect implements CompositeEffect {
 
         effects.eachWithIndex { BasicEffect effect, index ->
             if(index < count - 1) {
-                effect.chainCallback = runEffect.curry(effects[index + 1])
+                effect.afterCallback = runEffect.curry(effects[index + 1])
             }
         }
-        def oldChainCallback = effects[-1].chainCallback
-        effects[-1].chainCallback = {
-            if(oldChainCallback) oldChainCallback()
+        def oldAfterCallback = effects[-1].afterCallback
+        effects[-1].afterCallback = {
+            if(oldAfterCallback) oldAfterCallback()
             if(callback) callback(component, params)
-            if(chainCallback) chainCallback()
+            if(afterCallback) afterCallback()
         }
+        if(beforeCallback) beforeCallback()
         effects[0].run()
     }
 
