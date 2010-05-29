@@ -50,8 +50,10 @@ abstract class AbstractEffect implements Effect {
     final Component component
     /** end-of-animation callback */
     final Closure callback
-    /** callback to be executed if the effect is chained */
-    Closure chainCallback
+    /** callback to be executed before the effect starts */
+    Closure beforeCallback
+    /** callback to be executed after the effect ends */
+    Closure afterCallback
 
     /**
      * Creates a new effect.<br/>
@@ -84,15 +86,13 @@ abstract class AbstractEffect implements Effect {
      *
      * <p>If a callback was supplied it will be called at the end of the animation,
      * with the component and supplied parameters as arguments.</p>
-     *
-     * If this effect is chained (there is a chainCallback) then it will call
-     * said callback at the end of the animation.</p>
      */
     void run() {
         Timeline timeline = EffectUtil.newTimeline(this)
+        if(beforeCallback) beforeCallback()
         setupTimeline(timeline)
         EffectUtil.setupCallback(this, timeline)
-        EffectUtil.setupChainCallback(this, timeline)
+        EffectUtil.setupAfterCallback(this, timeline)
         timeline.play()
     }
 

@@ -77,7 +77,7 @@ class Shake extends ChainedEffect {
             new Move(x: distance*2,  y: 0i, duration: split*2, component),
             new Move(x: -distance,   y: 0i, duration: split,   component)
         ]
-        effects[-1].chainCallback = {
+        effects[-1].afterCallback = {
             component.setLocation(origin)
         }
         return effects

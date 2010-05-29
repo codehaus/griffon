@@ -34,13 +34,14 @@ import java.awt.Window
 import java.awt.Dimension
 import java.awt.Point
 import java.awt.Toolkit
+import java.awt.GraphicsEnvironment
 import org.pushingpixels.trident.Timeline
 
 /**
- * Fades and moves a window.<p>
+ * Fades in and moves a window.<p>
  * Parameters:
  * <ul>
- *    <li><b>anchor</b>: Anchor, anchoring point. default: Anchor.BOTTOM</li>
+ *    <li><b>anchor</b>: Anchor, anchoring point. default: Anchor.TOP</li>
  * </ul>
  * <p>Shared parameters:
  * <ul>
@@ -54,16 +55,16 @@ import org.pushingpixels.trident.Timeline
  *
  * @author Andres Almiray
  */
-class DropOut extends ParallelEffect {
+class DropIn extends ParallelEffect {
     /**
-     * Creates a new DropOut effect.<br/>
+     * Creates a new DropIn effect.<br/>
      *
      * @param params - set of options
      * @param component - the component to animate
      * @param callback - an optional callback to be executed at the end of the animation
      */ 
-    DropOut(Map params = [:], Window window, Closure callback = null) {
-        super(EffectUtil.mergeParams(params, [anchor: Anchor.BOTTOM]), window, callback)
+    DropIn(Map params = [:], Window window, Closure callback = null) {
+        super(EffectUtil.mergeParams(params, [anchor: Anchor.TOP]), window, callback)
         def ps = paramsInternal()
         ps.anchor = Anchor.resolve(ps.anchor)
     }
@@ -72,55 +73,76 @@ class DropOut extends ParallelEffect {
         def ps = paramsInternal()
         Point origin = component.location
         Dimension size = component.getSize()
+        Point center = GraphicsEnvironment.localGraphicsEnvironment.centerPoint
         Dimension screen = Toolkit.defaultToolkit.screenSize
 
         if(ps.anchor == Anchor.CENTER) {
-            ps.from = 100f
-            ps.to = 0f
+            
+            ps.from = 0f
+            ps.to = 100f
             return [
-                new Fade(ps, component),
+                new Appear(ps, component),
                 new Scale(ps, component)
             ] 
         }
 
+        EffectUtil.setWindowOpacity(component, EffectUtil.toFloat(0.0f))
         ps.mode = 'absolute'
+        ps.x = (screen.width/2) - (size.width/2)
+        ps.y = (screen.height/2) - (size.height/2)
         switch(ps.anchor) {
             case Anchor.TOP:
-                ps.x = origin.x
-                ps.y = -(size.height) 
+                component.setLocation(new Point(
+                    EffectUtil.toInt(origin.x),
+                    EffectUtil.toInt(-size.height)
+                )) 
                 break
             case Anchor.TOP_LEFT:
-                ps.x = -(size.width) 
-                ps.y = -(size.height) 
+                component.setLocation(new Point(
+                    EffectUtil.toInt(-size.width),
+                    EffectUtil.toInt(-size.height)
+                )) 
                 break
             case Anchor.LEFT:
-                ps.x = -(size.width) 
-                ps.y = origin.y
+                component.setLocation(new Point(
+                    EffectUtil.toInt(-size.width),
+                    EffectUtil.toInt(origin.y)
+                )) 
                 break
             case Anchor.BOTTOM_LEFT:
-                ps.x = -(size.width) 
-                ps.y = screen.height
+                component.setLocation(new Point(
+                    EffectUtil.toInt(-size.width),
+                    EffectUtil.toInt(-size.height)
+                )) 
                 break
             case Anchor.BOTTOM:
-                ps.x = origin.x
-                ps.y = screen.height
+                component.setLocation(new Point(
+                    EffectUtil.toInt(origin.x),
+                    EffectUtil.toInt(screen.height)
+                )) 
                 break
             case Anchor.BOTTOM_RIGHT:
-                ps.x = screen.width
-                ps.y = screen.height
+                component.setLocation(new Point(
+                    EffectUtil.toInt(screen.width),
+                    EffectUtil.toInt(screen.height)
+                )) 
                 break
             case Anchor.RIGHT:
-                ps.x = screen.width
-                ps.y = origin.y
+                component.setLocation(new Point(
+                    EffectUtil.toInt(screen.width),
+                    EffectUtil.toInt(origin.y)
+                )) 
                 break
             case Anchor.TOP_RIGHT:
-                ps.x = screen.width
-                ps.y = -(size.height) 
+                component.setLocation(new Point(
+                    EffectUtil.toInt(screen.width),
+                    EffectUtil.toInt(-size.height)
+                )) 
                 break
         }
 
         return [
-            new Fade(ps, component),
+            new Appear(ps, component),
             new Move(ps, component)
         ]
     }

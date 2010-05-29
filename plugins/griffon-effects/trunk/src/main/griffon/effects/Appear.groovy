@@ -58,7 +58,8 @@ class Appear extends Opacity {
     Appear(Map params = [:], Window window, Closure callback = null) {
         super(EffectUtil.mergeParams(params), window, callback)
         def ps = paramsInternal()
-        ps.from = EffectUtil.getWindowOpacity(window) ?: 0.0f
+        float opacity = EffectUtil.getWindowOpacity(window)
+        ps.from = opacity == 1.0f ? 0.0f : opacity
         ps.to = 1f
     }
 }
