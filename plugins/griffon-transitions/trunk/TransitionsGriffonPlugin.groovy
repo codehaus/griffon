@@ -18,9 +18,9 @@
  * @author Andres Almiray
  */
 class TransitionsGriffonPlugin {
-    def version = "0.2"
-    def griffonVersion = '0.3 > *'
-    def dependsOn = ["trident-builder": 0.2]
+    def version = "0.3"
+    def griffonVersion = '0.3.2 > *'
+    def dependsOn = ["trident-builder": 0.3]
     def jdk = "1.6"
     def toolkits = ['swing']
 
