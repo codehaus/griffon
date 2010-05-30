@@ -74,7 +74,7 @@ private boolean getConfigBoolean(config, String name) {
 private List configureIncludes(config) {
     List includes = []
 
-    if (getConfigBoolean(config, 'processSrc')) {
+    if (getConfigBoolean(config, 'processSrcGroovy')) {
         includes << 'src/main/**/*.groovy'
     }
 
