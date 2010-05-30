@@ -65,6 +65,16 @@ class Effects {
     }
 
     /**
+     * Shakes a component.<br/>
+     *
+     * @param component - the component to animate
+     * @param callback - an optional callback to be executed at the end of the animation
+     */ 
+    static void shake(Component component, Closure callback) {
+        new Shake([:], component, callback).run()
+    }
+
+    /**
      * Moves a component.<br/>
      * Parameters:
      * <ul>
@@ -146,6 +156,17 @@ class Effects {
     }
 
     /**
+     * Fades a window.<br/>
+     * Animates the window's opacity from its current value (or 1.0f) to 0.0f.
+     *
+     * @param window - the window to animate
+     * @param callback - an optional callback to be executed at the end of the animation
+     */
+    static void fade(Window window, Closure callback) {
+        new Fade([:], window, callback).run()
+    }
+
+    /**
      * Makes a window appear.<br/>
      * Animates the window's opacity from its current value (or 0.0f) to 1.0f.
      *
@@ -155,6 +176,17 @@ class Effects {
      */
     static void appear(Map params = [:], Window window, Closure callback = null) {
         new Appear(params, window, callback).run()
+    }
+
+    /**
+     * Makes a window appear.<br/>
+     * Animates the window's opacity from its current value (or 0.0f) to 1.0f.
+     *
+     * @param window - the window to animate
+     * @param callback - an optional callback to be executed at the end of the animation
+     */
+    static void appear(Window window, Closure callback) {
+        new Appear([:], window, callback).run()
     }
 
     /**
@@ -184,6 +216,16 @@ class Effects {
      */ 
     static void puff(Map params = [:], Window window, Closure callback = null) {
         new Puff(params, window, callback).run()
+    }
+
+    /**
+     * Fades and blows up a window.<p>
+     *
+     * @param window - the window to animate
+     * @param callback - an optional callback to be executed at the end of the animation
+     */ 
+    static void puff(Window window, Closure callback) {
+        new Puff([:], window, callback).run()
     }
 
     /**
