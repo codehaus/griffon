@@ -36,6 +36,7 @@ import org.pushingpixels.trident.Timeline
 import org.pushingpixels.trident.Timeline.TimelineState
 import org.pushingpixels.trident.callback.UIThreadTimelineCallbackAdapter
 import org.pushingpixels.trident.TimelinePropertyBuilder.PropertySetter
+import static griffon.effects.EffectUtil.*
 
 /**
  * Scales a component on x/y coordinates over an specific anchor.<p>
@@ -76,7 +77,7 @@ class Scale extends AbstractBasicEffect {
      * @param callback - an optional callback to be executed at the end of the animation
      */ 
     Scale(Map params = [:], Component component, Closure callback = null) {
-        super(EffectUtil.mergeParams(params, DEFAULT_PARAMS), component, callback)
+        super(mergeParams(params, DEFAULT_PARAMS), component, callback)
         def ps = paramsInternal()
         ps.anchor = Anchor.resolve(ps.anchor) 
     }
@@ -91,7 +92,9 @@ class Scale extends AbstractBasicEffect {
 
         Scaler() {
             def ps = paramsInternal()
-            factor = EffectUtil.toFloat((ps.to - ps.from)/100)
+            float to = toFloat(ps.to)
+            float from = toFloat(ps.from)
+            factor = toFloat((to - from)/100)
             origin = getComponent().bounds
         }
 
@@ -109,12 +112,14 @@ class Scale extends AbstractBasicEffect {
         }
 
         private void scale(float position) {
-            Map params = getParams()
-            float currentScale = EffectUtil.toFloat((params.from/100) + (factor * position))
-            float w = params.scaleX ? origin.width * currentScale : origin.width
-            float h = params.scaleY ? origin.height * currentScale : origin.height
+            Map ps = getParams()
+            float to = toFloat(ps.to)
+            float from = toFloat(ps.from)
+            float currentScale = toFloat((from/100) + (factor * position))
+            float w = ps.scaleX ? origin.width * currentScale : origin.width
+            float h = ps.scaleY ? origin.height * currentScale : origin.height
 
-            switch(params.anchor) {
+            switch(ps.anchor) {
                 case Anchor.TOP_LEFT:
                    newBounds(origin.x, origin.y, w, h) 
                    break
@@ -152,10 +157,10 @@ class Scale extends AbstractBasicEffect {
 
         private void newBounds(x, y, w, h) {
             getComponent().setBounds(
-                EffectUtil.toInt(x),
-                EffectUtil.toInt(y),
-                EffectUtil.toInt(w),
-                EffectUtil.toInt(h)
+                toInt(x),
+                toInt(y),
+                toInt(w),
+                toInt(h)
             )
         }
     }
