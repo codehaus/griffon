@@ -21,6 +21,8 @@
  * @author Andres Almiray (Griffon version)
  */
 
+import griffon.util.Environment
+
 includeTargets << griffonScript('Compile')
 
 target('default': 'Run CodeNarc') {
@@ -35,6 +37,7 @@ private void runCodenarc() {
     def config = loadConfig()
 
     String reportName = config.reportName ?: 'CodeNarcReport.html'
+    String reportLocation = config.reportLocation ?: projectTargetDir
     String reportType = config.reportType ?: 'html'
     String reportTitle = config.reportTitle ?: ''
     int maxPriority1Violations = getConfigInt(config, 'maxPriority1Violations', Integer.MAX_VALUE)
@@ -44,21 +47,27 @@ private void runCodenarc() {
     List includes = configureIncludes(config)
 
     ant.echo(message: "[codenarc] Running CodeNarc ...")
+    ant.mkdir(dir: projectTargetDir)   
+
+    String reportFile = "${reportLocation}/${reportName}".toString()
     ant.codenarc(ruleSetFiles: ruleSetFiles,
             maxPriority1Violations: maxPriority1Violations,
             maxPriority2Violations: maxPriority2Violations,
             maxPriority3Violations: maxPriority3Violations) {
-        report(type: reportType, toFile: reportName, title: reportTitle)
+        report(type: reportType) {
+            option(name: 'outputFile', value: reportFile)
+            option(name: 'title', value: reportTitle)
+        }
         fileset(dir: '.', includes: includes.join(','))
     }
 
-    ant.echo(message: "[codenarc] CodeNarc finished; report generated: $reportName")
+    ant.echo(message: "[codenarc] CodeNarc finished; report generated: $reportFile")
 }
 
 private ConfigObject loadConfig() {
     def classLoader = Thread.currentThread().contextClassLoader
     classLoader.addURL(new File(classesDirPath).toURL())
-    return new ConfigSlurper().parse(classLoader.loadClass('Config')).codenarc
+    return new ConfigSlurper(Environment.current.name).parse(classLoader.loadClass('Config')).codenarc
 }
 
 private int getConfigInt(config, String name, int defaultIfMissing) {
@@ -88,6 +97,10 @@ private List configureIncludes(config) {
 
     if (getConfigBoolean(config, 'processViews')) {
         includes << 'griffon-app/views/**/*.groovy'
+    }
+
+    if (getConfigBoolean(config, 'processServices')) {
+        includes << 'griffon-app/services/**/*.groovy'
     }
 
     if (getConfigBoolean(config, 'processTestUnit')) {
