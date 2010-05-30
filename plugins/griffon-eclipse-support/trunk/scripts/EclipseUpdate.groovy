@@ -37,26 +37,26 @@ updateEclipseClasspathFile = { newPlugin = null ->
         }
         mkp.yieldUnescaped("\n${indent}<!-- application libs -->")
         (new File("${basedir}/lib")).eachFileMatch(~/.*\.jar/) { file ->
-            classpathentry(kind: 'var', path: "lib/${file.name}")
+            classpathentry(kind: 'lib', path: "lib/${file.name}")
         }
         
         def nativeLibDir = new File("${basedir}/lib/${platform}")
         if(nativeLibDir.exists()) {
         mkp.yieldUnescaped("\n${indent}<!-- application native libs -->")
             nativeLibDir.eachFileMatch(~/.*\.jar/) { file ->
-                classpathentry(kind: 'var', path: "lib/${platform}/${file.name}")
+                classpathentry(kind: 'lib', path: "lib/${platform}/${file.name}")
             }
         }
 
         def pluginClasspathEntries = { libDir ->
             if(!libDir.exists()) return
             libDir.eachFileMatch(~/.*\.jar/) { file ->
-                classpathentry(kind: 'var', path: file.absolutePath)
+                classpathentry(kind: 'lib', path: file.absolutePath)
             }
             def platformDir = new File(libDir.absolutePath, platform)
             if(!platformDir.exists()) return
             platformDir.eachFileMatch(~/.*\.jar/) { file ->
-                classpathentry(kind: 'var', path: file.absolutePath)
+                classpathentry(kind: 'lib', path: file.absolutePath)
             }
         }
 

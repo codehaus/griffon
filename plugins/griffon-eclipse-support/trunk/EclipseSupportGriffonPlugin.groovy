@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class EclipseSupportGriffonPlugin {
-    def version = 0.1
+    def version = 0.2
     def griffonVersion = "0.3 > *" 
     def dependsOn = [:]
 
