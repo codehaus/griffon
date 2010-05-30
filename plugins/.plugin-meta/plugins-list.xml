@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1928">
+<plugins revision="1937">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -124,7 +124,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_3_1/griffon-code-coverage-0.3.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="codenarc">
+    <plugin latest-release="0.3" name="codenarc">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>CodeNarc plugin</title>
             <author>Andres Almiray</author>
@@ -140,6 +140,14 @@
             <description/>
             <documentation>http://griffon.codehaus.org/Codenarc+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_2/griffon-codenarc-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
+            <title>CodeNarc plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Codenarc+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_3/griffon-codenarc-0.3.zip</file>
         </release>
     </plugin>
     <plugin latest-release="0.1" name="couchdb">
@@ -253,6 +261,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_1/griffon-eclipse-support-0.1.zip</file>
         </release>
     </plugin>
+    <plugin name="effects"/>
     <plugin latest-release="0.1" name="erlang">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Erlang support</title>
@@ -471,6 +480,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_3/griffon-glazedlists-0.3.zip</file>
         </release>
     </plugin>
+    <plugin name="gmetrics"/>
     <plugin name="gorm"/>
     <plugin latest-release="0.3" name="gparallelizer">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
