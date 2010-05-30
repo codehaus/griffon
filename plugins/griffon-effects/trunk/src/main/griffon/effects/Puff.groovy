@@ -59,7 +59,7 @@ class Puff extends ParallelEffect {
         super(EffectUtil.mergeParams(params), window, callback)
         def ps = paramsInternal()
         ps.from = 100f
-        ps.to = 120f
+        ps.to = 150f
         ps.anchor = Anchor.CENTER
     }
  
