@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="1937">
+<plugins revision="1941">
     <plugin latest-release="0.1" name="abeilleform-builder">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -480,7 +480,16 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_3/griffon-glazedlists-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="gmetrics"/>
+    <plugin latest-release="0.1" name="gmetrics">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Plugin summary/headline</title>
+            <author>Your name</author>
+            <authorEmail/>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Gmetrics+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-gmetrics/tags/RELEASE_0_1/griffon-gmetrics-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="gorm"/>
     <plugin latest-release="0.3" name="gparallelizer">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
