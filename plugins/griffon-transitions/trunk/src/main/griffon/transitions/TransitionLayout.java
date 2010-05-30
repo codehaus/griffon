@@ -18,6 +18,7 @@ package griffon.transitions;
 import org.pushingpixels.trident.Timeline;
 import org.pushingpixels.trident.callback.TimelineCallback;
 import static org.pushingpixels.trident.Timeline.TimelineState;
+import org.pushingpixels.trident.callback.UIThreadTimelineCallbackAdapter;
 import com.bric.image.transition.Transition2D;
 import com.bric.image.transition.Transition2DInstruction;
 import com.bric.image.transition.vanilla.BlendTransition2D;
@@ -54,6 +55,8 @@ public class TransitionLayout extends CardLayout {
    private Transition2D _defaultTransition = DEFAULT_TRANSITION;
    private boolean _mirrorTransition = true;
    private boolean _skipTransitions = false;
+   private Runnable _beforeCallback = null;
+   private Runnable _afterCallback = null;
 
    // fields
    private TransitionAnimator _transitionAnimator;
@@ -96,6 +99,22 @@ public class TransitionLayout extends CardLayout {
 
    public void setSkipTransitions(boolean skipTransitions) {
       _skipTransitions = skipTransitions;
+   }
+
+   public Runnable getBeforeCallback() {
+      return _beforeCallback;
+   }   
+
+   public void setBeforeCallback(Runnable callback) {
+      _beforeCallback = callback;
+   }
+
+   public Runnable getAfterCallback() {
+      return _afterCallback;
+   }   
+
+   public void setAfterCallback(Runnable callback) {
+      _afterCallback = callback;
    }
 
    /**
@@ -227,6 +246,10 @@ public class TransitionLayout extends CardLayout {
       }
    }
 
+   public int getCardCount() {
+       return _components.size();
+   }
+
    private TransitionInfo transitionInfoAt(int index) {
       int count = 0;
       for(Map.Entry<String, TransitionInfo> entry: _components.entrySet()) {
@@ -238,7 +261,25 @@ public class TransitionLayout extends CardLayout {
       return null;
    }
 
-   private int cardIndexOf(String name) {
+   public String cardNameAt(int index) {
+      if(index < 0) {
+          throw new IndexOutOfBoundsException("Index cannot be negative: " + index);
+      }
+      if(index >= _components.size()) {
+          throw new IndexOutOfBoundsException("Index is greater than or equal to cards count: " + index);
+      }
+
+      int count = 0;
+      for(Map.Entry<String, TransitionInfo> entry: _components.entrySet()) {
+         if(count == index) {
+            return entry.getKey();
+         }
+         count++;
+      }
+      return "";
+   }
+
+   public int cardIndexOf(String name) {
       int index = 0;
       for(Map.Entry<String, TransitionInfo> entry: _components.entrySet()) {
          if(entry.getKey().equals(name)) {
@@ -249,7 +290,7 @@ public class TransitionLayout extends CardLayout {
       return -1;
    }
 
-   private int getCurrentCardIndex(Container parent) {
+   public int getCurrentCardIndex(Container parent) {
       int size = _components.size();
       for(int i = 0; i < size; i++) {
          if(parent.getComponent(i).isVisible()) {
@@ -259,7 +300,17 @@ public class TransitionLayout extends CardLayout {
       return -1;
    }
 
-   private boolean isAnimating() {
+   public String getCurrentCardName(Container parent) {
+      int size = _components.size();
+      for(int i = 0; i < size; i++) {
+         if(parent.getComponent(i).isVisible()) {
+            return cardNameAt(i);
+         }
+      }
+      return "";
+   }
+
+   public boolean isAnimating() {
       return _transitionAnimator != null &&
              _transitionAnimator.isAnimating();
    }
@@ -282,7 +333,8 @@ public class TransitionLayout extends CardLayout {
       if(duration == UNSPECIFIED_DURATION) duration = _defaultDuration;
       Transition2D transition = from.getTransition() != NullTransition.getInstance() ? from.getTransition() : _defaultTransition;
 
-      _transitionAnimator = new TransitionAnimator(from, to, parent, duration, transition, direction);
+      _transitionAnimator = new TransitionAnimator(from, to, parent, duration, transition, direction, _afterCallback);
+      if(_beforeCallback != null) _beforeCallback.run();
       _transitionAnimator.play();
    }
 
@@ -327,7 +379,7 @@ public class TransitionLayout extends CardLayout {
       private final Timeline _timeline;
       private final Direction _direction;
 
-      public TransitionAnimator(final TransitionInfo from, final TransitionInfo to, final Container container, long duration, Transition2D transition, final Direction direction) {
+      public TransitionAnimator(final TransitionInfo from, final TransitionInfo to, final Container container, long duration, Transition2D transition, final Direction direction, final Runnable callback) {
          _direction = direction;
          final TransitionPanel panel = new TransitionPanel(from.getComponent(), to.getComponent(), transition);
          _timeline = new Timeline(container);
@@ -360,6 +412,17 @@ public class TransitionLayout extends CardLayout {
                panel.setProgress(durationFraction);
             }
          });
+         if(callback != null) {
+            _timeline.addCallback(new UIThreadTimelineCallbackAdapter() {
+                @Override
+                public void onTimelineStateChanged(TimelineState oldState,
+                      TimelineState newState, float durationFraction, float timelinePosition) {
+                    if(newState == TimelineState.DONE) {
+                        callback.run();
+                    }
+                }
+            });
+         }
       }
 
       public boolean isAnimating() {
