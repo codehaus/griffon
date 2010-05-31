@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project relativePaths="false" version="4">
+  <component name="ProjectFileVersion" converted="true" />
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DockingFrame.iml" filepath="$PROJECT_DIR$/DockingFrame.iml" />
+    </modules>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="libraryTable">
+    <library name="Griffon 0.4-SNAPSHOT">
+      <CLASSES>
+        <root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/jline-0.9.94.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/ant-1.8.0.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/ant-launcher-1.8.0.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/commons-cli-1.2.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/groovy-all-1.7.1.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/asm-3.2.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/svnkit-1.2.0.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/spring-2.5.6.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/ant-nodeps-1.8.0.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/commons-lang-2.4.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/ant-junit-1.8.0.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/log4j-1.2.15.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/commons-logging-1.1.1.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/ant-trax-1.8.0.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/junit-4.8.1.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/lib/gant_groovy1.6-1.6.0.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/dist/griffon-cli-0.4-SNAPSHOT.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/dist/griffon-rt-0.4-SNAPSHOT.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/dist/griffon-resources-0.4-SNAPSHOT.jar!/" />
+
+<root url="jar:///home/per/peron/projects/hackergarten/griffon/griffon-git/dist/griffon-scripts-0.4-SNAPSHOT.jar!/" />
+
+
+      </CLASSES>
+    </library>
+  </component>
+</project>
