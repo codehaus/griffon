@@ -55,13 +55,24 @@ class ValidatableTransformationTest extends GroovyTestCase {
         assertFalse("id field should have error", model.errors.hasFieldErrors('id'))
     }
 
-    public void testGoodValidation() {
+    public void testGoodValidateAll() {
         def model = generateModel()
 
         model.id = "goodID"
         model.email = "someone@email.com"
 
         boolean result = model.validate()
+
+        assertTrue "Validation should have passed", result
+        assertFalse("Model should not have error", model.hasErrors())
+    }
+
+    public void testGoodSelectiveValidation() {
+        def model = generateModel()
+
+        model.email = "someone@email.com"
+
+        boolean result = model.validate(['email'])
 
         assertTrue "Validation should have passed", result
         assertFalse("Model should not have error", model.hasErrors())
