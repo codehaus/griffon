@@ -15,13 +15,24 @@
 
 package net.sourceforge.gvalidation
 
-import org.codehaus.groovy.control.CompilePhase
 import org.codehaus.groovy.ast.builder.TranformTestHelper
+import org.codehaus.groovy.control.CompilePhase
 
 /**
  * Created by nick.zhu
  */
-class ValidatableTransformationTest extends GroovyTestCase{
+class ValidatableTransformationTest extends GroovyTestCase {
+
+    public void testIgnoreNonAnnotatedModel() {
+        def model = generateModel("ModelBean.groovy")
+
+        try {
+            model.validate()
+            fail("Method should not have been injected, exception should have thrown")
+        } catch (MissingMethodException ex) {
+            // succeed
+        }
+    }
 
     public void testValidateAllInjection() {
         def model = generateModel()
@@ -31,7 +42,6 @@ class ValidatableTransformationTest extends GroovyTestCase{
         assertFalse "Validation should have failed", result
         assertTrue("Model should have error", model.hasErrors())
         assertTrue("id field should have error", model.errors.hasFieldErrors('id'))
-
     }
 
     public void testSelectiveValidationInjection() {
@@ -43,7 +53,6 @@ class ValidatableTransformationTest extends GroovyTestCase{
         assertTrue("Model should have error", model.hasErrors())
         assertTrue("email field should have error", model.errors.hasFieldErrors('email'))
         assertFalse("id field should have error", model.errors.hasFieldErrors('id'))
-
     }
 
     public void testGoodValidation() {
@@ -56,17 +65,18 @@ class ValidatableTransformationTest extends GroovyTestCase{
 
         assertTrue "Validation should have passed", result
         assertFalse("Model should not have error", model.hasErrors())
-
     }
 
-    private def generateModel() {
-        def file = new File('test/unit/net/sourceforge/gvalidation/models/AnnotatedModel.groovy')
-        assertTrue file.exists()
+    private def generateModel(fileName = "AnnotatedModel.groovy") {
+        def file = new File("test/unit/net/sourceforge/gvalidation/models/${fileName}")
+        assert file.exists()
 
         TranformTestHelper invoker = new TranformTestHelper(new ValidatableTransformation(), CompilePhase.SEMANTIC_ANALYSIS)
         def modelClass = invoker.parse(file)
         def model = modelClass.newInstance()
+
         return model
     }
+
 
 }

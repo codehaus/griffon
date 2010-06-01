@@ -15,19 +15,22 @@
 
 package net.sourceforge.gvalidation
 
-import org.codehaus.groovy.transform.ASTTransformation
-import org.codehaus.groovy.ast.ASTNode
-import org.codehaus.groovy.control.SourceUnit
-import org.codehaus.groovy.control.CompilePhase
-import org.codehaus.groovy.transform.GroovyASTTransformation
-import org.codehaus.groovy.ast.builder.AstBuilder
 import groovyjarjarasm.asm.Opcodes
-import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.Parameter
+import org.codehaus.groovy.ast.builder.AstBuilder
 import org.codehaus.groovy.ast.expr.ConstantExpression
+import org.codehaus.groovy.control.CompilePhase
+import org.codehaus.groovy.control.SourceUnit
+import org.codehaus.groovy.transform.ASTTransformation
+import org.codehaus.groovy.transform.GroovyASTTransformation
 
 /**
+ * Groovy AST transformation class that enhances any class
+ * annotated as @Validatable during compile time automatically 
+ *
  * Created by nick.zhu
  */
 @GroovyASTTransformation(phase = CompilePhase.SEMANTIC_ANALYSIS)
@@ -39,7 +42,6 @@ class ValidatableTransformation implements ASTTransformation {
         if (annotatedWithValidatable(classNode)) {
             if (hasNotInjectedMethod(classNode)) {
                 MethodNode validateMethod = buildValidateMethod()
-                println "result: " + validateMethod
                 classNode.addMethod(validateMethod)
             }
         }
@@ -71,8 +73,6 @@ class ValidatableTransformation implements ASTTransformation {
                 block {
                     owner.expression.addAll new AstBuilder().buildFromCode {
                         def enhancer = net.sourceforge.gvalidation.ValidationEnhancer.enhance(this)
-                        println "in validate enhancer: " + enhancer
-                        println "in validate this: " + this
                         return enhancer.doValidate(fields)
                     }
                 }
