@@ -1,0 +1,13 @@
+<plugin name='lookandfeel-substance' version='0.1' griffonVersion='0.3.2 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Substance Swing Look &amp; Feel</title>
+  <documentation>http://griffon.codehaus.org/Lookandfeel+Substance+Plugin</documentation>
+  <toolkits>swing</toolkits>
+  <plugin name='lookandfeel' version='0.1' />
+  <plugin name='trident-builder' version='0.3' />
+  <dependencies>
+    <plugin name='lookandfeel' version='0.1' />
+    <plugin name='trident-builder' version='0.3' />
+  </dependencies>
+</plugin>
