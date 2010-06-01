@@ -27,10 +27,18 @@ import net.sourceforge.gvalidation.models.CustomConstraintModelBean
  */
 class ValidationEnhancerTest extends GroovyTestCase {
 
+    public void testModelEnhancement() {
+        ModelBean model = new ModelBean()
+
+        def enhancer = ValidationEnhancer.enhance(model)
+
+        assertTrue "Enhancer instance returned in incorrect", enhancer instanceof ValidationEnhancer
+    }
+
     public void testModelConstraintInvocation() {
         ModelBean model = new ModelBean()
 
-        ValidationEnhancer validator = new ValidationEnhancer(model)
+        ValidationEnhancer.enhance(model)
 
         boolean result = model.validate()
 
@@ -51,7 +59,7 @@ class ValidationEnhancerTest extends GroovyTestCase {
     public void testErrorCorrection() {
         ModelBean model = new ModelBean()
 
-        ValidationEnhancer validator = new ValidationEnhancer(model)
+        ValidationEnhancer.enhance(model)
 
         boolean result = model.validate()
 
@@ -67,7 +75,7 @@ class ValidationEnhancerTest extends GroovyTestCase {
     public void testValidationWithNoConstraint() {
         NoConstraintModelBean model = new NoConstraintModelBean()
 
-        ValidationEnhancer validator = new ValidationEnhancer(model)
+        ValidationEnhancer.enhance(model)
 
         boolean result = model.validate()
 
@@ -77,7 +85,7 @@ class ValidationEnhancerTest extends GroovyTestCase {
     public void testValidationWithInvalidConstraint() {
         InvalidConstraintModelBean model = new InvalidConstraintModelBean()
 
-        ValidationEnhancer validator = new ValidationEnhancer(model)
+        ValidationEnhancer.enhance(model)
 
         try {
             boolean result = model.validate()
@@ -90,30 +98,30 @@ class ValidationEnhancerTest extends GroovyTestCase {
     public void testUnknownConstraintIsIgnored() {
         UnknownConstraintModelBean model = new UnknownConstraintModelBean()
 
-        ValidationEnhancer validator = new ValidationEnhancer(model)
+        ValidationEnhancer.enhance(model)
 
         boolean result = model.validate()
 
         assertTrue("Validation result should be true", result)
     }
 
-    public void testNullAndBlankTolerance(){
+    public void testNullAndBlankTolerance() {
         NullToleranceModelBean model = new NullToleranceModelBean()
 
         ValidationEnhancer.enhance(model)
 
         boolean result = model.validate()
 
-        model.errors.each{
+        model.errors.each {
             println it
         }
 
         assertTrue("Validation result should be true", result)
     }
 
-    public void testCustomValidator(){
+    public void testCustomValidator() {
         ConstraintRepository.instance.register('magic',
-                [validate:{property, bean, parameter-> false}])
+                [validate: {property, bean, parameter -> false}])
 
         def model = new CustomConstraintModelBean()
 
@@ -129,8 +137,8 @@ class ValidationEnhancerTest extends GroovyTestCase {
         assertEquals("Default error code is not correct", "default.magic.message", fieldError.defaultErrorCode)
     }
 
-    public void testFieldLevelValidation(){
-        def model = new ModelBean(email:'invalidEmail')
+    public void testFieldLevelValidation() {
+        def model = new ModelBean(email: 'invalidEmail')
 
         ValidationEnhancer.enhance(model)
 
@@ -147,8 +155,8 @@ class ValidationEnhancerTest extends GroovyTestCase {
         assertEquals("Default error code is not correct", "default.email.message", fieldError.defaultErrorCode)
     }
 
-    public void testFieldLevelValidationWithMultipleExecution(){
-        def model = new ModelBean(email:'invalidEmail')
+    public void testFieldLevelValidationWithMultipleExecution() {
+        def model = new ModelBean(email: 'invalidEmail')
 
         ValidationEnhancer.enhance(model)
 
@@ -168,8 +176,8 @@ class ValidationEnhancerTest extends GroovyTestCase {
         assertTrue "Email should be valid", model.validate(['email'])
     }
 
-    public void testFieldLevelValidationWithMultipleFields(){
-        def model = new ModelBean(email:'invalidEmail')
+    public void testFieldLevelValidationWithMultipleFields() {
+        def model = new ModelBean(email: 'invalidEmail')
 
         ValidationEnhancer.enhance(model)
 
@@ -181,8 +189,8 @@ class ValidationEnhancerTest extends GroovyTestCase {
         assertTrue model.errors.hasFieldErrors('email')
     }
 
-    public void testFieldLevelValidationWithSingleString(){
-        def model = new ModelBean(email:'invalidEmail')
+    public void testFieldLevelValidationWithSingleString() {
+        def model = new ModelBean(email: 'invalidEmail')
 
         ValidationEnhancer.enhance(model)
 

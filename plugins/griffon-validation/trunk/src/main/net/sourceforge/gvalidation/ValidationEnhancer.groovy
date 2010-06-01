@@ -23,24 +23,34 @@ import org.apache.commons.lang.ClassUtils
  */
 class ValidationEnhancer {
     static final def CONSTRAINT_PROPERTY_NAME = "constraints"
+    static final def VALIDATION_ENHANCER_PROPERTY_NAME = '__validationEnhancer'
 
     static def enhance(bean) {
-        new ValidationEnhancer(bean)
+        if (isNotEnhanced(bean)) {
+            final def enhancer = new ValidationEnhancer(bean)
+            bean.metaClass."${VALIDATION_ENHANCER_PROPERTY_NAME}" = enhancer
+            bean.metaClass.errors = new Errors()
+            bean.metaClass.hasErrors = { enhancer.model.errors.hasErrors() }
+        }
+
+        return bean."${VALIDATION_ENHANCER_PROPERTY_NAME}"
+    }
+
+    private static def isNotEnhanced(bean) {
+        return !bean.metaClass.hasProperty(VALIDATION_ENHANCER_PROPERTY_NAME)
     }
 
     private List fields
 
-    def model
+    private def model
 
-    public ValidationEnhancer(bean) {
+    private ValidationEnhancer(bean) {
         model = bean
 
         bean.metaClass.validate = { fields = null ->
+            ValidationEnhancer.enhance(bean)
             doValidate(fields)
         }
-
-        bean.metaClass.errors = new Errors()
-        bean.metaClass.hasErrors = { model.errors.hasErrors() }
     }
 
     /**
