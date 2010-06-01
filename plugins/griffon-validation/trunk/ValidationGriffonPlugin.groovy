@@ -14,7 +14,7 @@
  */
 
 class ValidationGriffonPlugin {
-    def version = 0.3
+    def version = 0.4
     def griffonVersion = "0.3 > *"
     def dependsOn = [:]
     // optional. Valid values are: swing, javafx, swt, pivot, gtk
