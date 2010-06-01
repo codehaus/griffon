@@ -23,6 +23,9 @@ import org.codehaus.groovy.transform.GroovyASTTransformation
 import org.codehaus.groovy.ast.builder.AstBuilder
 import groovyjarjarasm.asm.Opcodes
 import org.codehaus.groovy.ast.MethodNode
+import org.codehaus.groovy.ast.ClassNode
+import org.codehaus.groovy.ast.Parameter
+import org.codehaus.groovy.ast.expr.ConstantExpression
 
 /**
  * Created by nick.zhu
@@ -31,15 +34,29 @@ import org.codehaus.groovy.ast.MethodNode
 class ValidatableTransformation implements ASTTransformation {
 
     void visit(ASTNode[] astNodes, SourceUnit sourceUnit) {
-        def classNode = sourceUnit.getAST()?.classes.first()
+        ClassNode classNode = sourceUnit.getAST()?.classes.first()
 
-        println classNode
+        if (annotatedWithValidatable(classNode)) {
+            if (hasNotInjectedMethod(classNode)) {
+                MethodNode validateMethod = buildValidateMethod()
+                println "result: " + validateMethod
+                classNode.addMethod(validateMethod)
+            }
+        }
+    }
 
-        MethodNode validateMethod = buildValidateMethod()
+    private boolean annotatedWithValidatable(ClassNode classNode) {
+        def validatableAnnotation = classNode.getAnnotations().find {
+            it.classNode.typeClass == Validatable
+        }
 
-        println "result: " + validateMethod
+        return validatableAnnotation != null
+    }
 
-        classNode.addMethod(validateMethod)
+    private boolean hasNotInjectedMethod(ClassNode classNode) {
+        return !classNode.hasMethod('validate',
+                [new Parameter(new ClassNode(Object), 'fields', new ConstantExpression(null))] as Parameter[]
+        )
     }
 
     private MethodNode buildValidateMethod() {
@@ -65,6 +82,5 @@ class ValidatableTransformation implements ASTTransformation {
 
         return result.first()
     }
-
 
 }

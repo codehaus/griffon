@@ -20,7 +20,7 @@ import net.sourceforge.gvalidation.Validatable
 /**
  * Created by nick.zhu
  */
-//@Validatable
+@Validatable
 class AnnotatedModel {
     String id
     String email = " "
