@@ -20,17 +20,50 @@ import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.control.CompilePhase
 import org.codehaus.groovy.transform.GroovyASTTransformation
+import org.codehaus.groovy.ast.builder.AstBuilder
+import groovyjarjarasm.asm.Opcodes
+import org.codehaus.groovy.ast.MethodNode
 
 /**
  * Created by nick.zhu
  */
-@GroovyASTTransformation(phase=CompilePhase.SEMANTIC_ANALYSIS)
+@GroovyASTTransformation(phase = CompilePhase.SEMANTIC_ANALYSIS)
 class ValidatableTransformation implements ASTTransformation {
 
     void visit(ASTNode[] astNodes, SourceUnit sourceUnit) {
-        def classNode = sourceUnit.getAST()?.classNode()
+        def classNode = sourceUnit.getAST()?.classes.first()
 
         println classNode
+
+        MethodNode validateMethod = buildValidateMethod()
+
+        println "result: " + validateMethod
+
+        classNode.addMethod(validateMethod)
+    }
+
+    private MethodNode buildValidateMethod() {
+        List<ASTNode> result = new AstBuilder().buildFromSpec {
+            method('validate', Opcodes.ACC_PUBLIC, Boolean) {
+                parameters {
+                    parameter 'fields': Object.class, {
+                        constant null
+                    }
+                }
+                exceptions {}
+                block {
+                    owner.expression.addAll new AstBuilder().buildFromCode {
+                        def enhancer = net.sourceforge.gvalidation.ValidationEnhancer.enhance(this)
+                        println "in validate enhancer: " + enhancer
+                        println "in validate this: " + this
+                        return enhancer.doValidate(fields)
+                    }
+                }
+                annotations {}
+            }
+        }
+
+        return result.first()
     }
 
 
