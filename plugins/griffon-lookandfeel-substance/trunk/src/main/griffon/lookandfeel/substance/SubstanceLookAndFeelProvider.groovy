@@ -17,7 +17,10 @@
 package griffon.lookandfeel.substance
 
 import java.awt.Component
+import java.awt.Window
+import javax.swing.UIManager
 import javax.swing.LookAndFeel
+import javax.swing.SwingUtilities
 import griffon.lookandfeel.DefaultLookAndFeelProvider
 import griffon.lookandfeel.DefaultLookAndFeelInfo
 import org.pushingpixels.substance.api.SubstanceLookAndFeel
@@ -77,6 +80,13 @@ class SubstanceLookAndFeelProvider extends DefaultLookAndFeelProvider {
     private static class SubstanceLookAndFeelInfo extends DefaultLookAndFeelInfo {
         SubstanceLookAndFeelInfo(String displayName, LookAndFeel lookAndFeel) {
             super('substance-'+displayName.toLowerCase(), displayName, lookAndFeel)
+        }
+ 
+        void preview(Component component) {
+            UIManager.setLookAndFeel(lookAndFeel)
+            for(Window window : Window.getWindows()) {
+                SwingUtilities.updateComponentTreeUI(window)
+            }
         }
     }
 }
