@@ -82,8 +82,6 @@ panel(id: 'box') {
         bean(model, lafSelection: bind{lafs.selectedItem})
 
         label('', constraints: gbc(fill: GBC.BOTH, weightx: 0.5))
-        button('Reset [System]', actionPerformed: controller.reset,
-            constraints: gbc(fill: GBC.BOTH, gridwidth: GBC.RELATIVE, weightx: 1.0))
         button('Preview', actionPerformed: controller.preview,
             constraints: gbc(fill: GBC.BOTH, gridwidth: GBC.REMAINDER, weightx: 1.0))
     }
@@ -153,4 +151,5 @@ panel(id: 'box') {
             } 
         }
     }
+    button('Reset [System]', actionPerformed: controller.reset, constraints: SOUTH)
 }

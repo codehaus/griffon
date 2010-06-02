@@ -32,14 +32,11 @@ class LookAndFeelSelectorController {
     }
 
     def reset = { evt = null ->
-        LookAndFeelProvider provider = LookAndFeelManager.instance.lookAndFeelProviders.find { it.name == 'System' }
-        LookAndFeelInfo info = provider.supportedLookAndFeels.find { it.displayName == 'System' }
+        LookAndFeelProvider provider = LookAndFeelManager.instance.getLookAndFeelProvider('System')
+        LookAndFeelInfo info = LookAndFeelManager.instance.getLookAndFeelInfo(provider, 'System')
         execAsync {
             LookAndFeelManager.instance.installLookAndFeel(info.lookAndFeel, app)
             setCurrentLookAndFeel(provider)
-      
-            // def component = SwingUtilities.windowForComponent(view.box) ?: view.box
-            // SwingUtilities.updateComponentTreeUI(component)
         }
     }
 
