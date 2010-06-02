@@ -59,11 +59,41 @@ final class LookAndFeelManager {
         providers.toArray(new LookAndFeelProvider[providers.size()])
     }
 
+    LookAndFeelProvider getLookAndFeelProvider(String name) {
+        for(provider in getLookAndFeelProviders()) {
+            if(provider.name == name) {
+                return provider
+            } 
+        }
+        return null
+    }
+
+    griffon.lookandfeel.LookAndFeelInfo getLookAndFeelInfo(LookAndFeelProvider provider, String displayName) {
+        if(!provider) return null
+        for(lookAndFeelInfo in provider.supportedLookAndFeels) {
+            if(lookAndFeelInfo.displayName == displayName) {
+                return lookAndFeelInfo
+            } 
+        }
+        return null
+    }
+
     LookAndFeelProvider getCurrentLookAndFeelProvider() {
         for(provider in getLookAndFeelProviders()) {
             if(provider.handles(UIManager.lookAndFeel)) {
                 return provider
             } 
+        }
+        return null
+    }
+
+    griffon.lookandfeel.LookAndFeelInfo getCurrentLookAndFeelInfo() {
+        LookAndFeelProvider provider = getCurrentLookAndFeelProvider()
+        if(!provider) return null
+        for(lookAndFeelInfo in provider.supportedLookAndFeels) {
+            if(lookAndFeelInfo.isCurrentLookAndFeel()) {
+                return lookAndFeelInfo
+            }
         }
         return null
     }
@@ -86,7 +116,21 @@ final class LookAndFeelManager {
         }
     }
 
+    void installLookAndFeel(LookAndFeel lookAndFeel, GriffonApplication application) {
+        SwingUtilities.invokeLater {
+            UIManager.setLookAndFeel(lookAndFeel)
+            for(Window window : Window.getWindows()) {
+                SwingUtilities.updateComponentTreeUI(window)
+            }
+            application.event('LookAndFeelChanged',[lookAndFeel])
+        }
+    }
+
     void showLafDialog(GriffonApplication application) {
+        // already showing?
+println application.groups
+        if(application.groups['LookAndFeelSelector']) return
+
         LookAndFeel currentLookAndFeel = UIManager.lookAndFeel
 
         def (m, v, c) = application.createMVCGroup('LookAndFeelSelector')
@@ -101,20 +145,12 @@ final class LookAndFeelManager {
         } else {
             // reset settings
             SwingUtilities.invokeLater {
-                UIManager.setLookAndFeel(currentLookAndFeel)
+                for(Window window : Window.getWindows()) {
+                    UIManager.setLookAndFeel(currentLookAndFeel)
+                }
             }
         }
 
         application.destroyMVCGroup('LookAndFeelSelector')
-    }
-
-    void installLookAndFeel(LookAndFeel lookAndFeel, GriffonApplication application) {
-        SwingUtilities.invokeLater {
-            UIManager.setLookAndFeel(lookAndFeel)
-            for(Window window : Window.getWindows()) {
-                SwingUtilities.updateComponentTreeUI(window)
-            }
-            application.event('LookAndFeelChanged',[lookAndFeel])
-        }
     }
 }
