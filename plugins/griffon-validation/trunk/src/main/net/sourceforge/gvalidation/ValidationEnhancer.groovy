@@ -30,7 +30,15 @@ class ValidationEnhancer {
             final def enhancer = new ValidationEnhancer(bean)
             bean.metaClass."${VALIDATION_ENHANCER_PROPERTY_NAME}" = enhancer
             bean.metaClass.errors = new Errors()
-            bean.metaClass.hasErrors = { enhancer.model.errors.hasErrors() }
+            bean.metaClass.setErrors << {
+                Errors e ->
+                def newValue = e
+                def oldValue = bean.metaClass.errors
+                bean.metaClass.errors = newValue
+                firePropertyChange('errors', oldValue, newValue)
+            }
+            bean.metaClass.getErrors << {bean.errors}
+            bean.metaClass.hasErrors << { enhancer.model.errors.hasErrors() }
         }
 
         return bean."${VALIDATION_ENHANCER_PROPERTY_NAME}"

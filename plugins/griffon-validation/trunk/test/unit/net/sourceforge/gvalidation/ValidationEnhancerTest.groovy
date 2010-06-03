@@ -21,13 +21,35 @@ import net.sourceforge.gvalidation.models.NullToleranceModelBean
 import net.sourceforge.gvalidation.models.NoConstraintModelBean
 import net.sourceforge.gvalidation.models.InvalidConstraintModelBean
 import net.sourceforge.gvalidation.models.CustomConstraintModelBean
+import net.sourceforge.gvalidation.models.BindableModelBean
+import java.beans.PropertyChangeListener
 
 /**
  * Created by nick.zhu
  */
 class ValidationEnhancerTest extends GroovyTestCase {
 
-    public void testModelEnhancement() {
+    public void testErrorGetterSetterInjection(){
+        BindableModelBean model = new BindableModelBean()
+
+        ValidationEnhancer.enhance(model)
+
+        def methods = model.metaClass.methods
+
+        assertNotNull("Dynamic getter is not generated", methods.find{it.name == "getErrors"})
+        assertNotNull("Dynamic setter is not generated",methods.find{it.name == "setErrors"})
+
+        def firedEvent = false
+        model.addPropertyChangeListener({e->
+            assertEquals(e.propertyName, "errors"); firedEvent = true
+        } as PropertyChangeListener)
+
+        model.errors = new Errors()
+
+        assertTrue "Property change event should have been fired", firedEvent
+    }
+
+    public void testModelEnhancementReturn() {
         ModelBean model = new ModelBean()
 
         def enhancer = ValidationEnhancer.enhance(model)
