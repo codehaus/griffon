@@ -25,7 +25,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 /**
  * @author Andres Almiray
  */
-public abstract class DefaultLookAndFeelInfo extends LookAndFeelInfo {
+public abstract class DefaultLookAndFeelInfo extends griffon.lookandfeel.LookAndFeelInfo {
     private final LookAndFeel lookAndFeel;
 
     public DefaultLookAndFeelInfo(String identifier, String displayName, LookAndFeel lookAndFeel) {
@@ -37,13 +37,17 @@ public abstract class DefaultLookAndFeelInfo extends LookAndFeelInfo {
         return lookAndFeel;
     }
 
-    public void preview(Component component) {
+    public void install() {
         try {
             UIManager.setLookAndFeel(lookAndFeel);
-            SwingUtilities.updateComponentTreeUI(component);
         } catch(UnsupportedLookAndFeelException ulafe) {
             // ignore
         }
+    }
+
+    public void preview(Component component) {
+        install();
+        SwingUtilities.updateComponentTreeUI(component);
     }
 
     public boolean isCurrentLookAndFeel() {

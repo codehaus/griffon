@@ -4,6 +4,9 @@
   <title>Tonic Swing Look &amp; Feel</title>
   <documentation>http://griffon.codehaus.org/Lookandfeel+Tonic+Plugin</documentation>
   <toolkits>swing</toolkits>
+  <synopsis>Tonic Swing Look &amp; Feel.
+http://www.digitprop.com/tonic/tonic.php</synopsis>
+  <license>Apache Software License 2.0</license>
   <plugin name='lookandfeel' version='0.1' />
   <dependencies>
     <plugin name='lookandfeel' version='0.1' />

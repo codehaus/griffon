@@ -32,33 +32,32 @@ import com.jgoodies.looks.plastic.theme.*
  * @author Andres Almiray
  */
 abstract class AbstractJGoodiesLookAndFeelProvider extends LookAndFeelProvider {
-    private static final List<JGoodiesLookAndFeelInfo> SUPPORTED_LAFS = [
-        new JGoodiesLookAndFeelInfo('BrownSugar', new BrownSugar()),
-        new JGoodiesLookAndFeelInfo('DarkStar', new DarkStar()),
-        new JGoodiesLookAndFeelInfo('DesertBlue', new DesertBlue()),
-        new JGoodiesLookAndFeelInfo('DesertBluer', new DesertBluer()),
-        new JGoodiesLookAndFeelInfo('DesertGreen', new DesertGreen()),
-        new JGoodiesLookAndFeelInfo('DesertRed', new DesertRed()),
-        new JGoodiesLookAndFeelInfo('DesertYellow', new DesertYellow()),
-        new JGoodiesLookAndFeelInfo('ExperienceBlue', new ExperienceBlue()),
-        new JGoodiesLookAndFeelInfo('ExperienceGreen', new ExperienceGreen()),
-        new JGoodiesLookAndFeelInfo('ExperienceRoyale', new ExperienceRoyale()),
-        new JGoodiesLookAndFeelInfo('LightGray', new LightGray()),
-        new JGoodiesLookAndFeelInfo('Silver', new Silver()),
-        new JGoodiesLookAndFeelInfo('SkyBlue', new SkyBlue()),
-        new JGoodiesLookAndFeelInfo('SkyBluer', new SkyBluer()),
-        new JGoodiesLookAndFeelInfo('SkyGreen', new SkyGreen()),
-        new JGoodiesLookAndFeelInfo('SkyKrupp', new SkyKrupp()),
-        new JGoodiesLookAndFeelInfo('SkyPink', new SkyPink()),
-        new JGoodiesLookAndFeelInfo('SkyRed', new SkyRed()),
-        new JGoodiesLookAndFeelInfo('SkyYellow', new SkyYellow())
-    ]
+    private final List<JGoodiesLookAndFeelInfo> SUPPORTED_LAFS = []
 
     protected final LookAndFeel lookAndFeel
 
     AbstractJGoodiesLookAndFeelProvider(String name, LookAndFeel lookAndFeel) {
         super('JGoodies - ' + name)
         this.lookAndFeel = lookAndFeel
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('BrownSugar', new BrownSugar())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('DarkStar', new DarkStar())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('DesertBlue', new DesertBlue())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('DesertBluer', new DesertBluer())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('DesertGreen', new DesertGreen())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('DesertRed', new DesertRed())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('DesertYellow', new DesertYellow())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('ExperienceBlue', new ExperienceBlue())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('ExperienceGreen', new ExperienceGreen())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('ExperienceRoyale', new ExperienceRoyale())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('LightGray', new LightGray())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('Silver', new Silver())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('SkyBlue', new SkyBlue())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('SkyBluer', new SkyBluer())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('SkyGreen', new SkyGreen())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('SkyKrupp', new SkyKrupp())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('SkyPink', new SkyPink())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('SkyRed', new SkyRed())
+        SUPPORTED_LAFS << new JGoodiesLookAndFeelInfo('SkyYellow', new SkyYellow())
     }
     
     boolean handles(LookAndFeel lookAndFeel) {
@@ -76,7 +75,7 @@ abstract class AbstractJGoodiesLookAndFeelProvider extends LookAndFeelProvider {
     void preview(griffon.lookandfeel.LookAndFeelInfo lookAndFeelInfo, Component component) {
         if(!handles(lookAndFeelInfo)) return
         SwingUtilities.invokeLater {
-            LookUtils.setLookAndTheme(lookAndFeel, lookAndFeelInfo.lookAndFeelTheme)
+            lookAndFeelInfo.install()
             SwingUtilities.updateComponentTreeUI(component)
         } 
     }
@@ -84,7 +83,7 @@ abstract class AbstractJGoodiesLookAndFeelProvider extends LookAndFeelProvider {
     void apply(griffon.lookandfeel.LookAndFeelInfo lookAndFeelInfo, GriffonApplication application) {
         if(!handles(lookAndFeelInfo)) return
         SwingUtilities.invokeLater {
-            LookUtils.setLookAndTheme(lookAndFeel, lookAndFeelInfo.lookAndFeelTheme)
+            lookAndFeelInfo.install()
             for(Window window : Window.getWindows()) {
                 SwingUtilities.updateComponentTreeUI(window)
             }
@@ -94,18 +93,25 @@ abstract class AbstractJGoodiesLookAndFeelProvider extends LookAndFeelProvider {
     /**
      * @author Andres Almiray
      */
-    public static class JGoodiesLookAndFeelInfo extends griffon.lookandfeel.LookAndFeelInfo {
+    public class JGoodiesLookAndFeelInfo extends griffon.lookandfeel.LookAndFeelInfo {
         final lookAndFeelTheme
 
         JGoodiesLookAndFeelInfo(String displayName, lookAndFeelTheme) {
             super('system-'+displayName.toLowerCase(), displayName)
             this.lookAndFeelTheme = lookAndFeelTheme
         }
+       
+        void install() {
+            PlasticLookAndFeel.setPlasticTheme(lookAndFeelTheme)
+            UIManager.setLookAndFeel(lookAndFeel)
+        }
 
         boolean isCurrentLookAndFeel() {
-            LookAndFeel lookAndFeel = UIManager.lookAndFeel
-            if(!(lookAndFeel instanceof PlasticLookAndFeel)) return false
-            lookAndFeel.plasticTheme == lookAndFeelTheme
+            LookAndFeel laf = UIManager.lookAndFeel
+println laf
+            if(!(laf instanceof PlasticLookAndFeel)) return false
+println "${laf.plasticTheme} $lookAndFeelTheme"
+            laf.plasticTheme.class.name == lookAndFeelTheme.class.name
         }
     }
 }

@@ -63,4 +63,6 @@ public abstract class LookAndFeelInfo implements Comparable {
     }
 
     public abstract boolean isCurrentLookAndFeel();
+
+    public abstract void install();
 }

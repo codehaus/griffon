@@ -71,8 +71,7 @@ class PgsLookAndFeelProvider extends LookAndFeelProvider {
     void apply(griffon.lookandfeel.LookAndFeelInfo lookAndFeelInfo, GriffonApplication application) {
         if(!handles(lookAndFeelInfo)) return
         SwingUtilities.invokeLater {
-            PlafOptions.setCurrentTheme(lookAndFeelInfo.theme)
-            PlafOptions.setAsLookAndFeel()
+            lookAndFeelInfo.install()
             for(Window window : Window.getWindows()) {
                 SwingUtilities.updateComponentTreeUI(window)
             }
@@ -91,15 +90,19 @@ class PgsLookAndFeelProvider extends LookAndFeelProvider {
             this.theme = theme
         }
 
-        public void preview(Component component) {
+        void install() {
+            PlafOptions.setCurrentTheme(theme)
+            PlafOptions.setAsLookAndFeel()
+        }
+
+        void preview(Component component) {
             SwingUtilities.invokeLater {
-                PlafOptions.setCurrentTheme(theme)
-                PlafOptions.setAsLookAndFeel()
+                install()
                 SwingUtilities.updateComponentTreeUI(component)
             }
         }
     
-        public boolean isCurrentLookAndFeel() {
+        boolean isCurrentLookAndFeel() {
             LookAndFeel currentLookAndFeel = UIManager.getLookAndFeel()
             if(currentLookAndFeel == null) return false
             if(currentLookAndFeel.class.name != PgsLookAndFeel.class.name) return false

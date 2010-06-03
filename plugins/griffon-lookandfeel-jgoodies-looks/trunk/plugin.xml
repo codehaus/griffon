@@ -4,6 +4,8 @@
   <title>JGoodies Swing Look &amp; Feel</title>
   <documentation>http://griffon.codehaus.org/Lookandfeel+JgoodiesLooks+Plugin</documentation>
   <toolkits>swing</toolkits>
+  <synopsis>JGoodies Swing Look &amp; Feel.</synopsis>
+  <license>Apache Software License 2.0</license>
   <plugin name='lookandfeel' version='0.1' />
   <dependencies>
     <plugin name='lookandfeel' version='0.1' />
