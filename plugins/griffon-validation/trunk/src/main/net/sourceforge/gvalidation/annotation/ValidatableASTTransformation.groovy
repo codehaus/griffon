@@ -13,7 +13,7 @@
  *  limitations under the License.
  */
 
-package net.sourceforge.gvalidation
+package net.sourceforge.gvalidation.annotation
 
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
@@ -28,8 +28,9 @@ import org.codehaus.groovy.transform.GroovyASTTransformation
 import org.objectweb.asm.Opcodes
 import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.stmt.BlockStatement
-import org.codehaus.groovy.ast.stmt.ReturnStatement
+
 import org.codehaus.groovy.ast.VariableScope
+import net.sourceforge.gvalidation.annotation.Validatable
 
 /**
  * Groovy AST transformation class that enhances any class
@@ -38,7 +39,7 @@ import org.codehaus.groovy.ast.VariableScope
  * Created by nick.zhu
  */
 @GroovyASTTransformation(phase = CompilePhase.SEMANTIC_ANALYSIS)
-class ValidatableTransformation implements ASTTransformation {
+class ValidatableASTTransformation implements ASTTransformation {
 
     void visit(ASTNode[] astNodes, SourceUnit sourceUnit) {
         ClassNode classNode = sourceUnit.getAST()?.classes.first()

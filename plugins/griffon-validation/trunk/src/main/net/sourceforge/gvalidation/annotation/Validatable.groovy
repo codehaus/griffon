@@ -13,7 +13,7 @@
  *  limitations under the License.
  */
 
-package net.sourceforge.gvalidation
+package net.sourceforge.gvalidation.annotation
 
 import org.codehaus.groovy.transform.GroovyASTTransformationClass
 import java.lang.annotation.ElementType
@@ -26,7 +26,7 @@ import java.lang.annotation.Retention
 
 @Retention(RetentionPolicy.SOURCE)
 @Target([ElementType.TYPE])
-@GroovyASTTransformationClass(["net.sourceforge.gvalidation.ValidatableTransformation"])
+@GroovyASTTransformationClass(["net.sourceforge.gvalidation.annotation.ValidatableASTTransformation"])
 public @interface Validatable {
 
 }
