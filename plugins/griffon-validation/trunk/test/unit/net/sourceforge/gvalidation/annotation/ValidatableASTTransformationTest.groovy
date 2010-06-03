@@ -13,7 +13,7 @@
  *  limitations under the License.
  */
 
-package net.sourceforge.gvalidation
+package net.sourceforge.gvalidation.annotation
 
 import org.codehaus.groovy.ast.builder.TranformTestHelper
 import org.codehaus.groovy.control.CompilePhase
@@ -21,7 +21,7 @@ import org.codehaus.groovy.control.CompilePhase
 /**
  * Created by nick.zhu
  */
-class ValidatableTransformationTest extends GroovyTestCase {
+class ValidatableASTTransformationTest extends GroovyTestCase {
 
     public void testIgnoreNonAnnotatedModel() {
         def model = generateModel("ModelBean.groovy")
@@ -82,7 +82,7 @@ class ValidatableTransformationTest extends GroovyTestCase {
         def file = new File("test/unit/net/sourceforge/gvalidation/models/${fileName}")
         assert file.exists()
 
-        TranformTestHelper invoker = new TranformTestHelper(new ValidatableTransformation(), CompilePhase.SEMANTIC_ANALYSIS)
+        TranformTestHelper invoker = new TranformTestHelper(new ValidatableASTTransformation(), CompilePhase.SEMANTIC_ANALYSIS)
         def modelClass = invoker.parse(file)
         def model = modelClass.newInstance()
 
