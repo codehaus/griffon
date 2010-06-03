@@ -15,7 +15,6 @@
 
 package net.sourceforge.gvalidation
 
-import groovyjarjarasm.asm.Opcodes
 import org.codehaus.groovy.ast.ASTNode
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
@@ -26,6 +25,11 @@ import org.codehaus.groovy.control.CompilePhase
 import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.transform.ASTTransformation
 import org.codehaus.groovy.transform.GroovyASTTransformation
+import org.objectweb.asm.Opcodes
+import org.codehaus.groovy.ast.ClassHelper
+import org.codehaus.groovy.ast.stmt.BlockStatement
+import org.codehaus.groovy.ast.stmt.ReturnStatement
+import org.codehaus.groovy.ast.VariableScope
 
 /**
  * Groovy AST transformation class that enhances any class
@@ -62,25 +66,21 @@ class ValidatableTransformation implements ASTTransformation {
     }
 
     private MethodNode buildValidateMethod() {
-        List<ASTNode> result = new AstBuilder().buildFromSpec {
-            method('validate', Opcodes.ACC_PUBLIC, Boolean) {
-                parameters {
-                    parameter 'fields': Object.class, {
-                        constant null
-                    }
-                }
-                exceptions {}
-                block {
-                    owner.expression.addAll new AstBuilder().buildFromCode {
-                        def enhancer = net.sourceforge.gvalidation.ValidationEnhancer.enhance(this)
-                        return enhancer.doValidate(fields)
-                    }
-                }
-                annotations {}
-            }
-        }
+        def methodNode = new MethodNode(
+                "validate",
+                Opcodes.ACC_PUBLIC,
+                ClassHelper.make(Boolean, false),
+                [new Parameter(ClassHelper.make(Object, false), "fields", new ConstantExpression(null))] as Parameter[],
+                [] as ClassNode[],
+                new BlockStatement(
+                        new AstBuilder().buildFromCode {
+                            def enhancer = net.sourceforge.gvalidation.ValidationEnhancer.enhance(this)
+                            return enhancer.doValidate(fields)
+                        },
+                        new VariableScope()
+                ))
 
-        return result.first()
+         return methodNode
     }
 
 }
