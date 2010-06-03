@@ -36,7 +36,6 @@ class ValidationEnhancerTest extends GroovyTestCase {
 
         def methods = model.metaClass.methods
 
-        assertNotNull("Dynamic getter is not generated", methods.find{it.name == "getErrors"})
         assertNotNull("Dynamic setter is not generated",methods.find{it.name == "setErrors"})
 
         def firedEvent = false

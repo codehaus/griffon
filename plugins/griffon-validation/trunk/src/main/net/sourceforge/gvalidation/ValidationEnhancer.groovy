@@ -24,21 +24,22 @@ import org.apache.commons.lang.ClassUtils
 class ValidationEnhancer {
     static final def CONSTRAINT_PROPERTY_NAME = "constraints"
     static final def VALIDATION_ENHANCER_PROPERTY_NAME = '__validationEnhancer'
+    static final def ERRORS_PROPERTY_NAME = '__errors'
 
     static def enhance(bean) {
         if (isNotEnhanced(bean)) {
             final def enhancer = new ValidationEnhancer(bean)
             bean.metaClass."${VALIDATION_ENHANCER_PROPERTY_NAME}" = enhancer
-            bean.metaClass.errors = new Errors()
+            bean.metaClass."${ERRORS_PROPERTY_NAME}" = new Errors()
             bean.metaClass.setErrors << {
                 Errors e ->
                 def newValue = e
-                def oldValue = bean.metaClass.errors
-                bean.metaClass.errors = newValue
+                def oldValue = bean."${ERRORS_PROPERTY_NAME}"
+                bean."${ERRORS_PROPERTY_NAME}" = newValue
                 firePropertyChange('errors', oldValue, newValue)
             }
-            bean.metaClass.getErrors << {bean.errors}
-            bean.metaClass.hasErrors << { enhancer.model.errors.hasErrors() }
+            bean.metaClass.getErrors << { bean."${ERRORS_PROPERTY_NAME}" }
+            bean.metaClass.hasErrors << { bean.errors.hasErrors() }
         }
 
         return bean."${VALIDATION_ENHANCER_PROPERTY_NAME}"
