@@ -45,7 +45,7 @@ final class LookAndFeelManager {
                     providers << providerClass.newInstance()
                 } catch(NoClassDefFoundError ncdfe) {
                     // skip
-                    ncdef.printStackTrace()
+                    ncdfe.printStackTrace()
                 } catch(ClassNotFoundException cnfe) {
                     // skip
                     cnfe.printStackTrace()
@@ -128,7 +128,6 @@ final class LookAndFeelManager {
 
     void showLafDialog(GriffonApplication application) {
         // already showing?
-println application.groups
         if(application.groups['LookAndFeelSelector']) return
 
         LookAndFeel currentLookAndFeel = UIManager.lookAndFeel

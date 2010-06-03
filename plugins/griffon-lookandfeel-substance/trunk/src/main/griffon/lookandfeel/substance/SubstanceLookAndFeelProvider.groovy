@@ -83,9 +83,11 @@ class SubstanceLookAndFeelProvider extends DefaultLookAndFeelProvider {
         }
  
         void preview(Component component) {
-            UIManager.setLookAndFeel(lookAndFeel)
-            for(Window window : Window.getWindows()) {
-                SwingUtilities.updateComponentTreeUI(window)
+            SwingUtilities.invokeLater {
+                UIManager.setLookAndFeel(lookAndFeel)
+                for(Window window : Window.getWindows()) {
+                    SwingUtilities.updateComponentTreeUI(window)
+                }
             }
         }
     }

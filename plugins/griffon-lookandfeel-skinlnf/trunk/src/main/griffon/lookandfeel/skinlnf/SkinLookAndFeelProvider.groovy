@@ -99,8 +99,7 @@ class SkinLookAndFeelProvider extends LookAndFeelProvider {
     void apply(griffon.lookandfeel.LookAndFeelInfo lookAndFeelInfo, GriffonApplication application) {
         if(!handles(lookAndFeelInfo)) return
         SwingUtilities.invokeLater {
-            SkinLookAndFeel.setSkin(lookAndFeelInfo.skin)
-            UIManager.setLookAndFeel(new SkinLookAndFeel())
+            lookAndFeelInfo.install()
             for(Window window : Window.getWindows()) {
                 SwingUtilities.updateComponentTreeUI(window)
             }
@@ -118,16 +117,20 @@ class SkinLookAndFeelProvider extends LookAndFeelProvider {
             super('skinlnf-'+displayName.toLowerCase(), displayName)
             this.skin = skin
         }
+     
+        void install() {
+            SkinLookAndFeel.setSkin(skin)
+            UIManager.setLookAndFeel(new SkinLookAndFeel())
+        }
 
-        public void preview(Component component) {
+        void preview(Component component) {
             SwingUtilities.invokeLater {
-                SkinLookAndFeel.setSkin(skin)
-                UIManager.setLookAndFeel(new SkinLookAndFeel())
+                install()
                 SwingUtilities.updateComponentTreeUI(component)
             }
         }
     
-        public boolean isCurrentLookAndFeel() {
+        boolean isCurrentLookAndFeel() {
             LookAndFeel currentLookAndFeel = UIManager.getLookAndFeel()
             if(currentLookAndFeel == null) return false
             if(currentLookAndFeel.class.name != SkinLookAndFeel.class.name) return false

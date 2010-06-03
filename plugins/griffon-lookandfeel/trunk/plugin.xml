@@ -4,5 +4,7 @@
   <title>Swing Look &amp; Feel selector</title>
   <documentation>http://griffon.codehaus.org/Lookandfeel+Plugin</documentation>
   <toolkits>swing</toolkits>
+  <synopsis>Swing Look &amp; Feel selector.</synopsis>
+  <license>Apache Software License 2.0</license>
   <dependencies />
 </plugin>

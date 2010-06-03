@@ -17,6 +17,10 @@
 package griffon.lookandfeel
 
 import java.awt.Component
+import java.awt.Window
+import javax.swing.UIManager
+import javax.swing.LookAndFeel
+import javax.swing.SwingUtilities
 import griffon.core.GriffonApplication
 
 /**
@@ -34,8 +38,13 @@ abstract class DefaultLookAndFeelProvider extends LookAndFeelProvider {
 
     void apply(griffon.lookandfeel.LookAndFeelInfo lookAndFeelInfo, GriffonApplication application) {
         if(!handles(lookAndFeelInfo)) return
-        if(lookAndFeelInfo instanceof DefaultLookAndFeelInfo) {
-            LookAndFeelManager.instance.installLookAndFeel(lookAndFeelInfo.lookAndFeel, application)
+        SwingUtilities.invokeLater {
+            LookAndFeel lookAndFeel = lookAndFeelInfo.lookAndFeel
+            UIManager.setLookAndFeel(lookAndFeel)
+            for(Window window : Window.getWindows()) {
+                SwingUtilities.updateComponentTreeUI(window)
+            }
+            application.event('LookAndFeelChanged',[lookAndFeel])
         }
     }
 }

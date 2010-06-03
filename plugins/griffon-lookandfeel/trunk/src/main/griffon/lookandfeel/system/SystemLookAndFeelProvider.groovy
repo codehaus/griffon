@@ -19,11 +19,8 @@ package griffon.lookandfeel.system
 import java.awt.Component
 import javax.swing.UIManager
 import javax.swing.LookAndFeel
-import javax.swing.SwingUtilities
 import groovy.swing.LookAndFeelHelper
-import griffon.lookandfeel.LookAndFeelManager
 import griffon.lookandfeel.DefaultLookAndFeelProvider
-import griffon.lookandfeel.DefaultLookAndFeelInfo
 
 import static griffon.util.GriffonApplicationUtils.isWindows
 
@@ -60,14 +57,5 @@ class SystemLookAndFeelProvider extends DefaultLookAndFeelProvider {
 
     griffon.lookandfeel.LookAndFeelInfo[] getSupportedLookAndFeels() {
         return SUPPORTED_LAFS as griffon.lookandfeel.LookAndFeelInfo[]
-    }
-
-    /**
-     * @author Andres Almiray
-     */
-    private static class SystemLookAndFeelInfo extends DefaultLookAndFeelInfo {
-        SystemLookAndFeelInfo(String displayName, String className) {
-            super('system-'+displayName.toLowerCase(), displayName, className.asType(Class).newInstance())
-        }
     }
 }
