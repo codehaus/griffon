@@ -21,17 +21,18 @@
  * @author Andres Almiray
  */
 class Db4oGriffonPlugin {
-    def version = 0.1
-    def griffonVersion = '0.3 > *'
+    def version = 0.2
+    def griffonVersion = '0.3.2 > *'
     def dependsOn = [:]
+    def license = 'GNU General Public License v3'
 
-    def author = "Andres Almiray"
-    def authorEmail = "aalmiray@users.sourceforge.net"
-    def title = "Db4o support"
+    def author = 'Andres Almiray'
+    def authorEmail = 'aalmiray@users.sourceforge.net'
+    def title = 'Db4o support'
     def description = '''
 Db4o support
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://griffon.codehaus.org/Db4o+Plugin"
+    def documentation = 'http://griffon.codehaus.org/Db4o+Plugin'
 }

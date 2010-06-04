@@ -18,6 +18,7 @@
 package griffon.neo4j
 
 import griffon.core.GriffonApplication
+import griffon.util.Metadata
 import griffon.util.Environment
 
 import org.neo4j.kernel.EmbeddedGraphDatabase
@@ -49,7 +50,7 @@ final class Neo4jHelper {
     void startNeo4j(dbConfig) {
         String storeDirName = dbConfig?.neo4j?.storeDir ?: 'neo4j/db'
         File storeDir = new File(storeDirName)
-        if(!storeDir.absolute) storeDir = new File(System.getProperty('griffon.start.dir'), storeDirName)
+        if(!storeDir.absolute) storeDir = new File(Metadata.current.getGriffonWorkingDir(), storeDirName)
         storeDir.mkdirs()
         switch(Environment.current) {
             case Environment.DEVELOPMENT:

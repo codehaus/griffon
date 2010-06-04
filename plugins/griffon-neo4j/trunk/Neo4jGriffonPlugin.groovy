@@ -20,17 +20,18 @@
  * @author Andres Almiray
  */
 class Neo4jGriffonPlugin {
-    def version = 0.1
-    def griffonVersion = '0.3 > *'
+    def version = 0.2
+    def griffonVersion = '0.3.2 > *'
     def dependsOn = [:]
+    def license = 'GNU Affero General Public License v3'
 
-    def author = "Andres Almiray"
-    def authorEmail = "aalmiray@users.sourceforge.net"
-    def title = "Neo4j support"
+    def author = 'Andres Almiray'
+    def authorEmail = 'aalmiray@users.sourceforge.net'
+    def title = 'Neo4j support'
     def description = '''
 Neo4j support
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://griffon.codehaus.org/Neo4j+Plugin"
+    def documentation = 'http://griffon.codehaus.org/Neo4j+Plugin'
 }
