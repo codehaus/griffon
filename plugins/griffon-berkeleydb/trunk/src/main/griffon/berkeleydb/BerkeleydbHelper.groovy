@@ -16,6 +16,7 @@
 package griffon.berkeleydb
 
 import griffon.core.GriffonApplication
+import griffon.util.Metadata
 import griffon.util.Environment as GE
 import com.sleepycat.je.*
 import com.sleepycat.persist.*
@@ -43,7 +44,7 @@ final class BerkeleydbHelper {
     void startEnvironment(config) {
         String envhome = config.environment?.home ?: 'bdb_home'
         File envhomeDir = new File(envhome)
-        if(!envhomeDir.absolute) envhomeDir = new File(System.getProperty('griffon.start.dir'), envhome)
+        if(!envhomeDir.absolute) envhomeDir = new File(Metadata.current.getGriffonWorkingDir(), envhome)
         envhomeDir.mkdirs()
         config.environment.each { key, value ->
             if(key == 'home') return

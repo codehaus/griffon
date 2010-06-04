@@ -19,6 +19,7 @@
 package griffon.db4o
 
 import griffon.core.GriffonApplication
+import griffon.util.Metadata
 import griffon.util.Environment
 import com.db4o.*
 
@@ -35,7 +36,7 @@ final class Db4oHelper {
     void startObjectContainer(dbConfig) {
         String dbfileName = dbConfig?.dataSource?.name ?: 'db.yarv'
         File dbfile = new File(dbfileName)
-        if(!dbfile.absolute) dbfile = new File(System.getProperty('griffon.start.dir'), dbfileName)
+        if(!dbfile.absolute) dbfile = new File(Metadata.current.getGriffonWorkingDir(), dbfileName)
         ObjectContainerHolder.instance.objectContainer = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dbfile.absolutePath)
     }
 
@@ -44,7 +45,7 @@ final class Db4oHelper {
 
         String dbfileName = dbConfig?.dataSource?.name ?: 'db.yarv'
         File dbfile = new File(dbfileName)
-        if(!dbfile.absolute) dbfile = new File(System.getProperty('griffon.start.dir'), dbfileName)
+        if(!dbfile.absolute) dbfile = new File(Metadata.current.getGriffonWorkingDir(), dbfileName)
         switch(Environment.current) {
             case Environment.DEVELOPMENT:
             case Environment.TEST:

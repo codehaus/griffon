@@ -16,6 +16,7 @@
 package griffon.neodatis
 
 import griffon.core.GriffonApplication
+import griffon.util.Metadata
 import griffon.util.Environment
 import org.neodatis.odb.*
 
@@ -47,7 +48,7 @@ final class NeodatisHelper {
             OdbHolder.instance.odb = NeoDatis.openClient(alias, neodatisConfig)
         } else {
             File aliasFile = new File(alias)
-            if(!aliasFile.absolute) aliasFile = new File(System.getProperty('griffon.start.dir'), alias)
+            if(!aliasFile.absolute) aliasFile = new File(Metadata.current.getGriffonWorkingDir(), alias)
             aliasFile.parentFile?.mkdirs()
             OdbHolder.instance.odb = NeoDatis.open(aliasFile.absolutePath, neodatisConfig)
         }
@@ -58,7 +59,7 @@ final class NeodatisHelper {
         String alias = config.database?.alias ?: 'neodatis/db.odb'
 
         File aliasFile = new File(alias)
-        if(!aliasFile.absolute) aliasFile = new File(System.getProperty('griffon.start.dir'), alias)
+        if(!aliasFile.absolute) aliasFile = new File(Metadata.current.getGriffonWorkingDir(), alias)
 
         switch(Environment.current) {
             case Environment.DEVELOPMENT:
