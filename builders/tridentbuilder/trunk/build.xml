@@ -25,6 +25,7 @@
          <path refid="build.classpath"/>
          <path path="${project.build.output}" />
        </classpath>
+       <javac deprecation="on" debug="yes" source="1.5" target="1.5" />
      </groovyc>
      <copy todir="${project.build.output}">
         <fileset dir="${project.src.dir}">

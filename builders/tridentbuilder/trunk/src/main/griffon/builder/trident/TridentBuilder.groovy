@@ -20,6 +20,7 @@ import griffon.builder.trident.factory.*
 
 import org.pushingpixels.trident.*
 import org.pushingpixels.trident.ease.*
+import org.hybird.animation.trident.triggers.*
 
 /**
  * @author Andres Almiray
@@ -27,22 +28,18 @@ import org.pushingpixels.trident.ease.*
 public class TridentBuilder extends FactoryBuilderSupport {
    public static final String DELEGATE_PROPERTY_OBJECT_ID = "_delegateProperty:id";
    public static final String DEFAULT_DELEGATE_PROPERTY_OBJECT_ID = "id";
+   public static final String DELEGATE_PROPERTY_ACTION_TRIGGER = "_delegateProperty:actionTriggerFor";
+   public static final String DEFAULT_DELEGATE_PROPERTY_ACTION_TRIGGER = "actionTriggerFor";
 
    public TridentBuilder( boolean init = true ) {
       super( init )
       this[DELEGATE_PROPERTY_OBJECT_ID] = DEFAULT_DELEGATE_PROPERTY_OBJECT_ID
-   }
-
-   // taken from groovy.swing.SwingBuilder
-   public static objectIDAttributeDelegate(def builder, def node, def attributes) {
-      def idAttr = builder.getAt(DELEGATE_PROPERTY_OBJECT_ID) ?: DEFAULT_DELEGATE_PROPERTY_OBJECT_ID
-      def theID = attributes.remove(idAttr)
-      if (theID) {
-          builder.setVariable(theID, node)
-      }
+      this[DELEGATE_PROPERTY_ACTION_TRIGGER] = DEFAULT_DELEGATE_PROPERTY_ACTION_TRIGGER
    }
 
    def registerTrident() {
+	  addAttributeDelegate(TridentBuilder.&objectIDAttributeDelegate)
+	
       registerFactory("timeline", new TimelineFactory())
       registerFactory("timelineCallback", new TimelineCallbackFactory())
       registerFactory("uiThreadTimelineCallback", new UIThreadTimelineCallbackFactory())
@@ -61,5 +58,29 @@ public class TridentBuilder extends FactoryBuilderSupport {
       //
       registerFactory("swingRepaintTimeline", new SwingRepaintTimelineFactory())
       registerFactory("timelineRunnable", new TimelineRunnableFactory())
+   }
+
+   def registerTriggers() {
+      addAttributeDelegate(TridentBuilder.&actionTriggerAttributeDelegate)
+      registerFactory('actionTrigger', new ActionTriggerFactory())
+      registerFactory('mouseTrigger', new MouseTriggerFactory())
+      registerFactory('focusTrigger', new FocusTriggerFactory())
+   }
+
+   private static actionTriggerAttributeDelegate(builder, node, attributes) {
+	  def attr = builder.getAt(DELEGATE_PROPERTY_ACTION_TRIGGER) ?: DEFAULT_DELEGATE_PROPERTY_ACTION_TRIGGER
+      def timeline = attributes.remove(attr)
+      if (timeline) {
+          ActionTrigger.addTrigger(node, timeline)
+      }
+   }
+
+   // taken from groovy.swing.SwingBuilder
+   private static objectIDAttributeDelegate(builder, node, attributes) {
+      def idAttr = builder.getAt(DELEGATE_PROPERTY_OBJECT_ID) ?: DEFAULT_DELEGATE_PROPERTY_OBJECT_ID
+      def theID = attributes.remove(idAttr)
+      if (theID) {
+          builder.setVariable(theID, node)
+      }
    }
 }
