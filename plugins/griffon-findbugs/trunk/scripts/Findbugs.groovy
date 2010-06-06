@@ -44,7 +44,7 @@ target(default: "Run FindBugs on Java sources") {
     findBugsOptions.outputFile = findbugsConfig.outputFile ?: "${projectTargetDir}/findbugs.html"
     if(findbugsConfig.quietErrors) findBugsOptions.quietErrors = findbugsConfig.quietErrors
     findBugsOptions.reportLevel = findbugsConfig.reportLevel ?: 'medium'
-    findBugsOptions.sort = !findbugsConfig.styleSheet ? false : true
+    findBugsOptions.sort = !findbugsConfig.sort ? false : true
     if(findbugsConfig.debug) findBugsOptions.debug = findbugsConfig.debug
     findBugsOptions.effort = findbugsConfig.effort ?: 'default'
     if(findbugsConfig.styleSheet) findBugsOptions.styleSheet = findbugsConfig.styleSheet

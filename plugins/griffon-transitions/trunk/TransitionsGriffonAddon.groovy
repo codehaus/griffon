@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 import griffon.transitions.TransitionLayout
 import groovy.swing.factory.LayoutFactory
 

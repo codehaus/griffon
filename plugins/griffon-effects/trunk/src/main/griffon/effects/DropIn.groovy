@@ -34,7 +34,6 @@ import java.awt.Window
 import java.awt.Dimension
 import java.awt.Point
 import java.awt.Toolkit
-import java.awt.GraphicsEnvironment
 import org.pushingpixels.trident.Timeline
 
 /**
@@ -73,7 +72,6 @@ class DropIn extends ParallelEffect {
         def ps = paramsInternal()
         Point origin = component.location
         Dimension size = component.getSize()
-        Point center = GraphicsEnvironment.localGraphicsEnvironment.centerPoint
         Dimension screen = Toolkit.defaultToolkit.screenSize
 
         if(ps.anchor == Anchor.CENTER) {

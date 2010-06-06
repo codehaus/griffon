@@ -1,6 +1,7 @@
 <plugin name='gmetrics' version='0.1' griffonVersion='0.3.1 &gt; *' jdk='1.5'>
-  <author>Your name</author>
-  <title>Plugin summary/headline</title>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>GMetrics plugin</title>
   <documentation>http://griffon.codehaus.org/Gmetrics+Plugin</documentation>
   <dependencies />
 </plugin>

@@ -33,6 +33,7 @@ package griffon.effects
 import java.awt.Component
 import java.awt.Point
 import org.pushingpixels.trident.Timeline
+import static griffon.effects.EffectUtil.*
 
 /**
  * Shakes a component.<p>
@@ -61,12 +62,12 @@ class Shake extends ChainedEffect {
      * @param callback - an optional callback to be executed at the end of the animation
      */ 
     Shake(Map params = [:], Component component, Closure callback = null) {
-        super(EffectUtil.mergeParams(params), component, callback)
+        super(mergeParams(params), component, callback)
     }
  
     List<BasicEffect> makeEffects() { 
-        int distance = EffectUtil.toInt(params.distance, 20i)
-        long split = EffectUtil.toLong(params.duration / 10)
+        int distance = toInt(params.distance, 20i)
+        long split = toLong(toLong(params.duration) / 10)
         Point origin = component.location
 
         List<BasicEffect> effects = [
