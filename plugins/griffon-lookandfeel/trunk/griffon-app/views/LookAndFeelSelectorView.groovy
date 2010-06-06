@@ -18,7 +18,6 @@
  * @author Andres Almiray
  */
 
-import java.awt.GridBagConstraints as GBC
 import griffon.lookandfeel.LookAndFeelManager
 
 actions {
@@ -67,23 +66,27 @@ actions {
         shortDescription: 'Paste')
 }
 
+try{
 panel(id: 'box') {     
     borderLayout(hgap: 15, vgap: 15)
     panel(constraints: NORTH) {
-        gridBagLayout()
-        label('Look & Feel', constraints: gbc(fill: GBC.HORIZONTAL, weightx: 0.5))
+        migLayout(layoutConstraints: 'fill')
+
+        label('Look & Feel', constraints: 'left')
         comboBox(model: model.providerModel, id: 'providers',
-            constraints: gbc(fill: GBC.BOTH, gridwidth: GBC.REMAINDER, weightx: 1.0))
+            constraints: 'grow, span 2, right, wrap')
         bean(model, providerSelection: bind{providers.selectedItem})
 
-        label('Theme', constraints: gbc(fill: GBC.BOTH, weightx: 0.5))
+        label('Theme', constraints: 'left')
         comboBox(model: model.lafInfoModel, id: 'lafs',
-            constraints: gbc(fill: GBC.BOTH, gridwidth: GBC.REMAINDER, weightx: 1.0))
+            constraints: 'grow, span 2, right, wrap')
         bean(model, lafSelection: bind{lafs.selectedItem})
 
-        label('', constraints: gbc(fill: GBC.BOTH, weightx: 0.5))
+        label('', constraints: 'left')
         button('Preview', actionPerformed: controller.preview,
-            constraints: gbc(fill: GBC.BOTH, gridwidth: GBC.REMAINDER, weightx: 1.0))
+               constraints: 'grow, left')
+        button('Reset [System]', actionPerformed: controller.reset,
+               constraints: 'grow, right')
     }
     desktopPane(id: 'desktop', constraints: CENTER, preferredSize: [430, 330]) {
         internalFrame(id: 'sampleFrame', title: 'Sample',
@@ -151,5 +154,6 @@ panel(id: 'box') {
             } 
         }
     }
-    button('Reset [System]', actionPerformed: controller.reset, constraints: SOUTH)
+    // button('Reset [System]', actionPerformed: controller.reset, constraints: SOUTH)
 }
+}catch(x){x.printStackTrace()}

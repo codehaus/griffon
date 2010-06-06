@@ -15,7 +15,7 @@
  *    its contributors may be used to endorse or promote products derived
  *    from this software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 'AS IS'
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
@@ -33,18 +33,19 @@
  */
 class EffectsGriffonPlugin {
     def version = 0.1
-    def griffonVersion = "0.3.2 > *" 
+    def griffonVersion = '0.3.2 > *' 
     def dependsOn = ['trident-builder': 0.3]
     def toolkits = ['swing']
     def jdk = '1.6'
+    def license = 'BSD License'
 
-    def author = "Andres Almiray"
-    def authorEmail = "aalmiray@users.sourceforge.net"
-    def title = "Effects and Animations"
+    def author = 'Andres Almiray'
+    def authorEmail = 'aalmiray@users.sourceforge.net'
+    def title = 'Effects and Animations'
     def description = '''
 Effects and Animations
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://griffon.codehaus.org/Effects+Plugin"
+    def documentation = 'http://griffon.codehaus.org/Effects+Plugin'
 }

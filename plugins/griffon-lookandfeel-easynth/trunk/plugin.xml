@@ -4,6 +4,9 @@
   <title>EaSynth Swing Look &amp; Feel</title>
   <documentation>http://griffon.codehaus.org/Lookandfeel+EaSynth+Plugin</documentation>
   <toolkits>swing</toolkits>
+  <synopsis>EaSynth Swing Look &amp; Feel.
+http://www.easynth.com</synopsis>
+  <license>Apache Software License 2.0</license>
   <plugin name='lookandfeel' version='0.1' />
   <dependencies>
     <plugin name='lookandfeel' version='0.1' />
