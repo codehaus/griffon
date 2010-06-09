@@ -19,6 +19,8 @@ package net.sourceforge.gvalidation
  * Created by nick.zhu
  */
 class Errors {
+    static final def FIRE_PROPERTY_CHANGE_METHOD_NAME = 'firePropertyChange'
+
     def parent
     def fieldErrors = [:]
     def globalErrors = []
@@ -44,11 +46,25 @@ class Errors {
     }
 
     def reject(errorCode, defaultErrorCode, List arguments) {
-        def oldErrors = new Errors(parent: parent, fieldErrors: fieldErrors.clone(), globalErros: globalErrors.clone())
+        def oldErrors = cloneErrors()
 
         globalErrors.add(new SimpleError(errorCode: errorCode, defaultErrorCode: defaultErrorCode, arguments: arguments))
 
-        parent?.firePropertyChange('errors', oldErrors, this)
+        fireErrorChangedEventOnParent(oldErrors)
+    }
+
+    private Errors cloneErrors() {
+        return new Errors(parent: parent, fieldErrors: fieldErrors.clone(), globalErros: globalErrors.clone())
+    }
+
+    private def fireErrorChangedEventOnParent(Errors oldErrors) {
+        if (parent && hasPropertyChangeNotifier()) {
+            parent.firePropertyChange('errors', oldErrors, this)
+        }
+    }
+
+    private def hasPropertyChangeNotifier() {
+        return parent?.metaClass.methods?.find {it.name == FIRE_PROPERTY_CHANGE_METHOD_NAME} != null
     }
 
     def hasGlobalErrors() {
@@ -71,7 +87,11 @@ class Errors {
         if (!fieldErrors[field])
             fieldErrors[field] = []
 
+        def oldErrors = cloneErrors()
+
         fieldErrors[field].add new FieldError(field: field, errorCode: errorCode, defaultErrorCode: defaultErrorCode, arguments: arguments)
+
+        fireErrorChangedEventOnParent(oldErrors)
     }
 
     def hasFieldErrors() {
