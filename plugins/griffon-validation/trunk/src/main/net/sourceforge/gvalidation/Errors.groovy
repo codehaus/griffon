@@ -19,8 +19,17 @@ package net.sourceforge.gvalidation
  * Created by nick.zhu
  */
 class Errors {
+    def parent
     def fieldErrors = [:]
     def globalErrors = []
+
+    def Errors() {
+        this(null)
+    }
+
+    def Errors(parent) {
+        this.parent = parent
+    }
 
     def reject(errorCode) {
         reject(errorCode, [])
@@ -31,11 +40,15 @@ class Errors {
     }
 
     def reject(errorCode, List arguments) {
-        reject(errorCode, null, arguments)                                                    
+        reject(errorCode, null, arguments)
     }
 
     def reject(errorCode, defaultErrorCode, List arguments) {
+        def oldErrors = new Errors(parent: parent, fieldErrors: fieldErrors.clone(), globalErros: globalErrors.clone())
+
         globalErrors.add(new SimpleError(errorCode: errorCode, defaultErrorCode: defaultErrorCode, arguments: arguments))
+
+        parent?.firePropertyChange('errors', oldErrors, this)
     }
 
     def hasGlobalErrors() {
@@ -51,7 +64,7 @@ class Errors {
     }
 
     def rejectValue(field, errorCode, List arguments) {
-         rejectValue(field, errorCode, null, arguments)   
+        rejectValue(field, errorCode, null, arguments)
     }
 
     def rejectValue(field, errorCode, defaultErrorCode, List arguments) {

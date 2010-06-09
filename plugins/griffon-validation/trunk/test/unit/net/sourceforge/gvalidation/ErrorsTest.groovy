@@ -36,6 +36,16 @@ class ErrorsTest extends GroovyTestCase {
         assertTrue "Should have error", errors.hasErrors()
     }
 
+    public void testRejectCausePropertyChangedEvent() {
+        boolean fired = false
+
+        Errors errors = new Errors([firePropertyChange:{property, oldValue, newValue -> fired = true; assertEquals "errors", property}]  as Expando)
+
+        errors.reject("errorCode")
+
+        assertTrue "Should have fired property changed event", fired
+    }
+
     public void testReject() {
         Errors errors = new Errors()
 
