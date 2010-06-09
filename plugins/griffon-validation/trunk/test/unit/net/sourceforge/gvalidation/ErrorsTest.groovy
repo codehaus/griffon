@@ -39,11 +39,33 @@ class ErrorsTest extends GroovyTestCase {
     public void testRejectCausePropertyChangedEvent() {
         boolean fired = false
 
-        Errors errors = new Errors([firePropertyChange:{property, oldValue, newValue -> fired = true; assertEquals "errors", property}]  as Expando)
+        def parent = [:] as Expando
 
+        parent.metaClass.firePropertyChange << {property, oldValue, newValue -> fired = true; assertEquals "errors", property}
+
+        Errors errors = new Errors(parent)
         errors.reject("errorCode")
 
         assertTrue "Should have fired property changed event", fired
+    }
+
+    public void testRejectValueCausePropertyChangedEvent() {
+        boolean fired = false
+
+        def parent = [:] as Expando
+
+        parent.metaClass.firePropertyChange << {property, oldValue, newValue -> fired = true; assertEquals "errors", property}
+
+        Errors errors = new Errors(parent)
+        errors.rejectValue('testField', "errorCode")
+
+        assertTrue "Should have fired property changed event", fired
+    }
+
+    public void testRejectIgnoreNonObservableParent() {
+        Errors errors = new Errors([] as Expando)
+
+        errors.reject("errorCode")
     }
 
     public void testReject() {
@@ -60,7 +82,7 @@ class ErrorsTest extends GroovyTestCase {
         errors.reject("errorCode", "defaultErrorCode")
 
         assertTrue "Should have global error", errors.hasGlobalErrors()
-        errors.each{
+        errors.each {
             assertEquals "Default error code is not correct", "defaultErrorCode", it.defaultErrorCode
         }
     }
@@ -85,7 +107,7 @@ class ErrorsTest extends GroovyTestCase {
         def globalErrors = errors.getGlobalErrors()
 
         assertEquals "Error code is incorrect", globalErrors.first().errorCode, "errorCode"
-        assertEquals "Default error code is incorrect", globalErrors.first().defaultErrorCode, "defaultErrorCode"        
+        assertEquals "Default error code is incorrect", globalErrors.first().defaultErrorCode, "defaultErrorCode"
         assertEquals "Error args is incorrect", 10, globalErrors.first().arguments[0]
         assertEquals "Error args is incorrect", "arg2", globalErrors.first().arguments[1]
     }
@@ -106,7 +128,7 @@ class ErrorsTest extends GroovyTestCase {
 
         assertTrue "Should have field error", errors.hasFieldErrors()
         assertTrue "Field should have error", errors.hasFieldErrors("field")
-        errors.each{
+        errors.each {
             assertEquals "Default error message is not set", "defaultErrorCode", it.defaultErrorCode
         }
     }
