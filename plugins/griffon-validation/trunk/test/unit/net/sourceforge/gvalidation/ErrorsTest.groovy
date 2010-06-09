@@ -62,6 +62,19 @@ class ErrorsTest extends GroovyTestCase {
         assertTrue "Should have fired property changed event", fired
     }
 
+    public void testClearCausePropertyChangedEvent() {
+        boolean fired = false
+
+        def parent = [:] as Expando
+
+        parent.metaClass.firePropertyChange << {property, oldValue, newValue -> fired = true; assertEquals "errors", property}
+
+        Errors errors = new Errors(parent)
+        errors.clear()
+
+        assertTrue "Should have fired property changed event", fired
+    }
+
     public void testRejectIgnoreNonObservableParent() {
         Errors errors = new Errors([] as Expando)
 

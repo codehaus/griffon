@@ -115,8 +115,12 @@ class Errors {
     }
 
     def clear() {
+        def oldErrors = cloneErrors()
+
         fieldErrors.clear()
         globalErrors.clear()
+
+        fireErrorChangedEventOnParent(oldErrors)
     }
 
     def iterator() {
