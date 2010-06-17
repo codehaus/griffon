@@ -1,0 +1,13 @@
+<plugin name='countries' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Flags of the world</title>
+  <description>Flags of the world. Icons from http://www.famfamfam.com/lab/icons/flags/
+Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2</description>
+  <documentation>http://griffon.codehaus.org/Countries+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
