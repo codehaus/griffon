@@ -1,0 +1,10 @@
+<plugin name='fast-translate' version='0.2' griffonVersion='0.3 &gt; *' jdk='1.5'>
+  <author>Hamlet D'Arcy</author>
+  <authorEmail>hamletdrc@gmail.com</authorEmail>
+  <title>Provides fast translation services for human language. Backed by Google Translate.</title>
+  <documentation>http://griffon.codehaus.org/FastTranslate+Plugin</documentation>
+  <plugin name='gparallelizer' version='0.3' />
+  <dependencies>
+    <plugin name='gparallelizer' version='0.3' />
+  </dependencies>
+</plugin>
