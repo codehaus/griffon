@@ -35,6 +35,8 @@ import org.pushingpixels.trident.Timeline
 import org.pushingpixels.trident.Timeline.TimelineState
 import org.pushingpixels.trident.TimelinePropertyBuilder
 import org.pushingpixels.trident.TimelinePropertyBuilder.PropertySetter
+import griffon.swing.SwingUtils
+import griffon.util.UIThreadHelper
 
 import static griffon.util.GriffonApplicationUtils.isJdk16
 import static griffon.util.GriffonApplicationUtils.isJdk17
@@ -51,6 +53,7 @@ import static griffon.util.GriffonApplicationUtils.isJdk17
  *    <li><b>duration</b>: long, how long should the animation take. default: 500l</li>
  *    <li><b>delay</b>: long, wait time before the animation starts. default: 0l</li>
  *    <li><b>ease</b>: TimelineEase. default: Linear</li>
+ *    <li><b>wait</b>: boolean. Force the caller thread to wait until the effects finishes. default: false</li>
  * </ul>
  *
  * <p>If a callback is supplied it will be called at the end of the animation,
@@ -69,7 +72,7 @@ class Opacity extends AbstractBasicEffect {
      * Creates a new Opacity effect.<br/>
      *
      * @param params - set of options
-     * @param component - the component to animate
+     * @param window - the window to animate
      * @param callback - an optional callback to be executed at the end of the animation
      */ 
     Opacity(Map params = [:], Window window, Closure callback = null) {
@@ -88,9 +91,16 @@ class Opacity extends AbstractBasicEffect {
                 new PropertySetter<Float>() {
                     @Override
                     public void set(Object obj, String fieldName, Float value) {
-                        EffectUtil.setWindowOpacity(obj, value)
+                        SwingUtils.setWindowOpacity(obj, value)
                     }
                 }));
+        }
+    }
+
+    protected void doBeforePlay() {
+        // make sure the window is visible
+        UIThreadHelper.instance.executeSync {
+            component.visible = true
         }
     }
 }

@@ -31,6 +31,9 @@
 package griffon.effects
 
 import java.awt.Window
+import griffon.swing.SwingUtils
+import griffon.util.UIThreadHelper
+import org.pushingpixels.trident.Timeline
 
 /**
  * Fades a window.<p>
@@ -40,6 +43,7 @@ import java.awt.Window
  *    <li><b>duration</b>: long, how long should the animation take. default: 500l</li>
  *    <li><b>delay</b>: long, wait time before the animation starts. default: 0l</li>
  *    <li><b>ease</b>: TimelineEase. default: Linear</li>
+ *    <li><b>wait</b>: boolean. Force the caller thread to wait until the effects finishes. default: false</li>
  * </ul>
  *
  * <p>If a callback is supplied it will be called at the end of the animation,
@@ -52,13 +56,28 @@ class Fade extends Opacity {
      * Creates a new Fade effect.<br/>
      *
      * @param params - set of options
-     * @param component - the component to animate
+     * @param window - the window to animate
      * @param callback - an optional callback to be executed at the end of the animation
      */ 
     Fade(Map params = [:], Window window, Closure callback = null) {
         super(EffectUtil.mergeParams(params), window, callback)
         def ps = paramsInternal()
-        ps.from = EffectUtil.getWindowOpacity(window) ?: 1.0f
+        ps.from = SwingUtils.getWindowOpacity(window) ?: 1.0f
         ps.to = 0f
+    }
+
+    protected void setupTimeline(Timeline timeline) {
+        super.setupTimeline(timeline)
+        EffectUtil.setupCallback(timeline) {
+            component.visible = false
+        }
+    }
+
+    protected void doBeforePlay() {
+        // make sure the window is visible
+        UIThreadHelper.instance.executeSync {
+            component.visible = true
+            SwingUtils.setWindowOpacity(component, params.from)
+        }
     }
 }

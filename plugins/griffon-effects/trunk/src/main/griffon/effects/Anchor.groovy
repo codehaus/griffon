@@ -36,18 +36,55 @@ package griffon.effects
 enum Anchor {
     TOP, CENTER, BOTTOM, LEFT, RIGHT, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT;
 
+    /**
+     * Resolves the object to a valid Anchor value.
+     *
+     * @param value an object. May be null.
+     * @return Anchor.CENTER always
+     */
     static Anchor resolve(Object value) {
         CENTER
     }
 
+    /**
+     * Resolves the object to a valid Anchor value.
+     *
+     * @param value an Anchor instance.
+     * @return the same input
+     */
     static Anchor resolve(Anchor value) {
         value
     }
 
+    /**
+     * Resolves the string to a valid Anchor value.<p>
+     * Attempts conversion by matching common names to Anchor
+     * constants. Accepts aliases. Input may be in lower, upper
+     * and/or mixed case. Spaces are transformed inbto _.<p>
+     * Valid values are:<ul>
+     * <li>CENTER =&gt; Anchor.CENTER</li>
+     * <li>NORTH, TOP =&gt; Anchor.TOP</li>
+     * <li>SOUTH, BOTTOM =&gt; Anchor.BOTTOM</li>
+     * <li>WEST, LEFT =&gt; Anchor.LEFT</li>
+     * <li>EAST, RIGHT =&gt; Anchor.RIGHT</li>
+     * <li>NORTH_WEST, NORTH WEST, TOP_LEFT, TOP LEFT =&gt; Anchor.TOP_LEFT</li>
+     * <li>NORTH_EAST, NORTH EAST, TOP_RIGHT, TOP RIGHT =&gt; Anchor.TOP_RIGHT</li>
+     * <li>SOUTH_WEST, SOUTH WEST, BOTTOM_LEFT, BOTTOM LEFT =&gt; Anchor.BOTTOM_LEFT</li>
+     * <li>SOUTH_EAST, SOUTH EAST, BOTTOM_RIGHT, BOTTOM RIGHT =&gt; Anchor.BOTTOM_RIGHT</li>
+     * </ul>
+     *
+     * @param value a GString
+     * @return the converted value given the aforementioned rules.
+     */
     static Anchor resolve(GString value) {
         resolve(value.toString())
     }
 
+    /**
+     * Resolves the object to a valid Anchor value.
+     *
+     * @return Anchor.CENTER always
+     */
     static Anchor resolve(String value) {
         value = value.toUpperCase().replace(' ','_')
         switch(value) {

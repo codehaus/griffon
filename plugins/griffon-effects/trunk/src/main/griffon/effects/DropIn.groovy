@@ -35,6 +35,8 @@ import java.awt.Dimension
 import java.awt.Point
 import java.awt.Toolkit
 import org.pushingpixels.trident.Timeline
+import griffon.swing.SwingUtils
+import griffon.util.UIThreadHelper
 
 /**
  * Fades in and moves a window.<p>
@@ -47,6 +49,7 @@ import org.pushingpixels.trident.Timeline
  *    <li><b>duration</b>: long, how long should the animation take. default: 500l</li>
  *    <li><b>delay</b>: long, wait time before the animation starts. default: 0l</li>
  *    <li><b>ease</b>: TimelineEase. default: Linear</li>
+ *    <li><b>wait</b>: boolean. Force the caller thread to wait until the effects finishes. default: false</li>
  * </ul>
  *
  * <p>If a callback is supplied it will be called at the end of the animation,
@@ -59,7 +62,7 @@ class DropIn extends ParallelEffect {
      * Creates a new DropIn effect.<br/>
      *
      * @param params - set of options
-     * @param component - the component to animate
+     * @param window - the window to animate
      * @param callback - an optional callback to be executed at the end of the animation
      */ 
     DropIn(Map params = [:], Window window, Closure callback = null) {
@@ -84,7 +87,7 @@ class DropIn extends ParallelEffect {
             ] 
         }
 
-        EffectUtil.setWindowOpacity(component, EffectUtil.toFloat(0.0f))
+        SwingUtils.setWindowOpacity(component, EffectUtil.toFloat(0.0f))
         ps.mode = 'absolute'
         ps.x = (screen.width/2) - (size.width/2)
         ps.y = (screen.height/2) - (size.height/2)
@@ -143,5 +146,13 @@ class DropIn extends ParallelEffect {
             new Appear(ps, component),
             new Move(ps, component)
         ]
+    }
+
+    protected void doBeforePlay() {
+        // make sure the window is visible
+        UIThreadHelper.instance.executeSync {
+            SwingUtils.setWindowOpacity(component, params.from)
+            component.visible = true
+        }
     }
 }

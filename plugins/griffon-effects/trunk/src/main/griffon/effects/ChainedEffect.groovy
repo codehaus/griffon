@@ -32,6 +32,7 @@ package griffon.effects
 
 import java.awt.Component
 import org.pushingpixels.trident.Timeline
+import java.util.concurrent.CountDownLatch
 
 /**
  * Base class for composite, sequential Effects.<p>
@@ -40,6 +41,7 @@ import org.pushingpixels.trident.Timeline
  *    <li><b>duration</b>: long, how long should the animation take. default: 500l</li>
  *    <li><b>delay</b>: long, wait time before the animation starts. default: 0l</li>
  *    <li><b>ease</b>: TimelineEase. default: Linear</li>
+ *    <li><b>wait</b>: boolean. Force the caller thread to wait until the effects finishes. default: false</li>
  * </ul>
  *
  * <p>If a callback is supplied it will be called at the end of the animation,
@@ -74,14 +76,19 @@ abstract class ChainedEffect extends AbstractEffect implements CompositeEffect {
                 effect.afterCallback = runEffect.curry(effects[index + 1])
             }
         }
+
+        CountDownLatch latch = waitForCompletion ? new CountDownLatch(1i) :null
         def oldAfterCallback = effects[-1].afterCallback
         effects[-1].afterCallback = {
             if(oldAfterCallback) oldAfterCallback()
             if(callback) callback(component, params)
             if(afterCallback) afterCallback()
+            latch?.countDown()
         }
         if(beforeCallback) beforeCallback()
+        doBeforePlay()
         effects[0].run()
+        latch?.await()
     }
 
     /**

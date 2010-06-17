@@ -47,6 +47,7 @@ import org.pushingpixels.trident.Timeline
  *    <li><b>duration</b>: long, how long should the animation take. default: 500l</li>
  *    <li><b>delay</b>: long, wait time before the animation starts. default: 0l</li>
  *    <li><b>ease</b>: TimelineEase. default: Linear</li>
+ *    <li><b>wait</b>: boolean. Force the caller thread to wait until the effects finishes. default: false</li>
  * </ul>
  *
  * <p>If a callback is supplied it will be called at the end of the animation,
@@ -59,7 +60,7 @@ class DropOut extends ParallelEffect {
      * Creates a new DropOut effect.<br/>
      *
      * @param params - set of options
-     * @param component - the component to animate
+     * @param window - the window to animate
      * @param callback - an optional callback to be executed at the end of the animation
      */ 
     DropOut(Map params = [:], Window window, Closure callback = null) {
