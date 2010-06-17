@@ -17,6 +17,7 @@ package net.sourceforge.gvalidation
 
 import org.apache.commons.lang.StringUtils
 import org.apache.commons.lang.ClassUtils
+import net.sourceforge.gvalidation.util.MetaUtils
 
 /**
  * Created by nick.zhu
@@ -25,6 +26,7 @@ class ValidationEnhancer {
     static final def CONSTRAINT_PROPERTY_NAME = "constraints"
     static final def VALIDATION_ENHANCER_PROPERTY_NAME = '__validationEnhancer'
     static final def ERRORS_PROPERTY_NAME = '__errors'
+    static final def BEFORE_VALIDATION_CALLBACK_NAME = 'beforeValidation'
 
     static def enhance(bean) {
         if (isNotEnhanced(bean)) {
@@ -67,6 +69,9 @@ class ValidationEnhancer {
      * executed each time
      */
     def doValidate = {params = null ->
+        if(MetaUtils.hasMethodOrClosure(model, BEFORE_VALIDATION_CALLBACK_NAME))
+            model."${BEFORE_VALIDATION_CALLBACK_NAME}"()
+
         this.fields = generateTargetFields(params)
 
         try {
