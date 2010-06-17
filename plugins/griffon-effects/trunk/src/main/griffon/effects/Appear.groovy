@@ -31,6 +31,8 @@
 package griffon.effects
 
 import java.awt.Window
+import griffon.swing.SwingUtils
+import griffon.util.UIThreadHelper
 
 /**
  * Make a window appear.<p>
@@ -40,6 +42,7 @@ import java.awt.Window
  *    <li><b>duration</b>: long, how long should the animation take. default: 500l</li>
  *    <li><b>delay</b>: long, wait time before the animation starts. default: 0l</li>
  *    <li><b>ease</b>: TimelineEase. default: Linear</li>
+ *    <li><b>wait</b>: boolean. Force the caller thread to wait until the effects finishes. default: false</li>
  * </ul>
  *
  * <p>If a callback is supplied it will be called at the end of the animation,
@@ -52,14 +55,22 @@ class Appear extends Opacity {
      * Creates a new Appear effect.<br/>
      *
      * @param params - set of options
-     * @param component - the component to animate
+     * @param window - the window to animate
      * @param callback - an optional callback to be executed at the end of the animation
      */ 
     Appear(Map params = [:], Window window, Closure callback = null) {
         super(EffectUtil.mergeParams(params), window, callback)
         def ps = paramsInternal()
-        float opacity = EffectUtil.getWindowOpacity(window)
+        float opacity = SwingUtils.getWindowOpacity(window)
         ps.from = opacity == 1.0f ? 0.0f : opacity
         ps.to = 1f
+    }
+
+    protected void doBeforePlay() {
+        // make sure the window is visible
+        UIThreadHelper.instance.executeSync {
+            SwingUtils.setWindowOpacity(component, params.from)
+            component.visible = true       
+        }
     }
 }

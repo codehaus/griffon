@@ -32,6 +32,7 @@ package griffon.effects
 
 import java.awt.Component
 import org.pushingpixels.trident.Timeline
+import java.util.concurrent.CountDownLatch
 
 /**
  * Base class for all Effects.<p>
@@ -40,6 +41,7 @@ import org.pushingpixels.trident.Timeline
  *    <li><b>duration</b>: long, how long should the animation take. default: 500l</li>
  *    <li><b>delay</b>: long, wait time before the animation starts. default: 0l</li>
  *    <li><b>ease</b>: TimelineEase. default: Linear</li>
+ *    <li><b>wait</b>: boolean. Force the caller thread to wait until the effects finishes. default: false</li>
  * </ul>
  *
  * @author Andres Almiray
@@ -54,6 +56,8 @@ abstract class AbstractEffect implements Effect {
     Closure beforeCallback
     /** callback to be executed after the effect ends */
     Closure afterCallback
+    /** wait flag */
+    final boolean waitForCompletion
 
     /**
      * Creates a new effect.<br/>
@@ -63,15 +67,29 @@ abstract class AbstractEffect implements Effect {
      * @param callback - an optional callback to be executed at the end of the animation
      */
     AbstractEffect(Map params = [:], Component component, Closure callback = null) {
+        this.waitForCompletion = params.remove('wait') ?: false
         this.params = params
         this.component = component
         this.callback = callback ?: EffectUtil.NO_CALLBACK
     }
 
+    /**
+     * Returns an unmodifiable view of the effect's arguments
+     *
+     * @return a Map with the effect's parameters including 
+     * default settings.
+     */
     Map getParams() {
         Collections.unmodifiableMap(this.params)
     }
 
+    /**
+     * Mutable view of the effect's parameters.<p>
+     * <b>For internal use only.</b>
+     *
+     * @return a Map with the effect's parameters including 
+     * default settings.
+     */
     protected Map paramsInternal() {
         this.params
     }
@@ -91,9 +109,12 @@ abstract class AbstractEffect implements Effect {
         Timeline timeline = EffectUtil.newTimeline(this)
         if(beforeCallback) beforeCallback()
         setupTimeline(timeline)
-        EffectUtil.setupCallback(this, timeline)
+        EffectUtil.setupEffectCallback(this, timeline)
         EffectUtil.setupAfterCallback(this, timeline)
+        CountDownLatch latch = EffectUtil.setupWaitForCompletion(this, timeline)
+        doBeforePlay()
         timeline.play()
+        if(latch) latch.await()
     }
 
     /**
@@ -102,4 +123,10 @@ abstract class AbstractEffect implements Effect {
      * @param timeline - a timeline on which properties to interpolate can be set
      */
     protected abstract void setupTimeline(Timeline timeline)
+
+
+    /**
+     * Last opportunity to execute custom code before the Timeline starts 
+     */
+    protected void doBeforePlay() {}
 }

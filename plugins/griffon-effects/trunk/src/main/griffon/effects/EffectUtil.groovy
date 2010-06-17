@@ -34,10 +34,8 @@ import org.pushingpixels.trident.Timeline
 import org.pushingpixels.trident.Timeline.TimelineState
 import org.pushingpixels.trident.ease.Linear
 import org.pushingpixels.trident.callback.UIThreadTimelineCallbackAdapter
-
-import java.awt.Window
-import static griffon.util.GriffonApplicationUtils.isJdk16
-import static griffon.util.GriffonApplicationUtils.isJdk17
+import org.pushingpixels.trident.callback.TimelineCallbackAdapter
+import java.util.concurrent.CountDownLatch
 
 /**
  * @author Andres Almiray
@@ -61,7 +59,33 @@ final class EffectUtil {
         [effect.class.simpleName,'[params:',effect.params,']'].join('')
     }
 
-    static void setupCallback(final Effect effect, Timeline timeline) {
+    /**
+     * Sets the callback to be called once the timeline ends.<p>
+     *
+     * @param timeline the target Timeline.
+     * @param callback a Closure. Will be ignored if null.
+     */
+    static void setupCallback(Timeline timeline, final Closure callback) {
+        if(callback) {
+            timeline.addCallback(new UIThreadTimelineCallbackAdapter() {
+                @Override
+                public void onTimelineStateChanged(TimelineState oldState,
+                      TimelineState newState, float durationFraction, float timelinePosition) {
+                    if (newState == TimelineState.DONE) {
+                        callback()
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * Sets the Effect's callback to be called once the timeline ends.<p>
+     *
+     * @param effect the source Effect.
+     * @param timeline the target Timeline.
+     */
+    static void setupEffectCallback(final Effect effect, Timeline timeline) {
         if(effect.callback && effect.callback != NO_CALLBACK) {
             timeline.addCallback(new UIThreadTimelineCallbackAdapter() {
                 @Override
@@ -75,6 +99,12 @@ final class EffectUtil {
         }
     }
 
+    /**
+     * Sets the Effect's afterCallback to be called once the timeline ends.<p>
+     *
+     * @param effect the source Effect.
+     * @param timeline the target Timeline.
+     */
     static void setupAfterCallback(final Effect effect, Timeline timeline) {
         if(effect.afterCallback) {
             timeline.addCallback(new UIThreadTimelineCallbackAdapter() {
@@ -87,6 +117,30 @@ final class EffectUtil {
                 }
             });
         }
+    }
+
+    /**
+     * Creates a CountDonwLatch associated with the Timeline. Forces the calling thrad to wait.<p>
+     *
+     * @param effect the source Effect.
+     * @param timeline the target Timeline.
+     * @return a CountDonwLatch on which the calling hread can wait. May be null. 
+     */
+    static CountDownLatch setupWaitForCompletion(final Effect effect, Timeline timeline) {
+        final CountDownLatch latch = null
+        if(effect.waitForCompletion) {
+            latch = new CountDownLatch(1i)
+            timeline.addCallback(new TimelineCallbackAdapter() {
+                @Override
+                public void onTimelineStateChanged(TimelineState oldState,
+                      TimelineState newState, float durationFraction, float timelinePosition) {
+                    if (newState == TimelineState.DONE) {
+                        latch.countDown()
+                    }
+                }
+            });
+        }
+        return latch
     }
 
     /**
@@ -107,7 +161,7 @@ final class EffectUtil {
         return [*:DEFAULT_PARAMS, *:overrides, *:params]
     }
 
-    static float toDouble(value, double defaultValue = 0.0d) {
+    static double toDouble(value, double defaultValue = 0.0d) {
         if(value instanceof Number) {
             return value.doubleValue()
         } else {
@@ -143,7 +197,7 @@ final class EffectUtil {
         }
     }
 
-    static int toLong(value, long defaultValue = 0l) {
+    static long toLong(value, long defaultValue = 0l) {
         if(value instanceof Number) {
             return value.longValue()
         } else {
@@ -152,25 +206,6 @@ final class EffectUtil {
             } catch(NumberFormatException nfe) {
                 return defaultValue
             }
-        }
-    }
-
-    static float getWindowOpacity(Window window) {
-        if(isJdk17) {
-            return toFloat(window.getOpacity())
-        } else if(isJdk16) {
-            Class awtUtilities = Class.forName('com.sun.awt.AWTUtilities')
-            return toFloat(awtUtilities.getWindowOpacity(window))
-        }
-        return 1.0f
-    }
-
-    static void setWindowOpacity(Window window, float opacity) {
-        if(isJdk17) {
-            window.setOpacity(opacity)
-        } else if(isJdk16) {
-            Class awtUtilities = Class.forName('com.sun.awt.AWTUtilities')
-            awtUtilities.setWindowOpacity(window, opacity)
         }
     }
 }
