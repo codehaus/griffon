@@ -22,8 +22,8 @@
  */
 class Db4oGriffonPlugin {
     def version = 0.2
-    def griffonVersion = '0.3.2 > *'
     def dependsOn = [:]
+    def griffonVersion = '0.9 > *'
     def license = 'GNU General Public License v3'
 
     def author = 'Andres Almiray'

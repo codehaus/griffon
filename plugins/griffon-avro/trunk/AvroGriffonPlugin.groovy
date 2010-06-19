@@ -18,9 +18,10 @@
  * @author Andres Almiray
  */
 class AvroGriffonPlugin {
-    def version = 0.1
-    def griffonVersion = "0.3 > *" 
+    def version = 0.2
     def dependsOn = [:]
+    def griffonVersion = '0.9 > *'
+    def license = 'Apache Software License 2.0'
 
     def author = "Andres Almiray"
     def authorEmail = "aalmiray@users.sourceforge.net"

@@ -37,6 +37,7 @@ class LookAndFeelSelectorController {
         execAsync {
             LookAndFeelManager.instance.installLookAndFeel(info.lookAndFeel, app)
             setCurrentLookAndFeel(provider)
+            model.reset = true
         }
     }
 

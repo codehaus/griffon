@@ -19,10 +19,10 @@
  */
 class TransitionsGriffonPlugin {
     def version = '0.3'
-    def griffonVersion = '0.3.2 > *'
-    def dependsOn = ['trident-builder': 0.3]
+    def dependsOn = ['trident-builder': 0.4]
     def jdk = '1.6'
     def toolkits = ['swing']
+    def griffonVersion = '0.9 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'

@@ -66,7 +66,6 @@ actions {
         shortDescription: 'Paste')
 }
 
-try{
 panel(id: 'box') {     
     borderLayout(hgap: 15, vgap: 15)
     panel(constraints: NORTH) {
@@ -154,6 +153,4 @@ panel(id: 'box') {
             } 
         }
     }
-    // button('Reset [System]', actionPerformed: controller.reset, constraints: SOUTH)
 }
-}catch(x){x.printStackTrace()}
