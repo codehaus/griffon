@@ -130,7 +130,9 @@ final class LookAndFeelManager {
         // already showing?
         if(application.groups['LookAndFeelSelector']) return
 
-        LookAndFeel currentLookAndFeel = UIManager.lookAndFeel
+        def currentLaf = getCurrentLookAndFeelInfo()
+        def systemProvider = getLookAndFeelProvider('System')
+        def systemLaf = getLookAndFeelInfo(systemProvider, 'System')
 
         def (m, v, c) = application.createMVCGroup('LookAndFeelSelector')
         c.setCurrentLookAndFeel(getCurrentLookAndFeelProvider())
@@ -142,11 +144,10 @@ final class LookAndFeelManager {
         if(option == JOptionPane.OK_OPTION) {
             apply(m.lafSelection, application)
         } else {
-            // reset settings
-            SwingUtilities.invokeLater {
-                for(Window window : Window.getWindows()) {
-                    UIManager.setLookAndFeel(currentLookAndFeel)
-                }
+            if(m.reset) {
+                apply(systemLaf, application)
+            } else {
+                apply(currentLaf, application)
             }
         }
 

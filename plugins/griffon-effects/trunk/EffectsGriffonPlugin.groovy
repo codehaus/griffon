@@ -33,7 +33,7 @@
  */
 class EffectsGriffonPlugin {
     def version = 0.1
-    def griffonVersion = '0.3.2 > *' 
+    def griffonVersion = '0.9 > *' 
     def dependsOn = ['trident-builder': 0.4]
     def toolkits = ['swing']
     def jdk = '1.6'

@@ -17,21 +17,16 @@
 /**
  * @author Ixchel Ruiz
  */
-
-
 class OxbowGriffonPlugin {
-    def version = 0.1
-    def griffonVersion = "0.3 > *" 
+    def version = 0.2
     def dependsOn = [:]
-    // optional. Valid values are: swing, javafx, swt, pivot, gtk
-    // def toolkits = ['swing']
-    // optional. Valid values are linux, windows, macosx, solaris
-    // def platforms = []
+    def toolkits = ['swing']
+    def griffonVersion = '0.9 > *'
+    def license = 'Apache Software License 2.0'
 
-    // TODO Fill in these fields
     def author = "Ixchel Ruiz"
     def authorEmail = "ixchelruiz@yahoo.com"
-    def title = "based on Oxbow project"
+    def title = "Based on Oxbow project"
     def description = '''
 A collection of projects for Swing UI enhancements based on Oxbow project
 '''

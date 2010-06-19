@@ -19,14 +19,14 @@
  */
 class GsqlGriffonPlugin {
     def version = '0.4'
-    def griffonVersion = '0.3.2 > *'
     def dependsOn = [:]
-    def licens = 'Apache Software License 2.0'
+    def griffonVersion = '0.9 > *'
+    def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'
     def authorEmail = 'aalmiray@users.sourceforge.net'
     def title = 'Gsql powered DataSource'
-    def description = '''\\
+    def description = '''
 Adds Gsql powered DataSource capabilities to your Griffon application.
 '''
 

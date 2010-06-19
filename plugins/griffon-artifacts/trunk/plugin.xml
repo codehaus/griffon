@@ -1,7 +1,15 @@
-<plugin name='artifacts' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
+<plugin name='artifacts' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Artifacts API enhancements</title>
+  <description>
+Artifacts API enhancements.
+</description>
   <documentation>http://griffon.codehaus.org/Artifacts+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
+  <behavior />
 </plugin>

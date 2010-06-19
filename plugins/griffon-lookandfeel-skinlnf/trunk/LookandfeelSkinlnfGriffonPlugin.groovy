@@ -19,7 +19,7 @@
  */
 class LookandfeelSkinlnfGriffonPlugin {
     def version = 0.1
-    def griffonVersion = '0.3.2 > *'
+    def griffonVersion = '0.9 > *'
     def dependsOn = [lookandfeel: 0.1]
     def toolkits = ['swing']
     def license = 'Apache Software License 2.0'

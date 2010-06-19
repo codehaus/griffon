@@ -35,54 +35,34 @@ festTargetDir = "${projectWorkDir}/fest-classes"
 festReportDir = config.griffon.testing.reports.destDir ?: "${basedir}/test/fest-reports"
 festPluginBase = getPluginDirForName("fest").file as String
 _fest_skip = false
-_cobertura_enabled = false
 
-ant.path( id : 'festJarSet' ) {
-    fileset( dir: "${festPluginBase}/lib" , includes : "*.jar" )
+ant.path(id : 'festJarSet') {
+    fileset(dir: "${festPluginBase}/lib" , includes : "*.jar")
 }
 
-ant.taskdef( resource: "testngtasks", classpathref: "festJarSet" )
+ant.taskdef(resource: "testngtasks", classpathref: "festJarSet")
 
-ant.path( id: "fest.compile.classpath" ) {
+ant.path(id: "fest.compile.classpath") {
     path(refid:"griffon.compile.classpath")
     path(refid:"griffon.runtime.classpath")
     path(refid:"festJarSet")
     pathelement(location: "${classesDirPath}")
 }
 
-ant.path( id: "fest.runtime.classpath" ) {
+ant.path(id: "fest.runtime.classpath") {
     path(refid:"fest.compile.classpath")
     pathelement(location: "${festTargetDir}")
 }
 
 target(runFest:"Run FEST tests") {
     depends(checkVersion, configureProxy, clean, packageApp, parseArguments, classpath)
-//    initCobertura()
     checkFestTestsSources()
     compileFestTests()
     runFestTests()
-//    finishCobertura()
-}
-
-target(initCobertura:"") {
-   def coberturaPlugin = getPluginDirForName("code-coverage")
-   if( coberturaPlugin && argsMap.cobertura ) {
-      _cobertura_enabled = true
-       includeTargets << pluginScript("code-coverage","TestAppCobertura")
-       coberturaSetup()
-       coberturaInstrumentClasses()
-       coberturaInstrumentTests()
-   }
-}
-
-target(finishCobertura:"") {
-   if( _cobertura_enabled ) {
-      coberturaReport()
-   }
 }
 
 target(checkFestTestsSources:"") {
-    def src = new File( festSourceDir )
+    def src = new File(festSourceDir)
     if( !src || !src.list() ) {
         println "No FEST sources were found. SKIPPING"
         _fest_skip = true
@@ -107,6 +87,13 @@ target(compileFestTests: "") {
     catch(Exception e) {
         event("StatusFinal", ["Compilation error: ${e.message}"])
         exit(1)
+    }
+
+    compileSources(festTargetDir, "fest.compile.classpath") {
+        src(path: "${festSourceDir}")
+        include(name: "**/*.groovy")
+        include(name: "**/*.java")
+        javac(classpathref: 'fest.compile.classpath", debug:"yes" )
     }
 
     event("CompileEnd", ['fest'])

@@ -18,9 +18,9 @@
  * @author Andres Almiray
  */
 class EclipseSupportGriffonPlugin {
-    def version = '0.2.1'
-    def griffonVersion = '0.3 > *' 
+    def version = '0.3'
     def dependsOn = [:]
+    def griffonVersion = '0.9 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'

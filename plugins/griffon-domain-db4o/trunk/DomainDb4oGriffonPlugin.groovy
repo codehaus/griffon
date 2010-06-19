@@ -22,16 +22,17 @@
  */
 class DomainDb4oGriffonPlugin {
     def version = 0.1
-    def griffonVersion = '0.3-SNAPSHOT > *'
-    def dependsOn = [db4o: 0.1, domain: 0.1]
+    def dependsOn = [db4o: 0.2, domain: 0.1]
+    def griffonVersion = '0.9 > *'
+    def license = 'GNU General Public License 2.0'
 
-    def author = "Andres Almiray"
-    def authorEmail = "aalmiray@users.sourceforge.net"
-    def title = "Domain class support via Db4o"
+    def author = 'Andres Almiray'
+    def authorEmail = 'aalmiray@users.sourceforge.net'
+    def title = 'Domain class support via Db4o'
     def description = '''
 Domain class support via Db4o
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://griffon.codehaus.org/DomainDb4o+Plugin"
+    def documentation = 'http://griffon.codehaus.org/DomainDb4o+Plugin'
 }

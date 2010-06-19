@@ -30,6 +30,7 @@ class LookAndFeelSelectorModel {
 
     @Bindable LookAndFeelProvider providerSelection
     @Bindable LookAndFeelInfo lafSelection
+    boolean reset = false
 
     LookAndFeelSelectorModel() {
         LookAndFeelManager.instance.lookAndFeelProviders.sort().each { provider ->

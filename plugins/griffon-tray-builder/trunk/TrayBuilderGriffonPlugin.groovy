@@ -21,19 +21,20 @@
  * @author Andres Almiray
  */
 class TrayBuilderGriffonPlugin {
-    def version = "0.3"
-    def griffonVersion = '0.3 > *'
+    def version = '0.4'
     def dependsOn = [:]
-    def jdk = "1.6"
+    def jdk = '1.6'
     def toolkits = ['swing']
+    def griffonVersion = '0.9 > *'
+    def license = 'GNU General Public License 2.0 (with classpath extension)'
 
-    def author = "Andres Almiray"
-    def authorEmail = "aalmiray@users.sourceforge.net"
-    def title = "TrayBuilder Plugin"
+    def author = 'Andres Almiray'
+    def authorEmail = 'aalmiray@users.sourceforge.net'
+    def title = 'TrayBuilder Plugin'
     def description = '''
 Enables Swing components on SystemTray.
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://griffon.codehaus.org/TrayBuilder+Plugin"
+    def documentation = 'http://griffon.codehaus.org/TrayBuilder+Plugin'
 }

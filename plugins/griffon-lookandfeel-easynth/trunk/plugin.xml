@@ -1,13 +1,15 @@
-<plugin name='lookandfeel-easynth' version='0.1' griffonVersion='0.3.2 &gt; *' jdk='1.5'>
+<plugin name='lookandfeel-easynth' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>EaSynth Swing Look &amp; Feel</title>
+  <description>EaSynth Swing Look &amp; Feel.
+http://www.easynth.com</description>
   <documentation>http://griffon.codehaus.org/Lookandfeel+EaSynth+Plugin</documentation>
-  <toolkits>swing</toolkits>
-  <synopsis>EaSynth Swing Look &amp; Feel.
-http://www.easynth.com</synopsis>
   <license>Apache Software License 2.0</license>
-  <plugin name='lookandfeel' version='0.1' />
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies>
     <plugin name='lookandfeel' version='0.1' />
   </dependencies>

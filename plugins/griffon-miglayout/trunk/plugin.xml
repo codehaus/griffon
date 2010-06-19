@@ -1,11 +1,14 @@
-<plugin name='miglayout' version='0.1' griffonVersion='0.3.2 &gt; *' jdk='1.5'>
+<plugin name='miglayout' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>MigLayout Plugin</title>
+  <description>MigLayout Plugin
+http://miglayout.com</description>
   <documentation>http://griffon.codehaus.org/Miglayout+Plugin</documentation>
-  <toolkits>swing</toolkits>
-  <synopsis>MigLayout Plugin
-http://miglayout.com</synopsis>
   <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>
