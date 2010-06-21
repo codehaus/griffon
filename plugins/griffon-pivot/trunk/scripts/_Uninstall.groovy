@@ -18,12 +18,6 @@
  * @author Andres Almiray
  */
 
-//
-// This script is executed by Griffon when the plugin is uninstalled from project.
-// Use this script if you intend to do any additional clean-up on uninstall, but
-// beware of messing up SVN directories!
-//
-
 appToolkits = metadata.'app.toolkits'.split(',').toList() - 'pivot'
 if(appToolkits) {
     updateMetadata('app.toolkits': appToolkits.join(','))
@@ -32,7 +26,6 @@ if(appToolkits) {
     metadata.persist()
 }
 
-def builderConfigFile = new File("${basedir}/griffon-app/conf/Builder.groovy")
 def builderConfigText = new StringBuffer()
 boolean insideOldDefs = false
 boolean insidePivotPluginDefs = false

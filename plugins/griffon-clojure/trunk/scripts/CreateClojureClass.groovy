@@ -36,7 +36,6 @@ target('default': "Creates a new Clojure script") {
     def fqn = "${pkg}.${GCU.getClassNameRepresentation(name)}"
 
     def packageDir = new File("${basedir}/src/clojure/${pkg.replace('.','/')}")
-println packageDir
     packageDir.mkdirs()
 
     def classFile = new File(packageDir, "${name}.clj") 
@@ -61,4 +60,3 @@ println packageDir
 
 """
 }
-

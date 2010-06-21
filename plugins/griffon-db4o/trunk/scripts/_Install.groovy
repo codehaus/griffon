@@ -25,10 +25,8 @@ includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
 // check to see if we already have a Db4oGriffonAddon
-ConfigSlurper configSlurper1 = new ConfigSlurper()
-def slurpedBuilder1 = configSlurper1.parse(new File("$basedir/griffon-app/conf/Builder.groovy").toURL())
 boolean addonIsSet1
-slurpedBuilder1.each() { prefix, v ->
+builderConfig.each() { prefix, v ->
     v.each { builder, views ->
         addonIsSet1 = addonIsSet1 || 'Db4oGriffonAddon' == builder
     }
@@ -36,16 +34,15 @@ slurpedBuilder1.each() { prefix, v ->
 
 if (!addonIsSet1) {
     println 'Adding Db4oGriffonAddon to Builder.groovy'
-    new File("$basedir/griffon-app/conf/Builder.groovy").append('''
+    builderConfigFile.append('''
 root.'Db4oGriffonAddon'.addon=true
 ''')
 }
 
-appConfig = configSlurper1.parse(new File("$basedir/griffon-app/conf/Application.groovy").toURL())
-if(!(appConfig.flatten().'griffon.db4o.injectInto')) {
-    new File("${basedir}/griffon-app/conf/Application.groovy").append("""
+if(!(config.flatten().'griffon.db4o.injectInto')) {
+    configFile.append('''
 griffon.db4o.injectInto = ['controller']
-""")
+''')
 }
 
 if(!new File("${basedir}/griffon-app/conf/Db4oConfig.groovy").exists()) {

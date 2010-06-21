@@ -18,22 +18,16 @@
  * Compiles sources under ${basedir}/src/commons
  *
  * @author Andres Almiray
- *
- * @since 0.2
  */
 
-ant.property(environment:"env")
-griffonHome = ant.antProject.properties."env.GRIFFON_HOME"
+// includePluginScript('lang-bridge', 'CompileCommons')
 
-includePluginScript("lang-bridge", "CompileCommons")
-
-eventCompileStart = { type ->
-    if(compilingLangBridgePlugin()) return
-    if(type != "source") return
-    compileCommons()
-}
+//eventCompileStart = {
+//    if(compilingLangBridgePlugin()) return
+//    compileCommons()
+//}
 
 /**
  * Detects whether we're compiling the LangBridge plugin itself
  */
-private boolean compilingLangBridgePlugin() { getPluginDirForName("lang-bridge") == null }
+private boolean compilingLangBridgePlugin() { getPluginDirForName('lang-bridge') == basedir }

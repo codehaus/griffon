@@ -22,10 +22,8 @@ includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
 // check to see if we already have a NeodatisGriffonAddon
-ConfigSlurper configSlurper1 = new ConfigSlurper()
-def slurpedBuilder1 = configSlurper1.parse(new File("$basedir/griffon-app/conf/Builder.groovy").toURL())
 boolean addonIsSet1
-slurpedBuilder1.each() { prefix, v ->
+builderConfig.each() { prefix, v ->
     v.each { builder, views ->
         addonIsSet1 = addonIsSet1 || 'NeodatisGriffonAddon' == builder
     }
@@ -33,16 +31,15 @@ slurpedBuilder1.each() { prefix, v ->
 
 if (!addonIsSet1) {
     println 'Adding NeodatisGriffonAddon to Builder.groovy'
-    new File("$basedir/griffon-app/conf/Builder.groovy").append('''
+    builderConfigFile.append('''
 root.'NeodatisGriffonAddon'.addon=true
 ''')
 }
 
-appConfig = configSlurper1.parse(new File("$basedir/griffon-app/conf/Application.groovy").toURL())
-if(!(appConfig.flatten().'griffon.neodatis.injectInto')) {
-    new File("${basedir}/griffon-app/conf/Application.groovy").append("""
+if(!(config.flatten().'griffon.neodatis.injectInto')) {
+    configFile.append('''
 griffon.neodatis.injectInto = ['controller']
-""")
+''')
 }
 
 if(!new File("${basedir}/griffon-app/conf/NeodatisConfig.groovy").exists()) {

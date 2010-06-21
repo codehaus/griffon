@@ -1,7 +1,12 @@
-<plugin name='lang-bridge' version='0.3' griffonVersion='0.3 &gt; *' jdk='1.5'>
+<plugin name='lang-bridge' version='0.4' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
   <title>Enables interoperability between JVM languages</title>
+  <description>Enables interoperability between JVM languages</description>
   <documentation>http://griffon.codehaus.org/LangBridge+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>
