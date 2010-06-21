@@ -15,7 +15,7 @@
  */
 
 /**
- * Gant script that creates a new Griffon FEST test
+ * Gant script that creates a new Spock+FEST spec
  * 
  * @author Andres Almiray
  */
@@ -25,15 +25,15 @@ import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
-target (default: "Creates a new Griffon FEST test") {
-    depends(checkVersion,parseArguments)
-    promptForName(type: "FEST Test")
+target (default: "Creates a new Spock+FEST spec") {
+    depends(checkVersion, parseArguments)
+    promptForName(type: "Spock+FEST spec")
     def (pkg, name) = extractArtifactName(argsMap["params"][0])
     def fqn = "${pkg?pkg:''}${pkg?'.':''}${GCU.getClassNameRepresentation(name)}"
-
+ 
     createArtifact(
-        name: fqn,
-        suffix: "Tests",
-        type: "FestTest",
-        path: "test/integration")
+       name: fqn,
+       suffix: "Spec",
+       type: "FestSpec",
+       path: "test/integration")
 }

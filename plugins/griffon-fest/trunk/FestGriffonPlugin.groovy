@@ -19,7 +19,7 @@
  */
 class FestGriffonPlugin {
     def version = '0.4'
-    def dependsOn = [:]
+    def dependsOn = [spock: 0.1]
     def toolkits = ['swing']
     def griffonVersion = '0.9 > *'
     def license = 'Apache Software License 2.0'

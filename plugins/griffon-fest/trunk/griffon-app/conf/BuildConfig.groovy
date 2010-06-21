@@ -31,5 +31,3 @@ griffon {
         footer = "<br/><br/>Made with Griffon (@griffon.version@)"
     }
 }
-
-griffon.jars.destDir='target/addon'
