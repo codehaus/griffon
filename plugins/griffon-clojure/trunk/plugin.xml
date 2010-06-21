@@ -1,10 +1,14 @@
-<plugin name='clojure' version='0.5.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
+<plugin name='clojure' version='0.6' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Enables Clojure</title>
+  <description>Enables the usage of Clojure on your Griffon application.</description>
   <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
-  <plugin name='lang-bridge' version='0.3' />
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies>
-    <plugin name='lang-bridge' version='0.3' />
+    <plugin name='lang-bridge' version='0.4' />
   </dependencies>
 </plugin>

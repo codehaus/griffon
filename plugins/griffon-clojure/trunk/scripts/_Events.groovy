@@ -26,7 +26,8 @@ eventSetClasspath = { classLoader ->
 
     ant.fileset(dir: "${getPluginDirForName('clojure').file}/lib", includes: "*.jar").each {
         if(getPluginDirForName('spring')?.file && it.toString() =~ "spring") return
-        classLoader.addURL(jar.file.toURI().toURL())
+        // classLoader.addURL(jar.file.toURI().toURL())
+        addUrlIfNotPresent classLoader, jar.file
     }
 }
 
@@ -41,16 +42,17 @@ eventCopyLibsEnd = { jardir ->
     }
 }
 
-eventCompileStart = { type ->
+eventCompileStart = {
+try{
     if(compilingClojurePlugin()) return
-    if(type != "source") return
     compileClojureSrc()
+}catch(x){x.printStackTrace()}
 }
 
 /**
  * Detects whether we're compiling the Clojure plugin itself
  */
-private boolean compilingClojurePlugin() { getPluginDirForName("clojure") == null }
+private boolean compilingClojurePlugin() { getPluginDirForName("clojure") == basedir }
 
 eventStatsStart = { pathToInfo ->
     if(!pathToInfo.find{ it.path == "src.commons"} ) {

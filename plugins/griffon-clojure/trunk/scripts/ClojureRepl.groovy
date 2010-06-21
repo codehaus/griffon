@@ -22,15 +22,15 @@ includeTargets << griffonScript("_GriffonPackage")
 includePluginScript("clojure", "_ClojureCommon")
 
 target(default: "Run Clojure REPL") {
-    depends(checkVersion, configureProxy, packageApp, classpath)
+    depends(checkVersion, configureProxy, classpath, packageApp)
 
     ant.fileset(dir: "${clojurePluginDir}/lib/repl/", includes:"*.jar").each { jar ->
-        classLoader.addURL(jar.file.toURI().toURL())
+        addUrlIfNotPresent classLoader, jar.file
     }
     
-    classLoader.parent.addURL(classesDir.toURI().toURL())
-    classLoader.parent.addURL("file:${basedir}/griffon-app/resources/".toURL())
-    classLoader.parent.addURL("file:${basedir}/griffon-app/i18n/".toURL())
+    addUrlIfNotPresent classLoader.parent, classesDir
+    addUrlIfNotPresent classLoader.parent, "file:${basedir}/griffon-app/resources/"
+    addUrlIfNotPresent classLoader.parent, "file:${basedir}/griffon-app/i18n/"
 
     // classLoader.loadClass("clojure.lang.Repl").main([] as String[])
     classLoader.loadClass("jline.ConsoleRunner").main(["clojure.lang.Repl"] as String[])

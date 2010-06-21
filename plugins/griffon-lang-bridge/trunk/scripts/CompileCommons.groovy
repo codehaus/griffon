@@ -22,9 +22,6 @@
  * @since 0.1
  */
 
-ant.property(environment:"env")
-griffonHome = ant.antProject.properties."env.GRIFFON_HOME"
-
 includeTargets << griffonScript("Compile")
 
 target(default: "Compile common sources") {
@@ -32,6 +29,7 @@ target(default: "Compile common sources") {
 }
 
 target(compileCommons: "Compile common sources") {
+try{
     depends(checkVersion, parseArguments, classpath)
     def commons = "${basedir}/src/commons"
     def commonsdir = new File(commons)
@@ -39,26 +37,22 @@ target(compileCommons: "Compile common sources") {
 
     ant.mkdir(dir: classesDirPath)
 
-    def upToDate = false
-    if(hasSourcesOfType("${basedir}/src/commons", ".java"))
-        upToDate |= sourcesUpToDate("${basedir}/src/commons", classesDirPath, ".java")
-    if(hasSourcesOfType("${basedir}/src/commons", ".groovy"))
-        upToDate |= sourcesUpToDate("${basedir}/src/commons", classesDirPath, ".groovy")
-    if(upToDate) return
+    def upToDate = true
+    if(hasSourcesOfType(commons, ".java"))
+        upToDate &= sourcesUpToDate(commons, classesDirPath, ".java")
+    if(hasSourcesOfType(commons, ".groovy"))
+        upToDate &= sourcesUpToDate(commons, classesDirPath, ".groovy")
 
-    ant.echo(message: "Compiling common sources to $classesDirPath")
-    try {
+    if(!upToDate) {
+        ant.echo(message: "Compiling common sources to $classesDirPath")
+    
         String classpathId = "griffon.compile.classpath"
-        ant.groovyc(destdir: classesDirPath,
-                    classpathref: classpathId) {
+        compileSources(classesDir, classpathId) {
             src(path: commons)
             javac(classpathref: classpathId)
         }
     }
-    catch (Exception e) {
-        event("StatusFinal", ["Compilation error: ${e.message}"])
-        ant.fail(message: "Could not compile common sources: " + e.class.simpleName + ": " + e.message)
-    }
+}catch(x){x.printStackTrace()}
 }
 
 hasSourcesOfType = { src, srcsfx = ".java" ->

@@ -22,9 +22,10 @@ includePluginScript("lang-bridge", "CompileCommons")
 
 target(compileClojureSrc: "") {
     compileCommons()
-    def clojuresrc = "${basedir}/src/clojure"
-    def clojuresrcdir = new File(clojuresrc)
-    if(!clojuresrcdir.exists() || !clojuresrcdir.list().size()) {
+    def clojureSrc = "${basedir}/src/clojure"
+    def clojureSrcDir = new File(clojureSrc)
+    if(!clojureSrcDir.exists()) return
+    if(!hasSourcesOfType(clojureSrc, ".clj")) {
         ant.echo(message: "[clojure] No Clojure sources were found.")
         return
     }
@@ -32,9 +33,10 @@ target(compileClojureSrc: "") {
     if(sourcesUpToDate("${basedir}/src/clojure", classesDirPath, ".clj")) return
 
     ant.echo(message: "[clojure] Compiling Clojure sources to $classesDirPath")
+    ant.mkdir(dir: classesDirPath)
     try {
-        convertNamespacePath(clojuresrc, "clojure.compile.namespaces")
-        defineClojureCompilePath(clojuresrc, classesDirPath)
+        convertNamespacePath(clojureSrc, "clojure.compile.namespaces")
+        defineClojureCompilePath(clojureSrc, classesDirPath)
         ant.java(classname: "clojure.lang.Compile",
                  classpathref: "clojure.compile.classpath") {
             sysproperty(key: "clojure.compile.path", value: classesDirPath)
@@ -47,9 +49,10 @@ target(compileClojureSrc: "") {
 }
 
 target(compileClojureTest: "") {
-    def clojuretest = "${basedir}/test/clojure"
-    def clojuretestdir = new File(clojuretest)
-    if(!clojuretestdir.exists() || !clojuretestdir.list().size()) {
+    def clojureTest = "${basedir}/test/clojure"
+    def clojureTestDir = new File(clojureTest)
+    if(!clojureTestDir.exists()) return
+    if(!hasSourcesOfType(clojureTest, ".clj")) {
         ant.echo(message: "[clojure] No Clojure tests sources were found.")
         return
     }
@@ -57,12 +60,12 @@ target(compileClojureTest: "") {
     def destdir = new File(griffonSettings.testClassesDir, "clojure")
     ant.mkdir(dir: destdir)
 
-    if(sourcesUpToDate(clojuretest, destdir.absolutePath, ".clj")) return
+    if(sourcesUpToDate(clojureTest, destdir.absolutePath, ".clj")) return
 
     ant.echo(message: "[clojure] Compiling Clojure test sources to $destdir")
     try {
-        convertNamespacePath(clojuresrc, "clojure.test.namespaces")
-        defineClojureTestPath(clojuretest, destdir)
+        convertNamespacePath(clojureSrc, "clojure.test.namespaces")
+        defineClojureTestPath(clojureTest, destdir)
         ant.java(classname: "clojure.lang.Compile",
                  classpathref: "clojure.test.classpath") {
             sysproperty(key: "clojure.compile.path", value: destdir)
@@ -103,4 +106,4 @@ convertNamespacePath = { srcdir, pathProperty ->
     }
 }
 
-private boolean compilingClojurePlugin() { getPluginDirForName("clojure") == null }
+private boolean compilingClojurePlugin() { getPluginDirForName("clojure") == basedir }
