@@ -1,7 +1,13 @@
-<plugin name='code-coverage' version='0.3.1' jdk='1.5'>
+<plugin name='code-coverage' version='0.4' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Generates Code Coverage reports</title>
+  <description>Creates Code Coverage reports for your code.
+Based on grails-code-coverage by Mike Hugo.</description>
   <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>

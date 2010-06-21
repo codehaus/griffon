@@ -1,39 +1,13 @@
-/*
- * Copyright 2009-2010 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/**
- * @author Michael Hugo
- * @author Andres Almiray
- */
-
 dataFile = "cobertura.ser"
 
 codeCoverageExclusionList = [
-        "**/*BootStrap*",
         "Application*",
         "Builder*",
+        "BuildConfig*",
         "Config*",
-        "**/*DataSource*",
-        "**/*resources*",
         "**/*Tests*",
         "**/griffon/test/**",
         "**/org/codehaus/griffon/**",
-        "**/PreInit*",
-        "**/*\$_run_closure*",
-        "*GriffonAddon*",
         "*GriffonPlugin*"]
 
 eventTestPhasesStart = {
@@ -74,7 +48,7 @@ def createCoverageReports() {
     ant.mkdir(dir: "${coverageReportDir}")
 
     coverageReportFormats = ['html']
-    if (argsMap.xml) {
+    if (argsMap.xml || buildConfig.coverage.xml) {
         coverageReportFormats << 'xml'
     }
 
@@ -88,8 +62,8 @@ def createCoverageReports() {
                 fileset(dir: "${basedir}/griffon-app/${f}")
             }
             fileset(dir: "${basedir}/src/main")
-            if (config.coverage?.sourceInclusions) {
-                config.coverage.sourceInclusions.each {
+            if (buildConfig.coverage?.sourceInclusions) {
+                buildConfig.coverage.sourceInclusions.each {
                     fileset(dir: "${basedir}/${it}")
                 }
             }
@@ -107,38 +81,40 @@ def defineCoberturaPathAndTasks() {
     ant.taskdef(classpathRef: 'cobertura.classpath', resource: "tasks.properties")
 }
 
+def findArtefacts(String type) {
+    def artefacts = []
+    if(griffonApp) {
+	    griffonApp."$type".each { a ->
+		    artefacts << artefact
+	    }
+	    return artefacts
+    }
+    
+    File searchDir = new File("${basedir}/griffon-app/$type")
+    def pattern = ~/.*\.groovy/
+    def artefactFinder
+    artefactFinder = {
+        it.eachFileMatch(pattern) { f ->
+	    def artefact = f.absolutePath - searchDir.absolutePath - File.separator - ".groovy"
+	    artefacts << artefact.replaceAll(File.separator, ".")
+	}
+	it.eachDir(artefactFinder)
+    }
+    artefactFinder(searchDir)
+    artefacts.collect([]){ a -> classLoader.loadClass(a).newInstance() }
+}
+
+
 def replaceClosureNamesInReports() {
     if (!argsMap.nopost || !buildConfig.coverage.noPost) {
         def startTime = new Date().time
-		classLoader.parent.addURL(classesDir.toURI().toURL())
         replaceClosureNames(findArtefacts("controllers"))
         replaceClosureNames(findArtefacts("models"))
+        replaceClosureNamesInXmlReports(findArtefacts("controllers"))
+        replaceClosureNamesInXmlReports(findArtefacts("models"))
         def endTime = new Date().time
-        ant.echo(message: "[cobertura] Done with post processing reports in ${endTime - startTime}ms")
+        println "Done with post processing reports in ${endTime - startTime}ms"
     }
-}
-
-def findArtefacts(String type) {
-    def artefacts = []
-	if(griffonApp) {
-		griffonApp."$type".each { a ->
-			artefacts << artefact
-		}
-		return artefacts
-	}
-
-	File searchDir = new File("${basedir}/griffon-app/$type")
-    def pattern = ~/.*\.groovy/
-    def artefactFinder
-	artefactFinder = {
-		it.eachFileMatch(pattern) { f ->
-			def artefact = f.absolutePath - searchDir.absolutePath - File.separator - ".groovy"
-			artefacts << artefact.replaceAll(File.separator, ".")
-		}
-		it.eachDir(artefactFinder)
-	}
-	artefactFinder(searchDir)
-	artefacts.collect([]){ a -> classLoader.loadClass(a).newInstance() }
 }
 
 def replaceClosureNames(artefacts) {
@@ -165,6 +141,30 @@ def replaceClosureNames(artefacts) {
                 include(name: "**/*${klass.toString()}.html")
                 include(name: "frame-summary*.html")
             }
+        }
+    }
+}
+
+def replaceClosureNamesInXmlReports(artefacts) {
+    def xml = new File("${coverageReportDir}/coverage.xml")
+    if(xml.exists()) {
+        def parser = new XmlParser().parse(xml)
+
+        artefacts?.each {artefact ->
+            def closures = [:]
+            artefact.reference.propertyDescriptors.each {propertyDescriptor ->
+                def closureClassName = artefact.getPropertyOrStaticPropertyOrFieldValue(propertyDescriptor.name, Closure)?.class?.name
+                if (closureClassName) {
+                    def node = parser['packages']['package']['classes']['class'].find {it.@name == closureClassName}
+                    if(node) {
+                        node.@name = "${artefact.fullName}.${propertyDescriptor.name}"
+                    }
+                }
+            }
+        }
+
+        xml.withPrintWriter {writer ->
+            new XmlNodePrinter(writer).print(parser)
         }
     }
 }
