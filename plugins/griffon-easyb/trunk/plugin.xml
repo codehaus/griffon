@@ -1,7 +1,12 @@
-<plugin name='easyb' version='0.1.1' jdk='1.5'>
+<plugin name='easyb' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Enables BDD testing with Easyb</title>
+  <description>Enables BDD testing with Easyb (http://easyb.org)</description>
   <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>

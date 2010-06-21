@@ -14,20 +14,36 @@
  * limitations under the License.
  */
 
-/**
- * @author Andres Almiray
- */
+eventAllTestsStart = {
+    def easybTestTypeClass = loadTestTypeClass()
+    unitTests << easybTestTypeClass.newInstance('easyb', 'unit')
+    integrationTests << easybTestTypeClass.newInstance('easyb', 'integration')
+    functionalTests << easybTestTypeClass.newInstance('easyb', 'functional')
 
-eventCleanEnd = {
-    ant.delete(dir: "${projectWorkDir}/easyb-classes", failonerror: false)
-    ant.delete(dir: "${basedir}/test/easyb-reports", failonerror: false)
+    // register Injectors
+    classLoader.loadClass("griffon.plugin.easyb.test.inject.InjectTestRunnerFactory").getMethod("registerExternalFactory", [classLoader.loadClass("griffon.plugin.easyb.test.inject.TestRunnerFactory")] as Class[]).invoke(null, [classLoader.loadClass("griffon.plugin.easyb.test.inject.unit.InjectUnitTestRunnerFactory").newInstance()] as Object[])
+    classLoader.loadClass("griffon.plugin.easyb.test.inject.InjectTestRunnerFactory").getMethod("registerExternalFactory", [classLoader.loadClass("griffon.plugin.easyb.test.inject.TestRunnerFactory")] as Class[]).invoke(null, [classLoader.loadClass("griffon.plugin.easyb.test.inject.integration.InjectIntegrationTestRunnerFactory").newInstance()] as Object[])
 }
 
-eventJarFilesStart = {
-   // make sure EasybGriffonPlugin.class is not added to app jar
-   ant.delete(file: "${projectWorkDir}/classes/EasybGriffonPlugin.class", failonerror: false)
-}
+loadTestTypeClass = { ->
+    def doLoad = { ->
+        def easybPluginDir = pluginSettings.getPluginDirForName('easyb')
+        if(!easybPluginDir) return
+        ant.fileset(dir: "${easybPluginDir.file}/dist/", includes: "*-test.jar").each { f ->
+            addUrlIfNotPresent classLoader, f.file
+        }
+        ant.fileset(dir: "${easybPluginDir.file}/lib/", includes: "*jar").each { f ->
+            addUrlIfNotPresent classLoader, f.file
+        }
 
-eventCopyLibsEnd = { jardir ->
-   ant.delete(dir:jardir, includes: "**/easyb.*")
+        classLoader.loadClass('griffon.plugin.easyb.test.GriffonEasybTestType')
+    }
+
+    try {
+        doLoad()
+    } catch (ClassNotFoundException e) {
+        includeTargets << griffonScript("_GriffonCompile")
+        compile()
+        doLoad()
+    }
 }

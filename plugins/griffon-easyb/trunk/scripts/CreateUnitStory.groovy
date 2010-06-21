@@ -26,14 +26,14 @@ includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
 target(default: "Creates a new Griffon Easyb story") {
-   depends(checkVersion, parseArguments)
-   promptForName(type: "Easyb Story")
-   def (pkg, name) = extractArtifactName(argsMap["params"][0])
-   def fqn = "${pkg?pkg:''}${pkg?'.':''}${GCU.getClassNameRepresentation(name)}"
-
-   createArtifact(
-      name: fqn,
-      suffix: "Story",
-      type: "EasybStory",
-      path: "test/easyb")
+    depends(checkVersion, parseArguments)
+    promptForName(type: "Easyb Story")
+    def (pkg, name) = extractArtifactName(argsMap["params"][0])
+    def fqn = "${pkg?pkg:''}${pkg?'.':''}${GCU.getClassNameRepresentation(name)}"
+ 
+    createArtifact(
+        name: fqn,
+        suffix: "Story",
+        type: "EasybStory",
+        path: "test/unit")
 }
