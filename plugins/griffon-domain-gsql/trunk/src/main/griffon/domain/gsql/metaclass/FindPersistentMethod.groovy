@@ -18,13 +18,16 @@ package griffon.domain.gsql.metaclass
 
 import griffon.core.GriffonApplication
 import griffon.core.ArtifactInfo
+import griffon.util.GriffonClassUtils
 
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
 import griffon.gsql.GsqlHelper
 import griffon.domain.gsql.GsqlDomainClassHelper
+import griffon.domain.GriffonPersistenceUtil
 import griffon.domain.metaclass.AbstractFindPersistentMethod
+import griffon.domain.orm.*
 
 /**
  * @author Andres Almiray
@@ -34,6 +37,27 @@ class FindPersistentMethod extends AbstractFindPersistentMethod {
 
     FindPersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
         super(app, domainClass)
+    }
+
+    protected Object doInvokeInternal(Class clazz, String methodName, Object[] arguments) {
+        if(arguments && arguments.length >= 1) {
+            final Object arg = arguments[0] instanceof CharSequence ? arguments[0].toString() : arguments[0]
+            if(arg instanceof String) {
+                String query = arg.trim()
+                Object[] queryArgs = null
+    
+                if(arguments.length > 1) {
+                    if (arguments[1] instanceof Collection) {
+                        queryArgs = GriffonClassUtils.collectionToObjectArray((Collection) arguments[1])
+                    } else if (arguments[1].getClass().isArray()) {
+                        queryArgs = (Object[]) arguments[1]
+                    }
+                }
+    
+                return findWithQueryArgs(query, queryArgs != null ? queryArgs : GriffonPersistenceUtil.EMPTY_ARRAY); 
+            }
+        }
+        return super.doInvokeInternal(clazz, methodName, arguments)
     }
 
     protected Object findWithQueryArgs(String query, Object[] queryArgs) {
@@ -48,14 +72,9 @@ class FindPersistentMethod extends AbstractFindPersistentMethod {
         instance
     }
 
-    protected Object findWithNamedArgs(String query, Map namedArgs) {
-        LOG.trace("< Named arguments not supported: ${domainClass.simpleName}.find(${namedArgs})")
-        return null
-    }
-
     protected Object findByProperties(Map properties) {
         def query = GsqlDomainClassHelper.instance.fetchQuery('find_byProperties', domainClass.klass)
-        if(query instanceof Closure) query = query(domainClass, properties)
+        if(query instanceof Closure) (query, properties) = query(domainClass, properties)
         LOG.trace("> ${domainClass.simpleName}.find(${properties})")
         LOG.trace(query)
 
@@ -75,8 +94,25 @@ class FindPersistentMethod extends AbstractFindPersistentMethod {
         props.each { p -> if(example[p] != null) values[p] = example[p] }
 
         def query = GsqlDomainClassHelper.instance.fetchQuery('find_byExample', domainClass.klass)
-        if(query instanceof Closure) query = query(domainClass, example, values) 
+        if(query instanceof Closure) (query, values) = query(domainClass, example, values) 
         LOG.trace("> ${domainClass.simpleName}.find(${example})")
+        LOG.trace(query)
+
+        def instance = null
+        List args = new ArrayList(values.values())
+        GsqlHelper.instance.withSql { sql ->
+            def row = sql.firstRow(query, args)
+            if(row) instance = GsqlDomainClassHelper.instance.makeAndPopulateInstance(domainClass.klass, row)
+        }
+        LOG.trace("< ${domainClass.simpleName}.find() => ${instance}")
+        instance
+    }
+
+    protected Object findByCriterion(Criterion criterion, Map options) {
+        Map values = [:]
+        def query = GsqlDomainClassHelper.instance.fetchQuery('find_byCriterion', domainClass.klass)
+        if(query instanceof Closure) (query, values) = query(domainClass, criterion) 
+        LOG.trace("> ${domainClass.simpleName}.find()")
         LOG.trace(query)
 
         def instance = null

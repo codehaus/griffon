@@ -34,36 +34,59 @@ class GsqlDomainClassEnhancerDelegate extends DomainClassEnhancerDelegate {
     GsqlDomainClassEnhancerDelegate(GriffonApplication app) {
         GsqlDomainClassHelper.instance.init(app)
     }
+
+    void enhance(GriffonApplication app, ArtifactInfo domainClass) {
+        def mc = domainClass.metaClass
+
+        def findAllMethod = findAll(app, domainClass)
+        mc.static.findAll = {String query ->
+            findAllMethod.invoke(dc.klass, 'findAll', [query] as Object[])
+        }
+        mc.static.findAll = {String query, Collection positionalParams ->
+            findAllMethod.invoke(dc.klass, 'findAll', [query, positionalParams] as Object[])
+        }
+        mc.static.findAll = {String query, Collection positionalParams, Map paginateParams ->
+            findAllMethod.invoke(dc.klass, 'findAll', [query, positionalParams, paginateParams] as Object[])
+        }
+
+        def findMethod = find(app, domainClass)
+        mc.static.find = {String query ->
+            findMethod.invoke(dc.klass, 'find', [query] as Object[])
+        }
+        mc.static.find = {String query, Collection args ->
+            findMethod.invoke(dc.klass, 'find', [query, args] as Object[])
+        }
+    }
     
-    def make = { GriffonApplication app, ArtifactInfo domainClass ->
+    def make = {GriffonApplication app, ArtifactInfo domainClass ->
         new MakePersistentMethod(app, domainClass)
     }
 
-    def fetch = { GriffonApplication app, ArtifactInfo domainClass ->
+    def fetch = {GriffonApplication app, ArtifactInfo domainClass ->
         new FetchPersistentMethod(app, domainClass)
     }
     
-    def list = { GriffonApplication app, ArtifactInfo domainClass ->
+    def list = {GriffonApplication app, ArtifactInfo domainClass ->
         new ListPersistentMethod(app, domainClass)
     }
     
-    def find = { GriffonApplication app, ArtifactInfo domainClass ->
+    def find = {GriffonApplication app, ArtifactInfo domainClass ->
         new FindPersistentMethod(app, domainClass)
     }
     
-    def findAll = { GriffonApplication app, ArtifactInfo domainClass ->
+    def findAll = {GriffonApplication app, ArtifactInfo domainClass ->
         new FindAllPersistentMethod(app, domainClass)
     }
     
-    def count = { GriffonApplication app, ArtifactInfo domainClass ->
+    def count = {GriffonApplication app, ArtifactInfo domainClass ->
         new CountPersistentMethod(app, domainClass)
     }
     
-    def delete = { GriffonApplication app, ArtifactInfo domainClass ->
+    def delete = {GriffonApplication app, ArtifactInfo domainClass ->
         new DeletePersistentMethod(app, domainClass)
     }
     
-    def save = { GriffonApplication app, ArtifactInfo domainClass ->
+    def save = {GriffonApplication app, ArtifactInfo domainClass ->
         new SavePersistentMethod(app, domainClass)
     }
 }
