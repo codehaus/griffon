@@ -14,7 +14,7 @@
  */
 
 class ValidationGriffonPlugin {
-    def version = 0.4
+    def version = 0.5
     def griffonVersion = "0.3 > *"
     def dependsOn = [:]
     // optional. Valid values are: swing, javafx, swt, pivot, gtk
@@ -25,10 +25,7 @@ class ValidationGriffonPlugin {
     def author = "Nick Zhu"
     def authorEmail = "nzhu@jointsource.com"
     def title = "Griffon Validation Plugin"
-    def description = '''
-A validation plugin that provides Grails like validation capability using constraint
-declaration without depending on Spring
-'''
+    def description = 'A validation plugin that provides Grails like validation capability using constraints'
 
     // URL to the plugin's documentation
     def documentation = "http://gvalidation.sourceforge.net/"
