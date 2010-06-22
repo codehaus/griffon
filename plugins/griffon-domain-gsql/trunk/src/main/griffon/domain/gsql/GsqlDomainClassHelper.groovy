@@ -19,6 +19,7 @@ package griffon.domain.gsql
 import griffon.core.GriffonApplication
 import griffon.core.ArtifactInfo
 import griffon.domain.DomainClassHelper
+import griffon.domain.orm.*
 
 import java.beans.Introspector
 
@@ -58,6 +59,13 @@ final class GsqlDomainClassHelper {
         return klass.make(values)
     }
 
+    def toSql(Criterion criterion) {
+        List criteria = []
+        Map values = [:]
+        buildSql(criterion, criteria, values)
+        return [criteria.join(' '), values]
+    }
+
     // ----------------------------------------------
 
     private void fetchAndSetQueries() {
@@ -75,5 +83,31 @@ final class GsqlDomainClassHelper {
            queries[prop] = source[prop]
            return queries
         }
+    }
+
+    private void buildSql(UnaryExpression criterion, List criteria, Map values) {
+        criteria << criterion.propertyName +' '+ criterion.operator
+    }
+
+    private void buildSql(PropertyExpression criterion, List criteria, Map values) {
+        criteria << criterion.propertyName +' '+
+                    criterion.operator +' '+
+                    criterion.otherPropertyName
+    }
+
+    private void buildSql(BinaryExpression criterion, List criteria, Map values) {
+        criteria << criterion.propertyName +' '+ criterion.operator +' ?'
+        values[criterion.propertyName] = criterion.value
+    }
+
+    private void buildSql(CompositeCriterion criterion, List criteria, Map values) {
+        boolean first = criteria.empty
+        def length = criterion.criteria.length
+        if(!first) criteria << '('
+        criterion.criteria.eachWithIndex { c, i ->
+            buildSql(c, criteria, values)
+            if(i < length - 1) criteria << criterion.operator
+        }
+        if(!first) criteria << ')'
     }
 }

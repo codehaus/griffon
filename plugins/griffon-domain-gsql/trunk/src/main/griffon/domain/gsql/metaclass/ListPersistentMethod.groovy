@@ -53,7 +53,7 @@ class ListPersistentMethod extends AbstractListPersistentMethod {
 
     protected Collection list(Map properties) {
         def query = GsqlDomainClassHelper.instance.fetchQuery('list_byProperties', domainClass.klass)
-        if(query instanceof Closure) query = query(domainClass, properties)
+        if(query instanceof Closure) (query, properties) = query(domainClass, properties)
         LOG.trace("> ${domainClass.simpleName}.list(${properties})")
         LOG.trace(query)
         List list = []

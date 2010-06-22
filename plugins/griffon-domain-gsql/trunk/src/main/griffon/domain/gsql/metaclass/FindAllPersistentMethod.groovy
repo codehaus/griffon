@@ -18,13 +18,16 @@ package griffon.domain.gsql.metaclass
 
 import griffon.core.GriffonApplication
 import griffon.core.ArtifactInfo
+import griffon.util.GriffonClassUtils
 
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
 import griffon.gsql.GsqlHelper
 import griffon.domain.gsql.GsqlDomainClassHelper
+import griffon.domain.GriffonPersistenceUtil
 import griffon.domain.metaclass.AbstractFindAllPersistentMethod
+import griffon.domain.orm.*
 
 /**
  * @author Andres Almiray
@@ -34,6 +37,29 @@ class FindAllPersistentMethod extends AbstractFindAllPersistentMethod {
 
     FindAllPersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
         super(app, domainClass)
+    }
+
+    protected Object doInvokeInternal(Class clazz, String methodName, Object[] arguments) {
+        if(arguments && arguments.length >= 1) {
+            final Object arg = arguments[0] instanceof CharSequence ? arguments[0].toString() : arguments[0]
+            if(arg instanceof String) {
+                String query = arg.trim()
+                Object[] queryArgs = null;
+                int max = GriffonPersistenceUtil.retrieveMaxValue(arguments);
+                int offset = GriffonPersistenceUtil.retrieveOffsetValue(arguments);
+    
+                if(arguments.length > 1) {
+                    if (arguments[1] instanceof Collection) {
+                        queryArgs = GriffonClassUtils.collectionToObjectArray((Collection) arguments[1]);
+                    } else if (arguments[1].getClass().isArray()) {
+                        queryArgs = (Object[]) arguments[1];
+                    }
+                }
+    
+                return findWithQueryArgs(query, queryArgs != null ? queryArgs : GriffonPersistenceUtil.EMPTY_ARRAY, max, offset); 
+            }
+        }
+        return super.doInvokeInternal(clazz, methodName, arguments)
     }
 
     protected Collection findAll(Class clazz) {
@@ -64,14 +90,9 @@ class FindAllPersistentMethod extends AbstractFindAllPersistentMethod {
         list
     }
 
-    protected Collection findWithNamedArgs(String query, Map namedArgs, int max, int offset) {
-        LOG.trace("< Named arguments not supported: ${domainClass.simpleName}.findAll(${namedArgs})")
-        return Collections.emptyList()
-    }
-
     protected Collection findByProperties(Map properties) {
         def query = GsqlDomainClassHelper.instance.fetchQuery('findAll_byProperties', domainClass.klass)
-        if(query instanceof Closure) query = query(domainClass, properties) 
+        if(query instanceof Closure) (query, properties) = query(domainClass, properties) 
         LOG.trace("> ${domainClass.simpleName}.findAll(${properties})")
         LOG.trace(query)
         List list = []
@@ -91,9 +112,28 @@ class FindAllPersistentMethod extends AbstractFindAllPersistentMethod {
         props.each { p -> if(example[p] != null) values[p] = example[p] }
 
         def query = GsqlDomainClassHelper.instance.fetchQuery('findAll_byExample', domainClass.klass)
-        if(query instanceof Closure) query = query(domainClass, example, values) 
+        if(query instanceof Closure) (query, values) = query(domainClass, example, values) 
         LOG.trace("> ${domainClass.simpleName}.findAll(${example})")
         LOG.trace(query)
+
+        List list = []
+        List args = new ArrayList(values.values())
+        GsqlHelper.instance.withSql { sql ->
+            sql.eachRow(query, args) { row ->
+                list << GsqlDomainClassHelper.instance.makeAndPopulateInstance(domainClass.klass, row)
+            }
+        }
+        LOG.trace("< ${domainClass.simpleName}.findAll().size() => ${list.size()}")
+        list
+    }
+
+    protected Object findByCriterion(Criterion criterion, Map options) {
+        Map values = [:]
+        def query = GsqlDomainClassHelper.instance.fetchQuery('findAll_byCriterion', domainClass.klass)
+        if(query instanceof Closure) (query, values) = query(domainClass, criterion)
+        LOG.trace("> ${domainClass.simpleName}.findAll()")
+        LOG.trace(query)
+
         List list = []
         List args = new ArrayList(values.values())
         GsqlHelper.instance.withSql { sql ->

@@ -17,6 +17,7 @@
 package griffon.domain.gsql
 
 import griffon.core.ArtifactInfo
+import griffon.domain.orm.*
 
 /**
  * @author Andres Almiray
@@ -28,25 +29,39 @@ class DefaultGsqlQueries {
 
     def findAll_byExample = {ArtifactInfo artifactInfo, String table ->
         return {ArtifactInfo dc, Object example, Map values ->
-            "SELECT * FROM $table WHERE ${values.keySet().join(' = ?, ')} = ? ORDER BY id ASC"
+            ["SELECT * FROM $table WHERE ${values.keySet().join(' = ?, ')} = ? ORDER BY id ASC", values]
         }
     }
 
     def findAll_byProperties = {ArtifactInfo artifactInfo, String table ->
         return {ArtifactInfo dc, Map props ->
-            "SELECT * FROM $table WHERE ${props.keySet().join(' = ?, ')} = ? ORDER BY id ASC"
+            ["SELECT * FROM $table WHERE ${props.keySet().join(' = ?, ')} = ? ORDER BY id ASC", props]
+        }
+    }
+
+    def findAll_byCriterion = {ArtifactInfo artifactInfo, String table ->
+        return {ArtifactInfo dc, Criterion criterion ->
+            def (sql, values) = GsqlDomainClassHelper.instance.toSql(criterion)
+            ["SELECT * FROM $table WHERE ${sql} ORDER BY id ASC", values]
         }
     }
 
     def find_byExample = {ArtifactInfo artifactInfo, String table ->
         return {ArtifactInfo dc, Object example, Map values ->
-            "SELECT * FROM $table WHERE ${values.keySet().join(' = ?, ')} = ? ORDER BY id ASC"
+            ["SELECT * FROM $table WHERE ${values.keySet().join(' = ?, ')} = ? ORDER BY id ASC", values]
         }
     }
 
     def find_byProperties = {ArtifactInfo artifactInfo, String table ->
         return {ArtifactInfo dc, Map props ->
-            "SELECT * FROM $table WHERE ${props.keySet().join(' = ?, ')} = ? ORDER BY id ASC"
+            ["SELECT * FROM $table WHERE ${props.keySet().join(' = ?, ')} = ? ORDER BY id ASC", props]
+        }
+    }
+
+    def find_byCriterion = {ArtifactInfo artifactInfo, String table ->
+        return {ArtifactInfo dc, Criterion criterion ->
+            def (sql, values) = GsqlDomainClassHelper.instance.toSql(criterion)
+            ["SELECT * FROM $table WHERE ${sql} ORDER BY id ASC", values]
         }
     }
 
@@ -60,7 +75,7 @@ class DefaultGsqlQueries {
 
     def list_byProperties = {ArtifactInfo artifactInfo, String table ->
         return {ArtifactInfo dc, Map props ->
-            "SELECT * FROM $table WHERE ${props.keySet().join(' = ?, ')} = ? ORDER BY id ASC"
+            ["SELECT * FROM $table WHERE ${props.keySet().join(' = ?, ')} = ? ORDER BY id ASC", props]
         }
     }
 
@@ -68,20 +83,20 @@ class DefaultGsqlQueries {
         return "SELECT COUNT(id) AS __domain_count__ FROM $table"
     }
 
-    def countBy = {ArtifactInfo artifactInfo, String table ->
-        return "SELECT COUNT(id) AS __domain_count__ FROM $table WHERE \$column = ?"
-    }
+//    def countBy = {ArtifactInfo artifactInfo, String table ->
+//        return "SELECT COUNT(id) AS __domain_count__ FROM $table WHERE \$column = ?"
+//    }
 
-    def findBy = {ArtifactInfo artifactInfo, String table ->
-        return "SELECT * FROM $table WHERE \$column = ?"
-    }
+//    def findBy = {ArtifactInfo artifactInfo, String table ->
+//        return "SELECT * FROM $table WHERE \$column = ?"
+//    }
+
+//    def findAllBy = {ArtifactInfo artifactInfo, String table ->
+//        return "SELECT * FROM $table WHERE \$column = ? ORDER BY id ASC"
+//    }
 
     def findWhere = {ArtifactInfo artifactInfo, String table ->
         return "SELECT COUNT(id) AS __domain_count__ FROM $table"
-    }
-
-    def findAllBy = {ArtifactInfo artifactInfo, String table ->
-        return "SELECT * FROM $table WHERE \$column = ? ORDER BY id ASC"
     }
 
     def findAllWhere = {ArtifactInfo artifactInfo, String table ->
