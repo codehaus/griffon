@@ -25,20 +25,21 @@
 
 import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 
-includeTargets << griffonScript("_GriffonInit")
-includeTargets << griffonScript("_GriffonCreateArtifacts")
+includeTargets << griffonScript("Init")
+includeTargets << griffonScript("CreateIntegrationTest")
 
-target('default': "Creates a new Clojure script") {
+target('createClojureClass': "Creates a new Clojure script") {
     depends(checkVersion, parseArguments)
     promptForName(type: "Class")
     def (pkg, name) = extractArtifactName(argsMap["params"][0])
     if(!pkg) pkg = "griffon"
-    def fqn = "${pkg}.${GCU.getClassNameRepresentation(name)}"
+    name = GCU.getClassNameRepresentation(name)
 
     def packageDir = new File("${basedir}/src/clojure/${pkg.replace('.','/')}")
     packageDir.mkdirs()
 
     def classFile = new File(packageDir, "${name}.clj") 
+    def fqn = "${pkg}.${name}"
     if(classFile.exists()) {
         if(!confirmInput("WARNING: ${fqn} already exists.  Are you sure you want to replace this script?")) {
             exit(0)
@@ -60,3 +61,5 @@ target('default': "Creates a new Clojure script") {
 
 """
 }
+
+setDefaultTarget('createClojureClass')

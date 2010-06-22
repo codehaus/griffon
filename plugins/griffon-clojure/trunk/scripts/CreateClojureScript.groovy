@@ -22,10 +22,10 @@
  * @since 0.3
  */
 
-includeTargets << griffonScript("_GriffonInit")
-includeTargets << griffonScript("_GriffonCreateArtifacts")
+includeTargets << griffonScript("Init")
+includeTargets << griffonScript("CreateIntegrationTest")
 
-target('default': "Creates a new Clojure script") {
+target('createClojureScript': "Creates a new Clojure script") {
     depends(parseArguments)
 
     promptForName(type: 'Script')
@@ -47,3 +47,5 @@ target('default': "Creates a new Clojure script") {
     
 """
 }
+
+setDefaultTarget('createClojureScript')

@@ -20,12 +20,12 @@
  * @author Andres Almiray
  */
 
-// includePluginScript('lang-bridge', 'CompileCommons')
+includePluginScript('lang-bridge', 'CompileCommons')
 
-//eventCompileStart = {
-//    if(compilingLangBridgePlugin()) return
-//    compileCommons()
-//}
+eventCompileStart = {
+    if(compilingLangBridgePlugin()) return
+    compileCommons()
+}
 
 /**
  * Detects whether we're compiling the LangBridge plugin itself

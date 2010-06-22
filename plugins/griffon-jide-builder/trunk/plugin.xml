@@ -1,7 +1,13 @@
-<plugin name='jide-builder' version='0.3' griffonVersion='0.3 &gt; *' jdk='1.5'>
+<plugin name='jide-builder' version='0.4' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Jide Builder Plugin</title>
+  <description>Brings the Jide Builder libraries into a Griffon Build</description>
   <documentation>http://griffon.codehaus.org/JideBuilder+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>

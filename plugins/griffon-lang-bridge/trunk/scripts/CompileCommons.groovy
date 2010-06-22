@@ -24,12 +24,7 @@
 
 includeTargets << griffonScript("Compile")
 
-target(default: "Compile common sources") {
-    depends(compileCommons)
-}
-
 target(compileCommons: "Compile common sources") {
-try{
     depends(checkVersion, parseArguments, classpath)
     def commons = "${basedir}/src/commons"
     def commonsdir = new File(commons)
@@ -52,7 +47,6 @@ try{
             javac(classpathref: classpathId)
         }
     }
-}catch(x){x.printStackTrace()}
 }
 
 hasSourcesOfType = { src, srcsfx = ".java" ->
@@ -88,3 +82,5 @@ sourcesUpToDate = { src, dest, srcsfx = ".java", destsfx = ".class" ->
     }
     return true
 }
+
+setDefaultTarget('compileCommons')
