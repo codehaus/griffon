@@ -22,18 +22,17 @@ import com.ezware.dialog.task.TaskDialogs
  */
 
 class OxbowGriffonAddon {
+    def factories = [
+        taskDialog: new TaskDialogFactory()
+    ]
 
-	def factories = [
-		taskDialog: new TaskDialogFactory()
-	]
-
-        def methods = [
-		ask: { String... args -> TaskDialogs.ask(*args) },
-		choice: { Object... args -> TaskDialogs.choice(*args) },
-		error: { String... args -> TaskDialogs.error(*args) },
-		inform: { String... args -> TaskDialogs.inform(*args) },
-		radioChoice: { Object... args -> TaskDialogs.radioChoice(*args) },
-		showException: { Exception args -> TaskDialogs.showException(args) },
-		warn: { String... args -> TaskDialogs.warn(*args) }
-        ]
+    def methods = [
+        ask: { String... args -> TaskDialogs.ask(*args) },
+        choice: { Object... args -> TaskDialogs.choice(*args) },
+        error: { String... args -> TaskDialogs.error(*args) },
+        inform: { String... args -> TaskDialogs.inform(*args) },
+        radioChoice: { Object... args -> TaskDialogs.radioChoice(*args) },
+        showException: { Exception args -> TaskDialogs.showException(args) },
+        warn: { String... args -> TaskDialogs.warn(*args) }
+    ]
 }
