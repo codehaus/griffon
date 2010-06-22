@@ -1,0 +1,13 @@
+<plugin name='maven-publisher' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
+  <title>Publish to Maven repositories</title>
+  <description>A plugin that allows you to publish and/or resolve Griffon application and plugins to Maven repositories without needing to use Maven directly.
+A port of grails-maven-publisher originally created by Graeme Rocher.</description>
+  <documentation>http://griffon.codehaus.org/MavenPublisher+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
