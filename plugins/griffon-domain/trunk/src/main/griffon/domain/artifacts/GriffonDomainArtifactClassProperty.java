@@ -18,15 +18,14 @@ package griffon.domain.artifacts;
 /**
  * A property of a GriffonDomainArtifactClass instance
  * 
- * @author Graeme Rocher
- * @since Jul 5, 2005
+ * @author Graeme Rocher (Grails)
  */
 public interface GriffonDomainArtifactClassProperty {
     String IDENTITY = "id";
     String VERSION = "version";
     String TRANSIENT = "transients";
     String CONSTRAINTS = "constraints";
-    String EVANESCENT = "evanescent";
+//    String EVANESCENT = "evanescent";
     String RELATES_TO_MANY = "relatesToMany";
     String META_CLASS = "metaClass";
     String CLASS = "class";
@@ -220,7 +219,7 @@ public interface GriffonDomainArtifactClassProperty {
      * If #isEmbedded returns true then this method can be called to obtain a reference to the embedded component, which implements the GriffonDomainArtifactClass
      * interface
      *
-     * @see org.codehaus.groovy.griffon.commons.GriffonDomainArtifactClass
+     * @see org.codehaus.griffon.commons.GriffonDomainArtifactClass
      * @see GriffonDomainArtifactClassProperty#isEmbedded() 
      *
      * @return The component or null if it is not an embedded component

@@ -16,16 +16,27 @@
 package griffon.domain.metaclass;
 
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang.builder.ToStringBuilder;
+import griffon.core.ArtifactInfo;
+import griffon.domain.DomainHandler;
+import griffon.domain.DomainClassUtils;
 
 /**
- * @author Steven Devijver (Grails 0.1)
+ * @author Andres Almiray
  */
-public abstract class AbstractStaticMethodInvocation
-                      extends AbstractMethodInvocation
-                      implements StaticMethodInvocation {
-    public AbstractStaticMethodInvocation(Pattern pattern) {
+public abstract class AbstractPersistentMethodInvocation 
+                      extends AbstractMethodInvocation {
+    private final DomainHandler domainHandler;
+    
+    public AbstractPersistentMethodInvocation(DomainHandler domainHandler, Pattern pattern) {
         super(pattern);
+        this.domainHandler = domainHandler;
+    }
+
+    protected DomainHandler getDomainHandler() {
+        return domainHandler;
+    }
+
+    protected ArtifactInfo getArtifactInfoFor(Class clazz) {
+        return DomainClassUtils.getInstance().getArtifactInfoFor(clazz);
     }
 }

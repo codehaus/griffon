@@ -15,9 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.GriffonApplication;
 import griffon.core.ArtifactInfo;
-import griffon.domain.DynamicMethod;
+import griffon.domain.DomainHandler;
 import griffon.domain.orm.Criterion;
 import griffon.domain.orm.CriteriaBuilder;
 
@@ -36,44 +35,44 @@ import java.util.regex.Pattern;
 public abstract class AbstractFindPersistentMethod extends AbstractStaticPersistentMethod {
     private static final CriteriaBuilder BUILDER = new CriteriaBuilder();
 
-    public AbstractFindPersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass, Pattern.compile("^"+ DynamicMethod.FIND.getMethodName() +"$"));
+    public AbstractFindPersistentMethod(DomainHandler domainHandler) {
+        super(domainHandler, Pattern.compile("^"+ DynamicMethod.FIND.getMethodName() +"$"));
     }
 
-    protected Object doInvokeInternal(Class clazz, String methodName, Object[] arguments) {
+    protected Object doInvokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
         if(arguments.length == 0) {
             throw new MissingMethodException(methodName, clazz, arguments);
         }
         final Object arg = arguments[0];
         if(arg instanceof Criterion) {
             if(arguments.length == 1) {
-                return findByCriterion((Criterion)arg, Collections.emptyMap());
+                return findByCriterion(artifactInfo, (Criterion)arg, Collections.emptyMap());
             } else if(arguments[1] instanceof Map) {
-                return findByCriterion((Criterion)arg, (Map) arguments[1]);
+                return findByCriterion(artifactInfo, (Criterion)arg, (Map) arguments[1]);
             }
         } else if(arg instanceof Closure) {
-            return findByCriterion(buildCriterion((Closure)arg), Collections.emptyMap());
+            return findByCriterion(artifactInfo, buildCriterion((Closure)arg), Collections.emptyMap());
         } else if(arg instanceof Map) {
             if(arguments.length == 1) {
-                return findByProperties((Map) arg);
+                return findByProperties(artifactInfo, (Map) arg);
             } else if(arguments[1] instanceof Closure) {
-                return findByCriterion(buildCriterion((Closure)arguments[1]), (Map) arg);
+                return findByCriterion(artifactInfo, buildCriterion((Closure)arguments[1]), (Map) arg);
             }
-        } else if(getDomainClass().getKlass().isAssignableFrom(clazz) ) {
-            return findByExample(arg);
+        } else if(artifactInfo.getKlass().isAssignableFrom(clazz) ) {
+            return findByExample(artifactInfo, arg);
         }
         throw new MissingMethodException(methodName, clazz, arguments);
     }
 
-    protected Object findByProperties(Map properties) {
+    protected Object findByProperties(ArtifactInfo artifactInfo, Map properties) {
         return null;
     }
 
-    protected Object findByExample(Object example) {
+    protected Object findByExample(ArtifactInfo artifactInfo, Object example) {
         return null;
     }
 
-    protected Object findByCriterion(Criterion criterion, Map options) {
+    protected Object findByCriterion(ArtifactInfo artifactInfo, Criterion criterion, Map options) {
         return null;
     }
 

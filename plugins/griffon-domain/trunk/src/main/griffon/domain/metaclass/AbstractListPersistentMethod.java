@@ -15,9 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.GriffonApplication;
 import griffon.core.ArtifactInfo;
-import griffon.domain.DynamicMethod;
+import griffon.domain.DomainHandler;
 
 import groovy.lang.MissingMethodException;
 
@@ -30,24 +29,24 @@ import java.util.regex.Pattern;
  * @author Andres Almiray
  */
 public abstract class AbstractListPersistentMethod extends AbstractStaticPersistentMethod {
-    public AbstractListPersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass, Pattern.compile("^"+ DynamicMethod.LIST.getMethodName() +"$"));
+    public AbstractListPersistentMethod(DomainHandler domainHandler) {
+        super(domainHandler, Pattern.compile("^"+ DynamicMethod.LIST.getMethodName() +"$"));
     }
 
-    protected final Object doInvokeInternal(Class clazz, String methodName, Object[] arguments) {
+    protected final Object doInvokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
         if(arguments.length == 0) {
-            return list(clazz);
+            return list(artifactInfo, clazz);
         } else if(arguments[0] instanceof Map) {
-            return list((Map) arguments[0]);
+            return list(artifactInfo, (Map) arguments[0]);
         }
         throw new MissingMethodException(methodName, clazz, arguments);
     }
 
-    protected Collection list(Class clazz) {
+    protected Collection list(ArtifactInfo artifactInfo, Class clazz) {
         return Collections.emptyList();
     }
 
-    protected Collection list(Map props) {
+    protected Collection list(ArtifactInfo artifactInfo, Map props) {
         return Collections.emptyList();
     }
 }

@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package griffon.domain
+package griffon.domain;
 
-import griffon.core.GriffonApplication
-import griffon.core.ArtifactInfo
+import griffon.core.GriffonApplication;
 
 /**
  * @author Andres Almiray
  */
-abstract class DomainClassEnhancerDelegate {
-    void enhance(ArtifactInfo domainClass, GriffonApplication app) {
-    }
+public interface DomainHandler {
+    GriffonApplication  getApp();
+
+    Object invokeInstance(Object target, String methodName, Object... args);
+
+    Object invokeStatic(Class clazz, String methodName, Object... args);
 }

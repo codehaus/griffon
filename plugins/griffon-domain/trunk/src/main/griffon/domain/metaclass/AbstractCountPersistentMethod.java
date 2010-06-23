@@ -15,9 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.GriffonApplication;
 import griffon.core.ArtifactInfo;
-import griffon.domain.DynamicMethod;
+import griffon.domain.DomainHandler;
 
 import groovy.lang.MissingMethodException;
 
@@ -27,18 +26,18 @@ import java.util.regex.Pattern;
  * @author Andres Almiray
  */
 public abstract class AbstractCountPersistentMethod extends AbstractStaticPersistentMethod {
-    public AbstractCountPersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass, Pattern.compile("^"+ DynamicMethod.COUNT.getMethodName() +"$"));
+    public AbstractCountPersistentMethod(DomainHandler domainHandler) {
+        super(domainHandler, Pattern.compile("^"+ DynamicMethod.COUNT.getMethodName() +"$"));
     }
 
-    protected final Object doInvokeInternal(Class clazz, String methodName, Object[] arguments) {
+    protected final Object doInvokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
         if(arguments.length == 0) {
-            return count(clazz);
+            return count(artifactInfo, clazz);
         }
         throw new MissingMethodException(methodName, clazz, arguments);
     }
 
-    protected int count(Class clazz) {
+    protected int count(ArtifactInfo artifactInfo, Class clazz) {
         return 0;
     }
 }

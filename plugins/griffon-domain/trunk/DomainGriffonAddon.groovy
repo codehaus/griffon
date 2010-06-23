@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import griffon.domain.DomainClassHelper
-import griffon.domain.DomainClassArtifactHandler
+import griffon.domain.artifacts.DomainClassArtifactHandler
 
 /**
  * @author Andres Almiray
@@ -23,6 +22,5 @@ import griffon.domain.DomainClassArtifactHandler
 class DomainGriffonAddon {
     def addonInit(app) {
         app.artifactManager.registerArtifactHandler(new DomainClassArtifactHandler())
-        DomainClassHelper.instance.init(app)
     }
 }

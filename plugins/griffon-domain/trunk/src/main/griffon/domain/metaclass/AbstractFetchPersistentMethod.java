@@ -15,9 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.GriffonApplication;
 import griffon.core.ArtifactInfo;
-import griffon.domain.DynamicMethod;
+import griffon.domain.DomainHandler;
 
 import groovy.lang.MissingMethodException;
 
@@ -27,18 +26,18 @@ import java.util.regex.Pattern;
  * @author Andres Almiray
  */
 public abstract class AbstractFetchPersistentMethod extends AbstractStaticPersistentMethod {
-    public AbstractFetchPersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass, Pattern.compile("^"+ DynamicMethod.FETCH.getMethodName() +"$"));
+    public AbstractFetchPersistentMethod(DomainHandler domainHandler) {
+        super(domainHandler, Pattern.compile("^"+ DynamicMethod.FETCH.getMethodName() +"$"));
     }
 
-    protected final Object doInvokeInternal(Class clazz, String methodName, Object[] arguments) {
+    protected final Object doInvokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
         if(arguments.length == 1) {
-            return fetch(arguments[0]);
+            return fetch(artifactInfo, arguments[0]);
         }
         throw new MissingMethodException(methodName, clazz, arguments);
     }
 
-    protected Object fetch(Object key) {
+    protected Object fetch(ArtifactInfo artifactInfo, Object key) {
         return null;
     }
 }

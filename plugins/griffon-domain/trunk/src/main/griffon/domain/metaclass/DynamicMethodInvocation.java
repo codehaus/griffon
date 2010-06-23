@@ -17,29 +17,18 @@ package griffon.domain.metaclass;
 
 /**
  * <p>Dynamic method invocation callback interface. Implementation classes
- * can add a persistence functionality to Grails like save and delete.
+ * can add a persistence functionality to Grriffon like save and delete.
  * 
- * @author Steven Devijver
- * @author Graeme Rocher
- *
- * @since Aug 7, 2005
+ * @author Steven Devijver (Grails 0.1)
+ * @author Graeme Rocher (Grails 0.1)
  */
-public interface DynamicMethodInvocation {
-
-    /**
-     * <p>Checks if a method name matches the criteria of the implementation class.
-     * 
-     * @param methodName the static method name
-     * @return result of criteria match test
-     */
-    public boolean isMethodMatch(String methodName);
-    
+public interface DynamicMethodInvocation extends MethodInvocation {
     /**
      * <p>Invokes the actual method. The target object and arguments are supplied.
      * 
      * @param target the target on which the method is invoked.
      * @param methodName
-     *@param arguments the arguments passed in the method call @return the return value of the dynamic method invocation.
+     * @param arguments the arguments passed in the method call @return the return value of the dynamic method invocation.
      */
-    public Object invoke(Object target, String methodName, Object[] arguments);
+    Object invoke(Object target, String methodName, Object[] arguments);
 }

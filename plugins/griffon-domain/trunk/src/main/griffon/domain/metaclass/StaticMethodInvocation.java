@@ -17,21 +17,11 @@ package griffon.domain.metaclass;
 
 /**
  * <p>Static method invocation callback interface. Implementation classes
- * can add static persistent functionality to Grails like finder methods.
+ * can add static persistent functionality to Griffon like finder methods.
  * 
- * @author Steven Devijver
- * @since Aug 7, 2005
+ * @author Steven Devijver (Grails 0.1)
  */
-public interface StaticMethodInvocation {
-
-    /**
-     * <p>Checks if a method name matches the criteria of the implementation class.
-     * 
-     * @param methodName the static method name
-     * @return result of criteria match test
-     */
-    public boolean isMethodMatch(String methodName);
-    
+public interface StaticMethodInvocation extends MethodInvocation {
     /**
      * <p>Invokes the actual method. The class, method name and arguments are provided.
      * If no arguments are passed the argument array is empty.
