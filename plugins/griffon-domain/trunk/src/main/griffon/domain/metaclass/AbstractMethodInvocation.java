@@ -20,12 +20,26 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * @author Steven Devijver (Grails 0.1)
+ * @author Andres Almiray
  */
-public abstract class AbstractStaticMethodInvocation
-                      extends AbstractMethodInvocation
-                      implements StaticMethodInvocation {
-    public AbstractStaticMethodInvocation(Pattern pattern) {
-        super(pattern);
+public abstract class AbstractMethodInvocation {
+    private final Pattern pattern;
+    
+    public AbstractMethodInvocation(Pattern pattern) {
+        this.pattern = pattern;
+    }
+
+    protected Pattern getPattern() {
+        return pattern;
+    }
+
+    public boolean isMethodMatch(String methodName) {
+        return this.pattern.matcher(methodName.subSequence(0, methodName.length())).find();
+    }
+
+    public String toString() {
+        return new ToStringBuilder(this)
+                        .append("Pattern",this.pattern)
+                        .toString();
     }
 }

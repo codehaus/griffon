@@ -15,14 +15,14 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.GriffonApplication;
+import griffon.domain.DomainHandler;
 import griffon.core.ArtifactInfo;
 // import griffon.domain.orm.Criterion;
 // import griffon.domain.orm.Restrictions;
 // import griffon.domain.GriffonDomainClass;
 // import griffon.domain.GriffonDomainClassProperty;
 // import griffon.domain.GriffonDomainClassUtils;
-import griffon.domain.DynamicMethod;
+// import griffon.domain.DynamicMethod;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,8 +38,8 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractStat
     private final String[] operators;
     private final Pattern[] operatorPatterns;
 
-    public AbstractClausedStaticPersistentMethod(GriffonApplication app, ArtifactInfo artifactInfo, Pattern pattern, String[] operators) {
-        super(app, artifactInfo, pattern);
+    public AbstractClausedStaticPersistentMethod(DomainHandler domainHandler, Pattern pattern, String[] operators) {
+        super(domainHandler, pattern);
         this.operators = operators;
         this.operatorPatterns = new Pattern[this.operators.length];
         for (int i = 0; i < operators.length; i++) {
@@ -48,7 +48,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractStat
     }
 
 /*
-    protected Object doInvokeInternal(final Class clazz, String methodName, Object[] arguments) {
+    protected Object doInvokeInternal(final ArtifactInfo artifactInfo, final Class clazz, String methodName, Object[] arguments) {
         List expressions = new ArrayList();
         if(arguments == null) arguments = new Object[0];
         Matcher match = super.getPattern().matcher(methodName);
@@ -67,7 +67,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractStat
                 booleanProperty = booleanProperty.substring(3);
                 arg = Boolean.FALSE;
             }
-            GriffonMethodExpression booleanExpression = GriffonMethodExpression.create(getDomainClass(), booleanProperty);
+            GriffonMethodExpression booleanExpression = GriffonMethodExpression.create(artifactInfo, booleanProperty);
             booleanExpression.setArguments(new Object[]{arg});
             expressions.add(booleanExpression);
             querySequence = match.group(4);
@@ -92,7 +92,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractStat
                 // calculating the numBer of arguments required for the expression
                 int argumentCursor = 0;
                 for (String queryParameter : queryParameters) {
-                    GriffonMethodExpression currentExpression = GriffonMethodExpression.create(getDomainClass(), queryParameter);
+                    GriffonMethodExpression currentExpression = GriffonMethodExpression.create(artifactInfo, queryParameter);
                     totalRequiredArguments += currentExpression.argumentsRequired;
                     // populate the arguments into the GriffonExpression from the argument list
                     Object[] currentArguments = new Object[currentExpression.argumentsRequired];
@@ -118,7 +118,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractStat
 
         // otherwise there is only one expression
         if(!containsOperator) {
-            GriffonMethodExpression solo = GriffonMethodExpression.create(getDomainClass(), querySequence);
+            GriffonMethodExpression solo = GriffonMethodExpression.create(artifactInfo, querySequence);
 
             if(solo.argumentsRequired > arguments.length)
                 throw new MissingMethodException(methodName,clazz,arguments);

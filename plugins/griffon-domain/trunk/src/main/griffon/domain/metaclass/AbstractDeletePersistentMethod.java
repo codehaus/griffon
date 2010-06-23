@@ -15,9 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.GriffonApplication;
 import griffon.core.ArtifactInfo;
-import griffon.domain.DynamicMethod;
+import griffon.domain.DomainHandler;
 
 import groovy.lang.MissingMethodException;
 
@@ -27,18 +26,18 @@ import java.util.regex.Pattern;
  * @author Andres Almiray
  */
 public abstract class AbstractDeletePersistentMethod extends AbstractDynamicPersistentMethod {
-    public AbstractDeletePersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass, Pattern.compile("^"+ DynamicMethod.DELETE.getMethodName() +"$"));
+    public AbstractDeletePersistentMethod(DomainHandler domainHandler) {
+        super(domainHandler, Pattern.compile("^"+ DynamicMethod.DELETE.getMethodName() +"$"));
     }
 
-    protected final Object doInvokeInternal(Object target, String methodName, Object[] arguments) {
+    protected final Object doInvokeInternal(ArtifactInfo artifactInfo, Object target, String methodName, Object[] arguments) {
         if(target == null || (arguments != null && arguments.length > 0)) {
-            throw new MissingMethodException(methodName, getDomainClass().getKlass(), arguments);
+            throw new MissingMethodException(methodName, artifactInfo.getKlass(), arguments);
         }
-        return delete(target);
+        return delete(artifactInfo, target);
     }
 
-    protected Object delete(Object target) {
+    protected Object delete(ArtifactInfo artifactInfo, Object target) {
         return target;
     }
 }

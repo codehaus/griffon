@@ -19,7 +19,7 @@
  */
 class DomainGriffonPlugin {
     def version = 0.1
-    def dependsOn = [i18n: 0.2, artifacts: 0.2]
+    def dependsOn = [artifacts: 0.2]
     def griffonVersion = '0.9 > *'
     def license = 'Apache Software License 2.0'
 

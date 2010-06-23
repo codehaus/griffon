@@ -15,35 +15,23 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.GriffonApplication;
 import griffon.core.ArtifactInfo;
+import griffon.domain.DomainHandler;
 import java.util.regex.Pattern;
 
 /**
  * Abstract base class for dynamic persistent methods
  */
-public abstract class AbstractDynamicPersistentMethod extends
-        AbstractDynamicMethodInvocation {
-    private final GriffonApplication app;
-    private final ArtifactInfo domainClass;
-
-    public AbstractDynamicPersistentMethod(GriffonApplication app, ArtifactInfo domainClass, Pattern pattern) {
-        super(pattern);
-        this.app = app;
-        this.domainClass = domainClass;
-    }
-
-    public GriffonApplication getApp() {
-        return app;
-    }
-
-    public ArtifactInfo getDomainClass() {
-        return domainClass;
+public abstract class AbstractDynamicPersistentMethod
+                      extends AbstractPersistentMethodInvocation
+                      implements DynamicMethodInvocation {
+    public AbstractDynamicPersistentMethod(DomainHandler domainHandler, Pattern pattern) {
+        super(domainHandler, pattern);
     }
 
     public final Object invoke(Object target, String methodName, Object[] arguments) {
-        return doInvokeInternal(target, methodName, arguments);
+        return doInvokeInternal(getArtifactInfoFor(target.getClass()), target, methodName, arguments);
     }
 
-    protected abstract Object doInvokeInternal(Object target, String methodName, Object[] arguments);
+    protected abstract Object doInvokeInternal(ArtifactInfo artifactInfo, Object target, String methodName, Object[] arguments);
 }

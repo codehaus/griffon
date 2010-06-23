@@ -15,30 +15,29 @@
  */ 
 package griffon.domain.metaclass
 
-import griffon.core.GriffonApplication
 import griffon.core.ArtifactInfo
-import griffon.domain.DynamicMethod
+import griffon.domain.DomainHandler
 import java.util.regex.Pattern
 
 /**
  * @author Andres Almiray
  */
 public abstract class AbstractMakePersistentMethod extends AbstractStaticPersistentMethod {
-    public AbstractMakePersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass, Pattern.compile('^'+ DynamicMethod.MAKE.getMethodName() +'$'))
+    public AbstractMakePersistentMethod(DomainHandler domainHandler) {
+        super(domainHandler, Pattern.compile('^'+ DynamicMethod.MAKE.getMethodName() +'$'))
     }
 
-    protected final Object doInvokeInternal(Class clazz, String methodName, Object[] arguments) {
+    protected final Object doInvokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
         if(!arguments) {
-            return domainClass.newInstance()
+            return artifactInfo.newInstance()
         } else if(arguments[0] instanceof Map) {
-            return make((Map) arguments[0])
+            return make(artifactInfo, (Map) arguments[0])
         }
         throw new MissingMethodException(methodName, clazz, arguments)
     }
 
-    protected Object make(Map props) {
-        def instance = domainClass.newInstance()
+    protected Object make(ArtifactInfo artifactInfo, Map props) {
+        def instance = artifactInfo.newInstance()
         props.each { k, v ->
             try {
                 instance[k] = v

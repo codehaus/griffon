@@ -15,9 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.GriffonApplication;
 import griffon.core.ArtifactInfo;
-import griffon.domain.DynamicMethod;
+import griffon.domain.DomainHandler;
 
 import groovy.lang.MissingMethodException;
 
@@ -27,27 +26,27 @@ import java.util.regex.Pattern;
  * @author Andres Almiray
  */
 public abstract class AbstractSavePersistentMethod extends AbstractDynamicPersistentMethod {
-    public AbstractSavePersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass, Pattern.compile("^"+ DynamicMethod.SAVE.getMethodName() +"$"));
+    public AbstractSavePersistentMethod(DomainHandler domainHandler) {
+        super(domainHandler, Pattern.compile("^"+ DynamicMethod.SAVE.getMethodName() +"$"));
     }
 
-    protected final Object doInvokeInternal(Object target, String methodName, Object[] arguments) {
+    protected final Object doInvokeInternal(ArtifactInfo artifactInfo, Object target, String methodName, Object[] arguments) {
         if(target == null) {
-            throw new MissingMethodException(methodName, getDomainClass().getKlass(), arguments);
+            throw new MissingMethodException(methodName, artifactInfo.getKlass(), arguments);
         }
-        if(shouldInsert(target, arguments)) {
-            return insert(target, arguments);
+        if(shouldInsert(artifactInfo, target, arguments)) {
+            return insert(artifactInfo, target, arguments);
         }
-        return save(target, arguments);
+        return save(artifactInfo, target, arguments);
     }
    
-    protected abstract boolean shouldInsert(Object target, Object[] arguments);
+    protected abstract boolean shouldInsert(ArtifactInfo artifactInfo, Object target, Object[] arguments);
 
-    protected Object insert(Object target, Object[] arguments) {
+    protected Object insert(ArtifactInfo artifactInfo, Object target, Object[] arguments) {
         return target;
     }
 
-    protected Object save(Object target, Object[] arguments) {
+    protected Object save(ArtifactInfo artifactInfo, Object target, Object[] arguments) {
         return target;
     }
 }

@@ -1,4 +1,4 @@
-package griffon.domain;
+package griffon.persistence;
 
 import java.util.Map;
 

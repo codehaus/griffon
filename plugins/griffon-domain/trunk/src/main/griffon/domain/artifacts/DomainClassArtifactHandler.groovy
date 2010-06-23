@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package griffon.domain
+package griffon.domain.artifacts
 
 import griffon.core.ArtifactHandlerAdapter
 import griffon.core.ArtifactInfo

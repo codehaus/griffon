@@ -15,40 +15,26 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.GriffonApplication;
 import griffon.core.ArtifactInfo;
+import griffon.domain.DomainHandler;
 import java.util.regex.Pattern;
 
 /**
  * Abstract base class for static persistent methods
  * 
- * @author Steven Devijver
- * @author Graeme Rocher
- * 
- * @since Aug 8, 2005
+ * @author Steven Devijver (Grails 0.1)
+ * @author Graeme Rocher (Grails 0.1)
  */
-public abstract class AbstractStaticPersistentMethod extends
-        AbstractStaticMethodInvocation {
-    private final GriffonApplication app;
-    private final ArtifactInfo domainClass;
-
-    public AbstractStaticPersistentMethod(GriffonApplication app, ArtifactInfo domainClass, Pattern pattern) {
-        super(pattern);
-        this.app = app;
-        this.domainClass = domainClass;
-    }
-
-    public GriffonApplication getApp() {
-        return app;
-    }
-
-    public ArtifactInfo getDomainClass() {
-        return domainClass;
+public abstract class AbstractStaticPersistentMethod
+                      extends AbstractPersistentMethodInvocation
+                      implements StaticMethodInvocation {
+    public AbstractStaticPersistentMethod(DomainHandler domainHandler, Pattern pattern) {
+        super(domainHandler, pattern);
     }
 
     public final Object invoke(Class clazz, String methodName, Object[] arguments) {
-        return doInvokeInternal(clazz, methodName, arguments);
+        return doInvokeInternal(getArtifactInfoFor(clazz), clazz, methodName, arguments);
     }
 
-    protected abstract Object doInvokeInternal(Class clazz, String methodName, Object[] arguments);
+    protected abstract Object doInvokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments);
 }

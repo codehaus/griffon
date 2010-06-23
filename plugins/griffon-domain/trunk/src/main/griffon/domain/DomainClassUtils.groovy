@@ -30,14 +30,20 @@ import org.apache.commons.logging.LogFactory
 /**
  * @author Andres Almiray
  */
-@Singleton
-final class DomainClassHelper {
-    private static final Log LOG = LogFactory.getLog(DomainClassHelper.class)
+final class DomainClassUtils {
+    private static final Log LOG = LogFactory.getLog(DomainClassUtils.class)
     private static final Pattern PLURAL_PATTERN = Pattern.compile(".*[^aeiouy]y", Pattern.CASE_INSENSITIVE)
 
     private final Map ARTIFACTS = [:]
     private final Map DOMAIN_CLASSES = [:]
-    private final Map ENTITIES_NAMES = [:]
+    private final Map ENTITY_NAMES = [:]
+    private static final DomainClassUtils INSTANCE = new DomainClassUtils()
+
+    public static DomainClassUtils getInstance() {
+        INSTANCE
+    }
+
+    private DomainClassUtils() {}
 
     void init(GriffonApplication app) {
         app.artifactManager.domainArtifacts.each { domain ->
@@ -48,11 +54,11 @@ final class DomainClassHelper {
     }
     
     String getEntityNameFor(Class klass) {
-        ENTITIES_NAMES[klass.name]
+        ENTITY_NAMES[klass.name]
     }
 
     String getEntityNameFor(ArtifactInfo artifactInfo) {
-        ENTITIES_NAMES[artifactInfo.klass.name]
+        ENTITY_NAMES[artifactInfo.klass.name]
     }
 
     ArtifactInfo getArtifactInfoFor(Class klass) {
@@ -74,7 +80,7 @@ final class DomainClassHelper {
         String entityName = domain.simpleName
         boolean matchesIESRule = PLURAL_PATTERN.matcher(entityName).matches()
         entityName = matchesIESRule ? entityName[0..-1] + "ies" : entityName + "s"
-        ENTITIES_NAMES[key] = entityName
+        ENTITY_NAMES[key] = entityName
         return entityName
     }
 }

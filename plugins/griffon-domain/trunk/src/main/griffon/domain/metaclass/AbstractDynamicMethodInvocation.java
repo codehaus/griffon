@@ -18,30 +18,13 @@ package griffon.domain.metaclass;
 import java.util.regex.Pattern;
 
 /**
- * 
- * 
- * @author Steven Devijver
- * @author Graeme Rocher
- *
- * @since Aug 7, 2005
+ * @author Steven Devijver (Grails 0.1)
+ * @author Graeme Rocher (Grails 0.1)
  */
-public abstract class AbstractDynamicMethodInvocation implements
-        DynamicMethodInvocation {
-    private final Pattern pattern;
-
+public abstract class AbstractDynamicMethodInvocation
+                      extends AbstractMethodInvocation
+                      implements DynamicMethodInvocation {
     public AbstractDynamicMethodInvocation(Pattern pattern) {
-        this.pattern = pattern;
-    }
-
-//    public void setPattern(Pattern pattern) {
-//        this.pattern = pattern;
-//    }
-
-    protected Pattern getPattern() {
-        return pattern;
-    }
-
-    public boolean isMethodMatch(String methodName) {
-        return this.pattern.matcher(methodName.subSequence(0, methodName.length())).matches();
+        super(pattern);
     }
 }
