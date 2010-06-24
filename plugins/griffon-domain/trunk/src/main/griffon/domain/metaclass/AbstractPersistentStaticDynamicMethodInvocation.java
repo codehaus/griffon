@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2010 the original author or authors.
+ * Copyright 2010 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package griffon.domain.metaclass;
 
 import java.util.regex.Pattern;
+
 import griffon.core.ArtifactInfo;
 import griffon.domain.DomainHandler;
 import griffon.domain.DomainClassUtils;
@@ -23,20 +24,27 @@ import griffon.domain.DomainClassUtils;
 /**
  * @author Andres Almiray
  */
-public abstract class AbstractPersistentMethodInvocation 
-                      extends AbstractMethodInvocation {
+public abstract class AbstractPersistentStaticDynamicMethodInvocation 
+                      extends AbstractStaticDynamicMethodInvocation
+                      implements PersistentMethodInvocation {
     private final DomainHandler domainHandler;
     
-    public AbstractPersistentMethodInvocation(DomainHandler domainHandler, Pattern pattern) {
+    public AbstractPersistentStaticDynamicMethodInvocation(DomainHandler domainHandler, Pattern pattern) {
         super(pattern);
         this.domainHandler = domainHandler;
     }
 
-    protected DomainHandler getDomainHandler() {
+    public DomainHandler getDomainHandler() {
         return domainHandler;
     }
 
-    protected ArtifactInfo getArtifactInfoFor(Class clazz) {
+    public ArtifactInfo getArtifactInfoFor(Class clazz) {
         return DomainClassUtils.getInstance().getArtifactInfoFor(clazz);
     }
+
+    public final Object invoke(Class clazz, String methodName, Object[] arguments) {
+	    return invokeInternal(getArtifactInfoFor(clazz), clazz, methodName, arguments);
+	}
+	
+    protected abstract Object invokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments);
 }

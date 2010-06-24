@@ -15,12 +15,17 @@
  */
 package org.codehaus.griffon.persistence;
 
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import java.io.File;
 import java.lang.reflect.Modifier;
 
 import griffon.domain.DomainHandler;
-import griffon.domain.metaclass.DynamicMethod;
+import griffon.domain.artifacts.GriffonDomainClassProperty;
 import griffon.domain.metaclass.MethodSignature;
+import griffon.domain.metaclass.DefaultPersistentDynamicMethod;
 
 import org.codehaus.groovy.ast.*;
 import org.codehaus.groovy.ast.expr.*;
@@ -28,7 +33,8 @@ import org.codehaus.groovy.ast.stmt.*;
 import org.codehaus.groovy.classgen.GeneratorContext;
 import org.codehaus.groovy.control.SourceUnit;
 import org.codehaus.griffon.ast.GriffonASTUtils;
-import griffon.domain.artifacts.GriffonDomainArtifactClassProperty;
+
+import org.codehaus.groovy.runtime.DefaultGroovyMethods;
 
 /**
  * Base contract for a domain class injector that adds persistence
@@ -43,6 +49,7 @@ public abstract class GriffonDomainClassInjector {
     protected ClassNode dwClassNode = new ClassNode(DomainHandler.class);
     protected static final String DOMAIN_HANDLER_METHOD_NAME = "getDomainHandler";
 
+/*
     public void performInjection(SourceUnit source, ClassNode classNode) {
         performInjection(source, null, classNode);
     }
@@ -52,19 +59,20 @@ public abstract class GriffonDomainClassInjector {
             performInjectionOnAnnotatedEntity(classNode);
         }
     }
+*/
 
     public void performInjectionOnAnnotatedEntity(ClassNode classNode) {
-        GriffonASTUtils.injectConstant(classNode, GriffonDomainArtifactClassProperty.MAPPING, String.class, getMappingValue());
+        GriffonASTUtils.injectConstant(classNode, GriffonDomainClassProperty.GRIFFON_DOMAIN_MAPPING, String.class, getMappingValue());
         injectDomainHandler(classNode);
-        injectDynamicMethods(classNode);
         injectMethods(classNode);
+        performInjection(classNode);
     }
 
-    protected abstract DynamicMethod[] getProvidedDynamicMethods();
+    protected abstract MethodSignature[] getProvidedMethods();
     protected abstract String getMappingValue(); 
     protected abstract Class getDomainHandlerClass();
     protected abstract Class getDomainHandlerHolderClass();
-    protected abstract void injectMethods(ClassNode classNode);
+    protected abstract void performInjection(ClassNode classNode);
 
     public boolean isDomainClass(@SuppressWarnings("unused") ClassNode classNode, SourceUnit sourceNode) {
         String sourcePath = sourceNode.getName();
@@ -86,15 +94,13 @@ public abstract class GriffonDomainClassInjector {
         return !GriffonASTUtils.isEnum(classNode);
     }
 
-    protected void injectDynamicMethods(ClassNode classNode) {
-        for(DynamicMethod dynamicMethod: getProvidedDynamicMethods()) {
-            for(MethodSignature methodSignature: dynamicMethod.getMethodSignatures()) {
-               injectDynamicMethod(classNode, methodSignature);
-            }
+    protected void injectMethods(ClassNode classNode) {
+        for(MethodSignature methodSignature: getProvidedMethods()) {
+            injectMethod(classNode, methodSignature);
         }
     }
 
-    protected void injectDynamicMethod(ClassNode classNode, MethodSignature methodSignature) {
+    protected void injectMethod(ClassNode classNode, MethodSignature methodSignature) {
         Parameter[] parameters = makeParameters(methodSignature.getParameterTypes());
 
         int modifiers = Modifier.PUBLIC;
@@ -158,5 +164,16 @@ public abstract class GriffonDomainClassInjector {
             DOMAIN_HANDLER_METHOD_NAME,
             ArgumentListExpression.EMPTY_ARGUMENTS
         );
+    }
+
+    public static MethodSignature[] allDefaultPersistentMethodSignatures() {
+        Collection<MethodSignature> signatures = new ArrayList<MethodSignature>();
+        for(DefaultPersistentDynamicMethod dynaMethod: DefaultPersistentDynamicMethod.allMethods()) {
+            signatures = DefaultGroovyMethods.plus(
+                signatures,
+                Arrays.asList(dynaMethod.getMethodSignatures())
+            );
+        }
+        return (MethodSignature[]) signatures.toArray(new MethodSignature[signatures.size()]);
     }
 }

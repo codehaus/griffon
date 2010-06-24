@@ -23,17 +23,16 @@ import groovy.lang.MissingMethodException;
 import java.util.Map;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.regex.Pattern;
 
 /**
  * @author Andres Almiray
  */
-public abstract class AbstractListPersistentMethod extends AbstractStaticPersistentMethod {
+public abstract class AbstractListPersistentMethod extends AbstractPersistentStaticMethodInvocation {
     public AbstractListPersistentMethod(DomainHandler domainHandler) {
-        super(domainHandler, Pattern.compile("^"+ DynamicMethod.LIST.getMethodName() +"$"));
+        super(domainHandler);
     }
 
-    protected final Object doInvokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
+    protected final Object invokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
         if(arguments.length == 0) {
             return list(artifactInfo, clazz);
         } else if(arguments[0] instanceof Map) {

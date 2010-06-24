@@ -19,6 +19,8 @@ import griffon.core.ArtifactInfo;
 import griffon.domain.DomainHandler;
 import griffon.domain.orm.Criterion;
 import griffon.domain.orm.CriteriaBuilder;
+import griffon.domain.orm.CriteriaVisitor;
+import griffon.domain.orm.CriteriaVisitException;
 
 import groovy.lang.Closure;
 import groovy.lang.MissingMethodException;
@@ -27,19 +29,18 @@ import java.util.Map;
 import java.util.Iterator;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.regex.Pattern;
 
 /**
  * @author Andres Almiray
  */
-public abstract class AbstractFindAllPersistentMethod extends AbstractStaticPersistentMethod {
+public abstract class AbstractFindAllPersistentMethod extends AbstractPersistentStaticMethodInvocation {
     private static final CriteriaBuilder BUILDER = new CriteriaBuilder();
 
     public AbstractFindAllPersistentMethod(DomainHandler domainHandler) {
-        super(domainHandler, Pattern.compile("^"+ DynamicMethod.FIND_ALL.getMethodName() +"$"));
+        super(domainHandler);
     }
 
-    protected Object doInvokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
+    protected Object invokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
         if(arguments.length == 0) {
             return findAll(artifactInfo, clazz);
         }
@@ -81,7 +82,15 @@ public abstract class AbstractFindAllPersistentMethod extends AbstractStaticPers
     }
 
     protected final Criterion buildCriterion(Closure criteria) {
-        criteria.setDelegate(BUILDER);
-        return (Criterion) criteria.call();
+        Criterion criterion = null;
+
+        try {
+            criterion = CriteriaVisitor.visit(criteria);
+        } catch(CriteriaVisitException cve) {
+            criteria.setDelegate(BUILDER);
+            criterion = (Criterion) criteria.call();
+        }
+
+        return criterion;
     }
 }

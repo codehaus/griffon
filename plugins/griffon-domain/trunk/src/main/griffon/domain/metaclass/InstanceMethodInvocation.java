@@ -18,7 +18,13 @@ package griffon.domain.metaclass;
 /**
  * @author Andres Almiray
  */
-public abstract class AbstractStaticMethodInvocation
-                      extends AbstractMethodInvocation
-                      implements StaticMethodInvocation {
+public interface InstanceMethodInvocation extends MethodInvocation {
+    /**
+     * <p>Invokes the actual method. The target object and arguments are supplied.
+     * 
+     * @param target the target on which the method is invoked.
+     * @param methodName
+     * @param arguments the arguments passed in the method call @return the return value of the dynamic method invocation.
+     */
+    Object invoke(Object target, String methodName, Object[] arguments);
 }

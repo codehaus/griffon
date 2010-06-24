@@ -21,7 +21,7 @@ import griffon.domain.orm.Criterion
 /**
  * @author Andres Almiray
  */
-enum DynamicMethod {
+enum DefaultPersistentDynamicMethod {
     COUNT([new MethodSignature(true, Integer.TYPE, 'count')]),
 
     MAKE([new MethodSignature(true, Object, 'make'),
@@ -49,9 +49,11 @@ enum DynamicMethod {
          new MethodSignature(true, Collection, 'findAll', Closure),
          new MethodSignature(true, Collection, 'findAll', Map, Closure)]),
 
-    FIND_WHERE('findWhere', [new MethodSignature(true, Object, 'findWhere', Map)]),
+    FIND_WHERE('findWhere', [new MethodSignature(true, Object, 'findWhere', Map),
+         new MethodSignature(true, Collection, 'findWhere', Closure)]),
 
-    FIND_ALL_WHERE('findAllWhere', [new MethodSignature(true, Collection, 'findWhere', Map)]);
+    FIND_ALL_WHERE('findAllWhere', [new MethodSignature(true, Collection, 'findAllWhere', Map),
+         new MethodSignature(true, Collection, 'findAllWhere', Closure)]);
 
     // COUNT_BY('countBy'),
     // FIND_BY('findBy'),
@@ -60,12 +62,17 @@ enum DynamicMethod {
     final String methodName
     final MethodSignature[] methodSignatures
 
-    DynamicMethod(String methodName = null, List methodSignatures) {
+    DefaultPersistentDynamicMethod(String methodName = null, List methodSignatures) {
         this.methodName = methodName ?: name().toLowerCase()
         this.methodSignatures = methodSignatures as MethodSignature[]
     }
 
     String toString() {
         this.methodName
+    }
+
+    static DefaultPersistentDynamicMethod[] allMethods() {
+        [COUNT, MAKE, SAVE, DELETE, FETCH, LIST,
+         FIND, FIND_ALL, FIND_WHERE, FIND_ALL_WHERE] as DefaultPersistentDynamicMethod[]
     }
 }

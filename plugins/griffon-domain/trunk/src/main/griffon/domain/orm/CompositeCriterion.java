@@ -27,11 +27,11 @@ public final class CompositeCriterion implements Criterion {
     private final Criterion[] criteria;
     private final Operator operator;
 
-    public CompositeCriterion(Criterion[] criteria) {
+    public CompositeCriterion(Criterion... criteria) {
         this(Operator.AND, criteria);
     }
 
-    public CompositeCriterion(Operator  operator, Criterion[] criteria) {
+    public CompositeCriterion(Operator operator, Criterion... criteria) {
          if(criteria == null) {
              this.criteria = new Criterion[0];
          } else {
@@ -76,7 +76,6 @@ public final class CompositeCriterion implements Criterion {
         if(obj.getClass() != getClass()) return false; 
         CompositeCriterion rhs = (CompositeCriterion) obj;
         return new EqualsBuilder()
-                      .appendSuper(super.equals(obj))
                       .append(operator, rhs.operator)
                       .append(criteria, rhs.criteria)
                       .isEquals();

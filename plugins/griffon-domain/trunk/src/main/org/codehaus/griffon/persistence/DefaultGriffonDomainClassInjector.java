@@ -36,7 +36,7 @@ import org.codehaus.groovy.ast.expr.VariableExpression;
 import org.codehaus.groovy.ast.stmt.ReturnStatement;
 import org.codehaus.groovy.ast.stmt.Statement;
 import org.codehaus.griffon.ast.GriffonASTUtils;
-import griffon.domain.artifacts.GriffonDomainArtifactClassProperty;
+import griffon.domain.artifacts.GriffonDomainClassProperty;
 
 /**
  * Default implementation of domain class injector interface that adds the 'id'
@@ -47,10 +47,10 @@ import griffon.domain.artifacts.GriffonDomainArtifactClassProperty;
 public abstract class DefaultGriffonDomainClassInjector extends GriffonDomainClassInjector {
     private List<ClassNode> classesWithInjectedToString = new ArrayList<ClassNode>();
 
-    protected void injectMethods(ClassNode classNode) {
+    protected void performInjection(ClassNode classNode) {
         injectIdProperty(classNode);
         injectVersionProperty(classNode);
-        injectToStringMethod(classNode, GriffonDomainArtifactClassProperty.IDENTITY);
+        injectToStringMethod(classNode, GriffonDomainClassProperty.IDENTITY);
         injectAssociations(classNode);
     }
 
@@ -58,13 +58,13 @@ public abstract class DefaultGriffonDomainClassInjector extends GriffonDomainCla
         List<PropertyNode> propertiesToAdd = new ArrayList<PropertyNode>();
         for (PropertyNode pn : classNode.getProperties()) {
             final String name = pn.getName();
-            final boolean isHasManyProperty = name.equals(GriffonDomainArtifactClassProperty.RELATES_TO_MANY) ||
-                    name.equals(GriffonDomainArtifactClassProperty.HAS_MANY);
+            final boolean isHasManyProperty = name.equals(GriffonDomainClassProperty.RELATES_TO_MANY) ||
+                    name.equals(GriffonDomainClassProperty.HAS_MANY);
             if (isHasManyProperty) {
                 Expression e = pn.getInitialExpression();
                 propertiesToAdd.addAll(createPropertiesForHasManyExpression(e, classNode));
             }
-            final boolean isBelongsTo = name.equals(GriffonDomainArtifactClassProperty.BELONGS_TO) || name.equals(GriffonDomainArtifactClassProperty.HAS_ONE);
+            final boolean isBelongsTo = name.equals(GriffonDomainClassProperty.BELONGS_TO) || name.equals(GriffonDomainClassProperty.HAS_ONE);
             if (isBelongsTo) {
                 Expression e = pn.getInitialExpression();
                 propertiesToAdd.addAll(createPropertiesForBelongsToExpression(e, classNode));
@@ -135,10 +135,10 @@ public abstract class DefaultGriffonDomainClassInjector extends GriffonDomainCla
     }
 
     protected void injectVersionProperty(ClassNode classNode) {
-        GriffonASTUtils.injectProperty(classNode, GriffonDomainArtifactClassProperty.VERSION, Long.class);
+        GriffonASTUtils.injectProperty(classNode, GriffonDomainClassProperty.VERSION, Long.class);
     }
 
     protected void injectIdProperty(ClassNode classNode) {
-        GriffonASTUtils.injectProperty(classNode, GriffonDomainArtifactClassProperty.IDENTITY, Long.class);
+        GriffonASTUtils.injectProperty(classNode, GriffonDomainClassProperty.IDENTITY, Long.class);
     }
 }

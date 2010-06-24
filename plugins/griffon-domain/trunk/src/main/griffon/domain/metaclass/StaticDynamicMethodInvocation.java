@@ -18,7 +18,5 @@ package griffon.domain.metaclass;
 /**
  * @author Andres Almiray
  */
-public abstract class AbstractStaticMethodInvocation
-                      extends AbstractMethodInvocation
-                      implements StaticMethodInvocation {
+public interface StaticDynamicMethodInvocation extends StaticMethodInvocation, DynamicMethodInvocation {
 }

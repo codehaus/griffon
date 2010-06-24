@@ -15,14 +15,18 @@
  */ 
 package griffon.domain.metaclass;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.regex.Matcher;
+
 import griffon.domain.DomainHandler;
 import griffon.core.ArtifactInfo;
-// import griffon.domain.orm.Criterion;
-// import griffon.domain.orm.Restrictions;
-// import griffon.domain.GriffonDomainClass;
-// import griffon.domain.GriffonDomainClassProperty;
-// import griffon.domain.GriffonDomainClassUtils;
-// import griffon.domain.DynamicMethod;
+import griffon.domain.orm.Criterion;
+import griffon.domain.orm.Restrictions;
+// import griffon.domain.artifacts.GriffonDomainClass;
+// import griffon.domain.artifacts.GriffonDomainClassProperty;
+// import griffon.domain.DomainClassUtils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,7 +37,7 @@ import java.util.regex.Pattern;
 /**
  * @author Andres Almiray
  */
-public abstract class AbstractClausedStaticPersistentMethod extends AbstractStaticPersistentMethod {
+public abstract class AbstractClausedStaticPersistentMethod extends AbstractPersistentStaticDynamicMethodInvocation {
     private static final Log LOG = LogFactory.getLog(AbstractClausedStaticPersistentMethod.class);
     private final String[] operators;
     private final Pattern[] operatorPatterns;
@@ -47,8 +51,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractStat
         }
     }
 
-/*
-    protected Object doInvokeInternal(final ArtifactInfo artifactInfo, final Class clazz, String methodName, Object[] arguments) {
+    protected Object invokeInternal(final ArtifactInfo artifactInfo, final Class clazz, String methodName, Object[] arguments) {
         List expressions = new ArrayList();
         if(arguments == null) arguments = new Object[0];
         Matcher match = super.getPattern().matcher(methodName);
@@ -153,7 +156,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractStat
         if(LOG.isTraceEnabled())
             LOG.trace("Calculated expressions: " + expressions);
         
-        return doInvokeInternalWithExpressions(clazz, methodName, remainingArguments, expressions, operatorInUse, additionalCriteria);
+        return doInvokeInternalWithExpressions(clazz, methodName, remainingArguments, expressions, operatorInUse);
     }
     
     protected abstract Object doInvokeInternalWithExpressions(Class clazz, String methodName, Object[] arguments, List expressions, String operatorInUse);
@@ -206,10 +209,11 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractStat
 
         void setArguments(Object[] args)
             throws IllegalArgumentException {
+/*
             if(args.length != argumentsRequired)
                 throw new IllegalArgumentException("Method expression '"+this.type+"' requires " + argumentsRequired + " arguments");
 
-            GriffonDomainClass domainClass = DomainClassUtils.getDomainClass(artifactInfo);
+            GriffonDomainClass domainClass = DomainClassUtils.getDomainClassFor(artifactInfo);
             GriffonDomainClassProperty prop = domainClass.getPropertyByName(propertyName);
 
             if(prop == null)
@@ -247,6 +251,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractStat
             }
 
             this.arguments = args;
+*/
         }
 
         abstract Criterion createCriterion();
@@ -455,5 +460,4 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractStat
                 + propName.substring(1);
         }
     }
-*/
 }

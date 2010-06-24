@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2010 the original author or authors.
+ * Copyright 2010 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,4 @@ package griffon.domain.metaclass;
  * @author Andres Almiray
  */
 public interface MethodInvocation {
-    /**
-     * <p>Checks if a method name matches the criteria of the implementation class.
-     * 
-     * @param methodName the static method name
-     * @return result of criteria match test
-     */
-    boolean isMethodMatch(String methodName);
 }

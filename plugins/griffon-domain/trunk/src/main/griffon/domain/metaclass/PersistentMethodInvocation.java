@@ -15,10 +15,14 @@
  */ 
 package griffon.domain.metaclass;
 
+import griffon.domain.DomainHandler;
+import griffon.core.ArtifactInfo;
+
 /**
  * @author Andres Almiray
  */
-public abstract class AbstractStaticMethodInvocation
-                      extends AbstractMethodInvocation
-                      implements StaticMethodInvocation {
+public interface PersistentMethodInvocation {
+    DomainHandler getDomainHandler();
+
+    ArtifactInfo getArtifactInfoFor(Class clazz);
 }

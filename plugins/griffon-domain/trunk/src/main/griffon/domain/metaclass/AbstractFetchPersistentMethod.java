@@ -20,17 +20,15 @@ import griffon.domain.DomainHandler;
 
 import groovy.lang.MissingMethodException;
 
-import java.util.regex.Pattern;
-
 /**
  * @author Andres Almiray
  */
-public abstract class AbstractFetchPersistentMethod extends AbstractStaticPersistentMethod {
+public abstract class AbstractFetchPersistentMethod extends AbstractPersistentStaticMethodInvocation {
     public AbstractFetchPersistentMethod(DomainHandler domainHandler) {
-        super(domainHandler, Pattern.compile("^"+ DynamicMethod.FETCH.getMethodName() +"$"));
+        super(domainHandler);
     }
 
-    protected final Object doInvokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
+    protected final Object invokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
         if(arguments.length == 1) {
             return fetch(artifactInfo, arguments[0]);
         }
