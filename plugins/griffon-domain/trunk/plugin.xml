@@ -1,12 +1,14 @@
-<plugin name='domain' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
+<plugin name='domain' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Domain class support</title>
+  <description>Domain class support</description>
   <documentation>http://griffon.codehaus.org/Domain+Plugin</documentation>
-  <plugin name='i18n' version='0.1' />
-  <plugin name='artifacts' version='0.1' />
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies>
-    <plugin name='i18n' version='0.1' />
-    <plugin name='artifacts' version='0.1' />
+    <plugin name='artifacts' version='0.2' />
   </dependencies>
 </plugin>

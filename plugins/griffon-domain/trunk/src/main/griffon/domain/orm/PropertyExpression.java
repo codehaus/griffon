@@ -63,7 +63,6 @@ public class PropertyExpression implements Criterion {
         if(obj.getClass() != getClass()) return false; 
         PropertyExpression rhs = (PropertyExpression) obj;
         return new EqualsBuilder()
-                      // .appendSuper(super.equals(obj))
                       .append(propertyName, rhs.propertyName)
                       .append(operator, rhs.operator)
                       .append(otherPropertyName, rhs.otherPropertyName)

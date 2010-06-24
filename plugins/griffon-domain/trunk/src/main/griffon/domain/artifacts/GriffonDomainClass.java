@@ -25,10 +25,9 @@ import griffon.core.artifacts.GriffonArtifactClass;
 /**
  * <p>Represents a persistable Griffon domain class</p>
  * 
- * @author Graeme Rocher
- * @since Jul 5, 2005
+ * @author Graeme Rocher (Grails 0.1)
  */
-public interface GriffonDomainArtifactClass extends GriffonArtifactClass {
+public interface GriffonDomainClass extends GriffonArtifactClass {
     /**
      * The name of the default ORM implementation used to map the class
      */
@@ -40,60 +39,53 @@ public interface GriffonDomainArtifactClass extends GriffonArtifactClass {
      * @param domainClass
      * @return True if the specifying domain class is on the owning side of a relationship
      */
-    public boolean isOwningClass(Class domainClass);
+    boolean isOwningClass(Class domainClass);
 
     /**
      * Returns all of the properties of the domain class
      * @return The domain class properties
      */
-    public GriffonDomainArtifactClassProperty[] getProperties();
-
-    /**
-     * Returns all of the persistant properties of the domain class
-     * @return The domain class' persistant properties
-     * @deprecated Use #getPersistentProperties instead
-     */
-    public GriffonDomainArtifactClassProperty[] getPersistantProperties();
+    GriffonDomainClassProperty[] getProperties();
 
     /**
      * Returns all of the persistant properties of the domain class
      * @return The domain class' persistant properties
      */
-    public GriffonDomainArtifactClassProperty[] getPersistentProperties();
+    GriffonDomainClassProperty[] getPersistentProperties();
 
     /**
      * Returns the identifier property
      * @return The identifier property
      */
-    public GriffonDomainArtifactClassProperty getIdentifier();
+    GriffonDomainClassProperty getIdentifier();
 
     /**
      * Returns the version property
      * @return The version property
      */
-    public GriffonDomainArtifactClassProperty getVersion();
+    GriffonDomainClassProperty getVersion();
     
     /**
      * Returns this classes association map
      * @return The association map
      */
-    public Map getAssociationMap();
+    Map getAssociationMap();
     
     /**
      * Returns the property for the given name
      * 
      * @param name The property for the name
-     * @throws org.codehaus.groovy.griffon.exceptions.InvalidPropertyException
+     * @throws org.codehaus.griffon.exceptions.InvalidPropertyException
      * @return The domain class property for the given name
      */
-    public GriffonDomainArtifactClassProperty getPropertyByName(String name);    
+    GriffonDomainClassProperty getPropertyByName(String name);    
     
     /**
      * Returns the field name for the given property name
      * @param propertyName
      * @return The field representation of the property name
      */
-    public String getFieldName(String propertyName);
+    String getFieldName(String propertyName);
     
     /**
      * <p>Returns the default property name of the GriffonArtifactClass. For example the property name for 
@@ -101,21 +93,21 @@ public interface GriffonDomainArtifactClass extends GriffonArtifactClass {
      * 
      * @return The property name representation of the class name
      */
-    public String getPropertyName();
+    String getPropertyName();
     
     /**
      * Returns true if the given property is a one to many relationship
      * @param propertyName The name of the property
      * @return A boolean value
      */
-    public boolean isOneToMany(String propertyName);
+    boolean isOneToMany(String propertyName);
     
     /**
      * Returns true if the given property is a many to one relationship
      * @param propertyName The name of the property
      * @return A boolean value
      */
-    public boolean isManyToOne(String propertyName);
+    boolean isManyToOne(String propertyName);
     
     /**
      * Returns true if the given property is a bi-directional relationship
@@ -123,7 +115,7 @@ public interface GriffonDomainArtifactClass extends GriffonArtifactClass {
      * @param propertyName The name of the property
      * @return A boolean value
      */
-    public boolean isBidirectional(String propertyName);
+    boolean isBidirectional(String propertyName);
     
     /**
      * Returns the type of the related class of the given property
@@ -131,7 +123,7 @@ public interface GriffonDomainArtifactClass extends GriffonArtifactClass {
      * @param propertyName The name of the property 
      * @return The type of the class or null if no relationship exists for the specified property
      */
-    public Class getRelatedClassType(String propertyName);
+    Class getRelatedClassType(String propertyName);
 
     /**
      * Returns a map of constraints applied to this domain class with the keys being the property name
@@ -139,40 +131,40 @@ public interface GriffonDomainArtifactClass extends GriffonArtifactClass {
      * 
      * @return A map of constraints
      */
-    public Map getConstrainedProperties();
+    Map getConstrainedProperties();
 
     /**
      * Retreives the validator for this domain class 
      * 
      * @return A validator instance or null if none exists
      */
-//    public Validator getValidator();
+//    Validator getValidator();
 
     /**
      * Sets the validator for this domain class 
      * 
      * @param validator The domain class validator to set
      */
-//    public void setValidator(Validator validator);
+//    void setValidator(Validator validator);
     
     /**
      * @return The name of the ORM implementation used to map the domain class (default is "GORM")
      */
-    public String getMappingStrategy();
+    String getMappingStrategy();
     
     /**
      * Whether the class is the root of a heirarchy
      * 
      * @return True if it is the root of the heirarchy
      */
-    public boolean isRoot();
+    boolean isRoot();
     
     /**
      * Returns the sub-classes for this class if any
      * 
      * @return A set of sub classes or an empty set if none exist
      */
-    public Set<GriffonDomainArtifactClass> getSubClasses();
+    Set<GriffonDomainClass> getSubClasses();
 
     /**
      * Refreshes the constraint defined on a domain class

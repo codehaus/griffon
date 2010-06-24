@@ -15,15 +15,33 @@
  */ 
 package griffon.domain.metaclass;
 
+import java.util.regex.Pattern;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * @author Andres Almiray
  */
-abstract class AbstractMethodInvocation
-                      implements MethodInvocation {
+public abstract class AbstractInstanceDynamicMethodInvocation 
+                      extends AbstractInstanceMethodInvocation
+                      implements DynamicMethodInvocation {
+    private final Pattern pattern;
+    
+    public AbstractInstanceDynamicMethodInvocation(Pattern pattern) {
+        this.pattern = pattern;
+    }
+
+    protected Pattern getPattern() {
+        return pattern;
+    }
+
+    public boolean isMethodMatch(String methodName) {
+        return this.pattern.matcher(methodName.subSequence(0, methodName.length())).find();
+    }
+
     public String toString() {
         return new ToStringBuilder(this)
-                   .toString();
+                        .append("Pattern",this.pattern)
+                        .toString();
     }
 }

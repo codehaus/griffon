@@ -1,16 +1,23 @@
 package sample;
 
-import griffon.domain.metaclass.DynamicMethod;
-import org.codehaus.groovy.ast.ClassNode;
+import java.util.Arrays;
+import java.util.Collection;
+
+import griffon.domain.artifacts.GriffonDomainClassProperty;
+import griffon.domain.metaclass.DefaultPersistentDynamicMethod;
+import griffon.domain.metaclass.MethodSignature;
 import org.codehaus.griffon.persistence.DefaultGriffonDomainClassInjector;
-import griffon.domain.artifacts.GriffonDomainArtifactClassProperty;
+
+import org.codehaus.groovy.ast.ClassNode;
+import org.codehaus.groovy.runtime.DefaultGroovyMethods;
 
 public class SampleGriffonDomainClassInjector extends DefaultGriffonDomainClassInjector {
-    public DynamicMethod[] getProvidedDynamicMethods() {
-        return new DynamicMethod[] {
-            DynamicMethod.FETCH,
-            DynamicMethod.FIND_ALL
-        };
+    public MethodSignature[] getProvidedMethods() {
+        Collection<MethodSignature> signatures = DefaultGroovyMethods.plus(
+            Arrays.asList(DefaultPersistentDynamicMethod.FETCH.getMethodSignatures()),
+            Arrays.asList(DefaultPersistentDynamicMethod.FIND_ALL.getMethodSignatures())
+        ); 
+        return (MethodSignature[]) signatures.toArray(new MethodSignature[signatures.size()]);
     }
 
     protected String getMappingValue() {
@@ -25,8 +32,8 @@ public class SampleGriffonDomainClassInjector extends DefaultGriffonDomainClassI
         return SampleDomainHandlerHolder.class;
     }
 
-    protected void injectMethods(ClassNode classNode) {
+    protected void performInjection(ClassNode classNode) {
         injectIdProperty(classNode);
-        injectToStringMethod(classNode, GriffonDomainArtifactClassProperty.IDENTITY);
+        injectToStringMethod(classNode, GriffonDomainClassProperty.IDENTITY);
     }
 }

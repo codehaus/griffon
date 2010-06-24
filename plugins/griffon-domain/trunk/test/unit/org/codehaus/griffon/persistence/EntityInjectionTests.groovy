@@ -13,7 +13,7 @@ class EntityInjectionTests extends GroovyTestCase {
 
     void testInjectedProperties() {
         Book book = new Book(title: 'Griffon in Action', id: 1)
-        assert book.mapping == 'sample'
+        assert book.griffonDomainMapping == 'sample'
         assert book.title == 'Griffon in Action'
         assert book.id == 1
         assert book.toString() == 'sample.Book : 1'

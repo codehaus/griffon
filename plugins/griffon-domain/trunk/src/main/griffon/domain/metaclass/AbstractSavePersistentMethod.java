@@ -20,17 +20,15 @@ import griffon.domain.DomainHandler;
 
 import groovy.lang.MissingMethodException;
 
-import java.util.regex.Pattern;
-
 /**
  * @author Andres Almiray
  */
-public abstract class AbstractSavePersistentMethod extends AbstractDynamicPersistentMethod {
+public abstract class AbstractSavePersistentMethod extends AbstractPersistentInstanceMethodInvocation {
     public AbstractSavePersistentMethod(DomainHandler domainHandler) {
-        super(domainHandler, Pattern.compile("^"+ DynamicMethod.SAVE.getMethodName() +"$"));
+        super(domainHandler);
     }
 
-    protected final Object doInvokeInternal(ArtifactInfo artifactInfo, Object target, String methodName, Object[] arguments) {
+    protected final Object invokeInternal(ArtifactInfo artifactInfo, Object target, String methodName, Object[] arguments) {
         if(target == null) {
             throw new MissingMethodException(methodName, artifactInfo.getKlass(), arguments);
         }

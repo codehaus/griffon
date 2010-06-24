@@ -56,7 +56,6 @@ public class UnaryExpression implements Criterion {
         if(obj.getClass() != getClass()) return false; 
         UnaryExpression rhs = (UnaryExpression) obj;
         return new EqualsBuilder()
-                      .appendSuper(super.equals(obj))
                       .append(propertyName, rhs.propertyName)
                       .append(operator, rhs.operator)
                       .isEquals();

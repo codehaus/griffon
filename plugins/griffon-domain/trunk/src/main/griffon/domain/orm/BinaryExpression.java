@@ -63,7 +63,6 @@ public class BinaryExpression implements Criterion {
         if(obj.getClass() != getClass()) return false; 
         BinaryExpression rhs = (BinaryExpression) obj;
         return new EqualsBuilder()
-                      // .appendSuper(super.equals(obj))
                       .append(propertyName, rhs.propertyName)
                       .append(operator, rhs.operator)
                       .append(value, rhs.value)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2010 the original author or authors.
+ * Copyright 2010 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,14 @@
 package griffon.domain.metaclass;
 
 /**
- * <p>Dynamic method invocation callback interface. Implementation classes
- * can add a persistence functionality to Grriffon like save and delete.
- * 
- * @author Steven Devijver (Grails 0.1)
- * @author Graeme Rocher (Grails 0.1)
+ * @author Andres Almiray
  */
-public interface DynamicMethodInvocation extends MethodInvocation {
+public interface DynamicMethodInvocation {
     /**
-     * <p>Invokes the actual method. The target object and arguments are supplied.
+     * <p>Checks if a method name matches the criteria of the implementation class.
      * 
-     * @param target the target on which the method is invoked.
-     * @param methodName
-     * @param arguments the arguments passed in the method call @return the return value of the dynamic method invocation.
+     * @param methodName the static method name
+     * @return result of criteria match test
      */
-    Object invoke(Object target, String methodName, Object[] arguments);
+    boolean isMethodMatch(String methodName);
 }

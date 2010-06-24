@@ -18,8 +18,8 @@ package griffon.domain
 
 import griffon.core.GriffonApplication
 import griffon.core.ArtifactInfo
-import griffon.domain.artifacts.GriffonDomainArtifactClass
-// import griffon.domain.artifacts.DefaultGriffonDomainArtifactClass
+import griffon.domain.artifacts.GriffonDomainClass
+// import griffon.domain.artifacts.DefaultGriffonDomainClass
 
 import java.beans.Introspector
 import java.util.regex.Pattern
@@ -65,11 +65,11 @@ final class DomainClassUtils {
         ARTIFACTS[klass.name]
     }
 
-    GriffonDomainArtifactClass getDomainClassFor(Class klass) {
+    GriffonDomainClass getDomainClassFor(Class klass) {
         DOMAIN_CLASSES[klass.name]
     }
 
-    GriffonDomainArtifactClass getDomainClassFor(ArtifactInfo artifactInfo) {
+    GriffonDomainClass getDomainClassFor(ArtifactInfo artifactInfo) {
         DOMAIN_CLASSES[artifactInfo.klass.name]
     }
 

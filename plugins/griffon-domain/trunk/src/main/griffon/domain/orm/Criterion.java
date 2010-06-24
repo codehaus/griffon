@@ -20,5 +20,4 @@ package griffon.domain.orm;
  * @author Andres Almiray
  */
 public interface Criterion {
-    
 }

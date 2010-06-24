@@ -17,17 +17,16 @@ package griffon.domain.metaclass
 
 import griffon.core.ArtifactInfo
 import griffon.domain.DomainHandler
-import java.util.regex.Pattern
 
 /**
  * @author Andres Almiray
  */
-public abstract class AbstractMakePersistentMethod extends AbstractStaticPersistentMethod {
+public abstract class AbstractMakePersistentMethod extends AbstractPersistentStaticMethodInvocation {
     public AbstractMakePersistentMethod(DomainHandler domainHandler) {
-        super(domainHandler, Pattern.compile('^'+ DynamicMethod.MAKE.getMethodName() +'$'))
+        super(domainHandler)
     }
 
-    protected final Object doInvokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
+    protected final Object invokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
         if(!arguments) {
             return artifactInfo.newInstance()
         } else if(arguments[0] instanceof Map) {
