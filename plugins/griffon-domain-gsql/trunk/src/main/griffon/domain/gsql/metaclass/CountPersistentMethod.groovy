@@ -22,8 +22,9 @@ import griffon.core.ArtifactInfo
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
-import griffon.gsql.GsqlHelper
-import griffon.domain.gsql.GsqlDomainClassHelper
+import griffon.gsql.GsqlConnector
+import griffon.domain.gsql.GsqlDomainHandler
+import griffon.domain.gsql.GsqlDomainClassUtils
 import griffon.domain.metaclass.AbstractCountPersistentMethod
 
 /**
@@ -32,20 +33,20 @@ import griffon.domain.metaclass.AbstractCountPersistentMethod
 class CountPersistentMethod extends AbstractCountPersistentMethod {
     private static final Log LOG = LogFactory.getLog(CountPersistentMethod)
 
-    CountPersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass)
+    CountPersistentMethod(GsqlDomainHandler domainHandler) {
+        super(domainHandler)
     }
 
-    protected int count(Class clazz) {
-        def query = GsqlDomainClassHelper.instance.fetchQuery('count', clazz)
-        if(query instanceof Closure) query = query(domainClass) 
-        LOG.trace("> ${domainClass.simpleName}.count()")
+    protected int count(ArtifactInfo artifactInfo, Class clazz) {
+        def query = GsqlDomainClassUtils.instance.fetchQuery('count', clazz)
+        if(query instanceof Closure) query = query(artifactInfo) 
+        LOG.trace("> ${artifactInfo.simpleName}.count()")
         LOG.trace(query)
         int count = 0
-        GsqlHelper.instance.withSql { sql ->
+        GsqlConnector.instance.withSql { sql ->
             count = sql.firstRow(query.toString()).__domain_Count__ ?: 0
         }
-        LOG.trace("< ${domainClass.simpleName}.count() => ${count}")
+        LOG.trace("< ${artifactInfo.simpleName}.count() => ${count}")
         count
     }
 }

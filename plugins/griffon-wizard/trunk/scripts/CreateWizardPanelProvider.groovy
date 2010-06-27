@@ -25,7 +25,7 @@ import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
-target(default: "Creates a new WizardPanelProvider") {
+target(createWizardPanel: "Creates a new WizardPanelProvider") {
    depends(checkVersion, parseArguments)
    promptForName(type: "Wizard panel provider")
    def (pkg, name) = extractArtifactName(argsMap["params"][0])
@@ -37,3 +37,4 @@ target(default: "Creates a new WizardPanelProvider") {
       type: "WizardPanelProvider",
       path: "griffon-app/wizards")
 }
+setDefaultTarget(createWizardPanel)

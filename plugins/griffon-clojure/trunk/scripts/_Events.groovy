@@ -43,10 +43,8 @@ eventCopyLibsEnd = { jardir ->
 }
 
 eventCompileStart = {
-try{
     if(compilingClojurePlugin()) return
     compileClojureSrc()
-}catch(x){x.printStackTrace()}
 }
 
 /**

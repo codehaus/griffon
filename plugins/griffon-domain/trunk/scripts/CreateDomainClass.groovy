@@ -25,7 +25,7 @@
 includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
-target('default': "Creates a new domain class") {
+target('createDomainClass': "Creates a new domain class") {
     depends(checkVersion, parseArguments)
 
     promptForName(type: "Domain class")
@@ -34,3 +34,5 @@ target('default': "Creates a new domain class") {
     createArtifact(name: name, suffix: "", type: "DomainClass", path: "griffon-app/domain")
 	createUnitTest(name: name, suffix: "")
 }
+
+setDefaultTarget('createDomainClass')

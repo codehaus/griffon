@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-import org.divxdede.swing.busy.*
-import groovy.swing.factory.BeanFactory
-import griffon.jbusycomponent.factory.*
+import griffon.gdsl.GdslUtils
 
 /**
  * @author Andres Almiray
  */
-class JBusyComponentGriffonAddon {
-   def factories = [
-       busyComponent: new JBusyComponentFactory(),
-       busyModel: new BeanFactory(DefaultBusyModel, true),
-       futureBusyModel: new BeanFactory(FutureBusyModel, true)
-   ]
+
+contributor(context(scope: scriptScope())) {
+  if(!GdslUtils.isGriffonArtifactNotResource(classType)) return
+  
+  method name: 'chart', type: 'org.jfree.chart.ChartPanel'
 }

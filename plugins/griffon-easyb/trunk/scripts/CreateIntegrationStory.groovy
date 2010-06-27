@@ -25,7 +25,7 @@ import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
-target(default: "Creates a new Griffon Easyb story") {
+target(createIntegrationStory: "Creates a new Griffon Easyb story") {
     depends(checkVersion, parseArguments)
     promptForName(type: "Easyb Story")
     def (pkg, name) = extractArtifactName(argsMap["params"][0])
@@ -37,3 +37,4 @@ target(default: "Creates a new Griffon Easyb story") {
         type: "EasybStory",
         path: "test/integration")
 }
+setDefaultTarget('createIntegrationStory')

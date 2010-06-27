@@ -25,7 +25,7 @@ import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
-target(default: "Creates a new WizardPage") {
+target(createWizardPage: "Creates a new WizardPage") {
    depends(checkVersion, parseArguments)
    promptForName(type: "Wizard page")
    def (pkg, name) = extractArtifactName(argsMap["params"][0])
@@ -37,3 +37,4 @@ target(default: "Creates a new WizardPage") {
       type: "WizardPage",
       path: "griffon-app/wizards")
 }
+setDefaultTarget(createWizardPage)

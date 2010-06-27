@@ -23,7 +23,7 @@ includePluginScript("scala", "_ScalaCommon")
 
 testReportsDir = griffonSettings.testReportsDir
 
-target(default: "Run ScalaCheck tests") {
+target(scalaCheck: "Run ScalaCheck tests") {
     depends(parseArguments)
     def scalaCheckSrc = new File("${basedir}/test/scalacheck")
     if(!scalaCheckSrc.exists() || !scalaCheckSrc.list().size()) {
@@ -71,3 +71,4 @@ target(default: "Run ScalaCheck tests") {
     }
 */
 }
+setDefaultTarget(scalaCheck)

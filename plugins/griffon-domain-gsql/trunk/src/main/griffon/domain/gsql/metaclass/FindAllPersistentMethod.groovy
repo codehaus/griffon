@@ -23,11 +23,12 @@ import griffon.util.GriffonClassUtils
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
-import griffon.gsql.GsqlHelper
-import griffon.domain.gsql.GsqlDomainClassHelper
-import griffon.domain.GriffonPersistenceUtil
+import griffon.gsql.GsqlConnector
+import griffon.domain.gsql.GsqlDomainHandler
+import griffon.domain.gsql.GsqlDomainClassUtils
 import griffon.domain.metaclass.AbstractFindAllPersistentMethod
 import griffon.domain.orm.*
+import griffon.persistence.GriffonPersistenceUtil
 
 /**
  * @author Andres Almiray
@@ -35,11 +36,11 @@ import griffon.domain.orm.*
 class FindAllPersistentMethod extends AbstractFindAllPersistentMethod {
     private static final Log LOG = LogFactory.getLog(FindAllPersistentMethod)
 
-    FindAllPersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass)
+    FindAllPersistentMethod(GsqlDomainHandler domainHandler) {
+        super(domainHandler)
     }
 
-    protected Object doInvokeInternal(Class clazz, String methodName, Object[] arguments) {
+    protected Object invokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
         if(arguments && arguments.length >= 1) {
             final Object arg = arguments[0] instanceof CharSequence ? arguments[0].toString() : arguments[0]
             if(arg instanceof String) {
@@ -56,92 +57,92 @@ class FindAllPersistentMethod extends AbstractFindAllPersistentMethod {
                     }
                 }
     
-                return findWithQueryArgs(query, queryArgs != null ? queryArgs : GriffonPersistenceUtil.EMPTY_ARRAY, max, offset); 
+                return findWithQueryArgs(artifactInfo, query, queryArgs != null ? queryArgs : GriffonPersistenceUtil.EMPTY_ARRAY, max, offset); 
             }
         }
-        return super.doInvokeInternal(clazz, methodName, arguments)
+        return super.invokeInternal(artifactInfo, clazz, methodName, arguments)
     }
 
-    protected Collection findAll(Class clazz) {
-        def query = GsqlDomainClassHelper.instance.fetchQuery('findAll', clazz)
-        if(query instanceof Closure) query = query(domainClass) 
-        LOG.trace("> ${domainClass.simpleName}.findAll()")
+    protected Collection findAll(ArtifactInfo artifactInfo, Class clazz) {
+        def query = GsqlDomainClassUtils.instance.fetchQuery('findAll', clazz)
+        if(query instanceof Closure) query = query(artifactInfo) 
+        LOG.trace("> ${artifactInfo.simpleName}.findAll()")
         LOG.trace(query)
         List list = []
-        GsqlHelper.instance.withSql { sql ->
+        GsqlConnector.instance.withSql { sql ->
             sql.eachRow(query.toString()) { row ->
-                list << GsqlDomainClassHelper.instance.makeAndPopulateInstance(clazz, row)
+                list << GsqlDomainClassUtils.instance.makeAndPopulateInstance(clazz, row)
             }
         }
-        LOG.trace("< ${domainClass.simpleName}.findAll().size() => ${list.size()}")
+        LOG.trace("< ${artifactInfo.simpleName}.findAll().size() => ${list.size()}")
         list
     }
 
-    protected Collection findWithQueryArgs(String query, Object[] queryArgs, int max, int offset) {
-        LOG.trace("> ${domainClass.simpleName}.findAll(\"${query}\", ${queryArgs})")
+    protected Collection findWithQueryArgs(ArtifactInfo artifactInfo, String query, Object[] queryArgs, int max, int offset) {
+        LOG.trace("> ${artifactInfo.simpleName}.findAll(\"${query}\", ${queryArgs})")
         LOG.trace(query)
         List list = []
-        GsqlHelper.instance.withSql { sql ->
+        GsqlConnector.instance.withSql { sql ->
             sql.eachRow(query, queryArgs.collect([]){it}) { row ->
-                list << GsqlDomainClassHelper.instance.makeAndPopulateInstance(domainClass.klass, row)
+                list << GsqlDomainClassUtils.instance.makeAndPopulateInstance(artifactInfo.klass, row)
             }
         }
-        LOG.trace("< ${domainClass.simpleName}.findAll().size() => ${list.size()}")
+        LOG.trace("< ${artifactInfo.simpleName}.findAll().size() => ${list.size()}")
         list
     }
 
-    protected Collection findByProperties(Map properties) {
-        def query = GsqlDomainClassHelper.instance.fetchQuery('findAll_byProperties', domainClass.klass)
-        if(query instanceof Closure) (query, properties) = query(domainClass, properties) 
-        LOG.trace("> ${domainClass.simpleName}.findAll(${properties})")
+    protected Collection findByProperties(ArtifactInfo artifactInfo, Map properties) {
+        def query = GsqlDomainClassUtils.instance.fetchQuery('findAll_byProperties', artifactInfo.klass)
+        if(query instanceof Closure) (query, properties) = query(artifactInfo, properties) 
+        LOG.trace("> ${artifactInfo.simpleName}.findAll(${properties})")
         LOG.trace(query)
         List list = []
         List args = new ArrayList(properties.values())
-        GsqlHelper.instance.withSql { sql ->
+        GsqlConnector.instance.withSql { sql ->
             sql.eachRow(query, args) { row ->
-                list << GsqlDomainClassHelper.instance.makeAndPopulateInstance(domainClass.klass, row)
+                list << GsqlDomainClassUtils.instance.makeAndPopulateInstance(artifactInfo.klass, row)
             }
         }
-        LOG.trace("< ${domainClass.simpleName}.findAll().size() => ${list.size()}")
+        LOG.trace("< ${artifactInfo.simpleName}.findAll().size() => ${list.size()}")
         list
     }
 
-    protected Collection findByExample(Object example) {
-        def props = domainClass.declaredProperties
+    protected Collection findByExample(ArtifactInfo artifactInfo, Object example) {
+        def props = artifactInfo.declaredProperties
         Map values = [:]
         props.each { p -> if(example[p] != null) values[p] = example[p] }
 
-        def query = GsqlDomainClassHelper.instance.fetchQuery('findAll_byExample', domainClass.klass)
-        if(query instanceof Closure) (query, values) = query(domainClass, example, values) 
-        LOG.trace("> ${domainClass.simpleName}.findAll(${example})")
+        def query = GsqlDomainClassUtils.instance.fetchQuery('findAll_byExample', artifactInfo.klass)
+        if(query instanceof Closure) (query, values) = query(artifactInfo, example, values) 
+        LOG.trace("> ${artifactInfo.simpleName}.findAll(${example})")
         LOG.trace(query)
 
         List list = []
         List args = new ArrayList(values.values())
-        GsqlHelper.instance.withSql { sql ->
+        GsqlConnector.instance.withSql { sql ->
             sql.eachRow(query, args) { row ->
-                list << GsqlDomainClassHelper.instance.makeAndPopulateInstance(domainClass.klass, row)
+                list << GsqlDomainClassUtils.instance.makeAndPopulateInstance(artifactInfo.klass, row)
             }
         }
-        LOG.trace("< ${domainClass.simpleName}.findAll().size() => ${list.size()}")
+        LOG.trace("< ${artifactInfo.simpleName}.findAll().size() => ${list.size()}")
         list
     }
 
-    protected Object findByCriterion(Criterion criterion, Map options) {
+    protected Collection findByCriterion(ArtifactInfo artifactInfo, Criterion criterion, Map options) {
         Map values = [:]
-        def query = GsqlDomainClassHelper.instance.fetchQuery('findAll_byCriterion', domainClass.klass)
-        if(query instanceof Closure) (query, values) = query(domainClass, criterion)
-        LOG.trace("> ${domainClass.simpleName}.findAll()")
+        def query = GsqlDomainClassUtils.instance.fetchQuery('findAll_byCriterion', artifactInfo.klass)
+        if(query instanceof Closure) (query, values) = query(artifactInfo, criterion)
+        LOG.trace("> ${artifactInfo.simpleName}.findAll()")
         LOG.trace(query)
 
         List list = []
         List args = new ArrayList(values.values())
-        GsqlHelper.instance.withSql { sql ->
+        GsqlConnector.instance.withSql { sql ->
             sql.eachRow(query, args) { row ->
-                list << GsqlDomainClassHelper.instance.makeAndPopulateInstance(domainClass.klass, row)
+                list << GsqlDomainClassUtils.instance.makeAndPopulateInstance(artifactInfo.klass, row)
             }
         }
-        LOG.trace("< ${domainClass.simpleName}.findAll().size() => ${list.size()}")
+        LOG.trace("< ${artifactInfo.simpleName}.findAll().size() => ${list.size()}")
         list
     }
 }

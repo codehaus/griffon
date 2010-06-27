@@ -23,10 +23,11 @@ import griffon.util.Environment
 
 includeTargets << griffonScript('Compile')
 
-target('default': 'Run GMetrics') {
+target(gmetrics: 'Run GMetrics') {
     depends(compile)
     runGmetrics()
 }
+setDefaultTarget('gmetrics')
 
 private void runGmetrics() {
     ant.taskdef(name: 'gmetrics', classname: 'org.gmetrics.ant.GMetricsTask')

@@ -22,8 +22,9 @@ import griffon.core.ArtifactInfo
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
-import griffon.gsql.GsqlHelper
-import griffon.domain.gsql.GsqlDomainClassHelper
+import griffon.gsql.GsqlConnector
+import griffon.domain.gsql.GsqlDomainHandler
+import griffon.domain.gsql.GsqlDomainClassUtils
 import griffon.domain.metaclass.AbstractDeletePersistentMethod
 
 /**
@@ -32,21 +33,21 @@ import griffon.domain.metaclass.AbstractDeletePersistentMethod
 class DeletePersistentMethod extends AbstractDeletePersistentMethod {
     private static final Log LOG = LogFactory.getLog(DeletePersistentMethod)
 
-    DeletePersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass)
+    DeletePersistentMethod(GsqlDomainHandler domainHandler) {
+        super(domainHandler)
     }
 
-    protected Object delete(Object target) {
+    protected Object delete(ArtifactInfo artifactInfo, Object target) {
         if(target.id == null) return target
-        def query = GsqlDomainClassHelper.instance.fetchQuery('delete', domainClass.klass)
-        if(query instanceof Closure) query = query(domainClass, key) 
-        LOG.trace("> ${domainClass.simpleName}.delete(${target.id})")
+        def query = GsqlDomainClassUtils.instance.fetchQuery('delete', artifactInfo.klass)
+        if(query instanceof Closure) query = query(artifactInfo, key) 
+        LOG.trace("> ${artifactInfo.simpleName}.delete(${target.id})")
         LOG.trace(query)
 
-        GsqlHelper.instance.withSql { sql ->
+        GsqlConnector.instance.withSql { sql ->
             sql.execute(query, [target.id])
         }
-        LOG.trace("< ${domainClass.simpleName}.delete(${target.id})")
+        LOG.trace("< ${artifactInfo.simpleName}.delete(${target.id})")
         target
     }
 }

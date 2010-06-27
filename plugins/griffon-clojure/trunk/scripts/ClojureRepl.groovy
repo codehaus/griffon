@@ -21,7 +21,7 @@
 includeTargets << griffonScript("_GriffonPackage")
 includePluginScript("clojure", "_ClojureCommon")
 
-target(default: "Run Clojure REPL") {
+target(clojureRepl: "Run Clojure REPL") {
     depends(checkVersion, configureProxy, classpath, packageApp)
 
     ant.fileset(dir: "${clojurePluginDir}/lib/repl/", includes:"*.jar").each { jar ->
@@ -35,3 +35,4 @@ target(default: "Run Clojure REPL") {
     // classLoader.loadClass("clojure.lang.Repl").main([] as String[])
     classLoader.loadClass("jline.ConsoleRunner").main(["clojure.lang.Repl"] as String[])
 }
+setDefaultTarget('clojureRepl')

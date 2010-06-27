@@ -18,7 +18,7 @@ package griffon.domain.gsql
 
 import griffon.core.GriffonApplication
 import griffon.core.ArtifactInfo
-import griffon.domain.DomainClassHelper
+import griffon.domain.DomainClassUtils
 import griffon.domain.orm.*
 
 import java.beans.Introspector
@@ -32,8 +32,8 @@ import griffon.domain.gsql.metaclass.*
  * @author Andres Almiray
  */
 @Singleton
-final class GsqlDomainClassHelper {
-    private static final Log LOG = LogFactory.getLog(GsqlDomainClassHelper)
+final class GsqlDomainClassUtils {
+    private static final Log LOG = LogFactory.getLog(GsqlDomainClassUtils)
 
     private final Map DOMAIN_LOOKUP = [:]
     private final Map QUERIES = [:]
@@ -49,7 +49,7 @@ final class GsqlDomainClassHelper {
         ArtifactInfo artifactInfo = DOMAIN_LOOKUP[klass.name]
         def query = QUERIES[queryName +'_'+ artifactInfo.simpleName]  
         if(!query) query = QUERIES[queryName]  
-        return query(artifactInfo, DomainClassHelper.instance.getEntityNameFor(klass))
+        return query(artifactInfo, DomainClassUtils.instance.getEntityNameFor(klass))
     }
 
     def makeAndPopulateInstance(Class klass, row) {
@@ -72,7 +72,7 @@ final class GsqlDomainClassHelper {
         QUERIES.putAll(fetchQueryProperties(new DefaultGsqlQueries()))
         try {
             def gsqlQueriesClass = this.class.classLoader.loadClass('GsqlQueries')
-            QUERIES.putAll(fetchQueryProperties(gsqkQueriesClass.newInstance()))
+            QUERIES.putAll(fetchQueryProperties(gsqlQueriesClass.newInstance()))
         } catch(x) {
             LOG.info('No custom GSQL queries found.') 
         }

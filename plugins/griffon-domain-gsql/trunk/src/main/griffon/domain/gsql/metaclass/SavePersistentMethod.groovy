@@ -22,8 +22,9 @@ import griffon.core.ArtifactInfo
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
-import griffon.gsql.GsqlHelper
-import griffon.domain.gsql.GsqlDomainClassHelper
+import griffon.gsql.GsqlConnector
+import griffon.domain.gsql.GsqlDomainHandler
+import griffon.domain.gsql.GsqlDomainClassUtils
 import griffon.domain.metaclass.AbstractSavePersistentMethod
 
 /**
@@ -32,49 +33,49 @@ import griffon.domain.metaclass.AbstractSavePersistentMethod
 class SavePersistentMethod extends AbstractSavePersistentMethod {
     private static final Log LOG = LogFactory.getLog(SavePersistentMethod)
 
-    SavePersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass)
+    SavePersistentMethod(GsqlDomainHandler domainHandler) {
+        super(domainHandler)
     }
 
-    protected boolean shouldInsert(Object target, Object[] arguments) {
+    protected boolean shouldInsert(ArtifactInfo artifactInfo, Object target, Object[] arguments) {
         target.id == null
     }
 
-    protected Object insert(Object target, Object[] arguments) {
-        def props = domainClass.declaredProperties
+    protected Object insert(ArtifactInfo artifactInfo, Object target, Object[] arguments) {
+        def props = artifactInfo.declaredProperties
         Map values = [:]
         props.each { p -> if(target[p] != null) values[p] = target[p] }
 
-        def query = GsqlDomainClassHelper.instance.fetchQuery('insert', domainClass.klass)
-        if(query instanceof Closure) query = query(domainClass, target, props) 
-        LOG.trace("> ${domainClass.simpleName}.insert(${target})")
+        def query = GsqlDomainClassUtils.instance.fetchQuery('insert', artifactInfo.klass)
+        if(query instanceof Closure) query = query(artifactInfo, target, props) 
+        LOG.trace("> ${artifactInfo.simpleName}.insert(${target})")
         LOG.trace(query)
 
         List args = new ArrayList(properties.values())
-        GsqlHelper.instance.withSql { sql ->
+        GsqlConnector.instance.withSql { sql ->
             def rs = sql.executeInsert(query, args)
         }
-        LOG.trace("< ${domainClass.simpleName}.insert().id => ${target.id}")
+        LOG.trace("< ${artifactInfo.simpleName}.insert().id => ${target.id}")
         target
     }
 
-    protected Object save(Object target, Object[] arguments) {
-        def props = domainClass.declaredProperties
+    protected Object save(ArtifactInfo artifactInfo, Object target, Object[] arguments) {
+        def props = artifactInfo.declaredProperties
         Map values = [:]
         props.each { p -> if(target[p] != null) values[p] = target[p] }
 
-        def query = GsqlDomainClassHelper.instance.fetchQuery('save', domainClass.klass)
-        if(query instanceof Closure) query = query(domainClass, target, values) 
-        LOG.trace("> ${domainClass.simpleName}.save(${target})")
+        def query = GsqlDomainClassUtils.instance.fetchQuery('save', artifactInfo.klass)
+        if(query instanceof Closure) query = query(artifactInfo, target, values) 
+        LOG.trace("> ${artifactInfo.simpleName}.save(${target})")
         LOG.trace(query)
 
         List args = []
         values.each{ k, v -> if(k != 'id') args << v }
         args << target.id
-        GsqlHelper.instance.withSql { sql ->
+        GsqlConnector.instance.withSql { sql ->
             sql.execute(query, args)
         }
-        LOG.trace("< ${domainClass.simpleName}.save().id => ${target.id}")
+        LOG.trace("< ${artifactInfo.simpleName}.save().id => ${target.id}")
         target
     }
 }

@@ -21,7 +21,7 @@
 includeTargets << griffonScript("Compile")
 includePluginScript("scala", "_ScalaCommon")
 
-target(default: "Run Scala REPL") {
+target(scalaRepl: "Run Scala REPL") {
     depends(checkVersion, configureProxy, compile, classpath, adjustScalaHome)
     ant.echo(message: "[scala] Using SCALA_HOME => ${scalaHome}")
 
@@ -37,3 +37,4 @@ target(default: "Run Scala REPL") {
 
     classLoader.loadClass("scala.tools.nsc.MainGenericRunner").main(["-cp", scalaClasspath.join(File.pathSeparator)] as String[])
 }
+setDefaultTarget(scalaRepl)
