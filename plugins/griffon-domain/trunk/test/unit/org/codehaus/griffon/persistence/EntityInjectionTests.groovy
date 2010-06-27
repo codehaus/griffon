@@ -1,13 +1,14 @@
 package org.codehaus.griffon.persistence
 
 import griffon.core.GriffonApplication
+import griffon.test.mock.MockGriffonApplication
 import sample.*
 
 class EntityInjectionTests extends GroovyTestCase {
     private static GriffonApplication app
 
     static {
-        app = new SampleGriffonApplication()
+        app = new MockGriffonApplication()
         SampleDomainHandlerHolder.domainHandler = new SampleDomainHandler(app)
     }
 

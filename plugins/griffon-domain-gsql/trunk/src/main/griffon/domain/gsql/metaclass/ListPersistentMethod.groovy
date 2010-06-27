@@ -22,8 +22,9 @@ import griffon.core.ArtifactInfo
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
-import griffon.gsql.GsqlHelper
-import griffon.domain.gsql.GsqlDomainClassHelper
+import griffon.gsql.GsqlConnector
+import griffon.domain.gsql.GsqlDomainHandler
+import griffon.domain.gsql.GsqlDomainClassUtils
 import griffon.domain.metaclass.AbstractListPersistentMethod
 
 /**
@@ -32,38 +33,38 @@ import griffon.domain.metaclass.AbstractListPersistentMethod
 class ListPersistentMethod extends AbstractListPersistentMethod {
     private static final Log LOG = LogFactory.getLog(ListPersistentMethod)
 
-    ListPersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass)
+    ListPersistentMethod(GsqlDomainHandler domainHandler) {
+        super(domainHandler)
     }
 
-    protected Collection list(Class clazz) {
-        def query = GsqlDomainClassHelper.instance.fetchQuery('list', clazz)
-        if(query instanceof Closure) query = query(domainClass) 
-        LOG.trace("> ${domainClass.simpleName}.list()")
+    protected Collection list(ArtifactInfo artifactInfo, Class clazz) {
+        def query = GsqlDomainClassUtils.instance.fetchQuery('list', clazz)
+        if(query instanceof Closure) query = query(artifactInfo) 
+        LOG.trace("> ${artifactInfo.simpleName}.list()")
         LOG.trace(query)
         List list = []
-        GsqlHelper.instance.withSql { sql ->
+        GsqlConnector.instance.withSql { sql ->
             sql.eachRow(query.toString()) { row ->
-                list << GsqlDomainClassHelper.instance.makeAndPopulateInstance(clazz, row)
+                list << GsqlDomainClassUtils.instance.makeAndPopulateInstance(clazz, row)
             }
         }
-        LOG.trace("< ${domainClass.simpleName}.list().size() => ${list.size()}")
+        LOG.trace("< ${artifactInfo.simpleName}.list().size() => ${list.size()}")
         list
     }
 
-    protected Collection list(Map properties) {
-        def query = GsqlDomainClassHelper.instance.fetchQuery('list_byProperties', domainClass.klass)
-        if(query instanceof Closure) (query, properties) = query(domainClass, properties)
-        LOG.trace("> ${domainClass.simpleName}.list(${properties})")
+    protected Collection list(ArtifactInfo artifactInfo, Map properties) {
+        def query = GsqlDomainClassUtils.instance.fetchQuery('list_byProperties', artifactInfo.klass)
+        if(query instanceof Closure) (query, properties) = query(artifactInfo, properties)
+        LOG.trace("> ${artifactInfo.simpleName}.list(${properties})")
         LOG.trace(query)
         List list = []
         List args = new ArrayList(properties.values())
-        GsqlHelper.instance.withSql { sql ->
+        GsqlConnector.instance.withSql { sql ->
             sql.eachRow(query, args) { row ->
-                list << GsqlDomainClassHelper.instance.makeAndPopulateInstance(domainClass.klass, row)
+                list << GsqlDomainClassUtils.instance.makeAndPopulateInstance(artifactInfo.klass, row)
             }
         }
-        LOG.trace("< ${domainClass.simpleName}.list().size() => ${list.size()}")
+        LOG.trace("< ${artifactInfo.simpleName}.list().size() => ${list.size()}")
         list
     }
 }

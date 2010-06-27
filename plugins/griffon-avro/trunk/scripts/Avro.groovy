@@ -21,10 +21,6 @@
 includeTargets << griffonScript('Init')
 includeTargets << griffonScript('Compile')
 
-target(default: 'Compile Avro sources') {
-    depends(avro)
-}
-
 target(avro: 'Compile Avro sources') {
     depends(checkVersion, classpath)
     gensrcDir = "${projectWorkDir}/avro"
@@ -117,3 +113,4 @@ target(avro: 'Compile Avro sources') {
         ant.fail(message: "[avro] Could not compile generated sources: " + e.class.simpleName + ": " + e.message)
     }
 }
+setDefaultTarget('avro')

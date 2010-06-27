@@ -41,7 +41,7 @@ class DefaultGsqlQueries {
 
     def findAll_byCriterion = {ArtifactInfo artifactInfo, String table ->
         return {ArtifactInfo dc, Criterion criterion ->
-            def (sql, values) = GsqlDomainClassHelper.instance.toSql(criterion)
+            def (sql, values) = GsqlDomainClassUtils.instance.toSql(criterion)
             ["SELECT * FROM $table WHERE ${sql} ORDER BY id ASC", values]
         }
     }
@@ -60,7 +60,7 @@ class DefaultGsqlQueries {
 
     def find_byCriterion = {ArtifactInfo artifactInfo, String table ->
         return {ArtifactInfo dc, Criterion criterion ->
-            def (sql, values) = GsqlDomainClassHelper.instance.toSql(criterion)
+            def (sql, values) = GsqlDomainClassUtils.instance.toSql(criterion)
             ["SELECT * FROM $table WHERE ${sql} ORDER BY id ASC", values]
         }
     }

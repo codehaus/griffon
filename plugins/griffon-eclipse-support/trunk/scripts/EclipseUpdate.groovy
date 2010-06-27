@@ -23,9 +23,10 @@ import groovy.xml.MarkupBuilder
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("_PluginDependencies")
 
-target(default: "Update the application's Eclipse classpath file") {
+target(updateEclipseClasspath: "Update the application's Eclipse classpath file") {
     updateEclipseClasspathFile()
 }
+setDefaultTarget('updateEclipseClasspath')
 
 updateEclipseClasspathFile = { newPlugin = null ->
     println "Updating Eclipse classpath file..."

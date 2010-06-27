@@ -21,10 +21,6 @@
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("Compile")
 
-target(default: "Compile Protobuf sources with protoc") {
-    depends(protoc)
-}
-
 target(protoc: "Compile Protobuf sources with protoc") {
     depends(checkVersion, classpath)
     // FIXME -- remove the following def when/if GRIFFON-96 is resolved
@@ -90,3 +86,4 @@ Make sure you have a similar setting on your griffon-app/conf/BuildSettings.groo
         ant.fail(message: "[protoc] Could not compile generated sources: " + e.class.simpleName + ": " + e.message)
     }
 }
+setDefaultTarget(protoc)

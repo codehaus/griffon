@@ -33,5 +33,4 @@ griffon {
 }
 
 griffon.jars.destDir='target/addon'
-
-//griffon.jars.jarName='ChartsGriffonAddon.jar'
+griffon.plugin.pack.additional.sources = ['src/gdsl']

@@ -14,59 +14,34 @@
  * limitations under the License.
  */
 
-import groovy.sql.Sql
-
-import java.sql.Connection
-
 import griffon.core.GriffonApplication
 import griffon.gsql.DataSourceHolder
-import griffon.gsql.GsqlHelper
+import griffon.gsql.GsqlConnector
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 class GsqlGriffonAddon {
     private bootstrap
  
     def addonPostInit = { app ->
-        def config = GsqlHelper.instance.parseConfig()
-        GsqlHelper.instance.createDataSource(config)
-        def skipSchema = app.config?.griffon?.gsql?.schema?.skip ?: false
-        if(!skipSchema) GsqlHelper.instance.createSchema(config)
+        ConfigObject config = GsqlConnector.instance.parseConfig(app)
+        GsqlConnector.instance.connect(app, config)
     }
 
     def events = [
-        BootstrapEnd: { app ->
-            bootstrapInit()
-        },
         ShutdownStart: { app ->
-            Connection connection = null
-            try {
-                connection = DataSourceHolder.instance.dataSource.getConnection()
-                bootstrap.destroy(new Sql(connection))
-                if(connection.metaData.databaseProductName == 'HSQL Database Engine') {
-                    connection.createStatement().executeUpdate('SHUTDOWN')
-                }
-            } finally {
-                connection?.close()
-            }
+            ConfigObject config = GsqlConnector.instance.parseConfig(app)
+            GsqlConnector.instance.disconnect(app, config)
         },
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            instance.metaClass.withSql = GsqlHelper.instance.withSql
+            instance.metaClass.withSql = GsqlConnector.instance.withSql
         }
     ]
 
     def exportWithJmx = { exporter, domain, ctx ->
         exporter.beans."${domain}:service=datasource,type=configuration" = DataSourceHolder.instance.dataSource
-    }
-
-    // ======================================================
-
-    private void bootstrapInit() {
-        bootstrap = this.class.classLoader.loadClass('BootstrapGsql').newInstance()
-        bootstrap.metaClass.app = app
-        GsqlHelper.instance.withSql { sql -> bootstrap?.init(sql) }
     }
 }

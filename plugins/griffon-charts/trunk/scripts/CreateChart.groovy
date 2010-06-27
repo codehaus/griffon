@@ -21,7 +21,7 @@
 includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
-target(default: "Creates a new Chart script") {
+target(createChart: "Creates a new Chart script") {
     depends(checkVersion, parseArguments)
 
     promptForName(type: "Chart")
@@ -32,4 +32,4 @@ target(default: "Creates a new Chart script") {
         type: "Chart",
         path: "griffon-app/charts")
 }
-
+setDefaultTarget('createChart')

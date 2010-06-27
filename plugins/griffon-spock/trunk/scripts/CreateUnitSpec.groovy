@@ -25,7 +25,7 @@ import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
-target (default: "Creates a new Spock unit spec") {
+target(createUnitSpec: "Creates a new Spock unit spec") {
     depends(checkVersion, parseArguments)
     promptForName(type: "Spock unit spec")
     def (pkg, name) = extractArtifactName(argsMap["params"][0])
@@ -37,3 +37,4 @@ target (default: "Creates a new Spock unit spec") {
        type: "UnitSpec",
        path: "test/unit")
 }
+setDefaultTarget(createUnitSpec)

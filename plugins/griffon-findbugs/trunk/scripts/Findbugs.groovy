@@ -25,7 +25,7 @@ includeTargets << griffonScript("Package")
 findbugsPluginBase = getPluginDirForName("findbugs").file as String
 findBugsHome = "${findbugsPluginBase}/lib/findbugs"
 
-target(default: "Run FindBugs on Java sources") {
+target(findbugs: "Run FindBugs on Java sources") {
     depends(prepackage)
 
     ant.path(id: "findBugsJarSet") {
@@ -70,6 +70,8 @@ target(default: "Run FindBugs on Java sources") {
         }
     }
 }
+
+setDefaultTarget('findbugs')
 
 private ConfigObject loadFindbugsConfig() {
     def classLoader = Thread.currentThread().contextClassLoader

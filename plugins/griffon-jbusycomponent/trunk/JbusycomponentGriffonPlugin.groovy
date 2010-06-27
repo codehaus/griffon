@@ -19,7 +19,7 @@
  */
 class JbusycomponentGriffonPlugin {
     def version = '0.4'
-    def dependsOn = ['swingx-builder': '0.1']
+    def dependsOn = ['swingx-builder': '0.1', jxlayer: 0.1]
     def toolkits = ['swing']
     def griffonVersion = '0.9 > *'
     def license = 'Apache Software License 2.0'

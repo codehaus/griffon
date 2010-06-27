@@ -21,10 +21,6 @@
 includeTargets << griffonScript('Init')
 includeTargets << griffonScript('Compile')
 
-target(default: 'Compile Thrift sources with thrift') {
-    depends(thrift)
-}
-
 target(thrift: 'Compile Thrift sources with thrift') {
     depends(checkVersion, classpath)
     gensrcDir = "${projectWorkDir}/thrift"
@@ -90,3 +86,4 @@ Make sure you have a similar setting on your griffon-app/conf/BuildSettings.groo
         ant.fail(message: "[thrift] Could not compile generated sources: " + e.class.simpleName + ": " + e.message)
     }
 }
+setDefaultTarget(thrift)

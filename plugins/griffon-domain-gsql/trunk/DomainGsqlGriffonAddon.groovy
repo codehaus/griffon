@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import griffon.domain.DomainClassEnhancer
-import griffon.domain.gsql.GsqlDomainClassEnhancerDelegate
+import griffon.domain.gsql.GsqlDomainHandler
+import griffon.domain.gsql.GsqlDomainHandlerHolder
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 class DomainGsqlGriffonAddon {
     def addonPostInit = { app ->
-        DomainClassEnhancer.instance.enhance(app, new GsqlDomainClassEnhancerDelegate(app))
+        GsqlDomainHandlerHolder.domainHandler = new GsqlDomainHandler(app)
     }
 }

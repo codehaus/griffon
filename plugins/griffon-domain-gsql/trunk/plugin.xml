@@ -1,12 +1,15 @@
-<plugin name='domain-gsql' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
+<plugin name='domain-gsql' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Domain class support via GSQL</title>
+  <description>Domain class support via GSQL</description>
   <documentation>http://griffon.codehaus.org/DomainGsql+Plugin</documentation>
-  <plugin name='gsql' version='0.3' />
-  <plugin name='domain' version='0.1' />
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies>
-    <plugin name='gsql' version='0.3' />
+    <plugin name='gsql' version='0.4' />
     <plugin name='domain' version='0.1' />
   </dependencies>
 </plugin>

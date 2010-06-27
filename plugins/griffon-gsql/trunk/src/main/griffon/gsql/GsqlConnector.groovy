@@ -37,15 +37,50 @@ import org.apache.commons.logging.LogFactory
  * @author Andres.Almiray
  */
 @Singleton
-final class GsqlHelper {
-    private static final Log LOG = LogFactory.getLog(GsqlHelper)
+final class GsqlConnector {
+    private static final Log LOG = LogFactory.getLog(GsqlConnector)
+    private final Object lock = new Object()
+    private boolean connected = false
+    private bootstrap
 
-    def parseConfig() {
-        def dataSourceClass = this.class.classLoader.loadClass('DataSource')
+    ConfigObject createConfig(GriffonApplication app) {
+        def dataSourceClass = app.class.classLoader.loadClass('DataSource')
         return new ConfigSlurper(Environment.current.name).parse(dataSourceClass)
     }
 
-    void createDataSource(config) {
+    void connect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(connected) return
+            connected = true
+        }
+        createDataSource(config)
+        def skipSchema = app.config?.griffon?.gsql?.schema?.skip ?: false
+        if(!skipSchema) createSchema(config)
+
+        bootstrap = app.class.classLoader.loadClass('BootstrapGsql').newInstance()
+        bootstrap.metaClass.app = app
+        withSql { sql -> bootstrap.init(sql) }
+    }
+
+    void disconnect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(!connected) return
+            connected = false
+        }
+
+        Connection connection = null
+        try {
+            connection = DataSourceHolder.instance.dataSource.getConnection()
+            bootstrap.destroy(new Sql(connection))
+            if(connection.metaData.databaseProductName == 'HSQL Database Engine') {
+                connection.createStatement().executeUpdate('SHUTDOWN')
+            }
+        } finally {
+            connection?.close()
+        }
+    }
+
+    private void createDataSource(ConfigObject config) {
         if(DataSourceHolder.instance.dataSource) return
         
         Class.forName(config.dataSource.driverClassName.toString())
@@ -69,7 +104,7 @@ final class GsqlHelper {
         DataSourceHolder.instance.dataSource = new PoolingDataSource(connectionPool)
     }
 
-    void createSchema(config) {
+    private void createSchema(ConfigObject config) {
         def dbCreate = config.dataSource?.dbCreate.toString()
         if(dbCreate != 'create') return
  
@@ -91,12 +126,5 @@ final class GsqlHelper {
         }
     }
 
-    def withSql = { Closure closure ->
-        Connection connection = DataSourceHolder.instance.dataSource.getConnection()
-        try {
-            closure(new Sql(connection))
-        } finally {
-            connection.close()
-        }
-    }
+    def withSql = DataSourceHolder.instance.withSql
 }

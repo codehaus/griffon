@@ -22,6 +22,7 @@ import griffon.core.ArtifactInfo
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
+import griffon.domain.gsql.GsqlDomainHandler
 import griffon.domain.metaclass.AbstractMakePersistentMethod
 
 /**
@@ -30,7 +31,7 @@ import griffon.domain.metaclass.AbstractMakePersistentMethod
 class MakePersistentMethod extends AbstractMakePersistentMethod {
     private static final Log LOG = LogFactory.getLog(MakePersistentMethod)
 
-    MakePersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass)
+    MakePersistentMethod(GsqlDomainHandler domainHandler) {
+        super(domainHandler)
     }
 }

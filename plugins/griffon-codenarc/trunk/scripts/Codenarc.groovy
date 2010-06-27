@@ -25,11 +25,12 @@ import griffon.util.Environment
 
 includeTargets << griffonScript('Compile')
 
-target('default': 'Run CodeNarc') {
+target('codenarc': 'Run CodeNarc') {
    depends(compile)
-
    runCodenarc()
 }
+
+setDefaultTarget('codenarc')
 
 private void runCodenarc() {
     ant.taskdef(name: "codenarc", classname: "org.codenarc.ant.CodeNarcTask")

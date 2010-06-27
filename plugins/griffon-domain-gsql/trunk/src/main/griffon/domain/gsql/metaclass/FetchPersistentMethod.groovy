@@ -22,8 +22,9 @@ import griffon.core.ArtifactInfo
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
-import griffon.gsql.GsqlHelper
-import griffon.domain.gsql.GsqlDomainClassHelper
+import griffon.gsql.GsqlConnector
+import griffon.domain.gsql.GsqlDomainHandler
+import griffon.domain.gsql.GsqlDomainClassUtils
 import griffon.domain.metaclass.AbstractFetchPersistentMethod
 
 /**
@@ -32,22 +33,22 @@ import griffon.domain.metaclass.AbstractFetchPersistentMethod
 class FetchPersistentMethod extends AbstractFetchPersistentMethod {
     private static final Log LOG = LogFactory.getLog(FetchPersistentMethod)
 
-    FetchPersistentMethod(GriffonApplication app, ArtifactInfo domainClass) {
-        super(app, domainClass)
+    FetchPersistentMethod(GsqlDomainHandler domainHandler) {
+        super(domainHandler)
     }
 
-    protected Object fetch(Object key) {
-        def query = GsqlDomainClassHelper.instance.fetchQuery('fetch', domainClass.klass)
-        if(query instanceof Closure) query = query(domainClass, key) 
-        LOG.trace("> ${domainClass.simpleName}.fetch(${key})")
+    protected Object fetch(ArtifactInfo artifactInfo, Object key) {
+        def query = GsqlDomainClassUtils.instance.fetchQuery('fetch', artifactInfo.klass)
+        if(query instanceof Closure) query = query(artifactInfo, key) 
+        LOG.trace("> ${artifactInfo.simpleName}.fetch(${key})")
         LOG.trace(query)
 
         def instance = null
-        GsqlHelper.instance.withSql { sql ->
+        GsqlConnector.instance.withSql { sql ->
             def row = sql.firstRow(query, [key])
-            if(row) instance = GsqlDomainClassHelper.instance.makeAndPopulateInstance(domainClass.klass, row)
+            if(row) instance = GsqlDomainClassUtils.instance.makeAndPopulateInstance(artifactInfo.klass, row)
         }
-        LOG.trace("< ${domainClass.simpleName}.fetch(${key}) => ${instance}")
+        LOG.trace("< ${artifactInfo.simpleName}.fetch(${key}) => ${instance}")
         instance
     }
 }

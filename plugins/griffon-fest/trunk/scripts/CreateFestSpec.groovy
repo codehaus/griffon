@@ -25,7 +25,7 @@ import org.codehaus.griffon.commons.GriffonClassUtils as GCU
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
-target (default: "Creates a new Spock+FEST spec") {
+target(createFestSpec: "Creates a new Spock+FEST spec") {
     depends(checkVersion, parseArguments)
     promptForName(type: "Spock+FEST spec")
     def (pkg, name) = extractArtifactName(argsMap["params"][0])
@@ -37,3 +37,4 @@ target (default: "Creates a new Spock+FEST spec") {
        type: "FestSpec",
        path: "test/integration")
 }
+setDefaultTarget('createFestSpec')

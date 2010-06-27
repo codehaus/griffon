@@ -87,20 +87,22 @@ public class CriteriaVisitor extends CodeVisitorSupport {
         Object rhs = current;
 
         if(lhs instanceof Criterion) {
-            if(rhs instanceof Criterion &&
-               (op == Operator.AND || op == Operator.OR)) {
+            if(!isAndOr(op)) {
+                throw new CriteriaVisitException(
+                   "Invalid expression " + lhs + " "+ op +" " + rhs);
+            }
+            if(rhs instanceof Criterion) {
                   current = new CompositeCriterion(op, (Criterion) lhs, (Criterion) rhs);
                   return;
+            } else if(rhs instanceof Property) {
+                Property p = (Property) rhs;
+                current = new CompositeCriterion(op, (Criterion) lhs, new UnaryExpression(p.value, Operator.IS_NOT_NULL));
+                return;
             } else {
-               throw new CriteriaVisitException(
-                   "Invalid expression '" + rhs + "' after '"+ lhs +"' with operator " + op);
+                throw new CriteriaVisitException(
+                   "Invalid expression " + lhs + " "+ op +" " + rhs);
             }
-        } else if(rhs instanceof Criterion) {
-            throw new CriteriaVisitException(
-               "Invalid expression '" + lhs + "' before '"+ rhs +"' with operator " + op);
-        }
- 
-        if(lhs instanceof Property) {
+        } else if(lhs instanceof Property) {
             Property p = (Property) lhs;
             if(rhs instanceof Property) {
                current = new griffon.domain.orm.PropertyExpression(p.value, op, ((Property)rhs).value);
@@ -113,6 +115,13 @@ public class CriteriaVisitor extends CodeVisitorSupport {
                    current = new griffon.domain.orm.BinaryExpression(p.value, op, v.value);
                }
                return;
+            } else if(rhs instanceof Criterion && isAndOr(op)) {
+                Criterion c = (Criterion) rhs;
+                current = new CompositeCriterion(op, new UnaryExpression(p.value, Operator.IS_NOT_NULL), c);
+                return;
+            } else {
+                throw new CriteriaVisitException(
+                   "Invalid expression " + lhs + " "+ op +" " + rhs);
             }
         } else if(lhs instanceof Value) {
             Value v = (Value) lhs;
@@ -160,6 +169,10 @@ public class CriteriaVisitor extends CodeVisitorSupport {
         else if("||".equals(text)) return Operator.OR;
         throw new CriteriaVisitException(
             "Invalid operator '" + text + "'. Valid operators are ==, !=, >, >=, <, <=, &&, ||");
+    }
+
+    private static boolean isAndOr(Operator op) {
+        return op == Operator.AND || op == Operator.OR;
     }
 
     private static class Property {
