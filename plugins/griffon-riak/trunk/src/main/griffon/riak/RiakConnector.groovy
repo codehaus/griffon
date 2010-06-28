@@ -24,13 +24,41 @@ import com.basho.riak.client.raw.RawClient
  * @author Andres Almiray
  */
 @Singleton
-final class RiakHelper {
-    def parseConfig(GriffonApplication app) {
+final class RiakConnector {
+    private final Object lock = new Object()
+    private boolean connected = false
+    private bootstrap
+    private GriffonApplication app
+
+    ConfigObject createConfig(GriffonApplication app) {
         def configClass = app.class.classLoader.loadClass('RiakConfig')
         return new ConfigSlurper(Environment.current.name).parse(configClass)
     }
 
-    void startRiak(config) {
+    void connect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(connected) return
+            connected = true
+        }
+
+        this.app = app
+        RiakConnector.instance.startRiak(riakConfig)
+        bootstrap = app.class.classLoader.loadClass('BootstrapRiak').newInstance()
+        bootstrap.metaClass.app = app
+        bootstrap.init(RawClientHolder.instance.rawClient)
+    }
+
+    void disconnect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(!connected) return
+            connected = false
+        }
+
+        bootstrap.destroy(RawClientHolder.instance.rawClient)
+        stopRiak(config)
+    }
+
+    private void startRiak(config) {
         RiakConfig riakConfig = new RiakConfig()
         ['url', 'timeout', 'maxConnections'].each { p ->
             if(config.raw[p]) riakConfig[p] = config.raw[p]
@@ -38,7 +66,7 @@ final class RiakHelper {
         RawClientHolder.instance.rawClient = new RawClient(riakConfig)
     }
 
-    void stopRiak(config) {
+    private void stopRiak(config) {
     }
 
     def withRiak = { Closure closure ->

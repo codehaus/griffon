@@ -42,6 +42,9 @@ griffon.neodatis.injectInto = ['controller']
 ''')
 }
 
+argsMap = argsMap ?: [:]
+argsMap.skipPackagePrompt = true
+
 if(!new File("${basedir}/griffon-app/conf/NeodatisConfig.groovy").exists()) {
    createArtifact(
       name: "NeodatisConfig",

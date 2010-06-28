@@ -42,6 +42,9 @@ griffon.gsql.injectInto = ['controller']
 ''')
 }
 
+argsMap = argsMap ?: [:]
+argsMap.skipPackagePrompt = true
+
 if(!new File("${basedir}/griffon-app/conf/DataSource.groovy").exists()) {
    createArtifact(
       name: "DataSource",

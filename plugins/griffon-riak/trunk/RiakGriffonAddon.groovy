@@ -15,38 +15,26 @@
  */
 
 import griffon.core.GriffonApplication
-import griffon.util.Environment
-import griffon.riak.RiakHelper
-import griffon.riak.RawClientHolder
+import griffon.riak.RiakConnector
 
 /**
  * @author Andres Almiray
  */
 class RiakGriffonAddon {
-    private bootstrap
+    def addonInit = { app ->
+        ConfigObject config = RiakConnector.instance.createConfig(app)
+        RiakConnector.instance.connect(app, config)
+    }
 
     def events = [
-        BootstrapEnd: { app -> start(app) },
-        ShutdownStart: { app -> stop(app) },
+        ShutdownStart: { app ->
+            ConfigObject config = RiakConnector.instance.createConfig(app)
+            RiakConnector.instance.disconnect(app, config)
+        },
         NewInstance: { klass, type, instance ->
-            def types = app.config.griffon?.riak?.injectInto ?: ['controller']
+            def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            instance.metaClass.withRiak = RiakHelper.instance.withRiak
+            instance.metaClass.withRiak = RiakConnector.instance.withRiak
         }
     ]
-
-    private void start(GriffonApplication app) {
-        RiakHelper.instance.metaClass.app = app
-        def riakConfig = RiakHelper.instance.parseConfig(app)
-        RiakHelper.instance.startRiak(riakConfig)
-        bootstrap = app.class.classLoader.loadClass('BootstrapRiak').newInstance()
-        bootstrap.metaClass.app = app
-        bootstrap.init(RawClientHolder.instance.rawClient)
-    }
-
-    private void stop(GriffonApplication app) {
-        bootstrap.destroy(RawClientHolder.instance.rawClient)
-        def riakConfig = RiakHelper.instance.parseConfig(app)
-        RiakHelper.instance.stopRiak(riakConfig)
-    }
 }

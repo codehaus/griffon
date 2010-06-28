@@ -44,6 +44,9 @@ griffon.couchdb.injectInto = ['controller']
 ''')
 }
 
+argsMap = argsMap ?: [:]
+argsMap.skipPackagePrompt = true
+
 if(!new File("${basedir}/griffon-app/conf/CouchdbConfig.groovy").exists()) {
    createArtifact(
       name: "CouchdbConfig",

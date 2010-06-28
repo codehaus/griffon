@@ -42,6 +42,7 @@ final class GsqlConnector {
     private final Object lock = new Object()
     private boolean connected = false
     private bootstrap
+    private GriffonApplication app
 
     ConfigObject createConfig(GriffonApplication app) {
         def dataSourceClass = app.class.classLoader.loadClass('DataSource')
@@ -53,6 +54,8 @@ final class GsqlConnector {
             if(connected) return
             connected = true
         }
+
+        this.app = app
         createDataSource(config)
         def skipSchema = app.config?.griffon?.gsql?.schema?.skip ?: false
         if(!skipSchema) createSchema(config)

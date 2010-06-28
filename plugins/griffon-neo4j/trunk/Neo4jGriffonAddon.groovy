@@ -17,9 +17,7 @@
 */
 
 import griffon.core.GriffonApplication
-import griffon.util.Environment
-import griffon.neo4j.Neo4jHelper
-import griffon.neo4j.DatabaseHolder
+import griffon.neo4j.Neo4jConnector
 
 import org.neo4j.graphdb.Node
 import org.neo4j.graphdb.Relationship
@@ -29,8 +27,6 @@ import org.neo4j.graphdb.RelationshipType
  * @author Andres Almiray
  */
 class Neo4jGriffonAddon {
-    private bootstrap
-
     def addonInit(app) {
         [Node.metaClass, Relationship.metaClass].each { mc ->
             mc.getAt = {String propertyName ->
@@ -43,29 +39,20 @@ class Neo4jGriffonAddon {
         Node.metaClass.relate = {RelationshipType relType, Node other ->
             return delegate.createRelationshipTo(other, relType)
         }
+
+        ConfigObject config = Neo4jConnector.instance.createConfig(app)
+        Neo4jConnector.instance.connect(app, config)
     }
 
     def events = [
-        BootstrapEnd: { app -> startNeo4j(app) },
-        ShutdownStart: { app -> stopNeo4j(app) },
+        ShutdownStart: { app ->
+            ConfigObject config = Neo4jConnector.instance.createConfig(app)
+            Neo4jConnector.instance.disconnect(app, config)
+        },
         NewInstance: { klass, type, instance ->
-            def types = app.config.griffon?.neo4j?.injectInto ?: ['controller']
+            def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            instance.metaClass.withNeo4j = Neo4jHelper.instance.withNeo4j
+            instance.metaClass.withNeo4j = Neo4jConnector.instance.withNeo4j
         }
     ]
-
-    private void startNeo4j(GriffonApplication app) {
-        def dbConfig = Neo4jHelper.instance.parseConfig(app)
-        Neo4jHelper.instance.startNeo4j(dbConfig)
-        bootstrap = app.class.classLoader.loadClass('BootstrapNeo4j').newInstance()
-        bootstrap.metaClass.app = app
-        bootstrap.init(DatabaseHolder.instance.db)
-    }
-
-    private void stopNeo4j(GriffonApplication app) {
-        bootstrap.destroy(DatabaseHolder.instance.db)
-        def dbConfig = Neo4jHelper.instance.parseConfig(app)
-        Neo4jHelper.instance.stopNeo4j(dbConfig)
-    }
 }

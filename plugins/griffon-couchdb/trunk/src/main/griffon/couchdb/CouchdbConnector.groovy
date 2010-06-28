@@ -42,14 +42,40 @@ import org.svenson.converter.DefaultTypeConverterRepository
  * @author Andres Almiray
  */
 @Singleton
-final class CouchdbHelper {
-    def parseConfig(GriffonApplication app) {
-        def couchdbConfigClass = app.class.classLoader.loadClass("CouchdbConfig")
-        return new ConfigSlurper(Environment.current.name).parse(couchdbConfigClass)
+final class CouchdbConnector {
+    private final Object lock = new Object()
+    private boolean connected = false
+    private bootstrap
+    private GriffonApplication app
+
+    def createConfig(GriffonApplication app) {
+        def couchconfigClass = app.class.classLoader.loadClass("Couchconfig")
+        return new ConfigSlurper(Environment.current.name).parse(couchconfigClass)
     }
 
-    void startCouchdb(dbConfig) {
-        def ds = dbConfig.couchdb
+    void connect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(connected) return
+            connected = true
+        }
+
+        this.app = app
+        startCouchdb(config)
+        bootstrap = app.class.classLoader.loadClass('BootstrapCouchdb').newInstance()
+        bootstrap.metaClass.app = app
+        bootstrap.init(DatabaseHolder.instance.db)
+    }
+
+    void disconnect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(!connected) return
+            connected = false
+        }
+        bootstrap.destroy(DatabaseHolder.instance.db)
+    }
+
+    private void startCouchdb(config) {
+        def ds = config.couchdb
 
         String host = ds?.host ?: "localhost"
         Integer port = ds?.port ?: 5984

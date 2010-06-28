@@ -44,6 +44,9 @@ griffon.neo4j.injectInto = ['controller']
 ''')
 }
 
+argsMap = argsMap ?: [:]
+argsMap.skipPackagePrompt = true
+
 if(!new File("${basedir}/griffon-app/conf/Neo4jConfig.groovy").exists()) {
    createArtifact(
       name: "Neo4jConfig",

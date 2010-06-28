@@ -17,31 +17,34 @@
 package griffon.fest
 
 import org.fest.swing.fixture.FrameFixture
-import griffon.swing.SwingApplication
 import java.util.concurrent.CountDownLatch
+import griffon.swing.SwingApplication
+import griffon.test.GriffonUnitTestCase
 
 /**
  * @author Andres Almiray
  */
-abstract class FestSwingTestCase extends GroovyTestCase {
+abstract class FestSwingTestCase extends GriffonUnitTestCase {
     private boolean realized = false
     private final Object realizedLock = new Object()
 
     protected SwingApplication app
     protected FrameFixture window
 
-    protected final void setUp() throws Exception {
+    protected final void setUp() {
+        super.setup()
         initApp()
         onSetUp()
     }
 
-     protected final void tearDown() throws Exception {
+    protected final void tearDown() {
         window.cleanUp()
         onTearDown()
+        super.tearDown()
     }
  
-    protected void onSetUp() throws Exception { }
-    protected void onTearDown() throws Exception { }
+    protected void onSetUp() { }
+    protected void onTearDown() { }
  
     private final void initApp() {
         synchronized(realizedLock) {

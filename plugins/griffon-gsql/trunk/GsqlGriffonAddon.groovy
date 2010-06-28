@@ -22,16 +22,14 @@ import griffon.gsql.GsqlConnector
  * @author Andres Almiray
  */
 class GsqlGriffonAddon {
-    private bootstrap
- 
-    def addonPostInit = { app ->
-        ConfigObject config = GsqlConnector.instance.parseConfig(app)
+    def addonInit = { app ->
+        ConfigObject config = GsqlConnector.instance.createConfig(app)
         GsqlConnector.instance.connect(app, config)
     }
 
     def events = [
         ShutdownStart: { app ->
-            ConfigObject config = GsqlConnector.instance.parseConfig(app)
+            ConfigObject config = GsqlConnector.instance.createConfig(app)
             GsqlConnector.instance.disconnect(app, config)
         },
         NewInstance: { klass, type, instance ->

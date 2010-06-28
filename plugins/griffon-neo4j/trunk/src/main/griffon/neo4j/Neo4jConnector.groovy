@@ -39,16 +39,43 @@ import org.codehaus.groovy.runtime.StackTraceUtils
  * @author Andres.Almiray
  */
 @Singleton
-final class Neo4jHelper {
-    private static final Log LOG = LogFactory.getLog(Neo4jHelper)
+final class Neo4jConnector {
+    private static final Log LOG = LogFactory.getLog(Neo4jConnector)
+    private final Object lock = new Object()
+    private boolean connected = false
+    private bootstrap
 
-    def parseConfig(GriffonApplication app) {
+    ConfigObject createConfig(GriffonApplication app) {
         def neo4jConfigClass = app.class.classLoader.loadClass("Neo4jConfig")
         return new ConfigSlurper(Environment.current.name).parse(neo4jConfigClass)
     }
 
-    void startNeo4j(dbConfig) {
-        String storeDirName = dbConfig?.neo4j?.storeDir ?: 'neo4j/db'
+    void connect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(connected) return
+            connected = true
+        }
+
+        this.app = app
+        startNeo4j(config)
+        bootstrap = app.class.classLoader.loadClass('BootstrapNeo4j').newInstance()
+        bootstrap.metaClass.app = app
+        bootstrap.init(DatabaseHolder.instance.db)
+    }
+
+    void disconnect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(!connected) return
+            connected = false
+        }
+
+        bootstrap.destroy(DatabaseHolder.instance.db)
+        stopNeo4j(config)
+    }
+
+
+    private void startNeo4j(config) {
+        String storeDirName = config?.neo4j?.storeDir ?: 'neo4j/db'
         File storeDir = new File(storeDirName)
         if(!storeDir.absolute) storeDir = new File(Metadata.current.getGriffonWorkingDir(), storeDirName)
         storeDir.mkdirs()
@@ -65,7 +92,7 @@ final class Neo4jHelper {
 
         GraphDatabaseService db = new EmbeddedGraphDatabase(storeDir.absolutePath)
         DatabaseHolder.instance.db = db
-        String indexType = dbConfig?.neo4j?.index?.type ?: 'normal'
+        String indexType = config?.neo4j?.index?.type ?: 'normal'
         IndexService index = null
         switch(indexType) {
             case 'query': index = new LuceneFulltextQueryIndexService(db); break
@@ -85,7 +112,7 @@ final class Neo4jHelper {
         }
     }
 
-    void stopNeo4j(dbConfig) {
+    private void stopNeo4j(config) {
         try{ 
             DatabaseHolder.instance.index.shutdown()
         } catch(IOException ioe) { 

@@ -41,6 +41,9 @@ griffon.berkeleydb.injectInto = ['controller']
 '''
 }
 
+argsMap = argsMap ?: [:]
+argsMap.skipPackagePrompt = true
+
 if(!new File("${basedir}/griffon-app/conf/BerkeleydbConfig.groovy").exists()) {
    createArtifact(
       name: "BerkeleydbConfig",

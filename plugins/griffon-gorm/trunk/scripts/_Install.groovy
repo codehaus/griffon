@@ -38,6 +38,9 @@ root.'GormGriffonAddon'.addon=true
 
 ant.mkdir(dir: "${basedir}/griffon-app/domain")
 
+argsMap = argsMap ?: [:]
+argsMap.skipPackagePrompt = true
+
 if(!new File("${basedir}/griffon-app/conf/DataSource.groovy").exists()) {
    createArtifact(
       name: "DataSource",

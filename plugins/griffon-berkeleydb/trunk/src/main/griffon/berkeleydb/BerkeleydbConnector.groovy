@@ -29,19 +29,45 @@ import org.apache.commons.logging.LogFactory
  * @author Andres.Almiray
  */
 @Singleton
-final class BerkeleydbHelper {
+final class BerkeleydbConnector {
     private final Map ENTITY_STORES = new ConcurrentHashMap()
     private final Map DATABASES = new ConcurrentHashMap()
-    private static final Log LOG = LogFactory.getLog(BerkeleydbHelper)
+    private static final Log LOG = LogFactory.getLog(BerkeleydbConnector)
+    private final Object lock = new Object()
+    private boolean connected = false
+    private bootstrap
+    private GriffonApplication app
 
     final EnvironmentConfig envConfig = new EnvironmentConfig()
 
-    def parseConfig(GriffonApplication app) {
+    def createConfig(GriffonApplication app) {
         def configClass = app.class.classLoader.loadClass('BerkeleydbConfig')
         return new ConfigSlurper(GE.current.name).parse(configClass)
     }
 
-    void startEnvironment(config) {
+    void connect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(connected) return
+            connected = true
+        }
+        this.app = app
+        BerkeleydbConnector.instance.startEnvironment(dbConfig)
+        bootstrap = app.class.classLoader.loadClass('BootstrapBerkeleydb').newInstance()
+        bootstrap.metaClass.app = app
+        bootstrap.init(EnvironmentHolder.instance.environment)
+    }
+
+    void disconnect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(!connected) return
+            connected = false
+        }
+
+        bootstrap.destroy(EnvironmentHolder.instance.environment)
+        stopEnvironment(config)
+    }
+
+    private void startEnvironment(config) {
         String envhome = config.environment?.home ?: 'bdb_home'
         File envhomeDir = new File(envhome)
         if(!envhomeDir.absolute) envhomeDir = new File(Metadata.current.getGriffonWorkingDir(), envhome)
@@ -75,7 +101,7 @@ final class BerkeleydbHelper {
         EnvironmentHolder.instance.environment = new Environment(envhomeDir, envConfig)
     }
 
-    void stopEnvironment(config) {
+    private void stopEnvironment(config) {
         ENTITY_STORES.each { id, storeBucket -> storeBucket.store.close() }
         DATABASES.each { id, dbBucket ->
             dbBucket.db.with {
@@ -173,7 +199,7 @@ final class BerkeleydbHelper {
     }
 
     private Map createStoreBucket(String storeId) {
-        def config = parseConfig(app)
+        def config = createConfig(app)
         StoreConfig storeConfig = new StoreConfig()
         TransactionConfig txnConfig = new TransactionConfig()
 
@@ -192,7 +218,7 @@ final class BerkeleydbHelper {
     }
 
     private Map createDatabaseBucket(String dbId) {
-        def config = parseConfig(app)
+        def config = createConfig(app)
         DatabaseConfig dbConfig = new DatabaseConfig()
         TransactionConfig txnConfig = new TransactionConfig()
         CursorConfig cursorConfig = new CursorConfig()
