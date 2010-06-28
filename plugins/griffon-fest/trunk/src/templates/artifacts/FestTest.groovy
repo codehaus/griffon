@@ -11,10 +11,10 @@ class @artifact.name@ extends FestSwingTestCase {
  
     }
  
-    // protected void onSetUp() throws Exception {
+    // protected void onSetUp() {
     // }
  
-    // protected void onTearDown() throws Exception {
+    // protected void onTearDown() {
     // }
  
     // protected FrameFixture initWindow() {

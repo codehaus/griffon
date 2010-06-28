@@ -15,7 +15,7 @@
  */
 
 import griffon.core.GriffonApplication
-import griffon.neodatis.NeodatisHelper
+import griffon.neodatis.NeodatisConnector
 import griffon.neodatis.OdbHolder
 // import griffon.neodatis.ClosureQuery
 
@@ -50,30 +50,20 @@ class NeodatisGriffonAddon {
              remove: {-> throw new UnsupportedOperationException("${Objects.class.name} is immutable!")}] as Iterator
             */
         }
+
+        ConfigObject config = NeodatisConnector.instance.createConfig(app)
+        NeodatisConnector.instance.connect(app, config)
     }
 
     def events = [
-        BootstrapEnd: { app -> start(app) },
-        ShutdownStart: { app -> stop(app) },
+        ShutdownStart: { app ->
+            ConfigObject config = NeodatisConnector.instance.createConfig(app)
+            NeodatisConnector.instance.disconnect(app, config)
+        },
         NewInstance: { klass, type, instance ->
-            def types = app.config.griffon?.neodatis?.injectInto ?: ['controller']
+            def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            instance.metaClass.withOdb = NeodatisHelper.instance.withOdb
+            instance.metaClass.withOdb = NeodatisConnector.instance.withOdb
         }
     ]
-
-    private void start(GriffonApplication app) {
-        NeodatisHelper.instance.metaClass.app = app
-        def dbConfig = NeodatisHelper.instance.parseConfig(app)
-        NeodatisHelper.instance.startOdb(dbConfig)
-        bootstrap = app.class.classLoader.loadClass('BootstrapNeodatis').newInstance()
-        bootstrap.metaClass.app = app
-        bootstrap.init(OdbHolder.instance.odb)
-    }
-
-    private void stop(GriffonApplication app) {
-        bootstrap.destroy(OdbHolder.instance.odb)
-        def dbConfig = NeodatisHelper.instance.parseConfig(app)
-        NeodatisHelper.instance.stopOdb(dbConfig)
-    }
 }

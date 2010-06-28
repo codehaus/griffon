@@ -15,41 +15,29 @@
  */
 
 import griffon.core.GriffonApplication
-import griffon.util.Environment
-import griffon.berkeleydb.BerkeleydbHelper
-import griffon.berkeleydb.EnvironmentHolder
+import griffon.berkeleydb.BerkeleydbConnector
 
 /**
  * @author Andres Almiray
  */
 class BerkeleydbGriffonAddon {
-    private bootstrap
+    def addonInit = { app ->
+        ConfigObject config = BerkeleydbConnector.instance.createConfig(app)
+        BerkeleydbConnector.instance.connect(app, config)
+    }
 
     def events = [
-        BootstrapEnd: { app -> start(app) },
-        ShutdownStart: { app -> stop(app) },
+        ShutdownStart: { app ->
+            ConfigObject config = BerkeleydbConnector.instance.createConfig(app)
+            BerkeleydbConnector.instance.disconnect(app, config)
+        },
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.berkeleydb?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            instance.metaClass.withBerkeleyEnv = BerkeleydbHelper.instance.withBerkeleyEnv
-            instance.metaClass.withBerkeleyDb = BerkeleydbHelper.instance.withBerkeleyDb
-            instance.metaClass.withBerkeleyCursor = BerkeleydbHelper.instance.withBerkeleyCursor
-            instance.metaClass.withEntityStore = BerkeleydbHelper.instance.withEntityStore
+            instance.metaClass.withBerkeleyEnv = BerkeleydbConnector.instance.withBerkeleyEnv
+            instance.metaClass.withBerkeleyDb = BerkeleydbConnector.instance.withBerkeleyDb
+            instance.metaClass.withBerkeleyCursor = BerkeleydbConnector.instance.withBerkeleyCursor
+            instance.metaClass.withEntityStore = BerkeleydbConnector.instance.withEntityStore
         }
     ]
-
-    private void start(GriffonApplication app) {
-        BerkeleydbHelper.instance.metaClass.app = app
-        def dbConfig = BerkeleydbHelper.instance.parseConfig(app)
-        BerkeleydbHelper.instance.startEnvironment(dbConfig)
-        bootstrap = app.class.classLoader.loadClass('BootstrapBerkeleydb').newInstance()
-        bootstrap.metaClass.app = app
-        bootstrap.init(EnvironmentHolder.instance.environment)
-    }
-
-    private void stop(GriffonApplication app) {
-        bootstrap.destroy(EnvironmentHolder.instance.environment)
-        def dbConfig = BerkeleydbHelper.instance.parseConfig(app)
-        BerkeleydbHelper.instance.stopEnvironment(dbConfig)
-    }
 }

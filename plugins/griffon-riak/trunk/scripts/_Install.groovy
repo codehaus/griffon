@@ -42,6 +42,9 @@ griffon.riak.injectInto = ['controller']
 ''')
 }
 
+argsMap = argsMap ?: [:]
+argsMap.skipPackagePrompt = true
+
 if(!new File("${basedir}/griffon-app/conf/RiakConfig.groovy").exists()) {
    createArtifact(
       name: "RiakConfig",

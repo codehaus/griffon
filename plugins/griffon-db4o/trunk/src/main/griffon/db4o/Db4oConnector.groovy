@@ -27,23 +27,50 @@ import com.db4o.*
  * @author Andres.Almiray
  */
 @Singleton
-final class Db4oHelper {
-    def parseConfig(GriffonApplication app) {
+final class Db4oConnector {
+    private final Object lock = new Object()
+    private boolean connected = false
+    private bootstrap
+
+    ConfigObject parseConfig(GriffonApplication app) {
         def db4oConfigClass = app.class.classLoader.loadClass("Db4oConfig")
         return new ConfigSlurper(Environment.current.name).parse(db4oConfigClass)
     }
 
-    void startObjectContainer(dbConfig) {
-        String dbfileName = dbConfig?.dataSource?.name ?: 'db.yarv'
+    void connect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(connected) return
+            connected = true
+        }
+
+        this.app = app
+        startObjectContainer(config)
+        bootstrap = app.class.classLoader.loadClass('BootstrapDb4o').newInstance()
+        bootstrap.metaClass.app = app
+        bootstrap.init(ObjectContainerHolder.instance.objectContainer)
+    }
+
+    void disconnect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(!connected) return
+            connected = false
+        }
+
+        bootstrap.destroy(ObjectContainerHolder.instance.objectContainer)
+        stopObjectContainer(config)
+    }
+
+    private void startObjectContainer(config) {
+        String dbfileName = config?.dataSource?.name ?: 'db.yarv'
         File dbfile = new File(dbfileName)
         if(!dbfile.absolute) dbfile = new File(Metadata.current.getGriffonWorkingDir(), dbfileName)
         ObjectContainerHolder.instance.objectContainer = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dbfile.absolutePath)
     }
 
-    void stopObjectContainer(dbConfig) {
+    private void stopObjectContainer(config) {
         ObjectContainerHolder.instance.objectContainer.close()
 
-        String dbfileName = dbConfig?.dataSource?.name ?: 'db.yarv'
+        String dbfileName = config?.dataSource?.name ?: 'db.yarv'
         File dbfile = new File(dbfileName)
         if(!dbfile.absolute) dbfile = new File(Metadata.current.getGriffonWorkingDir(), dbfileName)
         switch(Environment.current) {

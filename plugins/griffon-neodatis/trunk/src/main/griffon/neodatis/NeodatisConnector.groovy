@@ -24,13 +24,41 @@ import org.neodatis.odb.*
  * @author Andres Almiray
  */
 @Singleton
-final class NeodatisHelper {
-    def parseConfig(GriffonApplication app) {
+final class NeodatisConnector {
+    private final Object lock = new Object()
+    private boolean connected = false
+    private bootstrap
+    private GriffonApplication app
+
+    ConfigObject createConfig(GriffonApplication app) {
         def configClass = app.class.classLoader.loadClass('NeodatisConfig')
         return new ConfigSlurper(Environment.current.name).parse(configClass)
     }
 
-    void startOdb(config) {
+    void connect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(connected) return
+            connected = true
+        }
+
+        this.app = app
+        startOdb(config)
+        bootstrap = app.class.classLoader.loadClass('BootstrapNeodatis').newInstance()
+        bootstrap.metaClass.app = app
+        bootstrap.init(OdbHolder.instance.odb)
+    }
+
+    void disconnect(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            if(!connected) return
+            connected = false
+        }
+
+        bootstrap.destroy(OdbHolder.instance.odb)
+        stopOdb(config)
+    }
+
+    private void startOdb(config) {
         boolean isClient = config.database?.client ?: false
         String alias = config.database?.alias ?: 'neodatis.odb'
 
@@ -54,7 +82,7 @@ final class NeodatisHelper {
         }
     }
 
-    void stopOdb(config) {
+    private void stopOdb(config) {
         boolean isClient = config.database?.client ?: false
         String alias = config.database?.alias ?: 'neodatis/db.odb'
 

@@ -15,35 +15,26 @@
  */
 
 import griffon.core.GriffonApplication
-import griffon.util.Environment
-import griffon.couchdb.CouchdbHelper
-import griffon.couchdb.DatabaseHolder
+import griffon.couchdb.CouchdbConnector
 
 /**
  * @author Andres Almiray
  */
 class CouchdbGriffonAddon {
-    private bootstrap
+    def addonInit = { app ->
+        ConfigObject config = CouchdbConnector.instance.createConfig(app)
+        CouchdbConnector.instance.connect(app, config)
+    }
 
     def events = [
-        BootstrapEnd: { app -> startCouchdb(app) },
-        ShutdownStart: { app -> stopCouchdb(app) },
+        ShutdownStart: { app ->
+            ConfigObject config = CouchdbConnector.instance.createConfig(app)
+            CouchdbConnector.instance.disconnect(app, config)
+        },
         NewInstance: { klass, type, instance ->
-            def types = app.config.griffon?.couchdb?.injectInto ?: ['controller']
+            def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            instance.metaClass.withCouchdb = CouchdbHelper.instance.withCouchdb
+            instance.metaClass.withCouchdb = CouchdbConnector.instance.withCouchdb
         }
     ]
-
-    private void startCouchdb(GriffonApplication app) {
-        def dbConfig = CouchdbHelper.instance.parseConfig(app)
-        CouchdbHelper.instance.startCouchdb(dbConfig)
-        bootstrap = app.class.classLoader.loadClass('BootstrapCouchdb').newInstance()
-        bootstrap.metaClass.app = app
-        bootstrap.init(DatabaseHolder.instance.db)
-    }
-
-    private void stopCouchdb(GriffonApplication app) {
-        bootstrap.destroy(DatabaseHolder.instance.db)
-    }
 }

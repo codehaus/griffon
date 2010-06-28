@@ -18,37 +18,26 @@
 */
 
 import griffon.core.GriffonApplication
-import griffon.util.Environment
-import griffon.db4o.Db4oHelper
-import griffon.db4o.ObjectContainerHolder
+import griffon.db4o.Db4oConnector
 
 /**
  * @author Andres Almiray
  */
 class Db4oGriffonAddon {
-    private bootstrap
+    def addonInit = { app ->
+        ConfigObject config = Db4oConnector.instance.createConfig(app)
+        Db4oConnector.instance.connect(app, config)
+    }
 
     def events = [
-        BootstrapEnd: { app -> start(app) },
-        ShutdownStart: { app -> stop(app) },
+        ShutdownStart: { app ->
+            ConfigObject config = Db4oConnector.instance.createConfig(app)
+            Db4oConnector.instance.disconnect(app, config)
+        },
         NewInstance: { klass, type, instance ->
-            def types = app.config.griffon?.db4o?.injectInto ?: ['controller']
+            def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             instance.metaClass.withDb4o = Db4oHelper.instance.withDb4o
         }
     ]
-
-    private void start(GriffonApplication app) {
-        def dbConfig = Db4oHelper.instance.parseConfig(app)
-        Db4oHelper.instance.startObjectContainer(dbConfig)
-        bootstrap = app.class.classLoader.loadClass('BootstrapDb4o').newInstance()
-        bootstrap.metaClass.app = app
-        bootstrap.init(ObjectContainerHolder.instance.objectContainer)
-    }
-
-    private void stop(GriffonApplication app) {
-        bootstrap.destroy(ObjectContainerHolder.instance.objectContainer)
-        def dbConfig = Db4oHelper.instance.parseConfig(app)
-        Db4oHelper.instance.stopObjectContainer(dbConfig)
-    }
 }
