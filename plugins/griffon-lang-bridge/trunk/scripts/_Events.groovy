@@ -27,7 +27,6 @@ eventCompileStart = {
     compileCommons()
 }
 
-/**
- * Detects whether we're compiling the LangBridge plugin itself
- */
-private boolean compilingLangBridgePlugin() { getPluginDirForName('lang-bridge') == basedir }
+private boolean compilingLangBridgePlugin() { 
+    getPluginDirForName('lang-bridge')?.file?.canonicalPath == basedir
+}

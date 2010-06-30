@@ -47,10 +47,9 @@ eventCompileStart = {
     compileClojureSrc()
 }
 
-/**
- * Detects whether we're compiling the Clojure plugin itself
- */
-private boolean compilingClojurePlugin() { getPluginDirForName("clojure") == basedir }
+private boolean compilingClojurePlugin() {
+    getPluginDirForName('clojure')?.file?.canonicalPath == basedir
+}
 
 eventStatsStart = { pathToInfo ->
     if(!pathToInfo.find{ it.path == "src.commons"} ) {

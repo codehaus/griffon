@@ -22,7 +22,7 @@
  * @since 0.1
  */
 
-includeTargets << griffonScript("Compile")
+includeTargets << griffonScript("_GriffonCompile")
 
 target(compileCommons: "Compile common sources") {
     depends(checkVersion, parseArguments, classpath)

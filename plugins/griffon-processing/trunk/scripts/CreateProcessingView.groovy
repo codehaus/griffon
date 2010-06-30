@@ -21,7 +21,7 @@
 includeTargets << griffonScript('_GriffonInit')
 includeTargets << griffonScript('_GriffonCreateArtifacts')
 
-target(default: 'Creates a Processing view') {
+target(createProcessingView: 'Creates a Processing view') {
     depends(checkVersion, parseArguments)
 
     def type = 'Processing'
@@ -36,3 +36,4 @@ target(default: 'Creates a Processing view') {
         lineTerminator: ';',
         path: 'griffon-app/processing')
 }
+setDefaultTarget(createProcessingView)

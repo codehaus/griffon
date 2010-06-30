@@ -39,7 +39,7 @@ eventCopyLibsEnd = { jardir ->
     }
 }
 
-eventCompileStart = { type ->
+eventCompileStart = {
     verifyJavaFXHome()
 
     def javafxlibs = ant.fileset(dir: "${javafxHome}/lib/shared", includes: "*.jar")
@@ -47,7 +47,7 @@ eventCompileStart = { type ->
     javafxlibs = ant.fileset(dir: "${javafxHome}/lib/desktop", excludes: "*rt15.jar, *.so")
     ant.project.references["griffon.compile.classpath"].addFileset(javafxlibs)
 
-    if( compilingJavaFXPlugin() ) return
+    if(compilingJavaFXPlugin()) return
 
     ant.taskdef(resource: "javafxc-ant-task.properties",
                 classpathref: "griffon.compile.classpath")
@@ -55,8 +55,6 @@ eventCompileStart = { type ->
     ant.property(name: "javafx.compiler.classpath", refid: "griffon.compile.classpath")
     def javafxCompilerClasspath = ant.antProject.properties.'javafx.compiler.classpath'
 
-
-    if( type != "source" ) return
     def javafxSrc = "${basedir}/src/javafx"
     if(!new File(javafxSrc).exists()) return
     compileCommons()
@@ -92,10 +90,9 @@ eventRunAppEnd = {
     ant.delete(dir: jardir)
 }
 
-/**
- * Detects whether we're compiling the fx plugin itself
- */
-private boolean compilingJavaFXPlugin() { getPluginDirForName("fx") == null }
+private boolean compilingJavaFXPlugin() { 
+    getPluginDirForName('fx')?.file?.canonicalPath == basedir
+}
 
 private void verifyJavaFXHome() {
     if( compilingJavaFXPlugin() ) return

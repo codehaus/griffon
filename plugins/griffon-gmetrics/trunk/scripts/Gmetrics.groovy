@@ -21,7 +21,7 @@
 
 import griffon.util.Environment
 
-includeTargets << griffonScript('Compile')
+includeTargets << griffonScript('_GriffonCompile')
 
 target(gmetrics: 'Run GMetrics') {
     depends(compile)

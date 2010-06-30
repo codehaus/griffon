@@ -21,9 +21,8 @@
 includeTargets << griffonScript('Init')
 includePluginScript('avro', 'Avro')
 
-eventCompileStart = { type ->
+eventCompileStart = { 
     if(compilingAvroPlugin()) return
-    if(type != 'source') return
     avro()
 }
 
@@ -44,4 +43,6 @@ eventStatsStart = { pathToInfo ->
     }
 }
 
-private boolean compilingAvroPlugin() { getPluginDirForName('avro') == null }
+private boolean compilingAvroPlugin() {
+    getPluginDirForName('avro')?.file?.canonicalPath == basedir
+}

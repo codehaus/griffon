@@ -62,6 +62,5 @@ eventCompileEnd = {
 }
 
 private boolean compilingMemcachedPlugin() {
-     def memcachedDir = getPluginDirForName('memcached')?.file?.canonicalPath
-     memcachedDir == basedir
+    getPluginDirForName('memcached')?.file?.canonicalPath == basedir
 }
