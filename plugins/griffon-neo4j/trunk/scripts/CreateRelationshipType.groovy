@@ -21,7 +21,7 @@
 includeTargets << griffonScript('_GriffonInit')
 includeTargets << griffonScript('_GriffonCreateArtifacts')
 
-target(default: 'Creates a Neo4j RelationshipType enum') {
+target(createRelationshipType: 'Creates a Neo4j RelationshipType enum') {
     depends(checkVersion, parseArguments)
 
     def type = 'RelationshipType'
@@ -36,3 +36,4 @@ target(default: 'Creates a Neo4j RelationshipType enum') {
         lineTerminator: ';',
         path: 'src/main')
 }
+setDefaultTarget(createRelationshipType)
