@@ -21,9 +21,8 @@
 includeTargets << griffonScript("Init")
 includePluginScript("protobuf", "Protoc")
 
-eventCompileStart = { type ->
+eventCompileStart = {
     if(compilingProtobufPlugin()) return
-    if(type != "source") return
     protoc()
 }
 
@@ -43,4 +42,7 @@ eventStatsStart = { pathToInfo ->
     }
 }
 
-private boolean compilingProtobufPlugin() { getPluginDirForName("protobuf") == null }
+private boolean compilingProtobufPlugin() {
+    getPluginDirForName('protobuf')?.file?.canonicalPath == basedir
+}
+

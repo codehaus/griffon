@@ -19,7 +19,7 @@
  */
 
 includeTargets << griffonScript('Init')
-includeTargets << griffonScript('Compile')
+includeTargets << griffonScript('_GriffonCompile')
 
 target(avro: 'Compile Avro sources') {
     depends(checkVersion, classpath)
@@ -99,9 +99,8 @@ target(avro: 'Compile Avro sources') {
     ant.mkdir(dir: classesDirPath)
     ant.echo(message: "[avro] Compiling generated sources to $classesDirPath")
     try {
-        String classpathId = "griffon.compile.classpath"
-        ant.groovyc(destdir: classesDirPath,
-                    classpathref: classpathId) {
+    String classpathId = "griffon.compile.classpath"
+        compileSources(classesDirPath, classpathId) {
             src(path: gensrcDirPath)
             javac(classpathref: classpathId)
         }

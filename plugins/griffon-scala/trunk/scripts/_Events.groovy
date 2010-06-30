@@ -42,27 +42,14 @@ eventCopyLibsEnd = { jardir ->
     }
 }
 
-eventCompileStart = { type ->
+eventCompileStart = { 
     if(compilingScalaPlugin()) return
-    if(type != "source") return
     compileScalaSrc()
 }
  
-/*
-eventTestCompileStart = { type ->
-    if(compilingScalaPlugin()) return
-    if(type != "scala") return
-    compileScalaTest()
+private boolean compilingScalaPlugin() { 
+    getPluginDirForName('scala')?.file?.canonicalPath == basedir
 }
-
-eventTestPhasesStart = { phasesToRun ->
-    if("other" in phasesToRun && (new File("${basedir}/test/scala")).exists() && !("scala" in otherTests)) {
-        otherTests << "scala"
-    }
-}
-*/
-
-private boolean compilingScalaPlugin() { getPluginDirForName("scala") == null }
 
 eventStatsStart = { pathToInfo ->
     if(!pathToInfo.find{ it.path == "src.commons"} ) {

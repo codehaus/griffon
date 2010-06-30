@@ -19,7 +19,7 @@
  */
 
 includeTargets << griffonScript("Init")
-includeTargets << griffonScript("Compile")
+includeTargets << griffonScript("_GriffonCompile")
 
 target(protoc: "Compile Protobuf sources with protoc") {
     depends(checkVersion, classpath)
@@ -73,17 +73,10 @@ Make sure you have a similar setting on your griffon-app/conf/BuildSettings.groo
 
     ant.mkdir(dir: classesDirPath)
     ant.echo(message: "[protoc] Compiling generated sources to $classesDirPath")
-    try {
-        String classpathId = "griffon.compile.classpath"
-        ant.groovyc(destdir: classesDirPath,
-                    classpathref: classpathId) {
-            src(path: gensrcDirPath)
-            javac(classpathref: classpathId)
-        }
-    }
-    catch (Exception e) {
-        event("StatusFinal", ["Compilation error: ${e.message}"])
-        ant.fail(message: "[protoc] Could not compile generated sources: " + e.class.simpleName + ": " + e.message)
+    String classpathId = "griffon.compile.classpath"
+    compileSources(classesDirPath, classpathId) {
+        src(path: gensrcDirPath)
+        javac(classpathref: classpathId)
     }
 }
 setDefaultTarget(protoc)

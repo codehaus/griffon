@@ -21,9 +21,8 @@
 includeTargets << griffonScript('Init')
 includePluginScript('thrift', 'Thrift')
 
-eventCompileStart = { type ->
+eventCompileStart = {
     if(compilingThriftPlugin()) return
-    if(type != 'source') return
     thrift()
 }
 
@@ -43,4 +42,7 @@ eventStatsStart = { pathToInfo ->
     }
 }
 
-private boolean compilingThriftPlugin() { getPluginDirForName('thrift') == null }
+private boolean compilingThriftPlugin() {
+    getPluginDirForName('thrift')?.file?.canonicalPath == basedir
+}
+
