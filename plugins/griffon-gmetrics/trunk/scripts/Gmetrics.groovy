@@ -32,14 +32,14 @@ setDefaultTarget('gmetrics')
 private void runGmetrics() {
     ant.taskdef(name: 'gmetrics', classname: 'org.gmetrics.ant.GMetricsTask')
 
-    def config = loadConfig()
+    def gmetricsConfig = buildConfig.gmetrics
 
-    String reportName = config.reportName ?: 'GMetricsReport.html'
-    String reportLocation = config.reportLocation ?: projectTargetDir
-    String reportType = config.reportType ?: 'org.gmetrics.report.BasicHtmlReportWriter'
-    String reportTitle = config.reportTitle ?: ''
+    String reportName = gmetricsConfig.reportName ?: 'GMetricsReport.html'
+    String reportLocation = gmetricsConfig.reportLocation ?: projectTargetDir
+    String reportType = gmetricsConfig.reportType ?: 'org.gmetrics.report.BasicHtmlReportWriter'
+    String reportTitle = gmetricsConfig.reportTitle ?: ''
 
-    List includes = configureIncludes(config)
+    List includes = gmetricsConfigureIncludes(gmetricsConfig)
 
     ant.echo(message: "[gmetrics] Running Gmetrics ...")
     ant.mkdir(dir: projectTargetDir)
@@ -56,54 +56,48 @@ private void runGmetrics() {
     ant.echo(message: "[gmetrics] GMetrics finished; report generated: $reportFile")
 }
 
-private ConfigObject loadConfig() {
-    def classLoader = Thread.currentThread().contextClassLoader
-    classLoader.addURL(new File(classesDirPath).toURL())
-    return new ConfigSlurper(Environment.current.name).parse(classLoader.loadClass('Config')).gmetrics
-}
-
-private int getConfigInt(config, String name, int defaultIfMissing) {
-    def value = config[name]
+private int getConfigInt(gmetricsConfig, String name, int defaultIfMissing) {
+    def value = gmetricsConfig[name]
     return value instanceof Integer ? value : defaultIfMissing
 }
 
-private boolean getConfigBoolean(config, String name) {
-    def value = config[name]
+private boolean getConfigBoolean(gmetricsConfig, String name) {
+    def value = gmetricsConfig[name]
     return value instanceof Boolean ? value : true
 }
 
-private List configureIncludes(config) {
+private List gmetricsConfigureIncludes(gmetricsConfig) {
     List includes = []
 
-    if (getConfigBoolean(config, 'processSrcGroovy')) {
+    if (getConfigBoolean(gmetricsConfig, 'processSrcGroovy')) {
         includes << 'src/main/**/*.groovy'
     }
 
-    if (getConfigBoolean(config, 'processModels')) {
+    if (getConfigBoolean(gmetricsConfig, 'processModels')) {
         includes << 'griffon-app/models/**/*.groovy'
     }
 
-    if (getConfigBoolean(config, 'processControllers')) {
+    if (getConfigBoolean(gmetricsConfig, 'processControllers')) {
         includes << 'griffon-app/controllers/**/*.groovy'
     }
 
-    if (getConfigBoolean(config, 'processViews')) {
+    if (getConfigBoolean(gmetricsConfig, 'processViews')) {
         includes << 'griffon-app/views/**/*.groovy'
     }
 
-    if (getConfigBoolean(config, 'processServices')) {
+    if (getConfigBoolean(gmetricsConfig, 'processServices')) {
         includes << 'griffon-app/services/**/*.groovy'
     }
 
-    if (getConfigBoolean(config, 'processTestUnit')) {
+    if (getConfigBoolean(gmetricsConfig, 'processTestUnit')) {
         includes << 'test/unit/**/*.groovy'
     }
 
-    if (getConfigBoolean(config, 'processTestIntegration')) {
+    if (getConfigBoolean(gmetricsConfig, 'processTestIntegration')) {
         includes << 'test/integration/**/*.groovy'
     }
 
-    for (includeDir in config.extraIncludeDirs) {
+    for (includeDir in gmetricsConfig.extraIncludeDirs) {
         includes << "$includeDir/**/*.groovy"
     }
 

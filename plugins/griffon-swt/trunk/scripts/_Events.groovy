@@ -24,7 +24,7 @@ eventPackageStart = { type ->
 }
 
 eventCreateConfigEnd = {
-    config.griffon.application.mainClass = 'griffon.swt.SWTApplication'
+    buildConfig.griffon.application.mainClass = 'griffon.swt.SWTApplication'
 }
 
 def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
