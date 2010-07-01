@@ -35,17 +35,17 @@ setDefaultTarget('codenarc')
 private void runCodenarc() {
     ant.taskdef(name: "codenarc", classname: "org.codenarc.ant.CodeNarcTask")
 
-    def config = loadConfig()
+    def codenarcConfig = buildCondig.codenarc
 
-    String reportName = config.reportName ?: 'CodeNarcReport.html'
-    String reportLocation = config.reportLocation ?: projectTargetDir
-    String reportType = config.reportType ?: 'html'
-    String reportTitle = config.reportTitle ?: ''
-    int maxPriority1Violations = getConfigInt(config, 'maxPriority1Violations', Integer.MAX_VALUE)
-    int maxPriority2Violations = getConfigInt(config, 'maxPriority2Violations', Integer.MAX_VALUE)
-    int maxPriority3Violations = getConfigInt(config, 'maxPriority3Violations', Integer.MAX_VALUE)
-    String ruleSetFiles = config.ruleSetFiles ?: 'rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml,rulesets/unused.xml'
-    List includes = configureIncludes(config)
+    String reportName = codenarcConfig.reportName ?: 'CodeNarcReport.html'
+    String reportLocation = codenarcConfig.reportLocation ?: projectTargetDir
+    String reportType = codenarcConfig.reportType ?: 'html'
+    String reportTitle = codenarcConfig.reportTitle ?: ''
+    int maxPriority1Violations = getConfigInt(codenarcConfig, 'maxPriority1Violations', Integer.MAX_VALUE)
+    int maxPriority2Violations = getConfigInt(codenarcConfig, 'maxPriority2Violations', Integer.MAX_VALUE)
+    int maxPriority3Violations = getConfigInt(codenarcConfig, 'maxPriority3Violations', Integer.MAX_VALUE)
+    String ruleSetFiles = codenarcConfig.ruleSetFiles ?: 'rulesets/basic.xml,rulesets/exceptions.xml,rulesets/imports.xml,rulesets/unused.xml'
+    List includes = codenarcConfigureIncludes(codenarcConfig)
 
     ant.echo(message: "[codenarc] Running CodeNarc ...")
     ant.mkdir(dir: projectTargetDir)   
@@ -65,54 +65,48 @@ private void runCodenarc() {
     ant.echo(message: "[codenarc] CodeNarc finished; report generated: $reportFile")
 }
 
-private ConfigObject loadConfig() {
-    def classLoader = Thread.currentThread().contextClassLoader
-    classLoader.addURL(new File(classesDirPath).toURL())
-    return new ConfigSlurper(Environment.current.name).parse(classLoader.loadClass('Config')).codenarc
-}
-
-private int getConfigInt(config, String name, int defaultIfMissing) {
-    def value = config[name]
+private int getConfigInt(codenarcConfig, String name, int defaultIfMissing) {
+    def value = codenarcConfig[name]
     return value instanceof Integer ? value : defaultIfMissing
 }
 
-private boolean getConfigBoolean(config, String name) {
-    def value = config[name]
+private boolean getConfigBoolean(codenarcConfig, String name) {
+    def value = codenarcConfig[name]
     return value instanceof Boolean ? value : true
 }
 
-private List configureIncludes(config) {
+private List codenarcConfigureIncludes(codenarcConfig) {
     List includes = []
 
-    if (getConfigBoolean(config, 'processSrcGroovy')) {
+    if (getConfigBoolean(codenarcConfig, 'processSrcGroovy')) {
         includes << 'src/main/**/*.groovy'
     }
 
-    if (getConfigBoolean(config, 'processControllers')) {
+    if (getConfigBoolean(codenarcConfig, 'processControllers')) {
         includes << 'griffon-app/controllers/**/*.groovy'
     }
 
-    if (getConfigBoolean(config, 'processModels')) {
+    if (getConfigBoolean(codenarcConfig, 'processModels')) {
         includes << 'griffon-app/models/**/*.groovy'
     }
 
-    if (getConfigBoolean(config, 'processViews')) {
+    if (getConfigBoolean(codenarcConfig, 'processViews')) {
         includes << 'griffon-app/views/**/*.groovy'
     }
 
-    if (getConfigBoolean(config, 'processServices')) {
+    if (getConfigBoolean(codenarcConfig, 'processServices')) {
         includes << 'griffon-app/services/**/*.groovy'
     }
 
-    if (getConfigBoolean(config, 'processTestUnit')) {
+    if (getConfigBoolean(codenarcConfig, 'processTestUnit')) {
         includes << 'test/unit/**/*.groovy'
     }
 
-    if (getConfigBoolean(config, 'processTestIntegration')) {
+    if (getConfigBoolean(codenarcConfig, 'processTestIntegration')) {
         includes << 'test/integration/**/*.groovy'
     }
 
-    for (includeDir in config.extraIncludeDirs) {
+    for (includeDir in codenarcConfig.extraIncludeDirs) {
         includes << "$includeDir/**/*.groovy"
     }
 

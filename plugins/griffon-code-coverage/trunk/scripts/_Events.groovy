@@ -43,7 +43,7 @@ eventTestPhasesEnd = {
 }
 
 def createCoverageReports() {
-    coverageReportDir = "${config.griffon.testing.reports.destDir ?: testReportsDir}/cobertura"
+    coverageReportDir = "${buildConfig.griffon.testing.reports.destDir ?: testReportsDir}/cobertura"
 
     ant.mkdir(dir: "${coverageReportDir}")
 

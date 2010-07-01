@@ -36,8 +36,8 @@ target(findbugs: "Run FindBugs on Java sources") {
                 classname: "edu.umd.cs.findbugs.anttask.FindBugsTask",
                 classpathref: "findBugsJarSet")
     
-    jardir = ant.antProject.replaceProperties(config.griffon.jars.destDir)
-    def findbugsConfig = loadFindbugsConfig()
+    jardir = ant.antProject.replaceProperties(buildConfig.griffon.jars.destDir)
+    def findbugsConfig = buildConfig.findbugs
 
     Map findBugsOptions = [home: findBugsHome]
     findBugsOptions.output = findbugsConfig.output ?: 'html'
@@ -72,19 +72,3 @@ target(findbugs: "Run FindBugs on Java sources") {
 }
 
 setDefaultTarget('findbugs')
-
-private ConfigObject loadFindbugsConfig() {
-    def classLoader = Thread.currentThread().contextClassLoader
-    classLoader.addURL(new File(classesDirPath).toURL())
-    return new ConfigSlurper(Environment.current.name).parse(classLoader.loadClass('Config')).findbugs
-}
-
-private int getConfigInt(config, String name, int defaultIfMissing) {
-    def value = config[name]
-    return value instanceof Integer ? value : defaultIfMissing
-}
-
-private boolean getConfigBoolean(config, String name) {
-    def value = config[name]
-    return value instanceof Boolean ? value : true
-}

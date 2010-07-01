@@ -24,8 +24,8 @@ eventPackageStart = { type ->
 }
 
 eventCreateConfigEnd = {
-    if(config.griffon.extensions) {
-        config.griffon.extensions.jnlpUrls << "http://worldwind.arc.nasa.gov/java/0.3.0/webstart/worldwind.jnlp"
+    if(buildConfig.griffon.extensions) {
+        buildConfig.griffon.extensions.jnlpUrls << "http://worldwind.arc.nasa.gov/java/0.3.0/webstart/worldwind.jnlp"
     }
 }
 
@@ -39,8 +39,8 @@ eventCopyLibsEnd = { jardir ->
             }
         }
 
-        if(!config.griffon?.extensions?.props) config.griffon.extensions.props = new ConfigObject()
-        config.griffon.extensions.props.'sun.java2d.noddraw' = true
+        if(!buildConfig.griffon?.extensions?.props) buildConfig.griffon.extensions.props = new ConfigObject()
+        buildConfig.griffon.extensions.props.'sun.java2d.noddraw' = true
 
         if(!(packagingType in ['applet', 'webstart'])) {
             ant.fileset(dir: "${getPluginDirForName('worldwind').file}/lib", includes: "*.jar").each {

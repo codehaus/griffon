@@ -22,6 +22,7 @@ class JdependGriffonPlugin {
     def dependsOn = [:]
     def griffonVersion = '0.9 > *'
     def license = 'Apache Software License 2.0'
+    def pluginIncludes = ['src/etc/**']
 
     def author = 'Andres Almiray'
     def authorEmail = 'aalmiray@users.sourceforge.net'

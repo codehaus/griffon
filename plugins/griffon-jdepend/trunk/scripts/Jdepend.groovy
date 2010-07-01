@@ -26,21 +26,17 @@ griffonHome = ant.antProject.properties."env.GRIFFON_HOME"
 
 includeTargets << griffonScript("Package")
 
-jdependReportDir = "${basedir}/test/reports"
+jdependReportDir = "${projectTargetDir}"
 jdependPluginBase = getPluginDirForName('jdepend').file as String
 
-ant.path( id : "jdependJarSet" ) {
-    fileset( dir: "${jdependPluginBase}/lib/jdepend" , includes : "*.jar" )
-}
+ant.taskdef(name: "jdepend",
+            classname: "org.apache.tools.ant.taskdefs.optional.jdepend.JDependTask",
+            classpathref: "griffon.compile.classpath")
 
-ant.taskdef( name: "jdepend",
-             classname: "org.apache.tools.ant.taskdefs.optional.jdepend.JDependTask",
-             classpathref: "jdependJarSet" )
+target(jdepend: "Run JDepend metrics") {
+    depends(checkVersion, packageApp, classpath)
 
-target(runJdepend: "Run JDepend metrics") {
-    depends(checkVersion, configureProxy, packageApp, classpath)
-
-    jdependReportDir = config.griffon.testing.reports.destDir ?: jdependReportDir
+    jdependReportDir = buildConfig.griffon.testing.reports.destDir ?: jdependReportDir
     jdependWorkDir = "${projectWorkDir}/jdepend-classes"
 
     ant.mkdir(dir: jdependReportDir)
@@ -55,9 +51,9 @@ target(runJdepend: "Run JDepend metrics") {
         }
     }
 
-    def config = loadConfig()
+    def jdependConfig = buildConfig.jdepend
 
-    def jdependConfig = {
+    def options = {
         exclude( name: "java.lang" )
         exclude( name: "java.util" )
         exclude( name: "java.net" )
@@ -66,34 +62,27 @@ target(runJdepend: "Run JDepend metrics") {
         exclude( name: "groovy.lang" )
         exclude( name: "groovy.util" )
         exclude( name: "org.codehaus.groovy.*" )
-        if( config.griffon?.jdepend?.excludes && config.griffon?.jdepend?.excludes instanceof List ) {
-            config.griffon.jdepend.excludes.each { x -> exclude( name: x ) }
+        if( jdependConfig?.excludes && jdependConfig?.excludes instanceof List ) {
+            jdependConfig.excludes.each { x -> exclude( name: x ) }
         }
         classespath {
            pathelement( location: jdependWorkDir )
         }
         classpath {
-           path( refid: "griffon.classpath" )
-           path( refid: "jdependJarSet" )
+           path( refid: "griffon.compile.classpath" )
            pathelement( location: jdependWorkDir )
         }
     }
 
-    ant.jdepend( outputfile: "${jdependReportDir}/jdepend-report.txt",
-                 jdependConfig )
-    ant.jdepend( outputfile: "${jdependReportDir}/jdepend-report.xml",
-                 format: "xml",
-                 jdependConfig )
-    ant.xslt( basedir: "${jdependReportDir}",
-              destdir: "${jdependReportDir}",
-              includes: "jdepend-report.xml",
-              style: "${jdependPluginBase}/src/etc/jdepend.xsl" )
+    ant.jdepend(outputfile: "${jdependReportDir}/jdepend-report.txt",
+                options )
+    ant.jdepend(outputfile: "${jdependReportDir}/jdepend-report.xml",
+                format: "xml",
+                options)
+    ant.xslt(basedir: "${jdependReportDir}",
+             destdir: "${jdependReportDir}",
+             includes: "jdepend-report.xml",
+             style: "${jdependPluginBase}/src/etc/jdepend.xsl")
 }
 
-private ConfigObject loadConfig() {
-    def classLoader = Thread.currentThread().contextClassLoader
-    classLoader.addURL(new File(classesDirPath).toURL())
-    return new ConfigSlurper().parse(classLoader.loadClass('Config')).jdepend
-}
-
-setDefaultTarget(runJdepend)
+setDefaultTarget(jdepend)
