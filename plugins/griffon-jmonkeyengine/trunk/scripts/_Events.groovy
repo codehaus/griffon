@@ -24,7 +24,7 @@ eventPackageStart = { type ->
 }
 
 eventCreateConfigEnd = {
-    config.griffon.application.mainClass = "griffon.jme.app.SimpleGameGriffonApplication"
+    buildConfig.griffon.application.mainClass = "griffon.jme.app.SimpleGameGriffonApplication"
 }
 
 def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
@@ -34,12 +34,12 @@ eventCopyLibsEnd = { jardir ->
         ant.fileset(dir: "${getPluginDirForName('jmonkeyengine').file}/lib", includes: "*.jar").each {
             griffonCopyDist(it.toString(), jardir)
         }
-        if(buildconfig?.jmonkeyengine?.collada?.include) {
+        if(buildConfig?.jmonkeyengine?.collada?.include) {
             ant.fileset(dir: "${getPluginDirForName('jmonkeyengine').file}/lib/collada", includes: "*.jar").each {
                 griffonCopyDist(it.toString(), jardir)
             }
         }
-        if(buildconfig?.jmonkeyengine?.swt?.include) {
+        if(buildConfig?.jmonkeyengine?.swt?.include) {
             ant.fileset(dir: "${getPluginDirForName('jmonkeyengine').file}/lib/swt", includes: "*.jar").each {
                 griffonCopyDist(it.toString(), jardir)
             }

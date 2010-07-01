@@ -54,12 +54,12 @@ doWithPlatform = { platformOs ->
     ant.fileset(dir: "${getPluginDirForName('serial').file}/lib/webstart", includes: "*${platformOs}.jar").each {
         griffonCopyDist(it.toString(), new File(jardir.toString(), 'webstart').absolutePath)
     }
-    if(!config?.griffon?.extensions?.resources) config.griffon.extensions.resources = new ConfigObject()
-    def rs = config.griffon.extensions.resources[platformOs]
+    if(!buildConfig?.griffon?.extensions?.resources) buildConfig.griffon.extensions.resources = new ConfigObject()
+    def rs = buildConfig.griffon.extensions.resources[platformOs]
     if(!rs) {
         def co = new ConfigObject()
         co.nativelibs = serialJnlpResources.find{it.os == platformOs}.nativelibs
-        config.griffon.extensions.resources[platformOs] = co
+        buildConfig.griffon.extensions.resources[platformOs] = co
     } else {
         if(!rs.nativeLibs) rs.nativeLibs = [] 
         rs.nativeLibs.addAll(nativeLibs)

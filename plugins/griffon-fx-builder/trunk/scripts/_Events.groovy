@@ -34,8 +34,8 @@ eventCopyLibsEnd = { jardir ->
         griffonCopyDist(it.toString(), jardir)
     }
 
-    if(!config.griffon.extensions.jnlpUrls.contains(javaFxUrl)) {
-        config.griffon.extensions.jnlpUrls << javaFxUrl
+    if(!buildConfig.griffon.extensions.jnlpUrls.contains(javaFxUrl)) {
+        buildConfig.griffon.extensions.jnlpUrls << javaFxUrl
     }
 }
 

@@ -24,8 +24,8 @@ eventPackageStart = { type ->
 }
 
 eventCreateConfigEnd = {
-    if(config.griffon.extensions) {
-        config.griffon.extensions.jnlpUrls << "http://download.java.net/media/jogl/builds/archive/jsr-231-1.x-webstart-next/jogl.jnlp"
+    if(buildConfig.griffon.extensions) {
+        buildConfig.griffon.extensions.jnlpUrls << "http://download.java.net/media/jogl/builds/archive/jsr-231-1.x-webstart-next/jogl.jnlp"
     }
 }
 
