@@ -29,7 +29,7 @@ loadDependencyClass = {name ->
 }
 
 
-eventCompileStart = {kind ->
+eventCompileStart = {
   ConfigObject config = mergeConfig()
   // Ants Project is available via: kind.ant.project
   println "Clover: Compile start."
