@@ -1,3 +1,5 @@
+import com.db4o.config.EmbeddedConfiguration
+
 dataSource {
 }
 environments {
@@ -16,4 +18,8 @@ environments {
             name = "prodDb.yarv"
         }
     }
+}
+
+def configure(EmbeddedConfiguration configuration) {
+    // empty
 }

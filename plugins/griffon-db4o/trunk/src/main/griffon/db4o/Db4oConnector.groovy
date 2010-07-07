@@ -22,6 +22,7 @@ import griffon.core.GriffonApplication
 import griffon.util.Metadata
 import griffon.util.Environment
 import com.db4o.*
+import com.db4o.config.EmbeddedConfiguration
 
 /**
  * @author Andres.Almiray
@@ -64,7 +65,10 @@ final class Db4oConnector {
         String dbfileName = config?.dataSource?.name ?: 'db.yarv'
         File dbfile = new File(dbfileName)
         if(!dbfile.absolute) dbfile = new File(Metadata.current.getGriffonWorkingDir(), dbfileName)
-        ObjectContainerHolder.instance.objectContainer = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dbfile.absolutePath)
+        Script configScript = app.class.classLoader.loadClass("Db4oConfig").newinstance()
+        EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration()
+        configScript.configure(configuration)
+        ObjectContainerHolder.instance.objectContainer = Db4oEmbedded.openFile(configuration, dbfile.absolutePath)
     }
 
     private void stopObjectContainer(config) {
