@@ -21,7 +21,7 @@
 includeTargets << griffonScript("_GriffonInit")
 
 eventCopyLibsEnd = { jardir ->
-    def gfxlibs = "${getPluginDirForName('gfx').file}/lib"
+    def gfxlibs = "${getPluginDirForName('gfx-builder').file}/lib"
     ant.fileset(dir: gfxlibs, includes: "*.jar").each {
         griffonCopyDist(it.toString(), jardir)
     }
