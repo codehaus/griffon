@@ -18,21 +18,15 @@
  * @author Andres Almiray
  */
 
-includeTargets << griffonScript("Init")
-
-eventPackagePluginStart = { pluginName, plugin ->
-    def destFileName = "lib/griffon-${pluginName}-addon-${plugin.version}.jar"
-    ant.delete(dir: destFileName, quiet: false, failOnError: false)
-    ant.jar(destfile: destFileName) {
-        fileset(dir: classesDirPath) {
-            exclude(name: '_*.class')
-            exclude(name: '*GriffonPlugin.class')
-        }
-    }
-}
-
+def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
 eventCopyLibsEnd = { jardir ->
-    ant.fileset(dir: "${getPluginDirForName('jgoodies-forms').file}/lib", includes: "*.jar").each {
-        griffonCopyDist(it.toString(), jardir)
+    eventClosure1(jardir)
+    if (!isPluginProject) {
+        def pluginDir = getPluginDirForName('jgoodies-forms')
+        if(pluginDir?.file?.exists()) {
+            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
+                griffonCopyDist(it.toString(), jardir)
+            }
+        }
     }
 }

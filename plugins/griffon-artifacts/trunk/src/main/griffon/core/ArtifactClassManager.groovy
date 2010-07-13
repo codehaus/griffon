@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-package griffon.core.artifacts
+package griffon.core
 
-import griffon.core.GriffonApplication
-import griffon.core.ArtifactInfo
-import griffon.core.ArtifactManager
 import org.apache.commons.beanutils.ConstructorUtils
 
 /**
@@ -32,7 +29,7 @@ class ArtifactClassManager {
     private final Map artifactClassTypes = [:]
     private final Map artifactClasses = [:]
 
-    private static final GriffonArtifactClass[] EMPTY_ARTIFACT_CLASS_ARRAY = new GriffonArtifactClass[0]
+    private static final GriffonClass[] EMPTY_ARTIFACT_CLASS_ARRAY = new GriffonClass[0]
 
     /**
      * Reads the artifacts definitions file from the classpath.<p>
@@ -50,26 +47,26 @@ class ArtifactClassManager {
     /**
      * Retrieves an artifact class metadata by class name
      */
-    GriffonArtifactClass getArtifactClass(Class clazz) {
+    GriffonClass getArtifactClass(Class clazz) {
         getArtifactClass(clazz.name)
     }
 
     /**
      * Retrieves an artifact class metadata by class name
      */
-    GriffonArtifactClass getArtifactClass(String className) {
+    GriffonClass getArtifactClass(String className) {
         getArtifactClass(ArtifactManager.instance.getArtifactInfo(className))
     }
 
     /**
      * Retrieves an artifact class metadata by class name
      */
-    GriffonArtifactClass getArtifactClass(ArtifactInfo artifactInfo) {
+    GriffonClass getArtifactClass(ArtifactInfo artifactInfo) {
         if(artifactInfo) {
             synchronized(this) {
                 Class artifactClassClazz = artifactClassTypes[artifactInfo.type]
                 Map classesPerType = artifactClasses.get(artifactInfo.type, [:])
-                GriffonArtifactClass artifactClass = classesPerType[artifactInfo.klass.name]
+                GriffonClass artifactClass = classesPerType[artifactInfo.klass.name]
                 if(!artifactClass && artifactClassClazz) {
                     artifactClass = ConstructorUtils.invokeConstructor(artifactClassClazz, artifactInfo)
                     classesPerType[artifactInfo.klass.name] = artifactClass 
@@ -84,10 +81,33 @@ class ArtifactClassManager {
     }
 
     /**
+     * Retrieves an artifact class metadata by type and class name
+     */
+    GriffonClass getArtifactClass(String type, String className) {
+        if(type && className) {
+            synchronized(this) {
+                Class artifactClassClazz = artifactClassTypes[type]
+                Map classesPerType = artifactClasses.get(type, [:])
+                GriffonClass artifactClass = classesPerType[className]
+                if(!artifactClass && artifactClassClazz) {
+                    ArtifactInfo artifactInfo = ArtifactManager.instance.getArtifactInfo(className)
+                    artifactClass = ConstructorUtils.invokeConstructor(artifactClassClazz, artifactInfo)
+                    classesPerType[artifactInfo.klass.name] = artifactClass 
+                    def getter = { a -> return a }
+                    artifactInfo.metaClass.getArtifactClass = getter.curry(artifactClass)
+                    artifactInfo.metaClass.artifactClass = artifactClass
+                }
+                return artifactClass
+            }
+        }
+        return null
+    }
+
+    /**
      * Returns all available artifacts of a particular type.<p>
      * Never returns null
      */
-    GriffonArtifactClass[] getArtifactClassesOfType(String type) {
+    GriffonClass[] getArtifactClassesOfType(String type) {
         List classes = []
         synchronized(this) {
             Map classesPerType = artifactClasses.get(type, [:])
@@ -100,7 +120,7 @@ class ArtifactClassManager {
                 classes.add(getArtifactClass(artifactInfo))
             }
         }
-        return classes.toArray(new GriffonArtifactClass[classes.size()])
+        return classes.toArray(new GriffonClass[classes.size()])
     }
 
     def methodMissing(String methodName, args) {

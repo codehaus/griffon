@@ -7,6 +7,7 @@
   <license>Apache Software License 2.0</license>
   <resources>
     <resource>BuildConfig</resource>
+    <resource>metainf.spring.springbeans</resource>
   </resources>
   <dependencies />
 </plugin>

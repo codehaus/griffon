@@ -13,18 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package griffon.core.artifacts;
-
-import griffon.core.ArtifactInfo;
-import griffon.core.ServiceArtifactHandler;
+package griffon.core;
 
 /**
  * @author Andres Almiray
  *
  * @since 0.1
  */
-public class DefaultGriffonServiceArtifactClass extends DefaultGriffonArtifactClass implements GriffonServiceArtifactClass {
-    public DefaultGriffonServiceArtifactClass(ArtifactInfo artifactInfo) {
-        super(artifactInfo, ServiceArtifactHandler.TRAILING);
+public class DefaultGriffonControllerClass extends DefaultGriffonClass implements GriffonControllerClass {
+    public DefaultGriffonControllerClass(ArtifactInfo artifactInfo) {
+        super(artifactInfo, ControllerArtifactHandler.TRAILING);
     }
 }

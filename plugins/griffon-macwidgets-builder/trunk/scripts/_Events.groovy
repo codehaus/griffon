@@ -19,7 +19,12 @@
  */
 
 eventCopyLibsEnd = { jardir ->
-    ant.fileset(dir:"${getPluginDirForName('macwidgets-builder').file}/lib/", includes:"*.jar").each {
-        griffonCopyDist(it.toString(), jardir)
+    if (!isPluginProject) {
+        def pluginDir = getPluginDirForName('macwidgets-builder')
+        if(pluginDir?.file?.exists()) {
+            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
+                griffonCopyDist(it.toString(), jardir)
+            }
+        }
     }
 }

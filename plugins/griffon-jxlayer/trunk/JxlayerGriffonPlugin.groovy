@@ -27,7 +27,7 @@ class JxlayerGriffonPlugin {
     // resources that are included in plugin packaging
     def pluginIncludes = []
     // the plugin license
-    def license = 'Apache Software 2icense 2.0'
+    def license = 'Apache Software License 2.0'
     // Toolkit compatibility. No value means compatible with all
     // Valid values are: swing, javafx, swt, pivot, gtk
     def toolkits = ['swing']

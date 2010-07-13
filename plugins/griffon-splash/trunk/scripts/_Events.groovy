@@ -19,11 +19,14 @@ println "===> Package Plugin Start"
 }
 
 eventCopyLibsEnd = { jardir ->
-    ant.fileset(dir:"${getPluginDirForName('splash').file}/lib/", includes:"*.jar").each {
-        griffonCopyDist(it.toString(), jardir)
+    if (!isPluginProject) {
+        def pluginDir = getPluginDirForName('splash')
+        if(pluginDir?.file?.exists()) {
+            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
+                griffonCopyDist(it.toString(), jardir)
+            }
+        }
     }
-	
-	
 }
 
 eventPluginInstalled = { fullPluginName ->

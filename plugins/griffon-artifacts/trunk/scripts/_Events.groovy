@@ -20,9 +20,9 @@
 
 eventCollectArtifacts = { artifactsInfo ->
     def artifactClasses = [
-        model:      "griffon.core.artifacts.DefaultGriffonModelArtifactClass",
-        service:    "griffon.core.artifacts.DefaultGriffonServiceArtifactClass",
-        controller: "griffon.core.artifacts.DefaultGriffonControllerArtifactClass"
+        model:      "griffon.core.DefaultGriffonModelClass",
+        service:    "griffon.core.DefaultGriffonServiceClass",
+        controller: "griffon.core.DefaultGriffonControllerClass"
     ]
 
     event("CollectArtifactClasses", [artifactClasses])
@@ -38,8 +38,11 @@ def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCop
 eventCopyLibsEnd = { jardir ->
     eventClosure1(jardir)
     if (!isPluginProject) {
-        ant.fileset(dir:"${getPluginDirForName('artifacts').file}/lib/", includes:"*.jar").each {
-            griffonCopyDist(it.toString(), jardir)
+        def pluginDir = getPluginDirForName('artifacts')
+        if(pluginDir?.file?.exists()) {
+            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
+                griffonCopyDist(it.toString(), jardir)
+            }
         }
     }
 }

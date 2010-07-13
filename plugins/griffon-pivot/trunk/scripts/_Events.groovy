@@ -31,9 +31,11 @@ def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCop
 eventCopyLibsEnd = { jardir ->
     eventClosure1(jardir)
     if (!isPluginProject) {
-        def pivotLibDir = "${getPluginDirForName('pivot').file}/lib".toString()
-        ant.fileset(dir: pivotLibDir, includes: "*.jar").each {
-            griffonCopyDist(it.toString(), jardir)
+        def pluginDir = getPluginDirForName('pivot')
+        if(pluginDir?.file?.exists()) {
+            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
+                griffonCopyDist(it.toString(), jardir)
+            }
         }
     }
 }
