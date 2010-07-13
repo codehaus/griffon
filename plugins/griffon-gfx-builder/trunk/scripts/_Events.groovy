@@ -21,14 +21,18 @@
 includeTargets << griffonScript("_GriffonInit")
 
 eventCopyLibsEnd = { jardir ->
-    def gfxlibs = "${getPluginDirForName('gfx-builder').file}/lib"
-    ant.fileset(dir: gfxlibs, includes: "*.jar").each {
-        griffonCopyDist(it.toString(), jardir)
-    }
-    ["swingx","svg"].each { ext ->
-        if(config?.griffon?.gfx[(ext)]?.enabled ?: false) {
-            ant.fileset(dir: "${gfxlibs}/$ext", includes: "*.jar").each {
+    if (!isPluginProject) {
+        def pluginDir = getPluginDirForName('gfx-builder')
+        if(pluginDir?.file?.exists()) {
+            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
                 griffonCopyDist(it.toString(), jardir)
+            }
+            ["swingx","svg"].each { ext ->
+                if(config?.griffon?.gfx[(ext)]?.enabled ?: false) {
+                    ant.fileset(dir: "${pluginDir.file}/$ext", includes: '*.jar').each {
+                        griffonCopyDist(it.toString(), jardir)
+                    }
+                }
             }
         }
     }

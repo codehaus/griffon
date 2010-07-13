@@ -19,7 +19,12 @@
  */
 
 eventCopyLibsEnd = { jardir ->
-    ant.fileset(dir:"${getPluginDirForName('flamingo-builder').file}/lib/", includes:"*.jar").each {
-        griffonCopyDist(it.toString(), jardir)
+    if (!isPluginProject) {
+        def pluginDir = getPluginDirForName('flamingo-builder')
+        if(pluginDir?.file?.exists()) {
+            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
+                griffonCopyDist(it.toString(), jardir)
+            }
+        }
     }
 }

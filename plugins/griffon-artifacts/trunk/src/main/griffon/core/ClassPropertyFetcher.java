@@ -1,7 +1,7 @@
 /**
  * 
  */
-package griffon.core.artifacts;
+package griffon.core;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.beanutils.*;
@@ -148,7 +148,7 @@ public class ClassPropertyFetcher {
             try {
                 return fetcher.get(callback);
             } catch (Exception e) {
-                AbstractGriffonArtifactClass.LOG.warn("Error fetching property's "
+                AbstractGriffonClass.LOG.warn("Error fetching property's "
                         + name + " value from class " + clazz.getName(), e);
             }
         }

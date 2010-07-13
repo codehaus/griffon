@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package griffon.core.artifacts;
+package griffon.core;
 
 import griffon.util.GriffonNameUtils;
 import griffon.util.GriffonClassUtils;
 import griffon.exceptions.NewInstanceCreationException;
-import griffon.core.ArtifactInfo;
 import groovy.lang.*;
 
 import java.beans.PropertyDescriptor;
@@ -41,8 +40,8 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @since 0.1
  */
-public abstract class AbstractGriffonArtifactClass implements GriffonArtifactClass {
-    static final Log LOG = LogFactory.getLog(AbstractGriffonArtifactClass.class);
+public abstract class AbstractGriffonClass implements GriffonClass {
+    static final Log LOG = LogFactory.getLog(AbstractGriffonClass.class);
 
     private final Class clazz;
     private final Object reference;
@@ -62,14 +61,13 @@ public abstract class AbstractGriffonArtifactClass implements GriffonArtifactCla
      *
      * @param artifactInfo the Griffon artifact
      */
-    public AbstractGriffonArtifactClass(ArtifactInfo artifactInfo, String trailingName) {
+    public AbstractGriffonClass(ArtifactInfo artifactInfo, String trailingName) {
         if (artifactInfo == null) {
-            throw new IllegalArgumentException("Clazz parameter should not be null");
+            throw new IllegalArgumentException("artifactInfo parameter should not be null");
         }
         this.artifactInfo = artifactInfo;
         this.clazz = artifactInfo.getClazz();
         this.reference = GriffonClassUtils.instantiateClass(clazz);
-        // this.reference = instantiateClass(clazz);
         this.fullName = clazz.getName();
         this.packageName = ClassUtils.getPackageName(clazz);
         this.naturalName = GriffonNameUtils.getNaturalName(clazz.getName());
@@ -83,19 +81,10 @@ public abstract class AbstractGriffonArtifactClass implements GriffonArtifactCla
         }
         this.classPropertyFetcher = new ClassPropertyFetcher(clazz, new ClassPropertyFetcher.ReferenceInstanceCallback() {
             public Object getReferenceInstance() {
-                return AbstractGriffonArtifactClass.this.getReferenceInstance();
+                return AbstractGriffonClass.this.getReferenceInstance();
             }
         });
     }
-
-    // can't call GriffonClassUtils.instantiateClass(Class) WTF?!
-//    private static Object instantiateClass(Class clazz) {
-//       try {
-//           return clazz.newInstance();
-//       } catch(Exception e) {
-//           throw new griffon.exceptions.BeanInstantiationException("Could not create an instance of "+ clazz, e);
-//       }
-//    }
 
     public String getShortName() {
         return this.shortName;

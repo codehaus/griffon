@@ -20,8 +20,11 @@
 
 eventCopyLibsEnd = { jardir ->
     if (!isPluginProject) {
-        ant.fileset(dir:"${getPluginDirForName('rest').file}/lib/", includes:"*.jar").each {
-            griffonCopyDist(it.toString(), jardir)
+        def pluginDir = getPluginDirForName('rest')
+        if(pluginDir?.file?.exists()) {
+            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
+                griffonCopyDist(it.toString(), jardir)
+            }
         }
     }
 }

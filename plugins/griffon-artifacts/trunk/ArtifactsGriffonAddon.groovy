@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import griffon.core.artifacts.ArtifactClassManager
+import griffon.core.ArtifactClassManager
 
 /**
  * @author Andres Almiray

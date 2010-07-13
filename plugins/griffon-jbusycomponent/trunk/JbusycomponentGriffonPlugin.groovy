@@ -26,7 +26,7 @@ class JbusycomponentGriffonPlugin {
 
     def author = 'Andres Almiray'
     def authorEmail = 'aalmiray@users.sourceforge.net'
-    def title = 'Enhance any swing components with a 'busy' state'
+    def title = 'Enhance any swing components with a \'busy\' state'
     def description = '''
 JBusyComponent: Enhance any swing components with a 'busy' state.
 http://code.google.com/p/jbusycomponent

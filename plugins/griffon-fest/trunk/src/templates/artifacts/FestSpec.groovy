@@ -12,6 +12,9 @@ class @artifact.name@ extends FestSpec {
             window
     }
 
+    // protected void onSetup() {}
+    // protected void onCleanup() {}
+
     // protected FrameFixture initWindow() {
     //    return new FrameFixture(app.windowManager.windows[0])
     // }

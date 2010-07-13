@@ -13,19 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package griffon.core.artifacts;
-
-import griffon.core.ArtifactInfo;
+package griffon.core;
 
 /**
  * A default implementation for Griffon classes that need to be registered and managed by a GriffonApplication,
  * but don't need any special handling.
  *
- * @author Graeme Rocher
- * @since 0.1
+ * @author Graeme Rocher (Grails 0.1)
  * 
  */
-public class DefaultGriffonArtifactClass extends AbstractGriffonArtifactClass {
+public class DefaultGriffonClass extends AbstractGriffonClass {
     /**
      * <p>Contructor to be used by all child classes to create a
      * new instance and get the name right.
@@ -33,11 +30,11 @@ public class DefaultGriffonArtifactClass extends AbstractGriffonArtifactClass {
      * @param artifactInfo the Griffon artifact
      * @param trailingName the trailing part of the name for this class type
      */
-    public DefaultGriffonArtifactClass(ArtifactInfo artifactInfo, String trailingName) {
+    public DefaultGriffonClass(ArtifactInfo artifactInfo, String trailingName) {
         super(artifactInfo, trailingName);
     }
 
-    public DefaultGriffonArtifactClass(ArtifactInfo artifactInfo) {
+    public DefaultGriffonClass(ArtifactInfo artifactInfo) {
         super(artifactInfo, "");
     }
 }

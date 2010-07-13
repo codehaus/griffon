@@ -35,9 +35,12 @@ def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCop
 eventCopyLibsEnd = { jardir ->
     eventClosure1(jardir)
     if (!isPluginProject) {
-        ant.fileset(dir:"${getPluginDirForName('clojure').file}/lib/", includes:"*.jar").each {
-            if(getPluginDirForName('spring')?.file && it.toString() =~ "spring") return
-            griffonCopyDist(it.toString(), jardir)
+        def pluginDir = getPluginDirForName('clojure')
+        if(pluginDir?.file?.exists()) {
+            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
+                if(getPluginDirForName('spring')?.file && it.toString() =~ "spring") return
+                griffonCopyDist(it.toString(), jardir)
+            }
         }
     }
 }

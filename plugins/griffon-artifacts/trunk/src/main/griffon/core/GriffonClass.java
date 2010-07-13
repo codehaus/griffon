@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package griffon.core.artifacts;
+package griffon.core;
 
 import groovy.lang.MetaClass;
-import griffon.core.ArtifactInfo;
 
 /**
  * <p>This interface represents any class in a Griffon application that is related to an artifact.</p>
@@ -27,7 +26,7 @@ import griffon.core.ArtifactInfo;
  *
  * @since 0.1
  */
-public interface GriffonArtifactClass {
+public interface GriffonClass {
     /**
      * <p>Gets the initial value of the given property on the class</p>
      * @param name The name of the property

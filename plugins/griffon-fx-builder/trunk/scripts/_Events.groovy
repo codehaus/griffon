@@ -28,10 +28,15 @@ javaFxUrl = "http://dl.javafx.com/1.2/javafx-rt.jnlp"
 eventCopyLibsEnd = { jardir ->
     if( compilingJavaFXPlugin() ) return
     verifyJavaFXHome()
-    ant.echo(message: "[fx] Copying FX jar files from ${getPluginDirForName('fx').file}/lib")
 
-    ant.fileset(dir:"${getPluginDirForName('fx').file}/lib/", includes: "*.jar").each {
-        griffonCopyDist(it.toString(), jardir)
+    if (!isPluginProject) {
+        def pluginDir = getPluginDirForName('fx-builder')
+        if(pluginDir?.file?.exists()) {
+            ant.echo(message: "[fx] Copying FX jar files from ${pluginDir.file}/lib")
+            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
+                griffonCopyDist(it.toString(), jardir)
+            }
+        }
     }
 
     if(!buildConfig.griffon.extensions.jnlpUrls.contains(javaFxUrl)) {
