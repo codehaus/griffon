@@ -80,6 +80,8 @@ class Opacity extends AbstractBasicEffect {
     }
  
     protected void setupTimeline(Timeline timeline) {
+        if(!SwingUtils.isTranslucencySupported()) return
+
         TimelinePropertyBuilder p = Timeline.property('opacity')
            .from(EffectUtil.toFloat(params.from, 0.0f))
            .to(EffectUtil.toFloat(params.to, 1.0f))
