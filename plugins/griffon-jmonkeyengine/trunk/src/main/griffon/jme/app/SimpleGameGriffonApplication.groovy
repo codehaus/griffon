@@ -18,58 +18,67 @@ package griffon.jme.app
 
 import com.jme.app.SimpleGame
 import griffon.core.BaseGriffonApplication
-import griffon.core.GriffonApplication
-import griffon.application.StandaloneGriffonApplication
-import griffon.util.GriffonApplicationHelper
 import griffon.util.GriffonExceptionHandler
-import griffon.util.EventRouter
-import griffon.util.Metadata
 import griffon.util.UIThreadHelper
+import griffon.swing.*
+import java.awt.EventQueue
 import java.awt.Toolkit
+import java.awt.Window
 
 /**
  * @author Andres Almiray
  */
-class SimpleGameGriffonApplication extends SimpleGame implements StandaloneGriffonApplication {
+class SimpleGameGriffonApplication extends SimpleGame implements griffon.application.StandaloneGriffonApplication {
     @Delegate private final BaseGriffonApplication _base
+    final WindowManager windowManager
+    WindowDisplayHandler windowDisplayHandler
+    private final WindowDisplayHandler defaultWindowDisplayHandler = new DefaultWindowDisplayHandler()
 
-    List appFrames  = []
-    SimpleGameDelegate gameDelegate
+    private SimpleGameDelegate gameDelegate
 
     SimpleGameGriffonApplication() {
-       _base = new BaseGriffonApplication(this)
-       loadApplicationProperties()
+        UIThreadHelper.instance.setUIThreadHandler(new SwingUIThreadHandler())
+        _base = new BaseGriffonApplication(this)
+        windowManager = new WindowManager(this)
+        addShutdownHandler(windowManager)
+    }
+
+    final WindowDisplayHandler resolveWindowDisplayHandler() {
+        windowDisplayHandler ?: defaultWindowDisplayHandler
     }
 
     void bootstrap() {
-        GriffonApplicationHelper.prepare(this)
+        initialize()
         gameDelegate = resolveGameDelegate()
-        event("BootstrapEnd",[this])
     }
 
     void realize() {
-        GriffonApplicationHelper.startup(this)
+        startup()
     }
 
     void show() {
-        ready()
+        List <Window> windows = windowManager.windows
+        if(windows.size() > 0) windowManager.show(windows[0])
+
+        callReady()
         start()
     }
 
-    void shutdown() {
-        stop()
-        _base.shutdown()
+    boolean shutdown() {
+        if(_base.shutdown()) {
+            exit()
+        }
+        false
+    }
+
+    void exit() {
         System.exit(0)
     }
 
     Object createApplicationContainer() {
-        def appContainer = GriffonApplicationHelper.createJFrameApplication(this)
-        try {
-            appFrames += appContainer
-        } catch (Throwable ignored) {
-            // if it doesn't have a window closing event, ignore it
-        }
-        return appContainer
+        Window window = SwingUtils.createApplicationFrame(this)
+        windowManager.attach(window)
+        return window
     }
 
     private SimpleGameDelegate resolveGameDelegate() {
@@ -82,10 +91,22 @@ class SimpleGameGriffonApplication extends SimpleGame implements StandaloneGriff
         }
     }
 
+    private void callReady() {
+        // wait for EDT to empty out.... somehow
+        boolean empty = false
+        while (true) {
+            UIThreadHelper.instance.executeSync {empty = Toolkit.defaultToolkit.systemEventQueue.peekEvent() == null}
+            if (empty) break
+            sleep(100)
+        }
+
+        ready()
+    }
+
     protected void simpleInitGame() {
-        event("InitGameStart", [])
+        event('InitGameStart', [])
         gameDelegate.simpleInitGame() 
-        event("InitGameEnd", [])
+        event('InitGameEnd', [])
     }
 
     protected void simpleUpdate() {
