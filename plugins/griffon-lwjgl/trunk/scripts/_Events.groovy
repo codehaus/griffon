@@ -18,13 +18,13 @@
  * @author Andres Almiray
  */
 
-import org.codehaus.griffon.util.BuildSettings
+import griffon.util.Environment
 
 includeTargets << griffonScript("_GriffonSettings")
 
 lwjglJnlpResources = []
-def lwjgl_version = "2.2.1"
-for(os in ['linux', 'macosx', 'windows', 'solaris']) {
+def lwjgl_version = "2.5"
+for(os in ['linux', 'linux64', 'macosx', 'macosx64', 'windows', 'windows64', 'solaris', 'solaris64']) {
     lwjglJnlpResources << [os: os, nativelibs: ["webstart/lwjgl-${lwjgl_version}-native-${os}.jar"]]
 }
 
@@ -51,8 +51,7 @@ eventCopyLibsEnd = { jardir ->
             copyPlatformJars(lwjglLibDir, jardir)
             copyNativeLibs(lwjglLibDir, jardir)
         } else {
-            def env = System.getProperty(BuildSettings.ENVIRONMENT)
-            if(env == BuildSettings.ENV_DEVELOPMENT) {
+            if(Environment.current == Environment.DEVELOPMENT) {
                 doWithPlatform(platform)
             } else {
                 PLATFORMS.each { doWithPlatform(it.key) }
@@ -76,4 +75,3 @@ doWithPlatform = { platformOs ->
         rs.nativeLibs.addAll(nativeLibs)
     }
 }
-
