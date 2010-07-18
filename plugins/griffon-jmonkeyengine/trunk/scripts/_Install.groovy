@@ -34,11 +34,11 @@ root.'JmonkeyengineGriffonAddon'.addon=true
 }
 
 def simpleGameDelegate = "MySimpleGameDelegate"
-if(!(simpleGameDelegate in config.flatten().'jme.simpleGameDelegate')) {
+if(!config.flatten().'jme.simpleGameDelegate') {
     println "Setting '$simpleGameDelegate' as jme.simpleGameDelegate"
-    configFile.append('''
+    configFile.append("""
 jme.simpleGameDelegate = "$simpleGameDelegate"
-''')
+""")
 }
 
 ant.copy(file: "${getPluginDirForName('jmonkeyengine').file}/src/templates/MySimpleGameDelegate.groovy", todir: "${basedir}/src/main")
