@@ -1,8 +1,13 @@
-<plugin name='lwjgl' version='0.2' griffonVersion='0.3 &gt; *' jdk='1.5'>
+<plugin name='lwjgl' version='0.3' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>LWJGL support</title>
+  <description>LWJGL support</description>
   <documentation>http://griffon.codehaus.org/Lwjgl+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
   <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>
