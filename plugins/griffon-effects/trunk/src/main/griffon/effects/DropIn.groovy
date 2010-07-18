@@ -87,7 +87,9 @@ class DropIn extends ParallelEffect {
             ] 
         }
 
-        SwingUtils.setWindowOpacity(component, EffectUtil.toFloat(0.0f))
+        if(SwingUtils.isTranslucencySupported()) {
+            SwingUtils.setWindowOpacity(component, EffectUtil.toFloat(0.0f))
+        }
         ps.mode = 'absolute'
         ps.x = (screen.width/2) - (size.width/2)
         ps.y = (screen.height/2) - (size.height/2)
@@ -151,7 +153,9 @@ class DropIn extends ParallelEffect {
     protected void doBeforePlay() {
         // make sure the window is visible
         UIThreadHelper.instance.executeSync {
-            SwingUtils.setWindowOpacity(component, params.from)
+            if(SwingUtils.isTranslucencySupported()) {
+                SwingUtils.setWindowOpacity(component, params.from)
+            }
             component.visible = true
         }
     }

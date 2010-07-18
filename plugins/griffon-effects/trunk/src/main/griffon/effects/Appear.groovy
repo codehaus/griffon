@@ -61,7 +61,7 @@ class Appear extends Opacity {
     Appear(Map params = [:], Window window, Closure callback = null) {
         super(EffectUtil.mergeParams(params), window, callback)
         def ps = paramsInternal()
-        float opacity = SwingUtils.getWindowOpacity(window)
+        float opacity =  SwingUtils.isTranslucencySupported() ? SwingUtils.getWindowOpacity(window) : 0.0f
         ps.from = opacity == 1.0f ? 0.0f : opacity
         ps.to = 1f
     }
@@ -69,8 +69,10 @@ class Appear extends Opacity {
     protected void doBeforePlay() {
         // make sure the window is visible
         UIThreadHelper.instance.executeSync {
-            SwingUtils.setWindowOpacity(component, params.from)
             component.visible = true       
+            if(SwingUtils.isTranslucencySupported()) {
+                SwingUtils.setWindowOpacity(component, params.from)
+            }
         }
     }
 }

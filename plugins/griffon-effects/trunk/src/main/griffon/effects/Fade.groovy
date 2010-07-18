@@ -62,7 +62,11 @@ class Fade extends Opacity {
     Fade(Map params = [:], Window window, Closure callback = null) {
         super(EffectUtil.mergeParams(params), window, callback)
         def ps = paramsInternal()
-        ps.from = SwingUtils.getWindowOpacity(window) ?: 1.0f
+        if(SwingUtils.isTranslucencySupported()) {
+            ps.from = SwingUtils.getWindowOpacity(window) ?: 1.0f
+        } else {
+            ps.from = 1.0f
+        }
         ps.to = 0f
     }
 
@@ -77,7 +81,9 @@ class Fade extends Opacity {
         // make sure the window is visible
         UIThreadHelper.instance.executeSync {
             component.visible = true
-            SwingUtils.setWindowOpacity(component, params.from)
+            if(SwingUtils.isTranslucencySupported()) {
+                SwingUtils.setWindowOpacity(component, params.from)
+            }
         }
     }
 }
