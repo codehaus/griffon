@@ -1,10 +1,14 @@
-<plugin name='scala' version='0.6' griffonVersion='0.3 &gt; *' jdk='1.5'>
+<plugin name='scala' version='0.7' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Brings the Scala language compiler and libraries</title>
+  <description>This plugin enables the usage of Scala classes in your Griffon application.</description>
   <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
-  <plugin name='lang-bridge' version='0.3' />
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies>
-    <plugin name='lang-bridge' version='0.3' />
+    <plugin name='lang-bridge' version='0.4' />
   </dependencies>
 </plugin>

@@ -21,7 +21,7 @@
 includeTargets << griffonScript("Init")
 includePluginScript("scala", "_ScalaCommon")
 
-eventPackagePluginStart = { pluginName, plugin ->
+eventPackagePluginStart = { pluginName ->
     def destFileName = "lib/check/scalacheck-tasks.jar"
     ant.delete(dir: destFileName, quiet: false, failOnError: false)
     ant.jar(destfile: destFileName) {
