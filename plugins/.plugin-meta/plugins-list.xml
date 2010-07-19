@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<plugins revision="2021">
-    <plugin latest-release="0.1" name="abeilleform-builder">
+<?xml version="1.0" encoding="UTF-8"?>
+<plugins revision="2055">
+    <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
             <author>Jim Shingler</author>
@@ -10,7 +10,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-abeilleform-builder/tags/RELEASE_0_1/griffon-abeilleform-builder-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="artifacts">
+    <plugin name="artifacts" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Artifacts API enhancements</title>
             <author>Andres Almiray</author>
@@ -20,7 +20,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-artifacts/tags/RELEASE_0_1/griffon-artifacts-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="avro">
+    <plugin name="avro" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Apache Avro support</title>
             <author>Andres Almiray</author>
@@ -30,7 +30,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-avro/tags/RELEASE_0_1/griffon-avro-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="berkeleydb">
+    <plugin name="berkeleydb" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Berkeleydb support</title>
             <author>Andres Almiray</author>
@@ -41,7 +41,7 @@
         </release>
     </plugin>
     <plugin name="charts"/>
-    <plugin latest-release="0.5.1" name="clojure">
+    <plugin name="clojure" latest-release="0.5.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables Clojure</title>
             <author>Andres Almiray</author>
@@ -84,7 +84,7 @@
         </release>
     </plugin>
     <plugin name="clover"/>
-    <plugin latest-release="0.3.1" name="code-coverage">
+    <plugin name="code-coverage" latest-release="0.3.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generates Code Coverage reports</title>
             <author>Andres Allmiray</author>
@@ -126,7 +126,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_3_1/griffon-code-coverage-0.3.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="codenarc">
+    <plugin name="codenarc" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>CodeNarc plugin</title>
             <author>Andres Almiray</author>
@@ -152,7 +152,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_3/griffon-codenarc-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="couchdb">
+    <plugin name="couchdb" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Couchdb support</title>
             <author>Andres Almiray</author>
@@ -163,7 +163,7 @@
         </release>
     </plugin>
     <plugin name="countries"/>
-    <plugin latest-release="0.2" name="coverflow">
+    <plugin name="coverflow" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
             <author>Your name</author>
@@ -181,7 +181,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-coverflow/tags/RELEASE_0_2/griffon-coverflow-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.5" name="css-builder">
+    <plugin name="css-builder" latest-release="0.5">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>CSS for Swing</title>
             <author>Andres Almiray</author>
@@ -223,7 +223,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-css-builder/tags/RELEASE_0_5/griffon-css-builder-0.5.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="db4o">
+    <plugin name="db4o" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Db4o support</title>
             <author>Andres Almiray</author>
@@ -233,7 +233,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-db4o/tags/RELEASE_0_1/griffon-db4o-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="docking-frame">
+    <plugin name="docking-frame" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon docking frame add-on</title>
             <author>Hackergarten</author>
@@ -246,7 +246,7 @@
     <plugin name="domain"/>
     <plugin name="domain-db4o"/>
     <plugin name="domain-gsql"/>
-    <plugin latest-release="0.1.1" name="easyb">
+    <plugin name="easyb" latest-release="0.1.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables BDD testing with Easyb</title>
             <author>Andres Almiray</author>
@@ -264,7 +264,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_1_1/griffon-easyb-0.1.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2.1" name="eclipse-support">
+    <plugin name="eclipse-support" latest-release="0.2.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Keeps Eclipse files up to date</title>
             <author>Andres Almiray</author>
@@ -291,7 +291,7 @@
         </release>
     </plugin>
     <plugin name="effects"/>
-    <plugin latest-release="0.1" name="erlang">
+    <plugin name="erlang" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Erlang support</title>
             <author>Andres Almiray</author>
@@ -301,7 +301,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-erlang/tags/RELEASE_0_1/griffon-erlang-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="fast-translate">
+    <plugin name="fast-translate" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Provides fast translation services for human language. Backed by Google Translate.</title>
             <author>Hamlet D'Arcy'</author>
@@ -319,8 +319,21 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fast-translate/tags/RELEASE_0_2/griffon-fast-translate-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="feeds"/>
-    <plugin latest-release="0.3" name="fest">
+    <plugin name="feeds" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>RSS/Atom integration</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Read/Write RSS/Atom feeds with Rome.
+Provides a nice icon set too.</description>
+            <documentation>http://griffon.codehaus.org/Feeds+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-feeds/tags/RELEASE_0_1/griffon-feeds-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="fest" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables application testing with FEST</title>
             <author>Andres Almiray</author>
@@ -354,7 +367,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_3/griffon-fest-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="findbugs">
+    <plugin name="findbugs" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>FindBugs plugin</title>
             <author>Andres Almiray</author>
@@ -364,7 +377,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-findbugs/tags/RELEASE_0_1/griffon-findbugs-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2.1" name="flamingo-builder">
+    <plugin name="flamingo-builder" latest-release="0.2.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>FlamingoBuilder Plugin</title>
             <author>Andres Almiray</author>
@@ -398,7 +411,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_2_1/griffon-flamingo-builder-0.2.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="flyingsaucer">
+    <plugin name="flyingsaucer" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Provides XHTML rendering capabilities</title>
             <author>Andres Almiray</author>
@@ -408,7 +421,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flyingsaucer/tags/RELEASE_0_1/griffon-flyingsaucer-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="font-jiggler">
+    <plugin name="font-jiggler" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>FontJiggler - Adds a Font API to Swing Components</title>
             <author>Hamlet D'Arcy</author>
@@ -426,7 +439,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-font-jiggler/tags/RELEASE_0_2/griffon-font-jiggler-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="fx-builder">
+    <plugin name="fx-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables JavaFX on your Griffon application</title>
             <author>Andres Almiray</author>
@@ -452,7 +465,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fx-builder/tags/RELEASE_0_3/griffon-fx-builder-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="gfx-builder">
+    <plugin name="gfx-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gfx Builder Plugin</title>
             <author>Andres Almiray</author>
@@ -502,7 +515,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gfx-builder/tags/RELEASE_0_3/griffon-gfx-builder-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="glazedlists">
+    <plugin name="glazedlists" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>GlazedLists library and components</title>
             <author>Andres Almiray</author>
@@ -528,7 +541,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_3/griffon-glazedlists-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="gmetrics">
+    <plugin name="gmetrics" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
             <author>Your name</author>
@@ -539,7 +552,7 @@
         </release>
     </plugin>
     <plugin name="gorm"/>
-    <plugin latest-release="0.3" name="gparallelizer">
+    <plugin name="gparallelizer" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>GParallelizer Plugin</title>
             <author>Vaclav Pech</author>
@@ -565,7 +578,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gparallelizer/tags/RELEASE_0_3/griffon-gparallelizer-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="gpars">
+    <plugin name="gpars" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>GPars Plugin</title>
             <author>Vaclav Pech</author>
@@ -575,7 +588,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gpars/tags/RELEASE_0_1/griffon-gpars-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="gsql">
+    <plugin name="gsql" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gsql powered DataSource</title>
             <author>Andres Almiray</author>
@@ -601,7 +614,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_3/griffon-gsql-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="gtk">
+    <plugin name="gtk" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gtk UI toolkit plugin</title>
             <author>Andres Almiray</author>
@@ -611,7 +624,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gtk/tags/RELEASE_0_1/griffon-gtk-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1.1" name="guice">
+    <plugin name="guice" latest-release="0.1.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Google Guice Plugin</title>
             <author>James Williams</author>
@@ -629,7 +642,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-guice/tags/RELEASE_0_1_1/griffon-guice-0.1.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="hessian">
+    <plugin name="hessian" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Hessian client &amp; libraries</title>
             <author>Andres Almiray</author>
@@ -647,7 +660,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-hessian/tags/RELEASE_0_2/griffon-hessian-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="i18n">
+    <plugin name="i18n" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>I18n support</title>
             <author>Andres Almiray</author>
@@ -657,7 +670,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-i18n/tags/RELEASE_0_1/griffon-i18n-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.4" name="installer">
+    <plugin name="installer" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Allows creating installers for your Griffon application</title>
             <author>Andres Almiray</author>
@@ -699,7 +712,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/tags/RELEASE_0_4/griffon-installer-0.4.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="jabber">
+    <plugin name="jabber" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Jabber client &amp; libraries</title>
             <author>Andres Almiray</author>
@@ -717,7 +730,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jabber/tags/RELEASE_0_2/griffon-jabber-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="jbusycomponent">
+    <plugin name="jbusycomponent" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enhance any swing components with a 'busy' state</title>
             <author>Andres Almiray</author>
@@ -743,7 +756,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jbusycomponent/tags/RELEASE_0_3/griffon-jbusycomponent-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="jdepend">
+    <plugin name="jdepend" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Runs JDepend metrics on your Griffon application</title>
             <author>Andres Almiray</author>
@@ -769,7 +782,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jdepend/tags/RELEASE_0_2/griffon-jdepend-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="jgoodies-forms">
+    <plugin name="jgoodies-forms" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JGoodies Forms</title>
             <author>Andres Almiray</author>
@@ -787,7 +800,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jgoodies-forms/tags/RELEASE_0_2/griffon-jgoodies-forms-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="jide-builder">
+    <plugin name="jide-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Jide Builder Plugin</title>
             <author>Andres Almiray</author>
@@ -822,7 +835,7 @@
         </release>
     </plugin>
     <plugin name="jmonkeyengine"/>
-    <plugin latest-release="0.1" name="jmx">
+    <plugin name="jmx" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JMX support</title>
             <author>Andres Almiray</author>
@@ -832,7 +845,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmx/tags/RELEASE_0_1/griffon-jmx-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="jogl">
+    <plugin name="jogl" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JOGL support</title>
             <author>Andres Almiray</author>
@@ -850,7 +863,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jogl/tags/RELEASE_0_2/griffon-jogl-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="jtreemap">
+    <plugin name="jtreemap" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JTreeMap Integration</title>
             <author>Hackergarten</author>
@@ -860,7 +873,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jtreemap/tags/RELEASE_0_1/griffon-jtreemap-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="jung">
+    <plugin name="jung" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Graph visualizations and algorithms via JUNG2</title>
             <author>Andres Almiray</author>
@@ -886,7 +899,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jung/tags/RELEASE_0_2/griffon-jung-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="lang-bridge">
+    <plugin name="lang-bridge" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables interoperability between JVM languages</title>
             <author>Andres Almiray</author>
@@ -935,7 +948,7 @@
     <plugin name="lookandfeel-substance"/>
     <plugin name="lookandfeel-tinylaf"/>
     <plugin name="lookandfeel-tonic"/>
-    <plugin latest-release="0.2" name="lwjgl">
+    <plugin name="lwjgl" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>LWJGL support</title>
             <author>Andres Almiray</author>
@@ -954,7 +967,7 @@
         </release>
     </plugin>
     <plugin name="mac-menus"/>
-    <plugin latest-release="0.3" name="macwidgets-builder">
+    <plugin name="macwidgets-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>MacWidgetsBuilder Plugin</title>
             <author>Andres Almiray</author>
@@ -988,7 +1001,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-macwidgets-builder/tags/RELEASE_0_3/griffon-macwidgets-builder-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="mail">
+    <plugin name="mail" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Send email from your Griffon app</title>
             <author>Josh Reed</author>
@@ -1008,7 +1021,7 @@
     </plugin>
     <plugin name="maven-publisher"/>
     <plugin name="miglayout"/>
-    <plugin latest-release="0.1.1" name="mongo-db">
+    <plugin name="mongo-db" latest-release="0.1.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
             <author>Your name</author>
@@ -1027,7 +1040,7 @@
         </release>
     </plugin>
     <plugin name="multidoc"/>
-    <plugin latest-release="0.1" name="neo4j">
+    <plugin name="neo4j" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Neo4j support</title>
             <author>Andres Almiray</author>
@@ -1037,7 +1050,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neo4j/tags/RELEASE_0_1/griffon-neo4j-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="neodatis">
+    <plugin name="neodatis" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Neodatis support</title>
             <author>Andres Almiray</author>
@@ -1047,7 +1060,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neodatis/tags/RELEASE_0_1/griffon-neodatis-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="notify">
+    <plugin name="notify" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon Desktop Notification Plugin</title>
             <author>Hackergarten</author>
@@ -1057,7 +1070,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-notify/tags/RELEASE_0_1/griffon-notify-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="oxbow">
+    <plugin name="oxbow" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>based on Oxbow project</title>
             <author>Ixchel Ruiz</author>
@@ -1067,7 +1080,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-oxbow/tags/RELEASE_0_1/griffon-oxbow-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="p6spy">
+    <plugin name="p6spy" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>P6spy support</title>
             <author>Andres Almiray</author>
@@ -1077,7 +1090,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-p6spy/tags/RELEASE_0_1/griffon-p6spy-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="pivot">
+    <plugin name="pivot" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Pivot UI toolkit plugin</title>
             <author>Andres Almiray</author>
@@ -1087,7 +1100,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-pivot/tags/RELEASE_0_1/griffon-pivot-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="processing">
+    <plugin name="processing" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>2D/3D animations with Processing</title>
             <author>Andres Almiray</author>
@@ -1097,7 +1110,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-processing/tags/RELEASE_0_1/griffon-processing-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="protobuf">
+    <plugin name="protobuf" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Adds Protocol Buffers support</title>
             <author>Andres Almiray</author>
@@ -1115,7 +1128,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-protobuf/tags/RELEASE_0_2/griffon-protobuf-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="rest">
+    <plugin name="rest" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>REST client libraries</title>
             <author>Andres Almiray</author>
@@ -1142,7 +1155,7 @@
         </release>
     </plugin>
     <plugin name="riak"/>
-    <plugin latest-release="0.2" name="rmi">
+    <plugin name="rmi" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>RMI client</title>
             <author>Andres Almiray</author>
@@ -1160,7 +1173,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rmi/tags/RELEASE_0_2/griffon-rmi-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.6" name="scala">
+    <plugin name="scala" latest-release="0.6">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Brings the Scala language compiler and libraries</title>
             <author>Andres Almiray</author>
@@ -1226,7 +1239,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_6/griffon-scala-0.6.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="serial">
+    <plugin name="serial" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Serial port communication libraries</title>
             <author>Andres Almiray</author>
@@ -1237,7 +1250,7 @@
         </release>
     </plugin>
     <plugin name="silkicons"/>
-    <plugin latest-release="0.1.4" name="splash">
+    <plugin name="splash" latest-release="0.1.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Griffon Splash Screen Plugin</title>
             <author>Jim Shingler</author>
@@ -1288,7 +1301,7 @@
         </release>
     </plugin>
     <plugin name="spock"/>
-    <plugin latest-release="0.2" name="spring">
+    <plugin name="spring" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Spring framework libraries and helpers</title>
             <author>Andres Almiray</author>
@@ -1306,7 +1319,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_2/griffon-spring-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="swingx-builder">
+    <plugin name="swingx-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>SwingX Builder Plugin</title>
             <author>James Williams</author>
@@ -1324,7 +1337,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/tags/RELEASE_0_1-SNAPSHOT/griffon-swingx-builder-0.1-SNAPSHOT.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="swingx-ws">
+    <plugin name="swingx-ws" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Map visualizations with Swingx-ws</title>
             <author>Andres Almiray</author>
@@ -1334,7 +1347,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-ws/tags/RELEASE_0_1/griffon-swingx-ws-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="swingxtras-builder">
+    <plugin name="swingxtras-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Swingxtras Builder Plugin</title>
             <author>Andres Almiray</author>
@@ -1360,7 +1373,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingxtras-builder/tags/RELEASE_0_2/griffon-swingxtras-builder-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.1" name="swt">
+    <plugin name="swt" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>SWT UI toolkit plugin</title>
             <author>Andres Almiray</author>
@@ -1371,7 +1384,7 @@
         </release>
     </plugin>
     <plugin name="tangoicons"/>
-    <plugin latest-release="0.1" name="thrift">
+    <plugin name="thrift" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Apache Thrift support</title>
             <author>Andres Almiray</author>
@@ -1381,7 +1394,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-thrift/tags/RELEASE_0_1/griffon-thrift-0.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="transitions">
+    <plugin name="transitions" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Adds animated transitions capabilities</title>
             <author>Andres Almiray</author>
@@ -1423,7 +1436,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-transitions/tags/RELEASE_0_2/griffon-transitions-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="tray-builder">
+    <plugin name="tray-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>TrayBuilder Plugin</title>
             <author>Andres Almiray</author>
@@ -1457,7 +1470,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-tray-builder/tags/RELEASE_0_3/griffon-tray-builder-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="trident-builder">
+    <plugin name="trident-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Trident Builder Plugin</title>
             <author>Andres Almiray</author>
@@ -1483,7 +1496,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-trident-builder/tags/RELEASE_0_3/griffon-trident-builder-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.4" name="validation">
+    <plugin name="validation" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon Validation Plugin</title>
             <author>Nick Zhu</author>
@@ -1509,7 +1522,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_4/griffon-validation-0.4.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.3" name="wizard">
+    <plugin name="wizard" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Adds a Wizard facility to your Griffon apps</title>
             <author>Andres Almiray</author>
@@ -1543,7 +1556,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wizard/tags/RELEASE_0_3/griffon-wizard-0.3.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="worldwind">
+    <plugin name="worldwind" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>NASA WolrdWind (3D Maps)</title>
             <author>Andres Almiray</author>
@@ -1561,7 +1574,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-worldwind/tags/RELEASE_0_2/griffon-worldwind-0.2.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2.1" name="wsclient">
+    <plugin name="wsclient" latest-release="0.2.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>WS client &amp; libraries</title>
             <author>Andres Almiray</author>
@@ -1587,7 +1600,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wsclient/tags/RELEASE_0_2_1/griffon-wsclient-0.2.1.zip</file>
         </release>
     </plugin>
-    <plugin latest-release="0.2" name="xmlrpc">
+    <plugin name="xmlrpc" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>XML-RPC client &amp; libraries</title>
             <author>Andres Almiray</author>
