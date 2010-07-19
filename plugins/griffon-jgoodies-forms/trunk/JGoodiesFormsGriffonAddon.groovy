@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package griffon.jgoodies
+import griffon.jgoodies.*
 
 /**
  * @author Andres Almiray
  */
-class JGoodiesFormsAddon {
+class JGoodiesFormsGriffonAddon {
     def factories = [
         "form": new FormFactory(),
         "formLayout": new FormLayoutFactory(),
