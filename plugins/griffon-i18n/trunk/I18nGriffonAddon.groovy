@@ -36,22 +36,22 @@ class I18nGriffonAddon {
             messageSource.getMessage(message, args as Object[], defaultMessage, locale)
         }
         mc.getMessage = {String message, List args, String defaultMessage ->
-            messageSource.getMessage(message, args as Object[], defaultMessage, Locale.getDefault())
+            messageSource.getMessage(message, args as Object[], defaultMessage, app.locale)
         }
         mc.getMessage = {String message, List args, Locale locale ->
             messageSource.getMessage(message, args as Object[], locale)
         }
         mc.getMessage = {String message, List args ->
-            messageSource.getMessage(message, args as Object[], Locale.getDefault())
+            messageSource.getMessage(message, args as Object[], app.locale)
         }
         mc.getMessage = {String message, Object[] args, String defaultMessage ->
-            messageSource.getMessage(message, args, defaultMessage, Locale.getDefault())
+            messageSource.getMessage(message, args, defaultMessage, app.locale)
         }
         mc.getMessage = {String message, Object[] args ->
-            messageSource.getMessage(message, args, Locale.getDefault())
+            messageSource.getMessage(message, args, app.locale)
         }
         mc.getMessage = {MessageSourceResolvable resolvable ->
-            messageSource.getMessage(resolvable, Locale.getDefault())
+            messageSource.getMessage(resolvable, app.locale)
         }
 
         // decorate GriffonApplication too!
@@ -60,31 +60,31 @@ class I18nGriffonAddon {
             messageSource.getMessage(message, args as Object[], defaultMessage, locale)
         }
         mc.getMessage = {String message, List args, String defaultMessage ->
-            messageSource.getMessage(message, args as Object[], defaultMessage, Locale.getDefault())
+            messageSource.getMessage(message, args as Object[], defaultMessage, app.locale)
         }
         mc.getMessage = {String message, List args, Locale locale ->
             messageSource.getMessage(message, args as Object[], locale)
         }
         mc.getMessage = {String message, List args ->
-            messageSource.getMessage(message, args as Object[], Locale.getDefault())
+            messageSource.getMessage(message, args as Object[], app.locale)
         }
         mc.getMessage = {String message, Object[] args, String defaultMessage, Locale locale ->
             messageSource.getMessage(message, args, defaultMessage, locale)
         }
         mc.getMessage = {String message, Object[] args, String defaultMessage ->
-            messageSource.getMessage(message, args, defaultMessage, Locale.getDefault())
+            messageSource.getMessage(message, args, defaultMessage, app.locale)
         }
         mc.getMessage = {String message, Object[] args, Locale locale ->
             messageSource.getMessage(message, args, locale)
         }
         mc.getMessage = {String message, Object[] args ->
-            messageSource.getMessage(message, args, Locale.getDefault())
+            messageSource.getMessage(message, args, app.locale)
         }
         mc.getMessage = {MessageSourceResolvable resolvable, Locale locale ->
             messageSource.getMessage(resolvable, locale)
         }
         mc.getMessage = {MessageSourceResolvable resolvable ->
-            messageSource.getMessage(resolvable, Locale.getDefault())
+            messageSource.getMessage(resolvable, app.locale)
         }
     }
 
