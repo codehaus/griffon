@@ -19,10 +19,10 @@
  */
 
 includeTargets << griffonScript('Init')
-includePluginScript('thrift', 'Thrift')
 
 eventCompileStart = {
     if(compilingThriftPlugin()) return
+    includePluginScript('thrift', 'Thrift')
     thrift()
 }
 

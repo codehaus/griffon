@@ -32,7 +32,7 @@ target(thrift: 'Compile Thrift sources with thrift') {
     def thriftExecutable = buildConfig?.apache?.thrift?.executable
     if(!thriftExecutable) {
         println('''Could not find thrift executable. Did you forget to define a value for it?
-Make sure you have a similar setting on your griffon-app/conf/BuildSettings.groovy script
+Make sure you have a similar setting on your griffon-app/conf/BuildConfig.groovy script
     apache.thrift.executable = "/path/to/thrift"''')
         System.exit(1)
     }
