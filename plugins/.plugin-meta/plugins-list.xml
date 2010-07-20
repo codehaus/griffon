@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2060">
+<plugins revision="2065">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1418,7 +1418,7 @@ Provides a nice icon set too.</description>
         </release>
     </plugin>
     <plugin name="tangoicons"/>
-    <plugin name="thrift" latest-release="0.1">
+    <plugin name="thrift" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Apache Thrift support</title>
             <author>Andres Almiray</author>
@@ -1426,6 +1426,14 @@ Provides a nice icon set too.</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Thrift+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-thrift/tags/RELEASE_0_1/griffon-thrift-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
+            <title>Apache Thrift support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Apache Thrift support</description>
+            <documentation>http://griffon.codehaus.org/Thrift+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-thrift/tags/RELEASE_0_2/griffon-thrift-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="transitions" latest-release="0.2">
