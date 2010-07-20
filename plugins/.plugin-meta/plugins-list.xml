@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2065">
+<plugins revision="2075">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1144,7 +1144,7 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-processing/tags/RELEASE_0_1/griffon-processing-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="protobuf" latest-release="0.2">
+    <plugin name="protobuf" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Adds Protocol Buffers support</title>
             <author>Andres Almiray</author>
@@ -1160,6 +1160,14 @@ Provides a nice icon set too.</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Protobuf+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-protobuf/tags/RELEASE_0_2/griffon-protobuf-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
+            <title>Adds Protocol Buffers support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Adds Protocol Buffers support.</description>
+            <documentation>http://griffon.codehaus.org/Protobuf+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-protobuf/tags/RELEASE_0_3/griffon-protobuf-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="rest" latest-release="0.3">
