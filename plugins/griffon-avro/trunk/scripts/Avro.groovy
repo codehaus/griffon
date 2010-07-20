@@ -31,11 +31,14 @@ target(avro: 'Compile Avro sources') {
 
     avrosrc = "${basedir}/src/avro"
     avrosrcDir = new File(avrosrc)
-    if(!avrosrcDir.list().size()) {
+    if(avrosrcDir.exists() && !avrosrcDir.list().size()) {
+        compileAvroSources()
+    } else {
         ant.echo(message: "[avro] No avro sources found at $avrosrc")
-        System.exit(0)
     }
+}
 
+compileAvroSources = {
     boolean uptodate1 = true
     boolean uptodate2 = true
     def skipIt = new RuntimeException()
