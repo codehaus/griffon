@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2075">
+<plugins revision="2080">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1045,7 +1045,17 @@ Provides a nice icon set too.</description>
     </plugin>
     <plugin name="maven-publisher"/>
     <plugin name="memcached"/>
-    <plugin name="miglayout"/>
+    <plugin name="miglayout" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>MigLayout Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>MigLayout Plugin
+http://miglayout.com</description>
+            <documentation>http://griffon.codehaus.org/Miglayout+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-miglayout/tags/RELEASE_0_1/griffon-miglayout-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="mongo-db" latest-release="0.1.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
