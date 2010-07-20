@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2080">
+<plugins revision="2085">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1660,7 +1660,7 @@ http://miglayout.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wsclient/tags/RELEASE_0_2_1/griffon-wsclient-0.2.1.zip</file>
         </release>
     </plugin>
-    <plugin name="xmlrpc" latest-release="0.2">
+    <plugin name="xmlrpc" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>XML-RPC client &amp; libraries</title>
             <author>Andres Almiray</author>
@@ -1676,6 +1676,14 @@ http://miglayout.com</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Xmlrpc+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-xmlrpc/tags/RELEASE_0_2/griffon-xmlrpc-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
+            <title>XML-RPC client &amp; libraries</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>XML-RPC client &amp; libraries.</description>
+            <documentation>http://griffon.codehaus.org/Xmlrpc+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-xmlrpc/tags/RELEASE_0_3/griffon-xmlrpc-0.3.zip</file>
         </release>
     </plugin>
 </plugins>
