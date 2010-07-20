@@ -19,10 +19,10 @@
  */
 
 includeTargets << griffonScript("Init")
-includePluginScript("protobuf", "Protoc")
 
 eventCompileStart = {
     if(compilingProtobufPlugin()) return
+    includePluginScript("protobuf", "Protoc")
     protoc()
 }
 

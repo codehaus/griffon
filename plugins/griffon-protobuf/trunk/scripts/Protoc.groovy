@@ -23,7 +23,6 @@ includeTargets << griffonScript("_GriffonCompile")
 
 target(protoc: "Compile Protobuf sources with protoc") {
     depends(checkVersion, classpath)
-    // FIXME -- remove the following def when/if GRIFFON-96 is resolved
     gensrcDir = "${projectWorkDir}/gensrc"
     gensrcDirPath = new File(gensrcDir)
 
@@ -32,7 +31,7 @@ target(protoc: "Compile Protobuf sources with protoc") {
     def protocExecutable = buildConfig?.google?.protobuf?.protoc
     if(!protocExecutable) {
         println('''Could not find protoc executable. Did you forget to define a value for it?
-Make sure you have a similar setting on your griffon-app/conf/BuildSettings.groovy script
+Make sure you have a similar setting on your griffon-app/conf/BuildConfig.groovy script
     google.protobuf.protoc = "/path/to/protoc"''')
         System.exit(1)
     }
