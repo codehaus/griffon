@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2085">
+<plugins revision="2090">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -956,7 +956,16 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lang-bridge/tags/RELEASE_0_3/griffon-lang-bridge-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel"/>
+    <plugin name="lookandfeel" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Swing Look &amp; Feel selector</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Swing Look &amp; Feel selector.</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel/tags/RELEASE_0_1/griffon-lookandfeel-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="lookandfeel-a03"/>
     <plugin name="lookandfeel-easynth"/>
     <plugin name="lookandfeel-jgoodies-looks"/>
