@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2155">
+<plugins revision="2160">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -258,7 +258,7 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
         </release>
     </plugin>
     <plugin name="countries" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Flags of the world</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -271,7 +271,7 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <file>https://svn.codehaus.org/griffon/plugins/griffon-countries/tags/RELEASE_0_1/griffon-countries-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="coverflow" latest-release="0.2">
+    <plugin name="coverflow" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
             <author>Your name</author>
@@ -287,6 +287,17 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <description/>
             <documentation>http://griffon.codehaus.org/Coverflow+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-coverflow/tags/RELEASE_0_2/griffon-coverflow-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Provides a coverflow component</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Provides a coverflow component.</description>
+            <documentation>http://griffon.codehaus.org/Coverflow+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-coverflow/tags/RELEASE_0_3/griffon-coverflow-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="css-builder" latest-release="0.5">
