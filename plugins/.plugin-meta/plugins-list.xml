@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2430">
+<plugins revision="2435">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1446,7 +1446,7 @@ http://www.jtattoo.net:%s%</description>
         </release>
     </plugin>
     <plugin name="lookandfeel-liquidlnf" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Liquid Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1459,7 +1459,19 @@ https://liquidlnf.dev.java.net/</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-liquidlnf/tags/RELEASE_0_1/griffon-lookandfeel-liquidlnf-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-metouia"/>
+    <plugin name="lookandfeel-metouia" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Metouia Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Metouia Swing Look &amp; Feel.</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+Metouia+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-metouia/tags/RELEASE_0_1/griffon-lookandfeel-metouia-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="lookandfeel-napkin"/>
     <plugin name="lookandfeel-nimrod"/>
     <plugin name="lookandfeel-officelnfs"/>
