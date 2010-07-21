@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2213">
+<plugins revision="2218">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -775,7 +775,7 @@ Provides a nice icon set too.</description>
             <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_3/griffon-glazedlists-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>GlazedLists library and components</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -787,7 +787,7 @@ Provides a nice icon set too.</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_4/griffon-glazedlists-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="gmetrics" latest-release="0.1">
+    <plugin name="gmetrics" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
             <author>Your name</author>
@@ -795,6 +795,18 @@ Provides a nice icon set too.</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Gmetrics+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gmetrics/tags/RELEASE_0_1/griffon-gmetrics-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>GMetrics plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Runs GMetrics analysis rules for Groovy source.
+Based on the original Grails gmetrics plugin by Scott Ryan.</description>
+            <documentation>http://griffon.codehaus.org/Gmetrics+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-gmetrics/tags/RELEASE_0_2/griffon-gmetrics-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="gorm"/>
