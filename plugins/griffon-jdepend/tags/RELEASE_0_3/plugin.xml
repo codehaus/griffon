@@ -1,0 +1,14 @@
+<plugin name='jdepend' version='0.3' griffonVersion='0.9 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Runs JDepend metrics on your Griffon application</title>
+  <description>JDepend traverses Java class file directories and generates design quality metrics for each Java package.
+JDepend allows you to automatically measure the quality of a design in terms of its extensibility, reusability, 
+and maintainability to manage package dependencies effectively.</description>
+  <documentation>http://griffon.codehaus.org/Jdepend+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
