@@ -4,7 +4,7 @@
   <title>Provides JXLayer/JLayer nodes</title>
   <description>JXLayer can be used with Jdk6 and older. JLayer can be used with Jdk7 and newer.</description>
   <documentation>http://griffon.codehaus.org/Jxlayer+Plugin</documentation>
-  <license>Apache Software 2icense 2.0</license>
+  <license>Apache Software License 2.0</license>
   <toolkits>swing</toolkits>
   <resources>
     <resource>BuildConfig</resource>
