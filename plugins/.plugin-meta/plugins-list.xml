@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2198">
+<plugins revision="2203">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -570,7 +570,7 @@ Provides a nice icon set too.</description>
             <documentation>http://griffon.codehaus.org/Findbugs+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-findbugs/tags/RELEASE_0_1/griffon-findbugs-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>FindBugs plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -616,7 +616,7 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_2_1/griffon-flamingo-builder-0.2.1.zip</file>
         </release>
     </plugin>
-    <plugin name="flyingsaucer" latest-release="0.1">
+    <plugin name="flyingsaucer" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Provides XHTML rendering capabilities</title>
             <author>Andres Almiray</author>
@@ -624,6 +624,17 @@ Provides a nice icon set too.</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Flyingsaucer+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flyingsaucer/tags/RELEASE_0_1/griffon-flyingsaucer-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Provides XHTML rendering capabilities</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>View and render XHTML documents to PDF.</description>
+            <documentation>http://griffon.codehaus.org/Flyingsaucer+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-flyingsaucer/tags/RELEASE_0_2/griffon-flyingsaucer-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="font-jiggler" latest-release="0.2">
