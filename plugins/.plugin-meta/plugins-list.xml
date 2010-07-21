@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2330">
+<plugins revision="2335">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1618,7 +1618,7 @@ http://miglayout.com</description>
             <documentation>http://griffon.codehaus.org/Oxbow+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-oxbow/tags/RELEASE_0_1/griffon-oxbow-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Based on Oxbow project</title>
             <author>Ixchel Ruiz</author>
             <authorEmail>ixchelruiz@yahoo.com</authorEmail>
@@ -1630,7 +1630,7 @@ http://miglayout.com</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-oxbow/tags/RELEASE_0_2/griffon-oxbow-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="p6spy" latest-release="0.1">
+    <plugin name="p6spy" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>P6spy support</title>
             <author>Andres Almiray</author>
@@ -1638,6 +1638,26 @@ http://miglayout.com</description>
             <description/>
             <documentation>http://griffon.codehaus.org/P6spy+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-p6spy/tags/RELEASE_0_1/griffon-p6spy-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>P6spy support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>\
+P6Spy plugin adds the p6spy library to your Grails application.
+P6Spy lets you monitor the JDBC queries by proxying your database driver.
+In addition to logging the prepared statements, it also logs the sql with
+parameters in place so you can copy and paste the exact sql into your favourite
+database client to test the results.
+
+Visit the p6spy website at http://p6spy.com/
+
+Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
+            <documentation>http://griffon.codehaus.org/P6spy+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-p6spy/tags/RELEASE_0_2/griffon-p6spy-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="pivot" latest-release="0.1">
