@@ -1,8 +1,14 @@
-<plugin name='jung' version='0.2' griffonVersion='0.3 &gt; *' jdk='1.5'>
+<plugin name='jung' version='0.3' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Graph visualizations and algorithms via JUNG2</title>
+  <description>Graph visualizations and algorithms via JUNG2.
+See http://jung.sourceforge.net for more information about JUNG2</description>
   <documentation>http://griffon.codehaus.org/Jung+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
   <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>
