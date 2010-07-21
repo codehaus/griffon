@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2284">
+<plugins revision="2289">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1235,7 +1235,7 @@ http://jgraph.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmx/tags/RELEASE_0_1/griffon-jmx-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="jogl" latest-release="0.2">
+    <plugin name="jogl" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JOGL support</title>
             <author>Andres Almiray</author>
@@ -1251,6 +1251,17 @@ http://jgraph.com</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Jogl+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jogl/tags/RELEASE_0_2/griffon-jogl-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>JOGL support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>JOGL support</description>
+            <documentation>http://griffon.codehaus.org/Jogl+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-jogl/tags/RELEASE_0_3/griffon-jogl-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="jtreemap" latest-release="0.1">
