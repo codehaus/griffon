@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2110">
+<plugins revision="2115">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -47,7 +47,7 @@
             <documentation>http://griffon.codehaus.org/Berkeleydb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-berkeleydb/tags/RELEASE_0_1/griffon-berkeleydb-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Berkeleydb support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -59,7 +59,21 @@
             <file>https://svn.codehaus.org/griffon/plugins/griffon-berkeleydb/tags/RELEASE_0_2/griffon-berkeleydb-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="charts"/>
+    <plugin name="charts" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Charting support via JFreeChart</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Charting support via JFreeChart + groovychart
+http//jfree.org/chart
+http://groovychart.dev.java.net</description>
+            <documentation>http://griffon.codehaus.org/Charts+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-charts/tags/RELEASE_0_1/griffon-charts-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="clojure" latest-release="0.5.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables Clojure</title>
