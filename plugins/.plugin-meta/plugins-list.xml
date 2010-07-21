@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2410">
+<plugins revision="2415">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1392,7 +1392,7 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
         </release>
     </plugin>
     <plugin name="lookandfeel-a03" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A03 Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1404,7 +1404,20 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-a03/tags/RELEASE_0_1/griffon-lookandfeel-a03-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-easynth"/>
+    <plugin name="lookandfeel-easynth" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>EaSynth Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>EaSynth Swing Look &amp; Feel.
+http://www.easynth.com</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+EaSynth+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-easynth/tags/RELEASE_0_1/griffon-lookandfeel-easynth-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="lookandfeel-jgoodies-looks"/>
     <plugin name="lookandfeel-jtattoo"/>
     <plugin name="lookandfeel-liquidlnf"/>
