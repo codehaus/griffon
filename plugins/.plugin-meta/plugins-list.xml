@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2370">
+<plugins revision="2375">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2128,7 +2128,7 @@ http://freedesktop.org</description>
             <documentation>http://griffon.codehaus.org/Transitions+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-transitions/tags/RELEASE_0_2/griffon-transitions-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>Adds animated transitions capabilities</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2140,7 +2140,7 @@ http://freedesktop.org</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-transitions/tags/RELEASE_0_3/griffon-transitions-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="tray-builder" latest-release="0.3">
+    <plugin name="tray-builder" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>TrayBuilder Plugin</title>
             <author>Andres Almiray</author>
@@ -2172,6 +2172,17 @@ http://freedesktop.org</description>
             <description/>
             <documentation>http://griffon.codehaus.org/TrayBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-tray-builder/tags/RELEASE_0_3/griffon-tray-builder-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>TrayBuilder Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables Swing components on SystemTray.</description>
+            <documentation>http://griffon.codehaus.org/TrayBuilder+Plugin</documentation>
+            <license>GNU General Public License 2.0 (with classpath extension)</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-tray-builder/tags/RELEASE_0_4/griffon-tray-builder-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="trident-builder" latest-release="0.4">
