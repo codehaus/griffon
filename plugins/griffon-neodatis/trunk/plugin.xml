@@ -1,9 +1,12 @@
-<plugin name='neodatis' version='0.2' griffonVersion='0.3.2 &gt; *' jdk='1.5'>
+<plugin name='neodatis' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Neodatis support</title>
+  <description>Neodatis support.</description>
   <documentation>http://griffon.codehaus.org/Neodatis+Plugin</documentation>
-  <synopsis>Neodatis support.</synopsis>
   <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>
