@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2405">
+<plugins revision="2410">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1391,7 +1391,19 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel/tags/RELEASE_0_1/griffon-lookandfeel-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-a03"/>
+    <plugin name="lookandfeel-a03" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>A03 Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>A03 Swing Look &amp; Feel.</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+A03+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-a03/tags/RELEASE_0_1/griffon-lookandfeel-a03-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="lookandfeel-easynth"/>
     <plugin name="lookandfeel-jgoodies-looks"/>
     <plugin name="lookandfeel-jtattoo"/>
@@ -1690,7 +1702,7 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <documentation>http://griffon.codehaus.org/Processing+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-processing/tags/RELEASE_0_1/griffon-processing-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>2D/3D animations with Processing</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
