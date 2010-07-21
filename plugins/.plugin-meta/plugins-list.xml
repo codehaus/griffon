@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2305">
+<plugins revision="2310">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1458,7 +1458,7 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <documentation>http://griffon.codehaus.org/MacWidgetsBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-macwidgets-builder/tags/RELEASE_0_3/griffon-macwidgets-builder-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>MacWidgetsBuilder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1488,7 +1488,20 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-mail/tags/RELEASE_0_2/griffon-mail-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="maven-publisher"/>
+    <plugin name="maven-publisher" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Publish to Maven repositories</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
+            <description>A plugin that allows you to publish and/or resolve Griffon application and plugins to Maven repositories without needing to use Maven directly.
+A port of grails-maven-publisher originally created by Graeme Rocher.</description>
+            <documentation>http://griffon.codehaus.org/MavenPublisher+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-maven-publisher/tags/RELEASE_0_1/griffon-maven-publisher-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="memcached"/>
     <plugin name="miglayout" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
