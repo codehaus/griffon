@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2450">
+<plugins revision="2455">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1500,7 +1500,7 @@ http://personales.ya.com/nimrod/index-en.html</description>
         </release>
     </plugin>
     <plugin name="lookandfeel-officelnfs" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Officelnfs Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1513,7 +1513,20 @@ http://officelnfs.sourceforge.net/</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-officelnfs/tags/RELEASE_0_1/griffon-lookandfeel-officelnfs-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-pgslaf"/>
+    <plugin name="lookandfeel-pgslaf" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Pgslaf Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Pgslaf Swing Look &amp; Feel.
+http://www.pagosoft.com/products/pgslookandfeel/index.html</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+Pgslaf+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-pgslaf/tags/RELEASE_0_1/griffon-lookandfeel-pgslaf-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="lookandfeel-skinlnf"/>
     <plugin name="lookandfeel-squareness"/>
     <plugin name="lookandfeel-substance"/>
