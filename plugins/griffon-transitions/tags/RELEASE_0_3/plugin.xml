@@ -1,0 +1,15 @@
+<plugin name='transitions' version='0.3' griffonVersion='0.9 &gt; *' jdk='1.6'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Adds animated transitions capabilities</title>
+  <description>Adds animated transitions capabilities</description>
+  <documentation>http://griffon.codehaus.org/Transitions+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies>
+    <plugin name='trident-builder' version='0.4' />
+  </dependencies>
+</plugin>
