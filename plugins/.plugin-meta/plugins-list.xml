@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2125">
+<plugins revision="2130">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -344,7 +344,7 @@ http://groovychart.dev.java.net</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_1/griffon-effects-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="erlang" latest-release="0.1">
+    <plugin name="erlang" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Erlang support</title>
             <author>Andres Almiray</author>
@@ -352,6 +352,17 @@ http://groovychart.dev.java.net</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Erlang+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-erlang/tags/RELEASE_0_1/griffon-erlang-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Erlang support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
+            <description>Erlang support via jinterface</description>
+            <documentation>http://griffon.codehaus.org/Erlang+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-erlang/tags/RELEASE_0_2/griffon-erlang-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="fast-translate" latest-release="0.2">
@@ -1358,7 +1369,7 @@ http://miglayout.com</description>
             <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_6/griffon-scala-0.6.zip</file>
         </release>
-        <release tag="RELEASE_0_7" version="0.7" type="svn">
+        <release tag="RELEASE_0_7" type="svn" version="0.7">
             <title>Brings the Scala language compiler and libraries</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
