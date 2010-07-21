@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2470">
+<plugins revision="2475">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1556,7 +1556,7 @@ http://squareness.beeger.net/</description>
         </release>
     </plugin>
     <plugin name="lookandfeel-substance" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Substance Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1568,7 +1568,20 @@ http://squareness.beeger.net/</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-substance/tags/RELEASE_0_1/griffon-lookandfeel-substance-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-tinylaf"/>
+    <plugin name="lookandfeel-tinylaf" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Tinylaf Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Tinylaf Swing Look &amp; Feel.
+http://www.muntjak.de/hans/java/tinylaf/index.html</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+Tinylaf+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-tinylaf/tags/RELEASE_0_1/griffon-lookandfeel-tinylaf-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="lookandfeel-tonic"/>
     <plugin name="lwjgl" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
