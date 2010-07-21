@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2460">
+<plugins revision="2465">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1528,7 +1528,7 @@ http://www.pagosoft.com/products/pgslookandfeel/index.html</description>
         </release>
     </plugin>
     <plugin name="lookandfeel-skinlnf" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Skinlnf Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1541,7 +1541,20 @@ http://l2fprod.com/skinlf</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-skinlnf/tags/RELEASE_0_1/griffon-lookandfeel-skinlnf-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-squareness"/>
+    <plugin name="lookandfeel-squareness" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Squareness Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Squareness Swing Look &amp; Feel.
+http://squareness.beeger.net/</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+Squareness+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-squareness/tags/RELEASE_0_1/griffon-lookandfeel-squareness-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="lookandfeel-substance"/>
     <plugin name="lookandfeel-tinylaf"/>
     <plugin name="lookandfeel-tonic"/>
