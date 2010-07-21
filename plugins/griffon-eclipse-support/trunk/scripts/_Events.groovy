@@ -19,14 +19,16 @@
  */
 
 includeTargets << griffonScript("Init")
-includePluginScript('eclipse-support', 'EclipseUpdate')
 
 eventPluginInstalled = { fullPluginName ->
+    includePluginScript('eclipse-support', 'EclipseUpdate')
     updateEclipseClasspathFile(fullPluginName)
 }
 eventPluginUninstalled = { msg ->
+    includePluginScript('eclipse-support', 'EclipseUpdate')
     updateEclipseClasspathFile()
 }
 eventCreatedArtifact = { type, className ->
+    includePluginScript('eclipse-support', 'EclipseUpdate')
     updateEclipseClasspathFile()
 }
