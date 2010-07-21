@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2135">
+<plugins revision="2140">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -125,7 +125,7 @@ http://groovychart.dev.java.net</description>
         </release>
     </plugin>
     <plugin name="clover" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Clover Code Coverage for Griffon</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -144,7 +144,7 @@ Clover's reports include:
             <file>https://svn.codehaus.org/griffon/plugins/griffon-clover/tags/RELEASE_0_1/griffon-clover-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="code-coverage" latest-release="0.3.1">
+    <plugin name="code-coverage" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generates Code Coverage reports</title>
             <author>Andres Allmiray</author>
@@ -184,6 +184,18 @@ Clover's reports include:
             <description/>
             <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_3_1/griffon-code-coverage-0.3.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>Generates Code Coverage reports</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Creates Code Coverage reports for your code.
+Based on grails-code-coverage by Mike Hugo.</description>
+            <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_4/griffon-code-coverage-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="codenarc" latest-release="0.3">
