@@ -1,0 +1,12 @@
+<plugin name='i18n' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>I18n support</title>
+  <description>I18n support via Spring.</description>
+  <documentation>http://griffon.codehaus.org/I18n+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
