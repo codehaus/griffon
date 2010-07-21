@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2105">
+<plugins revision="2110">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -38,7 +38,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-avro/tags/RELEASE_0_2/griffon-avro-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="berkeleydb" latest-release="0.1">
+    <plugin name="berkeleydb" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Berkeleydb support</title>
             <author>Andres Almiray</author>
@@ -46,6 +46,17 @@
             <description/>
             <documentation>http://griffon.codehaus.org/Berkeleydb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-berkeleydb/tags/RELEASE_0_1/griffon-berkeleydb-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Berkeleydb support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Berkeleydb support</description>
+            <documentation>http://griffon.codehaus.org/Berkeleydb+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-berkeleydb/tags/RELEASE_0_2/griffon-berkeleydb-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="charts"/>
@@ -307,7 +318,7 @@
         </release>
     </plugin>
     <plugin name="effects" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Effects and Animations</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
