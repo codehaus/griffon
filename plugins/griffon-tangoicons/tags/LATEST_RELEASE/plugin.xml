@@ -1,0 +1,14 @@
+<plugin name='tangoicons' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Tango! desktop icons</title>
+  <description>Tango! desktop icons 
+http://freedesktop.org</description>
+  <documentation>http://griffon.codehaus.org/Tangoicons+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
