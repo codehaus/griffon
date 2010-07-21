@@ -1,7 +1,0 @@
-<plugin name='p6spy' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
-  <author>Andres Almiray</author>
-  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-  <title>P6spy support</title>
-  <documentation>http://griffon.codehaus.org/P6spy+Plugin</documentation>
-  <dependencies />
-</plugin>
