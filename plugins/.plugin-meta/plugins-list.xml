@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2180">
+<plugins revision="2188">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -404,7 +404,7 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_1_1/griffon-easyb-0.1.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Enables BDD testing with Easyb</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -416,7 +416,7 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <file>https://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_2/griffon-easyb-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="eclipse-support" latest-release="0.2.1">
+    <plugin name="eclipse-support" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Keeps Eclipse files up to date</title>
             <author>Andres Almiray</author>
@@ -440,6 +440,17 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <description/>
             <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_2_1/griffon-eclipse-support-0.2.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Keeps Eclipse files up to date</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Keeps Eclipse files up to date.</description>
+            <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_3/griffon-eclipse-support-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="effects" latest-release="0.1">
