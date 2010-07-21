@@ -1,7 +1,0 @@
-<plugin name='codenarc' version='0.3' griffonVersion='0.3.1 &gt; *' jdk='1.5'>
-  <author>Andres Almiray</author>
-  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-  <title>CodeNarc plugin</title>
-  <documentation>http://griffon.codehaus.org/Codenarc+Plugin</documentation>
-  <dependencies />
-</plugin>
