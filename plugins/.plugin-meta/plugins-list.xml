@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2299">
+<plugins revision="2305">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1412,7 +1412,7 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <documentation>http://griffon.codehaus.org/Lwjgl+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lwjgl/tags/RELEASE_0_2/griffon-lwjgl-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>LWJGL support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1425,7 +1425,7 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
         </release>
     </plugin>
     <plugin name="mac-menus"/>
-    <plugin name="macwidgets-builder" latest-release="0.3">
+    <plugin name="macwidgets-builder" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>MacWidgetsBuilder Plugin</title>
             <author>Andres Almiray</author>
@@ -1457,6 +1457,17 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <description/>
             <documentation>http://griffon.codehaus.org/MacWidgetsBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-macwidgets-builder/tags/RELEASE_0_3/griffon-macwidgets-builder-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>MacWidgetsBuilder Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Brings the MacWidgetsBuilder libraries into a Griffon Build</description>
+            <documentation>http://griffon.codehaus.org/MacWidgetsBuilder+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-macwidgets-builder/tags/RELEASE_0_4/griffon-macwidgets-builder-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="mail" latest-release="0.2">
