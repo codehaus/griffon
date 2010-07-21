@@ -1,7 +1,0 @@
-<plugin name='hessian' version='0.2' griffonVersion='0.3 &gt; *' jdk='1.5'>
-  <author>Andres Almiray</author>
-  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-  <title>Hessian client &amp; libraries</title>
-  <documentation>http://griffon.codehaus.org/Hessian+Plugin</documentation>
-  <dependencies />
-</plugin>
