@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2465">
+<plugins revision="2470">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1542,7 +1542,7 @@ http://l2fprod.com/skinlf</description>
         </release>
     </plugin>
     <plugin name="lookandfeel-squareness" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Squareness Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1555,7 +1555,19 @@ http://squareness.beeger.net/</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-squareness/tags/RELEASE_0_1/griffon-lookandfeel-squareness-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-substance"/>
+    <plugin name="lookandfeel-substance" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Substance Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Substance Swing Look &amp; Feel.</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+Substance+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-substance/tags/RELEASE_0_1/griffon-lookandfeel-substance-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="lookandfeel-tinylaf"/>
     <plugin name="lookandfeel-tonic"/>
     <plugin name="lwjgl" latest-release="0.3">
