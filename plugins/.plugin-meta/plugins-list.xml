@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2130">
+<plugins revision="2135">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -124,7 +124,26 @@ http://groovychart.dev.java.net</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_5_1/griffon-clojure-0.5.1.zip</file>
         </release>
     </plugin>
-    <plugin name="clover"/>
+    <plugin name="clover" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Clover Code Coverage for Griffon</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>A plugin that integrates Clover into GRIFFON projects.
+Clover is a Code Coverage tool that produces beautiful reports which are highly configurable and extensible.
+Clover not only reports which lines of code were executed during a test run, it also reports which tests hit which lines of code.
+Clover's reports include:
+* Tag Clouds of your entire project that compare Complexity with Coverage
+* A TreeMap to visualise the most complex, uncovered areas of your project
+* Fully Cross Referenced HTML view of your source code
+* Much more: See http://atlassian.com/clover</description>
+            <documentation>http://griffon.codehaus.org/Clover+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-clover/tags/RELEASE_0_1/griffon-clover-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="code-coverage" latest-release="0.3.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generates Code Coverage reports</title>
@@ -353,7 +372,7 @@ http://groovychart.dev.java.net</description>
             <documentation>http://griffon.codehaus.org/Erlang+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-erlang/tags/RELEASE_0_1/griffon-erlang-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Erlang support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
