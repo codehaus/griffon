@@ -11,7 +11,7 @@ Clover's reports include:
 * Fully Cross Referenced HTML view of your source code
 * Much more: See http://atlassian.com/clover</description>
   <documentation>http://griffon.codehaus.org/Clover+Plugin</documentation>
-  <license>Apache Softwre License 2.0</license>
+  <license>Apache Software License 2.0</license>
   <resources>
     <resource>BuildConfig</resource>
   </resources>
