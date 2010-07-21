@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2218">
+<plugins revision="2223">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -796,7 +796,7 @@ Provides a nice icon set too.</description>
             <documentation>http://griffon.codehaus.org/Gmetrics+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gmetrics/tags/RELEASE_0_1/griffon-gmetrics-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>GMetrics plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -846,7 +846,7 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gpars/tags/RELEASE_0_1/griffon-gpars-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="gsql" latest-release="0.3">
+    <plugin name="gsql" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gsql powered DataSource</title>
             <author>Andres Almiray</author>
@@ -870,6 +870,17 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_3/griffon-gsql-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>Gsql powered DataSource</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Adds Gsql powered DataSource capabilities to your Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_4/griffon-gsql-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="gtk" latest-release="0.1">
