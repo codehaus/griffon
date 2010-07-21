@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2258">
+<plugins revision="2263">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1142,7 +1142,7 @@ and maintainability to manage package dependencies effectively.</description>
             <documentation>http://griffon.codehaus.org/JgoodiesForms+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jgoodies-forms/tags/RELEASE_0_2/griffon-jgoodies-forms-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>JGoodies Forms</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1154,7 +1154,20 @@ and maintainability to manage package dependencies effectively.</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-jgoodies-forms/tags/RELEASE_0_3/griffon-jgoodies-forms-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="jgraph"/>
+    <plugin name="jgraph" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Graph support via JGraphX</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Graph support via JGraphX.
+http://jgraph.com</description>
+            <documentation>http://griffon.codehaus.org/Jgraph+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-jgraph/tags/RELEASE_0_1/griffon-jgraph-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="jide-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Jide Builder Plugin</title>
