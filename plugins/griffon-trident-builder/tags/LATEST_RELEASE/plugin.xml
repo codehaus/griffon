@@ -1,0 +1,13 @@
+<plugin name='trident-builder' version='0.4' griffonVersion='0.9 &gt; *' jdk='1.6'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Trident Builder Plugin</title>
+  <description>Brings de Trident Builder libraries into a Griffon Build</description>
+  <documentation>http://griffon.codehaus.org/TridentBuilder+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
