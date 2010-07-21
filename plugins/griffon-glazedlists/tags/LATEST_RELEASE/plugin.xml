@@ -1,8 +1,0 @@
-<plugin name='glazedlists' version='0.3' griffonVersion='0.3 &gt; *' jdk='1.5'>
-  <author>Andres Almiray</author>
-  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-  <title>GlazedLists library and components</title>
-  <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
-  <toolkits>swing</toolkits>
-  <dependencies />
-</plugin>
