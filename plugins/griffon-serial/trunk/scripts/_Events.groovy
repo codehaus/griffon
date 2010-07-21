@@ -24,7 +24,7 @@ eventPackageStart = { type ->
 }
 
 serialJnlpResources = []
-for(os in ['linux', 'macosx', 'windows']) {
+for(os in ['linux', 'macosx', 'windows', 'windows64']) {
     serialJnlpResources << [os: os, nativelibs: ["webstart/serial-native-${os}.jar"]]
 }
 
