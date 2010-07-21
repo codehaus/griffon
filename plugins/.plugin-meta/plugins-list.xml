@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2315">
+<plugins revision="2320">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1503,7 +1503,7 @@ A port of grails-maven-publisher originally created by Graeme Rocher.</descripti
         </release>
     </plugin>
     <plugin name="memcached" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Memcached support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1557,7 +1557,7 @@ http://miglayout.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-multidoc/tags/RELEASE_0_1/griffon-multidoc-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="neo4j" latest-release="0.1">
+    <plugin name="neo4j" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Neo4j support</title>
             <author>Andres Almiray</author>
@@ -1565,6 +1565,17 @@ http://miglayout.com</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Neo4j+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neo4j/tags/RELEASE_0_1/griffon-neo4j-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Neo4j support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Neo4j support</description>
+            <documentation>http://griffon.codehaus.org/Neo4j+Plugin</documentation>
+            <license>GNU Affero General Public License v3</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-neo4j/tags/RELEASE_0_2/griffon-neo4j-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="neodatis" latest-release="0.1">
