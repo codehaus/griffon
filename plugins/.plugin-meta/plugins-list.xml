@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2090">
+<plugins revision="2095">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -733,7 +733,7 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/tags/RELEASE_0_4/griffon-installer-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="jabber" latest-release="0.2">
+    <plugin name="jabber" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Jabber client &amp; libraries</title>
             <author>Andres Almiray</author>
@@ -749,6 +749,17 @@ Provides a nice icon set too.</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Jabber+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jabber/tags/RELEASE_0_2/griffon-jabber-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Jabber client &amp; libraries</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Jabber client &amp; libraries.</description>
+            <documentation>http://griffon.codehaus.org/Jabber+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-jabber/tags/RELEASE_0_3/griffon-jabber-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="jbusycomponent" latest-release="0.3">
