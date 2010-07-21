@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2278">
+<plugins revision="2284">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -19,7 +19,7 @@
             <documentation>http://griffon.codehaus.org/Artifacts+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-artifacts/tags/RELEASE_0_1/griffon-artifacts-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Artifacts API enhancements</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
