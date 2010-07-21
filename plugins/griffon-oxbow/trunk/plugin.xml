@@ -1,7 +1,15 @@
-<plugin name='oxbow' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
+<plugin name='oxbow' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Ixchel Ruiz</author>
   <authorEmail>ixchelruiz@yahoo.com</authorEmail>
-  <title>based on Oxbow project</title>
+  <title>Based on Oxbow project</title>
+  <description>A collection of projects for Swing UI enhancements based on Oxbow project</description>
   <documentation>http://griffon.codehaus.org/Oxbow+Plugin</documentation>
-  <dependencies />
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies>
+    <plugin name='miglayout' version='0.1' />
+  </dependencies>
 </plugin>
