@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2310">
+<plugins revision="2315">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1489,7 +1489,7 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
         </release>
     </plugin>
     <plugin name="maven-publisher" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Publish to Maven repositories</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
@@ -1502,7 +1502,22 @@ A port of grails-maven-publisher originally created by Graeme Rocher.</descripti
             <file>https://svn.codehaus.org/griffon/plugins/griffon-maven-publisher/tags/RELEASE_0_1/griffon-maven-publisher-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="memcached"/>
+    <plugin name="memcached" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Memcached support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Memcached support via several clients 
+- Java Memcached Client -&gt; http://github.com/gwhalin/Memcached-Java-Client
+- XMemcachedClient -&gt; http://code.google.com/p/xmemcached
+- Spymemcached -&gt; http://code.google.com/p/spymemcached</description>
+            <documentation>http://griffon.codehaus.org/Memcached+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-memcached/tags/RELEASE_0_1/griffon-memcached-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="miglayout" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>MigLayout Plugin</title>
