@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2150">
+<plugins revision="2155">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -245,7 +245,7 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_1/griffon-couchdb-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Couchdb support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -257,7 +257,20 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_2/griffon-couchdb-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="countries"/>
+    <plugin name="countries" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Flags of the world</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Flags of the world. Icons from http://www.famfamfam.com/lab/icons/flags/
+Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2</description>
+            <documentation>http://griffon.codehaus.org/Countries+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-countries/tags/RELEASE_0_1/griffon-countries-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="coverflow" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
