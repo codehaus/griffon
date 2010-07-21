@@ -1,10 +1,15 @@
-<plugin name='lookandfeel-skinlnf' version='0.1' griffonVersion='0.3.2 &gt; *' jdk='1.5'>
+<plugin name='lookandfeel-skinlnf' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Skinlnf Swing Look &amp; Feel</title>
+  <description>Skinlnf Swing Look &amp; Feel.
+http://l2fprod.com/skinlf</description>
   <documentation>http://griffon.codehaus.org/Lookandfeel+Skinlnf+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
   <toolkits>swing</toolkits>
-  <plugin name='lookandfeel' version='0.1' />
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies>
     <plugin name='lookandfeel' version='0.1' />
   </dependencies>
