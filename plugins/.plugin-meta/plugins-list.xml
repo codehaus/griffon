@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2289">
+<plugins revision="2294">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1252,7 +1252,7 @@ http://jgraph.com</description>
             <documentation>http://griffon.codehaus.org/Jogl+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jogl/tags/RELEASE_0_2/griffon-jogl-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>JOGL support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1274,7 +1274,7 @@ http://jgraph.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jtreemap/tags/RELEASE_0_1/griffon-jtreemap-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="jung" latest-release="0.2">
+    <plugin name="jung" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Graph visualizations and algorithms via JUNG2</title>
             <author>Andres Almiray</author>
@@ -1298,6 +1298,18 @@ http://jgraph.com</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Jung+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jung/tags/RELEASE_0_2/griffon-jung-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Graph visualizations and algorithms via JUNG2</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Graph visualizations and algorithms via JUNG2.
+See http://jung.sourceforge.net for more information about JUNG2</description>
+            <documentation>http://griffon.codehaus.org/Jung+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-jung/tags/RELEASE_0_3/griffon-jung-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="jxlayer" latest-release="0.1">
