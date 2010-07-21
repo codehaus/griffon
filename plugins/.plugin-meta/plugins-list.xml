@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2248">
+<plugins revision="2253">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1073,7 +1073,7 @@ Supported formats are:
             <documentation>http://griffon.codehaus.org/JBusyComponent+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jbusycomponent/tags/RELEASE_0_3/griffon-jbusycomponent-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Enhance any swing components with a 'busy' state</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1086,7 +1086,7 @@ http://code.google.com/p/jbusycomponent</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-jbusycomponent/tags/RELEASE_0_4/griffon-jbusycomponent-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="jdepend" latest-release="0.2">
+    <plugin name="jdepend" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Runs JDepend metrics on your Griffon application</title>
             <author>Andres Almiray</author>
@@ -1110,6 +1110,19 @@ http://code.google.com/p/jbusycomponent</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Jdepend+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jdepend/tags/RELEASE_0_2/griffon-jdepend-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Runs JDepend metrics on your Griffon application</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>JDepend traverses Java class file directories and generates design quality metrics for each Java package.
+JDepend allows you to automatically measure the quality of a design in terms of its extensibility, reusability, 
+and maintainability to manage package dependencies effectively.</description>
+            <documentation>http://griffon.codehaus.org/Jdepend+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-jdepend/tags/RELEASE_0_3/griffon-jdepend-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="jgoodies-forms" latest-release="0.2">
