@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2395">
+<plugins revision="2400">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -593,7 +593,7 @@ Provides a nice icon set too.</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-findbugs/tags/RELEASE_0_2/griffon-findbugs-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="flamingo-builder" latest-release="0.2.1">
+    <plugin name="flamingo-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>FlamingoBuilder Plugin</title>
             <author>Andres Almiray</author>
@@ -625,6 +625,17 @@ Provides a nice icon set too.</description>
             <description/>
             <documentation>http://griffon.codehaus.org/FlamingoBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_2_1/griffon-flamingo-builder-0.2.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>FlamingoBuilder Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Brings the FlamingoBuilder libraries into a Griffon Build</description>
+            <documentation>http://griffon.codehaus.org/FlamingoBuilder+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_3/griffon-flamingo-builder-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="flyingsaucer" latest-release="0.2">
@@ -1871,7 +1882,7 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <documentation>http://griffon.codehaus.org/Serial+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-serial/tags/RELEASE_0_1/griffon-serial-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Serial port communication libraries</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
