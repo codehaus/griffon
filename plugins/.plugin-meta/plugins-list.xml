@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2100">
+<plugins revision="2105">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -306,7 +306,19 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_2_1/griffon-eclipse-support-0.2.1.zip</file>
         </release>
     </plugin>
-    <plugin name="effects"/>
+    <plugin name="effects" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Effects and Animations</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Effects and Animations</description>
+            <documentation>http://griffon.codehaus.org/Effects+Plugin</documentation>
+            <license>BSD License</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_1/griffon-effects-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="erlang" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Erlang support</title>
@@ -1575,7 +1587,7 @@ http://miglayout.com</description>
             <documentation>http://griffon.codehaus.org/TridentBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-trident-builder/tags/RELEASE_0_3/griffon-trident-builder-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Trident Builder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
