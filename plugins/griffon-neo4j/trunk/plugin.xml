@@ -1,9 +1,12 @@
-<plugin name='neo4j' version='0.2' griffonVersion='0.3.2 &gt; *' jdk='1.5'>
+<plugin name='neo4j' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Neo4j support</title>
+  <description>Neo4j support</description>
   <documentation>http://griffon.codehaus.org/Neo4j+Plugin</documentation>
-  <synopsis>Neo4j support</synopsis>
   <license>GNU Affero General Public License v3</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>
