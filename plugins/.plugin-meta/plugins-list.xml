@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2253">
+<plugins revision="2258">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1111,7 +1111,7 @@ http://code.google.com/p/jbusycomponent</description>
             <documentation>http://griffon.codehaus.org/Jdepend+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jdepend/tags/RELEASE_0_2/griffon-jdepend-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>Runs JDepend metrics on your Griffon application</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1125,7 +1125,7 @@ and maintainability to manage package dependencies effectively.</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-jdepend/tags/RELEASE_0_3/griffon-jdepend-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="jgoodies-forms" latest-release="0.2">
+    <plugin name="jgoodies-forms" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JGoodies Forms</title>
             <author>Andres Almiray</author>
@@ -1141,6 +1141,17 @@ and maintainability to manage package dependencies effectively.</description>
             <description/>
             <documentation>http://griffon.codehaus.org/JgoodiesForms+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jgoodies-forms/tags/RELEASE_0_2/griffon-jgoodies-forms-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>JGoodies Forms</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables the usage of JGoodies FormLayout and friends</description>
+            <documentation>http://griffon.codehaus.org/JgoodiesForms+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-jgoodies-forms/tags/RELEASE_0_3/griffon-jgoodies-forms-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="jgraph"/>
