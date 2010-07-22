@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2480">
+<plugins revision="2485">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -385,7 +385,7 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <file>https://svn.codehaus.org/griffon/plugins/griffon-db4o/tags/RELEASE_0_2/griffon-db4o-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="docking-frame" latest-release="0.1">
+    <plugin name="docking-frame" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon docking frame add-on</title>
             <author>Hackergarten</author>
@@ -393,6 +393,20 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <description/>
             <documentation>http://griffon.codehaus.org/DockingFrame+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-docking-frame/tags/RELEASE_0_1/griffon-docking-frame-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Griffon docking frame add-on</title>
+            <author>Hackergarten</author>
+            <authorEmail>hackergarten@googlegroups.com</authorEmail>
+            <description>\
+The docking frame add-on for Griffon, alows the user to have movable panels, or other components, in a frame, the docking frame.
+The panels can be rearranged inside the frame, stacked on top of each other (i.e. creating a tabbed pane), or even moved to
+another docking frame in the application.</description>
+            <documentation>http://griffon.codehaus.org/DockingFrame+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-docking-frame/tags/RELEASE_0_2/griffon-docking-frame-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="domain"/>
@@ -1583,7 +1597,7 @@ http://www.muntjak.de/hans/java/tinylaf/index.html</description>
         </release>
     </plugin>
     <plugin name="lookandfeel-tonic" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Tonic Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
