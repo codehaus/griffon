@@ -15,8 +15,8 @@
 
 package net.sourceforge.gvalidation.annotation
 
-import org.codehaus.groovy.ast.builder.TranformTestHelper
 import org.codehaus.groovy.control.CompilePhase
+import org.codehaus.groovy.tools.ast.TranformTestHelper
 
 /**
  * Created by nick.zhu
