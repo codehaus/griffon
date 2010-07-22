@@ -60,6 +60,7 @@ griffon.project.dependency.resolution = {
 
         compile 'common-lang:commons-lang:2.5'
         compile 'commons-validator:commons-validator:1.3.1'
+        runtime 'apache-oro:jakarta-oro:2.0.8'
     }
 }
 
