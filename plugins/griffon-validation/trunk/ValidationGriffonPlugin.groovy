@@ -14,13 +14,23 @@
  */
 
 class ValidationGriffonPlugin {
-    def version = 0.5
-    def griffonVersion = "0.3 > *"
-    def dependsOn = [:]
-    // optional. Valid values are: swing, javafx, swt, pivot, gtk
-    // def toolkits = ['swing']
-    // optional. Valid values are linux, windows, macosx, solaris
-    // def platforms = []
+     // the plugin version
+    def version = "0.5"
+    // the version or versions of Griffon the plugin is designed for
+    def griffonVersion = '0.9 > *'
+    // the other plugins this plugin depends on
+    def dependsOn = ['i18n':'0.2']
+    // resources that are included in plugin packaging
+    def pluginIncludes = []
+    // the plugin license
+    def license = 'Apache Software License 2.0'
+    // Toolkit compatibility. No value means compatible with all
+    // Valid values are: swing, javafx, swt, pivot, gtk
+    def toolkits = []
+    // Platform compatibility. No value means compatible with all
+    // Valid values are:
+    // linux, linux64, windows, windows64, macosx, macosx64, solaris
+    def platforms = []
 
     def author = "Nick Zhu"
     def authorEmail = "nzhu@jointsource.com"
@@ -28,5 +38,5 @@ class ValidationGriffonPlugin {
     def description = 'A validation plugin that provides Grails like validation capability using constraints'
 
     // URL to the plugin's documentation
-    def documentation = "http://gvalidation.sourceforge.net/"
+    def documentation = 'http://gvalidation.sourceforge.net/'
 }
