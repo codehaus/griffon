@@ -1,0 +1,16 @@
+<plugin name='docking-frame' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
+  <author>Hackergarten</author>
+  <authorEmail>hackergarten@googlegroups.com</authorEmail>
+  <title>Griffon docking frame add-on</title>
+  <description>\
+The docking frame add-on for Griffon, alows the user to have movable panels, or other components, in a frame, the docking frame.
+The panels can be rearranged inside the frame, stacked on top of each other (i.e. creating a tabbed pane), or even moved to
+another docking frame in the application.</description>
+  <documentation>http://griffon.codehaus.org/DockingFrame+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
