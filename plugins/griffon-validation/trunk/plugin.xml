@@ -1,4 +1,4 @@
-<plugin name='validation' version='0.5' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='validation' version='0.5.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Nick Zhu</author>
   <authorEmail>nzhu@jointsource.com</authorEmail>
   <title>Griffon Validation Plugin</title>
