@@ -15,7 +15,7 @@
 
 class ValidationGriffonPlugin {
      // the plugin version
-    def version = "0.5"
+    def version = "0.6"
     // the version or versions of Griffon the plugin is designed for
     def griffonVersion = '0.9 > *'
     // the other plugins this plugin depends on
