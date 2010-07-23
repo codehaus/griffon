@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2502">
+<plugins revision="2507">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1196,7 +1196,7 @@ http://jgraph.com</description>
             <documentation>http://griffon.codehaus.org/Jtreemap+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jtreemap/tags/RELEASE_0_1/griffon-jtreemap-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>JTreeMap Integration</title>
             <author>Hackergarten</author>
             <authorEmail>hackergarten@canoo.com</authorEmail>
@@ -1651,7 +1651,7 @@ http://miglayout.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neodatis/tags/RELEASE_0_2/griffon-neodatis-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="notify" latest-release="0.1">
+    <plugin name="notify" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon Desktop Notification Plugin</title>
             <author>Hackergarten</author>
@@ -1659,6 +1659,17 @@ http://miglayout.com</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Notify+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-notify/tags/RELEASE_0_1/griffon-notify-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Griffon Desktop Notification Plugin</title>
+            <author>Hackergarten</author>
+            <authorEmail>hackergarten@gmail.com</authorEmail>
+            <description>This plugin allows easy access to several desktop notification agents. If the user is running notify-send, Growl, or Snarl, then these services are used to display a notification message. If none of these are installed, then a dialog message is shown for several seconds to the user.</description>
+            <documentation>http://griffon.codehaus.org/Notify+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-notify/tags/RELEASE_0_2/griffon-notify-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="oxbow" latest-release="0.2">
