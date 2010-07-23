@@ -11,7 +11,7 @@ http://code.google.com/p/jbusycomponent</description>
     <resource>BuildConfig</resource>
   </resources>
   <dependencies>
-    <plugin name='swingx-builder' version='0.1' />
+    <plugin name='swingx-builder' version='0.2' />
     <plugin name='jxlayer' version='0.1' />
   </dependencies>
 </plugin>
