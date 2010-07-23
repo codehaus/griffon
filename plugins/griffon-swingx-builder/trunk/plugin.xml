@@ -1,7 +1,14 @@
-<plugin name='swingx-builder' version='0.1' jdk='1.5'>
+<plugin name='swingx-builder' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>James Williams</author>
   <authorEmail>james.l.williams@gmail.com</authorEmail>
   <title>SwingX Builder Plugin</title>
+  <description>\
+Brings the SwingX Builder libraries into a Griffon Build</description>
   <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>
