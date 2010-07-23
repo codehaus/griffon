@@ -1,6 +1,7 @@
 class NotifyGriffonPlugin {
-    def version = 0.1
-    def griffonVersion = "0.3 > *" 
+    def version = 0.2
+    def griffonVersion = "0.9 > *" 
+    def license = 'Apache Software License 2.0'
     def dependsOn = [:]
     // optional. Valid values are: swing, javafx, swt, pivot, gtk
     // def toolkits = ['swing']
