@@ -1,7 +1,0 @@
-<plugin name='notify' version='0.1' griffonVersion='0.3 &gt; *' jdk='1.5'>
-  <author>Hackergarten</author>
-  <authorEmail>hackergarten@gmail.com</authorEmail>
-  <title>Griffon Desktop Notification Plugin</title>
-  <documentation>http://griffon.codehaus.org/Notify+Plugin</documentation>
-  <dependencies />
-</plugin>
