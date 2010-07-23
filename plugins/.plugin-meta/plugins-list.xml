@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2507">
+<plugins revision="2513">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1660,7 +1660,7 @@ http://miglayout.com</description>
             <documentation>http://griffon.codehaus.org/Notify+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-notify/tags/RELEASE_0_1/griffon-notify-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Griffon Desktop Notification Plugin</title>
             <author>Hackergarten</author>
             <authorEmail>hackergarten@gmail.com</authorEmail>
