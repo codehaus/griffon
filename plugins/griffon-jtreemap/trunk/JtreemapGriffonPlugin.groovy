@@ -1,7 +1,8 @@
 class JtreemapGriffonPlugin {
-    def version = 0.1
-    def griffonVersion = "0.3 > *" 
+    def version = 0.2
+    def griffonVersion = "0.9 > *" 
     def dependsOn = [:]
+    def license = 'Apache Software License 2.0'
     // optional. Valid values are: swing, javafx, swt, pivot, gtk
     def toolkits = ['swing']
     // optional. Valid values are linux, windows, macosx, solaris
