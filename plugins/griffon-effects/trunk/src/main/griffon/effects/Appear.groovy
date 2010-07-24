@@ -69,10 +69,10 @@ class Appear extends Opacity {
     protected void doBeforePlay() {
         // make sure the window is visible
         UIThreadHelper.instance.executeSync {
-            component.visible = true       
             if(SwingUtils.isTranslucencySupported()) {
                 SwingUtils.setWindowOpacity(component, params.from)
             }
+            component.visible = true       
         }
     }
 }
