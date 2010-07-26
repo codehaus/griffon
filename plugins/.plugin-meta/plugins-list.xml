@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2536">
+<plugins revision="2542">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2439,6 +2439,20 @@ http://freedesktop.org</description>
             <description>XML-RPC client &amp; libraries.</description>
             <documentation>http://griffon.codehaus.org/Xmlrpc+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-xmlrpc/tags/RELEASE_0_3/griffon-xmlrpc-0.3.zip</file>
+        </release>
+    </plugin>
+    <plugin name="lookandfeel-kunststoff" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Kunststoff Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Kunststoff Swing Look &amp; Feel.
+http://kunstoff.incors.com/archive/index.php3</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+Kunststoff+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-kunststoff/tags/RELEASE_0_1/griffon-lookandfeel-kunststoff-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
