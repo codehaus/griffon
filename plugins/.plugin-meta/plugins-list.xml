@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2548">
+<plugins revision="2557">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2456,7 +2456,7 @@ http://kunstoff.incors.com/archive/index.php3</description>
         </release>
     </plugin>
     <plugin name="zonelayout" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>ZoneLayout support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2467,6 +2467,20 @@ http://zonelayout.com</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_1/griffon-zonelayout-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="nuvolaicons" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Nuvola desktop icons</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Nuvola desktop icons
+http://www.icon-king.com/projects/nuvola/</description>
+            <documentation>http://griffon.codehaus.org/Nuvolaicons+Plugin</documentation>
+            <license>GNU LGPL 2.1</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-nuvolaicons/tags/RELEASE_0_1/griffon-nuvolaicons-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
