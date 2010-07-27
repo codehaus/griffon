@@ -1,0 +1,14 @@
+<plugin name='riverlayout' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>RiverLayout Plugin</title>
+  <description>RiverLayout Plugin
+http://www.datadosen.se/riverlayout/</description>
+  <documentation>http://griffon.codehaus.org/Riverlayout+Plugin</documentation>
+  <license>GNU LGPL 2.1</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
