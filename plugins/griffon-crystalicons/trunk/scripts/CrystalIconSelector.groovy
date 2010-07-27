@@ -29,7 +29,7 @@ includeTargets << griffonScript("Init")
 target(crystalIconSelector: "Displays all Crystal icons") {
     def categories = [:]
     def pathResolver = new PathMatchingResourcePatternResolver(this.class.classLoader)
-    ['16', '22', '24', '32', '48', '64', '128'].each { s ->
+    ['16', '24', '32'].each { s ->
         pathResolver.getResources("classpath*:/com/everaldo/crystal/${s}x${s}/**/*.png").each { r ->
             def (m, category, icon) = (r.getURL().path =~ /.*\/(\w+)\/([0-9a-zA-Z_\-\+&\ ]+)\.png/)[0]
             def map = categories.get(category, [:])
