@@ -1,5 +1,5 @@
 /*
- * griffon-nuvola: Crystal icons Grifofn plugin
+ * griffon-crystalicons: Crystal icons Griffon plugin
  * Copyright 2010 and beyond, Andres Almiray
  *
  * SmartGWT is free software; you can redistribute it and/or modify it
