@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2557">
+<plugins revision="2563">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2470,7 +2470,7 @@ http://zonelayout.com</description>
         </release>
     </plugin>
     <plugin name="nuvolaicons" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Nuvola desktop icons</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2481,6 +2481,20 @@ http://www.icon-king.com/projects/nuvola/</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-nuvolaicons/tags/RELEASE_0_1/griffon-nuvolaicons-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="riverlayout" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>RiverLayout Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>RiverLayout Plugin
+http://www.datadosen.se/riverlayout/</description>
+            <documentation>http://griffon.codehaus.org/Riverlayout+Plugin</documentation>
+            <license>GNU LGPL 2.1</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-riverlayout/tags/RELEASE_0_1/griffon-riverlayout-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
