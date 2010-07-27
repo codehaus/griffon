@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2563">
+<plugins revision="2569">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2484,7 +2484,7 @@ http://www.icon-king.com/projects/nuvola/</description>
         </release>
     </plugin>
     <plugin name="riverlayout" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>RiverLayout Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2495,6 +2495,20 @@ http://www.datadosen.se/riverlayout/</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-riverlayout/tags/RELEASE_0_1/griffon-riverlayout-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="designgridlayout" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>DesignGridLayout Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>DesignGridLayout Plugin
+https://designgridlayout.dev.java.net</description>
+            <documentation>http://griffon.codehaus.org/Designgridlayout+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-designgridlayout/tags/RELEASE_0_1/griffon-designgridlayout-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
