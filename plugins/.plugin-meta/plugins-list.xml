@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2587">
+<plugins revision="2593">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2523,6 +2523,20 @@ http://everaldo.com/crystal/</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-crystalicons/tags/RELEASE_0_1/griffon-crystalicons-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="jcalendar" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Date &amp; Calendar support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Date &amp; Calendar support
+http://www.toedter.com/en/jcalendar/</description>
+            <documentation>http://griffon.codehaus.org/Jcalendar+Plugin</documentation>
+            <license>GNU LGPL 2.1</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-jcalendar/tags/RELEASE_0_1/griffon-jcalendar-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
