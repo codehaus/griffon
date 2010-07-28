@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2593">
+<plugins revision="2599">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2526,7 +2526,7 @@ http://everaldo.com/crystal/</description>
         </release>
     </plugin>
     <plugin name="jcalendar" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Date &amp; Calendar support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2537,6 +2537,20 @@ http://www.toedter.com/en/jcalendar/</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-jcalendar/tags/RELEASE_0_1/griffon-jcalendar-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="barcode" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Generate and display barcodes</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Generate and display barcodes with barcode4j
+http://barcode4j.sourceforge.net</description>
+            <documentation>http://griffon.codehaus.org/Barcode+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-barcode/tags/RELEASE_0_1/griffon-barcode-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
