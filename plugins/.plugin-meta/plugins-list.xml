@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2605">
+<plugins revision="2611">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2554,7 +2554,7 @@ http://barcode4j.sourceforge.net</description>
         </release>
     </plugin>
     <plugin name="mousegestures" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Mouse gestures recognizer</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2565,6 +2565,19 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-mousegestures/tags/RELEASE_0_1/griffon-mousegestures-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="lookandfeel-quaqua" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Quaqua Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Quaqua Swing Look &amp; Feel.</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+Quaqua+Plugin</documentation>
+            <license>GNU LGPL 2.1</license>
+            <toolkits>swing</toolkits>
+            <platforms>macosx,macosx64</platforms>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-quaqua/tags/RELEASE_0_1/griffon-lookandfeel-quaqua-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
