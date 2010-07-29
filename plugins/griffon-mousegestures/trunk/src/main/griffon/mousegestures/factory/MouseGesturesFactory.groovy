@@ -34,7 +34,6 @@ class MouseGesturesFactory extends AbstractFactory {
     }
 
     public boolean onHandleNodeAttributes(FactoryBuilderSupport builder, Object node, Map attributes) {
-		println builder.context.hashCode()
         builder.context.start = attributes.remove('start')
         return true
     }
@@ -68,7 +67,6 @@ class MouseGesturesFactory extends AbstractFactory {
     }
 
     void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {
-	println builder.context.hashCode()
         if(builder.context.start) node.start()
     }
 
