@@ -1,0 +1,14 @@
+<plugin name='mousegestures' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Mouse gestures recognizer</title>
+  <description>Mouse gestures recognizer
+http://www.smardec.com/products/mouse-gestures.html</description>
+  <documentation>http://griffon.codehaus.org/Mousegestures+Plugin</documentation>
+  <license>GNU LGPL 2.1</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
