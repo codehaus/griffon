@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2617">
+<plugins revision="2623">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2578,6 +2578,19 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <toolkits>swing</toolkits>
             <platforms>macosx,macosx64</platforms>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-quaqua/tags/RELEASE_0_1/griffon-lookandfeel-quaqua-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="jexplose" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Expose-like effect for DesktopPanes</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Expose-like effect for DesktopPanes</description>
+            <documentation>http://griffon.codehaus.org/Jexplose+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-jexplose/tags/RELEASE_0_1/griffon-jexplose-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
