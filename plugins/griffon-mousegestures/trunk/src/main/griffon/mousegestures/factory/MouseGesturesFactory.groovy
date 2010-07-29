@@ -83,39 +83,43 @@ class MouseGesturesFactory extends AbstractFactory {
         }
 
         void gestureMovementRecognized(String gesture) {
-            this.gestureRecognizedClosure?.call(gesture)
+            this.@gestureRecognizedClosure?.call(gesture)
         }
 
         void processGesture(String gesture) {
-            this.processGestureClosure?.call(gesture)
+            this.@processGestureClosure?.call(gesture)
         }
 
         void onGestureMovementRecognized(Closure cls) {
-            this.gestureRecognizedClosure = cls
+            this.@gestureRecognizedClosure = cls
+            this.@gestureRecognizedClosure.resolveStrategy = Closure.DELEGATE_FIRST
+            this.@gestureRecognizedClosure.delegate = this
         }
 
         void onProcessGesture(Closure cls) {
-            this.processGestureClosure = cls
+            this.@processGestureClosure = cls
+            this.@processGestureClosure.resolveStrategy = Closure.DELEGATE_FIRST
+            this.@processGestureClosure.delegate = this
         }
 
         def methodMissing(String name, args) {
-            try { return _node."$name"(*args) }
+            try { return this.@_node."$name"(*args) }
             catch(MissingMethodException mme) {
-                return _builder."$name"(*args)
+                return this.@_builder."$name"(*args)
             }
         }
 
-        void propertyMissinh(String name, value) {
-            try {_ node."$name" = value }
+        void setProperty(String name, value) {
+            try {this.@_ node."$name" = value }
             catch(MissingPropertyException mpe) {
-                _builder."$name" = value
+                this.@_builder."$name" = value
             }
         }
 
-        def propertyMissing(String name) {
-            try { return _node."$name" }
+        def getProperty(String name) {
+            try { return this.@_node."$name" }
             catch(MissingPropertyException mpe) {
-                return _builder."$name"
+                return this.@_builder."$name"
             }
         }
     }
