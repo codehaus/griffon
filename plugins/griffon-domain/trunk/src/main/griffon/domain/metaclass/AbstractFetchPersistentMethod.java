@@ -15,8 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.ArtifactInfo;
-import griffon.domain.DomainHandler;
+import griffon.domain.GriffonDomainClass;
+import org.codehaus.griffon.runtime.domain.DomainHandler;
 
 import groovy.lang.MissingMethodException;
 
@@ -28,14 +28,14 @@ public abstract class AbstractFetchPersistentMethod extends AbstractPersistentSt
         super(domainHandler);
     }
 
-    protected final Object invokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
+    protected final Object invokeInternal(GriffonDomainClass domainClass, String methodName, Object[] arguments) {
         if(arguments.length == 1) {
-            return fetch(artifactInfo, arguments[0]);
+            return fetch(domainClass, arguments[0]);
         }
-        throw new MissingMethodException(methodName, clazz, arguments);
+        throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
     }
 
-    protected Object fetch(ArtifactInfo artifactInfo, Object key) {
+    protected Object fetch(GriffonDomainClass domainClass, Object key) {
         return null;
     }
 }

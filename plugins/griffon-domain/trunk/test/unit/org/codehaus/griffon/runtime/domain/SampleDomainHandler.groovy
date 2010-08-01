@@ -1,8 +1,7 @@
-package sample
+package org.codehaus.griffon.runtime.domain
 
 import griffon.core.GriffonApplication
-import griffon.core.ArtifactInfo
-import griffon.domain.DomainHandler
+import griffon.domain.GriffonDomainClass
 import griffon.domain.orm.Criterion
 import griffon.domain.metaclass.*
 
@@ -33,7 +32,7 @@ class SampleFetchMethod extends AbstractFetchPersistentMethod {
         super(domainHandler)
     }
 
-    protected Object fetch(ArtifactInfo artifactInfo, Object key) {
+    protected Object fetch(GriffonDomainClass domain, Object key) {
         return key
     }
 }
@@ -42,20 +41,20 @@ class SampleFindAllMethod extends AbstractFindAllPersistentMethod {
     SampleFindAllMethod(DomainHandler domainHandler) {
         super(domainHandler)
     }
-    protected Collection findAll(ArtifactInfo artifactInfo, Class clazz) {
+
+    protected Collection findAll(GriffonDomainClass domain) {
         [1]
     }
 
-    protected Collection findByProperties(ArtifactInfo artifactInfo, Map properties) {
+    protected Collection findByProperties(GriffonDomainClass domain, Map properties) {
         [properties]
     }
 
-    protected Collection findByExample(ArtifactInfo artifactInfo, Object example) {
+    protected Collection findByExample(GriffonDomainClass domain, Object example) {
         [4]
     }
 
-    protected Collection findByCriterion(ArtifactInfo artifactInfo, Criterion criterion, Map options) {
+    protected Collection findByCriterion(GriffonDomainClass domain, Criterion criterion, Map options) {
         [3]
     }
 }
-

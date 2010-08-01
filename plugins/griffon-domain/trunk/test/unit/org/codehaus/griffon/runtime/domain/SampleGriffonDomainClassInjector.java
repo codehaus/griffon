@@ -1,9 +1,9 @@
-package sample;
+package org.codehaus.griffon.runtime.domain;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-import griffon.domain.artifacts.GriffonDomainClassProperty;
+import griffon.domain.GriffonDomainClassProperty;
 import griffon.domain.metaclass.DefaultPersistentDynamicMethod;
 import griffon.domain.metaclass.MethodSignature;
 import org.codehaus.griffon.persistence.DefaultGriffonDomainClassInjector;

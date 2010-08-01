@@ -15,8 +15,8 @@
  */ 
 package griffon.domain.metaclass
 
-import griffon.core.ArtifactInfo
-import griffon.domain.DomainHandler
+import griffon.domain.GriffonDomainClass;
+import org.codehaus.griffon.runtime.domain.DomainHandler;
 
 /**
  * @author Andres Almiray
@@ -26,17 +26,17 @@ public abstract class AbstractMakePersistentMethod extends AbstractPersistentSta
         super(domainHandler)
     }
 
-    protected final Object invokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
+    protected final Object invokeInternal(GriffonDomainClass domainClass, String methodName, Object[] arguments) {
         if(!arguments) {
             return artifactInfo.newInstance()
         } else if(arguments[0] instanceof Map) {
             return make(artifactInfo, (Map) arguments[0])
         }
-        throw new MissingMethodException(methodName, clazz, arguments)
+        throw new MissingMethodException(methodName, domainClass.getClazz(), arguments)
     }
 
-    protected Object make(ArtifactInfo artifactInfo, Map props) {
-        def instance = artifactInfo.newInstance()
+    protected Object make(GriffonDomainClass domainClass, Map props) {
+        def instance = domainClass.newInstance()
         props.each { k, v ->
             try {
                 instance[k] = v

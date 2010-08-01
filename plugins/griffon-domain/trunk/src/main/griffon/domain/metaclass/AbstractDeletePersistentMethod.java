@@ -15,8 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.ArtifactInfo;
-import griffon.domain.DomainHandler;
+import griffon.domain.GriffonDomainClass;
+import org.codehaus.griffon.runtime.domain.DomainHandler;
 
 import groovy.lang.MissingMethodException;
 
@@ -28,14 +28,14 @@ public abstract class AbstractDeletePersistentMethod extends AbstractPersistentI
         super(domainHandler);
     }
 
-    protected final Object invokeInternal(ArtifactInfo artifactInfo, Object target, String methodName, Object[] arguments) {
+    protected final Object invokeInternal(GriffonDomainClass domainClass, Object target, String methodName, Object[] arguments) {
         if(target == null || (arguments != null && arguments.length > 0)) {
-            throw new MissingMethodException(methodName, artifactInfo.getKlass(), arguments);
+            throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
         }
-        return delete(artifactInfo, target);
+        return delete(domainClass, target);
     }
 
-    protected Object delete(ArtifactInfo artifactInfo, Object target) {
+    protected Object delete(GriffonDomainClass domainClass, Object target) {
         return target;
     }
 }

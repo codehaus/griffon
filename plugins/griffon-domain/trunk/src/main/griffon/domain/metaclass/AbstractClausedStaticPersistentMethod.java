@@ -20,13 +20,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 
-import griffon.domain.DomainHandler;
-import griffon.core.ArtifactInfo;
+import griffon.domain.GriffonDomainClass;
+import org.codehaus.griffon.runtime.domain.DomainHandler;
 import griffon.domain.orm.Criterion;
 import griffon.domain.orm.Restrictions;
-// import griffon.domain.artifacts.GriffonDomainClass;
-// import griffon.domain.artifacts.GriffonDomainClassProperty;
-// import griffon.domain.DomainClassUtils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -51,7 +48,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
         }
     }
 
-    protected Object invokeInternal(final ArtifactInfo artifactInfo, final Class clazz, String methodName, Object[] arguments) {
+    protected Object invokeInternal(final GriffonDomainClass domainClass, String methodName, Object[] arguments) {
         List expressions = new ArrayList();
         if(arguments == null) arguments = new Object[0];
         Matcher match = super.getPattern().matcher(methodName);
@@ -70,7 +67,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
                 booleanProperty = booleanProperty.substring(3);
                 arg = Boolean.FALSE;
             }
-            GriffonMethodExpression booleanExpression = GriffonMethodExpression.create(artifactInfo, booleanProperty);
+            GriffonMethodExpression booleanExpression = GriffonMethodExpression.create(domainClass, booleanProperty);
             booleanExpression.setArguments(new Object[]{arg});
             expressions.add(booleanExpression);
             querySequence = match.group(4);
@@ -95,12 +92,12 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
                 // calculating the numBer of arguments required for the expression
                 int argumentCursor = 0;
                 for (String queryParameter : queryParameters) {
-                    GriffonMethodExpression currentExpression = GriffonMethodExpression.create(artifactInfo, queryParameter);
+                    GriffonMethodExpression currentExpression = GriffonMethodExpression.create(domainClass, queryParameter);
                     totalRequiredArguments += currentExpression.argumentsRequired;
                     // populate the arguments into the GriffonExpression from the argument list
                     Object[] currentArguments = new Object[currentExpression.argumentsRequired];
                     if ((argumentCursor + currentExpression.argumentsRequired) > arguments.length)
-                        throw new MissingMethodException(methodName, clazz, arguments);
+                        throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
 
                     for (int k = 0; k < currentExpression.argumentsRequired; k++, argumentCursor++) {
                         currentArguments[k] = arguments[argumentCursor];
@@ -110,7 +107,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
                     }
                     catch (IllegalArgumentException iae) {
                         LOG.debug(iae.getMessage(), iae);
-                        throw new MissingMethodException(methodName, clazz, arguments);
+                        throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
                     }
                     // add to list of expressions
                     expressions.add(currentExpression);
@@ -121,10 +118,10 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
 
         // otherwise there is only one expression
         if(!containsOperator) {
-            GriffonMethodExpression solo = GriffonMethodExpression.create(artifactInfo, querySequence);
+            GriffonMethodExpression solo = GriffonMethodExpression.create(domainClass, querySequence);
 
             if(solo.argumentsRequired > arguments.length)
-                throw new MissingMethodException(methodName,clazz,arguments);
+                throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
 
             totalRequiredArguments += solo.argumentsRequired;
             Object[] soloArgs = new Object[solo.argumentsRequired];
@@ -135,7 +132,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
             }
             catch(IllegalArgumentException iae) {
                 LOG.debug(iae.getMessage(),iae);
-                throw new MissingMethodException(methodName,clazz,arguments);
+                throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
             }
             expressions.add(solo);
         }
@@ -143,7 +140,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
         // if the total of all the arguments necessary does not equal the number of arguments
         // throw exception
         if(totalRequiredArguments > arguments.length)
-            throw new MissingMethodException(methodName,clazz,arguments);
+            throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
         
         // calculate the remaining arguments
         Object[] remainingArguments = new Object[arguments.length - totalRequiredArguments];
@@ -156,10 +153,10 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
         if(LOG.isTraceEnabled())
             LOG.trace("Calculated expressions: " + expressions);
         
-        return doInvokeInternalWithExpressions(clazz, methodName, remainingArguments, expressions, operatorInUse);
+        return doInvokeInternalWithExpressions(domainClass, methodName, remainingArguments, expressions, operatorInUse);
     }
     
-    protected abstract Object doInvokeInternalWithExpressions(Class clazz, String methodName, Object[] arguments, List expressions, String operatorInUse);
+    protected abstract Object doInvokeInternalWithExpressions(GriffonDomainClass domainClass, String methodName, Object[] arguments, List expressions, String operatorInUse);
 
     protected abstract static class GriffonMethodExpression {
         private static final String LESS_THAN = "LessThan";
@@ -181,11 +178,11 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
         protected int argumentsRequired;
         protected boolean negation;
         protected String type;
-        protected ArtifactInfo artifactInfo;
+        protected GriffonDomainClass domainClass;
         // private TypeConverter converter = new SimpleTypeConverter();
 
-        GriffonMethodExpression(ArtifactInfo artifactInfo, String propertyName, String type, int argumentsRequired, boolean negation) {
-            this.artifactInfo = artifactInfo;
+        GriffonMethodExpression(GriffonDomainClass domainClass, String propertyName, String type, int argumentsRequired, boolean negation) {
+            this.domainClass = domainClass;
             this.propertyName = propertyName;
             this.type = type;
             this.argumentsRequired = argumentsRequired;
@@ -213,7 +210,6 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
             if(args.length != argumentsRequired)
                 throw new IllegalArgumentException("Method expression '"+this.type+"' requires " + argumentsRequired + " arguments");
 
-            GriffonDomainClass domainClass = DomainClassUtils.getDomainClassFor(artifactInfo);
             GriffonDomainClassProperty prop = domainClass.getPropertyByName(propertyName);
 
             if(prop == null)
@@ -268,10 +264,10 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
             }
         }
 
-        protected static GriffonMethodExpression create(ArtifactInfo artifactInfo, String queryParameter) {
+        protected static GriffonMethodExpression create(GriffonDomainClass domainClass, String queryParameter) {
             if(queryParameter.endsWith( LESS_THAN_OR_EQUAL )) {
                 return new GriffonMethodExpression(
-                        artifactInfo,
+                        domainClass,
                         calcPropertyName(queryParameter, LESS_THAN_OR_EQUAL),
                         LESS_THAN_OR_EQUAL,
                         1,
@@ -283,7 +279,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
             }
             else if(queryParameter.endsWith( LESS_THAN )) {
                 return new GriffonMethodExpression(
-                        artifactInfo,
+                        domainClass,
                         calcPropertyName(queryParameter, LESS_THAN),
                         LESS_THAN,
                         1, // argument count
@@ -296,7 +292,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
             }
             else if(queryParameter.endsWith( GREATER_THAN_OR_EQUAL )) {
                 return new GriffonMethodExpression(
-                        artifactInfo,
+                        domainClass,
                         calcPropertyName(queryParameter, GREATER_THAN_OR_EQUAL),
                         GREATER_THAN_OR_EQUAL,
                         1,
@@ -309,7 +305,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
             }
             else if(queryParameter.endsWith( GREATER_THAN )) {
                 return new GriffonMethodExpression(
-                        artifactInfo,
+                        domainClass,
                         calcPropertyName(queryParameter, GREATER_THAN),
                         GREATER_THAN,
                         1,
@@ -323,7 +319,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
             }
 //            else if(queryParameter.endsWith( LIKE )) {
 //                return new GriffonMethodExpression(
-//                        artifactInfo,
+//                        domainClass,
 //                        calcPropertyName(queryParameter, LIKE),
 //                        LIKE,
 //                        1,
@@ -337,7 +333,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
 //            }
 //            else if(queryParameter.endsWith( ILIKE )) {
 //                return new GriffonMethodExpression(
-//                        artifactInfo,
+//                        domainClass,
 //                        calcPropertyName(queryParameter, ILIKE),
 //                        ILIKE,
 //                        1,
@@ -351,7 +347,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
 //            }
             else if(queryParameter.endsWith( IS_NOT_NULL )) {
                 return new GriffonMethodExpression(
-                        artifactInfo,
+                        domainClass,
                         calcPropertyName(queryParameter, IS_NOT_NULL),
                         IS_NOT_NULL,
                         0,
@@ -364,7 +360,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
             }
             else if(queryParameter.endsWith( IS_NULL )) {
                 return new GriffonMethodExpression(
-                        artifactInfo,
+                        domainClass,
                         calcPropertyName(queryParameter, IS_NULL),
                         IS_NULL,
                         0,
@@ -377,7 +373,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
             }
 //            else if(queryParameter.endsWith( BETWEEN )) {
 //                return new GriffonMethodExpression(
-//                        artifactInfo,
+//                        domainClass,
 //                        calcPropertyName(queryParameter, BETWEEN),
 //                        BETWEEN,
 //                        2,
@@ -391,7 +387,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
 //            else if(queryParameter.endsWith( IN_LIST )) {
 //
 //                return new GriffonMethodExpression(
-//                        artifactInfo,
+//                        domainClass,
 //                        calcPropertyName(queryParameter, IN_LIST),
 //                        IN_LIST,
 //                        1,
@@ -404,7 +400,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
 //            }
             else if(queryParameter.endsWith( NOT_EQUAL )) {
                 return new GriffonMethodExpression(
-                        artifactInfo,
+                        domainClass,
                         calcPropertyName(queryParameter, NOT_EQUAL),
                         NOT_EQUAL,
                         1,
@@ -418,7 +414,7 @@ public abstract class AbstractClausedStaticPersistentMethod extends AbstractPers
             }
             else {
                 return new GriffonMethodExpression(
-                        artifactInfo,
+                        domainClass,
                         calcPropertyName(queryParameter, null),
                         EQUAL,
                         1,

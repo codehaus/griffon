@@ -22,10 +22,10 @@ import java.util.Collection;
 import java.io.File;
 import java.lang.reflect.Modifier;
 
-import griffon.domain.DomainHandler;
-import griffon.domain.artifacts.GriffonDomainClassProperty;
+import griffon.domain.GriffonDomainClassProperty;
 import griffon.domain.metaclass.MethodSignature;
 import griffon.domain.metaclass.DefaultPersistentDynamicMethod;
+import org.codehaus.griffon.runtime.domain.DomainHandler;
 
 import org.codehaus.groovy.ast.*;
 import org.codehaus.groovy.ast.expr.*;
@@ -74,21 +74,21 @@ public abstract class GriffonDomainClassInjector {
     protected abstract Class getDomainHandlerHolderClass();
     protected abstract void performInjection(ClassNode classNode);
 
-    public boolean isDomainClass(@SuppressWarnings("unused") ClassNode classNode, SourceUnit sourceNode) {
-        String sourcePath = sourceNode.getName();
-        File sourceFile = new File(sourcePath);
-        File parent = sourceFile.getParentFile();
-        while (parent != null) {
-            File parentParent = parent.getParentFile();
-            if (parent.getName().equals(DOMAIN_DIR) && parentParent != null &&
-                    parentParent.getName().equals(GRIFFON_APP_DIR)) {
-                return true;
-            }
-            parent = parentParent;
-        }
-
-        return false;
-    }
+//    public boolean isDomainClass(@SuppressWarnings("unused") ClassNode classNode, SourceUnit sourceNode) {
+//        String sourcePath = sourceNode.getName();
+//        File sourceFile = new File(sourcePath);
+//        File parent = sourceFile.getParentFile();
+//        while (parent != null) {
+//            File parentParent = parent.getParentFile();
+//            if (parent.getName().equals(DOMAIN_DIR) && parentParent != null &&
+//                    parentParent.getName().equals(GRIFFON_APP_DIR)) {
+//                return true;
+//            }
+//            parent = parentParent;
+//        }
+//
+//        return false;
+//    }
 
     protected boolean shouldInjectClass(ClassNode classNode) {
         return !GriffonASTUtils.isEnum(classNode);

@@ -15,8 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.domain.DomainHandler;
-import griffon.core.ArtifactInfo;
+import org.codehaus.griffon.runtime.domain.DomainHandler;
+import griffon.domain.GriffonDomainClass;
 
 /**
  * @author Andres Almiray
@@ -24,5 +24,5 @@ import griffon.core.ArtifactInfo;
 public interface PersistentMethodInvocation {
     DomainHandler getDomainHandler();
 
-    ArtifactInfo getArtifactInfoFor(Class clazz);
+    GriffonDomainClass getDomainClassFor(Class clazz);
 }

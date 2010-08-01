@@ -17,25 +17,21 @@
 package griffon.domain
 
 import griffon.core.GriffonApplication
-import griffon.core.ArtifactInfo
-import griffon.domain.artifacts.GriffonDomainClass
-// import griffon.domain.artifacts.DefaultGriffonDomainClass
+import griffon.domain.GriffonDomainClass
+import griffon.domain.orm.Criterion
+import griffon.domain.orm.CriteriaBuilder
+import griffon.domain.orm.CriteriaVisitor
+import griffon.domain.orm.CriteriaVisitException
 
 import java.beans.Introspector
 import java.util.regex.Pattern
-
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
 
 /**
  * @author Andres Almiray
  */
 final class DomainClassUtils {
-    private static final Log LOG = LogFactory.getLog(DomainClassUtils.class)
     private static final Pattern PLURAL_PATTERN = Pattern.compile(".*[^aeiouy]y", Pattern.CASE_INSENSITIVE)
 
-    private final Map ARTIFACTS = [:]
-    private final Map DOMAIN_CLASSES = [:]
     private final Map ENTITY_NAMES = [:]
     private static final DomainClassUtils INSTANCE = new DomainClassUtils()
 
@@ -46,10 +42,8 @@ final class DomainClassUtils {
     private DomainClassUtils() {}
 
     void init(GriffonApplication app) {
-        app.artifactManager.domainArtifacts.each { domain ->
+        app.artifactManager.domainClasses.each { domain ->
             String entityName = fetchAndSetEntityNameFor(domain)
-            ARTIFACTS[domain.klass.name] = domain
-            // DOMAIN_CLASSES[domain.klass.name] = new DefaultGriffonDomainClass(domain, entityName)
         }
     }
     
@@ -57,27 +51,28 @@ final class DomainClassUtils {
         ENTITY_NAMES[klass.name]
     }
 
-    String getEntityNameFor(ArtifactInfo artifactInfo) {
-        ENTITY_NAMES[artifactInfo.klass.name]
+    String getEntityNameFor(GriffonDomainClass domain) {
+        ENTITY_NAMES[domain.clazz.name]
     }
 
-    ArtifactInfo getArtifactInfoFor(Class klass) {
-        ARTIFACTS[klass.name]
-    }
-
-    GriffonDomainClass getDomainClassFor(Class klass) {
-        DOMAIN_CLASSES[klass.name]
-    }
-
-    GriffonDomainClass getDomainClassFor(ArtifactInfo artifactInfo) {
-        DOMAIN_CLASSES[artifactInfo.klass.name]
+    Criterion buildCriterion(Closure criteria) {
+        Criterion criterion = null;
+       
+        try {
+            criterion = CriteriaVisitor.visit(criteria);
+        } catch(CriteriaVisitException cve) {
+            criteria.setDelegate(new CriteriaBuilder());
+            criterion = (Criterion) criteria.call();
+        }
+        
+        return criterion;
     }
 
     // ----------------------------------------------
 
-    private final String fetchAndSetEntityNameFor(ArtifactInfo domain) {
-        String key = domain.klass.name
-        String entityName = domain.simpleName
+    private final String fetchAndSetEntityNameFor(GriffonDomainClass domain) {
+        String key = domain.clazz.name
+        String entityName = domain.clazz.simpleName
         boolean matchesIESRule = PLURAL_PATTERN.matcher(entityName).matches()
         entityName = matchesIESRule ? entityName[0..-1] + "ies" : entityName + "s"
         ENTITY_NAMES[key] = entityName

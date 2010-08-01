@@ -1,4 +1,4 @@
-package sample
+package org.codehaus.griffon.runtime.domain
 
 import griffon.persistence.Entity
 

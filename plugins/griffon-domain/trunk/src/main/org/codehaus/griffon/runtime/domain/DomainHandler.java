@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package griffon.domain;
+package org.codehaus.griffon.runtime.domain;
 
 import griffon.core.GriffonApplication;
 

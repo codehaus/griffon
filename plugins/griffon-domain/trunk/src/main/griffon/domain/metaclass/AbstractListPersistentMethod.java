@@ -15,8 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.ArtifactInfo;
-import griffon.domain.DomainHandler;
+import griffon.domain.GriffonDomainClass;
+import org.codehaus.griffon.runtime.domain.DomainHandler;
 
 import groovy.lang.MissingMethodException;
 
@@ -32,20 +32,20 @@ public abstract class AbstractListPersistentMethod extends AbstractPersistentSta
         super(domainHandler);
     }
 
-    protected final Object invokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
+    protected final Object invokeInternal(GriffonDomainClass domainClass, String methodName, Object[] arguments) {
         if(arguments.length == 0) {
-            return list(artifactInfo, clazz);
+            return list(domainClass);
         } else if(arguments[0] instanceof Map) {
-            return list(artifactInfo, (Map) arguments[0]);
+            return list(domainClass, (Map) arguments[0]);
         }
-        throw new MissingMethodException(methodName, clazz, arguments);
+        throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
     }
 
-    protected Collection list(ArtifactInfo artifactInfo, Class clazz) {
+    protected Collection list(GriffonDomainClass domainClass) {
         return Collections.emptyList();
     }
 
-    protected Collection list(ArtifactInfo artifactInfo, Map props) {
+    protected Collection list(GriffonDomainClass domainClass, Map props) {
         return Collections.emptyList();
     }
 }

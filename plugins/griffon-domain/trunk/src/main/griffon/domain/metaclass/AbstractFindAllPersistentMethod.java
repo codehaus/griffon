@@ -15,12 +15,10 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.ArtifactInfo;
-import griffon.domain.DomainHandler;
+import griffon.domain.GriffonDomainClass;
+import griffon.domain.DomainClassUtils;
+import org.codehaus.griffon.runtime.domain.DomainHandler;
 import griffon.domain.orm.Criterion;
-import griffon.domain.orm.CriteriaBuilder;
-import griffon.domain.orm.CriteriaVisitor;
-import griffon.domain.orm.CriteriaVisitException;
 
 import groovy.lang.Closure;
 import groovy.lang.MissingMethodException;
@@ -34,63 +32,48 @@ import java.util.Collections;
  * @author Andres Almiray
  */
 public abstract class AbstractFindAllPersistentMethod extends AbstractPersistentStaticMethodInvocation {
-    private static final CriteriaBuilder BUILDER = new CriteriaBuilder();
-
     public AbstractFindAllPersistentMethod(DomainHandler domainHandler) {
         super(domainHandler);
     }
 
-    protected Object invokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
+    protected Object invokeInternal(GriffonDomainClass domainClass, String methodName, Object[] arguments) {
         if(arguments.length == 0) {
-            return findAll(artifactInfo, clazz);
+            return findAll(domainClass);
         }
         final Object arg = arguments[0];
         if(arg instanceof Criterion) {
             if(arguments.length == 1) {
-                return findByCriterion(artifactInfo, (Criterion)arg, Collections.emptyMap());
+                return findByCriterion(domainClass, (Criterion)arg, Collections.emptyMap());
             } else if(arguments[1] instanceof Map) {
-                return findByCriterion(artifactInfo, (Criterion)arg, (Map) arguments[1]);
+                return findByCriterion(domainClass, (Criterion)arg, (Map) arguments[1]);
             }
         } else if(arg instanceof Closure) {
-            return findByCriterion(artifactInfo, buildCriterion((Closure)arg), Collections.emptyMap());
+            return findByCriterion(domainClass, DomainClassUtils.getInstance().buildCriterion((Closure)arg), Collections.emptyMap());
         } else if(arg instanceof Map) {
             if(arguments.length == 1) {
-                return findByProperties(artifactInfo, (Map) arg);
+                return findByProperties(domainClass, (Map) arg);
             } else if(arguments[1] instanceof Closure) {
-                return findByCriterion(artifactInfo, buildCriterion((Closure)arguments[1]), (Map) arg);
+                return findByCriterion(domainClass, DomainClassUtils.getInstance().buildCriterion((Closure)arguments[1]), (Map) arg);
             }
-        } else if(artifactInfo.getKlass().isAssignableFrom(clazz) ) {
-            return findByExample(artifactInfo, arg);
+        } else if(domainClass.getClazz().isAssignableFrom(arg.getClass()) ) {
+            return findByExample(domainClass, arg);
         }
-        throw new MissingMethodException(methodName, clazz, arguments);
+        throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
     }
 
-    protected Collection findAll(ArtifactInfo artifactInfo, Class clazz) {
+    protected Collection findAll(GriffonDomainClass domainClass) {
         return Collections.emptyList();
     }
 
-    protected Collection findByProperties(ArtifactInfo artifactInfo, Map properties) {
+    protected Collection findByProperties(GriffonDomainClass domainClass, Map properties) {
         return Collections.emptyList();
     }
 
-    protected Collection findByExample(ArtifactInfo artifactInfo, Object example) {
+    protected Collection findByExample(GriffonDomainClass domainClass, Object example) {
         return Collections.emptyList();
     }
 
-    protected Collection findByCriterion(ArtifactInfo artifactInfo, Criterion criterion, Map options) {
+    protected Collection findByCriterion(GriffonDomainClass domainClass, Criterion criterion, Map options) {
         return Collections.emptyList();
-    }
-
-    protected final Criterion buildCriterion(Closure criteria) {
-        Criterion criterion = null;
-
-        try {
-            criterion = CriteriaVisitor.visit(criteria);
-        } catch(CriteriaVisitException cve) {
-            criteria.setDelegate(BUILDER);
-            criterion = (Criterion) criteria.call();
-        }
-
-        return criterion;
     }
 }

@@ -1,15 +1,17 @@
-package org.codehaus.griffon.persistence
+package org.codehaus.griffon.runtime.domain
 
+import griffon.test.*
 import griffon.core.GriffonApplication
 import griffon.test.mock.MockGriffonApplication
-import sample.*
 
-class EntityInjectionTests extends GroovyTestCase {
-    private static GriffonApplication app
+class EntityInjectionTests extends GriffonUnitTestCase {
+    private GriffonApplication app
 
-    static {
+    void setUp() {
         app = new MockGriffonApplication()
+        app.builderClass = SampleBuilderConfig
         SampleDomainHandlerHolder.domainHandler = new SampleDomainHandler(app)
+        app.initialize()
     }
 
     void testInjectedProperties() {
@@ -17,7 +19,7 @@ class EntityInjectionTests extends GroovyTestCase {
         assert book.griffonDomainMapping == 'sample'
         assert book.title == 'Griffon in Action'
         assert book.id == 1
-        assert book.toString() == 'sample.Book : 1'
+        assert book.toString() == 'org.codehaus.griffon.runtime.domain.Book : 1'
     }
 
     void testDynamicMethodInjection() {

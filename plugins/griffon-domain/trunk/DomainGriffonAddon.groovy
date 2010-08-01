@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import griffon.domain.artifacts.DomainClassArtifactHandler
+import org.codehaus.griffon.runtime.domain.DomainClassArtifactHandler
 
 /**
  * @author Andres Almiray
  */
 class DomainGriffonAddon {
     def addonInit(app) {
-        app.artifactManager.registerArtifactHandler(new DomainClassArtifactHandler())
+        app.artifactManager.registerArtifactHandler(new DomainClassArtifactHandler(app))
     }
 }
