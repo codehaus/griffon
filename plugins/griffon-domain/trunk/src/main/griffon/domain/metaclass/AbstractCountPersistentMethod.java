@@ -15,8 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.ArtifactInfo;
-import griffon.domain.DomainHandler;
+import griffon.domain.GriffonDomainClass;
+import org.codehaus.griffon.runtime.domain.DomainHandler;
 
 import groovy.lang.MissingMethodException;
 
@@ -28,14 +28,14 @@ public abstract class AbstractCountPersistentMethod extends AbstractPersistentSt
         super(domainHandler);
     }
 
-    protected final Object invokeInternal(ArtifactInfo artifactInfo, Class clazz, String methodName, Object[] arguments) {
+    protected final Object invokeInternal(GriffonDomainClass domainClass, String methodName, Object[] arguments) {
         if(arguments.length == 0) {
-            return count(artifactInfo, clazz);
+            return count(domainClass);
         }
-        throw new MissingMethodException(methodName, clazz, arguments);
+        throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
     }
 
-    protected int count(ArtifactInfo artifactInfo, Class clazz) {
+    protected int count(GriffonDomainClass domainClass) {
         return 0;
     }
 }

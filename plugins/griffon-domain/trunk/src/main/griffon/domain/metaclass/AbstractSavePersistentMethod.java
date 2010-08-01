@@ -15,8 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
-import griffon.core.ArtifactInfo;
-import griffon.domain.DomainHandler;
+import griffon.domain.GriffonDomainClass;
+import org.codehaus.griffon.runtime.domain.DomainHandler;
 
 import groovy.lang.MissingMethodException;
 
@@ -28,23 +28,23 @@ public abstract class AbstractSavePersistentMethod extends AbstractPersistentIns
         super(domainHandler);
     }
 
-    protected final Object invokeInternal(ArtifactInfo artifactInfo, Object target, String methodName, Object[] arguments) {
+    protected final Object invokeInternal(GriffonDomainClass domainClass, Object target, String methodName, Object[] arguments) {
         if(target == null) {
-            throw new MissingMethodException(methodName, artifactInfo.getKlass(), arguments);
+            throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
         }
-        if(shouldInsert(artifactInfo, target, arguments)) {
-            return insert(artifactInfo, target, arguments);
+        if(shouldInsert(domainClass, target, arguments)) {
+            return insert(domainClass, target, arguments);
         }
-        return save(artifactInfo, target, arguments);
+        return save(domainClass, target, arguments);
     }
    
-    protected abstract boolean shouldInsert(ArtifactInfo artifactInfo, Object target, Object[] arguments);
+    protected abstract boolean shouldInsert(GriffonDomainClass domainClass, Object target, Object[] arguments);
 
-    protected Object insert(ArtifactInfo artifactInfo, Object target, Object[] arguments) {
+    protected Object insert(GriffonDomainClass domainClass, Object target, Object[] arguments) {
         return target;
     }
 
-    protected Object save(ArtifactInfo artifactInfo, Object target, Object[] arguments) {
+    protected Object save(GriffonDomainClass domainClass, Object target, Object[] arguments) {
         return target;
     }
 }

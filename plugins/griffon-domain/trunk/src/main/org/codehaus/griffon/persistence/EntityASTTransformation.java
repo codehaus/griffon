@@ -42,15 +42,15 @@ import org.codehaus.groovy.runtime.MethodClosure;
 import static org.codehaus.groovy.runtime.DefaultGroovyMethods.eachLine;
 
 /**
- * Injects the necessary fields and behaviors into a domain class in order to make it a property GORM entity.
+ * Injects the necessary fields and behaviors into a domain class in order to make it a property domain entity.
  *
- * @author Graeme Rocher (1.1)
+ * @author Graeme Rocher (Grails 1.1)
  */
 @GroovyASTTransformation(phase = CompilePhase.CANONICALIZATION)
 public class EntityASTTransformation implements ASTTransformation {
     private static final ClassNode MY_TYPE = new ClassNode(Entity.class);
     private static final String MY_TYPE_NAME = "@" + MY_TYPE.getNameWithoutPackage();
-    private static final String DOMAIN_CLASS_INJECTOR_KEY = "org.codehaus.griffon.persistence.domain-class-injector.";
+    private static final String DOMAIN_CLASS_INJECTOR_KEY = "org.codehaus.griffon.runtime.domain-class-injector.";
     private static final Pattern INJECTOR_PATTERN = Pattern.compile(DOMAIN_CLASS_INJECTOR_KEY +"(\\w+)\\s+=\\s+([\\w+\\.]+)");
     private static final Map<String, GriffonDomainClassInjector> DOMAIN_INJECTORS = new LinkedHashMap<String, GriffonDomainClassInjector>();
 

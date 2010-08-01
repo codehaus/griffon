@@ -13,27 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package griffon.domain.artifacts;
+package griffon.domain;
 
 // import org.springframework.validation.Validator;
 
+import griffon.core.GriffonClass;
 import java.util.Map;
 import java.util.Set;
-
-import griffon.core.artifacts.GriffonArtifactClass;
 
 /**
  * <p>Represents a persistable Griffon domain class</p>
  * 
  * @author Graeme Rocher (Grails 0.1)
  */
-public interface GriffonDomainClass extends GriffonArtifactClass {
+public interface GriffonDomainClass extends GriffonClass {
+    /** "domain" */
+	String TYPE = "domain";
+	/** "" (empty) */
+    String TRAILING = "";
+
     /**
      * The name of the default ORM implementation used to map the class
      */
-    String GORM = "GORM";
+    // String GORM = "GORM";
     
-    String ORM_MAPPING = "mapping";
+    // String ORM_MAPPING = "mapping";
 
     /**
      * @param domainClass
@@ -86,14 +90,6 @@ public interface GriffonDomainClass extends GriffonArtifactClass {
      * @return The field representation of the property name
      */
     String getFieldName(String propertyName);
-    
-    /**
-     * <p>Returns the default property name of the GriffonArtifactClass. For example the property name for 
-     * a class called "User" would be "user"</p>
-     * 
-     * @return The property name representation of the class name
-     */
-    String getPropertyName();
     
     /**
      * Returns true if the given property is a one to many relationship

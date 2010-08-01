@@ -37,14 +37,6 @@ eventCollectArtifacts = { artifactsInfo ->
     }
 }
 
-/*
-eventCollectArtifactClasses = { artifactClasses ->
-    if(!artifactClasses.domain) {
-        artifactClasses.domain = 'griffon.domain.artifacts.DefaultGriffonDomainArtifactClass'
-    }
-}
-*/
-
 eventStatsStart = { pathToInfo ->
     if(!pathToInfo.find{ it.path == 'domain'} ) {
         pathToInfo << [name: 'Domain Classes', path: 'domain', filetype: ['.groovy','.java']]

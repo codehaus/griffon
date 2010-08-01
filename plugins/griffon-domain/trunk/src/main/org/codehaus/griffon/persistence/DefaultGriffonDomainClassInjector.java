@@ -36,7 +36,7 @@ import org.codehaus.groovy.ast.expr.VariableExpression;
 import org.codehaus.groovy.ast.stmt.ReturnStatement;
 import org.codehaus.groovy.ast.stmt.Statement;
 import org.codehaus.griffon.ast.GriffonASTUtils;
-import griffon.domain.artifacts.GriffonDomainClassProperty;
+import griffon.domain.GriffonDomainClassProperty;
 
 /**
  * Default implementation of domain class injector interface that adds the 'id'
