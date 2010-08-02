@@ -40,7 +40,7 @@ class JmxGriffonAddon {
         def ctx = app.applicationContext
         def domain = "${app.metadata['app.name']}"
         
-        MBeanExporter exporter = ctx.getBean("exporter")
+        MBeanExporter exporter = ctx.getBean('exporter')
         
         // exporting mbeans
         exportServices(exporter, domain, ctx)
@@ -65,12 +65,12 @@ class JmxGriffonAddon {
     private def exportServices(MBeanExporter exporter, domain, ctx) {
         Properties excludeMethods = new Properties()
         
-        app.artifactClassManager.serviceArtifactClasses?.each { service ->
-            def serviceClass = service.getClazz()
-            def serviceName = service.shortName
+        app.artifactManager.serviceClasses?.each { serviceClass ->
+            def serviceClazz = serviceClass.clazz
         
-            exportClass(exporter, domain, ctx, serviceClass, serviceName, service.getPropertyName(), excludeMethods, "service")
+            exportClass(exporter, domain, ctx, serviceClazz, serviceClass.propertyName, serviceClass.propertyName, excludeMethods, 'service')
         }
+
         handleExcludeMethods(exporter, excludeMethods)
     }
     
@@ -102,7 +102,7 @@ class JmxGriffonAddon {
                 excludeMethods.setProperty("${domain}:${objectName}", exposeMap['excludeMethods'])
             }
             
-            exporter.beans."${domain}:${objectName}" =  ctx.getBean(propertyName)
+            exporter.beans."${domain}:${objectName}" = ctx.getBean(propertyName)
         } 
     }
 
