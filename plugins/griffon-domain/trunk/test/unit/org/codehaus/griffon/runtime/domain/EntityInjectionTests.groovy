@@ -2,6 +2,7 @@ package org.codehaus.griffon.runtime.domain
 
 import griffon.test.*
 import griffon.core.GriffonApplication
+import griffon.domain.GriffonDomainClass
 import griffon.test.mock.MockGriffonApplication
 
 class EntityInjectionTests extends GriffonUnitTestCase {
@@ -26,5 +27,13 @@ class EntityInjectionTests extends GriffonUnitTestCase {
         assert 1 == Book.fetch(1)
         assert [1] == Book.findAll()
         assert [[a:1, b: 2]] == Book.findAll(a: 1, b: 2)
+        assert [4] == Book.findAll(new Book(id: 2))
+    }
+
+    void testConventions() {
+        GriffonDomainClass domain = app.artifactManager.findGriffonClass(Book)
+        assert domain
+// println domain.properties
+// println domain.persistentProperties
     }
 }
