@@ -3,8 +3,8 @@ package org.codehaus.griffon.runtime.domain
 import griffon.persistence.Entity
 
 @Entity('sample')
-class Book {
-    String title
+class Author {
+    String name
 
-    static hasMany = [author: Author]
+    static belongsTo = Book
 }

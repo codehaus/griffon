@@ -35,5 +35,6 @@ public class SampleGriffonDomainClassInjector extends DefaultGriffonDomainClassI
     protected void performInjection(ClassNode classNode) {
         injectIdProperty(classNode);
         injectToStringMethod(classNode, GriffonDomainClassProperty.IDENTITY);
+        injectAssociations(classNode);
     }
 }

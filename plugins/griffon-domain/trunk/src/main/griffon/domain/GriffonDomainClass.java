@@ -79,7 +79,7 @@ public interface GriffonDomainClass extends GriffonClass {
      * Returns the property for the given name
      * 
      * @param name The property for the name
-     * @throws org.codehaus.griffon.exceptions.InvalidPropertyException
+     * @throws griffon.exceptions.domain.InvalidPropertyException
      * @return The domain class property for the given name
      */
     GriffonDomainClassProperty getPropertyByName(String name);    
@@ -146,7 +146,7 @@ public interface GriffonDomainClass extends GriffonClass {
     /**
      * @return The name of the ORM implementation used to map the domain class (default is "GORM")
      */
-    String getMappingStrategy();
+//    String getMappingStrategy();
     
     /**
      * Whether the class is the root of a heirarchy
@@ -189,5 +189,5 @@ public interface GriffonDomainClass extends GriffonClass {
      * Sets the strategy to use for ORM mapping. Default is GORM
      * @param strategy The mapping strategy
      */
-    void setMappingStrategy(String strategy);
+//    void setMappingStrategy(String strategy);
 }

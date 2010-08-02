@@ -1,5 +1,5 @@
-/* 
- * Copyright 2004-2010 the original author or authors.
+/*
+ * Copyright 2010 the original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,28 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package griffon.exceptions;
+package griffon.exceptions.domain;
+
+import griffon.exceptions.GriffonException;
 
 /**
- * An exception thrown when an error occurs applying a constraint to a property 
- * 
- * @author Graeme Rocher
- * @since 10-Nov-2005
+ * @author Andres Almiray
  */
-public class ConstraintException extends GriffonException {
-    public ConstraintException() {
+public class InvalidPropertyException extends GriffonException {
+    public InvalidPropertyException() {
         super();
     }
 
-    public ConstraintException(String arg0, Throwable arg1) {
-        super(arg0, arg1);
-    }
-
-    public ConstraintException(String arg0) {
+    public InvalidPropertyException(String arg0) {
         super(arg0);
     }
 
-    public ConstraintException(Throwable arg0) {
+    public InvalidPropertyException(String arg0, Throwable arg1) {
+        super(arg0, arg1);
+    }
+
+    public InvalidPropertyException(Throwable arg0) {
         super(arg0);
     }
 }

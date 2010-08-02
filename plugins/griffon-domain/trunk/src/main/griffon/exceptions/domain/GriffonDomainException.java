@@ -13,25 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-package griffon.exceptions;
+package griffon.exceptions.domain;
+
+import griffon.exceptions.GriffonException;
 
 /**
  * @author Andres Almiray
  */
-public class InvalidPropertyException extends GriffonException {
-    public InvalidPropertyException() {
+public class GriffonDomainException extends GriffonException {
+    public GriffonDomainException() {
         super();
     }
 
-    public InvalidPropertyException(String arg0) {
+    public GriffonDomainException(String arg0) {
         super(arg0);
     }
 
-    public InvalidPropertyException(String arg0, Throwable arg1) {
+    public GriffonDomainException(String arg0, Throwable arg1) {
         super(arg0, arg1);
     }
 
-    public InvalidPropertyException(Throwable arg0) {
+    public GriffonDomainException(Throwable arg0) {
         super(arg0);
     }
 }
