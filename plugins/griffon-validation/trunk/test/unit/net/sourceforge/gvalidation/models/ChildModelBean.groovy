@@ -27,5 +27,6 @@ class ChildModelBean extends AnnotatedModel {
     static constraints = {
         name(nullable: false)
         email(email: true, blank: false)
+        zipCode(nullable: false, blank: false)
     }
 }
