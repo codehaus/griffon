@@ -35,11 +35,10 @@ class ValidationInheritenceTest extends GroovyTestCase {
     }
 
     public void testConstraintOverrideWithStricterConstraint(){
-        ChildModelBean model = new ChildModelBean()
-
-        model.id = 1
-        model.email = "" // override to not allow blank
-        model.name = "Name"
+        ChildModelBean model = new ChildModelBean(id:1,
+                email:"", // override to not allow blank
+                name:"Name",
+                zipCode:"123456")
 
         model.validate()
 
@@ -47,6 +46,17 @@ class ValidationInheritenceTest extends GroovyTestCase {
         assertTrue "Email can not be blank", model.errors.hasFieldErrors('email')
     }
 
-    
+    public void testConstraintOverrideWithRelaxedConstraint(){
+        ChildModelBean model = new ChildModelBean(id:1,
+                email:"email@email.com",
+                name:"Name",
+                zipCode:"123" // override should not allow more relaxed zipcode 
+        )
+
+        model.validate()
+
+        assertTrue "Shoudl have errors", model.hasErrors()
+        assertTrue "Short zipCode should not be allowed", model.errors.hasFieldErrors('zipCode')
+    }
 
 }

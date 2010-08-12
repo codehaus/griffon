@@ -24,9 +24,11 @@ import net.sourceforge.gvalidation.annotation.Validatable
 class AnnotatedModel {
     String id
     String email = " "
+    String zipCode = " "
 
     static constraints = {
         id(nullable: false)
         email(email: true)
+        zipCode(nullable: false, blank: false, minSize: 6)
     }
 }
