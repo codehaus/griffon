@@ -1,4 +1,4 @@
-<plugin name='wsclient' version='0.3' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='wsclient' version='0.3.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>WS client &amp; libraries</title>
