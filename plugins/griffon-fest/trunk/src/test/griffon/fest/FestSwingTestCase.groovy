@@ -32,7 +32,7 @@ abstract class FestSwingTestCase extends GriffonUnitTestCase {
     protected FrameFixture window
 
     protected final void setUp() {
-        super.setup()
+        super.setUp()
         initApp()
         onSetUp()
     }
