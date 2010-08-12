@@ -77,17 +77,9 @@ class ValidationEnhancer {
         try {
             model.errors.clear()
 
-            if (hasNoConstraintsDefined())
-                return true
+            evaluateParentClassConstraints()
 
-            def superClass = model.getClass().getSuperclass()
-            Closure parentConstraints = superClass."${CONSTRAINT_PROPERTY_NAME}"
-            parentConstraints.delegate = this
-            parentConstraints.call()            
-
-            Closure constraints = extractConstraints()
-            constraints.delegate = this
-            constraints.call()
+            evaluateCurrentClassConstraints()
         } finally {
             this.fields = null
         }
@@ -106,12 +98,34 @@ class ValidationEnhancer {
         return targets
     }
 
-    private boolean hasNoConstraintsDefined() {
-        return !model.hasProperty(CONSTRAINT_PROPERTY_NAME)
+
+    private def evaluateParentClassConstraints() {
+        def superClass = model.getClass().getSuperclass()
+
+        if (!hasConstraintsDefined(superClass))
+            return true
+
+        Closure parentConstraints = superClass."${CONSTRAINT_PROPERTY_NAME}"
+        parentConstraints.delegate = this
+        parentConstraints.call()
     }
 
-    private def extractConstraints() {
-        model.getProperty(CONSTRAINT_PROPERTY_NAME)
+    private def evaluateCurrentClassConstraints() {
+        if (!hasConstraintsDefined(model))
+            return true
+
+        Closure constraints = model.getProperty(CONSTRAINT_PROPERTY_NAME)
+        constraints.delegate = this
+        constraints.call()
+    }
+
+    private boolean hasConstraintsDefined(object) {
+        try {
+            return object."${CONSTRAINT_PROPERTY_NAME}" != null
+        } catch (MissingPropertyException ex) {
+            // TODO: need to find a better way to do this than relying on exception
+            return false
+        }
     }
 
     /**

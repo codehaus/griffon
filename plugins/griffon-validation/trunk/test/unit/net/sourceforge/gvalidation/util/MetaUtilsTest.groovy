@@ -58,5 +58,3 @@ class MetaUtilsTest extends GroovyTestCase {
         }
     }
 }
-
-
