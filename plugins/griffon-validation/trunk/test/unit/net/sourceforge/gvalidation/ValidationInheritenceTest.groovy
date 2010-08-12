@@ -24,7 +24,7 @@ import net.sourceforge.gvalidation.models.ChildModelBean
  * Created by nick.zhu
  */
 class ValidationInheritenceTest extends GroovyTestCase {
-
+    
     public void testBasicConstraintInheritence() {
         ChildModelBean model = new ChildModelBean()
 
@@ -33,5 +33,20 @@ class ValidationInheritenceTest extends GroovyTestCase {
         assertTrue "Shoudl have errors", model.hasErrors()
         assertTrue "Id can not be null", model.errors.hasFieldErrors('id')
     }
+
+    public void testConstraintOverrideWithStricterConstraint(){
+        ChildModelBean model = new ChildModelBean()
+
+        model.id = 1
+        model.email = "" // override to not allow blank
+        model.name = "Name"
+
+        model.validate()
+
+        assertTrue "Shoudl have errors", model.hasErrors()
+        assertTrue "Email can not be blank", model.errors.hasFieldErrors('email')
+    }
+
+    
 
 }
