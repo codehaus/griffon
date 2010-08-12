@@ -19,7 +19,7 @@
  */
 class JxlayerGriffonPlugin {
     // the plugin version
-    def version = "0.1"
+    def version = "0.1.1"
     // the version or versions of Griffon the plugin is designed for
     def griffonVersion = '0.9 > *' 
     // the other plugins this plugin depends on
