@@ -69,7 +69,7 @@ class ValidationEnhancer {
      * executed each time
      */
     def doValidate = {params = null ->
-        if(MetaUtils.hasMethodOrClosure(model, BEFORE_VALIDATION_CALLBACK_NAME))
+        if (MetaUtils.hasMethodOrClosure(model, BEFORE_VALIDATION_CALLBACK_NAME))
             model."${BEFORE_VALIDATION_CALLBACK_NAME}"()
 
         this.fields = generateTargetFields(params)
@@ -79,6 +79,11 @@ class ValidationEnhancer {
 
             if (hasNoConstraintsDefined())
                 return true
+
+            def superClass = model.getClass().getSuperclass()
+            Closure parentConstraints = superClass."${CONSTRAINT_PROPERTY_NAME}"
+            parentConstraints.delegate = this
+            parentConstraints.call()            
 
             Closure constraints = extractConstraints()
             constraints.delegate = this
