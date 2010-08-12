@@ -48,7 +48,7 @@ class JXLayerFactory extends ComponentFactory {
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
         if(child instanceof JComponent) {
             parent.view = child
-        } else if(JXLayerUtils.isLayerUI(child)) {
+        } else if(JXLayerUtil.isLayerUI(child)) {
              parent.setUI(child)
         } else {
             throw new IllegalArgumentException("You cannot nest ${child?.getClass()?.name} inside JXLayer.")
