@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class FestGriffonPlugin {
-    def version = '0.4'
+    def version = '0.4.1'
     def dependsOn = [spock: 0.1]
     def toolkits = ['swing']
     def griffonVersion = '0.9 > *'
