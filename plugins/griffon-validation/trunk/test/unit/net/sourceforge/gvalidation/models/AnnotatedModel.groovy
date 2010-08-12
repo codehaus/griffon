@@ -29,6 +29,6 @@ class AnnotatedModel {
     static constraints = {
         id(nullable: false)
         email(email: true)
-        zipCode(nullable: false, blank: false, minSize: 6)
+        zipCode(nullable: true, blank: true, minSize: 6)
     }
 }

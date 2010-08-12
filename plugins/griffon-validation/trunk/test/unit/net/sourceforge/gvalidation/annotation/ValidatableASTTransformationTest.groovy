@@ -60,6 +60,7 @@ class ValidatableASTTransformationTest extends GroovyTestCase {
 
         model.id = "goodID"
         model.email = "someone@email.com"
+        model.zipCode = 123456
 
         boolean result = model.validate()
 
