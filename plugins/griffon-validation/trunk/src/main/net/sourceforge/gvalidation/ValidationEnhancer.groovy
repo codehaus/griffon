@@ -77,7 +77,7 @@ class ValidationEnhancer {
         try {
             model.errors.clear()
 
-            evaluateParentClassConstraints()
+            evaluateParentClassConstraintsRecursively(model.getClass())
 
             evaluateCurrentClassConstraints()
         } finally {
@@ -99,11 +99,16 @@ class ValidationEnhancer {
     }
 
 
-    private def evaluateParentClassConstraints() {
-        def superClass = model.getClass().getSuperclass()
+    private def evaluateParentClassConstraintsRecursively(clazz) {
+        def superClass = clazz.getSuperclass()
+
+        if(superClass && superClass != Object)
+            evaluateParentClassConstraintsRecursively(superClass)
+        else
+            return
 
         if (!hasConstraintsDefined(superClass))
-            return true
+            return
 
         Closure parentConstraints = superClass."${CONSTRAINT_PROPERTY_NAME}"
         parentConstraints.delegate = this
@@ -112,7 +117,7 @@ class ValidationEnhancer {
 
     private def evaluateCurrentClassConstraints() {
         if (!hasConstraintsDefined(model))
-            return true
+            return
 
         Closure constraints = model.getProperty(CONSTRAINT_PROPERTY_NAME)
         constraints.delegate = this

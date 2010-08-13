@@ -19,6 +19,7 @@ import net.sourceforge.gvalidation.models.AnnotatedModel
 import net.sourceforge.gvalidation.models.ModelBeanWithBallback
 import net.sourceforge.gvalidation.models.ModelBean
 import net.sourceforge.gvalidation.models.ChildModelBean
+import net.sourceforge.gvalidation.models.GrandChildModelBean
 
 /**
  * Created by nick.zhu
@@ -26,7 +27,7 @@ import net.sourceforge.gvalidation.models.ChildModelBean
 class ValidationInheritenceTest extends GroovyTestCase {
     
     public void testBasicConstraintInheritence() {
-        ChildModelBean model = new ChildModelBean()
+        def model = new ChildModelBean()
 
         model.validate()
 
@@ -35,7 +36,7 @@ class ValidationInheritenceTest extends GroovyTestCase {
     }
 
     public void testConstraintOverrideWithStricterConstraint(){
-        ChildModelBean model = new ChildModelBean(id:1,
+        def model = new ChildModelBean(id:1,
                 email:"", // override to not allow blank
                 name:"Name",
                 zipCode:"123456")
@@ -47,7 +48,7 @@ class ValidationInheritenceTest extends GroovyTestCase {
     }
 
     public void testConstraintOverrideWithRelaxedConstraint(){
-        ChildModelBean model = new ChildModelBean(id:1,
+        def model = new ChildModelBean(id:1,
                 email:"email@email.com",
                 name:"Name",
                 zipCode:"123" // override should not allow more relaxed zipcode 
@@ -57,6 +58,16 @@ class ValidationInheritenceTest extends GroovyTestCase {
 
         assertTrue "Shoudl have errors", model.hasErrors()
         assertTrue "Short zipCode should not be allowed", model.errors.hasFieldErrors('zipCode')
+    }
+
+    public void testBasicMultiLevelConstraintInheritence() {
+        def model = new GrandChildModelBean()
+
+        model.validate()
+
+        assertTrue "Shoudl have errors", model.hasErrors()
+        assertTrue "Id can not be null", model.errors.hasFieldErrors('id')
+        assertTrue "Email should be invalid", model.errors.hasFieldErrors('email')
     }
 
 }
