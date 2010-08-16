@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2642">
+<plugins revision="2653">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -534,7 +534,7 @@ Provides a nice icon set too.</description>
             <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_4/griffon-fest-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_4_1" version="0.4.1" type="svn">
+        <release tag="RELEASE_0_4_1" type="svn" version="0.4.1">
             <title>Enables application testing with FEST</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2624,6 +2624,19 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-jexplose/tags/RELEASE_0_1/griffon-jexplose-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="steel" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Gerrit Grunwald's Steel Series</title>
+            <author>Andres Almirays</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Gerrit Grunwald's Steel Series</description>
+            <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
+            <license>BSD</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_1/griffon-steel-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
