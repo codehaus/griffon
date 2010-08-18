@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2676">
+<plugins revision="2681">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1369,7 +1369,7 @@ http://www.easynth.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-jgoodies-looks/tags/RELEASE_0_1/griffon-lookandfeel-jgoodies-looks-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-jtattoo" latest-release="0.1">
+    <plugin name="lookandfeel-jtattoo" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JTattoo Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
@@ -1378,6 +1378,18 @@ http://www.easynth.com</description>
 http://www.jtattoo.net:%s%</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+JTattoo+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-jtattoo/tags/RELEASE_0_1/griffon-lookandfeel-jtattoo-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>JTattoo Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>JTattoo Swing Look &amp; Feel.
+http://www.jtattoo.net:%s%</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+JTattoo+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-jtattoo/tags/RELEASE_0_2/griffon-lookandfeel-jtattoo-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="lookandfeel-liquidlnf" latest-release="0.1">
@@ -1475,7 +1487,7 @@ http://squareness.beeger.net/</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Substance+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-substance/tags/RELEASE_0_1/griffon-lookandfeel-substance-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Substance Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
