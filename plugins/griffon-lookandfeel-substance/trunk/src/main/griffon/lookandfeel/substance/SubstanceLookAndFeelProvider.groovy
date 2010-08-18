@@ -46,11 +46,13 @@ class SubstanceLookAndFeelProvider extends DefaultLookAndFeelProvider {
         new SubstanceLookAndFeelInfo('GraphiteGlass', new SubstanceGraphiteGlassLookAndFeel()),
         new SubstanceLookAndFeelInfo('Graphite', new SubstanceGraphiteLookAndFeel()),
         new SubstanceLookAndFeelInfo('Magellan', new SubstanceMagellanLookAndFeel()),
+        new SubstanceLookAndFeelInfo('Mariner', new SubstanceMarinerLookAndFeel()),
         new SubstanceLookAndFeelInfo('MistAqua', new SubstanceMistAquaLookAndFeel()),
         new SubstanceLookAndFeelInfo('MistSilver', new SubstanceMistSilverLookAndFeel()),
         new SubstanceLookAndFeelInfo('Moderate', new SubstanceModerateLookAndFeel()),
         new SubstanceLookAndFeelInfo('NebulaBrickWall', new SubstanceNebulaBrickWallLookAndFeel()),
         new SubstanceLookAndFeelInfo('Nebula', new SubstanceNebulaLookAndFeel()),
+        new SubstanceLookAndFeelInfo('OfficeBlack2007', new SubstanceOfficeBlack2007LookAndFeel()),
         new SubstanceLookAndFeelInfo('OfficeBlue2007', new SubstanceOfficeBlue2007LookAndFeel()),
         new SubstanceLookAndFeelInfo('OfficeSilver2007', new SubstanceOfficeSilver2007LookAndFeel()),
         new SubstanceLookAndFeelInfo('Raven', new SubstanceRavenLookAndFeel()),
@@ -63,7 +65,7 @@ class SubstanceLookAndFeelProvider extends DefaultLookAndFeelProvider {
     }
     
     boolean handles(LookAndFeel lookAndFeel) {
-        lookAndFeel?.class.name in SUPPORTED_LAFS.lookAndFeel.class.name
+        lookAndFeel?.class.name in (SUPPORTED_LAFS.lookAndFeel*.getClass()*.getName())
     }
 
     boolean handles(griffon.lookandfeel.LookAndFeelInfo lookAndFeelInfo) {

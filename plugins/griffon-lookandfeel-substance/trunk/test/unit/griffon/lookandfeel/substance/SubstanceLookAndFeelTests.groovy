@@ -25,4 +25,8 @@ class SubstanceLookAndFeelTests extends AbstractLookAndFeelTestCase {
     void testSubstanceAutumLookAndFeel() {
         setAndTestLookAndFeel('Substance', 'Autum')
     }
+
+    void testSubstanceMarinerLookAndFeel() {
+        setAndTestLookAndFeel('Substance', 'Mariner')
+    }
 }
