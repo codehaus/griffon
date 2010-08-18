@@ -26,11 +26,11 @@ class KeyFrameFactory extends AbstractFactory {
    public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
       FactoryBuilderSupport.checkValueIsNull(value, name)
-      def offset = attributes.remove("offset")
+      def offset = attributes.remove("offset") ?: 0.0f
       value = attributes.remove("value")
-      TimelineEase ease = attributes.remove("ease")
-      if( offset == null ) {
-         throw new RuntimeException("In $name you must specify a value for offset: attribute.")
+      TimelineEase ease = attributes.remove("ease") ?: new Linear()
+      if(offset == null) {
+         throw new RuntimeException("In $name you must specify a value for the offset: attribute.")
       }
       return new KeyFrame(offset, value, ease)
    }
