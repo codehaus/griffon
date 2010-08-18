@@ -98,9 +98,10 @@ final class LookAndFeelManager {
         return null
     }
 
-    void preview(griffon.lookandfeel.LookAndFeelInfo lookAndFeelInfo, Component component) {
+    void preview(griffon.lookandfeel.LookAndFeelInfo lookAndFeelInfo, Component component, GriffonApplication application) {
         for(provider in getLookAndFeelProviders()) {
             if(provider.handles(lookAndFeelInfo)) {
+                application.event('LookAndFeelPreview', [getCurrentLookAndFeelProvider(), getCurrentLookAndFeelInfo(), lookAndFeelInfo]) 
                 provider.preview(lookAndFeelInfo, component)
                 break
             }
@@ -110,6 +111,7 @@ final class LookAndFeelManager {
     void apply(griffon.lookandfeel.LookAndFeelInfo lookAndFeelInfo, GriffonApplication application) {
         for(provider in getLookAndFeelProviders()) {
             if(provider.handles(lookAndFeelInfo)) {
+                application.event('LookAndFeelApply', [getCurrentLookAndFeelProvider(), getCurrentLookAndFeelInfo(), lookAndFeelInfo]) 
                 provider.apply(lookAndFeelInfo, application)
                 break
             }
@@ -122,7 +124,7 @@ final class LookAndFeelManager {
             for(Window window : Window.getWindows()) {
                 SwingUtilities.updateComponentTreeUI(window)
             }
-            application.event('LookAndFeelChanged',[lookAndFeel])
+            application.event('LookAndFeelChanged', [getCurrentLookAndFeelProvider(), getCurrentLookAndFeelInfo(), lookAndFeel]) 
         }
     }
 

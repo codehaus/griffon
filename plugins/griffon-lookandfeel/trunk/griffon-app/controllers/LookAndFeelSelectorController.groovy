@@ -28,7 +28,7 @@ class LookAndFeelSelectorController {
 
     def preview = { evt = null ->
         if(!model.lafSelection) return
-        LookAndFeelManager.instance.preview(model.lafSelection, view.desktop)
+        LookAndFeelManager.instance.preview( model.lafSelection, view.desktop, app)
     }
 
     def reset = { evt = null ->

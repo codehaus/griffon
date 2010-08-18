@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class LookandfeelGriffonPlugin {
-    def version = 0.1
+    def version = 0.2
     def griffonVersion = '0.9 > *' 
     def dependsOn = [miglayout: 0.1]
     def toolkits = ['swing']
