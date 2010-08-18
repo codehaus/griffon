@@ -45,7 +45,7 @@ class JTattooLookAndFeelProvider extends DefaultLookAndFeelProvider {
     }
     
     boolean handles(LookAndFeel lookAndFeel) {
-        lookAndFeel?.class.name in SUPPORTED_LAFS.lookAndFeel.class.name
+        lookAndFeel?.class.name in SUPPORTED_LAFS.lookAndFeel*.getClass()*.getName()
     }
 
     boolean handles(griffon.lookandfeel.LookAndFeelInfo lookAndFeelInfo) {
