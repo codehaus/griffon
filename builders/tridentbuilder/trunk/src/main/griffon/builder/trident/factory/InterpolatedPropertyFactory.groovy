@@ -23,7 +23,7 @@ import griffon.builder.trident.impl.*
  * @author Andres Almiray
  */
 class InterpolatedPropertyFactory extends AbstractFactory {
-   public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+   Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes)
             throws InstantiationException, IllegalAccessException {
       if(value instanceof InterpolatedProperty) {
          return value
@@ -38,9 +38,15 @@ class InterpolatedPropertyFactory extends AbstractFactory {
       return new InterpolatedProperty(property.toString())
    }
 
-   public void setParent(FactoryBuilderSupport builder, Object parent, Object child) {
+   void setParent(FactoryBuilderSupport builder, Object parent, Object child) {
       if(parent instanceof Timeline) {
-          child.addToTimeline(parent)
+          builder.context.timeline = parent
+      }
+   }
+
+   void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {
+      if(builder.context.timeline) {
+	     node.addToTimeline(builder.context.timeline)
       }
    }
 }

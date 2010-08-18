@@ -31,4 +31,8 @@ class KeyFrame {
       this.value = value
       this.ease = ease
    }
+
+   String toString() {
+      ['[offset:', offset, ', ease:', ease, ', value:', value].join(' ') + ']'	
+   }
 }

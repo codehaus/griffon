@@ -25,25 +25,23 @@ import org.hybird.animation.trident.triggers.MouseTriggerEvent
  * @author Andres Almiray
  */
 class MouseTriggerFactory extends AbstractFactory {	
-   public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+   Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
-      if(!value || !(value instanceof JComponent)) {
-	      throw new IllegalArgumentException("In $name value must a JComponent")
-      }
-
       builder.context.autoReverse = attributes.remove('autoReverse') ?: false
       builder.context.event = attributes.remove('event') ?: MouseTriggerEvent.CLICK
-      value
+      builder.context.target = value
+      [:]
    }
 
-   public void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
+   void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
       if(parent instanceof Timeline) {
+	     def target = builder.context.target ?: parent.mainObject
 	     MouseTriggerEvent event = parseMouseTriggerEvent(builder.context.event)
-	     MouseTrigger.addTrigger(node, parent, event, builder.context.autoReverse)
+	     MouseTrigger.addTrigger(target, parent, event, builder.context.autoReverse)
       }
    }
 
-   public boolean isLeaf() {
+   boolean isLeaf() {
       true
    }
 

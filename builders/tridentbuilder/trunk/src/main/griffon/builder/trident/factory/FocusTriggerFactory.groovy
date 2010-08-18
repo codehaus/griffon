@@ -25,25 +25,23 @@ import org.hybird.animation.trident.triggers.FocusTriggerEvent
  * @author Andres Almiray
  */
 class FocusTriggerFactory extends AbstractFactory {	
-   public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+   Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
-      if(!value || !(value instanceof JComponent)) {
-	      throw new IllegalArgumentException("In $name value must a JComponent")
-      }
-
       builder.context.autoReverse = attributes.remove('autoReverse') ?: false
       builder.context.event = attributes.remove('event') ?: FocusTriggerEvent.GAINED
-      value
+      builder.context.target = value
+      [:]
    }
 
-   public void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
+   void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
       if(parent instanceof Timeline) {
+	     def target = builder.context.target ?: parent.mainObject
 	     FocusTriggerEvent event = parseFocusTriggerEvent(builder.context.event)
-	     FocusTrigger.addTrigger(node, parent, event, builder.context.autoReverse)
+	     FocusTrigger.addTrigger(target, parent, event, builder.context.autoReverse)
       }
    }
 
-   public boolean isLeaf() {
+   boolean isLeaf() {
       true
    }
 

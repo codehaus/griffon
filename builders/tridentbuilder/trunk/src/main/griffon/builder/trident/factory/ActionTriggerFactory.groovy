@@ -23,16 +23,20 @@ import org.hybird.animation.trident.triggers.ActionTrigger
  * @author Andres Almiray
  */
 class ActionTriggerFactory extends AbstractFactory {	
-   public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+   Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
             throws InstantiationException, IllegalAccessException {
-      value
+	  builder.context.target = value
+      [:]
    }
 
-   public void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
-      if(parent instanceof Timeline) ActionTrigger.addTrigger(node, parent)
+   void setParent(FactoryBuilderSupport builder, Object parent, Object node) {
+      if(parent instanceof Timeline) {
+	      def target = builder.context.target ?: parent.mainObject
+	      ActionTrigger.addTrigger(target, parent)
+	  }
    }
 
-   public boolean isLeaf() {
+   boolean isLeaf() {
       true
    }
 }

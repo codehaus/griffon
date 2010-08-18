@@ -24,17 +24,17 @@ import griffon.builder.trident.impl.*
  * @author Andres Almiray
  */
 class KeyFramesFactory extends AbstractFactory {
-   public Object newInstance( FactoryBuilderSupport builder, Object name, Object value, Map attributes )
+   Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes)
             throws InstantiationException, IllegalAccessException {
       PropertyInterpolator interpolator = attributes.remove("interpolator")
       [interpolator: interpolator, keyframes: []]
    }
 
-   public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
+   void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
       if(child instanceof KeyFrame) parent.keyframes << child
    }
 
-   public void onNodeCompleted( FactoryBuilderSupport builder, Object parent, Object node ) {
+   void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {
       if(parent instanceof InterpolatedProperty) {
           def offsets = []
           def values = []
@@ -42,8 +42,11 @@ class KeyFramesFactory extends AbstractFactory {
           node.keyframes.each {
              offsets << it.offset
              values << it.value
-             if(it.ease) eases << it.ease
+             eases << it.ease
           }
+          // chop the last ease
+          eases = eases[0..-2]
+
           KeyValues keyValues = node.interpolator ? KeyValues.create(node.interpolator, *values) : KeyValues.create(*values)
           KeyFrames keyFrames = eases ? new KeyFrames(keyValues, new KeyTimes(*offsets), *eases) :
                                         new KeyFrames(keyValues, new KeyTimes(*offsets))
