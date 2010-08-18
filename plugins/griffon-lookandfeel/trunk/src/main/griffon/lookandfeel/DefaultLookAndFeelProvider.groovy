@@ -44,7 +44,10 @@ abstract class DefaultLookAndFeelProvider extends LookAndFeelProvider {
             for(Window window : Window.getWindows()) {
                 SwingUtilities.updateComponentTreeUI(window)
             }
-            application.event('LookAndFeelChanged',[lookAndFeel])
+            application.event('LookAndFeelChanged', [
+                LookAndFeelManager.instance.getCurrentLookAndFeelProvider(),
+                LookAndFeelManager.instance.getCurrentLookAndFeelInfo(),
+                lookAndFeel])
         }
     }
 }

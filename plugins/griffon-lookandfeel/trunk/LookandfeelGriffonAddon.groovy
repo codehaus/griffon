@@ -19,10 +19,13 @@ import griffon.lookandfeel.LookAndFeelManager
 import griffon.lookandfeel.LookAndFeelProvider
 
 import java.awt.Toolkit
-import java.awt.AWTEvent
+import java.awt.KeyEventDispatcher
+import java.awt.KeyboardFocusManager
 import java.awt.event.KeyEvent
-import java.awt.event.AWTEventListener
+import javax.swing.UIManager
 import javax.swing.KeyStroke
+
+import griffon.util.RunMode
 
 import static griffon.util.GriffonApplicationUtils.isMacOSX
 
@@ -31,6 +34,10 @@ import static griffon.util.GriffonApplicationUtils.isMacOSX
  */
 class LookandfeelGriffonAddon {
     def addonInit(app) {
+        if(RunMode.current == RunMode.APPLET || RunMode.current == RunMode.WEBSTART) {
+            UIManager.put('ClassLoader', app.class.classLoader)
+        }
+
         LookAndFeelManager.instance.loadLookAndFeelProviders()
 
         String provider = app.config.lookandfeel.lookAndFeel ?: 'System'
@@ -49,25 +56,22 @@ class LookandfeelGriffonAddon {
             javax.swing.UIManager.put(key, value)
         }
 
-/*
         String keyStrokeText = app.config?.lookandfeel?.keystroke
         if(!keyStrokeText || keyStrokeText.toLowerCase() == 'none') return
-        KeyStroke keyStroke = KeyStroke.getKeyStroke(keyStrokeText)
+        KeyStroke trigger = KeyStroke.getKeyStroke(keyStrokeText)
 
-        AWTEventListener listener = null
-        listener = { event ->
-            if(event.id != KeyEvent.KEY_PRESSED) return
-            KeyStroke pressed = KeyStroke.getKeyStrokeForEvent(event)
-            if(keyStroke == pressed) {
-                execAsync {
+        KeyboardFocusManager.currentKeyboardFocusManager.addKeyEventDispatcher(new KeyEventDispatcher() {
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                KeyStroke k = KeyStroke.getKeyStrokeForEvent(e)
+                if(e.getID() == KeyEvent.KEY_RELEASED &&
+                   k.keyCode == trigger.keyCode &&
+                   k.modifiers == trigger.modifiers) {
                     LookAndFeelManager.instance.showLafDialog(app)
-                    Toolkit.defaultToolkit.removeAWTEventListener(listener)
-                    Toolkit.defaultToolkit.addAWTEventListener(listener, AWTEvent.KEY_EVENT_MASK)
+                    return true
                 }
+                return false
             }
-        } as AWTEventListener
-        Toolkit.defaultToolkit.addAWTEventListener(listener, AWTEvent.KEY_EVENT_MASK)
-*/
+        })
     }
 
     def mvcGroups = [
