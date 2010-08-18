@@ -1,4 +1,4 @@
-<plugin name='lookandfeel-jtattoo' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='lookandfeel-jtattoo' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>JTattoo Swing Look &amp; Feel</title>
@@ -11,6 +11,6 @@ http://www.jtattoo.net:%s%</description>
     <resource>BuildConfig</resource>
   </resources>
   <dependencies>
-    <plugin name='lookandfeel' version='0.1' />
+    <plugin name='lookandfeel' version='0.2' />
   </dependencies>
 </plugin>
