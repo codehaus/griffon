@@ -14,14 +14,20 @@
  * limitations under the License.
  */
 
+import griffon.core.GriffonApplication
 import groovy.swing.factory.ComponentFactory
-import javax.media.opengl.GLCanvas
-import javax.media.opengl.GLJPanel
+import javax.media.opengl.awt.GLCanvas
+import javax.media.opengl.awt.GLJPanel
+import javax.media.opengl.GLProfile
 
 /**
  * @author Andres Almiray
  */
 class JoglGriffonAddon {
+    def addonInit(GriffonApplication app) {
+//        GLProfile.initSingleton()
+    }
+
     def factories = [
         glcanvas: new ComponentFactory(GLCanvas),
         glpanel: new ComponentFactory(GLJPanel)
