@@ -18,14 +18,16 @@
  * @author Andres Almiray
  */
 
+/*
 packagingType = ''
 eventPackageStart = { type ->
     packagingType = type
 }
+*/
 
 eventCreateConfigEnd = {
     if(buildConfig.griffon.extensions) {
-        buildConfig.griffon.extensions.jnlpUrls << "http://download.java.net/media/jogl/builds/archive/jsr-231-1.x-webstart-next/jogl.jnlp"
+        buildConfig.griffon.extensions.jnlpUrls << 'http://jogamp.org/deployment/webstart/jogl-all-awt.jnlp'
     }
 }
 
@@ -34,11 +36,12 @@ eventCopyLibsEnd = { jardir ->
     eventClosure1(jardir)
     if (!isPluginProject) {
         ant.fileset(dir: "${getPluginDirForName('jogl').file}/lib", includes: "*.jar").each {
-            if(it.name =~ /griffon.jogl.addon.*/) {
+            //if(it.name =~ /griffon.jogl.addon.*/) {
                 griffonCopyDist(it.toString(), jardir)
-            }
+            //}
         }
 
+/*
         if(!(packagingType in ['applet', 'webstart'])) {
             ant.fileset(dir: "${getPluginDirForName('jogl').file}/lib", includes: "*.jar").each {
                 griffonCopyDist(it.toString(), jardir)
@@ -47,5 +50,6 @@ eventCopyLibsEnd = { jardir ->
             copyPlatformJars(joglLibDir, jardir)
             copyNativeLibs(joglLibDir, jardir)
         }
+*/
     }
 }
