@@ -19,7 +19,7 @@
  */
 class ClojureGriffonPlugin {
     def version = '0.6'
-    def dependsOn = ['lang-bridge': '0.4']
+    def dependsOn = ['lang-bridge': '0.4.1']
     def griffonVersion = '0.9 > *'
     def license = 'Apache Software License 2.0'
 
