@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2693">
+<plugins revision="2699">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -76,7 +76,7 @@ http://groovychart.dev.java.net</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-charts/tags/RELEASE_0_1/griffon-charts-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="clojure" latest-release="0.5.1">
+    <plugin name="clojure" latest-release="0.6">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables Clojure</title>
             <author>Andres Almiray</author>
@@ -124,6 +124,17 @@ http://groovychart.dev.java.net</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_5_1/griffon-clojure-0.5.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_6" version="0.6" type="svn">
+            <title>Enables Clojure</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables the usage of Clojure on your Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_6/griffon-clojure-0.6.zip</file>
         </release>
     </plugin>
     <plugin name="clover" latest-release="0.1">
@@ -1981,7 +1992,7 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_7/griffon-scala-0.7.zip</file>
         </release>
-        <release tag="RELEASE_0_7_1" version="0.7.1" type="svn">
+        <release tag="RELEASE_0_7_1" type="svn" version="0.7.1">
             <title>Brings the Scala language compiler and libraries</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
