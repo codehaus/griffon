@@ -18,8 +18,8 @@
  * @author Andres Almiray
  */
 class ScalaGriffonPlugin {
-    def version = '0.7'
-    def dependsOn = ['lang-bridge': 0.4]
+    def version = '0.7.1'
+    def dependsOn = ['lang-bridge': '0.4.1']
     def griffonVersion = '0.9 > *'
     def license = 'Apache Software License 2.0'
 
