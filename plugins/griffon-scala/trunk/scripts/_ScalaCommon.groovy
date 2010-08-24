@@ -21,8 +21,6 @@
 ant.property(environment: "env")
 scalaHome = ant.antProject.properties."env.SCALA_HOME"
 
-includePluginScript("lang-bridge", "CompileCommons")
-
 target(compileScalaSrc: "") {
     adjustScalaHome()
     def scalaSrc = "${basedir}/src/scala"
@@ -32,7 +30,9 @@ target(compileScalaSrc: "") {
         return
     }
 
+    includePluginScript("lang-bridge", "CompileCommons")
     compileCommons()
+
     if(sourcesUpToDate(scalaSrc, classesDirPath, ".scala")) return
 
     def scalaDir = resolveResources("file:${scalaHome}/lib/*")
