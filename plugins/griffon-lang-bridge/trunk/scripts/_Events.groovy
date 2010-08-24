@@ -20,7 +20,6 @@
  * @author Andres Almiray
  */
 
-
 eventCompileStart = {
     if(compilingLangBridgePlugin()) return
     includePluginScript('lang-bridge', 'CompileCommons')

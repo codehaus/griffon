@@ -24,7 +24,7 @@
 
 includeTargets << griffonScript("_GriffonCompile")
 
-target(compileCommons: "Compile common sources") {
+target(name: 'compileCommons', description: 'Compile common sources', prehook: null, posthook: null) {
     depends(checkVersion, parseArguments, classpath)
     def commons = "${basedir}/src/commons"
     def commonsdir = new File(commons)
