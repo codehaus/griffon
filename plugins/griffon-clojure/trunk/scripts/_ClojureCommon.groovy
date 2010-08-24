@@ -18,10 +18,11 @@
  * @author Andres Almiray
  */
 
-includePluginScript("lang-bridge", "CompileCommons")
 
 target(compileClojureSrc: "") {
+    includePluginScript("lang-bridge", "CompileCommons")
     compileCommons()
+
     def clojureSrc = "${basedir}/src/clojure"
     def clojureSrcDir = new File(clojureSrc)
     if(!clojureSrcDir.exists()) return

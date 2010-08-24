@@ -35,4 +35,5 @@ target(clojureRepl: "Run Clojure REPL") {
     // classLoader.loadClass("clojure.lang.Repl").main([] as String[])
     classLoader.loadClass("jline.ConsoleRunner").main(["clojure.lang.Repl"] as String[])
 }
+
 setDefaultTarget('clojureRepl')
