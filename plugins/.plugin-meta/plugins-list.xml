@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2699">
+<plugins revision="2704">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -125,7 +125,7 @@ http://groovychart.dev.java.net</description>
             <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_5_1/griffon-clojure-0.5.1.zip</file>
         </release>
-        <release tag="RELEASE_0_6" version="0.6" type="svn">
+        <release tag="RELEASE_0_6" type="svn" version="0.6">
             <title>Enables Clojure</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -240,7 +240,7 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_4/griffon-codenarc-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="couchdb" latest-release="0.2">
+    <plugin name="couchdb" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Couchdb support</title>
             <author>Andres Almiray</author>
@@ -256,6 +256,17 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <description>Couchdb support</description>
             <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_2/griffon-couchdb-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Couchdb support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Couchdb support</description>
+            <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_3/griffon-couchdb-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="countries" latest-release="0.1">
