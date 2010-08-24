@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2681">
+<plugins revision="2688">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1275,7 +1275,7 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-jxlayer/tags/RELEASE_0_1_1/griffon-jxlayer-0.1.1.zip</file>
         </release>
     </plugin>
-    <plugin name="lang-bridge" latest-release="0.4">
+    <plugin name="lang-bridge" latest-release="0.4.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables interoperability between JVM languages</title>
             <author>Andres Almiray</author>
@@ -1315,6 +1315,17 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <description>Enables interoperability between JVM languages</description>
             <documentation>http://griffon.codehaus.org/LangBridge+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lang-bridge/tags/RELEASE_0_4/griffon-lang-bridge-0.4.zip</file>
+        </release>
+        <release tag="RELEASE_0_4_1" version="0.4.1" type="svn">
+            <title>Enables interoperability between JVM languages</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
+            <description>Enables interoperability between JVM languages</description>
+            <documentation>http://griffon.codehaus.org/LangBridge+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-lang-bridge/tags/RELEASE_0_4_1/griffon-lang-bridge-0.4.1.zip</file>
         </release>
     </plugin>
     <plugin name="lookandfeel" latest-release="0.2">
@@ -1379,7 +1390,7 @@ http://www.jtattoo.net:%s%</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+JTattoo+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-jtattoo/tags/RELEASE_0_1/griffon-lookandfeel-jtattoo-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>JTattoo Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
