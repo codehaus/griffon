@@ -16,6 +16,7 @@
 
 package griffon.domain.metaclass
 
+import griffon.domain.GriffonDomain
 import griffon.domain.orm.Criterion
 
 /**
@@ -24,23 +25,23 @@ import griffon.domain.orm.Criterion
 enum DefaultPersistentDynamicMethod {
     COUNT([new MethodSignature(true, Integer.TYPE, 'count')]),
 
-    MAKE([new MethodSignature(true, Object, 'make'),
-         new MethodSignature(true, Object, 'make', Map)]),
+    MAKE([new MethodSignature(true, GriffonDomain, 'make'),
+         new MethodSignature(true, GriffonDomain, 'make', Map)]),
 
-    SAVE([new MethodSignature(Object, 'save')]),
+    SAVE([new MethodSignature(GriffonDomain, 'save')]),
 
-    DELETE([new MethodSignature(Object, 'delete')]),
+    DELETE([new MethodSignature(GriffonDomain, 'delete')]),
 
-    FETCH([new MethodSignature(true, Object, 'fetch', Object)]),
+    FETCH([new MethodSignature(true, GriffonDomain, 'fetch', Object)]),
 
     LIST([new MethodSignature(true, Collection, 'list'),
          new MethodSignature(true, Collection, 'list', Map)]),
 
-    FIND([new MethodSignature(true, Object, 'find', Object),
-         new MethodSignature(true, Object, 'find', Criterion),
-         new MethodSignature(true, Object, 'find', Criterion, Map),
-         new MethodSignature(true, Object, 'find', Closure),
-         new MethodSignature(true, Object, 'find', Map, Closure)]),
+    FIND([new MethodSignature(true, GriffonDomain, 'find', Object),
+         new MethodSignature(true, GriffonDomain, 'find', Criterion),
+         new MethodSignature(true, GriffonDomain, 'find', Criterion, Map),
+         new MethodSignature(true, GriffonDomain, 'find', Closure),
+         new MethodSignature(true, GriffonDomain, 'find', Map, Closure)]),
 
     FIND_ALL([new MethodSignature(true, Collection, 'findAll'),
          new MethodSignature(true, Collection, 'findAll', Object),
@@ -49,7 +50,7 @@ enum DefaultPersistentDynamicMethod {
          new MethodSignature(true, Collection, 'findAll', Closure),
          new MethodSignature(true, Collection, 'findAll', Map, Closure)]),
 
-    FIND_WHERE('findWhere', [new MethodSignature(true, Object, 'findWhere', Map),
+    FIND_WHERE('findWhere', [new MethodSignature(true, GriffonDomain, 'findWhere', Map),
          new MethodSignature(true, Collection, 'findWhere', Closure)]),
 
     FIND_ALL_WHERE('findAllWhere', [new MethodSignature(true, Collection, 'findAllWhere', Map),

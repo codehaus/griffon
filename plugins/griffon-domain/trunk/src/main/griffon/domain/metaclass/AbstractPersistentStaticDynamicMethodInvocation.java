@@ -17,8 +17,8 @@ package griffon.domain.metaclass;
 
 import java.util.regex.Pattern;
 
-import griffon.core.ArtifactManager;
 import griffon.core.GriffonClass;
+import griffon.domain.GriffonDomain;
 import griffon.domain.GriffonDomainClass;
 import org.codehaus.griffon.runtime.domain.DomainHandler;
 
@@ -39,15 +39,15 @@ public abstract class AbstractPersistentStaticDynamicMethodInvocation
         return domainHandler;
     }
 
-    public GriffonDomainClass getDomainClassFor(Class clazz) {
-        GriffonClass griffonClass = ArtifactManager.getInstance().findGriffonClass(clazz);
+    public GriffonDomainClass getDomainClassFor(Class<GriffonDomain> clazz) {
+        GriffonClass griffonClass = domainHandler.getApp().getArtifactManager().findGriffonClass(clazz);
         if(griffonClass instanceof GriffonDomainClass) return (GriffonDomainClass) griffonClass;
         throw new RuntimeException("Class "+ clazz.getName() + " is not a domain class.");
     }
 
-    public final Object invoke(Class clazz, String methodName, Object[] arguments) {
-	    return invokeInternal(getDomainClassFor(clazz), methodName, arguments);
-	}
-	
+    public final Object invoke(Class<GriffonDomain> clazz, String methodName, Object[] arguments) {
+        return invokeInternal(getDomainClassFor(clazz), methodName, arguments);
+    }
+    
     protected abstract Object invokeInternal(GriffonDomainClass domainClass, String methodName, Object[] arguments);
 }

@@ -24,7 +24,7 @@ class EntityInjectionTests extends GriffonUnitTestCase {
     }
 
     void testDynamicMethodInjection() {
-        assert 1 == Book.fetch(1)
+        assert '1' == Book.fetch(1).title
         assert [1] == Book.findAll()
         assert [[a:1, b: 2]] == Book.findAll(a: 1, b: 2)
         assert [4] == Book.findAll(new Book(id: 2))
@@ -33,7 +33,5 @@ class EntityInjectionTests extends GriffonUnitTestCase {
     void testConventions() {
         GriffonDomainClass domain = app.artifactManager.findGriffonClass(Book)
         assert domain
-// println domain.properties
-// println domain.persistentProperties
     }
 }

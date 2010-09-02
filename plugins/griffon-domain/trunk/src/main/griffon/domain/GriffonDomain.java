@@ -1,32 +1,34 @@
 /*
  * Copyright 2010 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
-package griffon.domain.metaclass;
+ */
+package griffon.domain;
 
-import griffon.domain.GriffonDomain;
+import griffon.core.GriffonArtifact;
 
 /**
  * @author Andres Almiray
  */
-public interface InstanceMethodInvocation extends MethodInvocation {
-    /**
-     * <p>Invokes the actual method. The target object and arguments are supplied.
-     * 
-     * @param target the target on which the method is invoked.
-     * @param methodName
-     * @param arguments the arguments passed in the method call @return the return value of the dynamic method invocation.
-     */
-    Object invoke(GriffonDomain target, String methodName, Object[] arguments);
+public interface GriffonDomain extends GriffonArtifact {
+    void onLoad();
+    void onSave();
+    void beforeLoad();
+    void beforeInsert();
+    void beforeUpdate();
+    void beforeDelete();
+    void afterLoad();
+    void afterInsert();
+    void afterUpdate();
+    void afterDelete();
 }

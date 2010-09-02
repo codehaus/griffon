@@ -28,8 +28,8 @@ import java.util.Set;
  */
 public interface GriffonDomainClass extends GriffonClass {
     /** "domain" */
-	String TYPE = "domain";
-	/** "" (empty) */
+    String TYPE = "domain";
+    /** "" (empty) */
     String TRAILING = "";
 
     /**

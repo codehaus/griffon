@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 
+import griffon.domain.GriffonDomain;
 import griffon.domain.GriffonDomainClass;
 import org.codehaus.griffon.runtime.domain.DomainHandler;
 import griffon.domain.orm.Criterion;

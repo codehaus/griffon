@@ -22,7 +22,7 @@ import griffon.core.GriffonApplication;
  * @author Andres Almiray
  */
 public interface DomainHandler {
-    GriffonApplication  getApp();
+    GriffonApplication getApp();
 
     Object invokeInstance(Object target, String methodName, Object... args);
 

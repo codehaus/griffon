@@ -15,6 +15,7 @@
  */ 
 package griffon.domain.metaclass;
 
+import griffon.domain.GriffonDomain;
 import griffon.domain.GriffonDomainClass;
 import org.codehaus.griffon.runtime.domain.DomainHandler;
 
@@ -41,11 +42,11 @@ public abstract class AbstractListPersistentMethod extends AbstractPersistentSta
         throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
     }
 
-    protected Collection list(GriffonDomainClass domainClass) {
-        return Collections.emptyList();
+    protected Collection<GriffonDomain> list(GriffonDomainClass domainClass) {
+        return Collections.<GriffonDomain>emptyList();
     }
 
-    protected Collection list(GriffonDomainClass domainClass, Map props) {
-        return Collections.emptyList();
+    protected Collection<GriffonDomain> list(GriffonDomainClass domainClass, Map props) {
+        return Collections.<GriffonDomain>emptyList();
     }
 }

@@ -15,8 +15,9 @@
  */ 
 package griffon.domain.metaclass
 
-import griffon.domain.GriffonDomainClass;
-import org.codehaus.griffon.runtime.domain.DomainHandler;
+import griffon.domain.GriffonDomain
+import griffon.domain.GriffonDomainClass
+import org.codehaus.griffon.runtime.domain.DomainHandler
 
 /**
  * @author Andres Almiray
@@ -35,8 +36,8 @@ public abstract class AbstractMakePersistentMethod extends AbstractPersistentSta
         throw new MissingMethodException(methodName, domainClass.getClazz(), arguments)
     }
 
-    protected Object make(GriffonDomainClass domainClass, Map props) {
-        def instance = domainClass.newInstance()
+    protected GriffonDomain make(GriffonDomainClass domainClass, Map props) {
+        GriffonDomain instance = domainClass.newInstance()
         props.each { k, v ->
             try {
                 instance[k] = v

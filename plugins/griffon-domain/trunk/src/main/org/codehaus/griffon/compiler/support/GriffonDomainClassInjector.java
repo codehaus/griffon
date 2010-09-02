@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codehaus.griffon.persistence;
+package org.codehaus.griffon.compiler.support;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -22,17 +22,21 @@ import java.util.Collection;
 import java.io.File;
 import java.lang.reflect.Modifier;
 
+import griffon.domain.GriffonDomain;
+import griffon.domain.GriffonDomainClass;
 import griffon.domain.GriffonDomainClassProperty;
 import griffon.domain.metaclass.MethodSignature;
+import griffon.persistence.Event;
 import griffon.domain.metaclass.DefaultPersistentDynamicMethod;
 import org.codehaus.griffon.runtime.domain.DomainHandler;
+import org.codehaus.griffon.runtime.domain.AbstractGriffonDomain;
 
 import org.codehaus.groovy.ast.*;
 import org.codehaus.groovy.ast.expr.*;
 import org.codehaus.groovy.ast.stmt.*;
 import org.codehaus.groovy.classgen.GeneratorContext;
 import org.codehaus.groovy.control.SourceUnit;
-import org.codehaus.griffon.ast.GriffonASTUtils;
+import static org.codehaus.griffon.ast.GriffonASTUtils.*;
 
 import org.codehaus.groovy.runtime.DefaultGroovyMethods;
 
@@ -48,6 +52,8 @@ public abstract class GriffonDomainClassInjector {
     private static final String GRIFFON_APP_DIR = "griffon-app";
     protected ClassNode dwClassNode = new ClassNode(DomainHandler.class);
     protected static final String DOMAIN_HANDLER_METHOD_NAME = "getDomainHandler";
+    private static final ClassNode GRIFFON_DOMAIN_CLASS = ClassHelper.makeWithoutCaching(GriffonDomain.class);
+    private static final ClassNode ABSTRACT_GRIFFON_DOMAIN_CLASS = ClassHelper.makeWithoutCaching(AbstractGriffonDomain.class);
 
 /*
     public void performInjection(SourceUnit source, ClassNode classNode) {
@@ -62,7 +68,8 @@ public abstract class GriffonDomainClassInjector {
 */
 
     public void performInjectionOnAnnotatedEntity(ClassNode classNode) {
-        GriffonASTUtils.injectConstant(classNode, GriffonDomainClassProperty.GRIFFON_DOMAIN_MAPPING, String.class, getMappingValue());
+        injectConstant(classNode, GriffonDomainClassProperty.GRIFFON_DOMAIN_MAPPING, String.class, getMappingValue());
+        injectGriffonDomain(classNode);
         injectDomainHandler(classNode);
         injectMethods(classNode);
         performInjection(classNode);
@@ -90,8 +97,31 @@ public abstract class GriffonDomainClassInjector {
 //        return false;
 //    }
 
+    protected void injectGriffonDomain(ClassNode classNode) {
+        if(ClassHelper.OBJECT_TYPE.equals(classNode.getSuperClass())) {
+            classNode.setSuperClass(ABSTRACT_GRIFFON_DOMAIN_CLASS);
+        } else if(!classNode.implementsInterface(GRIFFON_DOMAIN_CLASS)){
+            // 1. add interface
+            classNode.addInterface(GRIFFON_DOMAIN_CLASS);
+            // 2. add methods
+            ASTInjector injector = new GriffonArtifactASTInjector();
+            injector.inject(classNode, GriffonDomainClass.TYPE);
+
+            for(String eventName : Event.getAllEvents()) {
+                addMethod(classNode, new MethodNode(
+                    eventName,
+                    Modifier.PUBLIC,
+                    ClassHelper.VOID_TYPE,
+                    Parameter.EMPTY_ARRAY,
+                    ClassNode.EMPTY_ARRAY,
+                    new EmptyStatement()
+                ));
+            }
+        }    
+    }
+
     protected boolean shouldInjectClass(ClassNode classNode) {
-        return !GriffonASTUtils.isEnum(classNode);
+        return !isEnum(classNode);
     }
 
     protected void injectMethods(ClassNode classNode) {
@@ -105,7 +135,7 @@ public abstract class GriffonDomainClassInjector {
 
         int modifiers = Modifier.PUBLIC;
         if(methodSignature.isStatic()) modifiers |= Modifier.STATIC;
-        GriffonASTUtils.addMethod(classNode, new MethodNode(
+        addMethod(classNode, new MethodNode(
             methodSignature.getMethodName(),
             modifiers,
             ClassHelper.makeWithoutCaching(methodSignature.getReturnType()),
@@ -143,7 +173,7 @@ public abstract class GriffonDomainClassInjector {
     }
 
     protected void injectDomainHandler(ClassNode classNode) {
-        GriffonASTUtils.addMethod(classNode, new MethodNode(
+        addMethod(classNode, new MethodNode(
             DOMAIN_HANDLER_METHOD_NAME,
             Modifier.PRIVATE | Modifier.STATIC | ACC_SYNTHETIC,
             ClassHelper.makeWithoutCaching(getDomainHandlerClass()),

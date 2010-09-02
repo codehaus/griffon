@@ -328,7 +328,9 @@ public class GriffonDomainConfigurationUtil {
                !name.equals(GriffonDomainClassProperty.MAPPING_STRATEGY) &&
                !name.equals(GriffonDomainClassProperty.MAPPED_BY) &&
                !name.equals(GriffonDomainClassProperty.BELONGS_TO) &&
-               !name.equals(GriffonDomainClassProperty.GRIFFON_DOMAIN_MAPPING);
+               !name.equals(GriffonDomainClassProperty.GRIFFON_DOMAIN_MAPPING) &&
+               !name.equals(GriffonDomainClassProperty.APP) &&
+               !name.equals(GriffonDomainClassProperty.GRIFFON_CLASS);
     }
 
     /**

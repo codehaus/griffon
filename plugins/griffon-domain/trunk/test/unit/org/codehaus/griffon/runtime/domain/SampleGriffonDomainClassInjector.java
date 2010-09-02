@@ -6,7 +6,7 @@ import java.util.Collection;
 import griffon.domain.GriffonDomainClassProperty;
 import griffon.domain.metaclass.DefaultPersistentDynamicMethod;
 import griffon.domain.metaclass.MethodSignature;
-import org.codehaus.griffon.persistence.DefaultGriffonDomainClassInjector;
+import org.codehaus.griffon.compiler.support.DefaultGriffonDomainClassInjector;
 
 import org.codehaus.groovy.ast.ClassNode;
 import org.codehaus.groovy.runtime.DefaultGroovyMethods;

@@ -30,7 +30,7 @@ import org.codehaus.groovy.transform.GroovyASTTransformationClass;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
-@GroovyASTTransformationClass("org.codehaus.griffon.persistence.EntityASTTransformation")
+@GroovyASTTransformationClass("org.codehaus.griffon.compiler.support.EntityASTTransformation")
 public @interface Entity {
     /**
      * The value of the persistence implementation.
