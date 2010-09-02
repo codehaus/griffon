@@ -1,5 +1,5 @@
 /*
- * Copyright -2010 the original author or authors.
+ * Copyright 2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package org.codehaus.griffon.runtime.domain;
 import griffon.core.GriffonApplication;
 import griffon.core.GriffonClass;
 import griffon.core.ArtifactInfo;
+import griffon.domain.GriffonDomain;
 import griffon.domain.GriffonDomainClass;
 import griffon.domain.GriffonDomainClassProperty;
 import org.codehaus.griffon.runtime.core.ArtifactHandlerAdapter;
@@ -63,14 +64,14 @@ public class DomainClassArtifactHandler extends ArtifactHandlerAdapter {
      */
     @Override
     public void initialize(ArtifactInfo[] artifacts) {
-	    super.initialize(artifacts);
-	    postInitialize();
-	}
-	
-	protected void postInitialize() {
-	    for(GriffonClass griffonClass: getClasses()) {
-		    ((DefaultGriffonDomainClass)griffonClass).initialize();
-	    }
+        super.initialize(artifacts);
+        postInitialize();
+    }
+    
+    protected void postInitialize() {
+        for(GriffonClass griffonClass: getClasses()) {
+            ((DefaultGriffonDomainClass)griffonClass).initialize();
+        }
         GriffonDomainConfigurationUtil.configureDomainClassRelationships(
                 getClasses(),
                 getClassesByName());
@@ -101,6 +102,8 @@ public class DomainClassArtifactHandler extends ArtifactHandlerAdapter {
         }
 
         if (Enum.class.isAssignableFrom(clazz)) return false;
+
+        if (GriffonDomain.class.isAssignableFrom(clazz)) return true;
 
         if (clazz.getAnnotation(Entity.class) != null) {
             return true;

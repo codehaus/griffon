@@ -16,6 +16,7 @@
 package griffon.domain.metaclass;
 
 import org.codehaus.griffon.runtime.domain.DomainHandler;
+import griffon.domain.GriffonDomain;
 import griffon.domain.GriffonDomainClass;
 
 /**
@@ -24,5 +25,5 @@ import griffon.domain.GriffonDomainClass;
 public interface PersistentMethodInvocation {
     DomainHandler getDomainHandler();
 
-    GriffonDomainClass getDomainClassFor(Class clazz);
+    GriffonDomainClass getDomainClassFor(Class<GriffonDomain> clazz);
 }

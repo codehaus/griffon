@@ -21,6 +21,8 @@ package griffon.domain;
  * @author Graeme Rocher (Grails)
  */
 public interface GriffonDomainClassProperty {
+    String APP = "app";
+    String GRIFFON_CLASS = "griffonClass";
     String GRIFFON_DOMAIN_MAPPING = "griffonDomainMapping";
     String IDENTITY = "id";
     String VERSION = "version";

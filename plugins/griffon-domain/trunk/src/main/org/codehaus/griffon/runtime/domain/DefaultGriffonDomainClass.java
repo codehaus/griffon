@@ -694,6 +694,6 @@ public class DefaultGriffonDomainClass extends DefaultGriffonClass implements Gr
 //    public void setMappingStrategy(String strategy) {}
 
     public void resetCaches() {
-	    super.resetCaches();
+        super.resetCaches();
     }
 }

@@ -15,6 +15,7 @@
  */ 
 package griffon.domain.metaclass;
 
+import griffon.domain.GriffonDomain;
 import griffon.domain.GriffonDomainClass;
 import org.codehaus.griffon.runtime.domain.DomainHandler;
 
@@ -28,14 +29,18 @@ public abstract class AbstractDeletePersistentMethod extends AbstractPersistentI
         super(domainHandler);
     }
 
-    protected final Object invokeInternal(GriffonDomainClass domainClass, Object target, String methodName, Object[] arguments) {
+    protected final Object invokeInternal(GriffonDomainClass domainClass, GriffonDomain target, String methodName, Object[] arguments) {
         if(target == null || (arguments != null && arguments.length > 0)) {
             throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
         }
-        return delete(domainClass, target);
+
+        target.beforeDelete();
+        GriffonDomain entity = delete(domainClass, target);
+        target.afterDelete();
+        return entity;
     }
 
-    protected Object delete(GriffonDomainClass domainClass, Object target) {
+    protected GriffonDomain delete(GriffonDomainClass domainClass, GriffonDomain target) {
         return target;
     }
 }

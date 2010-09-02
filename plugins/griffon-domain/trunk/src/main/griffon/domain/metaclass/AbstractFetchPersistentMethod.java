@@ -15,6 +15,7 @@
  */ 
 package griffon.domain.metaclass;
 
+import griffon.domain.GriffonDomain;
 import griffon.domain.GriffonDomainClass;
 import org.codehaus.griffon.runtime.domain.DomainHandler;
 
@@ -35,7 +36,7 @@ public abstract class AbstractFetchPersistentMethod extends AbstractPersistentSt
         throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
     }
 
-    protected Object fetch(GriffonDomainClass domainClass, Object key) {
+    protected GriffonDomain fetch(GriffonDomainClass domainClass, Object key) {
         return null;
     }
 }

@@ -17,7 +17,6 @@
 package griffon.domain
 
 import griffon.core.GriffonApplication
-import griffon.domain.GriffonDomainClass
 import griffon.domain.orm.Criterion
 import griffon.domain.orm.CriteriaBuilder
 import griffon.domain.orm.CriteriaVisitor

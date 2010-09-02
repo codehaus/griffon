@@ -15,6 +15,7 @@
  */ 
 package griffon.domain.metaclass;
 
+import griffon.domain.GriffonDomain;
 import griffon.domain.GriffonDomainClass;
 import org.codehaus.griffon.runtime.domain.DomainHandler;
 
@@ -28,23 +29,35 @@ public abstract class AbstractSavePersistentMethod extends AbstractPersistentIns
         super(domainHandler);
     }
 
-    protected final Object invokeInternal(GriffonDomainClass domainClass, Object target, String methodName, Object[] arguments) {
+    protected final Object invokeInternal(GriffonDomainClass domainClass, GriffonDomain target, String methodName, Object[] arguments) {
         if(target == null) {
             throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
         }
+        
+        GriffonDomain entity = null;
+
         if(shouldInsert(domainClass, target, arguments)) {
-            return insert(domainClass, target, arguments);
+	        target.beforeInsert();
+            entity = insert(domainClass, target, arguments);
+            target.onSave();
+            target.afterInsert();
+        } else {
+            target.beforeUpdate();
+            entity = save(domainClass, target, arguments);
+            target.onSave();
+            target.afterUpdate();
         }
-        return save(domainClass, target, arguments);
+
+        return entity;
     }
    
-    protected abstract boolean shouldInsert(GriffonDomainClass domainClass, Object target, Object[] arguments);
+    protected abstract boolean shouldInsert(GriffonDomainClass domainClass, GriffonDomain target, Object[] arguments);
 
-    protected Object insert(GriffonDomainClass domainClass, Object target, Object[] arguments) {
+    protected GriffonDomain insert(GriffonDomainClass domainClass, GriffonDomain target, Object[] arguments) {
         return target;
     }
 
-    protected Object save(GriffonDomainClass domainClass, Object target, Object[] arguments) {
+    protected GriffonDomain save(GriffonDomainClass domainClass, GriffonDomain target, Object[] arguments) {
         return target;
     }
 }

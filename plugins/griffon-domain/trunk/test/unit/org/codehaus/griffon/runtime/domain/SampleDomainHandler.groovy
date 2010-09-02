@@ -1,6 +1,7 @@
 package org.codehaus.griffon.runtime.domain
 
 import griffon.core.GriffonApplication
+import griffon.domain.GriffonDomain
 import griffon.domain.GriffonDomainClass
 import griffon.domain.orm.Criterion
 import griffon.domain.metaclass.*
@@ -32,8 +33,8 @@ class SampleFetchMethod extends AbstractFetchPersistentMethod {
         super(domainHandler)
     }
 
-    protected Object fetch(GriffonDomainClass domain, Object key) {
-        return key
+    protected GriffonDomain fetch(GriffonDomainClass domain, Object key) {
+        return new Book(title: String.valueOf(key))
     }
 }
 

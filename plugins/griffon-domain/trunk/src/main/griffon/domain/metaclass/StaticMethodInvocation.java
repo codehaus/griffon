@@ -15,6 +15,8 @@
  */ 
 package griffon.domain.metaclass;
 
+import griffon.domain.GriffonDomain;
+
 /**
  * @author Andres Almiray
  */
@@ -28,5 +30,5 @@ public interface StaticMethodInvocation extends MethodInvocation {
      * @param arguments the arguments supplied
      * @return the return value of the static method invocation
      */
-    public Object invoke(Class clazz, String methodName, Object[] arguments);
+    public Object invoke(Class<GriffonDomain> clazz, String methodName, Object[] arguments);
 }

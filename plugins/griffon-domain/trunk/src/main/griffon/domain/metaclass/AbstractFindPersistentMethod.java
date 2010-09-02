@@ -15,6 +15,7 @@
  */ 
 package griffon.domain.metaclass;
 
+import griffon.domain.GriffonDomain;
 import griffon.domain.GriffonDomainClass;
 import griffon.domain.DomainClassUtils;
 import org.codehaus.griffon.runtime.domain.DomainHandler;
@@ -61,15 +62,15 @@ public abstract class AbstractFindPersistentMethod extends AbstractPersistentSta
         throw new MissingMethodException(methodName, domainClass.getClazz(), arguments);
     }
 
-    protected Object findByProperties(GriffonDomainClass domainClass, Map properties) {
+    protected GriffonDomain findByProperties(GriffonDomainClass domainClass, Map properties) {
         return null;
     }
 
-    protected Object findByExample(GriffonDomainClass domainClass, Object example) {
+    protected GriffonDomain findByExample(GriffonDomainClass domainClass, Object example) {
         return null;
     }
 
-    protected Object findByCriterion(GriffonDomainClass domainClass, Criterion criterion, Map options) {
+    protected GriffonDomain findByCriterion(GriffonDomainClass domainClass, Criterion criterion, Map options) {
         return null;
     }
 }
