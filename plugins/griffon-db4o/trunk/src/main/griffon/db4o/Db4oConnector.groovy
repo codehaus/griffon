@@ -32,9 +32,10 @@ final class Db4oConnector {
     private final Object lock = new Object()
     private boolean connected = false
     private bootstrap
+    private GriffonApplication app
 
     ConfigObject parseConfig(GriffonApplication app) {
-        def db4oConfigClass = app.class.classLoader.loadClass("Db4oConfig")
+        def db4oConfigClass = app.class.classLoader.loadClass('Db4oConfig')
         return new ConfigSlurper(Environment.current.name).parse(db4oConfigClass)
     }
 
@@ -65,7 +66,7 @@ final class Db4oConnector {
         String dbfileName = config?.dataSource?.name ?: 'db.yarv'
         File dbfile = new File(dbfileName)
         if(!dbfile.absolute) dbfile = new File(Metadata.current.getGriffonWorkingDir(), dbfileName)
-        Script configScript = app.class.classLoader.loadClass("Db4oConfig").newinstance()
+        Script configScript = app.class.classLoader.loadClass('Db4oConfig').newInstance()
         EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration()
         configScript.configure(configuration)
         ObjectContainerHolder.instance.objectContainer = Db4oEmbedded.openFile(configuration, dbfile.absolutePath)
