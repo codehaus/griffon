@@ -19,25 +19,26 @@
 
 import griffon.core.GriffonApplication
 import griffon.db4o.Db4oConnector
+import static griffon.util.GriffonApplicationUtils.metaClassOf
 
 /**
  * @author Andres Almiray
  */
 class Db4oGriffonAddon {
     def addonInit = { app ->
-        ConfigObject config = Db4oConnector.instance.createConfig(app)
+        ConfigObject config = Db4oConnector.instance.parseConfig(app)
         Db4oConnector.instance.connect(app, config)
     }
 
     def events = [
         ShutdownStart: { app ->
-            ConfigObject config = Db4oConnector.instance.createConfig(app)
+            ConfigObject config = Db4oConnector.instance.parseConfig(app)
             Db4oConnector.instance.disconnect(app, config)
         },
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            instance.metaClass.withDb4o = Db4oHelper.instance.withDb4o
+            metaClassOf(instance).withDb4o = Db4oConnector.instance.withDb4o
         }
     ]
 }
