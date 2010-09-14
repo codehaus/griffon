@@ -1,4 +1,4 @@
-<plugin name='steel' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='steel' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almirays</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Gerrit Grunwald's Steel Series</title>
@@ -10,6 +10,6 @@
     <resource>BuildConfig</resource>
   </resources>
   <dependencies>
-    <plugin name='trident-builder' version='0.4' />
+    <plugin name='trident-builder' version='0.5' />
   </dependencies>
 </plugin>

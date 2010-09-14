@@ -33,11 +33,11 @@
  */
 class SteelGriffonPlugin {
     // the plugin version
-    def version = "0.1"
+    def version = "0.2"
     // the version or versions of Griffon the plugin is designed for
     def griffonVersion = '0.9 > *' 
     // the other plugins this plugin depends on
-    def dependsOn = ['trident-builder':0.4]
+    def dependsOn = ['trident-builder':0.5]
     // resources that are included in plugin packaging
     def pluginIncludes = []
     // the plugin license
