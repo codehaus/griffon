@@ -66,10 +66,12 @@ class SteelGriffonAddon {
         radial1VerticalGauge: Radial1Vertical,
         radial2Gauge: Radial2,
         radial2LcdGauge: Radial2Lcd,
+        radial2TopGauge: Radial2Top,
         radial3Gauge: Radial3,
         radial3LcdGauge: Radial3Lcd,
         radial4Gauge: Radial4,
         radial4LcdGauge: Radial4Lcd,
+        radialCounterGauge: RadialCounter,
 
         poi: new PoiFactory()
     ]
