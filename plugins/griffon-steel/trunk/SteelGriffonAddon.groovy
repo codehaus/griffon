@@ -56,9 +56,12 @@ class SteelGriffonAddon {
         displayMulti: DisplayMulti,
         displayRectangular: DisplayRectangular,
         displaySingle: DisplaySingle,
+        led: Led,
         level: Level,
         linearGauge: Linear,
         linearLcdGauge: LinearLcd,
+        linearBargraph: LinearBargraph,
+        linearBargraphLcd: LinearBargraphLcd,
         radar: Radar,
         radial1Gauge: Radial1,
         radial1LcdGauge: Radial1Lcd,
@@ -72,6 +75,14 @@ class SteelGriffonAddon {
         radial4Gauge: Radial4,
         radial4LcdGauge: Radial4Lcd,
         radialCounterGauge: RadialCounter,
+        radialBargraph1: RadialBargraph1,
+        radialBargraph1Lcd: RadialBargraph1Lcd,
+        radialBargraph2: RadialBargraph2,
+        radialBargraph2Lcd: RadialBargraph2Lcd,
+        radialBargraph3: RadialBargraph3,
+        radialBargraph3Lcd: RadialBargraph3Lcd,
+        radialBargraph4: RadialBargraph4,
+        radialBargraph4Lcd: RadialBargraph4Lcd,
 
         poi: new PoiFactory()
     ]
