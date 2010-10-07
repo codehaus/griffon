@@ -15,16 +15,35 @@
 
 package net.sourceforge.gvalidation.artifact
 
-import griffon.core.ArtifactHandlerAdapter
+import org.codehaus.griffon.runtime.core.ArtifactHandlerAdapter
+import griffon.core.GriffonClass
+import griffon.core.GriffonApplication
 
 /**
  * Created by nick.zhu
  */
 class ConstraintArtifactHandler extends ArtifactHandlerAdapter {
-    public static final String TYPE = "constraint"
-    public static final String TRAILING = "Constraint"
+    /**
+     * Use GriffonConstraintClass.TYPE instead
+     *
+     * @see GriffonConstraintClass
+     */
+    @Deprecated
+    public static final String TYPE = GriffonConstraintClass.TYPE
 
-    ConstraintArtifactHandler() {
-        super(TYPE)
+    /**
+     * Use GriffonConstraintClass.TRAILING instead
+     *
+     * @see GriffonConstraintClass
+     */
+    @Deprecated
+    public static final String TRAILING = GriffonConstraintClass.TRAILING
+
+    public ConstraintArtifactHandler(GriffonApplication app) {
+        super(app, GriffonConstraintClass.TYPE, GriffonConstraintClass.TRAILING)
+    }
+
+    protected GriffonClass newGriffonClassInstance(Class clazz) {
+        return new DefaultGriffonConstraintClass(getApp(), clazz);
     }
 }
