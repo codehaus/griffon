@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2728">
+<plugins revision="2735">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -424,7 +424,7 @@ another docking frame in the application.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_2/griffon-easyb-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="eclipse-support" latest-release="0.3">
+    <plugin name="eclipse-support" latest-release="0.3.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Keeps Eclipse files up to date</title>
             <author>Andres Almiray</author>
@@ -456,6 +456,17 @@ another docking frame in the application.</description>
             <description>Keeps Eclipse files up to date.</description>
             <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_3/griffon-eclipse-support-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_3_1" version="0.3.1" type="svn">
+            <title>Keeps Eclipse files up to date</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Keeps Eclipse files up to date.</description>
+            <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_3_1/griffon-eclipse-support-0.3.1.zip</file>
         </release>
     </plugin>
     <plugin name="effects" latest-release="0.1">
@@ -2749,7 +2760,7 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <platforms/>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_2_1/griffon-steel-0.2.1.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>Gerrit Grunwald's Steel Series</title>
             <author>Andres Almirays</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
