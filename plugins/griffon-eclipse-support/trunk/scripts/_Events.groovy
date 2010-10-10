@@ -22,7 +22,11 @@ includeTargets << griffonScript("Init")
 
 eventPluginInstalled = { fullPluginName ->
     includePluginScript('eclipse-support', 'EclipseUpdate')
-    updateEclipseClasspathFile(fullPluginName)
+    try {
+        updateEclipseClasspathFile(fullPluginName)
+    } catch(NullPointerException npe) {
+        // ignore
+    }
 }
 eventPluginUninstalled = { msg ->
     includePluginScript('eclipse-support', 'EclipseUpdate')
