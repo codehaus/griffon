@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2735">
+<plugins revision="2741">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -44,6 +44,17 @@
             <description>Apache Avro support</description>
             <documentation>http://griffon.codehaus.org/Avro+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-avro/tags/RELEASE_0_2/griffon-avro-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="barcode" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Generate and display barcodes</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Generate and display barcodes with barcode4j
+http://barcode4j.sourceforge.net</description>
+            <documentation>http://griffon.codehaus.org/Barcode+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-barcode/tags/RELEASE_0_1/griffon-barcode-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="berkeleydb" latest-release="0.2">
@@ -131,10 +142,7 @@ http://groovychart.dev.java.net</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Enables the usage of Clojure on your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_6/griffon-clojure-0.6.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_6/griffon-clojure-0.6.zip</file>
         </release>
     </plugin>
     <plugin name="clover" latest-release="0.1">
@@ -263,10 +271,7 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Couchdb support</description>
             <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_3/griffon-couchdb-0.3.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_3/griffon-couchdb-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="countries" latest-release="0.1">
@@ -304,6 +309,17 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <description>Provides a coverflow component.</description>
             <documentation>http://griffon.codehaus.org/Coverflow+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-coverflow/tags/RELEASE_0_3/griffon-coverflow-0.3.zip</file>
+        </release>
+    </plugin>
+    <plugin name="crystalicons" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Crystal desktop icons</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Crystal desktop icons
+http://everaldo.com/crystal/</description>
+            <documentation>http://griffon.codehaus.org/Crystalicons+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-crystalicons/tags/RELEASE_0_1/griffon-crystalicons-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="css-builder" latest-release="0.6">
@@ -372,6 +388,17 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <description>Db4o support</description>
             <documentation>http://griffon.codehaus.org/Db4o+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-db4o/tags/RELEASE_0_2/griffon-db4o-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="designgridlayout" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>DesignGridLayout Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>DesignGridLayout Plugin
+https://designgridlayout.dev.java.net</description>
+            <documentation>http://griffon.codehaus.org/Designgridlayout+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-designgridlayout/tags/RELEASE_0_1/griffon-designgridlayout-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="docking-frame" latest-release="0.2">
@@ -457,16 +484,13 @@ another docking frame in the application.</description>
             <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_3/griffon-eclipse-support-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_3_1" version="0.3.1" type="svn">
+        <release tag="RELEASE_0_3_1" type="svn" version="0.3.1">
             <title>Keeps Eclipse files up to date</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Keeps Eclipse files up to date.</description>
             <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_3_1/griffon-eclipse-support-0.3.1.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_3_1/griffon-eclipse-support-0.3.1.zip</file>
         </release>
     </plugin>
     <plugin name="effects" latest-release="0.1">
@@ -573,10 +597,7 @@ Provides a nice icon set too.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Enables application testing with FEST (http://easytesting.org)</description>
             <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_4_1/griffon-fest-0.4.1.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_4_1/griffon-fest-0.4.1.zip</file>
         </release>
     </plugin>
     <plugin name="findbugs" latest-release="0.2">
@@ -1079,6 +1100,17 @@ http://code.google.com/p/jbusycomponent</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jbusycomponent/tags/RELEASE_0_4/griffon-jbusycomponent-0.4.zip</file>
         </release>
     </plugin>
+    <plugin name="jcalendar" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Date &amp; Calendar support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Date &amp; Calendar support
+http://www.toedter.com/en/jcalendar/</description>
+            <documentation>http://griffon.codehaus.org/Jcalendar+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jcalendar/tags/RELEASE_0_1/griffon-jcalendar-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="jdepend" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Runs JDepend metrics on your Griffon application</title>
@@ -1113,6 +1145,16 @@ JDepend allows you to automatically measure the quality of a design in terms of 
 and maintainability to manage package dependencies effectively.</description>
             <documentation>http://griffon.codehaus.org/Jdepend+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jdepend/tags/RELEASE_0_3/griffon-jdepend-0.3.zip</file>
+        </release>
+    </plugin>
+    <plugin name="jexplose" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Expose-like effect for DesktopPanes</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Expose-like effect for DesktopPanes</description>
+            <documentation>http://griffon.codehaus.org/Jexplose+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jexplose/tags/RELEASE_0_1/griffon-jexplose-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="jgoodies-forms" latest-release="0.3">
@@ -1231,6 +1273,17 @@ http://jgraph.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jogl/tags/RELEASE_0_3/griffon-jogl-0.3.zip</file>
         </release>
     </plugin>
+    <plugin name="jsyntaxpane" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Integrates JSyntaxPane</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Integrates JSyntaxPane
+http://code.google.com/p/jsyntaxpane/</description>
+            <documentation>http://griffon.codehaus.org/Jsyntaxpane+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jsyntaxpane/tags/RELEASE_0_1/griffon-jsyntaxpane-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="jtreemap" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JTreeMap Integration</title>
@@ -1246,10 +1299,7 @@ http://jgraph.com</description>
             <authorEmail>hackergarten@canoo.com</authorEmail>
             <description>Integrates the JTreeMap library.</description>
             <documentation>http://griffon.codehaus.org/Jtreemap+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-jtreemap/tags/RELEASE_0_2/griffon-jtreemap-0.2.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jtreemap/tags/RELEASE_0_2/griffon-jtreemap-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="jung" latest-release="0.3">
@@ -1302,10 +1352,7 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <authorEmail>aalmiraa@users.sourceforge.net</authorEmail>
             <description>JXLayer can be used with Jdk6 and older. JLayer can be used with Jdk7 and newer.</description>
             <documentation>http://griffon.codehaus.org/Jxlayer+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-jxlayer/tags/RELEASE_0_1_1/griffon-jxlayer-0.1.1.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jxlayer/tags/RELEASE_0_1_1/griffon-jxlayer-0.1.1.zip</file>
         </release>
     </plugin>
     <plugin name="lang-bridge" latest-release="0.4.1">
@@ -1355,10 +1402,7 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
             <description>Enables interoperability between JVM languages</description>
             <documentation>http://griffon.codehaus.org/LangBridge+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-lang-bridge/tags/RELEASE_0_4_1/griffon-lang-bridge-0.4.1.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lang-bridge/tags/RELEASE_0_4_1/griffon-lang-bridge-0.4.1.zip</file>
         </release>
     </plugin>
     <plugin name="lookandfeel" latest-release="0.2">
@@ -1376,10 +1420,7 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Swing Look &amp; Feel selector.</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel/tags/RELEASE_0_2/griffon-lookandfeel-0.2.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel/tags/RELEASE_0_2/griffon-lookandfeel-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="lookandfeel-a03" latest-release="0.1">
@@ -1430,10 +1471,18 @@ http://www.jtattoo.net:%s%</description>
             <description>JTattoo Swing Look &amp; Feel.
 http://www.jtattoo.net:%s%</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+JTattoo+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-jtattoo/tags/RELEASE_0_2/griffon-lookandfeel-jtattoo-0.2.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-jtattoo/tags/RELEASE_0_2/griffon-lookandfeel-jtattoo-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="lookandfeel-kunststoff" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Kunststoff Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Kunststoff Swing Look &amp; Feel.
+http://kunstoff.incors.com/archive/index.php3</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+Kunststoff+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-kunststoff/tags/RELEASE_0_1/griffon-lookandfeel-kunststoff-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="lookandfeel-liquidlnf" latest-release="0.1">
@@ -1500,6 +1549,16 @@ http://www.pagosoft.com/products/pgslookandfeel/index.html</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-pgslaf/tags/RELEASE_0_1/griffon-lookandfeel-pgslaf-0.1.zip</file>
         </release>
     </plugin>
+    <plugin name="lookandfeel-quaqua" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Quaqua Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Quaqua Swing Look &amp; Feel.</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+Quaqua+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-quaqua/tags/RELEASE_0_1/griffon-lookandfeel-quaqua-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="lookandfeel-skinlnf" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Skinlnf Swing Look &amp; Feel</title>
@@ -1537,10 +1596,7 @@ http://squareness.beeger.net/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Substance Swing Look &amp; Feel.</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Substance+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-substance/tags/RELEASE_0_2/griffon-lookandfeel-substance-0.2.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-substance/tags/RELEASE_0_2/griffon-lookandfeel-substance-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="lookandfeel-tinylaf" latest-release="0.1">
@@ -1705,6 +1761,17 @@ http://miglayout.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-mongo-db/tags/RELEASE_0_1_1/griffon-mongo-db-0.1.1.zip</file>
         </release>
     </plugin>
+    <plugin name="mousegestures" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Mouse gestures recognizer</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Mouse gestures recognizer
+http://www.smardec.com/products/mouse-gestures.html</description>
+            <documentation>http://griffon.codehaus.org/Mousegestures+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-mousegestures/tags/RELEASE_0_1/griffon-mousegestures-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="multidoc" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Multi-Document Support</title>
@@ -1766,10 +1833,19 @@ http://miglayout.com</description>
             <authorEmail>hackergarten@gmail.com</authorEmail>
             <description>This plugin allows easy access to several desktop notification agents. If the user is running notify-send, Growl, or Snarl, then these services are used to display a notification message. If none of these are installed, then a dialog message is shown for several seconds to the user.</description>
             <documentation>http://griffon.codehaus.org/Notify+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-notify/tags/RELEASE_0_2/griffon-notify-0.2.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-notify/tags/RELEASE_0_2/griffon-notify-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="nuvolaIcons"/>
+    <plugin name="nuvolaicons" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Nuvola desktop icons</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Nuvola desktop icons
+http://www.icon-king.com/projects/nuvola/</description>
+            <documentation>http://griffon.codehaus.org/Nuvolaicons+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-nuvolaicons/tags/RELEASE_0_1/griffon-nuvolaicons-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="oxbow" latest-release="0.2">
@@ -1915,6 +1991,17 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-riak/tags/RELEASE_0_1/griffon-riak-0.1.zip</file>
         </release>
     </plugin>
+    <plugin name="riverlayout" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>RiverLayout Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>RiverLayout Plugin
+http://www.datadosen.se/riverlayout/</description>
+            <documentation>http://griffon.codehaus.org/Riverlayout+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-riverlayout/tags/RELEASE_0_1/griffon-riverlayout-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="rmi" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>RMI client</title>
@@ -2020,10 +2107,7 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>This plugin enables the usage of Scala classes in your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_7_1/griffon-scala-0.7.1.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_7_1/griffon-scala-0.7.1.zip</file>
         </release>
     </plugin>
     <plugin name="serial" latest-release="0.2">
@@ -2143,6 +2227,40 @@ http://grails.org/plugin/spock</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_3/griffon-spring-0.3.zip</file>
         </release>
     </plugin>
+    <plugin name="steel" latest-release="0.3">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Gerrit Grunwald's Steel Series</title>
+            <author>Andres Almirays</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Gerrit Grunwald's Steel Series</description>
+            <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_1/griffon-steel-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
+            <title>Gerrit Grunwald's Steel Series</title>
+            <author>Andres Almirays</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Gerrit Grunwald's Steel Series</description>
+            <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_2/griffon-steel-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_2_1" type="svn" version="0.2.1">
+            <title>Gerrit Grunwald's Steel Series</title>
+            <author>Andres Almirays</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Gerrit Grunwald's Steel Series</description>
+            <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_2_1/griffon-steel-0.2.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
+            <title>Gerrit Grunwald's Steel Series</title>
+            <author>Andres Almirays</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Gerrit Grunwald's Steel Series</description>
+            <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_3/griffon-steel-0.3.zip</file>
+        </release>
+    </plugin>
     <plugin name="swingx-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>SwingX Builder Plugin</title>
@@ -2167,10 +2285,7 @@ http://grails.org/plugin/spock</description>
             <description>\
 Brings the SwingX Builder libraries into a Griffon Build</description>
             <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/tags/RELEASE_0_2/griffon-swingx-builder-0.2.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/tags/RELEASE_0_2/griffon-swingx-builder-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="swingx-ws" latest-release="0.1">
@@ -2387,10 +2502,7 @@ http://freedesktop.org</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Brings de Trident Builder libraries into a Griffon Build</description>
             <documentation>http://griffon.codehaus.org/TridentBuilder+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-trident-builder/tags/RELEASE_0_5/griffon-trident-builder-0.5.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-trident-builder/tags/RELEASE_0_5/griffon-trident-builder-0.5.zip</file>
         </release>
     </plugin>
     <plugin name="validation" latest-release="0.5.1">
@@ -2542,10 +2654,7 @@ http://freedesktop.org</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>WS client &amp; libraries</description>
             <documentation>http://griffon.codehaus.org/Wsclient+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-wsclient/tags/RELEASE_0_3_1/griffon-wsclient-0.3.1.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-wsclient/tags/RELEASE_0_3_1/griffon-wsclient-0.3.1.zip</file>
         </release>
     </plugin>
     <plugin name="xmlrpc" latest-release="0.3">
@@ -2574,20 +2683,6 @@ http://freedesktop.org</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-xmlrpc/tags/RELEASE_0_3/griffon-xmlrpc-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-kunststoff" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Kunststoff Swing Look &amp; Feel</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Kunststoff Swing Look &amp; Feel.
-http://kunstoff.incors.com/archive/index.php3</description>
-            <documentation>http://griffon.codehaus.org/Lookandfeel+Kunststoff+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-kunststoff/tags/RELEASE_0_1/griffon-lookandfeel-kunststoff-0.1.zip</file>
-        </release>
-    </plugin>
     <plugin name="zonelayout" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>ZoneLayout support</title>
@@ -2596,194 +2691,7 @@ http://kunstoff.incors.com/archive/index.php3</description>
             <description>ZoneLayout support
 http://zonelayout.com</description>
             <documentation>http://griffon.codehaus.org/Zonelayout+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_1/griffon-zonelayout-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="nuvolaicons" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Nuvola desktop icons</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Nuvola desktop icons
-http://www.icon-king.com/projects/nuvola/</description>
-            <documentation>http://griffon.codehaus.org/Nuvolaicons+Plugin</documentation>
-            <license>GNU LGPL 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-nuvolaicons/tags/RELEASE_0_1/griffon-nuvolaicons-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="riverlayout" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>RiverLayout Plugin</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>RiverLayout Plugin
-http://www.datadosen.se/riverlayout/</description>
-            <documentation>http://griffon.codehaus.org/Riverlayout+Plugin</documentation>
-            <license>GNU LGPL 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-riverlayout/tags/RELEASE_0_1/griffon-riverlayout-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="designgridlayout" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>DesignGridLayout Plugin</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>DesignGridLayout Plugin
-https://designgridlayout.dev.java.net</description>
-            <documentation>http://griffon.codehaus.org/Designgridlayout+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-designgridlayout/tags/RELEASE_0_1/griffon-designgridlayout-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="crystalicons" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Crystal desktop icons</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Crystal desktop icons
-http://everaldo.com/crystal/</description>
-            <documentation>http://griffon.codehaus.org/Crystalicons+Plugin</documentation>
-            <license>GNU LGPL 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-crystalicons/tags/RELEASE_0_1/griffon-crystalicons-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="jcalendar" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Date &amp; Calendar support</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Date &amp; Calendar support
-http://www.toedter.com/en/jcalendar/</description>
-            <documentation>http://griffon.codehaus.org/Jcalendar+Plugin</documentation>
-            <license>GNU LGPL 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-jcalendar/tags/RELEASE_0_1/griffon-jcalendar-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="barcode" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Generate and display barcodes</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Generate and display barcodes with barcode4j
-http://barcode4j.sourceforge.net</description>
-            <documentation>http://griffon.codehaus.org/Barcode+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-barcode/tags/RELEASE_0_1/griffon-barcode-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="mousegestures" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Mouse gestures recognizer</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Mouse gestures recognizer
-http://www.smardec.com/products/mouse-gestures.html</description>
-            <documentation>http://griffon.codehaus.org/Mousegestures+Plugin</documentation>
-            <license>GNU LGPL 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-mousegestures/tags/RELEASE_0_1/griffon-mousegestures-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="lookandfeel-quaqua" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Quaqua Swing Look &amp; Feel</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Quaqua Swing Look &amp; Feel.</description>
-            <documentation>http://griffon.codehaus.org/Lookandfeel+Quaqua+Plugin</documentation>
-            <license>GNU LGPL 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms>macosx,macosx64</platforms>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-quaqua/tags/RELEASE_0_1/griffon-lookandfeel-quaqua-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="jexplose" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Expose-like effect for DesktopPanes</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Expose-like effect for DesktopPanes</description>
-            <documentation>http://griffon.codehaus.org/Jexplose+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-jexplose/tags/RELEASE_0_1/griffon-jexplose-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="steel" latest-release="0.3">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Gerrit Grunwald's Steel Series</title>
-            <author>Andres Almirays</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Gerrit Grunwald's Steel Series</description>
-            <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
-            <license>BSD</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_1/griffon-steel-0.1.zip</file>
-        </release>
-        <release tag="RELEASE_0_2" type="svn" version="0.2">
-            <title>Gerrit Grunwald's Steel Series</title>
-            <author>Andres Almirays</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Gerrit Grunwald's Steel Series</description>
-            <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
-            <license>BSD</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_2/griffon-steel-0.2.zip</file>
-        </release>
-        <release tag="RELEASE_0_2_1" type="svn" version="0.2.1">
-            <title>Gerrit Grunwald's Steel Series</title>
-            <author>Andres Almirays</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Gerrit Grunwald's Steel Series</description>
-            <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
-            <license>BSD</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_2_1/griffon-steel-0.2.1.zip</file>
-        </release>
-        <release tag="RELEASE_0_3" type="svn" version="0.3">
-            <title>Gerrit Grunwald's Steel Series</title>
-            <author>Andres Almirays</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Gerrit Grunwald's Steel Series</description>
-            <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
-            <license>BSD</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_3/griffon-steel-0.3.zip</file>
-        </release>
-    </plugin>
-    <plugin name="jsyntaxpane" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Integrates JSyntaxPane</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Integrates JSyntaxPane
-http://code.google.com/p/jsyntaxpane/</description>
-            <documentation>http://griffon.codehaus.org/Jsyntaxpane+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>https://svn.codehaus.org/griffon/plugins/griffon-jsyntaxpane/tags/RELEASE_0_1/griffon-jsyntaxpane-0.1.zip</file>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_1/griffon-zonelayout-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
