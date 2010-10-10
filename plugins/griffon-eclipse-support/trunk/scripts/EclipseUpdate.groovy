@@ -18,6 +18,8 @@
  * @author Andres Almiray
  */
 
+import griffon.util.PluginBuildSettings
+
 import groovy.xml.MarkupBuilder
 
 includeTargets << griffonScript("Init")
@@ -84,9 +86,9 @@ updateEclipseClasspathFile = { newPlugin = null ->
         }
 
         mkp.yieldUnescaped("\n${indent}<!-- plugin libs -->")
-        getPluginDirectories().each { pluginDir ->
-            if(pluginDir.file.name == newPlugin) return
-            def libDir = new File(pluginDir.file.absolutePath, 'lib')
+        doWithPlugins{ pluginName, pluginVersion, pluginDir ->
+            if("${pluginName}-${pluginVersion}" == newPlugin) return
+            def libDir = new File(pluginDir, 'lib')
             pluginClasspathEntries(libDir)
         }
         if(newPlugin) {

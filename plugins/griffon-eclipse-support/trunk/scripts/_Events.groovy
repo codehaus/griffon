@@ -26,7 +26,13 @@ eventPluginInstalled = { fullPluginName ->
 }
 eventPluginUninstalled = { msg ->
     includePluginScript('eclipse-support', 'EclipseUpdate')
-    updateEclipseClasspathFile()
+    try {
+        updateEclipseClasspathFile()
+    } catch(MissingMethodException mme) {
+        if(getPluginDirForName('eclipse-support')) {
+            throw mme
+        }
+    }
 }
 eventCreatedArtifact = { type, className ->
     includePluginScript('eclipse-support', 'EclipseUpdate')
