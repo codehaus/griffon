@@ -93,4 +93,8 @@ class DesignGridLayoutFactory extends LayoutFactory {
 
         false
     }
+
+    void setParent(FactoryBuilderSupport builder, Object parent, Object child) {
+        // empty
+    }
 }
