@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2746">
+<plugins revision="2752">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -390,7 +390,7 @@ http://everaldo.com/crystal/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-db4o/tags/RELEASE_0_2/griffon-db4o-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="designgridlayout" latest-release="0.1">
+    <plugin name="designgridlayout" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>DesignGridLayout Plugin</title>
             <author>Andres Almiray</author>
@@ -399,6 +399,18 @@ http://everaldo.com/crystal/</description>
 https://designgridlayout.dev.java.net</description>
             <documentation>http://griffon.codehaus.org/Designgridlayout+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-designgridlayout/tags/RELEASE_0_1/griffon-designgridlayout-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>DesignGridLayout Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>DesignGridLayout Plugin
+https://designgridlayout.dev.java.net</description>
+            <documentation>http://griffon.codehaus.org/Designgridlayout+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-designgridlayout/tags/RELEASE_0_2/griffon-designgridlayout-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="docking-frame" latest-release="0.2">
@@ -1038,7 +1050,7 @@ Supported formats are:
             <documentation>http://griffon.codehaus.org/Installer+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-installer/tags/RELEASE_0_5/griffon-installer-0.5.zip</file>
         </release>
-        <release tag="RELEASE_0_5_1" version="0.5.1" type="svn">
+        <release tag="RELEASE_0_5_1" type="svn" version="0.5.1">
             <title>Creates launchers and installers for your Griffon application</title>
             <author>Andres Almiray, Josh Reed</author>
             <authorEmail>aalmiray@users.sourceforge.net, jareed@andrill.org</authorEmail>
