@@ -50,11 +50,14 @@ final class BerkeleydbConnector {
             if(connected) return
             connected = true
         }
+
         this.app = app
-        BerkeleydbConnector.instance.startEnvironment(dbConfig)
+        app.event('BerkeleydbConnectStart', [config])
+        BerkeleydbConnector.instance.startEnvironment(config)
         bootstrap = app.class.classLoader.loadClass('BootstrapBerkeleydb').newInstance()
         bootstrap.metaClass.app = app
         bootstrap.init(EnvironmentHolder.instance.environment)
+        app.event('BerkeleydbConnectEnd', [EnvironmentHolder.instance.environment])
     }
 
     void disconnect(GriffonApplication app, ConfigObject config) {
@@ -63,8 +66,10 @@ final class BerkeleydbConnector {
             connected = false
         }
 
+        app.event('BerkeleydbDisconnectStart', [config, EnvironmentHolder.instance.environment])
         bootstrap.destroy(EnvironmentHolder.instance.environment)
         stopEnvironment(config)
+        app.event('BerkeleydbDisconnectEnd')
     }
 
     private void startEnvironment(config) {
