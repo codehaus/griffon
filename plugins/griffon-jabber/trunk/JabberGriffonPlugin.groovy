@@ -18,9 +18,9 @@
  * @author Andres Almiray
  */
 class JabberGriffonPlugin {
-    def version = '0.3'
-    def dependsOn = [xmlrpc: 0.3]
-    def griffonVersion = '0.9 > *'
+    def version = '0.4'
+    def dependsOn = [xmlrpc: 0.4]
+    def griffonVersion = '0.9.1 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'
