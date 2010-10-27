@@ -49,7 +49,7 @@ final class CouchdbConnector {
     private GriffonApplication app
 
     def createConfig(GriffonApplication app) {
-        def couchconfigClass = app.class.classLoader.loadClass("CouchConfig")
+        def couchconfigClass = app.class.classLoader.loadClass('CouchConfig')
         return new ConfigSlurper(Environment.current.name).parse(couchconfigClass)
     }
 
@@ -60,10 +60,12 @@ final class CouchdbConnector {
         }
 
         this.app = app
+        app.event('CouchdbConnectStart', [config])
         startCouchdb(config)
         bootstrap = app.class.classLoader.loadClass('BootstrapCouchdb').newInstance()
         bootstrap.metaClass.app = app
         bootstrap.init(DatabaseHolder.instance.db)
+        app.event('CouchdbConnectEnd', [DatabaseHolder.instance.db])
     }
 
     void disconnect(GriffonApplication app, ConfigObject config) {
@@ -71,17 +73,20 @@ final class CouchdbConnector {
             if(!connected) return
             connected = false
         }
+
+        app.event('CouchdbDisconnectStart', [config, DatabaseHolder.instance.db])
         bootstrap.destroy(DatabaseHolder.instance.db)
+        app.event('CouchdbDisconnectEnd')
     }
 
     private void startCouchdb(config) {
         def ds = config.couchdb
 
-        String host = ds?.host ?: "localhost"
+        String host = ds?.host ?: 'localhost'
         Integer port = ds?.port ?: 5984
-        String database = ds?.database ?: app.metadata["app.name"]
-        String username = ds?.username ?: ""
-        String password = ds?.password ?: ""
+        String database = ds?.database ?: app.metadata['app.name']
+        String username = ds?.username ?: ''
+        String password = ds?.password ?: ''
 
         String realm = ds?.realm ?: null
         String scheme = ds?.scheme ?: null
@@ -106,7 +111,7 @@ final class CouchdbConnector {
         typeConverterRepository.addTypeConverter(dateConverter)
 
         JSON generator = new JSON()
-        generator.setIgnoredProperties(Arrays.asList("metaClass"))
+        generator.setIgnoredProperties(Arrays.asList('metaClass'))
         generator.setTypeConverterRepository(typeConverterRepository)
         generator.registerTypeConversion(java.util.Date, dateConverter)
         generator.registerTypeConversion(java.sql.Date, dateConverter)
