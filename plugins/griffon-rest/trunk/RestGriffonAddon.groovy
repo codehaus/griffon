@@ -25,26 +25,29 @@ import java.lang.reflect.InvocationTargetException
  */
 class RestGriffonAddon {
    def events = [
-      NewInstance: { klass, type, instance ->
+      NewInstance: {klass, type, instance ->
          def types = app.config.griffon?.rest?.injectInto ?: ['controller']
          if(!types.contains(type)) return
-         instance.metaClass.withAsyncHttp = withClient.curry(AsyncHTTPBuilder, instance)
-         instance.metaClass.withHttp = withClient.curry(HTTPBuilder, instance)
-         instance.metaClass.withRest = withClient.curry(RESTClient, instance)
+         app.artifactManager.findGriffonClass(klass).metaClass.with {
+             withAsyncHttp = withClient.curry(AsyncHTTPBuilder, instance)
+             withHttp = withClient.curry(HTTPBuilder, instance)
+             withRest = withClient.curry(RESTClient, instance)
+         }
       }
    ]
 
    // ======================================================
 
-   private withClient = { Class klass, Object instance, Map params, Closure closure ->
+   private withClient = {Class klass, Object instance, Map params, Closure closure ->
       def client = null
       if(params.id) {
          String id = params.remove('id').toString()
-         if(instance.metaClass.hasProperty(instance, id)) {
+         MetaClass mc = app.artifactManager.findGriffonClass(instance).metaClass
+         if(mc.hasProperty(instance, id)) {
             client = instance."$id"
          } else {
             client = makeClient(klass, params) 
-            instance.metaClass."$id" = client
+            mc."$id" = client
          }
       } else {
         client = makeClient(klass, params) 
