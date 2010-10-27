@@ -56,6 +56,7 @@ final class GsqlConnector {
         }
 
         this.app = app
+        app.event('GsqlConnectStart', [config])
         createDataSource(config)
         def skipSchema = app.config?.griffon?.gsql?.schema?.skip ?: false
         if(!skipSchema) createSchema(config)
@@ -63,6 +64,7 @@ final class GsqlConnector {
         bootstrap = app.class.classLoader.loadClass('BootstrapGsql').newInstance()
         bootstrap.metaClass.app = app
         withSql { sql -> bootstrap.init(sql) }
+        app.event('GsqlConnectEnd', [DataSourceHolder.instance.dataSource])
     }
 
     void disconnect(GriffonApplication app, ConfigObject config) {
@@ -71,6 +73,7 @@ final class GsqlConnector {
             connected = false
         }
 
+        app.event('GsqlDisconnectStart', [config, DataSourceHolder.instance.dataSource])
         Connection connection = null
         try {
             connection = DataSourceHolder.instance.dataSource.getConnection()
@@ -80,6 +83,7 @@ final class GsqlConnector {
             }
         } finally {
             connection?.close()
+            app.event('GsqlDisconnectEnd')
         }
     }
 

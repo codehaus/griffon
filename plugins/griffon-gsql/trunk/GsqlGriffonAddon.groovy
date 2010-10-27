@@ -35,7 +35,9 @@ class GsqlGriffonAddon {
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            instance.metaClass.withSql = GsqlConnector.instance.withSql
+            app.artifactManager.findGriffonClass(klass).metaClass.with {
+                withSql = GsqlConnector.instance.withSql
+            }
         }
     ]
 
