@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2863">
+<plugins revision="2868">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -253,7 +253,7 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <documentation>http://griffon.codehaus.org/Codenarc+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_4/griffon-codenarc-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>CodeNarc plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -885,7 +885,7 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_4/griffon-glazedlists-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="gmetrics" latest-release="0.2">
+    <plugin name="gmetrics" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
             <author>Your name</author>
@@ -902,6 +902,18 @@ Provides a nice icon set too.</description>
 Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <documentation>http://griffon.codehaus.org/Gmetrics+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gmetrics/tags/RELEASE_0_2/griffon-gmetrics-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>GMetrics plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Runs GMetrics analysis rules for Groovy source.
+Based on the original Grails gmetrics plugin by Scott Ryan.</description>
+            <documentation>http://griffon.codehaus.org/Gmetrics+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-gmetrics/tags/RELEASE_0_3/griffon-gmetrics-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="gorm"/>
