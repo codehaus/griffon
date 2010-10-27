@@ -18,7 +18,7 @@ package griffon.spock
 
 import spock.lang.Specification
 import griffon.core.GriffonApplication
-import org.codehaus.griffon.commons.ApplicationHolder
+import griffon.util.ApplicationHolder
 import org.codehaus.griffon.test.support.GriffonTestAutowirer
 
 class IntegrationSpec extends Specification {

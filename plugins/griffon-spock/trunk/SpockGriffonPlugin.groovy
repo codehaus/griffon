@@ -19,9 +19,9 @@
  */
 class SpockGriffonPlugin {
     // the plugin version
-    def version = "0.1"
+    def version = "0.2"
     // the version or versions of Griffon the plugin is designed for
-    def griffonVersion = '0.9 > *' 
+    def griffonVersion = '0.9.1 > *' 
     // the other plugins this plugin depends on
     def dependsOn = [:]
     // resources that are included in plugin packaging
