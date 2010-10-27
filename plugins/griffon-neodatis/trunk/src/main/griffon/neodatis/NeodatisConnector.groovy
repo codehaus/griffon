@@ -42,10 +42,12 @@ final class NeodatisConnector {
         }
 
         this.app = app
+        app.event('NeodatisConnectStart', [config])
         startOdb(config)
         bootstrap = app.class.classLoader.loadClass('BootstrapNeodatis').newInstance()
         bootstrap.metaClass.app = app
         bootstrap.init(OdbHolder.instance.odb)
+        app.event('NeodatisConnectEnd', [OdbHolder.instance.odb])
     }
 
     void disconnect(GriffonApplication app, ConfigObject config) {
@@ -54,8 +56,10 @@ final class NeodatisConnector {
             connected = false
         }
 
+        app.event('NeodatisDisconnectStart', [config, OdbHolder.instance.odb])
         bootstrap.destroy(OdbHolder.instance.odb)
         stopOdb(config)
+        appe.event('NeodatisDisconnectEnd')
     }
 
     private void startOdb(config) {
