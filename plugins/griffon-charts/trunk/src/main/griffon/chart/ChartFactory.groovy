@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package griffon.charts
+package griffon.chart
 
 import com.thecoderscorner.groovychart.chart.ChartBuilder
 import org.jfree.chart.ChartPanel
