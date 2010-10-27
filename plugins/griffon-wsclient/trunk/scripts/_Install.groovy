@@ -33,8 +33,8 @@ root.'WsclientGriffonAddon'.addon=true
 ''')
 }
 
-if(!(config.flatten().'griffon.wsclient.injectInto')) {
+if(!(config.flatten().'griffon.ws.injectInto')) {
     configFile.append('''
-griffon.wsclient.injectInto = ["controller"]
+griffon.ws.injectInto = ['controller']
 ''')
 }

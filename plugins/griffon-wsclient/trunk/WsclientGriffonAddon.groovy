@@ -25,7 +25,9 @@ class WsclientGriffonAddon {
       NewInstance: { klass, type, instance ->
          def types = app.config.griffon?.ws?.injectInto ?: ['controller']
          if(!types.contains(type)) return
-         instance.metaClass.withWs = withClient.curry(instance)
+         app.artifactManager.findGriffonClass(klass).metaClass.with {
+             withWs = withClient.curry(instance)
+         }
       }
    ]
 
@@ -35,11 +37,12 @@ class WsclientGriffonAddon {
       def client = null
       if(params.id) {
          String id = params.remove('id').toString()
-         if(instance.metaClass.hasProperty(instance, id)) {
+         MetaClass mc = app.artifactManager.findGriffonClass(klass).metaClass
+         if(mc.hasProperty(instance, id)) {
             client = instance."$id"
          } else {
             client = makeClient(params) 
-            instance.metaClass."$id" = client
+            mc."$id" = client
          }
       } else {
         client = makeClient(params) 
