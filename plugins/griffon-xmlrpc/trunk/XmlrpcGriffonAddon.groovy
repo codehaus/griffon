@@ -24,7 +24,9 @@ class XmlrpcGriffonAddon {
       NewInstance: { klass, type, instance ->
          def types = app.config.griffon?.xmlrpc?.injectInto ?: ['controller']
          if(!types.contains(type)) return
-         instance.metaClass.withXmlrpc = withClient.curry(instance)
+         app.artifactManager.findGriffonClass(klass).metaClass.with {
+             withXmlrpc = withClient.curry(instance)
+         }
       }
    ]
 
@@ -34,11 +36,12 @@ class XmlrpcGriffonAddon {
       def client = null
       if(params.id) {
          String id = params.remove('id').toString()
-         if(instance.metaClass.hasProperty(instance, id)) {
+         MetaClass mc = app.artifactManager.findGriffonClass(klass).metaClass
+         if(mc.hasProperty(instance, id)) {
             client = instance."$id"
          } else {
             client = makeClient(params) 
-            instance.metaClass."$id" = client
+            mc."$id" = client
          }
       } else {
         client = makeClient(params) 
