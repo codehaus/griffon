@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2858">
+<plugins revision="2863">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -219,7 +219,7 @@ Based on grails-code-coverage by Mike Hugo.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_4/griffon-code-coverage-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="codenarc" latest-release="0.4">
+    <plugin name="codenarc" latest-release="0.5">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>CodeNarc plugin</title>
             <author>Andres Almiray</author>
@@ -252,6 +252,18 @@ Based on grails-code-coverage by Mike Hugo.</description>
 Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <documentation>http://griffon.codehaus.org/Codenarc+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_4/griffon-codenarc-0.4.zip</file>
+        </release>
+        <release tag="RELEASE_0_5" version="0.5" type="svn">
+            <title>CodeNarc plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Runs CodeNarc static analysis rules for Groovy source.
+Based on the original Grails codenarc plugin by Burt Beckwith.</description>
+            <documentation>http://griffon.codehaus.org/Codenarc+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_5/griffon-codenarc-0.5.zip</file>
         </release>
     </plugin>
     <plugin name="couchdb" latest-release="0.4">
@@ -479,7 +491,7 @@ another docking frame in the application.</description>
             <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_2/griffon-easyb-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>Enables BDD testing with Easyb</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
