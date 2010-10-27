@@ -33,7 +33,9 @@ class JabberGriffonAddon {
       NewInstance: { klass, type, instance ->
          def types = app.config.griffon?.jabber?.injectInto ?: ['controller']
          if(!types.contains(type)) return
-         instance.metaClass.jabberConnect = jabberConnect.curry(instance)
+         app.artifactManager.findGriffonClass(klass).metaClass.with {
+             jabberConnect = jabberConnect.curry(instance)
+         }
       }
    ]
 
@@ -90,14 +92,14 @@ class JabberGriffonAddon {
    }
 
    private void notifyListener(Object instance, String eventHandler, List params) {
-      def mp = instance.metaClass.getMetaProperty(eventHandler)
+      def mp = app.artifactManager.findGriffonClass(klass).metaClass.getMetaProperty(eventHandler)
       if(mp && mp.getProperty(instance)) {
          mp.getProperty(instance)(*params)
          return
       }
 
       Class[] argTypes = MetaClassHelper.convertToTypeArray(params as Object[])
-      def mm = instance.metaClass.pickMethod(eventHandler,argTypes)
+      def mm = app.artifactManager.findGriffonClass(klass).metaClass.pickMethod(eventHandler,argTypes)
       if(mm) {
          mm.invoke(instance,*params)
       }
