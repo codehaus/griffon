@@ -18,7 +18,7 @@ package griffon.fest
 
 import org.fest.swing.fixture.FrameFixture
 import java.util.concurrent.CountDownLatch
-import griffon.swing.SwingApplication
+import griffon.swing.SwingGriffonApplication
 import griffon.test.GriffonUnitTestCase
 
 /**
@@ -28,7 +28,7 @@ abstract class FestSwingTestCase extends GriffonUnitTestCase {
     private boolean realized = false
     private final Object realizedLock = new Object()
 
-    protected SwingApplication app
+    protected SwingGriffonApplication app
     protected FrameFixture window
 
     protected final void setUp() {
@@ -43,6 +43,7 @@ abstract class FestSwingTestCase extends GriffonUnitTestCase {
         super.tearDown()
     }
  
+    protected void setupConfig(SwingGriffonApplication app) { }
     protected void onSetUp() { }
     protected void onTearDown() { }
  
@@ -54,6 +55,7 @@ abstract class FestSwingTestCase extends GriffonUnitTestCase {
                 }
 
                 def latch = new CountDownLatch(1)
+                setupConfig(app)
                 app.execSync {
                     app.realize()
                     latch.countDown()
