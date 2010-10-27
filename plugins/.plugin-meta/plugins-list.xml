@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2799">
+<plugins revision="2804">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1911,7 +1911,7 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <documentation>http://griffon.codehaus.org/Neodatis+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neodatis/tags/RELEASE_0_2/griffon-neodatis-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>Neodatis support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2086,7 +2086,7 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rest/tags/RELEASE_0_4/griffon-rest-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="riak" latest-release="0.1">
+    <plugin name="riak" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Riak support</title>
             <author>Andres Almiray</author>
@@ -2094,6 +2094,17 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <description>Riak support</description>
             <documentation>http://griffon.codehaus.org/Riak+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-riak/tags/RELEASE_0_1/griffon-riak-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Riak support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Riak support</description>
+            <documentation>http://griffon.codehaus.org/Riak+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-riak/tags/RELEASE_0_2/griffon-riak-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="riverlayout" latest-release="0.1">
