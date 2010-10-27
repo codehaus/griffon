@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2789">
+<plugins revision="2794">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -284,7 +284,7 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_3/griffon-couchdb-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Couchdb support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1865,7 +1865,7 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-multidoc/tags/RELEASE_0_1/griffon-multidoc-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="neo4j" latest-release="0.2">
+    <plugin name="neo4j" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Neo4j support</title>
             <author>Andres Almiray</author>
@@ -1881,6 +1881,17 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <description>Neo4j support</description>
             <documentation>http://griffon.codehaus.org/Neo4j+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neo4j/tags/RELEASE_0_2/griffon-neo4j-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Neo4j support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Neo4j support</description>
+            <documentation>http://griffon.codehaus.org/Neo4j+Plugin</documentation>
+            <license>GNU Affero General Public License v3</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-neo4j/tags/RELEASE_0_3/griffon-neo4j-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="neodatis" latest-release="0.2">
