@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2784">
+<plugins revision="2789">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -259,7 +259,7 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_4/griffon-codenarc-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="couchdb" latest-release="0.3">
+    <plugin name="couchdb" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Couchdb support</title>
             <author>Andres Almiray</author>
@@ -283,6 +283,17 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <description>Couchdb support</description>
             <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_3/griffon-couchdb-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>Couchdb support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Couchdb support</description>
+            <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_4/griffon-couchdb-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="countries" latest-release="0.1">
@@ -945,7 +956,7 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_4/griffon-gsql-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>Gsql powered DataSource</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
