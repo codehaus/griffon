@@ -35,7 +35,7 @@ setDefaultTarget('codenarc')
 private void runCodenarc() {
     ant.taskdef(name: "codenarc", classname: "org.codenarc.ant.CodeNarcTask")
 
-    def codenarcConfig = buildCondig.codenarc
+    def codenarcConfig = buildConfig.codenarc
 
     String reportName = codenarcConfig.reportName ?: 'CodeNarcReport.html'
     String reportLocation = codenarcConfig.reportLocation ?: projectTargetDir
