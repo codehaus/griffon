@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2853">
+<plugins revision="2858">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -454,7 +454,7 @@ another docking frame in the application.</description>
     <plugin name="domain"/>
     <plugin name="domain-db4o"/>
     <plugin name="domain-gsql"/>
-    <plugin name="easyb" latest-release="0.2">
+    <plugin name="easyb" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables BDD testing with Easyb</title>
             <author>Andres Almiray</author>
@@ -478,6 +478,17 @@ another docking frame in the application.</description>
             <description>Enables BDD testing with Easyb (http://easyb.org)</description>
             <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_2/griffon-easyb-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Enables BDD testing with Easyb</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables BDD testing with Easyb (http://easyb.org)</description>
+            <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_3/griffon-easyb-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="eclipse-support" latest-release="0.3.1">
