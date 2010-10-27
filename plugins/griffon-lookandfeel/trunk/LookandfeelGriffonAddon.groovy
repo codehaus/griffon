@@ -57,8 +57,9 @@ class LookandfeelGriffonAddon {
         }
 
         String keyStrokeText = app.config?.lookandfeel?.keystroke
-        if(!keyStrokeText || keyStrokeText.toLowerCase() == 'none') return
+        if(keyStrokeText instanceof ConfigObject || !keyStrokeText || keyStrokeText.toLowerCase() == 'none') return
         KeyStroke trigger = KeyStroke.getKeyStroke(keyStrokeText)
+        if(!trigger) return
 
         KeyboardFocusManager.currentKeyboardFocusManager.addKeyEventDispatcher(new KeyEventDispatcher() {
             public boolean dispatchKeyEvent(KeyEvent e) {
