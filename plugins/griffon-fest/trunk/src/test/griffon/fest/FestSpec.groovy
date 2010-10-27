@@ -17,17 +17,17 @@
 package griffon.fest
 
 import spock.lang.Specification
-import org.codehaus.griffon.commons.ApplicationHolder
+import griffon.util.ApplicationHolder
 import org.codehaus.griffon.test.support.GriffonTestAutowirer
 import org.fest.swing.fixture.FrameFixture
-import griffon.swing.SwingApplication
+import griffon.swing.SwingGriffonApplication
 import java.util.concurrent.CountDownLatch
 
 /**
  * @author Andres Almiray
  */
 class FestSpec extends Specification {
-    protected SwingApplication app = ApplicationHolder.application
+    protected SwingGriffonApplication app = ApplicationHolder.application
     protected FrameFixture window
     private boolean realized = false
     private final Object realizedLock = new Object()
@@ -44,6 +44,7 @@ class FestSpec extends Specification {
         onCleanup()
     }
 
+    protected void setupConfig(SwingGriffonApplication app) { }
     protected void onSetup() {}
     protected void onCleanup() {}
 
@@ -55,6 +56,7 @@ class FestSpec extends Specification {
                 }
 
                 def latch = new CountDownLatch(1)
+                setupConfig(app)
                 app.execSync {
                     app.realize()
                     latch.countDown()

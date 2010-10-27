@@ -1,4 +1,4 @@
-<plugin name='fest' version='0.4.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='fest' version='0.5' griffonVersion='0.9.1 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Enables application testing with FEST</title>
@@ -10,6 +10,6 @@
     <resource>BuildConfig</resource>
   </resources>
   <dependencies>
-    <plugin name='spock' version='0.1' />
+    <plugin name='spock' version='0.2' />
   </dependencies>
 </plugin>

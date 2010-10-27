@@ -8,19 +8,14 @@ griffon.project.dependency.resolution = {
         griffonHome()
         griffonCentral()
 
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo name: 'FEST main', root: 'http://repository.codehaus.org/', m2compatible: true
+        mavenCentral()
     }
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        // runtime 'mysql:mysql-connector-java:5.1.5'
+        compile('org.easytesting:fest-swing-junit-4.5:1.2.1') { excludes 'junit' }
+        compile 'junit:junit:4.8.2'
+        text('org.easytesting:fest-swing-junit-4.5:1.2.1') { excludes 'junit' }
+        test 'junit:junit:4.8.2'
     }
 }
 
