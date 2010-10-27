@@ -17,13 +17,14 @@
 package griffon.plugin.easyb.test
 
 import org.codehaus.griffon.test.GriffonTestTypeResult
-import org.easyb.listener.ResultsCollector
+import org.easyb.listener.ExecutionListener
+import org.easyb.listener.ListenerBuilder
 
 public class GriffonEasybTestTypeResult implements GriffonTestTypeResult {
-    final ResultsCollector result
+    final ExecutionListener result
 
-    GriffonEasybTestTypeResult(ResultsCollector result) {
-        this.result = result
+    GriffonEasybTestTypeResult(ListenerBuilder builder) {
+        this.result = builder.get()
     }
 
     public int getPassCount() {
