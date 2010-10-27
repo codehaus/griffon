@@ -57,10 +57,12 @@ final class Neo4jConnector {
         }
 
         this.app = app
+        app.event('Neo4jConnectStart', [config])
         startNeo4j(config)
         bootstrap = app.class.classLoader.loadClass('BootstrapNeo4j').newInstance()
         bootstrap.metaClass.app = app
         bootstrap.init(DatabaseHolder.instance.db)
+        app.event('Neo4jConnectEnd', [DatabaseHolder.instance.db])
     }
 
     void disconnect(GriffonApplication app, ConfigObject config) {
@@ -69,8 +71,10 @@ final class Neo4jConnector {
             connected = false
         }
 
+        app.event('Neo4jDisconnectStart', [config, DatabaseHolder.instance.db])
         bootstrap.destroy(DatabaseHolder.instance.db)
         stopNeo4j(config)
+        app.event('Neo4jDisconnectEnd')
     }
 
 

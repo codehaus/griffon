@@ -50,9 +50,11 @@ class Neo4jGriffonAddon {
             Neo4jConnector.instance.disconnect(app, config)
         },
         NewInstance: { klass, type, instance ->
-            def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
+            def types = app.config.griffon?.neo4j?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            instance.metaClass.withNeo4j = Neo4jConnector.instance.withNeo4j
+            app.artifactManager.findGriffonClass(klass).metaClass.with {
+                withNeo4j = Neo4jConnector.instance.withNeo4j
+            }
         }
     ]
 }
