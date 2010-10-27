@@ -14,7 +14,7 @@ griffon.project.dependency.resolution = {
     dependencies {
         compile('org.easytesting:fest-swing-junit-4.5:1.2.1') { excludes 'junit' }
         compile 'junit:junit:4.8.2'
-        text('org.easytesting:fest-swing-junit-4.5:1.2.1') { excludes 'junit' }
+        test('org.easytesting:fest-swing-junit-4.5:1.2.1') { excludes 'junit' }
         test 'junit:junit:4.8.2'
     }
 }
