@@ -32,9 +32,11 @@ class RiakGriffonAddon {
             RiakConnector.instance.disconnect(app, config)
         },
         NewInstance: { klass, type, instance ->
-            def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
+            def types = app.config.griffon?.riak?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            instance.metaClass.withRiak = RiakConnector.instance.withRiak
+            app.artifactManager.findGriffonClass(klass).metaClass.with {
+                withRiak = RiakConnector.instance.withRiak
+            }
         }
     ]
 }

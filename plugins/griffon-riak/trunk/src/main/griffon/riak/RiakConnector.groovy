@@ -42,10 +42,12 @@ final class RiakConnector {
         }
 
         this.app = app
+        app.event('RiakConnectStart', [config])
         RiakConnector.instance.startRiak(riakConfig)
         bootstrap = app.class.classLoader.loadClass('BootstrapRiak').newInstance()
         bootstrap.metaClass.app = app
         bootstrap.init(RawClientHolder.instance.rawClient)
+        app.event('RiakConnectEnd', [RawClientHolder.instance.rawClient])
     }
 
     void disconnect(GriffonApplication app, ConfigObject config) {
@@ -54,8 +56,10 @@ final class RiakConnector {
             connected = false
         }
 
+        app.event('RiakDisconnectStart', [config, RawClientHolder.instance.rawClient])
         bootstrap.destroy(RawClientHolder.instance.rawClient)
         stopRiak(config)
+        app.event('RiakDisconnectEnd')
     }
 
     private void startRiak(config) {
