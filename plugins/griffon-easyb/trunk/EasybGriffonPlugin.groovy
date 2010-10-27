@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class EasybGriffonPlugin {
-    def version = '0.2'
+    def version = '0.3'
     def dependsOn = [:]
     def griffonVersion = '0.9 > *'
     def license = 'Apache Software License 2.0'
