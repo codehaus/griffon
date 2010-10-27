@@ -1,0 +1,18 @@
+<plugin name='lookandfeel' version='0.3' griffonVersion='0.9.1 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Swing Look &amp; Feel selector</title>
+  <description>Swing Look &amp; Feel selector.</description>
+  <documentation>http://griffon.codehaus.org/Lookandfeel+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+    <resource>LookAndFeelSelectorController</resource>
+    <resource>LookAndFeelSelectorModel</resource>
+    <resource>LookAndFeelSelectorView</resource>
+  </resources>
+  <dependencies>
+    <plugin name='miglayout' version='0.1' />
+  </dependencies>
+</plugin>
