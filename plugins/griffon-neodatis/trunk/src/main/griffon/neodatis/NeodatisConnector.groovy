@@ -59,7 +59,7 @@ final class NeodatisConnector {
         app.event('NeodatisDisconnectStart', [config, OdbHolder.instance.odb])
         bootstrap.destroy(OdbHolder.instance.odb)
         stopOdb(config)
-        appe.event('NeodatisDisconnectEnd')
+        app.event('NeodatisDisconnectEnd')
     }
 
     private void startOdb(config) {
