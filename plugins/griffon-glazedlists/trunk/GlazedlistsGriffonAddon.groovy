@@ -25,6 +25,10 @@ import ca.odell.glazedlists.swing.AutoCompleteSupport
 import javax.swing.JTable
 import javax.swing.JComboBox
 import java.text.Format
+import javax.swing.ListSelectionModel
+import ca.odell.glazedlists.swing.EventSelectionModel
+import ca.odell.glazedlists.SortedList
+import ca.odell.glazedlists.swing.EventListJXTableSorting
 
 /**
  * @author Andres Almiray
@@ -32,10 +36,12 @@ import java.text.Format
 class GlazedlistsGriffonAddon {
     def factories = [
         defaultTableFormat: new DefaultTableFormatFactory(),
+        defaultWritableTableFormat: new DefaultWritableTableFormatFactory(),
         defaultAdvancedTableFormat: new DefaultAdvancedTableFormatFactory(),
         eventComboBoxModel: new EventComboBoxModelFactory(),
         eventListModel: new EventListModelFactory(),
         eventTreeModel: new EventTreeModelFactory(),
+        afterEdit: new EventTreeModelUpdateFactory(),
         eventTableModel: new EventTableModelFactory(),
         eventJXTableModel: new EventJXTableModelFactory()
     ]
@@ -86,6 +92,46 @@ class GlazedlistsGriffonAddon {
             } else {
                 AutoCompleteSupport.install(params.target, params.items)
             }
+        },
+
+        installEventSelectionModel: { Map args ->
+            def params = [target: current, mode: AbstractTableComparatorChooser.SINGLE_COLUMN] + args
+            if(!(params.target instanceof JTable)) {
+                throw new IllegalArgumentException("target: must be a JTable!")
+            }
+            if(!(params.source instanceof EventList)) {
+                throw new IllegalArgumentException("source: must be an EventList!")
+            }
+            if(!params.containsKey('selectionMode')) {
+                params.selectionMode = ListSelectionModel.SINGLE_SELECTION
+            }
+            if(!(params.selectionMode instanceof Integer) || !(0..2).contains(params.selectionMode)) {
+                throw new IllegalArgumentException("source: must be a one of ListSelectionModel.SINGLE_SELECTION, ListSelectionModel.MULTIPLE_INTERVAL_SELECTION or ListSelectionModel.SINGLE_INTERVAL_SELECTION!")
+            }
+            def selectionModel = new EventSelectionModel(params.source)
+            selectionModel.selectionMode = params.selectionMode
+            params.target.selectionModel = selectionModel
+            return selectionModel
+        },
+
+        installJXTableSorting: { Map args ->
+            def params = [target: current] + args
+            Class jxtableClass
+            try {
+                jxtableClass = Class.forName("org.jdesktop.swingx.JXTable")
+            } catch (e) {}
+            if(!(jxtableClass && jxtable.isAssignableFrom(params.target))) {
+                throw new IllegalArgumentException("target: must be a JXTable!")
+            }
+            if(!(params.source instanceof SortedList)) {
+                throw new IllegalArgumentException("source: must be an SortedList!")
+            }
+            if(!params.containsKey('multiple')) {
+                params.multiple = false
+            }
+            def jxts = EventListJXTableSorting.install(params.target, params.source)
+            jxts.multipleColumnSort = params.multiple
+            jxts
         },
     ]
 }
