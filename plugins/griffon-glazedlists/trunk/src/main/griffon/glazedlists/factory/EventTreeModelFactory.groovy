@@ -18,11 +18,13 @@ package griffon.glazedlists.factory
 
 import ca.odell.glazedlists.TreeList
 import ca.odell.glazedlists.swing.EventTreeModel
+import griffon.glazedlists.gui.ClosureEventTreeModel
+import javax.swing.JTree
 
 /**
  * @author Andres Almiray
  */
-class EventTreeModelFactory extends AbstractModelFactory {
+class EventTreeModelFactory extends AbstractFactory {
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes)
             throws InstantiationException, IllegalAccessException {
         if(FactoryBuilderSupport.checkValueIsTypeNotString(value, name, EventTreeModel)) {
@@ -33,6 +35,28 @@ class EventTreeModelFactory extends AbstractModelFactory {
             throw new IllegalArgumentException("In $name you must define a value for source: of type ${TreeList.class.name}")
         }
         TreeList source = attributes.remove('source')
-        new EventTreeModel(source)
+        new ClosureEventTreeModel(source)
+    }
+
+  def void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {
+    if(builder.context.containsKey('updateClosure'))
+      node.update = builder.context.updateClosure
+    if(parent instanceof JTree)
+      parent.model = node
+  }
+}
+
+class EventTreeModelUpdateFactory extends AbstractFactory {
+    public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {
+        return Collections.emptyMap()
+    }
+
+    public boolean isHandlesNodeChildren() {
+        return true
+    }
+
+    public boolean onNodeChildren(FactoryBuilderSupport builder, Object node, Closure childContent) {
+        builder.parentContext.updateClosure = childContent
+        return false
     }
 }

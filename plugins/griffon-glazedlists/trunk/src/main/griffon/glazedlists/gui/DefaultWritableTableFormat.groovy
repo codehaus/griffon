@@ -16,13 +16,18 @@
 
 package griffon.glazedlists.gui
 
+import ca.odell.glazedlists.gui.AdvancedTableFormat
 import ca.odell.glazedlists.gui.WritableTableFormat
 
 /**
  * @author Andres Almiray
  */
-class DefaultWritableTableFormat implements WritableTableFormat {
-    protected static final GET_COLUMN_VALUE_STRATEGY = { target, propertyName, index ->
+class DefaultWritableTableFormat implements WritableTableFormat, AdvancedTableFormat {
+    private static final Class DEFAULT_CLASS = Object
+    private static final Comparator DEFAULT_COMPARATOR = { a, b -> a <=> b } as Comparator
+
+    protected static final GET_COLUMN_VALUE_STRATEGY = { target, columns, index ->
+        def propertyName = columns[index]
         if(propertyName) {
             if(propertyName.size() == 1) propertyName = propertyName.toLowerCase()
             else propertyName = propertyName[0].toLowerCase() + propertyName[1..-1]
@@ -31,11 +36,17 @@ class DefaultWritableTableFormat implements WritableTableFormat {
         return null
     }
 
-    protected static final SET_COLUMN_VALUE_STRATEGY = { target, propertyName, index, editedValue ->
-        editedValue
+    protected static final SET_COLUMN_VALUE_STRATEGY = { target, columns, index, editedValue ->
+        def propertyName = columns[index]
+        if(propertyName) {
+            if(propertyName.size() == 1) propertyName = propertyName.toLowerCase()
+            else propertyName = propertyName[0].toLowerCase() + propertyName[1..-1]
+            target[propertyName] = editedValue
+        }
+		return target
     }
 
-    protected static final IS_EDITABLE_STRATEGY = { target, propertyName, index ->
+    protected static final IS_EDITABLE_STRATEGY = { target, columns, index ->
         true
     }
 
@@ -43,6 +54,8 @@ class DefaultWritableTableFormat implements WritableTableFormat {
     protected final List readers = []
     protected final List writers = []
     protected final List queries = []
+    protected final List classes = []
+    protected final List comparators = []
 
     DefaultWritableTableFormat(List columns, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY,
                                Closure setColumnValueStrategy = SET_COLUMN_VALUE_STRATEGY,
@@ -55,6 +68,8 @@ class DefaultWritableTableFormat implements WritableTableFormat {
         columns.collect(readers) { columndef -> columndef.read ?: read }
         columns.collect(writers) { columndef -> columndef.write ?: write }
         columns.collect(queries) { columndef -> columndef.editable ?: query }
+        columns.collect(classes) { columndef -> columndef.class ?: DEFAULT_CLASS }
+        columns.collect(comparators) { columndef -> columndef.comparator ?: DEFAULT_COMPARATOR }
     }
 
     int getColumnCount() {
@@ -66,14 +81,31 @@ class DefaultWritableTableFormat implements WritableTableFormat {
     }
 
     Object getColumnValue(baseObject, int index) {
-        readers[index](baseObject, columnNames[index], index)
-    } 
+        readers[index](baseObject, columnNames, index)
+    }
 
     boolean isEditable(baseObject, int index) {
-        queries[index](baseObject, columnNames[index], index)
-    } 
+        if(queries[index] instanceof Closure)
+            queries[index](baseObject, columnNames, index)
+        else
+            queries[index].asBoolean()
+    }
 
     Object setColumnValue(baseObject, editedValue, int index) {
-        qriters[index](baseObject, columnNames[index], index, editedValue)
-    } 
+        writers[index](baseObject, columnNames, index, editedValue)
+    }
+
+    Class getColumnClass(int index) {
+        if(classes[index] instanceof Closure)
+            classes[index](columnNames, index)
+        else
+            classes[index]
+    }
+
+    Comparator getColumnComparator(int index) {
+      if(comparators[index] instanceof Closure)
+          comparators[index](columnNames, index)
+      else
+          comparators[index]
+    }
 }
