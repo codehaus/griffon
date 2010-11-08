@@ -34,9 +34,8 @@ class RiakGriffonAddon {
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.riak?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            app.artifactManager.findGriffonClass(klass).metaClass.with {
-                withRiak = RiakConnector.instance.withRiak
-            }
+            def mc = app.artifactManager.findGriffonClass(klass).metaClass
+            mc.withRiak = RiakConnector.instance.withRiak
         }
     ]
 }
