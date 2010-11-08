@@ -24,9 +24,8 @@ class RmiGriffonAddon {
       NewInstance: { klass, type, instance ->
          def types = app.config.griffon?.rmi?.injectInto ?: ['controller']
          if(!types.contains(type)) return
-         app.artifactManager.findGriffonClass(klass).metaClass.with {
-             withRmi = withClient.curry(instance)
-         }
+         def mc = app.artifactManager.findGriffonClass(klass).metaClass
+         mc.withRmi = withClient.curry(instance)
       }
    ]
 
