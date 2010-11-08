@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2908">
+<plugins revision="2913">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -67,7 +67,7 @@ http://barcode4j.sourceforge.net</description>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-berkeleydb/tags/RELEASE_0_3/griffon-berkeleydb-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_3_1" version="0.3.1" type="svn">
+        <release tag="RELEASE_0_3_1" type="svn" version="0.3.1">
             <title>Berkeleydb support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -277,7 +277,7 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_5/griffon-codenarc-0.5.zip</file>
         </release>
     </plugin>
-    <plugin name="couchdb" latest-release="0.4">
+    <plugin name="couchdb" latest-release="0.4.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Couchdb support</title>
             <author>Andres Almiray</author>
@@ -312,6 +312,17 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_4/griffon-couchdb-0.4.zip</file>
+        </release>
+        <release tag="RELEASE_0_4_1" version="0.4.1" type="svn">
+            <title>Couchdb support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Couchdb support</description>
+            <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_4_1/griffon-couchdb-0.4.1.zip</file>
         </release>
     </plugin>
     <plugin name="countries" latest-release="0.1">
