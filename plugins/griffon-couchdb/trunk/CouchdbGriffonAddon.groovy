@@ -34,9 +34,8 @@ class CouchdbGriffonAddon {
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.couchdb?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            app.artifactManager.findGriffonClass(klass).metaClass.with {
-                withCouchdb = CouchdbConnector.instance.withCouchdb
-            }
+            def mc = app.artifactManager.findGriffonClass(klass).metaClass
+            mc.withCouchdb = CouchdbConnector.instance.withCouchdb
         }
     ]
 }
