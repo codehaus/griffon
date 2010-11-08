@@ -30,10 +30,9 @@ class HessianGriffonAddon {
       NewInstance: { klass, type, instance ->
          def types = app.config.griffon?.hessian?.injectInto ?: ['controller']
          if(!types.contains(type)) return
-         app.artifactManager.findGriffonClass(klass).metaClass.with {
-             withHessian = withClient.curry(HessianProxy, instance)
-             withBurlap = withClient.curry(BurlapProxy, instance)
-         }
+         def mc = app.artifactManager.findGriffonClass(klass).metaClass
+         mc.withHessian = withClient.curry(HessianProxy, instance)
+         mc.withBurlap = withClient.curry(BurlapProxy, instance)
       }
    ]
 
