@@ -1,0 +1,12 @@
+<plugin name='db4o' version='0.3' griffonVersion='0.9.1 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Db4o support</title>
+  <description>Db4o support</description>
+  <documentation>http://griffon.codehaus.org/Db4o+Plugin</documentation>
+  <license>GNU General Public License v3</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
