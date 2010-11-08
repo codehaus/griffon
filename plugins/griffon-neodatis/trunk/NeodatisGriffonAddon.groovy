@@ -63,9 +63,8 @@ class NeodatisGriffonAddon {
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.neodatis?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            app.artifactManager.findGriffonClass(klass).metaClass.with {
-                withOdb = NeodatisConnector.instance.withOdb
-            }
+            def mc = app.artifactManager.findGriffonClass(klass).metaClass
+            mc.withOdb = NeodatisConnector.instance.withOdb
         }
     ]
 }
