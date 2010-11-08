@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2928">
+<plugins revision="2933">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2000,7 +2000,7 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neo4j/tags/RELEASE_0_3/griffon-neo4j-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_3_1" version="0.3.1" type="svn">
+        <release tag="RELEASE_0_3_1" type="svn" version="0.3.1">
             <title>Neo4j support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2012,7 +2012,7 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neo4j/tags/RELEASE_0_3_1/griffon-neo4j-0.3.1.zip</file>
         </release>
     </plugin>
-    <plugin name="neodatis" latest-release="0.3.1">
+    <plugin name="neodatis" latest-release="0.3.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Neodatis support</title>
             <author>Andres Almiray</author>
@@ -2050,6 +2050,17 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neodatis/tags/RELEASE_0_3_1/griffon-neodatis-0.3.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_3_2" version="0.3.2" type="svn">
+            <title>Neodatis support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Neodatis support.</description>
+            <documentation>http://griffon.codehaus.org/Neodatis+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-neodatis/tags/RELEASE_0_3_2/griffon-neodatis-0.3.2.zip</file>
         </release>
     </plugin>
     <plugin name="notify" latest-release="0.2">
