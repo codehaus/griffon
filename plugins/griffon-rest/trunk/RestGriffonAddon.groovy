@@ -28,11 +28,10 @@ class RestGriffonAddon {
       NewInstance: {klass, type, instance ->
          def types = app.config.griffon?.rest?.injectInto ?: ['controller']
          if(!types.contains(type)) return
-         app.artifactManager.findGriffonClass(klass).metaClass.with {
-             withAsyncHttp = withClient.curry(AsyncHTTPBuilder, instance)
-             withHttp = withClient.curry(HTTPBuilder, instance)
-             withRest = withClient.curry(RESTClient, instance)
-         }
+         def mc = app.artifactManager.findGriffonClass(klass).metaClass
+         mc.withAsyncHttp = withClient.curry(AsyncHTTPBuilder, instance)
+         mc.withHttp = withClient.curry(HTTPBuilder, instance)
+         mc.withRest = withClient.curry(RESTClient, instance)
       }
    ]
 
