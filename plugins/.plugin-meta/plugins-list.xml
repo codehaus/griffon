@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2933">
+<plugins revision="2938">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -423,7 +423,7 @@ http://everaldo.com/crystal/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-css-builder/tags/RELEASE_0_6/griffon-css-builder-0.6.zip</file>
         </release>
     </plugin>
-    <plugin name="db4o" latest-release="0.2">
+    <plugin name="db4o" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Db4o support</title>
             <author>Andres Almiray</author>
@@ -439,6 +439,17 @@ http://everaldo.com/crystal/</description>
             <description>Db4o support</description>
             <documentation>http://griffon.codehaus.org/Db4o+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-db4o/tags/RELEASE_0_2/griffon-db4o-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Db4o support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Db4o support</description>
+            <documentation>http://griffon.codehaus.org/Db4o+Plugin</documentation>
+            <license>GNU General Public License v3</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-db4o/tags/RELEASE_0_3/griffon-db4o-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="designgridlayout" latest-release="0.2">
@@ -2051,7 +2062,7 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neodatis/tags/RELEASE_0_3_1/griffon-neodatis-0.3.1.zip</file>
         </release>
-        <release tag="RELEASE_0_3_2" version="0.3.2" type="svn">
+        <release tag="RELEASE_0_3_2" type="svn" version="0.3.2">
             <title>Neodatis support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
