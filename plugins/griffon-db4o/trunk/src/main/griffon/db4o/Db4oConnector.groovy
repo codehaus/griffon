@@ -25,7 +25,7 @@ import com.db4o.*
 import com.db4o.config.EmbeddedConfiguration
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 @Singleton
 final class Db4oConnector {
@@ -46,10 +46,12 @@ final class Db4oConnector {
         }
 
         this.app = app
+        app.event('Db4oConnectStart', [config])
         startObjectContainer(config)
         bootstrap = app.class.classLoader.loadClass('BootstrapDb4o').newInstance()
         bootstrap.metaClass.app = app
         bootstrap.init(ObjectContainerHolder.instance.objectContainer)
+        app.event('Db4oConnectEnd', [ObjectContainerHolder.instance.objectContainer])
     }
 
     void disconnect(GriffonApplication app, ConfigObject config) {
@@ -58,14 +60,17 @@ final class Db4oConnector {
             connected = false
         }
 
+        app.event('Db4oDisconnectStart', [config, ObjectContainerHolder.instance.objectContainer])
         bootstrap.destroy(ObjectContainerHolder.instance.objectContainer)
         stopObjectContainer(config)
+        app.event('Db4oDisconnectEnd')
     }
 
     private void startObjectContainer(config) {
         String dbfileName = config?.dataSource?.name ?: 'db.yarv'
         File dbfile = new File(dbfileName)
         if(!dbfile.absolute) dbfile = new File(Metadata.current.getGriffonWorkingDir(), dbfileName)
+        dbfile.parentFile.mkdirs()
         Script configScript = app.class.classLoader.loadClass('Db4oConfig').newInstance()
         EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration()
         configScript.configure(configuration)
