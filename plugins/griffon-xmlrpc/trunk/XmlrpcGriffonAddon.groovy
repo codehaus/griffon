@@ -24,9 +24,8 @@ class XmlrpcGriffonAddon {
       NewInstance: { klass, type, instance ->
          def types = app.config.griffon?.xmlrpc?.injectInto ?: ['controller']
          if(!types.contains(type)) return
-         app.artifactManager.findGriffonClass(klass).metaClass.with {
-             withXmlrpc = withClient.curry(instance)
-         }
+         def mc = app.artifactManager.findGriffonClass(klass).metaClass
+         mc.withXmlrpc = withClient.curry(instance)
       }
    ]
 
