@@ -34,12 +34,11 @@ class BerkeleydbGriffonAddon {
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.berkeleydb?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            app.artifactManager.findGriffonClass(klass).metaClass.with {
-                withBerkeleyEnv = BerkeleydbConnector.instance.withBerkeleyEnv
-                withBerkeleyDb = BerkeleydbConnector.instance.withBerkeleyDb
-                withBerkeleyCursor = BerkeleydbConnector.instance.withBerkeleyCursor
-                withEntityStore = BerkeleydbConnector.instance.withEntityStore
-            }
+            def mc = app.artifactManager.findGriffonClass(klass).metaClass
+            mc.withBerkeleyEnv = BerkeleydbConnector.instance.withBerkeleyEnv
+            mc.withBerkeleyDb = BerkeleydbConnector.instance.withBerkeleyDb
+            mc.withBerkeleyCursor = BerkeleydbConnector.instance.withBerkeleyCursor
+            mc.withEntityStore = BerkeleydbConnector.instance.withEntityStore
         }
     ]
 }
