@@ -19,7 +19,6 @@
 
 import griffon.core.GriffonApplication
 import griffon.db4o.Db4oConnector
-import static griffon.util.GriffonApplicationUtils.metaClassOf
 
 /**
  * @author Andres Almiray
@@ -36,9 +35,10 @@ class Db4oGriffonAddon {
             Db4oConnector.instance.disconnect(app, config)
         },
         NewInstance: { klass, type, instance ->
-            def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
+            def types = app.config.griffon?.db4o?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            metaClassOf(instance).withDb4o = Db4oConnector.instance.withDb4o
+            def mc = app.artifactManager.findGriffonClass(klass).metaClass
+            mc.withDb4o = Db4oConnector.instance.withDb4o
         }
     ]
 }
