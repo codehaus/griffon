@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2898">
+<?xml version="1.0" encoding="UTF-8"?><plugins revision="2903">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1073,7 +1072,7 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-hessian/tags/RELEASE_0_4/griffon-hessian-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_4_1" version="0.4.1" type="svn">
+        <release tag="RELEASE_0_4_1" type="svn" version="0.4.1">
             <title>Hessian client &amp; libraries</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2884,7 +2883,7 @@ http://freedesktop.org</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-worldwind/tags/RELEASE_0_3/griffon-worldwind-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="wsclient" latest-release="0.4">
+    <plugin name="wsclient" latest-release="0.4.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>WS client &amp; libraries</title>
             <author>Andres Almiray</author>
@@ -2935,6 +2934,17 @@ http://freedesktop.org</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wsclient/tags/RELEASE_0_4/griffon-wsclient-0.4.zip</file>
+        </release>
+        <release tag="RELEASE_0_4_1" version="0.4.1" type="svn">
+            <title>WS client &amp; libraries</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>WS client &amp; libraries</description>
+            <documentation>http://griffon.codehaus.org/Wsclient+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-wsclient/tags/RELEASE_0_4_1/griffon-wsclient-0.4.1.zip</file>
         </release>
     </plugin>
     <plugin name="xmlrpc" latest-release="0.4.1">
