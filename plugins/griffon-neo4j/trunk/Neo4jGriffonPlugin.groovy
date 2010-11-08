@@ -20,7 +20,7 @@
  * @author Andres Almiray
  */
 class Neo4jGriffonPlugin {
-    def version = 0.3
+    def version = '0.3.1'
     def dependsOn = [:]
     def griffonVersion = '0.9.1 > *'
     def license = 'GNU Affero General Public License v3'

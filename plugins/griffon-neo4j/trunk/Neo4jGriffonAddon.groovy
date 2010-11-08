@@ -52,9 +52,8 @@ class Neo4jGriffonAddon {
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.neo4j?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            app.artifactManager.findGriffonClass(klass).metaClass.with {
-                withNeo4j = Neo4jConnector.instance.withNeo4j
-            }
+            def mc = app.artifactManager.findGriffonClass(klass).metaClass
+            mc.withNeo4j = Neo4jConnector.instance.withNeo4j
         }
     ]
 }
