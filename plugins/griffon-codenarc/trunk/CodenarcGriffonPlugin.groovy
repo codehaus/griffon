@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class CodenarcGriffonPlugin {
-    def version = 0.5
+    def version = 0.6
     def dependsOn = [:]
     def griffonVersion = '0.9 > *'
     def license = 'Apache Software License 2.0'
