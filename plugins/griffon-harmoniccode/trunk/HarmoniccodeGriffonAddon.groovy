@@ -54,7 +54,7 @@ class HarmoniccodeGriffonAddon {
     ]
 
     def props = [
-        COUNTER_THEME_BRIGHT: [get: Theme.BRIGHT],
-        COUNTER_THEME_DARK: [get: Theme.DARK]
+        COUNTER_THEME_BRIGHT: [get: {Theme.BRIGHT}],
+        COUNTER_THEME_DARK: [get: {Theme.DARK}]
     ]
 }
