@@ -29,6 +29,7 @@
  */
 
 import eu.hansolo.steelseries.gauges.*
+import eu.hansolo.steelseries.extras.*
 import eu.hansolo.steelseries.tools.Poi
 import griffon.steel.factory.PoiFactory
 import griffon.core.GriffonApplication
@@ -47,7 +48,7 @@ class SteelGriffonAddon {
     }
 
     def factories = [
-        altimeter: Altimeter,
+//        altimeter: Altimeter,
         clock: Clock,
         compass: Compass,
         digitalRadialGauge: DigitalRadial,
@@ -83,7 +84,8 @@ class SteelGriffonAddon {
         radialBargraph3Lcd: RadialBargraph3Lcd,
         radialBargraph4: RadialBargraph4,
         radialBargraph4Lcd: RadialBargraph4Lcd,
-
+        radialSquareSmall: RadialSquareSmall,
+        radialSquareVertical: RadialSquareVertical,
         poi: new PoiFactory()
     ]
 }
