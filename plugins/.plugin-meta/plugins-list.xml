@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2949">
+<plugins revision="2955">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2520,7 +2520,7 @@ http://grails.org/plugin/spock</description>
             <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_3/griffon-steel-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Gerrit Grunwald's Steel Series</title>
             <author>Andres Almirays</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2995,6 +2995,20 @@ http://freedesktop.org</description>
 http://zonelayout.com</description>
             <documentation>http://griffon.codehaus.org/Zonelayout+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_1/griffon-zonelayout-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="harmoniccode" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Gerrit Grunwald's Fun Components</title>
+            <author>Andres Almirays</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Gerrit Grunwald's Fun components
+http://harmoniccode.blogspot.com</description>
+            <documentation>http://griffon.codehaus.org/Harmoniccode+Plugin</documentation>
+            <license>BSD</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-harmoniccode/tags/RELEASE_0_1/griffon-harmoniccode-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
