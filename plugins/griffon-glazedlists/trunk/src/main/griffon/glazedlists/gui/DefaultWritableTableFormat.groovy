@@ -16,6 +16,7 @@
 
 package griffon.glazedlists.gui
 
+import griffon.util.GriffonNameUtils
 import ca.odell.glazedlists.gui.AdvancedTableFormat
 import ca.odell.glazedlists.gui.WritableTableFormat
 
@@ -50,17 +51,22 @@ class DefaultWritableTableFormat implements WritableTableFormat, AdvancedTableFo
         true
     }
 
-    protected final List columnNames = []
+    protected final List<String> columnNames = []
+    protected final List<String> columnTitles = []
     protected final List readers = []
     protected final List writers = []
     protected final List queries = []
     protected final List classes = []
     protected final List comparators = []
 
-    DefaultWritableTableFormat(List columns, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY,
+    DefaultWritableTableFormat(List<Map<String, ?>> columns, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY,
                                Closure setColumnValueStrategy = SET_COLUMN_VALUE_STRATEGY,
                                Closure isEditableStrategy = IS_EDITABLE_STRATEGY) {
-        this.columnNames.addAll(columns.name)
+        columns.name.collect(this.columnNames) { GriffonNameUtils.getPropertyName(it) }
+        for(int i = 0; i < columnNames.size(); i++) {
+            String title = columnTitles[i]
+            this.columnTitles << (title != null ? title : GriffonNameUtils.getNaturalName(columnNames[i]))
+        }
         def read = getColumnValueStrategy ?: GET_COLUMN_VALUE_STRATEGY
         def write = setColumnValueStrategy ?: SET_COLUMN_VALUE_STRATEGY
         def query = isEditableStrategy ?: IS_EDITABLE_STRATEGY
@@ -77,7 +83,7 @@ class DefaultWritableTableFormat implements WritableTableFormat, AdvancedTableFo
     }
 
     String getColumnName(int index) {
-        columnNames[index]
+        columnTitles[index]
     }
 
     Object getColumnValue(baseObject, int index) {
