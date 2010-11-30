@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2971">
+<plugins revision="2976">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -875,7 +875,7 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gfx-builder/tags/RELEASE_0_4/griffon-gfx-builder-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="glazedlists" latest-release="0.5">
+    <plugin name="glazedlists" latest-release="0.6">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>GlazedLists library and components</title>
             <author>Andres Almiray</author>
@@ -915,6 +915,17 @@ Provides a nice icon set too.</description>
             <description>Adds GlazedLists support to your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_5/griffon-glazedlists-0.5.zip</file>
+        </release>
+        <release tag="RELEASE_0_6" version="0.6" type="svn">
+            <title>GlazedLists library and components</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Adds GlazedLists support to your Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>https://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_6/griffon-glazedlists-0.6.zip</file>
         </release>
     </plugin>
     <plugin name="gmetrics" latest-release="0.3">
@@ -1404,7 +1415,7 @@ http://jgraph.com</description>
             <documentation>http://griffon.codehaus.org/Jmx+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmx/tags/RELEASE_0_1/griffon-jmx-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>JMX support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
