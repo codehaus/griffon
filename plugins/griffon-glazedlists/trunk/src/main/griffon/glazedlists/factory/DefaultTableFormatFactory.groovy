@@ -28,6 +28,14 @@ class DefaultTableFormatFactory extends AbstractFactory {
             return value
         }
 
+        if(attributes.containsKey('columns')) {
+            def columns = attributes.remove('columns')
+            if(columns instanceof List) {
+                return new DefaultTableFormat(columns.name, columns.title, attributes.remove('read'))
+            }
+            throw new IllegalArgumentException("In $name the value of columns: must be a List with the following format [[name: 'firstName, title: 'First Name'], [name: 'lastName', title: 'Last Name']]")
+        }
+
         if(!attributes.containsKey('columnNames')) {
             throw new IllegalArgumentException("In $name you must define a value for columnNames:, i.e, ['ColumnA', 'ColumnB']")
         }

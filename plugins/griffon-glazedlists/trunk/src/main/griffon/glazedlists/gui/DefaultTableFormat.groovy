@@ -16,6 +16,7 @@
 
 package griffon.glazedlists.gui
 
+import griffon.util.GriffonNameUtils
 import ca.odell.glazedlists.gui.TableFormat
 
 /**
@@ -32,11 +33,22 @@ class DefaultTableFormat implements TableFormat {
         return null
     }
 
-    protected final List columnNames = []
+    protected final List<String> columnNames = []
+    protected final List<String> columnTitles = []
     protected final Closure getColumnValueStrategy
 
-    DefaultTableFormat(List columnNames, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY) {
-        this.columnNames.addAll(columnNames)
+    DefaultTableFormat(List<String> columnNames, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY) {
+        this(columnNames, columnNames, getColumnValueStrategy)
+    }   
+    
+    DefaultTableFormat(List<String> columnNames, List<String> columnTitles, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY) {
+        if(!columnTitles) columnTitles = columnNames
+        assert columnNames.size() == columnTitles.size()
+        columnNames.collect(this.columnNames) { GriffonNameUtils.getPropertyName(it) }
+        for(int i = 0; i < columnNames.size(); i++) {
+            String title = columnTitles[i]
+            this.columnTitles << (title != null ? title : GriffonNameUtils.getNaturalName(columnNames[i]))
+        }
         this.getColumnValueStrategy = getColumnValueStrategy ?: GET_COLUMN_VALUE_STRATEGY
     }
 
@@ -45,7 +57,7 @@ class DefaultTableFormat implements TableFormat {
     }
 
     String getColumnName(int index) {
-        columnNames[index]
+        columnTitles[index]
     }
 
     Object getColumnValue(baseObject, int index) {
