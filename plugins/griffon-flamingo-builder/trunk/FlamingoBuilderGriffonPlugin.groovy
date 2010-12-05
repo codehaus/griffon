@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class FlamingoBuilderGriffonPlugin {
-    def version = '0.3'
+    def version = '0.4'
     def dependsOn = [:]
     def jdk = '1.6'
     def toolkits = ['swing']
