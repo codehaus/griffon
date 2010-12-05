@@ -155,4 +155,10 @@ class FlamingoFactoryUtils {
       }
       return icon
    }
+   
+   static createIcon( builder, name, Map attributes ) {
+      def icon = createIcon(builder, name, "", attributes)
+      if( !icon ) icon = new EmptyResizableIcon(32)
+      return icon
+   }
 }
