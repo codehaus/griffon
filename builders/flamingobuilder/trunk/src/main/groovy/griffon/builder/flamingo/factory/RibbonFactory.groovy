@@ -303,7 +303,7 @@ public class RibbonApplicationMenuFactory extends AbstractFactory {
    public void setParent(FactoryBuilderSupport builder, Object parent, Object child) {
       if( parent instanceof JRibbon || parent instanceof JRibbonFrame ) {
          def ribbon = parent instanceof JRibbon ? parent : parent.ribbon
-         parent.setApplicationMenu(child)
+         ribbon.setApplicationMenu(child)
       }
    }
 }
