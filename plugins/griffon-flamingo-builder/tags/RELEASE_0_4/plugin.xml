@@ -1,0 +1,13 @@
+<plugin name='flamingo-builder' version='0.4' griffonVersion='0.9 &gt; *' jdk='1.6'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>FlamingoBuilder Plugin</title>
+  <description>Brings the FlamingoBuilder libraries into a Griffon Build</description>
+  <documentation>http://griffon.codehaus.org/FlamingoBuilder+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
