@@ -39,7 +39,7 @@ class WrapperIconFactory extends AbstractFactory {
       }
 
       def type = attributes.remove("type")
-      def id = FlamingoFactoryUtils.processIconInitialDimAttribute(name, attributes)
+      def initialDim = FlamingoFactoryUtils.processIconInitialDimAttribute(name, attributes)
 
       if( value instanceof URL ) {
          if( value.toString().endsWith("ico") ) {

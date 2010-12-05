@@ -193,7 +193,7 @@ public class RibbonBandFactory extends AbstractFactory {
          throw new RuntimeException("In $name either value is be a String or title: must be defined.")
       }
 
-      def icon = createIcon(builder, name, attributes)
+      def icon = FlamingoFactoryUtils.createIcon(builder, name, attributes)
       ActionListener expandActionListener = attributes.remove("expandActionListener")
       def actionPerformed = attributes.remove("actionPerformed")
       if( !expandActionListener && actionPerformed instanceof Closure ) {
@@ -224,12 +224,6 @@ public class RibbonBandFactory extends AbstractFactory {
          }
       }
    }
-
-   protected createIcon( FactoryBuilderSupport builder, Object name, Map attributes ) {
-      def icon = FlamingoFactoryUtils.createIcon(builder, name, "", attributes)
-      if( !icon ) icon = new EmptyResizableIcon(32)
-      return icon
-   }
 }
 
 /**
@@ -248,7 +242,7 @@ public class FlowRibbonBandFactory extends RibbonBandFactory {
          throw new RuntimeException("In $name either value is be a String or title: must be defined.")
       }
 
-      def icon = createIcon(builder, name, attributes)
+      def icon = FlamingoFactoryUtils.createIcon(builder, name, attributes)
       ActionListener expandActionListener = attributes.remove("expandActionListener")
       def actionPerformed = attributes.remove("actionPerformed")
       if( !expandActionListener && actionPerformed instanceof Closure ) {
@@ -325,7 +319,7 @@ public class RibbonApplicationMenuEntryPrimaryFactory extends AbstractFactory {
          throw new RuntimeException("In $name either value is be a String or text: must be defined.")
       }
 
-      def icon = createIcon(builder, name, attributes)
+      def icon = FlamingoFactoryUtils.createIcon(builder, name, attributes)
       ActionListener mainActionListener = attributes.remove("mainActionListener")
       def actionPerformed = attributes.remove("actionPerformed")
       if( !mainActionListener && actionPerformed instanceof Closure ) {
@@ -362,7 +356,7 @@ public class RibbonApplicationMenuEntryFooterFactory extends AbstractFactory {
          throw new RuntimeException("In $name either value is be a String or text: must be defined.")
       }
 
-      def icon = createIcon(builder, name, attributes)
+      def icon = FlamingoFactoryUtils.createIcon(builder, name, attributes)
       ActionListener mainActionListener = attributes.remove("mainActionListener")
       def actionPerformed = attributes.remove("actionPerformed")
       if( !mainActionListener && actionPerformed instanceof Closure ) {
