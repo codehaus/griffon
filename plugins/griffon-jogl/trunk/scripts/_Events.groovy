@@ -24,12 +24,15 @@ eventCreateConfigEnd = {
     }
 }
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        ant.fileset(dir: "${getPluginDirForName('jogl').file}/lib", includes: "*.jar").each {
-            griffonCopyDist(it.toString(), jardir)
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('jogl')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-jogl-plugin', dirs: "${joglPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('jogl', [
+        conf: 'compile',
+        name: 'griffon-jogl-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: joglPluginVersion
+    ])
 }
