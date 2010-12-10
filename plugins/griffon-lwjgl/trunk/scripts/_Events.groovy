@@ -23,8 +23,8 @@ import griffon.util.Environment
 includeTargets << griffonScript("_GriffonSettings")
 
 lwjglJnlpResources = []
-def lwjgl_version = "2.5"
-for(os in ['linux', 'linux64', 'macosx', 'macosx64', 'windows', 'windows64', 'solaris', 'solaris64']) {
+def lwjgl_version = '2.6'
+for(os in ['linux', 'macosx', 'windows', 'solaris']) {
     lwjglJnlpResources << [os: os, nativelibs: ["webstart/lwjgl-${lwjgl_version}-native-${os}.jar"]]
 }
 
@@ -36,40 +36,45 @@ eventPackageStart = { type ->
 def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
 eventCopyLibsEnd = { jardir ->
     eventClosure1(jardir)
-    if (!isPluginProject) {
-        ant.fileset(dir: "${getPluginDirForName('lwjgl').file}/lib", includes: "*.jar").each {
-            if(it.name =~ /griffon.lwjgl.addon.*/) {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-
-        if(!(packagingType in ['applet', 'webstart'])) {
-            ant.fileset(dir: "${getPluginDirForName('lwjgl').file}/lib", includes: "*.jar").each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-            def lwjglLibDir = "${getPluginDirForName('lwjgl').file}/lib".toString()
-            copyPlatformJars(lwjglLibDir, jardir)
-            copyNativeLibs(lwjglLibDir, jardir)
+    if(compilingPlugin('lwjgl')) return
+    if(!(packagingType in ['applet', 'webstart'])) {
+        def lwjglLibDir = "${getPluginDirForName('lwjgl').file}/lib".toString()
+        copyNativeLibs(lwjglLibDir, jardir)
+    } else {
+        if(Environment.current == Environment.DEVELOPMENT) {
+            doWithPlatform(platform)
         } else {
-            if(Environment.current == Environment.DEVELOPMENT) {
-                doWithPlatform(platform)
-            } else {
-                PLATFORMS.each { doWithPlatform(it.key) }
-            }
+            PLATFORMS.each { doWithPlatform(it.key) }
         }
     }
 }
 
+def eventClosure2 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure2(cl)
+    if(compilingPlugin('lwjgl')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-lwjgl-plugin', dirs: "${lwjglPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('lwjgl', [
+        conf: 'compile',
+        name: 'griffon-lwjgl-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: lwjglPluginVersion
+    ])
+}
+
 doWithPlatform = { platformOs ->
+    def origPlatformOs = platformOs
+    if(platformOs.endsWith('64')) platformOs -= '64'
+
     ant.fileset(dir: "${getPluginDirForName('lwjgl').file}/lib/webstart", includes: "*${platformOs}.jar").each {
         griffonCopyDist(it.toString(), new File(jardir.toString(), 'webstart').absolutePath)
     }
     if(!buildConfig?.griffon?.extensions?.resources) buildConfig.griffon.extensions.resources = new ConfigObject()
-    def rs = buildConfig.griffon.extensions.resources[platformOs]
+    def rs = buildConfig.griffon.extensions.resources[origPlatformOs]
     if(!rs) {
         def co = new ConfigObject()
         co.nativelibs = lwjglJnlpResources.find{it.os == platformOs}.nativelibs
-        buildConfig.griffon.extensions.resources[platformOs] = co
+        buildConfig.griffon.extensions.resources[origPlatformOs] = co
     } else {
         if(!rs.nativeLibs) rs.nativeLibs = [] 
         rs.nativeLibs.addAll(nativeLibs)
