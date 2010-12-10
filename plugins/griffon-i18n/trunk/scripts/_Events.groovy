@@ -18,16 +18,16 @@
  * @author Andres Almiray
  */
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('i18n')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('i18n')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-i18n-plugin', dirs: "${i18nPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('i18n', [
+        conf: 'compile',
+        name: 'griffon-i18n-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: i18nPluginVersion
+    ])
 }
 
