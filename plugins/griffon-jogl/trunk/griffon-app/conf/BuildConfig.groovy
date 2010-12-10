@@ -8,19 +8,14 @@ griffon.project.dependency.resolution = {
         griffonHome()
         griffonCentral()
 
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        flatDir name: 'joglPluginLib', dirs: 'lib'
     }
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        // runtime 'mysql:mysql-connector-java:5.1.5'
+        def joglVersion = 'jsr231-2.0.0'
+        compile "com.jogamp:jogl-all:$joglVersion",
+                "com.jogamp:gluegen-rt:$joglVersion",
+                "com.jogamp:nativewindow.all:$joglVersion",
+                "com.jogamp:newt.all:$joglVersion"
     }
 }
 
