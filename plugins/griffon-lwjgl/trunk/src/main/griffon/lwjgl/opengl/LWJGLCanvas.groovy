@@ -30,6 +30,8 @@ class LWJGLCanvas extends AWTGLCanvas {
     Closure onInitGL
     Closure onPaintGL
     Closure onUpdate
+    boolean initSharedContext = true
+    boolean autoSwapBuffers = true
 
     LWJGLCanvas() {
         super()
@@ -52,6 +54,7 @@ class LWJGLCanvas extends AWTGLCanvas {
     }
 
     protected void initGL() {
+        if(initSharedContext) createSharedContext()
         super.initGL()
         if(onInitGL) {
             onInitGL.delegate = this
@@ -65,6 +68,7 @@ class LWJGLCanvas extends AWTGLCanvas {
             onPaintGL.delegate = this
             onPaintGL()
         }
+        if(autoSwapBuffers) swapBuffers()
     }
 
     protected void update(Graphics g) {
