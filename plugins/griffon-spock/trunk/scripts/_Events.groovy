@@ -16,15 +16,7 @@
 
 loadSpecTestTypeClass = { ->
     def doLoad = { -> 
-        def spockPluginDir = pluginSettings.getPluginDirForName('spock')
         if(!spockPluginDir) return
-        ant.fileset(dir: "${spockPluginDir.file}/dist/", includes: "*-test.jar").each { f ->
-            addUrlIfNotPresent classLoader, f.file
-        }
-        ant.fileset(dir: "${spockPluginDir.file}/lib/", includes: "*jar").each { f ->
-            addUrlIfNotPresent classLoader, f.file
-        }
-
         classLoader.loadClass('griffon.spock.test.GriffonSpecTestType')
     }
 
