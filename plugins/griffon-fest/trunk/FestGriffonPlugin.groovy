@@ -18,10 +18,10 @@
  * @author Andres Almiray
  */
 class FestGriffonPlugin {
-    def version = '0.5'
-    def dependsOn = [spock: 0.2]
+    def version = '0.6'
+    def dependsOn = [spock: 0.3]
     def toolkits = ['swing']
-    def griffonVersion = '0.9.1 > *'
+    def griffonVersion = '0.9.2 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'
