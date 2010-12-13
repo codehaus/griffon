@@ -27,14 +27,16 @@ eventAllTestsStart = {
 
 loadTestTypeClass = { ->
     def doLoad = { ->
-        def easybPluginDir = pluginSettings.getPluginDirForName('easyb')
+//        def easybPluginDir = pluginSettings.getPluginDirForName('easyb')
         if(!easybPluginDir) return
+/*
         ant.fileset(dir: "${easybPluginDir.file}/dist/", includes: "*-test.jar").each { f ->
             addUrlIfNotPresent classLoader, f.file
         }
         ant.fileset(dir: "${easybPluginDir.file}/lib/", includes: "*jar").each { f ->
             addUrlIfNotPresent classLoader, f.file
         }
+*/
 
         classLoader.loadClass('griffon.plugin.easyb.test.GriffonEasybTestType')
     }

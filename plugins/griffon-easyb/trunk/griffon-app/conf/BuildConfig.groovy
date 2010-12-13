@@ -1,8 +1,6 @@
 griffon.project.dependency.resolution = {
-    // inherit Griffon' default dependencies
-    inherits("global") {
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    inherits("global")
+    log "warn"
     repositories {
         griffonPlugins()
         griffonHome()
@@ -11,8 +9,8 @@ griffon.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        compile('org.easyb:easyb:0.9.8') { excludes('commons-logging'); excludes('groovy-all') }
-        test('org.easyb:easyb:0.9.8') { excludes('commons-logging'); excludes('groovy-all') }
+        compile('org.easyb:easyb:0.9.8') { excludes 'commons-logging', 'groovy-all'; export = false }
+        test('org.easyb:easyb:0.9.8') { excludes 'commons-logging', 'groovy-all' }
     }
 }
 
