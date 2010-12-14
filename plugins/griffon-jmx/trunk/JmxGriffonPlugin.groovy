@@ -18,9 +18,9 @@
  * @author Andres Almiray
  */
 class JmxGriffonPlugin {
-    def version = 0.2
-    def dependsOn = [spring: 0.4]
-    def griffonVersion = '0.9.1 > *'
+    def version = 0.3
+    def dependsOn = [spring: 0.5]
+    def griffonVersion = '0.9.2 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'
