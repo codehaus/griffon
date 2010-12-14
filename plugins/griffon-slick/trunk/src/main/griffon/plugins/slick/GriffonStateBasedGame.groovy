@@ -57,22 +57,38 @@ class GriffonStateBasedGame extends StateBasedGame {
     }
         
 	protected void preRenderState(GameContainer container, Graphics g) throws SlickException {
-        onPreRenderState?.call(container, g)
+	    if(onPreRenderState) {
+	        onPreRenderState.delegate = this
+	        onPreRenderState.resolveStrategy = Closure.DELEGATE_FIRST
+	        onPreRenderState(container, g)
+	    }
         app.event('SlickPreRenderState', [container, g])
 	}
 	
 	protected void postRenderState(GameContainer container, Graphics g) throws SlickException {
-        onPostRenderState?.call(container, g)
+	    if(onPostRenderState) {
+	        onPostRenderState.delegate = this
+	        onPostRenderState.resolveStrategy = Closure.DELEGATE_FIRST
+	        onPostRenderState(container, g)
+	    }
         app.event('SlickPostRenderState', [container, g])
 	}
 	
 	protected void preUpdateState(GameContainer container, int delta) throws SlickException {
-        onPreUpdateState?.call(container, delta)
+        if(onPreUpdateState) {
+	        onPreUpdateState.delegate = this
+	        onPreUpdateState.resolveStrategy = Closure.DELEGATE_FIRST
+	        onPreUpdateState(container, delta)
+	    }
         app.event('SlickPreUpdateState', [container, delta])
 	}
 	
 	protected void postUpdateState(GameContainer container, int delta) throws SlickException {
-        onPostUpdateState?.call(container, delta)
+	    if(onPostUpdateState) {
+	        onPostUpdateState.delegate = this
+	        onPostUpdateState.resolveStrategy = Closure.DELEGATE_FIRST
+	        onPostUpdateState(container, delta)
+	    }
         app.event('SlickPostUpdateState', [container, delta])
 	}
 }

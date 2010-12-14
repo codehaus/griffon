@@ -5,7 +5,7 @@ griffon.project.dependency.resolution = {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-        latDir name: 'slickPluginLib', dirs: 'lib'
+        flatDir name: 'slickPluginLib', dirs: 'lib'
     }
     dependencies {
         compile 'org.newdawn:slick:274',
