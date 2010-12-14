@@ -1,6 +1,17 @@
 @artifact.package@import griffon.plugins.processing.artifact.AbstractGriffonProcessingView;
 
 public class @artifact.name@ extends AbstractGriffonProcessingView {
+    public @artifact.name.plain@Model model;
+    public @artifact.name.plain@Controller controller;
+
+    public void setModel(@artifact.name.plain@Model model) {
+        this.model = model;
+    }
+
+    public void setController(@artifact.name.plain@Controller controller) {
+        this.controller = controller;
+    }
+
     private float y = 100;
 
     // The statements in the setup() function 
