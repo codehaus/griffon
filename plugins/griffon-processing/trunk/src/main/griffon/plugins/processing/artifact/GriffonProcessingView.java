@@ -14,13 +14,18 @@
  * limitations under the License.
  */
 
-import griffon.plugins.processing.factory.ProcessingFactory
+package griffon.plugins.processing.artifact;
+
+import griffon.core.GriffonMvcArtifact;
 
 /**
+ * 
  * @author Andres Almiray
  */
-class ProcessingGriffonAddon {
-    def factories = [
-        processing: new ProcessingFactory()
-    ]
+public interface GriffonProcessingView extends GriffonMvcArtifact {
+    void setup();
+    
+    void draw();
+    
+    void init();
 }

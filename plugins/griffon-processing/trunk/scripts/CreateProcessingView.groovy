@@ -24,13 +24,13 @@ includeTargets << griffonScript('_GriffonCreateArtifacts')
 target(createProcessingView: 'Creates a Processing view') {
     depends(checkVersion, parseArguments)
 
-    def type = 'Processing'
+    String type = 'ProcessingView'
     promptForName(type: type)
     def (pkg, name) = extractArtifactName(argsMap['params'][0])
-
+    
     createArtifact(
         name: name,
-        suffix: 'Processing',
+        suffix: type,
         type: type,
         fileType: '.java',
         lineTerminator: ';',
