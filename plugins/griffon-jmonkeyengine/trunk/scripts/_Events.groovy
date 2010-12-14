@@ -24,25 +24,19 @@ eventPackageStart = { type ->
 }
 
 eventCreateConfigEnd = {
-    buildConfig.griffon.application.mainClass = "griffon.jme.app.SimpleGameGriffonApplication"
+    buildConfig.griffon.application.mainClass = 'griffon.plugins.jme.SimpleGameGriffonApplication'
 }
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        ant.fileset(dir: "${getPluginDirForName('jmonkeyengine').file}/lib", includes: "*.jar").each {
-            griffonCopyDist(it.toString(), jardir)
-        }
-        if(buildConfig?.jmonkeyengine?.collada?.include) {
-            ant.fileset(dir: "${getPluginDirForName('jmonkeyengine').file}/lib/collada", includes: "*.jar").each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-        if(buildConfig?.jmonkeyengine?.swt?.include) {
-            ant.fileset(dir: "${getPluginDirForName('jmonkeyengine').file}/lib/swt", includes: "*.jar").each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('jmonkeyengine')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-jmonkeyengine-plugin', dirs: "${jmonkeyenginePluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('jmonkeyengine', [
+        conf: 'compile',
+        name: 'griffon-jmonkeyengine-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: jmonkeyenginePluginVersion
+    ])
 }
+

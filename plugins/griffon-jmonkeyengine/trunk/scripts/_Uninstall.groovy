@@ -27,6 +27,7 @@ builderConfig.each() { prefix, v ->
 }
 
 if(addonIsSet1) {
+    println 'Removing JmonkeyengineGriffonAddon from Builder.groovy'
     builderConfigFile.text = builderConfigFile.text - "root.'JmonkeyengineGriffonAddon'.addon=true\n"
 }
 
