@@ -76,109 +76,120 @@ class BasicGameDelegate extends BasicGame {
     }
 
     void init(GameContainer gc) throws SlickException {
-        onInit?.call(gc)
+        callClosure(onInit, gc)
         app.event('SlickInit', [app, gc])
     }
 
     void update(GameContainer gc, int delta) throws SlickException {
-        onUpdate?.call(gc, delta)
+        callClosure(onUpdate, gc, delta)
         app.event('SlickUpdate', [app, gc, delta])   
     }
 
     void render(GameContainer gc, Graphics g) throws SlickException {
-        onRender?.call(gc, g)
+        callClosure(onRender, gc, g)
         app.event('SlickRender', [app, gc, g])
     }
     
     boolean isAcceptingInput() {
-       acceptingInput?.call() ?: true 
+       def val = callClosure(acceptingInput)
+       val != null ? val : true 
     }
 
     boolean closeRequested() {
-       onCloseRequested?.call() ?: true
+       def val = callClosure(onCloseRequested)
+       val != null ? val : true  
     }
 
     void controllerButtonPressed(int controller, int button) {
-        onControllerButtonPressed?.call(controller, button)
+        callClosure(onControllerButtonPressed, controller, button)
     }
 
     void controllerButtonReleased(int controller, int button) {
-        onControllerButtonReleased?.call(controller, button)
+        callClosure(onControllerButtonReleased, controller, button)
     }
 
     void controllerDownPressed(int controller) {
-        onControllerDownPressed?.call(controller)
+        callClosure(onControllerDownPressed, controller)
     }
 
     void controllerDownReleased(int controller) {
-        onControllerDownReleased?.call(controller)
+        callClosure(onControllerDownReleased, controller)
     }
 
     void controllerLeftPressed(int controller) {
-        onControllerLeftPressed?.call(controller)
+        callClosure(onControllerLeftPressed, controller)
     }
 
     void controllerLeftReleased(int controller) {
-        onControllerLeftReleased?.call(controller)
+        callClosure(onControllerLeftReleased, controller)
     }
 
     void controllerRightPressed(int controller) {
-        onControllerRightPressed?.call(controller)
+        callClosure(onControllerRightPressed, controller)
     }
 
     void controllerRightReleased(int controller) {
-        onControllerRightReleased?.call(controller)
+        callClosure(onControllerRightReleased, controller)
     }
 
     void controllerUpPressed(int controller) {
-        onControllerUpPressed?.call(controller)
+        callClosure(onControllerUpPressed, controller)
     }
 
     void controllerUpReleased(int controller) {
-        onControllerUpReleased?.call(controller)
+        callClosure(onControllerUpReleased, controller)
     }
 
     void inputEnded() {
-        onInputEnded?.call()
+        callClosure(onInputEnded, )
     }
 
     void inputStarted() {
-        onInputStarted?.call()
+        callClosure(onInputStarted, )
     }
 
     void keyPressed(int key, char c) {
-        onKeyPressed?.call(key, c)
+        callClosure(onKeyPressed, key, c)
     }
 
     void keyReleased(int key, char c) {
-        onKeyReleased?.call(key, c)
+        callClosure(onKeyReleased, key, c)
     }
 
     void mouseClicked(int button, int x, int y, int clickCount) {
-        onMouseClicked?.call(button, x, y, clickCount)
+        callClosure(onMouseClicked, button, x, y, clickCount)
     }
 
     void mouseDragged(int oldx, int oldy, int newx, int newy) {
-        onMouseDragged?.call(oldx, oldy, newx, newy)
+        callClosure(onMouseDragged, oldx, oldy, newx, newy)
     }
 
     void mouseMoved(int oldx, int oldy, int newx, int newy) {
-        onMouseMoved?.call(oldx, oldy, newx, newy)
+        callClosure(onMouseMoved, oldx, oldy, newx, newy)
     }
 
     void mousePressed(int button, int x, int y) {
-        onMousePressed?.call(button, x, y)
+        callClosure(onMousePressed, button, x, y)
     }
 
     void mouseReleased(int button, int x, int y) {
-        onMouseReleased?.call(button, x, y)
+        callClosure(onMouseReleased, button, x, y)
     }
 
     void mouseWheelMoved(int change) {
-        onMouseWheelMoved?.call(change)
+        callClosure(onMouseWheelMoved, change)
+    }
+
+    void setInput(Input input) {
+        callClosure(onSetInput, input)
     }
     
-    void setInput(Input input) {
-        onSetInput?.call(input)
+    private callClosure(Closure cls, Object[] args) {
+        if(cls) {
+            cls.delegate = this
+            cls.resolveStrategy = Closure.DELEGATE_FIRST
+            return cls(*args)
+        }
+        return null
     }
 }
