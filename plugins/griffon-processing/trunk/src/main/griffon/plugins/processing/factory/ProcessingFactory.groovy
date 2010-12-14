@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package griffon.processing.factory
+package griffon.plugins.processing.factory
 
 import processing.core.PApplet
 
@@ -22,23 +22,13 @@ import processing.core.PApplet
  * @author Andres Almiray
  */
 class ProcessingFactory extends AbstractFactory {
-    final Class beanClass
-
-    ProcessingFactory() {
-        this(PApplet)
-    }
-
-    ProcessingFactory(Class beanClass) {
-        this.beanClass = beanClass
-    }
-
     boolean isLeaf() {
         return true
     }
 
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
         PApplet applet
-        if(FactoryBuilderSupport.checkValueIsTypeNotString(value, name, beanClass)) {
+        if(FactoryBuilderSupport.checkValueIsTypeNotString(value, name, PApplet)) {
             applet = value
         }
         if(attributes.containsKey('source')) {
@@ -47,7 +37,9 @@ class ProcessingFactory extends AbstractFactory {
         if(!applet) {
             throw new IllegalArgumentException("In $name you must define a node value or a property source: of type ${PApplet.class.name}")
         }
-        // applet.init()
+        
+        if(!attributes.containsKey('init') || attributes.remove('init')) applet.init()
+        
         return applet
     }
 }

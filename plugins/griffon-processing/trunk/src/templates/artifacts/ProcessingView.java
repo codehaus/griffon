@@ -1,6 +1,6 @@
-@artifact.package@import processing.core.*;
+@artifact.package@import griffon.plugins.processing.artifact.AbstractGriffonProcessingView;
 
-public class @artifact.name@ extends PApplet {
+public class @artifact.name@ extends AbstractGriffonProcessingView {
     private float y = 100;
 
     // The statements in the setup() function 

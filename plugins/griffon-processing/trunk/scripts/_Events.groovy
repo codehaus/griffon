@@ -18,35 +18,27 @@
  * @author Andres Almiray
  */
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def processingLibDir = "${getPluginDirForName('processing').file}/lib".toString()
-        ant.fileset(dir: processingLibDir, includes: "*.jar").each {
-            griffonCopyDist(it.toString(), jardir)
-        }
-        if(getPluginDirForName('jogl')) {
-            ant.fileset(dir: "${processingLibDir}/opengl", includes: "*.jar").each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-        if(getPluginDirForName('serial')) {
-            ant.fileset(dir: "${processingLibDir}/serial", includes: "*.jar").each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('processing')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-processing-plugin', dirs: "${processingPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('processing', [
+        conf: 'compile',
+        name: 'griffon-processing-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: processingPluginVersion
+    ])
 }
 
 eventCollectArtifacts = { artifactsInfo ->
-    if(!artifactsInfo.find{ it.type == "processing" }) {
-        artifactsInfo << [type: "processing", path: "processing", suffix: "Processing"]
+    if(!artifactsInfo.find{ it.type == 'processing' }) {
+        artifactsInfo << [type: 'processing', path: 'processing', suffix: 'ProcessingView']
     }
 }
 
 eventStatsStart = { pathToInfo ->
-    if(!pathToInfo.find{ it.path == "processing"} ) {
-        pathToInfo << [name: "Processing Views", path: "processing", filetype: [".java"]]
+    if(!pathToInfo.find{ it.path == 'processing'} ) {
+        pathToInfo << [name: 'Processing Views', path: 'processing', filetype: ['.java']]
     }
 }
