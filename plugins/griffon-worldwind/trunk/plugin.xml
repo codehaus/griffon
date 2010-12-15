@@ -1,4 +1,4 @@
-<plugin name='worldwind' version='0.3' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='worldwind' version='0.4' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>NASA WolrdWind (3D Maps)</title>
@@ -10,6 +10,6 @@
     <resource>BuildConfig</resource>
   </resources>
   <dependencies>
-    <plugin name='jogl' version='0.3' />
+    <plugin name='jogl-compat' version='0.1' />
   </dependencies>
 </plugin>

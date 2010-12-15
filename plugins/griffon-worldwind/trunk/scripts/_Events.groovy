@@ -26,29 +26,21 @@ eventPackageStart = { type ->
 eventCreateConfigEnd = {
     if(buildConfig.griffon.extensions) {
         buildConfig.griffon.extensions.jnlpUrls << "http://worldwind.arc.nasa.gov/java/0.3.0/webstart/worldwind.jnlp"
-    }
-}
-
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        ant.fileset(dir: "${getPluginDirForName('worldwind').file}/lib", includes: "*.jar").each {
-            if(it.name =~ /griffon.worldwind.addon.*/) {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-
-        if(!buildConfig.griffon?.extensions?.props) buildConfig.griffon.extensions.props = new ConfigObject()
+        if(!buildConfig.griffon.extensions.props) buildConfig.griffon.extensions.props = new ConfigObject()
         buildConfig.griffon.extensions.props.'sun.java2d.noddraw' = true
-
-        if(!(packagingType in ['applet', 'webstart'])) {
-            ant.fileset(dir: "${getPluginDirForName('worldwind').file}/lib", includes: "*.jar").each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-            def worldwindLibDir = "${getPluginDirForName('worldwind').file}/lib".toString()
-            copyPlatformJars(worldwindLibDir, jardir)
-            copyNativeLibs(worldwindLibDir, jardir)
-        }
     }
 }
+
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('worldwind')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-worldwind-plugin', dirs: "${worldwindPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('worldwind', [
+        conf: 'compile',
+        name: 'griffon-worldwind-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: worldwindPluginVersion
+    ])
+}
+

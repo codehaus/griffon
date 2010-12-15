@@ -18,8 +18,8 @@
  * @author Andres Almiray
  */
 class WorldwindGriffonPlugin {
-    def version = 0.3
-    def dependsOn = [jogl: 0.3]
+    def version = 0.4
+    def dependsOn = ['jogl-compat': 0.1]
     def toolkits = ['swing']
     def griffonVersion = '0.9 > *'
     def license = 'Apache Software License 2.0'
