@@ -18,13 +18,16 @@
  * @author Andres Almiray
  */
 
-eventCopyLibsEnd = { jardir ->
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('rest')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('rest')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-rest-plugin', dirs: "${restPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('rest', [
+        conf: 'compile',
+        name: 'griffon-rest-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: restPluginVersion
+    ])
 }
+
