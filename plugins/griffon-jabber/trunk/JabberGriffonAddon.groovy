@@ -33,9 +33,8 @@ class JabberGriffonAddon {
       NewInstance: { klass, type, instance ->
          def types = app.config.griffon?.jabber?.injectInto ?: ['controller']
          if(!types.contains(type)) return
-         app.artifactManager.findGriffonClass(klass).metaClass.with {
-             jabberConnect = jabberConnect.curry(instance)
-         }
+         def mc = app.artifactManager.findGriffonClass(klass).metaClass
+         mc.jabberConnect = jabberConnect.curry(instance)
       }
    ]
 
