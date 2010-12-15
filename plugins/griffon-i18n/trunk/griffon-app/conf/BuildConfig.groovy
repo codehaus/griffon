@@ -9,7 +9,7 @@ griffon.project.dependency.resolution = {
         mavenRepo 'http://repository.springsource.com/maven/bundles/release'
     }
     dependencies {
-        def springVersion = '3.0.3.RELEASE'
+        def springVersion = '3.0.5.RELEASE'
         compile("org.springframework:org.springframework.core:$springVersion") { transitive = false }
         compile("org.springframework:org.springframework.beans:$springVersion") { transitive = false }
         compile("org.springframework:org.springframework.context:$springVersion") { transitive = false }
