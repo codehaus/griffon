@@ -1,4 +1,4 @@
-<plugin name='xmlrpc' version='0.4.1' griffonVersion='0.9.1 &gt; *' jdk='1.5'>
+<plugin name='xmlrpc' version='0.5' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>XML-RPC client &amp; libraries</title>
