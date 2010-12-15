@@ -1,8 +1,6 @@
 griffon.project.dependency.resolution = {
-    // inherit Griffon' default dependencies
-    inherits("global") {
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    inherits "global"
+    log "warn"
     repositories {
         griffonPlugins()
         griffonHome()
@@ -11,11 +9,11 @@ griffon.project.dependency.resolution = {
         flatDir name: 'joglPluginLib', dirs: 'lib'
     }
     dependencies {
-        def joglVersion = 'jsr231-2.0.0'
-        compile "com.jogamp:jogl-all:$joglVersion",
-                "com.jogamp:gluegen-rt:$joglVersion",
-                "com.jogamp:nativewindow.all:$joglVersion",
-                "com.jogamp:newt.all:$joglVersion"
+        compile 'com.jogamp:jogl.all:249',
+                'com.jogamp:nativewindow.all:249',
+                'com.jogamp:newt.all:249',
+                'com.jogamp:gluegen-rt:233',
+                'com.jogamp:jocl:225'
     }
 }
 
