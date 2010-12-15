@@ -6,6 +6,7 @@
   <documentation>http://griffon.codehaus.org/Jogl+Plugin</documentation>
   <license>Apache Software License 2.0</license>
   <toolkits>swing</toolkits>
+  <platforms>linux,macosx,windows</platforms>
   <resources>
     <resource>BuildConfig</resource>
   </resources>

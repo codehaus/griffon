@@ -21,6 +21,7 @@ class JoglGriffonPlugin {
     def version = 0.4
     def dependsOn = [:]
     def toolkits = ['swing']
+    def platforms = ['linux', 'macosx', 'windows']
     def griffonVersion = '0.9.2 > *'
     def license = 'Apache Software License 2.0'
 
