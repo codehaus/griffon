@@ -18,16 +18,16 @@
  * @author Andres Almiray
  */
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('couchdb')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('couchdb')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-couchdb-plugin', dirs: "${couchdbPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('couchdb', [
+        conf: 'compile',
+        name: 'griffon-couchdb-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: couchdbPluginVersion
+    ])
 }
 
