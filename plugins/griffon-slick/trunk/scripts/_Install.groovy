@@ -46,3 +46,5 @@ if (!addonIsSet1) {
 root.'SlickGriffonAddon'.addon=true
 ''')
 }
+
+ant.mkdir(dir: "${basedir}/griffon-app/slick-states")

@@ -61,11 +61,14 @@ eventCreateConfigEnd = {
     if(compilingPlugin('slick')) return
     if(buildConfig.griffon.application.mainClass) return
 
+    File slickStates = new File("${basedir}/griffon-app/slick-states")
     boolean hasStates = false
-    new File("${basedir}/griffon-app/slick-states").eachFileRecurse { file ->
-        if(hasStates) return
-        if(file.name.endsWith('GameState.groovy') || file.name.endsWith('GameState.java')) {
-            hasStates = true
+    if(slickStates.exists()) {
+        slickStates.eachFileRecurse { file ->
+            if(hasStates) return
+            if(file.name.endsWith('GameState.groovy') || file.name.endsWith('GameState.java')) {
+                hasStates = true
+            }
         }
     }
 
