@@ -10,7 +10,6 @@ griffon.project.dependency.resolution = {
     dependencies {
         String camelVersion = '2.5.0'
         compile("org.apache.camel:camel-core:$camelVersion",
-                "org.apache.camel:camel-core-xml:$camelVersion",
                 "org.apache.camel:camel-spring:$camelVersion",
                 "org.apache.camel:camel-groovy:$camelVersion",
                 "org.apache.camel:camel-stream:$camelVersion",
