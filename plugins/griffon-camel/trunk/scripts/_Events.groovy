@@ -29,6 +29,12 @@ eventSetClasspath = { cl ->
         group: 'org.codehaus.griffon.plugins',
         version: camelPluginVersion
     ])
+    griffonSettings.dependencyManager.addPluginDependency('camel', [
+        conf: 'build',
+        name: 'griffon-camel-cli',
+        group: 'org.codehaus.griffon.plugins',
+        version: camelPluginVersion
+    ])
 }
 
 eventCollectArtifacts = { artifactsInfo ->
