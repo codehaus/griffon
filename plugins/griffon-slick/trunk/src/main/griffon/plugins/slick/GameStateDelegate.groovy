@@ -78,7 +78,7 @@ class GameStateDelegate extends BasicGameState {
 
     void init(GameContainer gc, StateBasedGame game) throws SlickException {
         callClosure(onInit, gc, game)
-        app.event('SlickInit', [app, game, gc])
+        app.event('SlickInit', [app, gc, game])
     }
 
     void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {

@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class @artifact.name@ extends AbstractGriffonGameState {
     public static final int ID = 0; // CHANGE ME!!
-    public @artifact.name.plain@Model model;
-    public @artifact.name.plain@Controller controller;
+    private @artifact.name.plain@Model model;
+    private @artifact.name.plain@Controller controller;
     
     public int getID() { return ID; } 
 
