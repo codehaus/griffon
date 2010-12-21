@@ -28,37 +28,18 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.codehaus.griffon.runtime.jzy3d;
+
+import griffon.plugins.jzy3d.GriffonChart3DClass;
+
+import griffon.core.GriffonApplication;
+import org.codehaus.griffon.runtime.core.DefaultGriffonClass;
+
 /**
  * @author Andres Almiray
  */
-
-def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
-eventSetClasspath = { cl ->
-    eventClosure1(cl)
-    if(compilingPlugin('jzy3d')) return
-    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-jzy3d-plugin', dirs: "${jzy3dPluginDir}/addon"
-    griffonSettings.dependencyManager.addPluginDependency('jzy3d', [
-        conf: 'compile',
-        name: 'griffon-jzy3d-addon',
-        group: 'org.codehaus.griffon.plugins',
-        version: jzy3dPluginVersion
-    ])
-    griffonSettings.dependencyManager.addPluginDependency('jzy3d', [
-        conf: 'build',
-        name: 'griffon-jzy3d-cli',
-        group: 'org.codehaus.griffon.plugins',
-        version: jzy3dPluginVersion
-    ])
-}
-
-eventCollectArtifacts = { artifactsInfo ->
-    if(!artifactsInfo.find{ it.type == 'chart3d' }) {
-        artifactsInfo << [type: 'chart3d', path: 'charts', suffix: 'Chart3D']
-    }
-}
-
-eventStatsStart = { pathToInfo ->
-    if(!pathToInfo.find{ it.path == 'charts'} ) {
-        pathToInfo << [name: '3D Charts', path: 'charts', filetype: ['.groovy', '.java']]
+public class DefaultGriffonChart3DClass extends DefaultGriffonClass implements GriffonChart3DClass {
+    public DefaultGriffonChart3DClass(GriffonApplication app, Class clazz) {
+        super(app, clazz, GriffonChart3DClass.TYPE, GriffonChart3DClass.TRAILING);
     }
 }

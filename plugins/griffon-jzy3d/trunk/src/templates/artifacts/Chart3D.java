@@ -8,7 +8,7 @@ import org.jzy3d.plot3d.builder.Mapper;
 import org.jzy3d.plot3d.builder.concrete.OrthonormalGrid;
 import org.jzy3d.plot3d.primitives.Shape;
 import org.jzy3d.plot3d.rendering.legends.colorbars.ColorbarLegend;
-import griffon.plugins.jzy3d.artifact.AbstractGriffonChart3D;
+import org.codehaus.griffon.runtime.jzy3d.AbstractGriffonChart3D;
 import java.util.Map;
 
 public class @artifact.name@ extends AbstractGriffonChart3D {
