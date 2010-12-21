@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3083">
+<plugins revision="3088">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1487,7 +1487,7 @@ http://jgraph.com</description>
             <documentation>http://griffon.codehaus.org/Jogl+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jogl/tags/RELEASE_0_3/griffon-jogl-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>JOGL support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -3174,6 +3174,19 @@ Based on the Grails plugin of the same name.</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-quartz/tags/RELEASE_0_1/griffon-quartz-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="jogl-compat" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>JOGL 1.1.1 support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>JOGL 1.1.1 support</description>
+            <documentation>http://griffon.codehaus.org/JoglCompat+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms>linux,macosx,windows</platforms>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jogl-compat/tags/RELEASE_0_1/griffon-jogl-compat-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
