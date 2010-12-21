@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3154">
+<plugins revision="3160">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2374,7 +2374,7 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <documentation>http://griffon.codehaus.org/Rest+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rest/tags/RELEASE_0_5_1/griffon-rest-0.5.1.zip</file>
         </release>
-        <release tag="RELEASE_0_6" version="0.6" type="svn">
+        <release tag="RELEASE_0_6" type="svn" version="0.6">
             <title>REST client libraries</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
