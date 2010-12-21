@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3129">
+<plugins revision="3134">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -652,7 +652,7 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-feeds/tags/RELEASE_0_1/griffon-feeds-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="fest" latest-release="0.5">
+    <plugin name="fest" latest-release="0.6">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables application testing with FEST</title>
             <author>Andres Almiray</author>
@@ -708,6 +708,17 @@ Provides a nice icon set too.</description>
             <description>Enables application testing with FEST (http://easytesting.org)</description>
             <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_5/griffon-fest-0.5.zip</file>
+        </release>
+        <release tag="RELEASE_0_6" version="0.6" type="svn">
+            <title>Enables application testing with FEST</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables application testing with FEST (http://easytesting.org)</description>
+            <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_6/griffon-fest-0.6.zip</file>
         </release>
     </plugin>
     <plugin name="findbugs" latest-release="0.2">
