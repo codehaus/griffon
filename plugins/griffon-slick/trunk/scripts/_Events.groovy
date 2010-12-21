@@ -46,14 +46,14 @@ eventSetClasspath = { cl ->
 }
 
 eventCollectArtifacts = { artifactsInfo ->
-    if(!artifactsInfo.find{ it.type == 'state' }) {
-        artifactsInfo << [type: 'state', path: 'slick-states', suffix: 'GameState']
+    if(!artifactsInfo.find{ it.type == 'gamestate' }) {
+        artifactsInfo << [type: 'gamestate', path: 'gamestates', suffix: 'GameState']
     }
 }
 
 eventStatsStart = { pathToInfo ->
-    if(!pathToInfo.find{ it.path == 'slick-states'} ) {
-        pathToInfo << [name: 'Slick Game States', path: 'slick-states', filetype: ['.groovy', '.java']]
+    if(!pathToInfo.find{ it.path == 'gamestates'} ) {
+        pathToInfo << [name: 'Slick Game States', path: 'gamestates', filetype: ['.groovy', '.java']]
     }
 }
 
@@ -61,7 +61,7 @@ eventCreateConfigEnd = {
     if(compilingPlugin('slick')) return
     if(buildConfig.griffon.application.mainClass) return
 
-    File slickStates = new File("${basedir}/griffon-app/slick-states")
+    File slickStates = new File("${basedir}/griffon-app/gamestates")
     boolean hasStates = false
     if(slickStates.exists()) {
         slickStates.eachFileRecurse { file ->

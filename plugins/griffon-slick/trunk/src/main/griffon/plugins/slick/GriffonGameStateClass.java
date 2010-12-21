@@ -28,23 +28,16 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package griffon.plugins.slick;
+
+import griffon.core.GriffonClass;
+
 /**
  * @author Andres Almiray
  */
-
-// check to see if we already have a SlickGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'SlickGriffonAddon' == builder
-    }
+public interface GriffonGameStateClass extends GriffonClass {
+    /** "gamestate" */
+    String TYPE = "gamestate";
+    /** "GameState" */
+    String TRAILING = "GameState";
 }
-
-if (!addonIsSet1) {
-    println 'Adding SlickGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'SlickGriffonAddon'.addon=true
-''')
-}
-
-ant.mkdir(dir: "${basedir}/griffon-app/gamestates")

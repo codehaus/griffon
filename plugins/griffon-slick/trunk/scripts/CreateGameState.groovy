@@ -56,7 +56,7 @@ Type in griffon create-addon then execute this command again."""
         name: fqn,
         suffix: "GameState",
         type: "GameState",
-        path: "griffon-app/slick-states")
+        path: "griffon-app/gamestates")
 
     createArtifact(
         name: fqn,

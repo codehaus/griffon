@@ -30,11 +30,16 @@
  
 import org.newdawn.slick.AppGameContainer
 import griffon.plugins.slick.factory.GameStateFactory
+import org.codehaus.griffon.runtime.slick.GameStateArtifactHandler
 
 /**
  * @author Andres Almiray
  */
 class SlickGriffonAddon {
+    void addonInit(GriffonApplication app) {
+        app.artifactManager.registerArtifactHandler(new GameStateArtifactHandler(app))
+    }
+
     def attributeDelegates = [
         {builder, node, attributes ->
             if(node instanceof AppGameContainer) {

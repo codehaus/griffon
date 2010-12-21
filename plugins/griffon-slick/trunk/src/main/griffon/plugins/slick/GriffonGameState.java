@@ -28,9 +28,8 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package griffon.plugins.slick.artifact;
+package griffon.plugins.slick;
 
-import griffon.plugins.slick.StateBasedSlickGriffonApplication;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.GameContainer;
