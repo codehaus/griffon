@@ -50,6 +50,12 @@ class I18nGriffonAddon {
         mc.getMessage = {String message, Object[] args ->
             messageSource.getMessage(message, args, app.locale)
         }
+        mc.getMessage = {String message, Locale locale ->
+            messageSource.getMessage(message, new Object[0], locale)
+        }
+        mc.getMessage = {String message ->
+            messageSource.getMessage(message, new Object[0], app.locale)
+        }
         mc.getMessage = {MessageSourceResolvable resolvable ->
             messageSource.getMessage(resolvable, app.locale)
         }
@@ -79,6 +85,12 @@ class I18nGriffonAddon {
         }
         mc.getMessage = {String message, Object[] args ->
             messageSource.getMessage(message, args, app.locale)
+        }
+        mc.getMessage = {String message, Locale locale ->
+            messageSource.getMessage(message, new Object[0], locale)
+        }
+        mc.getMessage = {String message ->
+            messageSource.getMessage(message, new Object[0], app.locale)
         }
         mc.getMessage = {MessageSourceResolvable resolvable, Locale locale ->
             messageSource.getMessage(resolvable, locale)
