@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3068">
+<plugins revision="3073">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2177,7 +2177,7 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-pivot/tags/RELEASE_0_1/griffon-pivot-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="processing" latest-release="0.2">
+    <plugin name="processing" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>2D/3D animations with Processing</title>
             <author>Andres Almiray</author>
@@ -2193,6 +2193,17 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <description>2D/3D animations with Processing (http://processing.org)</description>
             <documentation>http://griffon.codehaus.org/Processing+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-processing/tags/RELEASE_0_2/griffon-processing-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>2D/3D animations with Processing</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>2D/3D animations with Processing (http://processing.org)</description>
+            <documentation>http://griffon.codehaus.org/Processing+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-processing/tags/RELEASE_0_3/griffon-processing-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="protobuf" latest-release="0.3">
@@ -3130,7 +3141,7 @@ This is a port of the grails-ldap plugin, original from Luke Daley</description>
         </release>
     </plugin>
     <plugin name="quartz" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Job scheduling via Quartz</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
