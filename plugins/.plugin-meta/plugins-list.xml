@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="2988">
+<plugins revision="3043">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -746,7 +746,7 @@ Provides a nice icon set too.</description>
             <documentation>http://griffon.codehaus.org/FlamingoBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_3/griffon-flamingo-builder-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>FlamingoBuilder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2509,7 +2509,7 @@ http://grails.org/plugin/spock</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spock/tags/RELEASE_0_2/griffon-spock-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="spring" latest-release="0.4">
+    <plugin name="spring" latest-release="0.5">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Spring framework libraries and helpers</title>
             <author>Andres Almiray</author>
@@ -2541,6 +2541,17 @@ http://grails.org/plugin/spock</description>
             <description>Brings the Spring framework libraries and some helper classes.</description>
             <documentation>http://griffon.codehaus.org/Spring+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_4/griffon-spring-0.4.zip</file>
+        </release>
+        <release tag="RELEASE_0_5" version="0.5" type="svn">
+            <title>Spring framework libraries and helpers</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Brings the Spring framework libraries and some helper classes.</description>
+            <documentation>http://griffon.codehaus.org/Spring+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_5/griffon-spring-0.5.zip</file>
         </release>
     </plugin>
     <plugin name="steel" latest-release="0.4">
