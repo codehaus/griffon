@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3088">
+<plugins revision="3093">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1429,7 +1429,19 @@ http://jgraph.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jide-builder/tags/RELEASE_0_4/griffon-jide-builder-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="jmonkeyengine"/>
+    <plugin name="jmonkeyengine" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>JMonkeyEngine support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>JMonkeyEngine support.</description>
+            <documentation>http://griffon.codehaus.org/Jmonkeyengine+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jmonkeyengine/tags/RELEASE_0_1/griffon-jmonkeyengine-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="jmx" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JMX support</title>
@@ -3177,7 +3189,7 @@ Based on the Grails plugin of the same name.</description>
         </release>
     </plugin>
     <plugin name="jogl-compat" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JOGL 1.1.1 support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
