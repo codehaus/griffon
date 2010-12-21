@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3073">
+<plugins revision="3078">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1844,7 +1844,7 @@ http://www.digitprop.com/tonic/tonic.php</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-tonic/tags/RELEASE_0_1/griffon-lookandfeel-tonic-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="lwjgl" latest-release="0.3">
+    <plugin name="lwjgl" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>LWJGL support</title>
             <author>Andres Almiray</author>
@@ -1868,6 +1868,17 @@ http://www.digitprop.com/tonic/tonic.php</description>
             <description>LWJGL support</description>
             <documentation>http://griffon.codehaus.org/Lwjgl+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lwjgl/tags/RELEASE_0_3/griffon-lwjgl-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>LWJGL support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>LWJGL support</description>
+            <documentation>http://griffon.codehaus.org/Lwjgl+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lwjgl/tags/RELEASE_0_4/griffon-lwjgl-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="mac-menus"/>
@@ -2194,7 +2205,7 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <documentation>http://griffon.codehaus.org/Processing+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-processing/tags/RELEASE_0_2/griffon-processing-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>2D/3D animations with Processing</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
