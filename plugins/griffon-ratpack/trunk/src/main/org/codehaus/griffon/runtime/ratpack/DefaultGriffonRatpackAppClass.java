@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
+package org.codehaus.griffon.runtime.ratpack;
+
+import griffon.plugins.ratpack.GriffonRatpackAppClass;
+
+import griffon.core.GriffonApplication;
+import org.codehaus.griffon.runtime.core.DefaultGriffonClass;
+
 /**
  * @author Andres Almiray
  */
-
-// check to see if we already have a RatpackGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'RatpackGriffonAddon' == builder
+public class DefaultGriffonRatpackAppClass extends DefaultGriffonClass implements GriffonRatpackAppClass {
+    public DefaultGriffonRatpackAppClass(GriffonApplication app, Class clazz) {
+        super(app, clazz, GriffonRatpackAppClass.TYPE, GriffonRatpackAppClass.TRAILING);
     }
-}
-
-if (addonIsSet1) {
-    println 'Removing RatpackGriffonAddon from Builder.groovy'
-    builderConfigFile.text = builderConfigFile.text - "root.'RatpackGriffonAddon'.addon=true\n"
 }
