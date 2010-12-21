@@ -2,7 +2,8 @@
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Job scheduling via Quartz</title>
-  <description>Job scheduling via Quartz</description>
+  <description>Job scheduling via Quartz.
+Based on the Grails plugin of the same name.</description>
   <documentation>http://griffon.codehaus.org/Quartz+Plugin</documentation>
   <license>Apache Software License 2.0</license>
   <resources>
