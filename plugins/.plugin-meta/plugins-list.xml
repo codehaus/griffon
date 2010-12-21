@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3048">
+<plugins revision="3053">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1417,7 +1417,7 @@ http://jgraph.com</description>
         </release>
     </plugin>
     <plugin name="jmonkeyengine"/>
-    <plugin name="jmx" latest-release="0.2">
+    <plugin name="jmx" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JMX support</title>
             <author>Andres Almiray</author>
@@ -1436,6 +1436,17 @@ http://jgraph.com</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmx/tags/RELEASE_0_2/griffon-jmx-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>JMX support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Adds JMX support to Griffon applications</description>
+            <documentation>http://griffon.codehaus.org/Jmx+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jmx/tags/RELEASE_0_3/griffon-jmx-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="jogl" latest-release="0.3">
@@ -3079,7 +3090,7 @@ http://harmoniccode.blogspot.com</description>
         </release>
     </plugin>
     <plugin name="jml" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Msn Messenger support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
