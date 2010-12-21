@@ -10,6 +10,9 @@ griffon.project.dependency.resolution = {
     }
   
     dependencies {
+        build('org.spockframework:spock-core:0.5-groovy-1.7') {
+            exclude 'groovy-all'
+        }
         test('org.spockframework:spock-core:0.5-groovy-1.7') {
             exclude 'groovy-all'
         }
