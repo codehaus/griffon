@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3202">
+<plugins revision="3207">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1210,7 +1210,7 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <documentation>http://griffon.codehaus.org/I18n+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-i18n/tags/RELEASE_0_2/griffon-i18n-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>I18n support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2916,7 +2916,7 @@ http://freedesktop.org</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-thrift/tags/RELEASE_0_2/griffon-thrift-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="transitions" latest-release="0.3">
+    <plugin name="transitions" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Adds animated transitions capabilities</title>
             <author>Andres Almiray</author>
@@ -2964,6 +2964,17 @@ http://freedesktop.org</description>
             <description>Adds animated transitions capabilities</description>
             <documentation>http://griffon.codehaus.org/Transitions+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-transitions/tags/RELEASE_0_3/griffon-transitions-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>Adds animated transitions capabilities</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Adds animated transitions capabilities</description>
+            <documentation>http://griffon.codehaus.org/Transitions+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-transitions/tags/RELEASE_0_4/griffon-transitions-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="tray-builder" latest-release="0.4">
