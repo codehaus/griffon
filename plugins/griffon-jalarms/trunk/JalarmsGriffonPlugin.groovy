@@ -21,9 +21,9 @@ class JalarmsGriffonPlugin {
     // the plugin version
     def version = "0.1"
     // the version or versions of Griffon the plugin is designed for
-    def griffonVersion = '0.9.1 > *' 
+    def griffonVersion = '0.9.2 > *' 
     // the other plugins this plugin depends on
-    def dependsOn = [spring: 0.4]
+    def dependsOn = [spring: 0.5]
     // resources that are included in plugin packaging
     def pluginIncludes = []
     // the plugin license
