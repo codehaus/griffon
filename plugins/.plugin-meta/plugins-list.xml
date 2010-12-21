@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3186">
+<plugins revision="3191">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -608,7 +608,7 @@ another docking frame in the application.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_3_1/griffon-eclipse-support-0.3.1.zip</file>
         </release>
     </plugin>
-    <plugin name="effects" latest-release="0.1">
+    <plugin name="effects" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Effects and Animations</title>
             <author>Andres Almiray</author>
@@ -616,6 +616,17 @@ another docking frame in the application.</description>
             <description>Effects and Animations</description>
             <documentation>http://griffon.codehaus.org/Effects+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_1/griffon-effects-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Effects and Animations</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Effects and Animations</description>
+            <documentation>http://griffon.codehaus.org/Effects+Plugin</documentation>
+            <license>BSD License</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_2/griffon-effects-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="erlang" latest-release="0.2">
@@ -1170,7 +1181,7 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <documentation>http://griffon.codehaus.org/Hessian+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-hessian/tags/RELEASE_0_4_1/griffon-hessian-0.4.1.zip</file>
         </release>
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>Hessian client &amp; libraries</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
