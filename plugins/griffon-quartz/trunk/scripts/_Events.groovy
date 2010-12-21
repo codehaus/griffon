@@ -29,6 +29,12 @@ eventSetClasspath = { cl ->
         group: 'org.codehaus.griffon.plugins',
         version: quartzPluginVersion
     ])
+    griffonSettings.dependencyManager.addPluginDependency('quartz', [
+        conf: 'build',
+        name: 'griffon-quartz-cli',
+        group: 'org.codehaus.griffon.plugins',
+        version: quartzPluginVersion
+    ])
 }
 
 eventCollectArtifacts = { artifactsInfo ->
@@ -40,43 +46,5 @@ eventCollectArtifacts = { artifactsInfo ->
 eventStatsStart = { pathToInfo ->
     if(!pathToInfo.find{ it.path == 'jobs'} ) {
         pathToInfo << [name: 'Quartz Jobs', path: 'jobs', filetype: ['.groovy']]
-    }
-}
-
-includeTargets << griffonScript('_GriffonCompile')
-quartzCliDir = new File("${griffonSettings.projectWorkDir}/cli-classes")
-
-eventCleanEnd = {
-    if(!compilingPlugin('quartz')) return
-    ant.delete(dir: quartzCliDir)
-}
-
-eventCompileEnd = {
-    if(!compilingPlugin('quartz')) return
-    ant.mkdir(dir: quartzCliDir)
-
-    ant.path(id:'quartz.compile.classpath') {
-        path(refid: "griffon.compile.classpath")
-        pathElement(location: classesDirPath)
-    }
-    compileSources(quartzCliDir, 'quartz.compile.classpath') {
-        src(path: "${basedir}/src/cli")
-        javac(classpathref: 'quartz.compile.classpath', debug: 'yes')
-    }
-    ant.copy(todir: quartzCliDir) {
-        fileset(dir: "${basedir}/src/cli") {
-            exclude(name: '**/*.java')
-            exclude(name: '**/*.groovy')
-            exclude(name: '**/.svn')
-        }
-    }
-}
-
-eventPackageAddonEnd = {
-    if(!compilingPlugin('quartz')) return
-
-    cliJarName = "griffon-${pluginName}-cli-${plugin.version}.jar"
-    ant.jar(destfile: "$addonJarDir/$cliJarName") {
-        fileset(dir: quartzCliDir)
     }
 }

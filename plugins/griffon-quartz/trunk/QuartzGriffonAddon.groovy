@@ -92,24 +92,24 @@ class QuartzGriffonAddon {
             }
 
             mc.'static'.schedule = { String cronExpression, Map params = null ->
-                Trigger trigger = new CronTrigger(generateTriggerName(), GriffonJob.DEFAULT_TRIGGERS_GROUP, jobName, jobGroup, cronExpression)
+                Trigger trigger = new CronTrigger(generateTriggerName(), QuartzConstants.DEFAULT_TRIGGERS_GROUP, jobName, jobGroup, cronExpression)
                 if(jc.getVolatility()) trigger.setVolatility(true)
                 if(params) trigger.jobDataMap.putAll(params)
                 quartzScheduler.scheduleJob(trigger)
             }
             mc.'static'.schedule = {Long interval, Integer repeatCount = SimpleTrigger.REPEAT_INDEFINITELY, Map params = null ->
-                Trigger trigger = new SimpleTrigger(generateTriggerName(), GriffonJob.DEFAULT_TRIGGERS_GROUP, jobName, jobGroup, new Date(), null, repeatCount, interval)
+                Trigger trigger = new SimpleTrigger(generateTriggerName(), QuartzConstants.DEFAULT_TRIGGERS_GROUP, jobName, jobGroup, new Date(), null, repeatCount, interval)
                 if(jc.getVolatility()) trigger.setVolatility(true)
                 if(params) trigger.jobDataMap.putAll(params)
                 quartzScheduler.scheduleJob(trigger)
             }
             mc.'static'.schedule = {Date scheduleDate ->
-                Trigger trigger = new SimpleTrigger(generateTriggerName(), GriffonJob.DEFAULT_TRIGGERS_GROUP, jobName, jobGroup, scheduleDate, null, 0, 0)
+                Trigger trigger = new SimpleTrigger(generateTriggerName(), QuartzConstants.DEFAULT_TRIGGERS_GROUP, jobName, jobGroup, scheduleDate, null, 0, 0)
                 if(jc.getVolatility()) trigger.setVolatility(true)
                 quartzScheduler.scheduleJob(trigger)
             }
             mc.'static'.schedule = {Date scheduleDate, Map params ->
-                Trigger trigger = new SimpleTrigger(generateTriggerName(), GriffonJob.DEFAULT_TRIGGERS_GROUP, jobName, jobGroup, scheduleDate, null, 0, 0)
+                Trigger trigger = new SimpleTrigger(generateTriggerName(), QuartzConstants.DEFAULT_TRIGGERS_GROUP, jobName, jobGroup, scheduleDate, null, 0, 0)
                 if(jc.getVolatility()) trigger.setVolatility(true)
                 if(params) trigger.jobDataMap.putAll(params)
                 quartzScheduler.scheduleJob(trigger)
@@ -136,7 +136,7 @@ class QuartzGriffonAddon {
                 quartzScheduler.rescheduleJob(trigger.name, trigger.group, trigger)
             }
 
-            mc.'static'.unschedule = {String triggerName, String triggerGroup = GriffonJob.DEFAULT_TRIGGERS_GROUP ->
+            mc.'static'.unschedule = {String triggerName, String triggerGroup = QuartzConstants.DEFAULT_TRIGGERS_GROUP ->
                 quartzScheduler.unscheduleJob(triggerName, triggerGroup)
             }
         }
