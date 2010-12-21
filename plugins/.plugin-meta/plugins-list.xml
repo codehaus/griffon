@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3103">
+<plugins revision="3108">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -3213,7 +3213,7 @@ Based on the Grails plugin of the same name.</description>
         </release>
     </plugin>
     <plugin name="jzy3d" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>3D chart support via Jzy3d</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -3223,6 +3223,20 @@ Based on the Grails plugin of the same name.</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jzy3d/tags/RELEASE_0_1/griffon-jzy3d-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="slick" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Slick2D is a simple set of tools wrapped around the LWJGL OpenGL binding for Java</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Slick2D is a simple set of tools wrapped around the LWJGL OpenGL binding for Java
+http://slick.cokeandcode.com/</description>
+            <documentation>http://griffon.codehaus.org/Slick+Plugin</documentation>
+            <license>BSD</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-slick/tags/RELEASE_0_1/griffon-slick-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
