@@ -1,0 +1,15 @@
+<plugin name='jzy3d' version='0.1' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>3D chart support via Jzy3d</title>
+  <description>3D chart support via Jzy3d</description>
+  <documentation>http://griffon.codehaus.org/Jzy3d+Plugin</documentation>
+  <license>BSD</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies>
+    <plugin name='jogl-compat' version='0.1' />
+  </dependencies>
+</plugin>
