@@ -35,7 +35,7 @@ root.'JmlGriffonAddon'.addon=true
 
 if(!(config.flatten().'griffon.plugins.msn.messenger.injectInto')) {
      configFile.append('''
-griffon.plugins.msn.messenger.injectInto = ['controller']
+griffon.msn.injectInto = ['controller']
 ''')
 }
 
