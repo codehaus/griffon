@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3197">
+<plugins revision="3202">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1193,7 +1193,7 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-hessian/tags/RELEASE_0_5/griffon-hessian-0.5.zip</file>
         </release>
     </plugin>
-    <plugin name="i18n" latest-release="0.2">
+    <plugin name="i18n" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>I18n support</title>
             <author>Andres Almiray</author>
@@ -1209,6 +1209,17 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <description>I18n support via Spring.</description>
             <documentation>http://griffon.codehaus.org/I18n+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-i18n/tags/RELEASE_0_2/griffon-i18n-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>I18n support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>I18n support via Spring.</description>
+            <documentation>http://griffon.codehaus.org/I18n+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-i18n/tags/RELEASE_0_3/griffon-i18n-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="installer" latest-release="0.5.1">
