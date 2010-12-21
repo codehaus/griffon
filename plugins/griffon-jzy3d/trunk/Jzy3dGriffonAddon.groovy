@@ -30,13 +30,13 @@
 
 import griffon.core.GriffonApplication
 import griffon.util.Metadata
-import griffon.plugins.jzy3d.artifact.GriffonChart3DArtifactHandler
+import org.codehaus.griffon.runtime.jzy3d.Chart3DArtifactHandler
 
 /**
  * @author Andres Almiray
  */
 class Jzy3dGriffonAddon {
     void addonInit(GriffonApplication app) {
-        app.artifactManager.registerArtifactHandler(new GriffonChart3DArtifactHandler(app))
+        app.artifactManager.registerArtifactHandler(new Chart3DArtifactHandler(app))
     }
 }
