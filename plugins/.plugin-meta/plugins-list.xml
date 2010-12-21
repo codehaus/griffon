@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3053">
+<plugins revision="3058">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1244,7 +1244,20 @@ Supported formats are:
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jabber/tags/RELEASE_0_4/griffon-jabber-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="jalarms"/>
+    <plugin name="jalarms" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>JAlarms: send notifications on various channels</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>JAlarms: send notifications in various channels
+http://jalarms.sourceforge.net</description>
+            <documentation>http://griffon.codehaus.org/Jalarms+Plugin</documentation>
+            <license>GNU LGPL 2.1</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jalarms/tags/RELEASE_0_1/griffon-jalarms-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="jbusycomponent" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enhance any swing components with a 'busy' state</title>
@@ -1437,7 +1450,7 @@ http://jgraph.com</description>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmx/tags/RELEASE_0_2/griffon-jmx-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>JMX support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
