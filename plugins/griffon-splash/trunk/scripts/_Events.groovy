@@ -1,41 +1,32 @@
-import griffon.util.GriffonApplicationUtils
+/*
+ * Copyright 2009-2010 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-eventPackagePluginStart = { pluginName, plugin ->
-println "===> Package Plugin Start"
-    if( !GriffonApplicationUtils.isJdk16 ) {
-        ant.fail("Plugin $pluginName requires Jdk1.6 or above to be packaged, current Jdk is ${System.getProperty('java.version')}")
-    }
-    def destFileName = "lib/$pluginName-${plugin.version}.jar"
-    ant.delete(dir: destFileName, quiet: true, failOnError: false)
-    ant.copy(todir: classesDirPath) {
-        fileset(dir:"${basedir}/src/main", includes:"**/*.xml")
-    }
-    ant.jar(destfile: destFileName) {
-        fileset(dir: classesDirPath) {
-            exclude(name:'_*.class')
-            exclude(name:'*GriffonPlugin.class')
-        }
-    }
-}
+/**
+ * @author Jim Shingler
+ */
 
-eventCopyLibsEnd = { jardir ->
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('splash')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
-}
-
-eventPluginInstalled = { fullPluginName ->
-	println "Plugin: ${fullPluginName} Installed"
-	if (fullPluginName.startsWith("splash")) {
-		println "Splash Install: Copying Resources"
-		println "Copy Files From: ${getPluginDirForName('splash').file}/griffon-app/resources/"
-		ant.copy(todir:"${basedir}/griffon-app/resources") {
-			fileset(dir:"${getPluginDirForName('splash').file}/griffon-app/resources/", includes:"**/*.*")
-		}
-	}
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('splash')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-splash-plugin', dirs: "${splashPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('splash', [
+        conf: 'compile',
+        name: 'griffon-splash-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: splashPluginVersion
+    ])
 }

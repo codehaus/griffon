@@ -1,7 +1,13 @@
-<plugin name='splash' version='0.1.4' jdk='1.5'>
+<plugin name='splash' version='0.2' griffonVersion='0.9.2-beta-3 &gt; *' jdk='1.5'>
   <author>Jim Shingler</author>
   <authorEmail>ShinglerJim@gmail.com</authorEmail>
   <title>A Griffon Splash Screen Plugin</title>
+  <description>A Griffon Splash Screen Plugin</description>
   <documentation>http://griffon.codehaus.org/Splash+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>
