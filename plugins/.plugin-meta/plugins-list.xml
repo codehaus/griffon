@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3093">
+<plugins revision="3098">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1430,7 +1430,7 @@ http://jgraph.com</description>
         </release>
     </plugin>
     <plugin name="jmonkeyengine" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JMonkeyEngine support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2996,7 +2996,7 @@ http://freedesktop.org</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wizard/tags/RELEASE_0_4/griffon-wizard-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="worldwind" latest-release="0.3">
+    <plugin name="worldwind" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>NASA WolrdWind (3D Maps)</title>
             <author>Andres Almiray</author>
@@ -3020,6 +3020,17 @@ http://freedesktop.org</description>
             <description>NASA WorldWind (3D Maps)</description>
             <documentation>http://griffon.codehaus.org/Worldwind+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-worldwind/tags/RELEASE_0_3/griffon-worldwind-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>NASA WolrdWind (3D Maps)</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>NASA WorldWind (3D Maps)</description>
+            <documentation>http://griffon.codehaus.org/Worldwind+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-worldwind/tags/RELEASE_0_4/griffon-worldwind-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="wsclient" latest-release="0.4.1">
