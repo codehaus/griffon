@@ -1,0 +1,13 @@
+<plugin name='processing' version='0.3' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>2D/3D animations with Processing</title>
+  <description>2D/3D animations with Processing (http://processing.org)</description>
+  <documentation>http://griffon.codehaus.org/Processing+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
