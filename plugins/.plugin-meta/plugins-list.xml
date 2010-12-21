@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3175">
+<?xml version="1.0" encoding="UTF-8"?><plugins revision="3181">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1290,7 +1289,7 @@ Supported formats are:
             <documentation>http://griffon.codehaus.org/Jabber+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jabber/tags/RELEASE_0_4/griffon-jabber-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>Jabber client &amp; libraries</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
