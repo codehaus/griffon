@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3043">
+<plugins revision="3048">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2542,7 +2542,7 @@ http://grails.org/plugin/spock</description>
             <documentation>http://griffon.codehaus.org/Spring+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_4/griffon-spring-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>Spring framework libraries and helpers</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -3076,6 +3076,19 @@ http://harmoniccode.blogspot.com</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>https://svn.codehaus.org/griffon/plugins/griffon-harmoniccode/tags/RELEASE_0_1/griffon-harmoniccode-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="jml" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Msn Messenger support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Msn Messenger support.</description>
+            <documentation>http://griffon.codehaus.org/Jml+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jml/tags/RELEASE_0_1/griffon-jml-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
