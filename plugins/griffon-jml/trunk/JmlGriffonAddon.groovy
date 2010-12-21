@@ -26,7 +26,7 @@ class JmlGriffonAddon {
             MessengerConnector.instance.disconnect(app, config)
         },
         NewInstance: { klass, type, instance ->
-            def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
+            def types = app.config.griffon.msn.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
             mc.withMessenger = MessengerConnector.instance.withMessenger
