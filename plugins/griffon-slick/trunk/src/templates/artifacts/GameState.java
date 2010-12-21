@@ -2,7 +2,7 @@
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Graphics;
-import griffon.plugins.slick.artifact.AbstractGriffonGameState;
+import org.codehaus.griffon.runtime.slick.AbstractGriffonGameState;
 import java.util.Map;
 
 public class @artifact.name@ extends AbstractGriffonGameState {

@@ -28,8 +28,9 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package griffon.plugins.slick.artifact;
+package org.codehaus.griffon.runtime.slick;
 
+import griffon.plugins.slick.GriffonGameState;
 import static java.util.Arrays.asList;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.BasicGameState;
