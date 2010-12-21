@@ -32,9 +32,9 @@
  * @author Andres Almiray
  */
 class EffectsGriffonPlugin {
-    def version = 0.1
-    def griffonVersion = '0.9 > *' 
-    def dependsOn = ['trident-builder': 0.4]
+    def version = 0.2
+    def griffonVersion = '0.9.2 > *' 
+    def dependsOn = ['trident-builder': 0.6]
     def toolkits = ['swing']
     def jdk = '1.6'
     def license = 'BSD License'
