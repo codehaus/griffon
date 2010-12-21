@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3063">
+<plugins revision="3068">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -3116,7 +3116,7 @@ http://harmoniccode.blogspot.com</description>
         </release>
     </plugin>
     <plugin name="ldap" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>LDAP integration</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -3127,6 +3127,20 @@ This is a port of the grails-ldap plugin, original from Luke Daley</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-ldap/tags/RELEASE_0_1/griffon-ldap-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="quartz" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Job scheduling via Quartz</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Job scheduling via Quartz.
+Based on the Grails plugin of the same name.</description>
+            <documentation>http://griffon.codehaus.org/Quartz+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-quartz/tags/RELEASE_0_1/griffon-quartz-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
