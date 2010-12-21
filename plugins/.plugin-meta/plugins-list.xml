@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3108">
+<plugins revision="3113">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2556,7 +2556,7 @@ http://www.famfamfam.com/lab/icons/silk/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-splash/tags/RELEASE_0_1_4/griffon-splash-0.1.4.zip</file>
         </release>
     </plugin>
-    <plugin name="spock" latest-release="0.2">
+    <plugin name="spock" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Spock Plugin - spockframework.org</title>
             <author>Andres Almiray</author>
@@ -2576,6 +2576,19 @@ A port of the Grails Spock plugin by Luke Daley
 http://grails.org/plugin/spock</description>
             <documentation>http://griffon.codehaus.org/Spock+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spock/tags/RELEASE_0_2/griffon-spock-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Spock Plugin - spockframework.org</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Test your Griffon apps with Spock.
+A port of the Grails Spock plugin by Luke Daley
+http://grails.org/plugin/spock</description>
+            <documentation>http://griffon.codehaus.org/Spock+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-spock/tags/RELEASE_0_3/griffon-spock-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="spring" latest-release="0.5">
@@ -3226,7 +3239,7 @@ Based on the Grails plugin of the same name.</description>
         </release>
     </plugin>
     <plugin name="slick" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Slick2D is a simple set of tools wrapped around the LWJGL OpenGL binding for Java</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
