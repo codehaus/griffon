@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3058">
+<plugins revision="3063">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1245,7 +1245,7 @@ Supported formats are:
         </release>
     </plugin>
     <plugin name="jalarms" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JAlarms: send notifications on various channels</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -3113,6 +3113,20 @@ http://harmoniccode.blogspot.com</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jml/tags/RELEASE_0_1/griffon-jml-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="ldap" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>LDAP integration</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>LDAP integration via Spring's LDAP and Gldapo.
+This is a port of the grails-ldap plugin, original from Luke Daley</description>
+            <documentation>http://griffon.codehaus.org/Ldap+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-ldap/tags/RELEASE_0_1/griffon-ldap-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
