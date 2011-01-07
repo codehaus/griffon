@@ -20,10 +20,8 @@
 //
 
 // check to see if we already have a ValidationGriffonAddon
-ConfigSlurper configSlurper1 = new ConfigSlurper()
-def slurpedBuilder1 = configSlurper1.parse(new File("$basedir/griffon-app/conf/Builder.groovy").toURL())
 boolean addonIsSet1
-slurpedBuilder1.each() { prefix, v ->
+builderConfig.each() { prefix, v ->
     v.each { builder, views ->
         addonIsSet1 = addonIsSet1 || 'ValidationGriffonAddon' == builder
     }
@@ -31,6 +29,5 @@ slurpedBuilder1.each() { prefix, v ->
 
 if (addonIsSet1) {
     println 'Removing ValidationGriffonAddon from Builder.groovy'
-    def builderConfigFile1 = new File("${basedir}/griffon-app/conf/Builder.groovy")
-    builderConfigFile1.text = builderConfigFile1.text - "root.'ValidationGriffonAddon'.addon=true\n"
+    builderConfigFile.text = builderConfigFile.text - "root.'ValidationGriffonAddon'.addon=true\n"
 }
