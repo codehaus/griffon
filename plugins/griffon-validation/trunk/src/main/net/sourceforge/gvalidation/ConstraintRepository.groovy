@@ -61,8 +61,8 @@ class ConstraintRepository {
     ]
 
     def initialize(app) {
-        app.artifactManager.constraintArtifacts.each { artifactInfo ->
-            def constraintName = artifactInfo.simpleName?.replace('Constraint', '')
+        app.artifactManager.constraintClasses.each { artifactInfo ->
+            def constraintName = artifactInfo.logicalPropertyName
             register(constraintName, artifactInfo.newInstance())
         }
     }
