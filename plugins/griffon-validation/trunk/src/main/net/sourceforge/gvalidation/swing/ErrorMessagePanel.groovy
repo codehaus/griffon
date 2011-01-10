@@ -26,12 +26,17 @@ import org.springframework.context.NoSuchMessageException
  * Created by nick.zhu
  */
 class ErrorMessagePanel extends JPanel {
+    private ImageIcon errorIcon;
+    private ImageIcon successIcon;
+
     def messageSource
     Errors errors
     JPanel contentPanel
 
     def ErrorMessagePanel(def messageSource) {
         this.messageSource = messageSource
+        this.errorIcon = new ImageIcon(getClass().getClassLoader().getResource('net/sourceforge/gvalidation/error.png'))
+        this.successIcon = new ImageIcon(getClass().getClassLoader().getResource('net/sourceforge/gvalidation/success.png'))
 
         setLayout new BorderLayout()
 
@@ -77,11 +82,12 @@ class ErrorMessagePanel extends JPanel {
         try {
             errorMessage = messageSource.getMessage(error.errorCode, error.arguments)
         } catch (NoSuchMessageException ex) {
-            errorMessage = messageSource.getMessage(error.defaultErrorCode, error.arguments)                
+            errorMessage = messageSource.getMessage(error.defaultErrorCode, error.arguments)
         }
 
-        def errorLabel = new JLabel(" - ${errorMessage}", LEFT)
-        
+        def errorLabel = new JLabel(" ${errorMessage}", LEFT)
+
+        errorLabel.setIcon errorIcon
         errorLabel.setForeground Color.RED
 
         return errorLabel
