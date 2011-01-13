@@ -33,7 +33,7 @@ class ErrorMessagePanelTest extends GroovyTestCase {
         def errorLabel = errorPanel.getContentPanel().getComponents()[0]
 
         assertTrue "Label type is incorrect", errorLabel instanceof JLabel
-        assertEquals "Error message is incorrect", " - errorMessage", errorLabel.text
+        assertEquals "Error message is incorrect", " errorMessage", errorLabel.text
         assertTrue "Error border was not generated", errorPanel.getContentPanel().getBorder() instanceof CompoundBorder
     }
 
@@ -73,7 +73,7 @@ class ErrorMessagePanelTest extends GroovyTestCase {
 
         JLabel label = errorPanel.createErrorLabel([errorCode:'errorCode', arguments:[]])
 
-        assertEquals "Label message is incorrect", " - errorMessage", label.getText()
+        assertEquals "Label message is incorrect", " errorMessage", label.getText()
     }
 
     public void testLabelCreationWithDefaultMessage(){
@@ -90,6 +90,6 @@ class ErrorMessagePanelTest extends GroovyTestCase {
 
         JLabel label = errorPanel.createErrorLabel([errorCode:'errorCode', defaultErrorCode:'defaultErrorCode', arguments:[]])
 
-        assertEquals "Label message is incorrect", " - defaultMessage", label.getText()
+        assertEquals "Label message is incorrect", " defaultMessage", label.getText()
     }
 }
