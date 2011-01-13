@@ -34,7 +34,7 @@ import net.sourceforge.gvalidation.validator.NullableValidator
 import griffon.core.GriffonApplication
 
 /**
- * Repository class for managing and configure both built-in and custom constraints 
+ * Repository class for managing and configuring both built-in and custom constraints
  *
  * @since 0.3
  * @author nick.zhu
