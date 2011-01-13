@@ -39,11 +39,11 @@ class ConstraintRespositoryTest extends GroovyTestCase {
         ConstraintRepository repo = ConstraintRepository.instance
 
         def artifactInfos = [
-                [simpleName:'customConstraint', newInstance:{new TestConstraint()}],
-                [simpleName:'magicConstraint', newInstance:{new TestConstraint()}]                
+                [logicalPropertyName:'custom', newInstance:{new TestConstraint()}],
+                [logicalPropertyName:'magic', newInstance:{new TestConstraint()}]
         ]
         
-        def app = [artifactManager: [constraintArtifacts:artifactInfos]] 
+        def app = [artifactManager: [constraintClasses:artifactInfos]]
 
         repo.initialize(app)
 
