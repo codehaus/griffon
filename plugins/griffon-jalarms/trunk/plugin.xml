@@ -1,4 +1,4 @@
-<plugin name='jalarms' version='0.1' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
+<plugin name='jalarms' version='0.2' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>JAlarms: send notifications on various channels</title>
@@ -10,6 +10,6 @@ http://jalarms.sourceforge.net</description>
     <resource>BuildConfig</resource>
   </resources>
   <dependencies>
-    <plugin name='spring' version='0.5' />
+    <plugin name='spring' version='0.6' />
   </dependencies>
 </plugin>
