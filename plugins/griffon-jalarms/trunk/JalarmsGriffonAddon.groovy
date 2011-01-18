@@ -21,6 +21,19 @@ import com.solab.alarms.AlarmSender
  * @author Andres Almiray
  */
 class JalarmsGriffonAddon {
+    def events = [
+        NewInstance: {klass, type, instance ->
+            def types = app.config.griffon?.rest?.injectInto ?: ['controller', 'service']
+            if(!types.contains(type)) return
+            def mc = app.artifactManager.findGriffonClass(klass).metaClass
+            mc.sendAlarm = sendAlarm
+        }
+    ]
+
+    private sendAlarm = {String... args ->
+        app.applicationContext.alarmer.sendAlarm(*args)
+    }
+
     def doWithSpring = {
         alarmer(com.solab.alarms.AlarmSender) { bean ->
             bean.scope = 'singleton'

@@ -1,17 +1,14 @@
 griffon.project.dependency.resolution = {
-    // inherit Griffon' default dependencies
-    inherits("global") {
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    inherits "global"
+    log "warn"
     repositories {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-
-        mavenCentral()
+        flatDir name: 'jalarmsPluginLib', dirs: 'lib'
     }
     dependencies {
-        runtime 'org.slf4j:slf4j-api:1.6.1'
+        compile 'com.solab:jalarms:1.5.1'
     }
 }
 
