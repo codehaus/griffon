@@ -8,7 +8,7 @@ griffon.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        build 'org.codenarc:CodeNarc:0.11'
+        build 'org.codenarc:CodeNarc:0.12'
     }
 }
 
