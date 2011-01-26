@@ -1,4 +1,4 @@
-<plugin name='swingx-builder' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='swingx-builder' version='0.3' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
   <author>James Williams</author>
   <authorEmail>james.l.williams@gmail.com</authorEmail>
   <title>SwingX Builder Plugin</title>
