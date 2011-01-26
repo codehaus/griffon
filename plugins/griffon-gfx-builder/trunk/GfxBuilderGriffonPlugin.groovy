@@ -18,11 +18,11 @@
  * @author Andres Almiray
  */
 class GfxBuilderGriffonPlugin {
-    def version = '0.4'
+    def version = '0.5'
     def dependsOn = [:]
     def jdk = '1.6'
     def toolkits = ['swing']
-    def griffonVersion = '0.9 > *'
+    def griffonVersion = '0.9.2 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'
