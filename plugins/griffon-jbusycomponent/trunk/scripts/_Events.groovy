@@ -18,16 +18,16 @@
  * @author Andres Almiray
  */
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('jbusycomponent')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('jbusycomponent')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-jbusycomponent-plugin', dirs: "${jbusycomponentPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('jbusycomponent', [
+        conf: 'compile',
+        name: 'griffon-jbusycomponent-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: jbusycomponentPluginVersion
+    ])
 }
 
