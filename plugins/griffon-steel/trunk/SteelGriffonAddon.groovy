@@ -30,7 +30,7 @@
 
 import eu.hansolo.steelseries.gauges.*
 import eu.hansolo.steelseries.extras.*
-import eu.hansolo.steelseries.tools.Poi
+import eu.hansolo.steelseries.tools.*
 import griffon.steel.factory.PoiFactory
 import griffon.core.GriffonApplication
 
@@ -48,11 +48,10 @@ class SteelGriffonAddon {
     }
 
     def factories = [
-//        altimeter: Altimeter,
+        altimeter: Altimeter,
         clock: Clock,
         compass: Compass,
         digitalRadialGauge: DigitalRadial,
-        digitalRadialLcdGauge: DigitalRadialLcd,
         displayCircular: DisplayCircular,
         displayMulti: DisplayMulti,
         displayRectangular: DisplayRectangular,
@@ -60,32 +59,16 @@ class SteelGriffonAddon {
         led: Led,
         level: Level,
         linearGauge: Linear,
-        linearLcdGauge: LinearLcd,
         linearBargraph: LinearBargraph,
-        linearBargraphLcd: LinearBargraphLcd,
         radar: Radar,
-        radial1Gauge: Radial1,
-        radial1LcdGauge: Radial1Lcd,
+        radialGauge: Radial,
         radial1SquareGauge: Radial1Square,
         radial1VerticalGauge: Radial1Vertical,
-        radial2Gauge: Radial2,
-        radial2LcdGauge: Radial2Lcd,
         radial2TopGauge: Radial2Top,
-        radial3Gauge: Radial3,
-        radial3LcdGauge: Radial3Lcd,
-        radial4Gauge: Radial4,
-        radial4LcdGauge: Radial4Lcd,
         radialCounterGauge: RadialCounter,
-        radialBargraph1: RadialBargraph1,
-        radialBargraph1Lcd: RadialBargraph1Lcd,
-        radialBargraph2: RadialBargraph2,
-        radialBargraph2Lcd: RadialBargraph2Lcd,
-        radialBargraph3: RadialBargraph3,
-        radialBargraph3Lcd: RadialBargraph3Lcd,
-        radialBargraph4: RadialBargraph4,
-        radialBargraph4Lcd: RadialBargraph4Lcd,
+        radialBargraph: RadialBargraph,
         radialSquareSmall: RadialSquareSmall,
-        radialSquareVertical: RadialSquareVertical,
+        sparkLine: SparkLine,
         poi: new PoiFactory()
     ]
 }
