@@ -18,10 +18,10 @@
  * @author Andres.Almiray
  */
 class CoverflowGriffonPlugin {
-    def version = '0.3'
+    def version = '0.4'
     def dependsOn = [:]
     def toolkits = ['swing']
-    def griffonVersion = '0.9 > *'
+    def griffonVersion = '0.9.2 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'

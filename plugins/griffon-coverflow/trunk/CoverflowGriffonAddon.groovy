@@ -20,13 +20,13 @@ import griffon.coverflow.ui.*
 import griffon.coverflow.factory.*
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 class CoverflowGriffonAddon {
    def factories = [
-      "gradientPanel": new ComponentFactory(GradientPanel),
-      "stackLayout": new LayoutFactory(StackLayout),
-      "imageFlow": new ImageFlowFactory(),
-      "imageFlowItem": new ImageFlowItemFactory()
+      gradientPanel: new ComponentFactory(GradientPanel),
+      stackLayout: new LayoutFactory(StackLayout),
+      imageFlow: new ImageFlowFactory(),
+      imageFlowItem: new ImageFlowItemFactory()
    ]
 }
