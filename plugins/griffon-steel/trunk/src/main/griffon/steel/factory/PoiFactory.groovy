@@ -30,7 +30,7 @@
 
 package griffon.steel.factory
 
-import eu.hansolo.steelseries.tools.Poi
+import eu.hansolo.steelseries.extras.Poi
 
 /**
  * @author Andres Almiray

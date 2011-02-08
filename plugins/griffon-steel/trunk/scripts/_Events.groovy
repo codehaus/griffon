@@ -32,15 +32,15 @@
  * @author Andres Almiray
  */
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('steel')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('steel')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-steel-plugin', dirs: "${steelPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('steel', [
+        conf: 'compile',
+        name: 'griffon-steel-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: steelPluginVersion
+    ])
 }
