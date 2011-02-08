@@ -17,7 +17,7 @@
 import griffon.countries.FlagIconFactory
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 class CountriesGriffonAddon {
     def factories = [
