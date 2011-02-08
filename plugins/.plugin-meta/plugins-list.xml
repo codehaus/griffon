@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3235">
+<plugins revision="3250">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -303,7 +303,7 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-codenarc/tags/RELEASE_0_6_2/griffon-codenarc-0.6.2.zip</file>
         </release>
     </plugin>
-    <plugin name="couchdb" latest-release="0.4.1">
+    <plugin name="couchdb" latest-release="0.5">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Couchdb support</title>
             <author>Andres Almiray</author>
@@ -343,6 +343,17 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <description>Couchdb support</description>
             <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_4_1/griffon-couchdb-0.4.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_5" version="0.5" type="svn">
+            <title>Couchdb support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Couchdb support</description>
+            <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_5/griffon-couchdb-0.5.zip</file>
         </release>
     </plugin>
     <plugin name="countries" latest-release="0.1">
