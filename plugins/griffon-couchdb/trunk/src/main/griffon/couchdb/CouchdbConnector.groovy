@@ -49,7 +49,7 @@ final class CouchdbConnector {
     private GriffonApplication app
 
     def createConfig(GriffonApplication app) {
-        def couchconfigClass = app.class.classLoader.loadClass('CouchConfig')
+        def couchconfigClass = app.class.classLoader.loadClass('CouchdbConfig')
         return new ConfigSlurper(Environment.current.name).parse(couchconfigClass)
     }
 
