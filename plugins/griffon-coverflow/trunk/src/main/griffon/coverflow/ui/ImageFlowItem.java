@@ -278,7 +278,8 @@ public class ImageFlowItem {
 			if (image == null) {
 				try {
 					CrystalCaseFactory fx = CrystalCaseFactory.getInstance();
-					image = fx.createReflectedPicture(fx.createCrystalCase(loadImage()));
+                    Image img = loadImage();
+					image = fx.createReflectedPicture(fx.createCrystalCase(img));
 				} catch (IOException ioe) {
 					// ignore
 					log.log(Level.INFO, "Unnable to load image for " + this, ioe);

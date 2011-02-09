@@ -34,16 +34,18 @@ import java.awt.geom.*;
  * 2/17/2008
  * ---------
  * - Removed CD case drawing
- * 
+ *
+ * 2/9/2011
+ * --------
+ * - Removed fixed sizes
+ *
  * @author Romain.Guy
  * @author Kevin.Long
+ * @author Alexander.Klein
  */
 public class CrystalCaseFactory {
 
 	private static CrystalCaseFactory instance = null;
-	private static int IMAGE_WIDTH = 262;
-	private static int IMAGE_HEIGHT = 233;
-	private BufferedImage mask;
 
 	public static CrystalCaseFactory getInstance() {
 		if (instance == null) {
@@ -52,13 +54,11 @@ public class CrystalCaseFactory {
 		return instance;
 	}
 
-	private CrystalCaseFactory() {
-		mask = createGradientMask(IMAGE_WIDTH, IMAGE_HEIGHT);
-	}
-
 	public BufferedImage createCrystalCase(Image cover) {
-		BufferedImage crystal = new BufferedImage(IMAGE_WIDTH,
-				IMAGE_HEIGHT,
+        int imageWidth = cover.getWidth(null);
+        int imageHeight = cover.getHeight(null);
+		BufferedImage crystal = new BufferedImage(imageWidth,
+				imageHeight,
 				BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = crystal.createGraphics();
 		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
@@ -70,16 +70,16 @@ public class CrystalCaseFactory {
 		float scale;
 
 		if (width > height) {
-			scale = (float) IMAGE_WIDTH / (float) width;
+			scale = (float) imageWidth / (float) width;
 		} else {
-			scale = (float) IMAGE_HEIGHT / (float) height;
+			scale = (float) imageHeight / (float) height;
 		}
 
 		int scaledWidth = (int) ((float) width * scale);
 		int scaledHeight = (int) ((float) height * scale);
 
-		int x = (IMAGE_WIDTH - scaledWidth) / 2;
-		int y = (IMAGE_HEIGHT - scaledHeight) / 2;
+		int x = (imageWidth - scaledWidth) / 2;
+		int y = (imageHeight - scaledHeight) / 2;
 
 		g2.drawImage(cover, x, y, scaledWidth, scaledHeight, null);
 
@@ -89,7 +89,7 @@ public class CrystalCaseFactory {
 	}
 
 	public BufferedImage createReflectedPicture(BufferedImage item) {
-		return createReflectedPicture(item, mask);
+		return createReflectedPicture(item, createGradientMask(item.getWidth(), item.getHeight()));
 	}
 
 	public BufferedImage createReflectedPicture(BufferedImage item,
