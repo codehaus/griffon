@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3277">
+<plugins revision="3282">
     <plugin name="coverflow" latest-release="0.4">
         <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Provides a coverflow component</title>
@@ -40,7 +40,7 @@
         </release>
     </plugin>
     <plugin name="countries" latest-release="0.2">
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Flags of the world</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -51,6 +51,20 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-countries/tags/RELEASE_0_2/griffon-countries-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="crystalicons" latest-release="0.2">
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Crystal desktop icons</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Crystal desktop icons
+http://everaldo.com/crystal/</description>
+            <documentation>http://griffon.codehaus.org/Crystalicons+Plugin</documentation>
+            <license>GNU LGPL 2.1</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-crystalicons/tags/RELEASE_0_2/griffon-crystalicons-0.2.zip</file>
         </release>
     </plugin>
 </plugins>
