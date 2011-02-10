@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3267">
+<plugins revision="3272">
     <plugin name="coverflow" latest-release="0.4">
         <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Provides a coverflow component</title>
@@ -14,7 +14,7 @@
         </release>
     </plugin>
     <plugin name="spring" latest-release="0.6">
-        <release tag="RELEASE_0_6" version="0.6" type="svn">
+        <release tag="RELEASE_0_6" type="svn" version="0.6">
             <title>Spring framework libraries and helpers</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -24,6 +24,19 @@
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_6/griffon-spring-0.6.zip</file>
+        </release>
+    </plugin>
+    <plugin name="gsql" latest-release="0.6">
+        <release tag="RELEASE_0_6" version="0.6" type="svn">
+            <title>Gsql powered DataSource</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Adds Gsql powered DataSource capabilities to your Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_6/griffon-gsql-0.6.zip</file>
         </release>
     </plugin>
 </plugins>
