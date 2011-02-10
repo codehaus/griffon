@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3312">
+<plugins revision="3317">
     <plugin name="coverflow" latest-release="0.4">
         <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Provides a coverflow component</title>
@@ -135,7 +135,7 @@ http://zonelayout.com</description>
         </release>
     </plugin>
     <plugin name="riverlayout" latest-release="0.2">
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>RiverLayout Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -146,6 +146,19 @@ http://www.datadosen.se/riverlayout/</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-riverlayout/tags/RELEASE_0_2/griffon-riverlayout-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="tray-builder" latest-release="0.5">
+        <release tag="RELEASE_0_5" version="0.5" type="svn">
+            <title>TrayBuilder Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables Swing components on SystemTray.</description>
+            <documentation>http://griffon.codehaus.org/TrayBuilder+Plugin</documentation>
+            <license>GNU General Public License 2.0 (with classpath extension)</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-tray-builder/tags/RELEASE_0_5/griffon-tray-builder-0.5.zip</file>
         </release>
     </plugin>
 </plugins>
