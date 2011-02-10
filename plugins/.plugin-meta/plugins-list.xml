@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3297">
+<plugins revision="3302">
     <plugin name="coverflow" latest-release="0.4">
         <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Provides a coverflow component</title>
@@ -95,7 +95,7 @@ Brings the SwingX Builder libraries into a Griffon Build</description>
         </release>
     </plugin>
     <plugin name="gfx-builder" latest-release="0.5">
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>Gfx Builder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -105,6 +105,19 @@ Brings the SwingX Builder libraries into a Griffon Build</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gfx-builder/tags/RELEASE_0_5/griffon-gfx-builder-0.5.zip</file>
+        </release>
+    </plugin>
+    <plugin name="jide-builder" latest-release="0.5">
+        <release tag="RELEASE_0_5" version="0.5" type="svn">
+            <title>Jide Builder Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Brings the Jide Builder libraries into a Griffon Build</description>
+            <documentation>http://griffon.codehaus.org/JideBuilder+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jide-builder/tags/RELEASE_0_5/griffon-jide-builder-0.5.zip</file>
         </release>
     </plugin>
 </plugins>
