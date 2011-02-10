@@ -1,5 +1,5 @@
 /*
- * griffon-nuvola: Nuvola icons Grifofn plugin
+ * griffon-riverlayout: RiverLayout Griffon  plugin
  * Copyright 2010 and beyond, Andres Almiray
  *
  * SmartGWT is free software; you can redistribute it and/or modify it
@@ -18,8 +18,8 @@
  * @author Andres Almiray
  */
 class RiverlayoutGriffonPlugin {
-    def version = 0.1
-    def griffonVersion = '0.9 > *' 
+    def version = 0.2
+    def griffonVersion = '0.9.2 > *' 
     def dependsOn = [:]
     def toolkits = ['swing']
     def license = 'GNU LGPL 2.1'

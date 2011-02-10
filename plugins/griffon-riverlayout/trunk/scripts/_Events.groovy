@@ -1,5 +1,5 @@
 /*
- * griffon-nuvola: Nuvola icons Grifofn plugin
+ * griffon-riverlayout: RiverLayout Griffon  plugin
  * Copyright 2010 and beyond, Andres Almiray
  *
  * SmartGWT is free software; you can redistribute it and/or modify it
@@ -18,15 +18,16 @@
  * @author Andres Almiray
  */
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('riverlayout')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('riverlayout')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-riverlayout-plugin', dirs: "${riverlayoutPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('riverlayout', [
+        conf: 'compile',
+        name: 'griffon-riverlayout-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: riverlayoutPluginVersion
+    ])
 }
+
