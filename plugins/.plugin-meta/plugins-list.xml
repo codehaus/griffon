@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3307">
+<plugins revision="3312">
     <plugin name="coverflow" latest-release="0.4">
         <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Provides a coverflow component</title>
@@ -121,7 +121,7 @@ Brings the SwingX Builder libraries into a Griffon Build</description>
         </release>
     </plugin>
     <plugin name="zonelayout" latest-release="0.2">
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>ZoneLayout support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -132,6 +132,20 @@ http://zonelayout.com</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_2/griffon-zonelayout-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="riverlayout" latest-release="0.2">
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>RiverLayout Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>RiverLayout Plugin
+http://www.datadosen.se/riverlayout/</description>
+            <documentation>http://griffon.codehaus.org/Riverlayout+Plugin</documentation>
+            <license>GNU LGPL 2.1</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-riverlayout/tags/RELEASE_0_2/griffon-riverlayout-0.2.zip</file>
         </release>
     </plugin>
 </plugins>
