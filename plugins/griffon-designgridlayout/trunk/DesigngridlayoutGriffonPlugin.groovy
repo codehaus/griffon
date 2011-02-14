@@ -18,8 +18,8 @@
  * @author Andres Almiray
  */
 class DesigngridlayoutGriffonPlugin {
-    def version = 0.3
-    def griffonVersion = '0.9 > *' 
+    def version = 0.4
+    def griffonVersion = '0.9.2 > *' 
     def dependsOn = [:]
     def toolkits = ['swing']
     def license = 'Apache Software License 2.0'
