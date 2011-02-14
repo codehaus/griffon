@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3332">
+<plugins revision="3337">
     <plugin name="coverflow" latest-release="0.4">
         <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Provides a coverflow component</title>
@@ -189,7 +189,7 @@ http://code.google.com/p/jbusycomponent</description>
         </release>
     </plugin>
     <plugin name="designgridlayout" latest-release="0.4">
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>DesignGridLayout Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -200,6 +200,19 @@ https://designgridlayout.dev.java.net</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-designgridlayout/tags/RELEASE_0_4/griffon-designgridlayout-0.4.zip</file>
+        </release>
+    </plugin>
+    <plugin name="jgoodies-forms" latest-release="0.4">
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>JGoodies Forms</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables the usage of JGoodies FormLayout and friends</description>
+            <documentation>http://griffon.codehaus.org/JgoodiesForms+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jgoodies-forms/tags/RELEASE_0_4/griffon-jgoodies-forms-0.4.zip</file>
         </release>
     </plugin>
 </plugins>
