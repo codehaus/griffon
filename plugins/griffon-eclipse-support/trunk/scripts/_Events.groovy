@@ -38,6 +38,7 @@ eventPluginUninstalled = { msg ->
         }
     }
 }
+
 eventCreatedArtifact = { type, className ->
     includePluginScript('eclipse-support', 'EclipseUpdate')
     updateEclipseClasspathFile()
