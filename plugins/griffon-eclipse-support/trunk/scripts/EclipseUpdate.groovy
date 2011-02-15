@@ -19,6 +19,7 @@
  */
 
 import griffon.util.PluginBuildSettings
+import static griffon.util.GriffonApplicationUtils.is64Bit
 
 import groovy.xml.MarkupBuilder
 
@@ -33,6 +34,10 @@ setDefaultTarget('updateEclipseClasspath')
 updateEclipseClasspathFile = { newPlugin = null ->
     println "Updating Eclipse classpath file..."
 
+    if(newPlugin) event('SetClasspath', [classLoader])
+    griffonSettings.resetDependencies()
+    def visitedDependencies = []
+
     String indent = '    '
     def writer = new PrintWriter(new FileWriter('.classpath'))
     def xml = new MarkupBuilder(new IndentPrinter(writer, indent))
@@ -44,56 +49,65 @@ updateEclipseClasspathFile = { newPlugin = null ->
         mkp.yieldUnescaped("\n${indent}<!-- source paths -->")
         ['griffon-app', 'src', 'test'].each { base ->
             new File(base).eachDir { dir ->
-                if (! (dir.name =~ /^\..+/) ) {
+                if (! (dir.name =~ /^\..+/) && dir.name != 'templates') {
                     classpathentry(kind: 'src', path: "${base}/${dir.name}")
                 }
             }
         }
+        buildConfig.eclipse?.classpath?.include?.each { dir ->
+            File target = new File(basedir, dir)
+            if(target.exists()) classpathentry(kind: 'src', path: dir)
+        }        
+
         mkp.yieldUnescaped("\n${indent}<!-- output paths -->")
         classpathentry(kind: 'con', path: 'org.eclipse.jdt.launching.JRE_CONTAINER')
         classpathentry(kind: 'output', path: 'staging/classes')
-        mkp.yieldUnescaped("\n${indent}<!-- griffon dist libs -->")
-        (new File("${griffonHome}/dist")).eachFileMatch(~/^griffon-.*\.jar/) { file ->
-            classpathentry(kind: 'var', path: "GRIFFON_HOME/dist/${file.name}")
-        }
-        mkp.yieldUnescaped("\n${indent}<!-- griffon libs -->")
-        (new File("${griffonHome}/lib")).eachFileMatch(~/.*\.jar/) { file ->
-            classpathentry(kind: 'var', path: "GRIFFON_HOME/lib/${file.name}")
-        }
-        mkp.yieldUnescaped("\n${indent}<!-- application libs -->")
-        (new File("${basedir}/lib")).eachFileMatch(~/.*\.jar/) { file ->
-            classpathentry(kind: 'lib', path: "lib/${file.name}")
-        }
         
-        def nativeLibDir = new File("${basedir}/lib/${platform}")
-        if(nativeLibDir.exists()) {
-        mkp.yieldUnescaped("\n${indent}<!-- application native libs -->")
-            nativeLibDir.eachFileMatch(~/.*\.jar/) { file ->
-                classpathentry(kind: 'lib', path: "lib/${platform}/${file.name}")
+        def visitDependencies = {List dependencies ->
+            dependencies.each { File f ->
+                if(visitedDependencies.contains(f)) return
+                visitedDependencies << f
+                String path = f.absolutePath
+                path = path.replaceFirst(~/.*\.ivy2\/cache/, 'IVY2_CACHE')
+                classpathentry(kind: 'lib', path: path)   
+            }    
+        }
+               
+        mkp.yieldUnescaped("\n${indent}<!-- runtime -->")
+        visitDependencies(griffonSettings.runtimeDependencies)
+        mkp.yieldUnescaped("\n${indent}<!-- test -->")
+        visitDependencies(griffonSettings.testDependencies)
+        mkp.yieldUnescaped("\n${indent}<!-- compile -->")
+        visitDependencies(griffonSettings.compileDependencies)
+        mkp.yieldUnescaped("\n${indent}<!-- build -->")
+        visitDependencies(griffonSettings.buildDependencies)
+        
+        def visitPlatformDir = {libdir ->
+            def nativeLibDir = new File("${libdir}/${platform}")
+            if(nativeLibDir.exists()) {
+                nativeLibDir.eachFileMatch(~/.*\.jar/) { file ->
+                    classpathentry(kind: 'lib', path: file.absolutePath)
+                }
+            }
+            nativeLibDir = new File("${libdir}/${platform[0..-3]}")
+            if(is64Bit && nativeLibDir.exists()) {
+                nativeLibDir.eachFileMatch(~/.*\.jar/) { file ->
+                    classpathentry(kind: 'lib', path: file.absolutePath)
+                }
             }
         }
 
-        def pluginClasspathEntries = { libDir ->
-            if(!libDir.exists()) return
-            libDir.eachFileMatch(~/.*\.jar/) { file ->
-                classpathentry(kind: 'lib', path: file.absolutePath)
-            }
-            def platformDir = new File(libDir.absolutePath, platform)
-            if(!platformDir.exists()) return
-            platformDir.eachFileMatch(~/.*\.jar/) { file ->
-                classpathentry(kind: 'lib', path: file.absolutePath)
-            }
-        }
+        mkp.yieldUnescaped("\n${indent}<!-- platform specific -->")
+        visitPlatformDir(new File("${basedir}/lib"))
 
-        mkp.yieldUnescaped("\n${indent}<!-- plugin libs -->")
         doWithPlugins{ pluginName, pluginVersion, pluginDir ->
             if("${pluginName}-${pluginVersion}" == newPlugin) return
             def libDir = new File(pluginDir, 'lib')
-            pluginClasspathEntries(libDir)
+            visitPlatformDir(libDir)
         }
         if(newPlugin) {
             def libDir = new File([pluginsHome, newPlugin, 'lib'].join(File.separator))
-            pluginClasspathEntries(libDir)
+            visitPlatformDir(libDir)
         }
     }
 }
