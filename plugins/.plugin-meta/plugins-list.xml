@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3337">
+<plugins revision="3343">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -343,7 +343,7 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_4_1/griffon-couchdb-0.4.1.zip</file>
         </release>
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>Couchdb support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -618,7 +618,7 @@ another docking frame in the application.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_4/griffon-easyb-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="eclipse-support" latest-release="0.3.1">
+    <plugin name="eclipse-support" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Keeps Eclipse files up to date</title>
             <author>Andres Almiray</author>
@@ -658,6 +658,17 @@ another docking frame in the application.</description>
             <description>Keeps Eclipse files up to date.</description>
             <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_3_1/griffon-eclipse-support-0.3.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>Keeps Eclipse files up to date</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Keeps Eclipse files up to date.</description>
+            <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4/griffon-eclipse-support-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="effects" latest-release="0.2">
@@ -1586,7 +1597,7 @@ and maintainability to manage package dependencies effectively.</description>
             <documentation>http://griffon.codehaus.org/JgoodiesForms+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jgoodies-forms/tags/RELEASE_0_3/griffon-jgoodies-forms-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>JGoodies Forms</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -3254,7 +3265,8 @@ http://freedesktop.org</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-tray-builder/tags/RELEASE_0_5/griffon-tray-builder-0.5.zip</file>
-        </release>        <release tag="RELEASE_0_2" type="svn" version="0.2">
+        </release>
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Provides JXLayer/JLayer nodes</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiraa@users.sourceforge.net</authorEmail>
