@@ -1,4 +1,4 @@
-<plugin name='i18n-gettext' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='i18n-gettext' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Tobias Schulte</author>
   <authorEmail>tobias.schulte@gliderpilot.de</authorEmail>
   <title>I18n gettext plugin for griffon</title>
