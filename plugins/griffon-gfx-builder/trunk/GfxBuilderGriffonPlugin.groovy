@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class GfxBuilderGriffonPlugin {
-    def version = '0.5'
+    def version = '0.6'
     def dependsOn = [:]
     def jdk = '1.6'
     def toolkits = ['swing']
