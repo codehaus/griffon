@@ -21,9 +21,10 @@ import griffon.builder.gfx.GfxAttribute
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
+ * @author Alexander Klein <info@aklein.org>
  */
 class PolylineNode extends AbstractOutlineGfxNode {
-    @GfxAttribute double points
+    @GfxAttribute List<Double> points
 
     PolylineNode() {
         super("polyline")

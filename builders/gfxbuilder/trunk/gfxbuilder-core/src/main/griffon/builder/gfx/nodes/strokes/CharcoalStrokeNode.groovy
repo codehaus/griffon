@@ -25,7 +25,7 @@ import griffon.builder.gfx.StrokeProvider
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 class CharcoalStrokeNode extends AbstractStrokeNode implements ComposableStroke {
-    @GfxAttribute(alias="s")  def stroke
+    @GfxAttribute(alias="s")  Stroke stroke
     @GfxAttribute(alias="w")  float width = 1f
     @GfxAttribute(alias="sz") float size = 1f
     @GfxAttribute(alias="a")  float angle = (Math.PI/4) as float

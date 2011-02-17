@@ -30,6 +30,7 @@ import griffon.builder.gfx.nodes.paints.MultiPaintNode
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.com>
+ * @author Alexander Klein <info@aklein.org>
  */
 class MultiPaintFactory extends GfxBeanFactory {
    MultiPaintFactory() {
@@ -114,7 +115,7 @@ public class BorderPaintFactory extends AbstractGfxFactory {
     }
 
     public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-       if(child instanceof PaintProvider || child instanceof MultiPaintProvider) {
+       if(child instanceof Paint || child instanceof PaintProvider || child instanceof MultiPaintProvider) {
           parent.paint = child
        } else {
           throw new IllegalArgumentException("$child can not be nested inside $parent")
