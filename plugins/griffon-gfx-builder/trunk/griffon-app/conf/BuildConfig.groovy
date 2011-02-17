@@ -11,9 +11,9 @@ griffon.project.dependency.resolution = {
         flatDir name: 'gfxPluginLib', dirs: 'lib'
     }
     dependencies {
-        compile 'org.codehaus.griffon:gfxbuilder-core:0.2.4',
-                'org.codehaus.griffon:gfxbuilder-svg:0.2.4',
-                'org.codehaus.griffon:gfxbuilder-swingx:0.2.4',
+        compile 'org.codehaus.griffon:gfxbuilder-core:0.4',
+                'org.codehaus.griffon:gfxbuilder-svg:0.4',
+                'org.codehaus.griffon:gfxbuilder-swingx:0.4',
                 'org.swinglabs:swingx:1.0',
                 'org.kordamp:jsilhouette-geom:0.3.1',
                 'xml-apis:xml-apis-ext:1.3.04',
