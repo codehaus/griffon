@@ -26,7 +26,7 @@ import griffon.builder.gfx.GfxContext
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 public class ZigzagStrokeNode extends AbstractStrokeNode implements ComposableStroke {
-    @GfxAttribute(alias="s") def stroke
+    @GfxAttribute(alias="s") Stroke stroke
     @GfxAttribute(alias="a") float amplitude = 10f
     @GfxAttribute(alias="w") float wavelength = 10f
 

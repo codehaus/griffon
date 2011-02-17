@@ -30,6 +30,7 @@ import griffon.builder.gfx.nodes.transforms.*
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
+ * @author Alexander Klein <info@aklein.org>
  */
 abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
    //private ObservableMap _drag = new ObservableMap()
@@ -138,6 +139,7 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
    protected void draw(GfxContext context, Shape shape) {
        def g = context.g
        def __bc = _runtime.borderColor
+       def __bw = _runtime.borderWidth
        def __st = _runtime.stroke
        def __bp = findLast{ it instanceof BorderPaintProvider }
 
@@ -152,7 +154,7 @@ abstract class AbstractGfxNode extends AbstractDrawableContainerNode {
              g.fill(__ss)
              g.paint = __p
           }
-       } else if(__bc) {
+       } else if(__bc && __bw > 0) {
           def __pc = g.color
           def __ps = g.stroke
           g.color = __bc

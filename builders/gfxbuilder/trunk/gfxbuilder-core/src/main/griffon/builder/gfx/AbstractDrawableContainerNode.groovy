@@ -20,6 +20,7 @@ import groovy.util.ObservableList.ElementEvent
 
 /**
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
+ * @author Alexander Klein <info@aklein.org>
  */
 abstract class AbstractDrawableContainerNode extends AbstractDrawableNode implements ContainerNode {
    private final ObservableList/*<GfxNode>*/ _nodes = new ObservableList()
@@ -39,6 +40,12 @@ abstract class AbstractDrawableContainerNode extends AbstractDrawableNode implem
       _nodes << node
    }
 
+   void removeNode(GfxNode node) {
+      if(!node || !_nodes.contains(node)) return
+      node.removePropertyChangeListener(this)
+      _nodes.remove(node)
+   }
+
    AbstractDrawableContainerNode leftShift(GfxNode node) {
       addNode(node)
       this
@@ -55,7 +62,7 @@ abstract class AbstractDrawableContainerNode extends AbstractDrawableNode implem
    protected final void applyNode(GfxContext context) {
        applyThisNode(context)
        if(!_nodes.empty) {
-          _nodes.each { n -> applyNestedNode(n, context) }
+          new ArrayList(_nodes).each { n -> applyNestedNode(n, context) }
        }
    }
 
@@ -72,6 +79,7 @@ abstract class AbstractDrawableContainerNode extends AbstractDrawableNode implem
              break
          case ElementEvent.REMOVED:
              event.newValue.removePropertyChangeListener(this)
+             break
          case ElementEvent.MULTI_ADD:
              event.values.each { it.addPropertyChangeListener(this) }
              break
