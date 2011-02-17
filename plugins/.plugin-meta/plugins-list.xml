@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3348">
+<plugins revision="3356">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -73,6 +73,7 @@ http://barcode4j.sourceforge.net</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-berkeleydb/tags/RELEASE_0_3_1/griffon-berkeleydb-0.3.1.zip</file>
         </release>
     </plugin>
+    <plugin name="camel"/>
     <plugin name="charts" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Charting support via JFreeChart</title>
@@ -349,9 +350,6 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Couchdb support</description>
             <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_5/griffon-couchdb-0.5.zip</file>
         </release>
     </plugin>
@@ -372,9 +370,6 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <description>Flags of the world. Icons from http://www.famfamfam.com/lab/icons/flags/
 Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2</description>
             <documentation>http://griffon.codehaus.org/Countries+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-countries/tags/RELEASE_0_2/griffon-countries-0.2.zip</file>
         </release>
     </plugin>
@@ -409,9 +404,6 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Provides a coverflow component.</description>
             <documentation>http://griffon.codehaus.org/Coverflow+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-coverflow/tags/RELEASE_0_4/griffon-coverflow-0.4.zip</file>
         </release>
     </plugin>
@@ -432,9 +424,6 @@ http://everaldo.com/crystal/</description>
             <description>Crystal desktop icons
 http://everaldo.com/crystal/</description>
             <documentation>http://griffon.codehaus.org/Crystalicons+Plugin</documentation>
-            <license>GNU LGPL 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-crystalicons/tags/RELEASE_0_2/griffon-crystalicons-0.2.zip</file>
         </release>
     </plugin>
@@ -549,9 +538,6 @@ https://designgridlayout.dev.java.net</description>
             <description>DesignGridLayout Plugin
 https://designgridlayout.dev.java.net</description>
             <documentation>http://griffon.codehaus.org/Designgridlayout+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-designgridlayout/tags/RELEASE_0_4/griffon-designgridlayout-0.4.zip</file>
         </release>
     </plugin>
@@ -576,6 +562,9 @@ another docking frame in the application.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-docking-frame/tags/RELEASE_0_2/griffon-docking-frame-0.2.zip</file>
         </release>
     </plugin>
+    <plugin name="domain"/>
+    <plugin name="domain-db4o"/>
+    <plugin name="domain-gsql"/>
     <plugin name="easyb" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables BDD testing with Easyb</title>
@@ -665,9 +654,6 @@ another docking frame in the application.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Keeps Eclipse files up to date.</description>
             <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4/griffon-eclipse-support-0.4.zip</file>
         </release>
     </plugin>
@@ -932,7 +918,7 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fx-builder/tags/RELEASE_0_3/griffon-fx-builder-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="gfx-builder" latest-release="0.5">
+    <plugin name="gfx-builder" latest-release="0.6">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gfx Builder Plugin</title>
             <author>Andres Almiray</author>
@@ -1003,10 +989,15 @@ Provides a nice icon set too.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Brings de GfxBuilder libraries into a Griffon application</description>
             <documentation>http://griffon.codehaus.org/GfxBuilder+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gfx-builder/tags/RELEASE_0_5/griffon-gfx-builder-0.5.zip</file>
+        </release>
+        <release tag="RELEASE_0_6" type="svn" version="0.6">
+            <title>Gfx Builder Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Brings de GfxBuilder libraries into a Griffon application</description>
+            <documentation>http://griffon.codehaus.org/GfxBuilder+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-gfx-builder/tags/RELEASE_0_6/griffon-gfx-builder-0.6.zip</file>
         </release>
     </plugin>
     <plugin name="glazedlists" latest-release="0.7">
@@ -1064,9 +1055,6 @@ Provides a nice icon set too.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Adds GlazedLists support to your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_7/griffon-glazedlists-0.7.zip</file>
         </release>
     </plugin>
@@ -1098,6 +1086,7 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gmetrics/tags/RELEASE_0_3/griffon-gmetrics-0.3.zip</file>
         </release>
     </plugin>
+    <plugin name="gorm"/>
     <plugin name="gparallelizer" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>GParallelizer Plugin</title>
@@ -1189,9 +1178,6 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Adds Gsql powered DataSource capabilities to your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_6/griffon-gsql-0.6.zip</file>
         </release>
     </plugin>
@@ -1346,7 +1332,7 @@ Rainer Brang for his grails plugin</description>
             <documentation>http://griffon.codehaus.org/I18nGettext+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-i18n-gettext/tags/RELEASE_0_1/griffon-i18n-gettext-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>I18n gettext plugin for griffon</title>
             <author>Tobias Schulte</author>
             <authorEmail>tobias.schulte@gliderpilot.de</authorEmail>
@@ -1379,9 +1365,6 @@ b) Your original strings should be english, because Gnu gettext can't cope with 
 Many thanks to:
 Rainer Brang for his grails plugin</description>
             <documentation>http://griffon.codehaus.org/I18nGettext+Plugin</documentation>
-            <license>Apache License, Version 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-i18n-gettext/tags/RELEASE_0_2/griffon-i18n-gettext-0.2.zip</file>
         </release>
     </plugin>
@@ -1547,9 +1530,6 @@ http://code.google.com/p/jbusycomponent</description>
             <description>JBusyComponent: Enhance any swing components with a 'busy' state.
 http://code.google.com/p/jbusycomponent</description>
             <documentation>http://griffon.codehaus.org/JBusyComponent+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jbusycomponent/tags/RELEASE_0_5/griffon-jbusycomponent-0.5.zip</file>
         </release>
     </plugin>
@@ -1641,9 +1621,6 @@ and maintainability to manage package dependencies effectively.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Enables the usage of JGoodies FormLayout and friends</description>
             <documentation>http://griffon.codehaus.org/JgoodiesForms+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jgoodies-forms/tags/RELEASE_0_4/griffon-jgoodies-forms-0.4.zip</file>
         </release>
     </plugin>
@@ -1705,9 +1682,6 @@ http://jgraph.com</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Brings the Jide Builder libraries into a Griffon Build</description>
             <documentation>http://griffon.codehaus.org/JideBuilder+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jide-builder/tags/RELEASE_0_5/griffon-jide-builder-0.5.zip</file>
         </release>
     </plugin>
@@ -1888,9 +1862,6 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <authorEmail>aalmiraa@users.sourceforge.net</authorEmail>
             <description>JXLayer can be used with Jdk6 and older. JLayer can be used with Jdk7 and newer.</description>
             <documentation>http://griffon.codehaus.org/Jxlayer+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jxlayer/tags/RELEASE_0_2/griffon-jxlayer-0.2.zip</file>
         </release>
     </plugin>
@@ -2233,6 +2204,7 @@ http://www.digitprop.com/tonic/tonic.php</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lwjgl/tags/RELEASE_0_4/griffon-lwjgl-0.4.zip</file>
         </release>
     </plugin>
+    <plugin name="mac-menus"/>
     <plugin name="macwidgets-builder" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>MacWidgetsBuilder Plugin</title>
@@ -2487,6 +2459,7 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-notify/tags/RELEASE_0_3/griffon-notify-0.3.zip</file>
         </release>
     </plugin>
+    <plugin name="nuvolaIcons"/>
     <plugin name="nuvolaicons" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Nuvola desktop icons</title>
@@ -2616,6 +2589,7 @@ Based on the Grails plugin of the same name.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-quartz/tags/RELEASE_0_1/griffon-quartz-0.1.zip</file>
         </release>
     </plugin>
+    <plugin name="ratpack"/>
     <plugin name="rest" latest-release="0.6">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>REST client libraries</title>
@@ -2717,9 +2691,6 @@ http://www.datadosen.se/riverlayout/</description>
             <description>RiverLayout Plugin
 http://www.datadosen.se/riverlayout/</description>
             <documentation>http://griffon.codehaus.org/Riverlayout+Plugin</documentation>
-            <license>GNU LGPL 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-riverlayout/tags/RELEASE_0_2/griffon-riverlayout-0.2.zip</file>
         </release>
     </plugin>
@@ -3024,9 +2995,6 @@ http://grails.org/plugin/spock</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Brings the Spring framework libraries and some helper classes.</description>
             <documentation>http://griffon.codehaus.org/Spring+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_6/griffon-spring-0.6.zip</file>
         </release>
     </plugin>
@@ -3105,9 +3073,6 @@ Brings the SwingX Builder libraries into a Griffon Build</description>
             <description>\
 Brings the SwingX Builder libraries into a Griffon Build</description>
             <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/tags/RELEASE_0_3/griffon-swingx-builder-0.3.zip</file>
         </release>
     </plugin>
@@ -3299,21 +3264,7 @@ http://freedesktop.org</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Enables Swing components on SystemTray.</description>
             <documentation>http://griffon.codehaus.org/TrayBuilder+Plugin</documentation>
-            <license>GNU General Public License 2.0 (with classpath extension)</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-tray-builder/tags/RELEASE_0_5/griffon-tray-builder-0.5.zip</file>
-        </release>
-        <release tag="RELEASE_0_2" type="svn" version="0.2">
-            <title>Provides JXLayer/JLayer nodes</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiraa@users.sourceforge.net</authorEmail>
-            <description>JXLayer can be used with Jdk6 and older. JLayer can be used with Jdk7 and newer.</description>
-            <documentation>http://griffon.codehaus.org/Jxlayer+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-jxlayer/tags/RELEASE_0_2/griffon-jxlayer-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="trident-builder" latest-release="0.6">
@@ -3609,9 +3560,6 @@ http://zonelayout.com</description>
             <description>ZoneLayout support
 http://zonelayout.com</description>
             <documentation>http://griffon.codehaus.org/Zonelayout+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_2/griffon-zonelayout-0.2.zip</file>
         </release>
     </plugin>
