@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3378">
+<plugins revision="3383">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -28,7 +28,7 @@
             <file>http://svn.codehaus.org/griffon/plugins/griffon-avro/tags/RELEASE_0_2/griffon-avro-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="barcode" latest-release="0.1">
+    <plugin name="barcode" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Generate and display barcodes</title>
             <author>Andres Almiray</author>
@@ -37,6 +37,18 @@
 http://barcode4j.sourceforge.net</description>
             <documentation>http://griffon.codehaus.org/Barcode+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-barcode/tags/RELEASE_0_1/griffon-barcode-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Generate and display barcodes</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Generate and display barcodes with barcode4j
+http://barcode4j.sourceforge.net</description>
+            <documentation>http://griffon.codehaus.org/Barcode+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-barcode/tags/RELEASE_0_2/griffon-barcode-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="berkeleydb" latest-release="0.3.1">
@@ -1500,7 +1512,7 @@ http://jalarms.sourceforge.net</description>
             <documentation>http://griffon.codehaus.org/Jalarms+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jalarms/tags/RELEASE_0_1/griffon-jalarms-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>JAlarms: send notifications on various channels</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
