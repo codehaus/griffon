@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3383">
+<plugins revision="3391">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -38,16 +38,13 @@ http://barcode4j.sourceforge.net</description>
             <documentation>http://griffon.codehaus.org/Barcode+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-barcode/tags/RELEASE_0_1/griffon-barcode-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Generate and display barcodes</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Generate and display barcodes with barcode4j
 http://barcode4j.sourceforge.net</description>
             <documentation>http://griffon.codehaus.org/Barcode+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-barcode/tags/RELEASE_0_2/griffon-barcode-0.2.zip</file>
         </release>
     </plugin>
@@ -250,9 +247,6 @@ Based on grails-code-coverage by Mike Hugo.</description>
             <description>Creates Code Coverage reports for your code.
 Based on grails-code-coverage by Mike Hugo.</description>
             <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_5/griffon-code-coverage-0.5.zip</file>
         </release>
     </plugin>
@@ -1519,9 +1513,6 @@ http://jalarms.sourceforge.net</description>
             <description>JAlarms: send notifications in various channels
 http://jalarms.sourceforge.net</description>
             <documentation>http://griffon.codehaus.org/Jalarms+Plugin</documentation>
-            <license>GNU LGPL 2.1</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jalarms/tags/RELEASE_0_2/griffon-jalarms-0.2.zip</file>
         </release>
     </plugin>
@@ -2780,6 +2771,7 @@ http://www.datadosen.se/riverlayout/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rmi/tags/RELEASE_0_5/griffon-rmi-0.5.zip</file>
         </release>
     </plugin>
+    <plugin name="scaffolding"/>
     <plugin name="scala" latest-release="0.7.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Brings the Scala language compiler and libraries</title>
@@ -3081,9 +3073,6 @@ http://grails.org/plugin/spock</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Gerrit Grunwald's Steel Series</description>
             <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
-            <license>BSD</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_5/griffon-steel-0.5.zip</file>
         </release>
     </plugin>
@@ -3364,7 +3353,18 @@ http://freedesktop.org</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-trident-builder/tags/RELEASE_0_6/griffon-trident-builder-0.6.zip</file>
         </release>
     </plugin>
-    <plugin name="validation" latest-release="0.5.1">
+    <plugin name="uispec4j" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Run UI tests with UISpec4J</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Build and run UI tests with UISpec4j
+http://www.uispec4j.org/</description>
+            <documentation>http://griffon.codehaus.org/Uispec4j+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-uispec4j/tags/RELEASE_0_1/griffon-uispec4j-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="validation" latest-release="0.6">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon Validation Plugin</title>
             <author>Nick Zhu</author>
@@ -3404,6 +3404,14 @@ http://freedesktop.org</description>
             <description>A validation plugin that provides Grails like validation capability using constraints</description>
             <documentation>http://gvalidation.sourceforge.net/</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_5_1/griffon-validation-0.5.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_6" type="svn" version="0.6">
+            <title>Griffon Validation Plugin</title>
+            <author>Nick Zhu</author>
+            <authorEmail>nzhu@jointsource.com</authorEmail>
+            <description>A validation plugin that provides Grails like validation capability using constraints</description>
+            <documentation>http://griffon.codehaus.org/Validation+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_6/griffon-validation-0.6.zip</file>
         </release>
     </plugin>
     <plugin name="wizard" latest-release="0.4">
@@ -3608,20 +3616,6 @@ http://zonelayout.com</description>
 http://zonelayout.com</description>
             <documentation>http://griffon.codehaus.org/Zonelayout+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_2/griffon-zonelayout-0.2.zip</file>
-        </release>
-    </plugin>
-    <plugin name="uispec4j" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Run UI tests with UISpec4J</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Build and run UI tests with UISpec4j
-http://www.uispec4j.org/</description>
-            <documentation>http://griffon.codehaus.org/Uispec4j+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-uispec4j/tags/RELEASE_0_1/griffon-uispec4j-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
