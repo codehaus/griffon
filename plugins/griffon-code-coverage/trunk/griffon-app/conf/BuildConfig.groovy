@@ -1,26 +1,22 @@
 griffon.project.dependency.resolution = {
-    // inherit Griffon' default dependencies
-    inherits("global") {
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    inherits("global")
+    log "warn"
     repositories {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenCentral()
+        flatDir name: 'codeCoveragePluginLib', dirs: 'lib'
     }
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        // runtime 'mysql:mysql-connector-java:5.1.5'
+        build 'net.sourceforge.cobertura:cobertura:1.9.8',
+              'oro:oro:2.0.8',
+              'asm:asm:3.0',
+              'asm:asm-tree:3.0'
+        test 'net.sourceforge.cobertura:cobertura:1.9.8',
+             'oro:oro:2.0.8',
+             'asm:asm:3.0',
+             'asm:asm-tree:3.0'
     }
 }
 
@@ -31,3 +27,4 @@ griffon {
         footer = "<br/><br/>Made with Griffon (@griffon.version@)"
     }
 }
+
