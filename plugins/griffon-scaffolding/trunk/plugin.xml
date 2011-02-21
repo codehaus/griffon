@@ -1,0 +1,11 @@
+<plugin name='scaffolding' version='0.1' griffonVersion='0.9.1 &gt; *' jdk='1.5'>
+  <author>Your name</author>
+  <title>Plugin summary/headline</title>
+  <description>Brief description of the plugin.</description>
+  <documentation>http://griffon.codehaus.org/Scaffolding+Plugin</documentation>
+  <license>&lt;UNKNOWN&gt;</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
