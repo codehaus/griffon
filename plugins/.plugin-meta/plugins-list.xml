@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3361">
+<plugins revision="3367">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -231,7 +231,7 @@ Based on grails-code-coverage by Mike Hugo.</description>
             <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_4/griffon-code-coverage-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>Generates Code Coverage reports</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -3573,6 +3573,20 @@ http://zonelayout.com</description>
 http://zonelayout.com</description>
             <documentation>http://griffon.codehaus.org/Zonelayout+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_2/griffon-zonelayout-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="uispec4j" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Run UI tests with UISpec4J</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Build and run UI tests with UISpec4j
+http://www.uispec4j.org/</description>
+            <documentation>http://griffon.codehaus.org/Uispec4j+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-uispec4j/tags/RELEASE_0_1/griffon-uispec4j-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
