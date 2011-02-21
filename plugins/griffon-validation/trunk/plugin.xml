@@ -3,13 +3,11 @@
   <authorEmail>nzhu@jointsource.com</authorEmail>
   <title>Griffon Validation Plugin</title>
   <description>A validation plugin that provides Grails like validation capability using constraints</description>
-  <documentation>http://gvalidation.sourceforge.net/</documentation>
+  <documentation>http://griffon.codehaus.org/Validation+Plugin</documentation>
   <license>Apache Software License 2.0</license>
   <resources>
     <resource>BuildConfig</resource>
     <resource>Config</resource>
   </resources>
-  <dependencies>
-    <plugin name='i18n' version='0.3' />
-  </dependencies>
+  <dependencies />
 </plugin>
