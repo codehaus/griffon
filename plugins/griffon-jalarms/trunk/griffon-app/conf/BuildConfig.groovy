@@ -8,7 +8,9 @@ griffon.project.dependency.resolution = {
         flatDir name: 'jalarmsPluginLib', dirs: 'lib'
     }
     dependencies {
-        compile 'com.solab:jalarms:1.5.1'
+        compile 'com.solab:jalarms-core:1.5.2',
+                'com.solab:jalarms-aop:1.5.2',
+                'com.solab:jalarms-channels:1.5.2'
     }
 }
 

@@ -23,7 +23,7 @@ import com.solab.alarms.AlarmSender
 class JalarmsGriffonAddon {
     def events = [
         NewInstance: {klass, type, instance ->
-            def types = app.config.griffon?.rest?.injectInto ?: ['controller', 'service']
+            def types = app.config.griffon?.jalarms?.injectInto ?: ['controller', 'service']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
             mc.sendAlarm = sendAlarm
