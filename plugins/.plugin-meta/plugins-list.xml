@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3406">
+<plugins revision="3411">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -3195,7 +3195,7 @@ http://freedesktop.org</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-thrift/tags/RELEASE_0_2/griffon-thrift-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="transitions" latest-release="0.4">
+    <plugin name="transitions" latest-release="0.4.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Adds animated transitions capabilities</title>
             <author>Andres Almiray</author>
@@ -3251,6 +3251,17 @@ http://freedesktop.org</description>
             <description>Adds animated transitions capabilities</description>
             <documentation>http://griffon.codehaus.org/Transitions+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-transitions/tags/RELEASE_0_4/griffon-transitions-0.4.zip</file>
+        </release>
+        <release tag="RELEASE_0_4_1" version="0.4.1" type="svn">
+            <title>Adds animated transitions capabilities</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Adds animated transitions capabilities</description>
+            <documentation>http://griffon.codehaus.org/Transitions+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-transitions/tags/RELEASE_0_4_1/griffon-transitions-0.4.1.zip</file>
         </release>
     </plugin>
     <plugin name="tray-builder" latest-release="0.5">
@@ -3352,7 +3363,7 @@ http://freedesktop.org</description>
             <documentation>http://griffon.codehaus.org/TridentBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-trident-builder/tags/RELEASE_0_6/griffon-trident-builder-0.6.zip</file>
         </release>
-        <release tag="RELEASE_0_6_1" version="0.6.1" type="svn">
+        <release tag="RELEASE_0_6_1" type="svn" version="0.6.1">
             <title>Trident Builder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
