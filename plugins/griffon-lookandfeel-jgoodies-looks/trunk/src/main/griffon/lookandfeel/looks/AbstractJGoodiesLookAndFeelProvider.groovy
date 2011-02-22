@@ -108,9 +108,7 @@ abstract class AbstractJGoodiesLookAndFeelProvider extends LookAndFeelProvider {
 
         boolean isCurrentLookAndFeel() {
             LookAndFeel laf = UIManager.lookAndFeel
-println laf
             if(!(laf instanceof PlasticLookAndFeel)) return false
-println "${laf.plasticTheme} $lookAndFeelTheme"
             laf.plasticTheme.class.name == lookAndFeelTheme.class.name
         }
     }
