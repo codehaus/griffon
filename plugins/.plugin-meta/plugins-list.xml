@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3411">
+<plugins revision="3416">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -675,7 +675,7 @@ another docking frame in the application.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4/griffon-eclipse-support-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="effects" latest-release="0.2">
+    <plugin name="effects" latest-release="0.2.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Effects and Animations</title>
             <author>Andres Almiray</author>
@@ -691,6 +691,17 @@ another docking frame in the application.</description>
             <description>Effects and Animations</description>
             <documentation>http://griffon.codehaus.org/Effects+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_2/griffon-effects-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_2_1" version="0.2.1" type="svn">
+            <title>Effects and Animations</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Effects and Animations</description>
+            <documentation>http://griffon.codehaus.org/Effects+Plugin</documentation>
+            <license>BSD License</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_2_1/griffon-effects-0.2.1.zip</file>
         </release>
     </plugin>
     <plugin name="erlang" latest-release="0.2">
@@ -3252,7 +3263,7 @@ http://freedesktop.org</description>
             <documentation>http://griffon.codehaus.org/Transitions+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-transitions/tags/RELEASE_0_4/griffon-transitions-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_4_1" version="0.4.1" type="svn">
+        <release tag="RELEASE_0_4_1" type="svn" version="0.4.1">
             <title>Adds animated transitions capabilities</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
