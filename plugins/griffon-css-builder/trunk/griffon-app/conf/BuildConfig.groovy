@@ -5,12 +5,13 @@ griffon.project.dependency.resolution = {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-        flatDir name: 'cssBuilderPluginLib', dirs: 'lib'
+        mavenCentral()
+        mavenRepo 'http://repository.codehaus.org'
     }
     dependencies {
-        runtime 'net.sourceforge.cssparser:cssparser:0.9.5',
-                'org.w3c.css:sac:1.3',
-                'org.codehaus.griffon:cssbuilder:0.4'
+        compile('org.codehaus.griffon:cssbuilder:0.4') {
+            excludes 'groovy-all'
+        }
     }
 }
 
