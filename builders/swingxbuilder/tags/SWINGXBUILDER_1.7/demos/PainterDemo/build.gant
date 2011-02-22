@@ -1,0 +1,87 @@
+// Gant build script
+//
+// Author: James Williams
+groovyHome = System.getenv().'GROOVY_HOME'
+
+if ((groovyHome == null) || (groovyHome == '') ) {
+	println('Must set environment variable GROOVY_HOME to compile.')
+}
+
+def base_dir = new File(".").canonicalPath
+def src_dir = "${base_dir}/src"
+def build_output_dir = "${base_dir}/build"
+def build_output_classes_dir = "${build_output_dir}/classes"
+def dist_dir = "dist"
+def metadata_dir = build_output_classes_dir + '/META-INF'
+
+jar_name = 'PainterDemo.jar'
+
+includeTargets << gant.targets.Clean
+cleanPattern << ['**/*~', '**/*.bak']
+cleanDirectory << [build_output_dir]
+clobberDirectory << build_output_dir
+
+Ant.path (id :'libs') {	fileset (dir : base_dir+'/lib', includes : '*.jar')}
+Ant.path (id :'common') {fileset (dir : '../common', includes: '*.jar') }
+Ant.path(id:'groovy_jar_set') {	fileset (dir: groovyHome + '/lib', includes : '*.jar')}
+Ant.path(id:'swingx_libs_jars_set') {	fileset (dir: '../../lib', includes : '*.jar')}
+Ant.path(id:'swingx_jars_set') {	fileset (dir: '../../dist', includes : '*.jar')}
+Ant.taskdef (name:'groovyc', classname : 'org.codehaus.groovy.ant.Groovyc', classpathref:'groovy_jar_set')
+
+makeManifest = {
+	Ant.mkdir (dir: metadata_dir)
+	Ant.manifest (file: metadata_dir+'/MANIFEST.MF') {
+		attribute (name: 'Build-By', value:'jwill')
+		attribute (name: 'Main-Class', value:'groovy.swingx.demo.PainterDemo')
+	}
+}
+
+clean = {
+	Ant.delete(dir: dist_dir)
+	Ant.delete(dir: build_output_dir)
+}
+
+task (init: 'Initialize prior to a build') {
+	Ant.mkdir(dir:build_output_dir)
+	Ant.mkdir(dir:build_output_classes_dir)
+	Ant.mkdir(dir:dist_dir)
+}
+
+task (compile: 'Compile all classes') {
+	clean()
+	depends(init)
+	makeManifest()
+	Ant.groovyc(srcdir: src_dir, destDir: "build/classes") {
+		classpath {
+			pathelement (location: build_output_classes_dir)
+			path (refid: 'libs')
+			path (refid: 'common')
+            path (refid: 'swingx_libs_jars_set')
+            path (refid: 'swingx_jars_set')
+		}
+	}
+}
+
+task ('package': 'Package a jar') {
+	depends(compile)
+	makeManifest()
+	Ant.jar(destfile: dist_dir+ "/"+jar_name, basedir: build_output_classes_dir, manifest:metadata_dir+'/MANIFEST.MF')
+}
+
+task('run':'Run the file') {
+	depends('package')
+	Ant.java(classname:'groovy.swingx.demo.PainterDemo' ) {
+		classpath {
+			pathelement (location: build_output_classes_dir)
+			path (refid: 'libs')
+			path (refid: 'common')
+			path (refid: 'groovy_jar_set')
+            path (refid: 'swingx_libs_jars_set')
+            path (refid: 'swingx_jars_set')
+		}
+	}
+}
+
+task('default': 'The default target is package') {
+	'package'()
+}
