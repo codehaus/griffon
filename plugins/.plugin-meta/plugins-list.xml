@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3431">
+<plugins revision="3436">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1733,7 +1733,7 @@ http://jgraph.com</description>
             <documentation>http://griffon.codehaus.org/JideBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jide-builder/tags/RELEASE_0_5/griffon-jide-builder-0.5.zip</file>
         </release>
-        <release tag="RELEASE_0_5_1" version="0.5.1" type="svn">
+        <release tag="RELEASE_0_5_1" type="svn" version="0.5.1">
             <title>Jide Builder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -3120,7 +3120,7 @@ http://grails.org/plugin/spock</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_5_1/griffon-steel-0.5.1.zip</file>
         </release>
     </plugin>
-    <plugin name="swingx-builder" latest-release="0.3">
+    <plugin name="swingx-builder" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>SwingX Builder Plugin</title>
             <author>James Williams</author>
@@ -3154,6 +3154,17 @@ Brings the SwingX Builder libraries into a Griffon Build</description>
 Brings the SwingX Builder libraries into a Griffon Build</description>
             <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/tags/RELEASE_0_3/griffon-swingx-builder-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>SwingX Builder Plugin</title>
+            <author>James Williams</author>
+            <authorEmail>james.l.williams@gmail.com</authorEmail>
+            <description>Brings the SwingX Builder libraries into a Griffon Build</description>
+            <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/tags/RELEASE_0_4/griffon-swingx-builder-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="swingx-ws" latest-release="0.1">
