@@ -31,9 +31,9 @@ import org.jdesktop.swingx.color.GradientPreviewPanel
 import org.jdesktop.swingx.combobox.MapComboBoxModel
 import org.jdesktop.swingx.decorator.ColorHighlighter
 import org.jdesktop.swingx.decorator.PainterHighlighter
-import org.jdesktop.swingx.editors.ImagePicker
-import org.jdesktop.swingx.editors.PaintPicker
-import org.jdesktop.swingx.editors.ShapeChooser
+//import org.jdesktop.swingx.editors.ImagePicker
+//import org.jdesktop.swingx.editors.PaintPicker
+//import org.jdesktop.swingx.editors.ShapeChooser
 import org.jdesktop.swingx.icon.ColumnControlIcon
 import org.jdesktop.swingx.icon.EmptyIcon
 import org.jdesktop.swingx.image.ColorTintFilter
@@ -175,7 +175,7 @@ public class SwingXBuilder extends SwingBuilder {
         registerFactory("dialog", new JXDialogFactory())
         registerBeanFactory("list", JXList)
         registerBeanFactory("loginPanel", JXLoginPane)
-        registerBeanFactory("loginDialog", JXLoginDialog)
+        // registerBeanFactory("loginDialog", JXLoginPane.JXLoginDialog)
         registerBeanFactory("monthView", JXMonthView)
         registerBeanFactory("statusBar", JXStatusBar)
         registerBeanFactory("collapsiblePane", JXCollapsiblePane)
@@ -199,20 +199,20 @@ public class SwingXBuilder extends SwingBuilder {
         registerBeanFactory("rootPane", JXRootPane)
         registerBeanFactory("tableHeader", JXTableHeader)
         registerBeanFactory("emptyIcon", EmptyIcon)
-        registerFactory("sortArrowIcon", new SortArrowIconFactory())
+        // registerFactory("sortArrowIcon", new SortArrowIconFactory())
         registerBeanFactory("columnControlIcon", ColumnControlIcon)
-        registerBeanFactory("paintPicker", PaintPicker)
-        registerBeanFactory("shapeChooser", ShapeChooser)
-        registerBeanFactory("imagePicker", ImagePicker)
+        // registerBeanFactory("paintPicker", PaintPicker)
+        // registerBeanFactory("shapeChooser", ShapeChooser)
+        // registerBeanFactory("imagePicker", ImagePicker)
         registerBeanFactory("mapComboBoxModel", MapComboBoxModel)
         registerFactory("listComboBoxModel", new ListCBModelFactory())
         registerBeanFactory("dropShadowBorder", DropShadowBorder)
         registerBeanFactory("iconBorder", IconBorder)
         registerBeanFactory("painterGlasspane", PainterGlasspane)
-       // registerBeanFactory("leaf", Leaf)
-       // registerBeanFactory("divider", Divider)
-       // registerFactory("split", new SplitFactory())
-       // registerBeanFactory("multiSplitPane", JXMultiSplitPane)
+        registerBeanFactory("leaf", MultiSplitLayout.Leaf)
+        registerBeanFactory("divider", MultiSplitLayout.Divider)
+        registerFactory("split", new SplitFactory())
+        registerBeanFactory("multiSplitPane", JXMultiSplitPane)
     }
 
     def registerThreading() {
@@ -250,7 +250,7 @@ public class SwingXBuilder extends SwingBuilder {
         registerBeanFactory("pinstripePainter", PinstripePainter)
         registerBeanFactory("glossPainter", GlossPainter)
         registerBeanFactory("checkerboardPainter", CheckerboardPainter)
-        registerBeanFactory("urlPainter", URLPainter)
+        // registerBeanFactory("urlPainter", URLPainter)
     }
 
     def registerSwingxHighlighters() {
