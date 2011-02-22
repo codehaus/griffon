@@ -6,10 +6,9 @@ griffon.project.dependency.resolution = {
         griffonHome()
         griffonCentral()
         flatDir name: 'tridentBuilderPluginLib', dirs: 'lib'
+        mavenRepo 'http://repository.codehaus.org'
     }
     dependencies {
-        build   'org.codehaus.griffon:tridentbuilder:0.4',
-                'org.pushingpixels:trident:1.3'
         compile 'org.codehaus.griffon:tridentbuilder:0.4',
                 'org.pushingpixels:trident:1.3'
     }
