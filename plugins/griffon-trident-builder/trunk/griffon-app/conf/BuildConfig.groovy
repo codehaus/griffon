@@ -10,7 +10,7 @@ griffon.project.dependency.resolution = {
     }
     dependencies {
         compile 'org.codehaus.griffon:tridentbuilder:0.4',
-                'org.pushingpixels:trident:1.3'
+                'org.pushing-pixels:trident:1.3'
     }
 }
 
