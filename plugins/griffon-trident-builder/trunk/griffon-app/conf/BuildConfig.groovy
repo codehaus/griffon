@@ -9,8 +9,10 @@ griffon.project.dependency.resolution = {
         mavenRepo 'http://repository.codehaus.org'
     }
     dependencies {
-        compile 'org.codehaus.griffon:tridentbuilder:0.4',
-                'org.pushing-pixels:trident:1.3'
+        compile('org.codehaus.griffon:tridentbuilder:0.4') {
+            transitive = false
+        }
+        compile 'org.pushing-pixels:trident:1.3'
     }
 }
 
