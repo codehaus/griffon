@@ -97,11 +97,11 @@ public class PaintersTest extends GroovyTestCase{
 		assertTrue(bp instanceof BusyPainter && bp != null)
 	}
 
-	void testURLPainter() {
-		def builder = new SwingXBuilder()
-		def bp = builder.urlPainter(url:new java.net.URL("http://www.yahoo.com"))
-		assertTrue(bp instanceof URLPainter && bp != null)
-	}
+	// void testURLPainter() {
+	//	def builder = new SwingXBuilder()
+	//	def bp = builder.urlPainter(url:new java.net.URL("http://www.yahoo.com"))
+	//	assertTrue(bp instanceof URLPainter && bp != null)
+	// }
 	
 	void testCompoundPainter() {
 		def builder = new SwingXBuilder()

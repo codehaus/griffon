@@ -23,12 +23,12 @@ import org.jdesktop.swingx.color.EyeDropperColorChooserPanel
 import org.jdesktop.swingx.color.GradientPreviewPanel
 import org.jdesktop.swingx.combobox.ListComboBoxModel
 import org.jdesktop.swingx.combobox.MapComboBoxModel
-import org.jdesktop.swingx.editors.ImagePicker
-import org.jdesktop.swingx.editors.PaintPicker
-import org.jdesktop.swingx.editors.ShapeChooser
+// import org.jdesktop.swingx.editors.ImagePicker
+// import org.jdesktop.swingx.editors.PaintPicker
+// import org.jdesktop.swingx.editors.ShapeChooser
 import org.jdesktop.swingx.icon.ColumnControlIcon
 import org.jdesktop.swingx.icon.EmptyIcon
-import org.jdesktop.swingx.icon.SortArrowIcon
+// import org.jdesktop.swingx.icon.SortArrowIcon
 import org.jdesktop.swingx.tips.DefaultTip
 import org.jdesktop.swingx.tips.DefaultTipOfTheDayModel
 
@@ -66,21 +66,21 @@ public class ComponentsTest extends GroovyTestCase {
             header: JXHeader,
             hyperlink: JXHyperlink,
             imagePanel: JXImagePanel,
-            imagePicker: ImagePicker,
+            // imagePicker: ImagePicker,
             imageView: JXImageView,
             list: JXList,
             listComboBoxModel: ListComboBoxModel,
-            loginDialog: JXLoginDialog,
+            // loginDialog: JXLoginPane.JXLoginDialog,
             loginPanel: JXLoginPane,
             mapComboBoxModel: MapComboBoxModel,
             monthView: JXMonthView,
             multiSplitPane: JXMultiSplitPane,
-            paintPicker: PaintPicker,
+            // paintPicker: PaintPicker,
             radioGroup: JXRadioGroup,
             rootPane: JXRootPane,
             searchPanel: JXSearchPanel,
-            shapeChooser: ShapeChooser,
-            sortArrowIcon: SortArrowIcon,
+            // shapeChooser: ShapeChooser,
+            // sortArrowIcon: SortArrowIcon,
             statusBar: JXStatusBar,
             table: JXTable,
             tableHeader: JXTableHeader,
