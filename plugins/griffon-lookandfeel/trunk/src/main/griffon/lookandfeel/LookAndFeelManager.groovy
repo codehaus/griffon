@@ -102,7 +102,11 @@ final class LookAndFeelManager {
         for(provider in getLookAndFeelProviders()) {
             if(provider.handles(lookAndFeelInfo)) {
                 application.event('LookAndFeelPreview', [getCurrentLookAndFeelProvider(), getCurrentLookAndFeelInfo(), lookAndFeelInfo]) 
-                provider.preview(lookAndFeelInfo, component)
+                try {
+                    provider.preview(lookAndFeelInfo, component)
+                } catch(Exception x) {
+                    // ignore ??
+                }
                 break
             }
         }
@@ -139,10 +143,18 @@ final class LookAndFeelManager {
         def (m, v, c) = application.createMVCGroup('LookAndFeelSelector')
         c.setCurrentLookAndFeel(getCurrentLookAndFeelProvider())
 
-        int option = JOptionPane.showConfirmDialog(null, v.box,
+        int option = JOptionPane.CANCEL_OPTION
+        try {
+            option = JOptionPane.showConfirmDialog(
+                         application.windowManager.windows.find{it.focused},
+                         v.box,
                          'Look & Feel Selection',
                          JOptionPane.OK_CANCEL_OPTION,
                          JOptionPane.PLAIN_MESSAGE)
+        } catch(Exception x) {
+            // ignore ?
+        }
+
         if(option == JOptionPane.OK_OPTION) {
             apply(m.lafSelection, application)
         } else {

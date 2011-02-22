@@ -1,4 +1,4 @@
-<plugin name='lookandfeel' version='0.3' griffonVersion='0.9.1 &gt; *' jdk='1.5'>
+<plugin name='lookandfeel' version='0.4' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Swing Look &amp; Feel selector</title>
@@ -13,6 +13,6 @@
     <resource>LookAndFeelSelectorView</resource>
   </resources>
   <dependencies>
-    <plugin name='miglayout' version='0.1' />
+    <plugin name='miglayout' version='0.2' />
   </dependencies>
 </plugin>

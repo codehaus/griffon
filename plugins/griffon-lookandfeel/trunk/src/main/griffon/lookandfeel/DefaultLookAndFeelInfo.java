@@ -40,7 +40,7 @@ public abstract class DefaultLookAndFeelInfo extends griffon.lookandfeel.LookAnd
     public void install() {
         try {
             UIManager.setLookAndFeel(lookAndFeel);
-        } catch(UnsupportedLookAndFeelException ulafe) {
+        } catch(Exception e) {
             // ignore
         }
     }
