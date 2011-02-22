@@ -5,13 +5,16 @@ griffon.project.dependency.resolution = {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-        mavenCentral()
         flatDir name: 'jideBuilderPluginLib', dirs: 'lib'
+        mavenCentral()
+        mavenRepo 'http://repository.codehaus.org'
+        mavenRepo 'http://repository.sonatype.org/content/groups/public'
     }
     dependencies {
-        compile 'com.jidesoft:jide-oss:2.6.2',
-                'com.kitfox.svg:svg-salamander:1.0',
-                'org.codehaus.griffon:jidebuilder:2.2'
+        compile('org.codehaus.griffon:jidebuilder:3.0') {
+            excludes 'groovy-all', 'svg-salamander'
+        }
+        compile 'com.kitfox.svg:svg-salamander:1.0'
     }
 }
 
