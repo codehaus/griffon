@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3391">
+<plugins revision="3406">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -3303,7 +3303,7 @@ http://freedesktop.org</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-tray-builder/tags/RELEASE_0_5/griffon-tray-builder-0.5.zip</file>
         </release>
     </plugin>
-    <plugin name="trident-builder" latest-release="0.6">
+    <plugin name="trident-builder" latest-release="0.6.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Trident Builder Plugin</title>
             <author>Andres Almiray</author>
@@ -3351,6 +3351,17 @@ http://freedesktop.org</description>
             <description>Brings de Trident Builder libraries into a Griffon Build</description>
             <documentation>http://griffon.codehaus.org/TridentBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-trident-builder/tags/RELEASE_0_6/griffon-trident-builder-0.6.zip</file>
+        </release>
+        <release tag="RELEASE_0_6_1" version="0.6.1" type="svn">
+            <title>Trident Builder Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Brings de Trident Builder libraries into a Griffon Build</description>
+            <documentation>http://griffon.codehaus.org/TridentBuilder+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-trident-builder/tags/RELEASE_0_6_1/griffon-trident-builder-0.6.1.zip</file>
         </release>
     </plugin>
     <plugin name="uispec4j" latest-release="0.1">
