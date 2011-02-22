@@ -1,15 +1,14 @@
 class SwingxBuilderGriffonPlugin {
-    def version = "0.3"
+    def version = "0.4"
     def griffonVersion = "0.9.2 > *"
     def toolkits = ['swing']
     def license = 'Apache Software License 2.0'
     def dependsOn = [:]
 
-
     def author = "James Williams"
     def authorEmail = "james.l.williams@gmail.com"
     def title = "SwingX Builder Plugin"
-    def description = '''\\
+    def description = '''
 Brings the SwingX Builder libraries into a Griffon Build 
 '''
 
