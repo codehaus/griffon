@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3416">
+<plugins revision="3421">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -692,7 +692,7 @@ another docking frame in the application.</description>
             <documentation>http://griffon.codehaus.org/Effects+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_2/griffon-effects-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_2_1" version="0.2.1" type="svn">
+        <release tag="RELEASE_0_2_1" type="svn" version="0.2.1">
             <title>Effects and Animations</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -3037,7 +3037,7 @@ http://grails.org/plugin/spock</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_6/griffon-spring-0.6.zip</file>
         </release>
     </plugin>
-    <plugin name="steel" latest-release="0.5">
+    <plugin name="steel" latest-release="0.5.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gerrit Grunwald's Steel Series</title>
             <author>Andres Almirays</author>
@@ -3085,6 +3085,17 @@ http://grails.org/plugin/spock</description>
             <description>Gerrit Grunwald's Steel Series</description>
             <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_5/griffon-steel-0.5.zip</file>
+        </release>
+        <release tag="RELEASE_0_5_1" version="0.5.1" type="svn">
+            <title>Gerrit Grunwald's Steel Series</title>
+            <author>Andres Almirays</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Gerrit Grunwald's Steel Series</description>
+            <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
+            <license>BSD</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_5_1/griffon-steel-0.5.1.zip</file>
         </release>
     </plugin>
     <plugin name="swingx-builder" latest-release="0.3">
