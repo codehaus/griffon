@@ -3,7 +3,7 @@ package groovy.util;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class GroovySwingTestCase extends GroovyTestCase {
+public abstract class GroovySwingTestCase extends GroovyTestCase {
     private static boolean headless;
 
     /**
