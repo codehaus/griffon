@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException
 import javax.swing.SwingUtilities;
 
-public class GroovySwingTestCase extends GroovyTestCase {
+public abstract class GroovySwingTestCase extends GroovyTestCase {
     private static boolean headless;
 
     /**
