@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3463">
+<plugins revision="3468">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2064,7 +2064,7 @@ This is a port of the grails-ldap plugin, original from Luke Daley</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+A03+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-a03/tags/RELEASE_0_1/griffon-lookandfeel-a03-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>A03 Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2076,7 +2076,7 @@ This is a port of the grails-ldap plugin, original from Luke Daley</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-a03/tags/RELEASE_0_2/griffon-lookandfeel-a03-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-easynth" latest-release="0.1">
+    <plugin name="lookandfeel-easynth" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>EaSynth Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
@@ -2085,6 +2085,18 @@ This is a port of the grails-ldap plugin, original from Luke Daley</description>
 http://www.easynth.com</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+EaSynth+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-easynth/tags/RELEASE_0_1/griffon-lookandfeel-easynth-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>EaSynth Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>EaSynth Swing Look &amp; Feel.
+http://www.easynth.com</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+EaSynth+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-easynth/tags/RELEASE_0_2/griffon-lookandfeel-easynth-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="lookandfeel-jgoodies-looks" latest-release="0.1">
