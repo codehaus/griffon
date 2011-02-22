@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3421">
+<plugins revision="3426">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -445,7 +445,7 @@ http://everaldo.com/crystal/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-crystalicons/tags/RELEASE_0_2/griffon-crystalicons-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="css-builder" latest-release="0.6">
+    <plugin name="css-builder" latest-release="0.7">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>CSS for Swing</title>
             <author>Andres Almiray</author>
@@ -493,6 +493,17 @@ http://everaldo.com/crystal/</description>
             <description>Enables styling a Griffon application with CSS</description>
             <documentation>http://griffon.codehaus.org/CssBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-css-builder/tags/RELEASE_0_6/griffon-css-builder-0.6.zip</file>
+        </release>
+        <release tag="RELEASE_0_7" version="0.7" type="svn">
+            <title>CSS for Swing</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables styling a Griffon application with CSS</description>
+            <documentation>http://griffon.codehaus.org/CssBuilder+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-css-builder/tags/RELEASE_0_7/griffon-css-builder-0.7.zip</file>
         </release>
     </plugin>
     <plugin name="db4o" latest-release="0.3">
@@ -3086,7 +3097,7 @@ http://grails.org/plugin/spock</description>
             <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_5/griffon-steel-0.5.zip</file>
         </release>
-        <release tag="RELEASE_0_5_1" version="0.5.1" type="svn">
+        <release tag="RELEASE_0_5_1" type="svn" version="0.5.1">
             <title>Gerrit Grunwald's Steel Series</title>
             <author>Andres Almirays</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
