@@ -18,16 +18,15 @@
  * @author Andres Almiray
  */
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('lookandfeel-skinlnf')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('lookandfeel-skinlnf')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-lookandfeelSkinlnf-plugin', dirs: "${lookandfeelSkinlnfPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('lookandfeelSkinlnf', [
+        conf: 'compile',
+        name: 'griffon-lookandfeel-skinlnf-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: lookandfeelSkinlnfPluginVersion
+    ])
 }
-
