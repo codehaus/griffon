@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3543">
+<plugins revision="3548">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -590,7 +590,7 @@ another docking frame in the application.</description>
             <documentation>http://griffon.codehaus.org/DockingFrame+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-docking-frame/tags/RELEASE_0_2/griffon-docking-frame-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>Griffon docking frame add-on</title>
             <author>Hackergarten</author>
             <authorEmail>hackergarten@googlegroups.com</authorEmail>
@@ -910,7 +910,7 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flamingo-builder/tags/RELEASE_0_4/griffon-flamingo-builder-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="flyingsaucer" latest-release="0.2">
+    <plugin name="flyingsaucer" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Provides XHTML rendering capabilities</title>
             <author>Andres Almiray</author>
@@ -926,6 +926,17 @@ Provides a nice icon set too.</description>
             <description>View and render XHTML documents to PDF.</description>
             <documentation>http://griffon.codehaus.org/Flyingsaucer+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flyingsaucer/tags/RELEASE_0_2/griffon-flyingsaucer-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Provides XHTML rendering capabilities</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>View and render XHTML documents to PDF.</description>
+            <documentation>http://griffon.codehaus.org/Flyingsaucer+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-flyingsaucer/tags/RELEASE_0_3/griffon-flyingsaucer-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="font-jiggler" latest-release="0.2">
