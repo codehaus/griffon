@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,16 @@
  * @author Andres Almiray
  */
 
-includeTargets << griffonScript("Init")
-
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('jung')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('jung')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-jung-plugin', dirs: "${jungPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('jung', [
+        conf: 'compile',
+        name: 'griffon-jung-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: jungPluginVersion
+    ])
 }
+
