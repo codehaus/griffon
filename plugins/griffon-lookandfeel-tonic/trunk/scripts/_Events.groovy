@@ -18,20 +18,15 @@
  * @author Andres Almiray
  */
 
-includeTargets << griffonScript('Init')
-
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        if(buildConfig.lookandfeel?.tonic?.slim) {
-            ant.fileset(dir:"${getPluginDirForName('lookandfeel-tonic').file}/lib/slim/", includes:"*.jar").each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        } else {
-            ant.fileset(dir:"${getPluginDirForName('lookandfeel-tonic').file}/lib/", includes:"*.jar").each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('lookandfeel-tonic')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-lookandfeelTonic-plugin', dirs: "${lookandfeelTonicPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('lookandfeelTonic', [
+        conf: 'compile',
+        name: 'griffon-lookandfeel-tonic-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: lookandfeelTonicPluginVersion
+    ])
 }
