@@ -20,7 +20,7 @@ import java.awt.Component
 import javax.swing.LookAndFeel
 import griffon.lookandfeel.DefaultLookAndFeelProvider
 import griffon.lookandfeel.DefaultLookAndFeelInfo
-import de.muntjak.tinylookandfeel.TinyLookAndFeel
+import net.sf.tinylaf.TinyLookAndFeel
 
 /**
  * @author Andres Almiray
