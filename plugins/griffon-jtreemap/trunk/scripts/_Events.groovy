@@ -10,4 +10,3 @@ eventSetClasspath = { cl ->
         version: jtreemapPluginVersion
     ])
 }
-

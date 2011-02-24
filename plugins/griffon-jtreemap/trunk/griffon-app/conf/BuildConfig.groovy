@@ -22,3 +22,5 @@ griffon {
 
 griffon.jars.destDir='target/addon'
 griffon.plugin.pack.additional.sources = ['src/gdsl']
+
+//griffon.jars.jarName='JtreemapGriffonAddon.jar'
