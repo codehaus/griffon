@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,19 @@
  */
 
 /**
- * @author Per Junel
- * @author Christoph Lipp
+ * @author Ixchel Ruiz
  */
 
-
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('docking-frame')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('docking-frame')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-docking-frame-plugin', dirs: "${dockingFramePluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('dockingFrame', [
+        conf: 'compile',
+        name: 'griffon-docking-frame-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: dockingFramePluginVersion
+    ])
 }
 
