@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3538">
+<plugins revision="3543">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -570,7 +570,7 @@ https://designgridlayout.dev.java.net</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-designgridlayout/tags/RELEASE_0_4/griffon-designgridlayout-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="docking-frame" latest-release="0.2">
+    <plugin name="docking-frame" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon docking frame add-on</title>
             <author>Hackergarten</author>
@@ -589,6 +589,20 @@ The panels can be rearranged inside the frame, stacked on top of each other (i.e
 another docking frame in the application.</description>
             <documentation>http://griffon.codehaus.org/DockingFrame+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-docking-frame/tags/RELEASE_0_2/griffon-docking-frame-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Griffon docking frame add-on</title>
+            <author>Hackergarten</author>
+            <authorEmail>hackergarten@googlegroups.com</authorEmail>
+            <description>\
+The docking frame add-on for Griffon, alows the user to have movable panels, or other components, in a frame, the docking frame.
+The panels can be rearranged inside the frame, stacked on top of each other (i.e. creating a tabbed pane), or even moved to
+another docking frame in the application.</description>
+            <documentation>http://griffon.codehaus.org/DockingFrame+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-docking-frame/tags/RELEASE_0_3/griffon-docking-frame-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="domain"/>
@@ -2352,7 +2366,7 @@ http://squareness.beeger.net/</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Squareness+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-squareness/tags/RELEASE_0_1/griffon-lookandfeel-squareness-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Squareness Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
