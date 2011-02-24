@@ -1,26 +1,14 @@
 griffon.project.dependency.resolution = {
-    // inherit Griffon' default dependencies
-    inherits("global") {
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    inherits("global")
+    log "warn"
     repositories {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        flatDir name: 'lookandfeelSkinlnfPluginLib', dirs: 'lib'
     }
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        // runtime 'mysql:mysql-connector-java:5.1.5'
+        runtime 'com.l2fprod:skinlnf:6.7'
     }
 }
 
