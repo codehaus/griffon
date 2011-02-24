@@ -20,7 +20,7 @@ import java.awt.Component
 import javax.swing.LookAndFeel
 import griffon.lookandfeel.DefaultLookAndFeelProvider
 import griffon.lookandfeel.DefaultLookAndFeelInfo
-import com.nilo.plaf.nimrod.NimRODLookAndFeel
+import net.sf.nimrod.NimRODLookAndFeel
 
 /**
  * @author Andres Almiray
