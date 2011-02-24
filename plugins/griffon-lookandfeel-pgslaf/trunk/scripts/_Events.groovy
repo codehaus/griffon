@@ -18,18 +18,15 @@
  * @author Andres Almiray
  */
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        if(getPluginDirForName('jide-builder')) {
-            ant.fileset(dir:"${getPluginDirForName('lookandfeel-pgslaf').file}/lib/jide/", includes:"*.jar").each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        } else {
-            ant.fileset(dir:"${getPluginDirForName('lookandfeel-pgslaf').file}/lib/", includes:"*.jar").each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('lookandfeel-pgslaf')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-lookandfeelPgslaf-plugin', dirs: "${lookandfeelPgslafPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('lookandfeelPgslaf', [
+        conf: 'compile',
+        name: 'griffon-lookandfeel-pgslaf-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: lookandfeelPgslafPluginVersion
+    ])
 }
