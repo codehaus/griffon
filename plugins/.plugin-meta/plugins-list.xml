@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3569">
+<plugins revision="3575">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -391,7 +391,7 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <file>http://svn.codehaus.org/griffon/plugins/griffon-countries/tags/RELEASE_0_2/griffon-countries-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="coverflow" latest-release="0.4">
+    <plugin name="coverflow" latest-release="0.5">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
             <author>Your name</author>
@@ -423,6 +423,14 @@ Country code and names taken from http://en.wikipedia.org/wiki/ISO_3166-1_alpha-
             <description>Provides a coverflow component.</description>
             <documentation>http://griffon.codehaus.org/Coverflow+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-coverflow/tags/RELEASE_0_4/griffon-coverflow-0.4.zip</file>
+        </release>
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
+            <title>Provides a coverflow component</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Provides a coverflow component.</description>
+            <documentation>http://griffon.codehaus.org/Coverflow+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-coverflow/tags/RELEASE_0_5/griffon-coverflow-0.5.zip</file>
         </release>
     </plugin>
     <plugin name="crystalicons" latest-release="0.2">
@@ -500,9 +508,6 @@ http://everaldo.com/crystal/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Enables styling a Griffon application with CSS</description>
             <documentation>http://griffon.codehaus.org/CssBuilder+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-css-builder/tags/RELEASE_0_7/griffon-css-builder-0.7.zip</file>
         </release>
     </plugin>
@@ -599,9 +604,6 @@ The docking frame add-on for Griffon, alows the user to have movable panels, or 
 The panels can be rearranged inside the frame, stacked on top of each other (i.e. creating a tabbed pane), or even moved to
 another docking frame in the application.</description>
             <documentation>http://griffon.codehaus.org/DockingFrame+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-docking-frame/tags/RELEASE_0_3/griffon-docking-frame-0.3.zip</file>
         </release>
     </plugin>
@@ -723,9 +725,6 @@ another docking frame in the application.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Effects and Animations</description>
             <documentation>http://griffon.codehaus.org/Effects+Plugin</documentation>
-            <license>BSD License</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_2_1/griffon-effects-0.2.1.zip</file>
         </release>
     </plugin>
@@ -933,9 +932,6 @@ Provides a nice icon set too.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>View and render XHTML documents to PDF.</description>
             <documentation>http://griffon.codehaus.org/Flyingsaucer+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-flyingsaucer/tags/RELEASE_0_3/griffon-flyingsaucer-0.3.zip</file>
         </release>
     </plugin>
@@ -1613,9 +1609,6 @@ http://code.google.com/p/jbusycomponent</description>
             <description>JBusyComponent: Enhance any swing components with a 'busy' state.
 http://code.google.com/p/jbusycomponent</description>
             <documentation>http://griffon.codehaus.org/JBusyComponent+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jbusycomponent/tags/RELEASE_0_5_1/griffon-jbusycomponent-0.5.1.zip</file>
         </release>
     </plugin>
@@ -1681,9 +1674,6 @@ and maintainability to manage package dependencies effectively.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Expose-like effect for DesktopPanes</description>
             <documentation>http://griffon.codehaus.org/Jexplose+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jexplose/tags/RELEASE_0_2/griffon-jexplose-0.2.zip</file>
         </release>
     </plugin>
@@ -1787,9 +1777,6 @@ http://jgraph.com</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Brings the Jide Builder libraries into a Griffon Build</description>
             <documentation>http://griffon.codehaus.org/JideBuilder+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jide-builder/tags/RELEASE_0_5_1/griffon-jide-builder-0.5.1.zip</file>
         </release>
     </plugin>
@@ -1917,9 +1904,6 @@ http://code.google.com/p/jsyntaxpane/</description>
             <authorEmail>hackergarten@canoo.com</authorEmail>
             <description>Integrates the JTreeMap library.</description>
             <documentation>http://griffon.codehaus.org/Jtreemap+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jtreemap/tags/RELEASE_0_3/griffon-jtreemap-0.3.zip</file>
         </release>
     </plugin>
@@ -1964,9 +1948,6 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <description>Graph visualizations and algorithms via JUNG2.
 See http://jung.sourceforge.net for more information about JUNG2</description>
             <documentation>http://griffon.codehaus.org/Jung+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jung/tags/RELEASE_0_4/griffon-jung-0.4.zip</file>
         </release>
     </plugin>
@@ -2108,9 +2089,6 @@ This is a port of the grails-ldap plugin, original from Luke Daley</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Swing Look &amp; Feel selector.</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel/tags/RELEASE_0_4/griffon-lookandfeel-0.4.zip</file>
         </release>
     </plugin>
@@ -2129,9 +2107,6 @@ This is a port of the grails-ldap plugin, original from Luke Daley</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>A03 Swing Look &amp; Feel.</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+A03+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-a03/tags/RELEASE_0_2/griffon-lookandfeel-a03-0.2.zip</file>
         </release>
     </plugin>
@@ -2152,9 +2127,6 @@ http://www.easynth.com</description>
             <description>EaSynth Swing Look &amp; Feel.
 http://www.easynth.com</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+EaSynth+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-easynth/tags/RELEASE_0_2/griffon-lookandfeel-easynth-0.2.zip</file>
         </release>
     </plugin>
@@ -2173,9 +2145,6 @@ http://www.easynth.com</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>JGoodies Swing Look &amp; Feel.</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+JgoodiesLooks+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-jgoodies-looks/tags/RELEASE_0_2/griffon-lookandfeel-jgoodies-looks-0.2.zip</file>
         </release>
     </plugin>
@@ -2205,9 +2174,6 @@ http://www.jtattoo.net:%s%</description>
             <description>JTattoo Swing Look &amp; Feel.
 http://www.jtattoo.net:%s%</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+JTattoo+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-jtattoo/tags/RELEASE_0_3/griffon-lookandfeel-jtattoo-0.3.zip</file>
         </release>
     </plugin>
@@ -2228,9 +2194,6 @@ http://kunstoff.incors.com/archive/index.php3</description>
             <description>Kunststoff Swing Look &amp; Feel.
 http://kunstoff.incors.com/archive/index.php3</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Kunststoff+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-kunststoff/tags/RELEASE_0_2/griffon-lookandfeel-kunststoff-0.2.zip</file>
         </release>
     </plugin>
@@ -2251,9 +2214,6 @@ https://liquidlnf.dev.java.net/</description>
             <description>Liquid Swing Look &amp; Feel.
 https://liquidlnf.dev.java.net/</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Liquidlnf+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-liquidlnf/tags/RELEASE_0_2/griffon-lookandfeel-liquidlnf-0.2.zip</file>
         </release>
     </plugin>
@@ -2272,9 +2232,6 @@ https://liquidlnf.dev.java.net/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Metouia Swing Look &amp; Feel.</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Metouia+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-metouia/tags/RELEASE_0_2/griffon-lookandfeel-metouia-0.2.zip</file>
         </release>
     </plugin>
@@ -2293,9 +2250,6 @@ https://liquidlnf.dev.java.net/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Napkin Swing Look &amp; Feel.</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Napkin+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-napkin/tags/RELEASE_0_2/griffon-lookandfeel-napkin-0.2.zip</file>
         </release>
     </plugin>
@@ -2316,9 +2270,6 @@ http://personales.ya.com/nimrod/index-en.html</description>
             <description>NimROD Swing Look &amp; Feel.
 http://personales.ya.com/nimrod/index-en.html</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Nimrod+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-nimrod/tags/RELEASE_0_2/griffon-lookandfeel-nimrod-0.2.zip</file>
         </release>
     </plugin>
@@ -2339,9 +2290,6 @@ http://officelnfs.sourceforge.net/</description>
             <description>Officelnfs Swing Look &amp; Feel.
 http://officelnfs.sourceforge.net/</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Officelnfs+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms>windows,windows64</platforms>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-officelnfs/tags/RELEASE_0_2/griffon-lookandfeel-officelnfs-0.2.zip</file>
         </release>
     </plugin>
@@ -2362,9 +2310,6 @@ http://www.pagosoft.com/products/pgslookandfeel/index.html</description>
             <description>Pgslaf Swing Look &amp; Feel.
 http://www.pagosoft.com/products/pgslookandfeel/index.html</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Pgslaf+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-pgslaf/tags/RELEASE_0_2/griffon-lookandfeel-pgslaf-0.2.zip</file>
         </release>
     </plugin>
@@ -2395,9 +2340,6 @@ http://l2fprod.com/skinlf</description>
             <description>Skinlnf Swing Look &amp; Feel.
 http://l2fprod.com/skinlf</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Skinlnf+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-skinlnf/tags/RELEASE_0_2/griffon-lookandfeel-skinlnf-0.2.zip</file>
         </release>
     </plugin>
@@ -2418,9 +2360,6 @@ http://squareness.beeger.net/</description>
             <description>Squareness Swing Look &amp; Feel.
 http://squareness.beeger.net/</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Squareness+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-squareness/tags/RELEASE_0_2/griffon-lookandfeel-squareness-0.2.zip</file>
         </release>
     </plugin>
@@ -2447,9 +2386,6 @@ http://squareness.beeger.net/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Substance Swing Look &amp; Feel.</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Substance+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-substance/tags/RELEASE_0_3/griffon-lookandfeel-substance-0.3.zip</file>
         </release>
     </plugin>
@@ -2470,9 +2406,6 @@ http://www.muntjak.de/hans/java/tinylaf/index.html</description>
             <description>Tinylaf Swing Look &amp; Feel.
 http://www.muntjak.de/hans/java/tinylaf/index.html</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Tinylaf+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-tinylaf/tags/RELEASE_0_2/griffon-lookandfeel-tinylaf-0.2.zip</file>
         </release>
     </plugin>
@@ -2493,9 +2426,6 @@ http://www.digitprop.com/tonic/tonic.php</description>
             <description>Tonic Swing Look &amp; Feel.
 http://www.digitprop.com/tonic/tonic.php</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Tonic+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-tonic/tags/RELEASE_0_2/griffon-lookandfeel-tonic-0.2.zip</file>
         </release>
     </plugin>
@@ -3383,9 +3313,6 @@ http://grails.org/plugin/spock</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Gerrit Grunwald's Steel Series</description>
             <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
-            <license>BSD</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_5_1/griffon-steel-0.5.1.zip</file>
         </release>
     </plugin>
@@ -3430,9 +3357,6 @@ Brings the SwingX Builder libraries into a Griffon Build</description>
             <authorEmail>james.l.williams@gmail.com</authorEmail>
             <description>Brings the SwingX Builder libraries into a Griffon Build</description>
             <documentation>http://griffon.codehaus.org/SwingxBuilder+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-builder/tags/RELEASE_0_4/griffon-swingx-builder-0.4.zip</file>
         </release>
     </plugin>
@@ -3582,9 +3506,6 @@ http://freedesktop.org</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Adds animated transitions capabilities</description>
             <documentation>http://griffon.codehaus.org/Transitions+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-transitions/tags/RELEASE_0_4_1/griffon-transitions-0.4.1.zip</file>
         </release>
     </plugin>
@@ -3693,9 +3614,6 @@ http://freedesktop.org</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Brings de Trident Builder libraries into a Griffon Build</description>
             <documentation>http://griffon.codehaus.org/TridentBuilder+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-trident-builder/tags/RELEASE_0_6_1/griffon-trident-builder-0.6.1.zip</file>
         </release>
     </plugin>
