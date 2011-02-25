@@ -74,6 +74,10 @@ import javax.swing.DefaultListModel;
  * - Removed fixed sizes
  * - Fixed repaint behaviour when changing size
  * </p>
+ * 2/25/2011
+ * --------
+ * - Added listener to dataModel to repaint after a change
+ * </p>
  *
  * @author Romain.Guy
  * @author Kevin.Long
@@ -111,6 +115,7 @@ public class ImageFlow extends JPanel {
     private List<ListSelectionListener> listSelectionListeners;
     private ListModel dataModel;
     private Color itemTextColor = Color.WHITE;
+    private RepaintListDataListener repaintListDataListener = new RepaintListDataListener();
 
     /**
      * Constructs a <code>ImageFlow</code> with an empty, mutable, model.
@@ -190,6 +195,7 @@ public class ImageFlow extends JPanel {
         }
 
         this.dataModel = dataModel;
+        this.dataModel.addListDataListener(repaintListDataListener);
         fx = CrystalCaseFactory.getInstance();
         setLayout(new GridBagLayout());
         setSigma(0.5);
@@ -259,7 +265,10 @@ public class ImageFlow extends JPanel {
             throw new IllegalArgumentException("model must be non null");
         }
         ListModel oldValue = dataModel;
+        if(oldValue != null)
+            oldValue.removeListDataListener(repaintListDataListener);
         dataModel = model;
+        dataModel.addListDataListener(repaintListDataListener);
         firePropertyChange("model", oldValue, dataModel);
         adjust();
     }
@@ -1057,6 +1066,23 @@ public class ImageFlow extends JPanel {
                     }
                 }
             }
+        }
+    }
+
+    private class RepaintListDataListener implements ListDataListener {
+        public void intervalAdded(ListDataEvent e) {
+            damaged = true;
+            repaint();
+        }
+
+        public void intervalRemoved(ListDataEvent e) {
+            damaged = true;
+            repaint();
+        }
+
+        public void contentsChanged(ListDataEvent e) {
+            damaged = true;
+            repaint();
         }
     }
 }
