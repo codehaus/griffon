@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/airbag.iml" filepath="$PROJECT_DIR$/airbag.iml" />
       <module fileurl="file://$PROJECT_DIR$/../airbag-demo/airbag-demo.iml" filepath="$PROJECT_DIR$/../airbag-demo/airbag-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../airbag-demo/airbag-demo-griffonPlugins.iml" filepath="$PROJECT_DIR$/../airbag-demo/airbag-demo-griffonPlugins.iml" />
     </modules>
   </component>
 </project>
