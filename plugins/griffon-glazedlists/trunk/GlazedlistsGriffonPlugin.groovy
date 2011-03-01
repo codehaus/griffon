@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class GlazedlistsGriffonPlugin {
-    def version = 0.7
+    def version = 0.8
     def dependsOn = [:]
     def toolkits = ['swing']
     def griffonVersion = '0.9.2 > *'
