@@ -29,7 +29,7 @@ class DefaultAdvancedTableFormat extends DefaultTableFormat implements AdvancedT
     private final List columnComparators = []
 
     DefaultAdvancedTableFormat(List<Map<String,?>> columns, Closure getColumnValueStrategy = DefaultTableFormat.GET_COLUMN_VALUE_STRATEGY) {
-        super(columns.name, columns.title, getColumnValueStrategy ?: DefaultTableFormat.GET_COLUMN_VALUE_STRATEGY)
+        super(columns.name, columns.title, columns.read, getColumnValueStrategy ?: DefaultTableFormat.GET_COLUMN_VALUE_STRATEGY)
         columns.collect(columnClasses) { columndef ->
             columndef.class ?: DEFAULT_CLASS
         }

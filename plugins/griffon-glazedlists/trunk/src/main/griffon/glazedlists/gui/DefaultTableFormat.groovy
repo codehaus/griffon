@@ -35,13 +35,14 @@ class DefaultTableFormat implements TableFormat {
 
     protected final List<String> columnNames = []
     protected final List<String> columnTitles = []
+    protected final List<Closure> columnReaders = []
     protected final Closure getColumnValueStrategy
 
     DefaultTableFormat(List<String> columnNames, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY) {
         this(columnNames, columnNames, getColumnValueStrategy)
-    }   
-    
-    DefaultTableFormat(List<String> columnNames, List<String> columnTitles, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY) {
+    }
+
+    DefaultTableFormat(List<String> columnNames, List<String> columnTitles, List<Closure> columnReaders, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY) {
         if(!columnTitles) columnTitles = columnNames
         assert columnNames.size() == columnTitles.size()
         columnNames.collect(this.columnNames) { GriffonNameUtils.getPropertyName(it) }
@@ -49,6 +50,7 @@ class DefaultTableFormat implements TableFormat {
             String title = columnTitles[i]
             this.columnTitles << (title != null ? title : GriffonNameUtils.getNaturalName(columnNames[i]))
         }
+        this.columnReaders.addAll(columnReaders)
         this.getColumnValueStrategy = getColumnValueStrategy ?: GET_COLUMN_VALUE_STRATEGY
     }
 
@@ -61,6 +63,9 @@ class DefaultTableFormat implements TableFormat {
     }
 
     Object getColumnValue(baseObject, int index) {
-        getColumnValueStrategy(baseObject, columnNames, index)
-    } 
+        if(index < columnReaders.size() && columnReaders[index])
+          columnReaders[index](baseObject, columnNames, index)
+        else
+          getColumnValueStrategy(baseObject, columnNames, index)
+    }
 }
