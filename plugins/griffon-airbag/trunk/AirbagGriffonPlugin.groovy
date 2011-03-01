@@ -2,13 +2,13 @@ class AirbagGriffonPlugin {
     // the plugin version
     def version = "0.1"
     // the version or versions of Griffon the plugin is designed for
-    def griffonVersion = '0.9.2-rc1 > *' 
+    def griffonVersion = '0.9.2 > *'
     // the other plugins this plugin depends on
     def dependsOn = [:]
     // resources that are included in plugin packaging
     def pluginIncludes = []
     // the plugin license
-    def license = '<UNKNOWN>'
+    def license = 'Apache Software License 2.0'
     // Toolkit compatibility. No value means compatible with all
     // Valid values are: swing, javafx, swt, pivot, gtk
     def toolkits = []
@@ -17,12 +17,11 @@ class AirbagGriffonPlugin {
     // linux, linux64, windows, windows64, macosx, macosx64, solaris
     def platforms = []
 
-    // TODO Fill in these fields
-    def author = 'Your name'
-    def authorEmail = ''
-    def title = 'Plugin summary/headline'
+    def author = 'Nick Zhu'
+    def authorEmail = 'nzhu@jointsource.com'
+    def title = 'Griffon Airbag Plugin'
     def description = '''
-Brief description of the plugin.
+This plugin provides AOP like global exception handling and notification for any Griffon application
 '''
 
     // URL to the plugin's documentation
