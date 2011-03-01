@@ -64,8 +64,8 @@ class DefaultWritableTableFormat implements WritableTableFormat, AdvancedTableFo
                                Closure isEditableStrategy = IS_EDITABLE_STRATEGY) {
         columns.name.collect(this.columnNames) { GriffonNameUtils.getPropertyName(it) }
         for(int i = 0; i < columnNames.size(); i++) {
-            String title = columnTitles[i]
-            this.columnTitles << (title != null ? title : GriffonNameUtils.getNaturalName(columnNames[i]))
+            String title = columns[i].title
+            this.columnTitles << (title ?: GriffonNameUtils.getNaturalName(columnNames[i]))
         }
         def read = getColumnValueStrategy ?: GET_COLUMN_VALUE_STRATEGY
         def write = setColumnValueStrategy ?: SET_COLUMN_VALUE_STRATEGY
