@@ -15,7 +15,7 @@ import java.awt.TextArea
  */
 class AirBagDialog extends JDialog {
 
-    def AirBagDialog(owner, String title, Throwable exception){
+    def AirBagDialog(owner, title, exception){
         super(owner, title)
 
         setModal true
