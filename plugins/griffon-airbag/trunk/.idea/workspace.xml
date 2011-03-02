@@ -15,26 +15,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="f94cbb5b-b432-4ef5-9eee-c453d4002d8c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../airbag-demo/src/main/net/sourceforge/griffon-airbag" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../airbag-demo/src/main/net/sourceforge" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../airbag-demo/src/main/net" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/net/sourceforge/griffon" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/net/sourceforge" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/net" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../airbag-demo/airbag-demo-griffonPlugins.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirbagExceptionHandler.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../airbag-demo" afterPath="$PROJECT_DIR$/../airbag-demo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$" afterPath="$PROJECT_DIR$" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../airbag-demo/airbag-demo.iml" afterPath="$PROJECT_DIR$/../airbag-demo/airbag-demo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../airbag-demo/application.properties" afterPath="$PROJECT_DIR$/../airbag-demo/application.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../airbag-demo/griffon-app/conf/Builder.groovy" afterPath="$PROJECT_DIR$/../airbag-demo/griffon-app/conf/Builder.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../airbag-demo/griffon-app/views/airbag/demo/AirbagDemoView.groovy" afterPath="$PROJECT_DIR$/../airbag-demo/griffon-app/views/airbag/demo/AirbagDemoView.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/net/sourceforge/griffon" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/net/sourceforge" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/net" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/airbag-griffonPlugins.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBag.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBagDialog.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/DefaultAirBag.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/AirbagExceptionHandlerSpec.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/DefaultAirBagSpec.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AirbagGriffonAddon.groovy" afterPath="$PROJECT_DIR$/AirbagGriffonAddon.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/airbag.iml" afterPath="$PROJECT_DIR$/airbag.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application.properties" afterPath="$PROJECT_DIR$/application.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirbagExceptionHandler.groovy" afterPath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirbagExceptionHandler.groovy" />
     </list>
     <ignored path="airbag.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -104,7 +101,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AirbagGriffonAddon.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AirbagGriffonAddon.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AirbagGriffonAddon.groovy">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="103" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
@@ -125,7 +122,52 @@
       <file leaf-file-name="AirbagExceptionHandler.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirbagExceptionHandler.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="56" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
+            <state line="8" column="30" selection-start="199" selection-end="199" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AirbagExceptionHandlerSpec.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/AirbagExceptionHandlerSpec.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="0" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AirBag.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBag.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="38" selection-start="0" selection-end="38" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AirBagDialog.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBagDialog.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="38" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultAirBag.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/DefaultAirBag.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="116" selection-start="473" selection-end="473" vertical-scroll-proportion="0.3167702">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultAirBagSpec.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/DefaultAirBagSpec.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="63" column="0" selection-start="1588" selection-end="1588" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -153,8 +195,13 @@
         <option value="$PROJECT_DIR$/AirbagGriffonPlugin.groovy" />
         <option value="$PROJECT_DIR$/../airbag-demo/griffon-app/controllers/airbag/demo/AirbagDemoController.groovy" />
         <option value="$PROJECT_DIR$/../airbag-demo/griffon-app/views/airbag/demo/AirbagDemoView.groovy" />
-        <option value="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirbagExceptionHandler.groovy" />
         <option value="$PROJECT_DIR$/AirbagGriffonAddon.groovy" />
+        <option value="$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/AirbagExceptionHandlerSpec.groovy" />
+        <option value="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBag.groovy" />
+        <option value="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBagDialog.groovy" />
+        <option value="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirbagExceptionHandler.groovy" />
+        <option value="$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/DefaultAirBagSpec.groovy" />
+        <option value="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/DefaultAirBag.groovy" />
       </list>
     </option>
   </component>
@@ -289,6 +336,42 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="airbag" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="airbag" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="airbag" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="airbag" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="airbag" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -307,22 +390,87 @@
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="OverrideImplement.combined" value="true" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="recentsLimit" value="5" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="dynamic.classpath" value="false" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="net.sourceforge.griffon.airbag" />
     </key>
   </component>
-  <component name="RunManager" selected="Griffon.Griffon:airbag-demo">
+  <component name="RunManager" selected="JUnit.DefaultAirBagSpec">
+    <configuration default="false" name="DefaultAirBagSpec.Air bag should trigger app generic exception event" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false">
+        <pattern>
+          <option name="PATTERN" value="net.sourceforge.griffon.airbag.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="airbag" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="net.sourceforge.griffon.airbag" />
+      <option name="MAIN_CLASS_NAME" value="net.sourceforge.griffon.airbag.DefaultAirBagSpec" />
+      <option name="METHOD_NAME" value="Air bag should trigger app generic exception event" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="DefaultAirBagSpec" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false">
+        <pattern>
+          <option name="PATTERN" value="net.sourceforge.griffon.airbag.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="airbag" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="net.sourceforge.griffon.airbag" />
+      <option name="MAIN_CLASS_NAME" value="net.sourceforge.griffon.airbag.DefaultAirBagSpec" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="51411" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="GriffonRunConfigurationType" factoryName="Griffon">
       <module name="" />
       <setting name="vmparams" value="" />
@@ -445,9 +593,11 @@
         <option name="Make" enabled="false" />
       </method>
     </configuration>
-    <list size="2">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Griffon.Griffon:airbag" />
       <item index="1" class="java.lang.String" itemvalue="Griffon.Griffon:airbag-demo" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.DefaultAirBagSpec.Air bag should trigger app generic exception event" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.DefaultAirBagSpec" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -512,11 +662,11 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39906102" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3298122" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298122" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Griffon View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -547,7 +697,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="created addon hook to replace default exception handler" />
+    <option name="LAST_COMMIT_MESSAGE" value="ported airbag code from jndi-warrior" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -565,21 +715,26 @@
     <MESSAGE value="created airbag demo griffon app on sf.net" />
     <MESSAGE value="created mvc skeleton for demo app" />
     <MESSAGE value="created addon hook to replace default exception handler" />
+    <MESSAGE value="ported airbag code from jndi-warrior" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/AirbagGriffonPlugin.groovy">
+    <entry file="file://$PROJECT_DIR$/AirbagGriffonAddon.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="45" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0">
+        <state line="0" column="103" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../airbag-demo/griffon-app/controllers/airbag/demo/AirbagDemoController.groovy">
+    <entry file="file://$PROJECT_DIR$/AirbagGriffonPlugin.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="32" selection-start="111" selection-end="111" vertical-scroll-proportion="0.0">
+        <state line="26" column="45" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -591,16 +746,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirbagExceptionHandler.groovy">
+    <entry file="file://$PROJECT_DIR$/../airbag-demo/griffon-app/controllers/airbag/demo/AirbagDemoController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="56" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
+        <state line="7" column="32" selection-start="111" selection-end="111" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AirbagGriffonAddon.groovy">
+    <entry file="file://$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/AirbagExceptionHandlerSpec.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="103" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
+        <state line="12" column="0" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBag.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="38" selection-start="0" selection-end="38" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBagDialog.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="38" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirbagExceptionHandler.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="30" selection-start="199" selection-end="199" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/DefaultAirBagSpec.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="0" selection-start="1588" selection-end="1588" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/DefaultAirBag.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="116" selection-start="473" selection-end="473" vertical-scroll-proportion="0.3167702">
           <folding />
         </state>
       </provider>
@@ -624,8 +814,90 @@
             <GrailsSettings />
           </value>
         </entry>
+        <entry key="airbag-griffonPlugins">
+          <value>
+            <GrailsSettings />
+          </value>
+        </entry>
       </map>
     </option>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Android</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>griffon-0.9.2-beta-3</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>airbag</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Plugins</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 
