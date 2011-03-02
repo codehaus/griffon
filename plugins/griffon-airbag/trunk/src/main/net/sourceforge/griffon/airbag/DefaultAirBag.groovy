@@ -2,6 +2,7 @@ package net.sourceforge.griffon.airbag
 
 import org.apache.log4j.Logger
 import org.apache.commons.lang.StringUtils
+import griffon.util.ApplicationHolder
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -11,6 +12,10 @@ class DefaultAirBag implements AirBag {
     private static final String EXCEPTION_CAUGHT_EVENT_NAME = 'uncaughtException'
 
     private app
+
+    def DefaultAirBag(){
+        this.app = ApplicationHolder.application
+    }
 
     def DefaultAirBag(app){
         this.app = app
