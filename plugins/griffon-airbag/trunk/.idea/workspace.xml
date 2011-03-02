@@ -15,16 +15,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="f94cbb5b-b432-4ef5-9eee-c453d4002d8c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../airbag-demo/airbag-demo.iml" afterPath="$PROJECT_DIR$/../airbag-demo/airbag-demo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../airbag-demo/application.properties" afterPath="$PROJECT_DIR$/../airbag-demo/application.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../airbag-demo/griffon-app/conf/Builder.groovy" afterPath="$PROJECT_DIR$/../airbag-demo/griffon-app/conf/Builder.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../airbag-demo/griffon-app/controllers/airbag/demo/AirbagDemoController.groovy" afterPath="$PROJECT_DIR$/../airbag-demo/griffon-app/controllers/airbag/demo/AirbagDemoController.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../airbag-demo/griffon-app/views/airbag/demo/AirbagDemoView.groovy" afterPath="$PROJECT_DIR$/../airbag-demo/griffon-app/views/airbag/demo/AirbagDemoView.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/griffon-app/resources/net/sourceforge/griffon/airbag/messagebox_warning.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/griffon-app/resources/net/sourceforge/griffon/airbag" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/griffon-app/resources/net/sourceforge/griffon" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/griffon-app/resources/net/sourceforge" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/griffon-app/resources/net" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../griffon-airbag-demo/griffon-airbag-demo.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBagErrorDialog.groovy" />
+      <change type="DELETED" beforePath="C:\Dev\temp\griffon-airbag\src\main\net\sourceforge\griffon\airbag\AirBagDialog.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../griffon-airbag-demo/src/main/net/sourceforge/griffon-airbag" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../griffon-airbag-demo/src/main/net/sourceforge" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$" afterPath="$PROJECT_DIR$" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../griffon-airbag-demo/airbag-demo-griffonPlugins.iml" afterPath="$PROJECT_DIR$/../griffon-airbag-demo/airbag-demo-griffonPlugins.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../griffon-airbag-demo/application.properties" afterPath="$PROJECT_DIR$/../griffon-airbag-demo/application.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../griffon-airbag-demo/griffon-app/conf/Builder.groovy" afterPath="$PROJECT_DIR$/../griffon-airbag-demo/griffon-app/conf/Builder.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../griffon-airbag-demo/griffon-app/controllers/airbag/demo/AirbagDemoController.groovy" afterPath="$PROJECT_DIR$/../griffon-airbag-demo/griffon-app/controllers/airbag/demo/AirbagDemoController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBagDialog.groovy" afterPath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBagDialog.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirbagExceptionHandler.groovy" afterPath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirbagExceptionHandler.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/DefaultAirBag.groovy" afterPath="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/DefaultAirBag.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/airbag-griffonPlugins.iml" afterPath="$PROJECT_DIR$/airbag-griffonPlugins.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/airbag.iml" afterPath="$PROJECT_DIR$/airbag.iml" />
     </list>
     <ignored path="airbag.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -85,28 +96,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AirbagGriffonPlugin.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AirbagGriffonPlugin.groovy">
+      <file leaf-file-name="AirBagErrorDialog.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBagErrorDialog.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="45" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AirbagGriffonAddon.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AirbagGriffonAddon.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="60" selection-start="232" selection-end="232" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AirbagDemoView.groovy" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../airbag-demo/griffon-app/views/airbag/demo/AirbagDemoView.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="13" selection-start="216" selection-end="216" vertical-scroll-proportion="0.2576336">
+            <state line="36" column="53" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -121,10 +114,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AirbagExceptionHandlerSpec.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/AirbagExceptionHandlerSpec.groovy">
+      <file leaf-file-name="DefaultAirBag.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/DefaultAirBag.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0">
+            <state line="16" column="48" selection-start="487" selection-end="487" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -139,37 +132,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AirBagDialog.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBagDialog.groovy">
+      <file leaf-file-name="AirbagDemoView.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../griffon-airbag-demo/griffon-app/views/airbag/demo/AirbagDemoView.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="53" selection-start="422" selection-end="422" vertical-scroll-proportion="0.0">
+            <state line="14" column="49" selection-start="350" selection-end="386" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultAirBag.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/DefaultAirBag.groovy">
+      <file leaf-file-name="AirbagDemoController.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../griffon-airbag-demo/griffon-app/controllers/airbag/demo/AirbagDemoController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="48" selection-start="487" selection-end="487" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefaultAirBagSpec.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/DefaultAirBagSpec.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="55" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AirbagDemoController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../airbag-demo/griffon-app/controllers/airbag/demo/AirbagDemoController.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="66" selection-start="374" selection-end="384" vertical-scroll-proportion="0.0">
+            <state line="15" column="56" selection-start="322" selection-end="322" vertical-scroll-proportion="0.4678899">
               <folding />
             </state>
           </provider>
@@ -195,6 +170,9 @@
         <option value="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/DefaultAirBag.groovy" />
         <option value="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirbagExceptionHandler.groovy" />
         <option value="$PROJECT_DIR$/../airbag-demo/griffon-app/views/airbag/demo/AirbagDemoView.groovy" />
+        <option value="$PROJECT_DIR$/../griffon-airbag-demo/src/main/net/sourceforge/griffon/airbag/AirBagDialog.groovy" />
+        <option value="$PROJECT_DIR$/../griffon-airbag-demo/src/main/net/sourceforge/griffon/airbag/AirBagErrorDialog.groovy" />
+        <option value="$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBagErrorDialog.groovy" />
       </list>
     </option>
   </component>
@@ -230,9 +208,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -247,7 +222,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="airbag-demo" />
+              <option name="myItemId" value="griffon-airbag-demo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -257,7 +232,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="airbag-demo" />
+              <option name="myItemId" value="griffon-airbag-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="airbag" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="griffon-airbag-demo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -279,7 +272,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="airbag-demo" />
+              <option name="myItemId" value="griffon-airbag-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="griffon-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="airbag" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="griffon-airbag-demo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -293,7 +304,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="airbag-demo" />
+              <option name="myItemId" value="griffon-airbag-demo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -315,7 +326,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="airbag" />
+              <option name="myItemId" value="griffon-airbag" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -325,29 +336,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="airbag" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="unit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="airbag" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="airbag" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="airbag" />
+              <option name="myItemId" value="griffon-airbag" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -361,7 +350,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="airbag" />
+              <option name="myItemId" value="griffon-airbag" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -377,8 +366,59 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="airbag" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="griffon-airbag" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="griffon-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="airbag" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="griffon-airbag" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="griffon-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="net" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sourceforge" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="griffon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="airbag" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -397,6 +437,9 @@
     <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="net.sourceforge.griffon.airbag" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="net.sourceforge.griffon.airbag" />
     </key>
@@ -580,7 +623,13 @@
       <setting name="depsClasspath" value="true" />
       <setting name="passParentEnv" value="true" />
       <extension name="coverage" enabled="false" merge="false" />
+      <RunnerSettings RunnerId="GriffonDebugger">
+        <option name="DEBUG_PORT" value="2531" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="GriffonDebugger" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
         <option name="Make" enabled="false" />
@@ -611,7 +660,7 @@
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="true">$USER_HOME$/.subversion_IDEA</configuration>
+    <configuration useDefault="true">C:\Documents and Settings\x140689\Application Data\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
@@ -619,65 +668,66 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$/../airbag-demo" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$/../airbag-demo" />
+          <option name="myVcsRoot" value="C:\Dev\temp\griffon-airbag" />
+          <option name="myCopyRoot" value="C:\Dev\temp\griffon-airbag" />
         </SvnCopyRootSimple>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+          <option name="myVcsRoot" value="C:\Dev\temp\griffon-airbag-demo" />
+          <option name="myCopyRoot" value="C:\Dev\temp\griffon-airbag-demo" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$/../airbag-demo" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$/../airbag-demo" />
+          <option name="myVcsRoot" value="C:\Dev\temp\griffon-airbag" />
+          <option name="myCopyRoot" value="C:\Dev\temp\griffon-airbag" />
         </SvnCopyRootSimple>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+          <option name="myVcsRoot" value="C:\Dev\temp\griffon-airbag-demo" />
+          <option name="myCopyRoot" value="C:\Dev\temp\griffon-airbag-demo" />
         </SvnCopyRootSimple>
       </list>
     </option>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="f94cbb5b-b432-4ef5-9eee-c453d4002d8c" name="Default" comment="" />
       <created>1299007203787</created>
       <updated>1299007203787</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1680" height="1000" extended-state="0" />
+    <frame x="-4" y="-4" width="1288" height="1002" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39906102" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298122" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Griffon View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39817974" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3287827" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Griffon View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24876848" sideWeight="0.6701878" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3298122" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24817519" sideWeight="0.67121726" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287827" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
     <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
@@ -690,7 +740,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished first cut of airbag plugin impl" />
+    <option name="LAST_COMMIT_MESSAGE" value="replaced direct java impl in error dialog with swring builder" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -710,6 +760,7 @@
     <MESSAGE value="created addon hook to replace default exception handler" />
     <MESSAGE value="ported airbag code from jndi-warrior" />
     <MESSAGE value="finished first cut of airbag plugin impl" />
+    <MESSAGE value="replaced direct java impl in error dialog with swring builder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -721,70 +772,58 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/AirbagGriffonPlugin.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="45" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="26" column="45" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AirbagGriffonAddon.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="60" selection-start="232" selection-end="232" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/AirbagExceptionHandlerSpec.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0">
+        <state line="12" column="0" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/DefaultAirBagSpec.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="71" selection-start="641" selection-end="641" vertical-scroll-proportion="0.43896714">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../griffon-airbag-demo/griffon-app/views/airbag/demo/AirbagDemoView.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="49" selection-start="350" selection-end="386" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBag.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="38" selection-start="0" selection-end="38" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="38" selection-start="0" selection-end="38" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBagDialog.groovy">
+    <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirBagErrorDialog.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="53" selection-start="422" selection-end="422" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AirbagGriffonAddon.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="60" selection-start="232" selection-end="232" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/unit/net/sourceforge/griffon/airbag/DefaultAirBagSpec.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="55" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/DefaultAirBag.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="48" selection-start="487" selection-end="487" vertical-scroll-proportion="0.0">
+        <state line="36" column="53" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/AirbagExceptionHandler.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="34" selection-start="309" selection-end="309" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="14" column="34" selection-start="309" selection-end="309" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../airbag-demo/griffon-app/controllers/airbag/demo/AirbagDemoController.groovy">
+    <entry file="file://$PROJECT_DIR$/src/main/net/sourceforge/griffon/airbag/DefaultAirBag.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="66" selection-start="374" selection-end="384" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="16" column="48" selection-start="487" selection-end="487" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../airbag-demo/griffon-app/views/airbag/demo/AirbagDemoView.groovy">
+    <entry file="file://$PROJECT_DIR$/../griffon-airbag-demo/griffon-app/controllers/airbag/demo/AirbagDemoController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="216" selection-end="216" vertical-scroll-proportion="0.2576336">
+        <state line="15" column="56" selection-start="322" selection-end="322" vertical-scroll-proportion="0.4678899">
           <folding />
         </state>
       </provider>
@@ -799,6 +838,11 @@
           </value>
         </entry>
         <entry key="airbag-demo">
+          <value>
+            <GrailsSettings />
+          </value>
+        </entry>
+        <entry key="airbag-demo-griffonPlugins">
           <value>
             <GrailsSettings />
           </value>

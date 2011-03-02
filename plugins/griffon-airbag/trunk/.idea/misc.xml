@@ -37,13 +37,6 @@
             </SvnBranchConfiguration>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/../airbag-demo">
-          <value>
-            <SvnBranchConfiguration>
-              <option name="trunkUrl" value="https://griffon-airbag.svn.sourceforge.net/svnroot/griffon-airbag/trunk" />
-            </SvnBranchConfiguration>
-          </value>
-        </entry>
       </map>
     </option>
     <option name="mySupportsUserInfoFilter" value="true" />

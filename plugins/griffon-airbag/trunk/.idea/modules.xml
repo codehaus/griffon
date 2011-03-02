@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/airbag.iml" filepath="$PROJECT_DIR$/airbag.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../griffon-airbag-demo/griffon-airbag-demo.iml" filepath="$PROJECT_DIR$/../griffon-airbag-demo/griffon-airbag-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/../airbag-demo/airbag-demo.iml" filepath="$PROJECT_DIR$/../airbag-demo/airbag-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../griffon-airbag-demo/airbag-demo-griffonPlugins.iml" filepath="$PROJECT_DIR$/../griffon-airbag-demo/airbag-demo-griffonPlugins.iml" />
       <module fileurl="file://$PROJECT_DIR$/airbag-griffonPlugins.iml" filepath="$PROJECT_DIR$/airbag-griffonPlugins.iml" />
     </modules>
   </component>
