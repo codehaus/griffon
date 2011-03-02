@@ -11,7 +11,7 @@ class AirbagExceptionHandler extends GriffonExceptionHandler {
     void uncaughtException(Thread t, Throwable e) {
         super.uncaughtException(t, e)
 
-        println "AirbagExceptionHandler -> ${e.message}"
+
     }
 
 }
