@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3624">
+<plugins revision="3629">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -774,7 +774,7 @@ another docking frame in the application.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fast-translate/tags/RELEASE_0_2/griffon-fast-translate-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="feeds" latest-release="0.1">
+    <plugin name="feeds" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>RSS/Atom integration</title>
             <author>Andres Almiray</author>
@@ -783,6 +783,18 @@ another docking frame in the application.</description>
 Provides a nice icon set too.</description>
             <documentation>http://griffon.codehaus.org/Feeds+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-feeds/tags/RELEASE_0_1/griffon-feeds-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>RSS/Atom integration</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Read/Write RSS/Atom feeds with Rome.
+Provides a nice icon set too.</description>
+            <documentation>http://griffon.codehaus.org/Feeds+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-feeds/tags/RELEASE_0_2/griffon-feeds-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="fest" latest-release="0.6">
@@ -3144,7 +3156,7 @@ http://www.famfamfam.com/lab/icons/silk/</description>
             <documentation>http://griffon.codehaus.org/Silkicons+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-silkicons/tags/RELEASE_0_1/griffon-silkicons-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>FamFamFam's Silk icon set</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
