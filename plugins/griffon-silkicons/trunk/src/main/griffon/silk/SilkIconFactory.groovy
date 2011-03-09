@@ -29,7 +29,7 @@ class SilkIconFactory extends ImageIconFactory {
 
         if(icon.endsWith('.png')) icon -= '.png'
 
-        value = "/com/famfamfam/silk/icons/${icon}.png"
+        value = "/com/famfamfam/silk/${icon}.png"
         super.newInstance(builder, name, value, [:])
     }
 }

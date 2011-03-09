@@ -28,7 +28,7 @@ includeTargets << griffonScript("Init")
 target(silkIconSelector: "Displays all Silk icons") {
     def icons = []
     def pathResolver = new PathMatchingResourcePatternResolver(this.class.classLoader)
-    pathResolver.getResources('classpath*:/com/famfamfam/silk/icons/*.png').each { r ->
+    pathResolver.getResources('classpath*:/com/famfamfam/silk/*.png').each { r ->
         def (m, icon) = (r.getURL().path =~ /.*\/([a-zA-Z0-9_\-]+)\.png/)[0]
         icons << icon
     }
@@ -44,7 +44,7 @@ target(silkIconSelector: "Displays all Silk icons") {
                 panel {
                     gridLayout(cols: 4, rows: icons.size()/4)
                     icons.each { icon ->
-                        label(icon, icon: imageIcon("/com/famfamfam/silk/icons/${icon}.png"), toolTipText: icon)
+                        label(icon, icon: imageIcon("/com/famfamfam/silk/${icon}.png"), toolTipText: icon)
                     }
                 } 
             }
