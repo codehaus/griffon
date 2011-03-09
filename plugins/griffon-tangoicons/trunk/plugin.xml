@@ -1,4 +1,4 @@
-<plugin name='tangoicons' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='tangoicons' version='0.2' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Tango! desktop icons</title>
