@@ -32,3 +32,8 @@ if (!addonIsSet1) {
 root.'WeldGriffonAddon'.addon=true
 ''')
 }
+
+beansXml = new File("${basedir}/griffon-app/conf/metainf/beans.xml")
+if(!beansXml.exists()) {
+    beansXml.text = ''
+}
