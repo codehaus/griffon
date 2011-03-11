@@ -18,13 +18,10 @@
  * @author Andres Almiray
  */
 
-packagingType = ''
-eventPackageStart = { type ->
-    packagingType = type
-}
-
 eventCreateConfigEnd = {
-    buildConfig.griffon.application.mainClass = 'griffon.plugins.jme.SimpleGameGriffonApplication'
+    if(!buildConfig.jmonkeyengine.embedded) {
+        buildConfig.griffon.application.mainClass = 'griffon.plugins.jme.SimpleGameGriffonApplication'
+    }
 }
 
 def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
