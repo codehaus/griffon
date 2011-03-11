@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class JmonkeyengineGriffonPlugin {
-    def version = 0.1
+    def version = '0.1.1'
     def dependsOn = [lwjgl: 0.4]
     def toolkits = ['swing']
     def griffonVersion = '0.9.2 > *'
