@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3636">
+<plugins revision="3641">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -711,7 +711,7 @@ another docking frame in the application.</description>
             <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4/griffon-eclipse-support-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_4_1" version="0.4.1" type="svn">
+        <release tag="RELEASE_0_4_1" type="svn" version="0.4.1">
             <title>Keeps Eclipse files up to date</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1831,7 +1831,7 @@ http://jgraph.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jml/tags/RELEASE_0_1/griffon-jml-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="jmonkeyengine" latest-release="0.1">
+    <plugin name="jmonkeyengine" latest-release="0.1.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JMonkeyEngine support</title>
             <author>Andres Almiray</author>
@@ -1839,6 +1839,17 @@ http://jgraph.com</description>
             <description>JMonkeyEngine support.</description>
             <documentation>http://griffon.codehaus.org/Jmonkeyengine+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmonkeyengine/tags/RELEASE_0_1/griffon-jmonkeyengine-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_1_1" version="0.1.1" type="svn">
+            <title>JMonkeyEngine support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>JMonkeyEngine support.</description>
+            <documentation>http://griffon.codehaus.org/Jmonkeyengine+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jmonkeyengine/tags/RELEASE_0_1_1/griffon-jmonkeyengine-0.1.1.zip</file>
         </release>
     </plugin>
     <plugin name="jmx" latest-release="0.3">
