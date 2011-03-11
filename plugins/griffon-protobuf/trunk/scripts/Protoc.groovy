@@ -22,7 +22,7 @@ includeTargets << griffonScript("Init")
 includeTargets << griffonScript("_GriffonCompile")
 
 target(protoc: "Compile Protobuf sources with protoc") {
-    depends(checkVersion, classpath)
+    depends(checkVersion, classpath, parseArguments)
     gensrcDir = "${projectWorkDir}/gensrc"
     gensrcDirPath = new File(gensrcDir)
 
