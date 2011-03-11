@@ -2,7 +2,7 @@
  * griffon-mouseguestures: MouseGestures Griffon plugin
  * Copyright 2010 and beyond, Andres Almiray
  *
- * SmartGWT is free software; you can redistribute it and/or modify it
+ * MouseGestures is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License version 3
  * as published by the Free Software Foundation.  SmartGWT is also
  * available under typical commercial license terms - see
@@ -18,15 +18,16 @@
  * @author Andres Almiray
  */
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('mousegestures')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('mousegestures')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-mousegestures-plugin', dirs: "${mousegesturesPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('mousegestures', [
+        conf: 'compile',
+        name: 'griffon-mousegestures-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: mousegesturesPluginVersion
+    ])
 }
+
