@@ -21,7 +21,7 @@
 includeTargets << griffonScript('Init')
 
 eventCompileStart = {
-    if(compilingThriftPlugin()) return
+    if(compilingPlugin('thrift')) return
     includePluginScript('thrift', 'Thrift')
     thrift()
 }
@@ -30,24 +30,8 @@ eventCleanEnd = {
     ant.delete(dir: "${projectWorkDir}/thrift", quiet: false)
 }
 
-eventCopyLibsEnd = { jardir ->
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('thrift')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
-}
-
 eventStatsStart = { pathToInfo ->
     if(!pathToInfo.find{it.path == 'src.thrift'} ) {
         pathToInfo << [name: 'Thrift Sources', path: 'src.thrift', filetype: ['.thrift']]
     }
 }
-
-private boolean compilingThriftPlugin() {
-    getPluginDirForName('thrift')?.file?.canonicalPath == basedir
-}
-

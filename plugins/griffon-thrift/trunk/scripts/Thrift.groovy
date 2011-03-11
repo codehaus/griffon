@@ -22,11 +22,11 @@ includeTargets << griffonScript('Init')
 includeTargets << griffonScript('_GriffonCompile')
 
 target(thrift: 'Compile Thrift sources with thrift') {
-    depends(checkVersion, classpath)
+    depends(checkVersion, classpath, parseArguments)
     gensrcDir = "${projectWorkDir}/thrift"
     gensrcDirPath = new File(gensrcDir)
     gensrcDirPath.mkdirs()
-    gensrcDirPath = new File(gensrcDir, 'gen-java')
+    gensrcDirPath = new File(gensrcDir, 'gen-javabean')
     gensrcDirPath.mkdirs()
 
     def thriftExecutable = buildConfig?.apache?.thrift?.executable
@@ -48,16 +48,16 @@ Make sure you have a similar setting on your griffon-app/conf/BuildConfig.groovy
     def skipIt = new RuntimeException()
     try {
         ant.fileset(dir: thriftsrcDir, includes: "**/*.thrift").each { thriftfile ->
-            File markerFile = new File(gensrcDir+File.separator+'gen-java', "." + (thriftfile.toString() - thriftsrc).substring(1))
+            File markerFile = new File(gensrcDir+File.separator+'gen-javabean', "." + (thriftfile.toString() - thriftsrc).substring(1))
             if(!markerFile.exists() || thriftfile.file.lastModified() > markerFile.lastModified()) throw skipIt
         }
     } catch(x) {
-       if(x == skipIt) uptodate = false
-       else throw x
+        if(x == skipIt) uptodate = false
+        else throw x
     }
     if(uptodate) {
-       ant.echo(message: "[thrift] Sources are up to date")
-       return
+        ant.echo(message: "[thrift] Sources are up to date")
+        return
     }
 
     ant.echo(message: "[thrift] Invoking $thriftExecutable on $thriftsrc")
