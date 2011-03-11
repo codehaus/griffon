@@ -22,7 +22,7 @@ includeTargets << griffonScript('Init')
 includeTargets << griffonScript('_GriffonCompile')
 
 target(avro: 'Compile Avro sources') {
-    depends(checkVersion, classpath)
+    depends(checkVersion, classpath, parseArguments)
     gensrcDir = "${projectWorkDir}/avro"
     gensrcDirPath = new File(gensrcDir)
     gensrcDirPath.mkdirs()
@@ -31,7 +31,7 @@ target(avro: 'Compile Avro sources') {
 
     avrosrc = "${basedir}/src/avro"
     avrosrcDir = new File(avrosrc)
-    if(avrosrcDir.exists() && !avrosrcDir.list().size()) {
+    if(avrosrcDir.exists() && avrosrcDir.list().size()) {
         compileAvroSources()
     } else {
         ant.echo(message: "[avro] No avro sources found at $avrosrc")
@@ -102,13 +102,13 @@ compileAvroSources = {
     ant.mkdir(dir: classesDirPath)
     ant.echo(message: "[avro] Compiling generated sources to $classesDirPath")
     try {
-    String classpathId = "griffon.compile.classpath"
+        String classpathId = "griffon.compile.classpath"
         compileSources(classesDirPath, classpathId) {
             src(path: gensrcDirPath)
             javac(classpathref: classpathId)
         }
-        paranamer(sourceDirectory: gensrcDirPath,
-                  outputDirectory: classesDirPath)
+        ant.paranamer(sourceDirectory: gensrcDirPath,
+                      outputDirectory: classesDirPath)
     }
     catch (Exception e) {
         event("StatusFinal", ["Compilation error: ${e.message}"])
