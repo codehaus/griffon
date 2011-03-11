@@ -21,7 +21,7 @@
 includeTargets << griffonScript("Init")
 
 eventCompileStart = {
-    if(compilingProtobufPlugin()) return
+    if(compilingPlugin('protobuf')) return
     includePluginScript("protobuf", "Protoc")
     protoc()
 }
@@ -30,24 +30,8 @@ eventCleanEnd = {
     ant.delete(dir: "${projectWorkDir}/gensrc", quiet: false)
 }
 
-eventCopyLibsEnd = { jardir ->
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('protobuf')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
-}
-
 eventStatsStart = { pathToInfo ->
     if(!pathToInfo.find{it.path == "src.protobuf"} ) {
         pathToInfo << [name: "Protobuf Sources", path: "src.protobuf", filetype: [".proto"]]
     }
 }
-
-private boolean compilingProtobufPlugin() {
-    getPluginDirForName('protobuf')?.file?.canonicalPath == basedir
-}
-
