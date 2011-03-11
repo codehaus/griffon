@@ -69,7 +69,7 @@ updateEclipseClasspathFile = { newPlugin = null ->
                 visitedDependencies << f
                 String path = f.absolutePath
                 path = path.replaceFirst(~/.*\.ivy2\/cache/, 'IVY2_CACHE')
-                classpathentry(kind: 'lib', path: path)   
+                classpathentry(kind: 'var', path: path)   
             }    
         }
                
