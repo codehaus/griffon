@@ -2,11 +2,9 @@
  * griffon-mouseguestures: MouseGestures Griffon plugin
  * Copyright 2010 and beyond, Andres Almiray
  *
- * SmartGWT is free software; you can redistribute it and/or modify it
+ * MouseGestures is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License version 3
- * as published by the Free Software Foundation.  SmartGWT is also
- * available under typical commercial license terms - see
- * smartclient.com/license.
+ * as published by the Free Software Foundation.
  *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -19,9 +17,9 @@
  */
 class MousegesturesGriffonPlugin {
     // the plugin version
-    def version = "0.1"
+    def version = "0.2"
     // the version or versions of Griffon the plugin is designed for
-    def griffonVersion = '0.9 > *' 
+    def griffonVersion = '0.9.2 > *' 
     // the other plugins this plugin depends on
     def dependsOn = [:]
     // resources that are included in plugin packaging
