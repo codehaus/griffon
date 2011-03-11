@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3641">
+<plugins revision="3646">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1653,7 +1653,7 @@ http://code.google.com/p/jbusycomponent</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jbusycomponent/tags/RELEASE_0_5_1/griffon-jbusycomponent-0.5.1.zip</file>
         </release>
     </plugin>
-    <plugin name="jcalendar" latest-release="0.1">
+    <plugin name="jcalendar" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Date &amp; Calendar support</title>
             <author>Andres Almiray</author>
@@ -1662,6 +1662,18 @@ http://code.google.com/p/jbusycomponent</description>
 http://www.toedter.com/en/jcalendar/</description>
             <documentation>http://griffon.codehaus.org/Jcalendar+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jcalendar/tags/RELEASE_0_1/griffon-jcalendar-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Date &amp; Calendar support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Date &amp; Calendar support
+http://www.toedter.com/en/jcalendar/</description>
+            <documentation>http://griffon.codehaus.org/Jcalendar+Plugin</documentation>
+            <license>GNU LGPL 2.1</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jcalendar/tags/RELEASE_0_2/griffon-jcalendar-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="jdepend" latest-release="0.3">
@@ -1840,7 +1852,7 @@ http://jgraph.com</description>
             <documentation>http://griffon.codehaus.org/Jmonkeyengine+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmonkeyengine/tags/RELEASE_0_1/griffon-jmonkeyengine-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_1_1" version="0.1.1" type="svn">
+        <release tag="RELEASE_0_1_1" type="svn" version="0.1.1">
             <title>JMonkeyEngine support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
