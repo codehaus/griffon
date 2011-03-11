@@ -20,29 +20,14 @@
 
 includeTargets << griffonScript('Init')
 
-def compilingAvroPlugin = {
-    getPluginDirForName('avro')?.file?.canonicalPath == basedir
-}
-
 eventCompileStart = { 
-    if(compilingAvroPlugin()) return
+    if(compilingPlugin('avro')) return
     includePluginScript('avro', 'Avro')
     avro()
 }
 
 eventCleanEnd = {
     ant.delete(dir: "${projectWorkDir}/avro", quiet: false)
-}
-
-eventCopyLibsEnd = { jardir ->
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('avro')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
 }
 
 eventStatsStart = { pathToInfo ->
