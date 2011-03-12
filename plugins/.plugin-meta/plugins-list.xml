@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3672">
+<plugins revision="3679">
     <plugin name="abeilleform-builder" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -4097,7 +4097,7 @@ http://zonelayout.com</description>
         </release>
     </plugin>
     <plugin name="lookandfeel-synthetica" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Synthetica Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -4108,6 +4108,20 @@ http://jyloo.com/synthetica</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-synthetica/tags/RELEASE_0_1/griffon-lookandfeel-synthetica-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="lookandfeel-lipstiklf" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Lipstiklf Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Lipstiklf Look &amp; Feel
+http://sourceforge.net/projects/lipstiklf</description>
+            <documentation>http://griffon.codehaus.org/LookandfeelLipstiklf+Plugin</documentation>
+            <license>GNU Public License 2.1</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-lipstiklf/tags/RELEASE_0_1/griffon-lookandfeel-lipstiklf-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
