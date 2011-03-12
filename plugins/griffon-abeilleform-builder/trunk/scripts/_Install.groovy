@@ -1,28 +1,32 @@
-//
-// This script is executed by Griffon after plugin was installed to project.
-// This script is a Gant script so you can use all special variables provided
-// by Gant (such as 'baseDir' which points on project base dir). You can
-// use 'ant' to access a global instance of AntBuilder
-//
-// For example you can create directory under project tree:
-//
-//    ant.mkdir(dir:"${basedir}/griffon-app/jobs")
-//
+/*
+ * griffon-abeilleformbuilder: AbeilleForms Griffon plugin
+ * Copyright 2010 and beyond, Jim Shingler
+ *
+ * AbeilleForms is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
 
+/**
+ * @author Jim Shingler
+ */
 
-
-ConfigSlurper configSlurper = new ConfigSlurper()
-o = configSlurper.parse(new File("${basedir}/griffon-app/conf/Builder.groovy").toURL())
+// check to see if we already have a AbeilleForm Builder
 boolean builderIsSet
-o.each() { prefix,v ->
-	v.each { builder, views ->
-		builderIsSet = builderIsSet || 'griffon.builder.abeilleform.AbeilleFormBuilder' == builder
-	}
+builderConfig.each() { prefix, v ->
+    v.each { builder, views ->
+        builderIsSet = builderIsSet || 'griffon.builder.abeilleform.AbeilleFormBuilder' == builder
+    }
 }
 
 if (!builderIsSet) {
-	println "Adding AbeilleFormBuilder to Builders.groovy"
-	new File("${basedir}/griffon-app/conf/Builder.groovy").append("""
+    println 'Adding AbeilleFormBuilder to Builder.groovy'
+    builderConfigFile.append('''
 root.'griffon.builder.abeilleform.AbeilleFormBuilder'.view = '*'
-	""")
+''')
 }
