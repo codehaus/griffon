@@ -32,10 +32,11 @@ class DefaultWritableTableFormatFactory extends AbstractFactory {
             throw new IllegalArgumentException("In $name you must define a value for columns:, i.e, [[name: 'ColumnA', class: String]]")
         }
         List columns = attributes.remove('columns')
+        def editable = attributes.remove('editable')
         return new DefaultWritableTableFormat(columns,
             attributes.remove('read'),
             attributes.remove('write'),
-            attributes.remove('editable')
+            (editable instanceof Closure) ? editable : { -> editable == null ?: editable as Boolean }
         )
     }
 
