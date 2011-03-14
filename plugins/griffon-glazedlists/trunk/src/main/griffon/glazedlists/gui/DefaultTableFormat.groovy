@@ -39,7 +39,7 @@ class DefaultTableFormat implements TableFormat {
     protected final Closure getColumnValueStrategy
 
     DefaultTableFormat(List<String> columnNames, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY) {
-        this(columnNames, columnNames, getColumnValueStrategy)
+        this(columnNames, columnNames, [], getColumnValueStrategy)
     }
 
     DefaultTableFormat(List<String> columnNames, List<String> columnTitles, List<Closure> columnReaders, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY) {
@@ -50,7 +50,7 @@ class DefaultTableFormat implements TableFormat {
             String title = columnTitles[i]
             this.columnTitles << (title != null ? title : GriffonNameUtils.getNaturalName(columnNames[i]))
         }
-        this.columnReaders.addAll(columnReaders)
+        if(columnReaders) this.columnReaders.addAll(columnReaders)
         this.getColumnValueStrategy = getColumnValueStrategy ?: GET_COLUMN_VALUE_STRATEGY
     }
 
