@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3684">
+<plugins revision="3689">
     <plugin name="abeilleform-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -9,7 +9,7 @@
             <documentation>http://griffon.codehaus.org/AbeilleformBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-abeilleform-builder/tags/RELEASE_0_1/griffon-abeilleform-builder-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>A Builder for Abeille Forms</title>
             <author>Jim Shingler</author>
             <authorEmail>ShinglerJim@gmail.com</authorEmail>
@@ -1117,7 +1117,7 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gfx-builder/tags/RELEASE_0_6/griffon-gfx-builder-0.6.zip</file>
         </release>
     </plugin>
-    <plugin name="glazedlists" latest-release="0.8">
+    <plugin name="glazedlists" latest-release="0.8.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>GlazedLists library and components</title>
             <author>Andres Almiray</author>
@@ -1181,6 +1181,17 @@ Provides a nice icon set too.</description>
             <description>Adds GlazedLists support to your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_8/griffon-glazedlists-0.8.zip</file>
+        </release>
+        <release tag="RELEASE_0_8_1" version="0.8.1" type="svn">
+            <title>GlazedLists library and components</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Adds GlazedLists support to your Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_8_1/griffon-glazedlists-0.8.1.zip</file>
         </release>
     </plugin>
     <plugin name="gmetrics" latest-release="0.3">
