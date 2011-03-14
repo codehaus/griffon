@@ -73,7 +73,7 @@ class DefaultWritableTableFormat implements WritableTableFormat, AdvancedTableFo
 
         columns.collect(readers) { columndef -> columndef.read ?: read }
         columns.collect(writers) { columndef -> columndef.write ?: write }
-        columns.collect(queries) { columndef -> columndef.editable ?: query }
+        columns.collect(queries) { columndef -> columndef.editable != null ? columndef.editable : query }
         columns.collect(classes) { columndef -> columndef.class ?: DEFAULT_CLASS }
         columns.collect(comparators) { columndef -> columndef.comparator ?: DEFAULT_COMPARATOR }
     }
