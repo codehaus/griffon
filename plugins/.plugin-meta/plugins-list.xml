@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3697">
+<plugins revision="3703">
     <plugin name="glazedlists" latest-release="0.8.1">
-        <release tag="RELEASE_0_8_1" version="0.8.1" type="svn">
+        <release tag="RELEASE_0_8_1" type="svn" version="0.8.1">
             <title>GlazedLists library and components</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
