@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3703">
-    <plugin name="glazedlists" latest-release="0.8.1">
+<plugins revision="3708">
+    <plugin name="glazedlists" latest-release="0.8.2">
         <release tag="RELEASE_0_8_1" type="svn" version="0.8.1">
             <title>GlazedLists library and components</title>
             <author>Andres Almiray</author>
@@ -11,6 +11,17 @@
             <toolkits>swing</toolkits>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_8_1/griffon-glazedlists-0.8.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_8_2" version="0.8.2" type="svn">
+            <title>GlazedLists library and components</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Adds GlazedLists support to your Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_8_2/griffon-glazedlists-0.8.2.zip</file>
         </release>
     </plugin>
 </plugins>
