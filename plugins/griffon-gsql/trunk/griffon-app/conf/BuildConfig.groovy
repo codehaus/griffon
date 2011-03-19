@@ -5,7 +5,7 @@ griffon.project.dependency.resolution = {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-        mavenLocal()
+        mavenCentral()
     }
     dependencies {
         compile('commons-dbcp:commons-dbcp:1.2.2',
