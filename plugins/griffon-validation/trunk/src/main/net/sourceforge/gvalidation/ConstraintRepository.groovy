@@ -43,7 +43,7 @@ import griffon.core.GriffonApplication
 class ConstraintRepository {
     private def validators = [
             nullable: new NullableValidator(this),
-            blank: new BlankValidator(this),
+            blank: new BlankValidator(),
             email: new EmailValidator(this),
             creditCard: new CreditCardValidator(this),
             inList: new InListValidator(this),

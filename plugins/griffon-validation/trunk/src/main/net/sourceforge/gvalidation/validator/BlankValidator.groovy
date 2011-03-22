@@ -20,13 +20,10 @@ import org.apache.commons.lang.StringUtils
 /**
  * Created by nick.zhu
  */
-class BlankValidator extends Closure {
+class BlankValidator implements Validator {
 
-    def BlankValidator(owner) {
-        super(owner);
-    }
-
-    def doCall(propertyValue, bean, allowBlank) {
+    @Override
+    def validate(propertyValue, bean, allowBlank) {
         if (allowBlank)
             return true
 
@@ -35,4 +32,5 @@ class BlankValidator extends Closure {
 
         return StringUtils.isNotBlank(propertyValue)
     }
+
 }

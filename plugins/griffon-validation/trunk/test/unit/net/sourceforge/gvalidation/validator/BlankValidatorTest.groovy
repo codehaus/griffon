@@ -23,22 +23,22 @@ import net.sourceforge.gvalidation.validator.BlankValidator
 class BlankValidatorTest extends GroovyTestCase {
 
     public void testBlankValidation() {
-        BlankValidator blank = new BlankValidator(this)
+        BlankValidator blank = new BlankValidator()
 
-        assertTrue("Should allow blank", (boolean) blank.call("", this, true))
-        assertTrue("Should allow null", (boolean) blank.call(null, this, true))
-        assertFalse("Should not allow null", (boolean) blank.call(null, this, false))
-        assertFalse("Should not allow blank", (boolean) blank.call("", this, false))
-        assertFalse("Should not allow blank", (boolean) blank.call(" ", this, false))
-        assertTrue("Should be successful", (boolean) blank.call(" something ", this, false))
+        assertTrue("Should allow blank", (boolean) blank.validate("", this, true))
+        assertTrue("Should allow null", (boolean) blank.validate(null, this, true))
+        assertFalse("Should not allow null", (boolean) blank.validate(null, this, false))
+        assertFalse("Should not allow blank", (boolean) blank.validate("", this, false))
+        assertFalse("Should not allow blank", (boolean) blank.validate(" ", this, false))
+        assertTrue("Should be successful", (boolean) blank.validate(" something ", this, false))
     }
 
     // bug #2983285
     public void testValidatingNonStrings() {
-        BlankValidator blank = new BlankValidator(this)
+        BlankValidator blank = new BlankValidator()
 
-        assertTrue("Should allow blank", (boolean) blank.call(10, this, true))
-        assertTrue("Should not allow blank", (boolean) blank.call(10, this, false))
+        assertTrue("Should allow blank", (boolean) blank.validate(10, this, true))
+        assertTrue("Should not allow blank", (boolean) blank.validate(10, this, false))
     }
 
 }
