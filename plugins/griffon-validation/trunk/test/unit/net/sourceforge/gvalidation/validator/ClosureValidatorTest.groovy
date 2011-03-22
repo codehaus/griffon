@@ -24,10 +24,10 @@ import net.sourceforge.gvalidation.ValidationEnhancer
 class ClosureValidatorTest extends GroovyTestCase {
 
     public void testBasicClosureBasedValidation(){
-        ClosureValidator validator = new ClosureValidator(this)
+        ClosureValidator validator = new ClosureValidator()
 
-        assertTrue "Should be valid", validator.call(null, this, {value, obj -> true})
-        assertFalse "Should not be valid", validator.call(null, this, {value, obj -> false})
+        assertTrue "Should be valid", validator.validate(null, this, {value, obj -> true})
+        assertFalse "Should not be valid", validator.validate(null, this, {value, obj -> false})
     }
     
     public void testErrorGeneration(){
@@ -35,9 +35,9 @@ class ClosureValidatorTest extends GroovyTestCase {
 
         ValidationEnhancer.enhance(obj)
 
-        ClosureValidator validator = new ClosureValidator(obj)
+        ClosureValidator validator = new ClosureValidator()
 
-        assertFalse "Should be valid", validator.call(null, obj, {value, bean -> bean.errors.reject('error'); false})
+        assertFalse "Should be valid", validator.validate(null, obj, {value, bean -> bean.errors.reject('error'); false})
 
         assertTrue "Error should be generated", obj.hasErrors()
     }
