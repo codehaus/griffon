@@ -18,13 +18,10 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class ClosureValidator extends Closure {
+class ClosureValidator implements Validator {
 
-    def ClosureValidator(owner) {
-        super(owner);
-    }
-
-    def doCall(value, bean, closure){
+    @Override
+    def validate(value, bean, closure){
         return closure.call(value, bean)        
     }
 

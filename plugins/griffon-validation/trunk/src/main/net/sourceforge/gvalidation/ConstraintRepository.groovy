@@ -57,7 +57,7 @@ class ConstraintRepository {
             size: new SizeValidator(this),
             url: new UrlValidator(this),
             inetAddress: new InetAddressValidator(this),
-            validator: new ClosureValidator(this)
+            validator: new ClosureValidator()
     ]
 
     def initialize(app) {
