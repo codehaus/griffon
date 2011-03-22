@@ -23,11 +23,11 @@ import net.sourceforge.gvalidation.validator.EmailValidator
 class EmailValidatorTest extends GroovyTestCase {
 
     public void testEmailValidation(){
-        EmailValidator email = new EmailValidator(this)
+        EmailValidator email = new EmailValidator()
 
-        assertTrue("Should be skipped", (boolean) email.call("blah", this, false))
-        assertFalse("Should not be a valid email address", (boolean) email.call("blah", this, true))
-        assertTrue("Should be a valid email address", (boolean) email.call("blah@somesite.com", this, true))
+        assertTrue("Should be skipped", (boolean) email.validate("blah", this, false))
+        assertFalse("Should not be a valid email address", (boolean) email.validate("blah", this, true))
+        assertTrue("Should be a valid email address", (boolean) email.validate("blah@somesite.com", this, true))
     }
     
 }

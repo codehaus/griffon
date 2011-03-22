@@ -18,13 +18,10 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class CreditCardValidator extends Closure {
+class CreditCardValidator implements Validator {
 
-    def CreditCardValidator(owner) {
-        super(owner);
-    }
-
-    def doCall(propertyValue, bean, isCreditCard){
+    @Override
+    def validate(propertyValue, bean, isCreditCard){
         if(!propertyValue)
             return true
         
