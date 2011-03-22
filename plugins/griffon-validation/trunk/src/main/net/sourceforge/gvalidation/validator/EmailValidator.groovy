@@ -20,13 +20,10 @@ import org.apache.commons.lang.StringUtils
 /**
  * Created by nick.zhu
  */
-class EmailValidator extends Closure {
+class EmailValidator implements Validator {
 
-    def EmailValidator(owner) {
-        super(owner);
-    }
-
-    def doCall(propertyValue, bean, isEmail) {
+    @Override
+    def validate(propertyValue, bean, isEmail) {
         if(!propertyValue)
             return true
         

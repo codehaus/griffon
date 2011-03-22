@@ -42,10 +42,10 @@ import griffon.core.GriffonApplication
 @Singleton
 class ConstraintRepository {
     private def validators = [
-            nullable: new NullableValidator(this),
+            nullable: new NullableValidator(),
             blank: new BlankValidator(),
-            email: new EmailValidator(this),
-            creditCard: new CreditCardValidator(this),
+            email: new EmailValidator(),
+            creditCard: new CreditCardValidator(),
             inList: new InListValidator(this),
             matches: new MatchesValidator(this),
             max: new MaxValidator(this),

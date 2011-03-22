@@ -23,13 +23,13 @@ import net.sourceforge.gvalidation.validator.NullableValidator
 class NullableValidatorTest extends GroovyTestCase {
 
     public void testNullableCheck(){
-        NullableValidator nullable = new NullableValidator(this)
+        NullableValidator nullable = new NullableValidator()
 
-        assertTrue("Should allow null", (Boolean) nullable.call(null, this, true))
-        assertFalse("Should not allow null", (Boolean) nullable.call(null, this, false))
+        assertTrue("Should allow null", (Boolean) nullable.validate(null, this, true))
+        assertFalse("Should not allow null", (Boolean) nullable.validate(null, this, false))
 
-        assertTrue("Should allow not null", (Boolean) nullable.call(" ", this, true))
-        assertTrue("Should allow not null", (Boolean) nullable.call(" ", this, false))
+        assertTrue("Should allow not null", (Boolean) nullable.validate("", this, true))
+        assertTrue("Should allow not null", (Boolean) nullable.validate("", this, false))
     }
 
 }
