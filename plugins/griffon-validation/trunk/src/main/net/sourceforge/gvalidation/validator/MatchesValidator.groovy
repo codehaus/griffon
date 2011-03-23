@@ -18,13 +18,10 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class MatchesValidator extends Closure {
+class MatchesValidator extends AbstractValidator {
 
-    def MatchesValidator(owner) {
-        super(owner);
-    }
-
-    def doCall(property, bean, regex){
+    @Override
+    def validate(property, bean, regex){
         if(!property)
             return true
 

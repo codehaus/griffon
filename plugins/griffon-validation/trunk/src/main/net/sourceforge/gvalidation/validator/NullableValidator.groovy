@@ -18,7 +18,7 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class NullableValidator implements Validator {
+class NullableValidator extends AbstractValidator {
 
     @Override
     def validate(propertyValue, bean, allowNull) {

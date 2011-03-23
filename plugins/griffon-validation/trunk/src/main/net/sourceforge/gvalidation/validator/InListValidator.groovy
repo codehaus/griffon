@@ -18,7 +18,7 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class InListValidator implements Validator {
+class InListValidator extends AbstractValidator {
 
     @Override
     def validate(property, model, list){

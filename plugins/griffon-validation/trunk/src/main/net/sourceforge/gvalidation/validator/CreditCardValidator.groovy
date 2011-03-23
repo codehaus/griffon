@@ -18,7 +18,7 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class CreditCardValidator implements Validator {
+class CreditCardValidator extends AbstractValidator {
 
     @Override
     def validate(propertyValue, bean, isCreditCard){
