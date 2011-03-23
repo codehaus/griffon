@@ -46,7 +46,7 @@ class ConstraintRepository {
             blank: new BlankValidator(),
             email: new EmailValidator(),
             creditCard: new CreditCardValidator(),
-            inList: new InListValidator(this),
+            inList: new InListValidator(),
             matches: new MatchesValidator(this),
             max: new MaxValidator(this),
             maxSize: new MaxSizeValidator(this),
