@@ -20,7 +20,7 @@ import org.apache.commons.lang.StringUtils
 /**
  * Created by nick.zhu
  */
-class EmailValidator implements Validator {
+class EmailValidator extends AbstractValidator {
 
     @Override
     def validate(propertyValue, bean, isEmail) {

@@ -24,14 +24,14 @@ import net.sourceforge.gvalidation.validator.MatchesValidator
 class MatchesValidatorTest extends GroovyTestCase {
 
     public void testMatchesValidation(){
-        MatchesValidator matches = new MatchesValidator(this)
+        MatchesValidator matches = new MatchesValidator()
 
         def regex = /[a-zA-Z]+/
         
-        assertFalse("Should not be valid", (boolean) matches.call("blahblah", this, null))
-        assertFalse("Should not be valid", (boolean) matches.call("789abd", this, regex))
-        assertTrue("Should be valid", (boolean) matches.call("somethingValid", this, regex))
-        assertTrue("Should ignore null", (boolean) matches.call(null, this, regex))        
+        assertFalse("Should not be valid", (boolean) matches.validate("blahblah", this, null))
+        assertFalse("Should not be valid", (boolean) matches.validate("789abd", this, regex))
+        assertTrue("Should be valid", (boolean) matches.validate("somethingValid", this, regex))
+        assertTrue("Should ignore null", (boolean) matches.validate(null, this, regex))        
     }
 
 }

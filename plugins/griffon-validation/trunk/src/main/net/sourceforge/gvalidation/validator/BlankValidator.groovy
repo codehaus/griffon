@@ -20,7 +20,7 @@ import org.apache.commons.lang.StringUtils
 /**
  * Created by nick.zhu
  */
-class BlankValidator implements Validator {
+class BlankValidator extends AbstractValidator {
 
     @Override
     def validate(propertyValue, bean, allowBlank) {

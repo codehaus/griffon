@@ -18,7 +18,7 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class ClosureValidator implements Validator {
+class ClosureValidator extends AbstractValidator {
 
     @Override
     def validate(value, bean, closure){

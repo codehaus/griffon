@@ -18,13 +18,10 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class MaxValidator extends ValidatorClosure {
+class MaxValidator extends AbstractValidator {
 
-    def MaxValidator(owner) {
-        super(owner);
-    }
-
-    def doCall(property, bean, max){
+    @Override
+    def validate(property, bean, max){
         if(!property)
             return true
         
