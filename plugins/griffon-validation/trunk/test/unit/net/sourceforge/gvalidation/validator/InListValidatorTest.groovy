@@ -24,14 +24,14 @@ import net.sourceforge.gvalidation.validator.InListValidator
 class InListValidatorTest extends GroovyTestCase {
 
     public void testInListlValidation(){
-        InListValidator inList = new InListValidator(this)
+        InListValidator inList = new InListValidator()
 
         def names = ['Joe', 'John', 'Bob']
 
-        assertFalse("Should not be valid", (boolean) inList.call("blahblah", this, null))
-        assertFalse("Should not be in the list", (boolean) inList.call("blahblah", this, names))
-        assertTrue("Should ignore null", (boolean) inList.call(null, this, names))
-        assertTrue("Should be in the list", (boolean) inList.call("Bob", this, names))
+        assertFalse("Should not be valid", (boolean) inList.validate("blahblah", this, null))
+        assertFalse("Should not be in the list", (boolean) inList.validate("blahblah", this, names))
+        assertTrue("Should ignore null", (boolean) inList.validate(null, this, names))
+        assertTrue("Should be in the list", (boolean) inList.validate("Bob", this, names))
     }
 
 }

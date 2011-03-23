@@ -18,14 +18,10 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class InListValidator extends Closure {
+class InListValidator implements Validator {
 
-    def InListValidator(owner) {
-        super(owner);
-    }
-
-
-    def doCall(property, model, list){
+    @Override
+    def validate(property, model, list){
         if(!property)
             return true
         
