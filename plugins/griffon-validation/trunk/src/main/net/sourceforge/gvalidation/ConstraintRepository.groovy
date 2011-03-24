@@ -49,7 +49,7 @@ class ConstraintRepository {
             inList: new InListValidator(),
             matches: new MatchesValidator(),
             max: new MaxValidator(),
-            maxSize: new MaxSizeValidator(this),
+            maxSize: new MaxSizeValidator(),
             min: new MinValidator(this),
             minSize: new MinSizeValidator(this),
             notEqual: new NotEqualValidator(this),
