@@ -24,7 +24,7 @@ import net.sourceforge.gvalidation.validator.MinValidator
 class MinValidatorTest extends GroovyTestCase {
 
     public void testMinValidation() {
-        MinValidator min = new MinValidator(this)
+        MinValidator min = new MinValidator()
 
         checkNulls(min)
 
@@ -38,35 +38,35 @@ class MinValidatorTest extends GroovyTestCase {
     }
 
     private def tryWithDifferentTypes(min, Date now) {
-        assertFalse("Should not be valid", (boolean) min.call("today", this, now))
+        assertFalse("Should not be valid", (boolean) min.validate("today", this, now))
     }
 
     private def validateWithDates(min, Date now) {
-        assertFalse("Should not be valid", (boolean) min.call(now - 1, this, now))
-        assertTrue("Should be valid", (boolean) min.call(now + 1, this, now))
+        assertFalse("Should not be valid", (boolean) min.validate(now - 1, this, now))
+        assertTrue("Should be valid", (boolean) min.validate(now + 1, this, now))
     }
 
     private def validateWithNumbers(min) {
-        assertFalse("Should not be valid", (boolean) min.call(70, this, 80))
-        assertTrue("Should be valid", (boolean) min.call(98, this, 80))
+        assertFalse("Should not be valid", (boolean) min.validate(70, this, 80))
+        assertTrue("Should be valid", (boolean) min.validate(98, this, 80))
     }
 
     private def checkNulls(min) {
-        assertTrue("Should not be valid", (boolean) min.call("blahblah", this, null))
-        assertTrue("Should ignore null", (boolean) min.call(null, this, 80))
+        assertTrue("Should not be valid", (boolean) min.validate("blahblah", this, null))
+        assertTrue("Should ignore null", (boolean) min.validate(null, this, 80))
     }
 
     public void testBlanks() {
-        MinValidator min = new MinValidator(this)
+        MinValidator min = new MinValidator()
         
-        assertTrue("Should be valid", (boolean) min.call("", this, 1))
+        assertTrue("Should be valid", (boolean) min.validate("", this, 1))
     }
 
     // bug #2984137
     public void testLessThanMin() {
-        MinValidator min = new MinValidator(this)
+        MinValidator min = new MinValidator()
 
-        assertFalse("Should not be valid", (boolean) min.call(0, this, 1))
+        assertFalse("Should not be valid", (boolean) min.validate(0, this, 1))
     }
 
 }

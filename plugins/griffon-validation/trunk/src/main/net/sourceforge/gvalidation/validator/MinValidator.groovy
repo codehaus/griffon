@@ -18,13 +18,10 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class MinValidator extends ValidatorClosure {
+class MinValidator extends AbstractValidator {
 
-    def MinValidator(owner) {
-        super(owner)
-    }
-
-    def doCall(property, bean, min){
+    @Override
+    def validate(property, bean, min){
         if(property == null || property == "")
             return true
         
