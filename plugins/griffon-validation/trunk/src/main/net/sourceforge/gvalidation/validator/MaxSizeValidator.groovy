@@ -18,13 +18,10 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class MaxSizeValidator extends Closure {
+class MaxSizeValidator implements Validator {
 
-    def MaxSizeValidator(owner) {
-        super(owner);
-    }
-
-    def doCall(property, bean, maxSize) {
+    @Override
+    def validate(property, bean, maxSize) {
         if(!property)
             return true
         

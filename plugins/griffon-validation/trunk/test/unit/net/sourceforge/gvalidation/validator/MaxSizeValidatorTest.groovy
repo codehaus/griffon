@@ -24,16 +24,16 @@ import net.sourceforge.gvalidation.validator.MaxSizeValidator
 class MaxSizeValidatorTest extends GroovyTestCase {
 
     public void testMaxSizeValidation() {
-        MaxSizeValidator maxSize = new MaxSizeValidator(this)
+        MaxSizeValidator maxSize = new MaxSizeValidator()
 
-        assertFalse("Should not be valid", (boolean) maxSize.call("blahblah", this, null))
-        assertTrue("Should be valid, since null is considered 0 length", (boolean) maxSize.call(null, this, 5))
+        assertFalse("Should not be valid", (boolean) maxSize.validate("blahblah", this, null))
+        assertTrue("Should be valid, since null is considered 0 length", (boolean) maxSize.validate(null, this, 5))
 
-        assertFalse("Should not be valid", (boolean) maxSize.call("something long", this, 5))
-        assertTrue("Should be valid", (boolean) maxSize.call("valid", this, 5))
+        assertFalse("Should not be valid", (boolean) maxSize.validate("something long", this, 5))
+        assertTrue("Should be valid", (boolean) maxSize.validate("valid", this, 5))
 
-        assertFalse("Should not be valid", (boolean) maxSize.call(['a', 'b', 'c'], this, 2))
-        assertTrue("Should be valid", (boolean) maxSize.call(['a', 'b'], this, 3))
+        assertFalse("Should not be valid", (boolean) maxSize.validate(['a', 'b', 'c'], this, 2))
+        assertTrue("Should be valid", (boolean) maxSize.validate(['a', 'b'], this, 3))
     }
 
 }
