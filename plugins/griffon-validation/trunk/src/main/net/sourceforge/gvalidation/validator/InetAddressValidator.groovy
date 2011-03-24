@@ -18,13 +18,10 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class InetAddressValidator extends Closure {
+class InetAddressValidator extends AbstractValidator {
 
-    def InetAddressValidator(owner) {
-        super(owner);
-    }
-
-    def doCall(value, bean, isInetAddress) {
+    @Override
+    def validate(value, bean, isInetAddress) {
         if(!value)
             return true
 

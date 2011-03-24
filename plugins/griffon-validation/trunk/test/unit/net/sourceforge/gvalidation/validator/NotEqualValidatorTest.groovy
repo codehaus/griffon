@@ -23,13 +23,13 @@ import net.sourceforge.gvalidation.validator.NotEqualValidator
 class NotEqualValidatorTest extends GroovyTestCase {
 
     public void testNotEqual(){
-        NotEqualValidator notEqual = new NotEqualValidator(this)
+        NotEqualValidator notEqual = new NotEqualValidator()
 
-        assertTrue("Should be valid", notEqual.call("bob", this, "alice"))
-        assertFalse("Should be valid", notEqual.call("bob", this, "bob"))
-        assertFalse("Should be valid", notEqual.call(10, this, 10))
-        assertTrue("Should be valid", notEqual.call(9, this, 10))
-        assertTrue("Should be valid", notEqual.call(9, this, "bob"))
+        assertTrue("Should be valid", notEqual.validate("bob", this, "alice"))
+        assertFalse("Should be valid", notEqual.validate("bob", this, "bob"))
+        assertFalse("Should be valid", notEqual.validate(10, this, 10))
+        assertTrue("Should be valid", notEqual.validate(9, this, 10))
+        assertTrue("Should be valid", notEqual.validate(9, this, "bob"))
     }
 
 }

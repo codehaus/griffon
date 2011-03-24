@@ -52,11 +52,11 @@ class ConstraintRepository {
             maxSize: new MaxSizeValidator(),
             min: new MinValidator(),
             minSize: new MinSizeValidator(),
-            notEqual: new NotEqualValidator(this),
-            range: new RangeValidator(this),
-            size: new SizeValidator(this),
-            url: new UrlValidator(this),
-            inetAddress: new InetAddressValidator(this),
+            notEqual: new NotEqualValidator(),
+            range: new RangeValidator(),
+            size: new SizeValidator(),
+            url: new UrlValidator(),
+            inetAddress: new InetAddressValidator(),
             validator: new ClosureValidator()
     ]
 

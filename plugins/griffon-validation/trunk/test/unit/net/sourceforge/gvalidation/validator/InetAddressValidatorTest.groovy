@@ -21,11 +21,11 @@ package net.sourceforge.gvalidation.validator
 class InetAddressValidatorTest extends GroovyTestCase {
 
     public void testInetAddressValidation() {
-        InetAddressValidator inetAddress = new InetAddressValidator(this)
+        InetAddressValidator inetAddress = new InetAddressValidator()
 
-        assertTrue("Should be a valid address", inetAddress.call("codehaus.org", this, true))
-        assertTrue("Should be a valid address", inetAddress.call("127.0.0.1", this, true))
-        assertFalse("Should not be a valid address", inetAddress.call("invalid", this, true))
+        assertTrue("Should be a valid address", inetAddress.validate("codehaus.org", this, true))
+        assertTrue("Should be a valid address", inetAddress.validate("127.0.0.1", this, true))
+        assertFalse("Should not be a valid address", inetAddress.validate("invalid", this, true))
     }
 
 }

@@ -18,13 +18,10 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class NotEqualValidator extends Closure {
+class NotEqualValidator extends AbstractValidator {
 
-    def NotEqualValidator(owner) {
-        super(owner);
-    }
-
-    def doCall(value, bean, compareTo){
+    @Override
+    def validate(value, bean, compareTo){
         def valid = false
 
         valid = value != compareTo

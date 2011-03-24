@@ -23,11 +23,11 @@ import net.sourceforge.gvalidation.validator.UrlValidator
 class UrlValidatorTest extends GroovyTestCase {
 
     public void testUrlValidation(){
-        UrlValidator url = new UrlValidator(this)
+        UrlValidator url = new UrlValidator()
 
-        assertTrue("Should be valid", url.call('http://gvalidation.sf.net', this, true))
-        assertTrue("Should be valid", url.call('http://gvalidation.sf.net', this, false))
-        assertFalse("Should not be valid", url.call('gvalidation.sf.net', this, true))
+        assertTrue("Should be valid", url.validate('http://gvalidation.sf.net', this, true))
+        assertTrue("Should be valid", url.validate('http://gvalidation.sf.net', this, false))
+        assertFalse("Should not be valid", url.validate('gvalidation.sf.net', this, true))
     }
 
 }
