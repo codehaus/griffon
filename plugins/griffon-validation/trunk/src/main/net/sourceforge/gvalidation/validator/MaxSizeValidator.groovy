@@ -18,7 +18,7 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class MaxSizeValidator implements Validator {
+class MaxSizeValidator extends AbstractValidator {
 
     @Override
     def validate(property, bean, maxSize) {
