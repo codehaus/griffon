@@ -18,13 +18,10 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class RangeValidator extends Closure {
+class RangeValidator extends AbstractValidator {
 
-    def RangeValidator(owner) {
-        super(owner);
-    }
-
-    def doCall(value, bean, input){
+    @Override
+    def validate(value, bean, input){
         if(!value)
             return true
 

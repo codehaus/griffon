@@ -18,14 +18,11 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class UrlValidator extends Closure {
+class UrlValidator extends AbstractValidator {
     static def org.apache.commons.validator.UrlValidator validator = new org.apache.commons.validator.UrlValidator ()
 
-    def UrlValidator(owner) {
-        super(owner);
-    }
-
-    def doCall(value, bean, isUrl) {
+    @Override
+    def validate(value, bean, isUrl) {
         if(!value)
             return true
         

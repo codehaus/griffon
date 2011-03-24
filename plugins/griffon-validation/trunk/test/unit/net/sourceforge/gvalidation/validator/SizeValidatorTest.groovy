@@ -23,15 +23,15 @@ import net.sourceforge.gvalidation.validator.SizeValidator
 class SizeValidatorTest extends GroovyTestCase {
 
     public void testSizeValidation() {
-        SizeValidator size = new SizeValidator(this)
+        SizeValidator size = new SizeValidator()
 
-        assertTrue("Should be valid", size.call("hello", this, 3..10))
-        assertTrue("Should be valid", size.call(['a', 'b'], this, 1..3))
+        assertTrue("Should be valid", size.validate("hello", this, 3..10))
+        assertTrue("Should be valid", size.validate(['a', 'b'], this, 1..3))
 
-        assertFalse("Should not be valid", size.call("hello", this, 3..4))
-        assertFalse("Should not be valid", size.call(['a', 'b', 'c', 'd'], this, 1..3))
+        assertFalse("Should not be valid", size.validate("hello", this, 3..4))
+        assertFalse("Should not be valid", size.validate(['a', 'b', 'c', 'd'], this, 1..3))
 
-        assertFalse("Should not be valid", size.call(['a', 'b', 'c', 'd'], this, 3))
+        assertFalse("Should not be valid", size.validate(['a', 'b', 'c', 'd'], this, 3))
     }
 
 }

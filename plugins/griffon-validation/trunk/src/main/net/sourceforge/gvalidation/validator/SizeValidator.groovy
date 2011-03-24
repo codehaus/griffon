@@ -18,13 +18,10 @@ package net.sourceforge.gvalidation.validator
 /**
  * Created by nick.zhu
  */
-class SizeValidator extends Closure {
+class SizeValidator extends AbstractValidator {
 
-    def SizeValidator(owner) {
-        super(owner);
-    }
-
-    def doCall(value, bean, input) {
+    @Override
+    def validate(value, bean, input) {
         if(!value)
             return true
         
