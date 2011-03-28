@@ -23,16 +23,16 @@ import net.sourceforge.gvalidation.util.MetaUtils
  * Created by nick.zhu
  */
 class ValidationEnhancer {
-    static final def CONSTRAINT_PROPERTY_NAME = "constraints"
     static final def VALIDATION_ENHANCER_PROPERTY_NAME = '__validationEnhancer'
-    static final def ERRORS_PROPERTY_NAME = '__errors'
     static final def BEFORE_VALIDATION_CALLBACK_NAME = 'beforeValidation'
+    static final def CONSTRAINT_PROPERTY_NAME = "constraints"
+    static final def ERRORS_PROPERTY_NAME = '__errors'
 
     static def enhance(bean) {
         if (isNotEnhanced(bean)) {
             final def enhancer = new ValidationEnhancer(bean)
             bean.metaClass."${VALIDATION_ENHANCER_PROPERTY_NAME}" = enhancer
-            bean.metaClass."${ERRORS_PROPERTY_NAME}" = new Errors(bean)
+//            bean.metaClass."${ERRORS_PROPERTY_NAME}" = new Errors(bean)
             bean.metaClass.setErrors << {
                 Errors e ->
                 def newValue = e

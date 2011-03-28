@@ -31,6 +31,15 @@ import org.codehaus.groovy.ast.stmt.BlockStatement
 
 import org.codehaus.groovy.ast.VariableScope
 import net.sourceforge.gvalidation.annotation.Validatable
+import org.codehaus.groovy.ast.FieldNode
+import net.sourceforge.gvalidation.ValidationEnhancer
+import org.codehaus.groovy.ast.expr.Expression
+import org.codehaus.groovy.ast.expr.ConstructorCallExpression
+import net.sourceforge.gvalidation.Errors
+import org.codehaus.groovy.ast.expr.EmptyExpression
+import org.codehaus.groovy.ast.PropertyNode
+import static net.sourceforge.gvalidation.ValidationEnhancer.*
+import org.codehaus.groovy.ast.expr.ArgumentListExpression
 
 /**
  * Groovy AST transformation class that enhances any class
@@ -42,12 +51,22 @@ import net.sourceforge.gvalidation.annotation.Validatable
 class ValidatableASTTransformation implements ASTTransformation {
 
     void visit(ASTNode[] astNodes, SourceUnit sourceUnit) {
-        ClassNode classNode = sourceUnit.getAST()?.classes.first()
+        ClassNode targetClassNode = sourceUnit.getAST()?.classes.first()
 
-        if (annotatedWithValidatable(classNode)) {
-            if (hasNotInjectedMethod(classNode)) {
+        if (annotatedWithValidatable(targetClassNode)) {
+            if (!targetClassNode.getField(ERRORS_PROPERTY_NAME)) {
+                FieldNode errorsField = new FieldNode(ERRORS_PROPERTY_NAME,
+                        Opcodes.ACC_PUBLIC,
+                        ClassHelper.make(Errors.class),
+                        targetClassNode,
+                        new ConstructorCallExpression(ClassHelper.make(Errors.class), ArgumentListExpression.EMPTY_ARGUMENTS)
+                )
+                targetClassNode.addField (errorsField)
+            }
+
+            if (hasNotInjectedMethod(targetClassNode)) {
                 MethodNode validateMethod = buildValidateMethod()
-                classNode.addMethod(validateMethod)
+                targetClassNode.addMethod(validateMethod)
             }
         }
     }
@@ -81,7 +100,7 @@ class ValidatableASTTransformation implements ASTTransformation {
                         new VariableScope()
                 ))
 
-         return methodNode
+        return methodNode
     }
 
 }
