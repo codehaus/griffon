@@ -16,15 +16,16 @@
 package net.sourceforge.gvalidation.models
 
 import net.sourceforge.gvalidation.annotation.Validatable
+import groovy.beans.Bindable
 
 /**
  * Created by nick.zhu
  */
 @Validatable
 class AnnotatedModel {
-    String id
-    String email = " "
-    String zipCode = " "
+    @Bindable String id
+    @Bindable String email = " "
+    @Bindable String zipCode = " "
 
     static constraints = {
         id(nullable: false)

@@ -38,7 +38,6 @@ import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import net.sourceforge.gvalidation.Errors
 import org.codehaus.groovy.ast.expr.EmptyExpression
 import org.codehaus.groovy.ast.PropertyNode
-import static net.sourceforge.gvalidation.ValidationEnhancer.*
 import org.codehaus.groovy.ast.expr.ArgumentListExpression
 
 /**
@@ -50,18 +49,54 @@ import org.codehaus.groovy.ast.expr.ArgumentListExpression
 @GroovyASTTransformation(phase = CompilePhase.SEMANTIC_ANALYSIS)
 class ValidatableASTTransformation implements ASTTransformation {
 
+    private static final String ERRORS_PROPERTY_NAME = 'errors'
+
     void visit(ASTNode[] astNodes, SourceUnit sourceUnit) {
         ClassNode targetClassNode = sourceUnit.getAST()?.classes.first()
 
         if (annotatedWithValidatable(targetClassNode)) {
             if (!targetClassNode.getField(ERRORS_PROPERTY_NAME)) {
+                // errors field
                 FieldNode errorsField = new FieldNode(ERRORS_PROPERTY_NAME,
-                        Opcodes.ACC_PUBLIC,
+                        Opcodes.ACC_PRIVATE,
                         ClassHelper.make(Errors.class),
                         targetClassNode,
                         new ConstructorCallExpression(ClassHelper.make(Errors.class), ArgumentListExpression.EMPTY_ARGUMENTS)
                 )
-                targetClassNode.addField (errorsField)
+                targetClassNode.addField(errorsField)
+
+                // getErrors()
+//                targetClassNode.addMethod(new MethodNode(
+//                        'getErrors',
+//                        Opcodes.ACC_PUBLIC,
+//                        ClassHelper.make(Errors.class),
+//                        [] as Parameter[],
+//                        [] as ClassNode[],
+//                        new BlockStatement(
+//                                new AstBuilder().buildFromCode {
+//                                    return this.errors
+//                                },
+//                                new VariableScope()
+//                        )
+//                ))
+
+                // setErrors(errors)
+//                targetClassNode.addMethod(new MethodNode(
+//                        'setErrors',
+//                        Opcodes.ACC_PUBLIC,
+//                        ClassHelper.VOID_TYPE,
+//                        [new Parameter(ClassHelper.make(Errors.class, false), "errors", new ConstantExpression(null))] as Parameter[],
+//                        [] as ClassNode[],
+//                        new BlockStatement(
+//                                new AstBuilder().buildFromCode {
+//                                    def newValue = errors
+//                                    def oldValue = this.errors
+//                                    this.errors = newValue
+//                                    firePropertyChange('errors', oldValue, newValue)
+//                                },
+//                                new VariableScope()
+//                        )
+//                ))
             }
 
             if (hasNotInjectedMethod(targetClassNode)) {
