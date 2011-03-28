@@ -8,7 +8,7 @@ griffon.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        compile 'eu.hansolo:SteelSeries:3.7.1'
+        compile 'eu.hansolo:SteelSeries:3.8'
     }
 }
 
