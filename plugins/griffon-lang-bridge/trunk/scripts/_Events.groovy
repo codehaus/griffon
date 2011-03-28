@@ -21,11 +21,7 @@
  */
 
 eventCompileStart = {
-    if(compilingLangBridgePlugin()) return
+    if(compilingPlugin('lang-bridge')) return
     includePluginScript('lang-bridge', 'CompileCommons')
     compileCommons()
-}
-
-private boolean compilingLangBridgePlugin() { 
-    getPluginDirForName('lang-bridge')?.file?.canonicalPath == basedir
 }
