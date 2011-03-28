@@ -17,6 +17,9 @@ package net.sourceforge.gvalidation.annotation
 
 import org.codehaus.groovy.control.CompilePhase
 import org.codehaus.groovy.tools.ast.TranformTestHelper
+import net.sourceforge.gvalidation.models.BindableModelBean
+import java.beans.PropertyChangeListener
+import net.sourceforge.gvalidation.Errors
 
 /**
  * Created by nick.zhu
@@ -77,6 +80,36 @@ class ValidatableASTTransformationTest extends GroovyTestCase {
 
         assertTrue "Validation should have passed", result
         assertFalse("Model should not have error", model.hasErrors())
+    }
+
+    public void testErrorPropertyChange(){
+        def model = generateModel()
+
+        def firedEvent = false
+        model.addPropertyChangeListener({e->
+            assertEquals(e.propertyName, "errors"); firedEvent = true
+        } as PropertyChangeListener)
+
+        model.errors.reject('testError')
+
+        assertTrue "Property change event should have been fired", firedEvent
+    }
+
+    public void testErrorGetterSetterInjection(){
+        def model = generateModel()
+
+        def methods = model.metaClass.methods
+
+        assertNotNull("Dynamic setter is not generated", methods.find{it.name == "setErrors"})
+
+        def firedEvent = false
+        model.addPropertyChangeListener({e->
+            assertEquals(e.propertyName, "errors"); firedEvent = true
+        } as PropertyChangeListener)
+
+        model.errors = new Errors()
+
+        assertTrue "Property change event should have been fired", firedEvent
     }
 
     private def generateModel(fileName = "AnnotatedModel.groovy") {

@@ -33,14 +33,14 @@ class ValidationEnhancer {
             final def enhancer = new ValidationEnhancer(bean)
             bean.metaClass."${VALIDATION_ENHANCER_PROPERTY_NAME}" = enhancer
 //            bean.metaClass."${ERRORS_PROPERTY_NAME}" = new Errors(bean)
-            bean.metaClass.setErrors << {
-                Errors e ->
-                def newValue = e
-                def oldValue = bean."${ERRORS_PROPERTY_NAME}"
-                bean."${ERRORS_PROPERTY_NAME}" = newValue
-                firePropertyChange('errors', oldValue, newValue)
-            }
-            bean.metaClass.getErrors << { bean."${ERRORS_PROPERTY_NAME}" }
+//            bean.metaClass.setErrors << {
+//                Errors e ->
+//                def newValue = e
+//                def oldValue = bean."${ERRORS_PROPERTY_NAME}"
+//                bean."${ERRORS_PROPERTY_NAME}" = newValue
+//                firePropertyChange('errors', oldValue, newValue)
+//            }
+//            bean.metaClass.getErrors << { bean."${ERRORS_PROPERTY_NAME}" }
             bean.metaClass.hasErrors << { bean.errors.hasErrors() }
         }
 

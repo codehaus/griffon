@@ -29,40 +29,6 @@ import java.beans.PropertyChangeListener
  */
 class ValidationEnhancerTest extends GroovyTestCase {
 
-    public void testErrorPropertyChange(){
-        BindableModelBean model = new BindableModelBean()
-
-        ValidationEnhancer.enhance(model)
-
-        def firedEvent = false
-        model.addPropertyChangeListener({e->
-            assertEquals(e.propertyName, "errors"); firedEvent = true
-        } as PropertyChangeListener)
-
-        model.errors.reject('testError')
-
-        assertTrue "Property change event should have been fired", firedEvent
-    }
-
-    public void testErrorGetterSetterInjection(){
-        BindableModelBean model = new BindableModelBean()
-
-        ValidationEnhancer.enhance(model)
-
-        def methods = model.metaClass.methods
-
-        assertNotNull("Dynamic setter is not generated",methods.find{it.name == "setErrors"})
-
-        def firedEvent = false
-        model.addPropertyChangeListener({e->
-            assertEquals(e.propertyName, "errors"); firedEvent = true
-        } as PropertyChangeListener)
-
-        model.errors = new Errors()
-
-        assertTrue "Property change event should have been fired", firedEvent
-    }
-
     public void testModelEnhancementReturn() {
         ModelBean model = new ModelBean()
 
