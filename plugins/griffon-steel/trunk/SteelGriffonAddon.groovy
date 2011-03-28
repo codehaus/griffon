@@ -48,6 +48,7 @@ class SteelGriffonAddon {
     }
 
     def factories = [
+        airCompass: AirCompass,
         altimeter: Altimeter,
         clock: Clock,
         compass: Compass,
@@ -56,6 +57,7 @@ class SteelGriffonAddon {
         displayMulti: DisplayMulti,
         displayRectangular: DisplayRectangular,
         displaySingle: DisplaySingle,
+        horizon: Horizon,
         led: Led,
         level: Level,
         linearGauge: Linear,
