@@ -15,19 +15,13 @@
 
 package net.sourceforge.gvalidation
 
-import net.sourceforge.gvalidation.models.AnnotatedModel
-import net.sourceforge.gvalidation.models.ModelBeanWithBallback
-import net.sourceforge.gvalidation.models.ModelBean
-import net.sourceforge.gvalidation.models.ChildModelBean
-import net.sourceforge.gvalidation.models.GrandChildModelBean
-
 /**
  * Created by nick.zhu
  */
-class ValidationInheritenceTest extends GroovyTestCase {
-    
+class ValidationInheritenceTest extends BaseTestCase {
+
     public void testBasicConstraintInheritence() {
-        def model = new ChildModelBean()
+        def model = generateModel('ChildModelBean.groovy')
 
         model.validate()
 
@@ -35,11 +29,13 @@ class ValidationInheritenceTest extends GroovyTestCase {
         assertTrue "Id can not be null", model.errors.hasFieldErrors('id')
     }
 
-    public void testConstraintOverrideWithStricterConstraint(){
-        def model = new ChildModelBean(id:1,
-                email:"", // override to not allow blank
-                name:"Name",
-                zipCode:"123456")
+    public void testConstraintOverrideWithStricterConstraint() {
+        def model = generateModel('ChildModelBean.groovy')
+
+        model.id = 1
+        model.email = "" // override to not allow blank
+        model.name = "Name"
+        model.zipCode = "123456"
 
         model.validate()
 
@@ -47,12 +43,13 @@ class ValidationInheritenceTest extends GroovyTestCase {
         assertTrue "Email can not be blank", model.errors.hasFieldErrors('email')
     }
 
-    public void testConstraintOverrideWithRelaxedConstraint(){
-        def model = new ChildModelBean(id:1,
-                email:"email@email.com",
-                name:"Name",
-                zipCode:"123" // override should not allow more relaxed zipcode 
-        )
+    public void testConstraintOverrideWithRelaxedConstraint() {
+        def model = generateModel('ChildModelBean.groovy')
+
+        model.id = 1
+        model.email = "email@email.com"
+        model.name = "Name"
+        model.zipCode = "123" // override should not allow more relaxed zipcode
 
         model.validate()
 
@@ -61,7 +58,7 @@ class ValidationInheritenceTest extends GroovyTestCase {
     }
 
     public void testBasicMultiLevelConstraintInheritence() {
-        def model = new GrandChildModelBean()
+        def model = generateModel('GrandChildModelBean.groovy')
 
         model.validate()
 

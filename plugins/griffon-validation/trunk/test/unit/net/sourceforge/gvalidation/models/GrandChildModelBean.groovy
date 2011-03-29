@@ -16,13 +16,14 @@
 package net.sourceforge.gvalidation.models
 
 import net.sourceforge.gvalidation.annotation.Validatable
+import groovy.beans.Bindable
 
 /**
  * Created by nick.zhu
  */
 @Validatable
 class GrandChildModelBean extends ChildModelBean {
-    String occupation
+    @Bindable String occupation
 
     static constraints = {
         occupation(nullable: true, blank: true, minSize: 5)

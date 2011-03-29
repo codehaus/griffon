@@ -30,14 +30,12 @@ import org.codehaus.groovy.ast.ClassHelper
 import org.codehaus.groovy.ast.stmt.BlockStatement
 
 import org.codehaus.groovy.ast.VariableScope
-import net.sourceforge.gvalidation.annotation.Validatable
+
 import org.codehaus.groovy.ast.FieldNode
-import net.sourceforge.gvalidation.ValidationEnhancer
-import org.codehaus.groovy.ast.expr.Expression
+
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import net.sourceforge.gvalidation.Errors
-import org.codehaus.groovy.ast.expr.EmptyExpression
-import org.codehaus.groovy.ast.PropertyNode
+
 import org.codehaus.groovy.ast.expr.ArgumentListExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 
@@ -50,75 +48,30 @@ import org.codehaus.groovy.ast.expr.VariableExpression
 @GroovyASTTransformation(phase = CompilePhase.SEMANTIC_ANALYSIS)
 class ValidatableASTTransformation implements ASTTransformation {
 
-    private static final String ERRORS_PROPERTY_NAME = 'errors'
+    private static final String ERRORS_PROPERTY_NAME = '__errors'
 
     void visit(ASTNode[] astNodes, SourceUnit sourceUnit) {
         ClassNode targetClassNode = sourceUnit.getAST()?.classes.first()
 
         if (annotatedWithValidatable(targetClassNode)) {
-            if (!targetClassNode.getField(ERRORS_PROPERTY_NAME)) {
-                // errors field
-                FieldNode errorsField = new FieldNode(ERRORS_PROPERTY_NAME,
-                        Opcodes.ACC_PRIVATE,
-                        ClassHelper.make(Errors.class),
-                        targetClassNode,
-                        new ConstructorCallExpression(ClassHelper.make(Errors.class), new ArgumentListExpression(new VariableExpression('this')))
-                )
-                targetClassNode.addField(errorsField)
-
-                // getErrors()
-                targetClassNode.addMethod(new MethodNode(
-                        'getErrors',
-                        Opcodes.ACC_PUBLIC,
-                        ClassHelper.make(Errors.class),
-                        [] as Parameter[],
-                        [] as ClassNode[],
-                        new BlockStatement(
-                                new AstBuilder().buildFromCode {
-                                    return this.errors
-                                },
-                                new VariableScope()
-                        )
-                ))
-
-                // setErrors(errors)
-                targetClassNode.addMethod(new MethodNode(
-                        'setErrors',
-                        Opcodes.ACC_PUBLIC,
-                        ClassHelper.VOID_TYPE,
-                        [new Parameter(ClassHelper.make(Errors.class, false), "errors")] as Parameter[],
-                        [] as ClassNode[],
-                        new BlockStatement(
-                                new AstBuilder().buildFromCode {
-                                    def newValue = errors
-                                    def oldValue = this.errors
-                                    this.errors = newValue
-                                    firePropertyChange('errors', oldValue, newValue)
-                                    return null
-                                },
-                                new VariableScope()
-                        )
-                ))
-
-                // hasErrors()
-                targetClassNode.addMethod(new MethodNode(
-                        'hasErrors',
-                        Opcodes.ACC_PUBLIC,
-                        ClassHelper.Boolean_TYPE,
-                        [] as Parameter[],
-                        [] as ClassNode[],
-                        new BlockStatement(
-                                new AstBuilder().buildFromCode {
-                                    return this.errors.hasErrors()
-                                },
-                                new VariableScope()
-                        )
-                ))
+            if (hasNoErrorsField(targetClassNode)) {
+                injectErrorsField(targetClassNode)
             }
 
-            if (hasNotInjectedMethod(targetClassNode)) {
-                MethodNode validateMethod = buildValidateMethod()
-                targetClassNode.addMethod(validateMethod)
+            if (hasNoGetErrorsMethod(targetClassNode)) {
+                injectGetErrorsMethod(targetClassNode)
+            }
+
+            if (hasNoSetErrorsMethod(targetClassNode)) {
+                injectSetErrorsMethod(targetClassNode)
+            }
+
+            if (hasNoHasErrorsMethod(targetClassNode)) {
+                injectHasErrorsMethod(targetClassNode)
+            }
+
+            if (hasNoValidateMethod(targetClassNode)) {
+                injectValidateMethod(targetClassNode)
             }
         }
     }
@@ -131,14 +84,92 @@ class ValidatableASTTransformation implements ASTTransformation {
         return validatableAnnotation != null
     }
 
-    private boolean hasNotInjectedMethod(ClassNode classNode) {
+    private boolean hasNoErrorsField(ClassNode targetClassNode) {
+        return !targetClassNode.getField(ERRORS_PROPERTY_NAME)
+    }
+
+    private def injectErrorsField(ClassNode targetClassNode) {
+        FieldNode errorsField = new FieldNode(ERRORS_PROPERTY_NAME,
+                Opcodes.ACC_PRIVATE,
+                ClassHelper.make(Errors.class),
+                targetClassNode,
+                new ConstructorCallExpression(ClassHelper.make(Errors.class), new ArgumentListExpression(new VariableExpression('this')))
+        )
+        targetClassNode.addField(errorsField)
+    }
+
+    private boolean hasNoGetErrorsMethod(ClassNode targetClassNode) {
+        return !targetClassNode.hasDeclaredMethod('getErrors', [] as Parameter[])
+    }
+
+    private def injectGetErrorsMethod(ClassNode targetClassNode) {
+        targetClassNode.addMethod(new MethodNode(
+                'getErrors',
+                Opcodes.ACC_PUBLIC,
+                ClassHelper.make(Errors.class),
+                [] as Parameter[],
+                [] as ClassNode[],
+                new BlockStatement(
+                        new AstBuilder().buildFromCode {
+                            return this.__errors
+                        },
+                        new VariableScope()
+                )
+        ))
+    }
+
+    private boolean hasNoSetErrorsMethod(ClassNode targetClassNode) {
+        return !targetClassNode.hasMethod('setErrors', [new Parameter(ClassHelper.make(Errors.class, false), "errors")] as Parameter[])
+    }
+
+    private def injectSetErrorsMethod(ClassNode targetClassNode) {
+        targetClassNode.addMethod(new MethodNode(
+                'setErrors',
+                Opcodes.ACC_PUBLIC,
+                ClassHelper.VOID_TYPE,
+                [new Parameter(ClassHelper.make(Errors.class, false), "errors")] as Parameter[],
+                [] as ClassNode[],
+                new BlockStatement(
+                        new AstBuilder().buildFromCode {
+                            def newValue = errors
+                            def oldValue = this.__errors
+                            this.__errors = newValue
+                            firePropertyChange('errors', oldValue, newValue)
+                            return null
+                        },
+                        new VariableScope()
+                )
+        ))
+    }
+
+    private boolean hasNoHasErrorsMethod(ClassNode targetClassNode) {
+        return !targetClassNode.hasMethod('hasErrors', [] as Parameter[])
+    }
+
+    private def injectHasErrorsMethod(ClassNode targetClassNode) {
+        targetClassNode.addMethod(new MethodNode(
+                'hasErrors',
+                Opcodes.ACC_PUBLIC,
+                ClassHelper.Boolean_TYPE,
+                [] as Parameter[],
+                [] as ClassNode[],
+                new BlockStatement(
+                        new AstBuilder().buildFromCode {
+                            return this.__errors.hasErrors()
+                        },
+                        new VariableScope()
+                )
+        ))
+    }
+
+    private boolean hasNoValidateMethod(ClassNode classNode) {
         return !classNode.hasMethod('validate',
                 [new Parameter(new ClassNode(Object), 'fields', new ConstantExpression(null))] as Parameter[]
         )
     }
 
-    private MethodNode buildValidateMethod() {
-        def methodNode = new MethodNode(
+    private def injectValidateMethod(ClassNode targetClassNode) {
+        MethodNode validateMethod = new MethodNode(
                 "validate",
                 Opcodes.ACC_PUBLIC,
                 ClassHelper.make(Boolean, false),
@@ -151,8 +182,7 @@ class ValidatableASTTransformation implements ASTTransformation {
                         },
                         new VariableScope()
                 ))
-
-        return methodNode
+        targetClassNode.addMethod(validateMethod)
     }
 
 }

@@ -15,16 +15,14 @@
 
 package net.sourceforge.gvalidation.annotation
 
-import org.codehaus.groovy.control.CompilePhase
-import org.codehaus.groovy.tools.ast.TranformTestHelper
-import net.sourceforge.gvalidation.models.BindableModelBean
 import java.beans.PropertyChangeListener
+import net.sourceforge.gvalidation.BaseTestCase
 import net.sourceforge.gvalidation.Errors
 
 /**
  * Created by nick.zhu
  */
-class ValidatableASTTransformationTest extends GroovyTestCase {
+class ValidatableASTTransformationTest extends BaseTestCase {
 
     public void testValidateAllInjection() {
         def model = generateModel()
@@ -100,17 +98,5 @@ class ValidatableASTTransformationTest extends GroovyTestCase {
 
         assertTrue "Property change event should have been fired", firedEvent
     }
-
-    private def generateModel(fileName = "AnnotatedModel.groovy") {
-        def file = new File("test/unit/net/sourceforge/gvalidation/models/${fileName}")
-        assert file.exists()
-
-        TranformTestHelper invoker = new TranformTestHelper(new ValidatableASTTransformation(), CompilePhase.SEMANTIC_ANALYSIS)
-        def modelClass = invoker.parse(file)
-        def model = modelClass.newInstance()
-
-        return model
-    }
-
 
 }
