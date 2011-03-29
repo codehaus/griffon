@@ -21,7 +21,7 @@ import net.sourceforge.gvalidation.annotation.Validatable
  * Created by nick.zhu
  */
 @Validatable
-class ModelBeanWithBallback {
+class ModelBeanWithCallback {
     String id
     String email
     boolean callbackInvoked
