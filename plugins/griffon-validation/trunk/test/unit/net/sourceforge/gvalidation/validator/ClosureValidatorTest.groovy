@@ -17,6 +17,7 @@ package net.sourceforge.gvalidation.validator
 
 import net.sourceforge.gvalidation.validator.ClosureValidator
 import net.sourceforge.gvalidation.ValidationEnhancer
+import net.sourceforge.gvalidation.models.ModelBean
 
 /**
  * Created by nick.zhu
@@ -31,9 +32,7 @@ class ClosureValidatorTest extends GroovyTestCase {
     }
     
     public void testErrorGeneration(){
-        def obj = new Object()
-
-        ValidationEnhancer.enhance(obj)
+        def obj = new ModelBean()
 
         ClosureValidator validator = new ClosureValidator()
 

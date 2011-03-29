@@ -26,17 +26,6 @@ import net.sourceforge.gvalidation.Errors
  */
 class ValidatableASTTransformationTest extends GroovyTestCase {
 
-    public void testIgnoreNonAnnotatedModel() {
-        def model = generateModel("ModelBean.groovy")
-
-        try {
-            model.validate()
-            fail("Method should not have been injected, exception should have thrown")
-        } catch (MissingMethodException ex) {
-            // succeed
-        }
-    }
-
     public void testValidateAllInjection() {
         def model = generateModel()
 

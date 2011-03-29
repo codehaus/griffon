@@ -26,22 +26,11 @@ class ValidationEnhancer {
     static final def VALIDATION_ENHANCER_PROPERTY_NAME = '__validationEnhancer'
     static final def BEFORE_VALIDATION_CALLBACK_NAME = 'beforeValidation'
     static final def CONSTRAINT_PROPERTY_NAME = "constraints"
-    static final def ERRORS_PROPERTY_NAME = '__errors'
 
     static def enhance(bean) {
         if (isNotEnhanced(bean)) {
             final def enhancer = new ValidationEnhancer(bean)
             bean.metaClass."${VALIDATION_ENHANCER_PROPERTY_NAME}" = enhancer
-//            bean.metaClass."${ERRORS_PROPERTY_NAME}" = new Errors(bean)
-//            bean.metaClass.setErrors << {
-//                Errors e ->
-//                def newValue = e
-//                def oldValue = bean."${ERRORS_PROPERTY_NAME}"
-//                bean."${ERRORS_PROPERTY_NAME}" = newValue
-//                firePropertyChange('errors', oldValue, newValue)
-//            }
-//            bean.metaClass.getErrors << { bean."${ERRORS_PROPERTY_NAME}" }
-            bean.metaClass.hasErrors << { bean.errors.hasErrors() }
         }
 
         return bean."${VALIDATION_ENHANCER_PROPERTY_NAME}"
