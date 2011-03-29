@@ -15,8 +15,11 @@
 
 package net.sourceforge.gvalidation.models
 
+import net.sourceforge.gvalidation.annotation.Validatable
+
 /**
  * Created by nick.zhu
  */
+@Validatable
 class NoConstraintModelBean {
 }

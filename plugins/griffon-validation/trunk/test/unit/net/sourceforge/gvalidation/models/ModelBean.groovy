@@ -15,12 +15,16 @@
 
 package net.sourceforge.gvalidation.models
 
+import net.sourceforge.gvalidation.annotation.Validatable
+import groovy.beans.Bindable
+
 /**
  * Created by nick.zhu
  */
+@Validatable
 class ModelBean {
-    String id
-    String email
+    @Bindable String id
+    @Bindable String email
 
     static constraints = {
         id(nullable: false)
