@@ -26,10 +26,4 @@ class ValidationGriffonAddon {
         app.artifactManager.registerArtifactHandler(new ConstraintArtifactHandler(app))
         ConstraintRepository.instance.initialize(app)
     }
-
-    def events = [
-        NewInstance: {klass, type, instance ->
-            if (type == "model") ValidationEnhancer.enhance(instance)
-        }
-    ]
 }
