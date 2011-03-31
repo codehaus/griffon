@@ -18,53 +18,30 @@
  * @author Andres Almiray
  */
 
-includeTargets << griffonScript('_GriffonArgParsing')
-
 appToolkits = metadata.'app.toolkits'
 if(!appToolkits) appToolkits = ''
 appToolkits = appToolkits.split(',').toList()
-firstTime = !metadata.'plugins.swt'
-
 updateMetadata('app.toolkits': 'swt')
 
-if(firstTime) {
-    def addonPattern = ~/^.+\.addon=true$/
-    def addonsCopied = false
-    def builderConf = new StringBuffer("/* SWT_PLUGIN_COMMENT_START\n")
-    builderConf.append(builderConfigFile.text)
-    builderConf.append("SWT_PLUGIN_COMMENT_END */\n")
-    builderConf.append("// ADDED_BY_SWT_PLUGIN_START\n")
-    builderConf.append("root.'groovy.swt.SwtBuilder'.view = '*'\n")
-    builderConf.append("root.'SWTGriffonAddon'.addon=true\n")
-    builderConfigFile.text.eachLine { line ->
-        if(line =~ addonPattern) {
-            addonsCopied = true
-            builderConf.append(line).append('\n')
-        }
-    }
-    builderConf.append("\n// ADDED_BY_SWT_PLUGIN_END\n")
-    builderConfigFile.text = builderConf.toString()
-    
-    if(addonsCopied) {
-        printFramed("""Please review griffon-app/conf/Builder.groovy as some addons
-were relocated. Make sure any ommisions are inserted in the
-same block as SwtGriffonAddon.""")
+// check to see if we already have a SwtGriffonAddon
+boolean addonIsSet1
+boolean builderIsSet1
+builderConfig.each() { prefix, v ->
+    v.each { builder, views ->
+        addonIsSet1 = addonIsSet1 || 'SwtGriffonAddon' == builder
+        builderIsSet1 = builderIsSet1 || 'groovy.swt.SwtBuilder' == builder
     }
 }
 
-// Replace views
-new File("${basedir}/griffon-app/views").eachFileMatch(~/.*View\.groovy/) { view ->
-    if(view.text =~ /application\(/) {
-        askAndDoNoNag("Would you like to replace ${view.name} with a Swt view?") {
-            println "Replacing ${view.name} with Swt code..."
-            view.text = """import org.eclipse.swt.layout.GridData
-
-application(text: '$griffonAppName', location:[100,100], size:[280, 70]) {
-    gridLayout(numColumns:1)
-    cLabel(background: "#fff777", "The quick brown fox jumps over the lazy dog\\nThe quick brown fox jumps over the lazy dog",
-           layoutData: gridData(horizontalAlignment: GridData.FILL, grabExcessHorizontalSpace:true))
+if (!builderIsSet1) {
+    println 'Adding groovy.swt.SwtBuilder to Builder.groovy'
+    builderConfigFile.append('''
+root.'groovy.swt.SwtBuilder'.view = '*'
+''')
 }
-"""
-        }
-    }
+if (!addonIsSet1) {
+    println 'Adding SwtGriffonAddon to Builder.groovy'
+    builderConfigFile.append('''
+root.'SwtGriffonAddon'.addon=true
+''')
 }

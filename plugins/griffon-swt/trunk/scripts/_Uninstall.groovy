@@ -26,21 +26,21 @@ if(appToolkits) {
     metadata.persist()
 }
 
-def builderConfigText = new StringBuffer()
-boolean insideOldDefs = false
-boolean insideSwtPluginDefs = false
-builderConfigFile.eachLine { line ->
-    switch(line) {
-        case ~/.*SWT_PLUGIN_COMMENT_START.*/: insideOldDefs = true;  break
-        case ~/.*SWT_PLUGIN_COMMENT_END.*/: insideOldDefs = false; break
-        case ~/.*ADDED_BY_SWT_PLUGIN_START.*/: insideSwtPluginDefs = true; break
-        case ~/.*ADDED_BY_SWT_PLUGIN_END.*/: insideSwtPluginDefs = false; break
-        default:
-            if(insideOldDefs || !insideSwtPluginDefs) builderConfigText += line + '\n'
+// check to see if we already have a SwtGriffonAddon
+boolean addonIsSet1
+boolean builderIsSet1
+builderConfig.each() { prefix, v ->
+    v.each { builder, views ->
+        addonIsSet1 = addonIsSet1 || 'SwtGriffonAddon' == builder
+        builderIsSet1 = builderIsSet1 || 'groovy.swt.SwtBuilder' == builder
     }
 }
-builderConfigFile.text = builderConfigText
 
-printFramed("""Please review your View scripts as they may contain
-SWT specific nodes which won't work after uninstalling
-""")
+if (builderIsSet1) {
+    println 'Removing groovy.swt.SwtBuilder from Builder.groovy'
+    builderConfigFile.text = builderConfigFile.text - "root.'groovy.swt.SwtBuilder'.view = '*'\n"
+}
+if (addonIsSet1) {
+    println 'Removing SwtGriffonAddon from Builder.groovy'
+    builderConfigFile.text = builderConfigFile.text - "root.'SwtGriffonAddon'.addon=true\n"
+}
