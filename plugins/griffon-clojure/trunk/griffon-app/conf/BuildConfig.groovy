@@ -1,26 +1,26 @@
 griffon.project.dependency.resolution = {
-    // inherit Griffon' default dependencies
-    inherits("global") {
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    inherits "global"
+    log "warn"
     repositories {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenCentral()
+        mavenRepo 'http://repository.springsource.com/maven/bundles/release'
     }
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
+        def clojureVersion = '1.2.0'
+        build "org.clojure:clojure:$clojureVersion",
+              "org.clojure:clojure-contrib:$clojureVersion",
+              "jline:jline:0.9.94",
+              "org.fusesource.jansi:jansi:1.4"
+        compile "org.clojure:clojure:$clojureVersion",
+                "org.clojure:clojure-contrib:$clojureVersion"
 
-        // runtime 'mysql:mysql-connector-java:5.1.5'
+        def springVersion = '3.0.5.RELEASE'
+        compile("org.springframework:org.springframework.core:$springVersion") {
+            transitive = false
+        }
     }
 }
 
@@ -33,4 +33,3 @@ griffon {
 }
 
 griffon.jars.destDir='target/addon'
-griffon.plugin.pack.additional.sources = ['src/gdsl']

@@ -26,7 +26,7 @@ class ClojureGriffonAddon {
    private final ClojureProxy CLJ_PROXY = new ClojureProxy()
    private String clojurePropertyName
 
-   def addonInit = { app ->
+   void addonInit(GriffonApplication app) {
       clojurePropertyName = app.config.griffon?.clojure?.dynamicPropertyName ?: 'clj'
       if(clojurePropertyName) {
           clojurePropertyName = clojurePropertyName[0].toUpperCase() + clojurePropertyName[1..-1]
@@ -36,14 +36,15 @@ class ClojureGriffonAddon {
    }
 
    def events = [
-      BootstrapEnd: { app ->
+      BootstrapStart: { app ->
           loadSources(app, 'classpath*:/clj/**/*.clj')
       },
       NewInstance: { klass, type, instance ->
          def types = app.config.griffon?.clojure?.injectInto ?: ['controller']
          if(!types.contains(type)) return
-         instance.metaClass."get${clojurePropertyName}" = { CLJ_PROXY }
-         instance.metaClass."${clojurePropertyName[0].toLowerCase() + clojurePropertyName[1..-1]}Load" = loadSources.curry(app)
+         MetaClass mc = app.artifactManager.findGriffonClass(klass).metaClass
+         mc."get${clojurePropertyName}" = { CLJ_PROXY }
+         mc."${clojurePropertyName[0].toLowerCase() + clojurePropertyName[1..-1]}Load" = loadSources.curry(app)
       }
    ]
 

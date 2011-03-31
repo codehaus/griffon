@@ -41,7 +41,7 @@ target('createClojureClass': "Creates a new Clojure script") {
     def classFile = new File(packageDir, "${name}.clj") 
     def fqn = "${pkg}.${name}"
     if(classFile.exists()) {
-        if(!confirmInput("WARNING: ${fqn} already exists.  Are you sure you want to replace this script?")) {
+        if(!confirmInput("WARNING: ${fqn} already exists. Are you sure you want to replace this script?")) {
             exit(0)
         }
     }
