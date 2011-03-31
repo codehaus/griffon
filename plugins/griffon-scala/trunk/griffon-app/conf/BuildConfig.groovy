@@ -1,26 +1,21 @@
 griffon.project.dependency.resolution = {
-    // inherit Griffon' default dependencies
-    inherits("global") {
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    inherits "global"
+    log "warn" 
     repositories {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenCentral()
+        mavenRepo 'http://repository.codehaus.org'
     }
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        // runtime 'mysql:mysql-connector-java:5.1.5'
+        def scalaVersion = '2.8.1'
+        build "org.scala-lang:scala-compiler:$scalaVersion",
+              "org.scala-lang:scala-library:$scalaVersion"
+        compile "org.scala-lang:scala-compiler:$scalaVersion",
+                "org.scala-lang:scala-library:$scalaVersion",
+                "org.scala-lang:scala-swing:$scalaVersion"
+        compile('org.codehaus.groovy.modules:groovytransforms:0.2') { transitive = false }
     }
 }
 

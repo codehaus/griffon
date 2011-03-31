@@ -18,8 +18,32 @@
  * @author Andres Almiray
  */
 
-includeTargets << griffonScript("Init")
-includePluginScript("scala", "_ScalaCommon")
+includeTargets << griffonScript('Init')
+includePluginScript('scala', '_ScalaCommon')
+
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('scala')) return
+/*
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-scala-plugin', dirs: scalaLibDir
+    for(filename in ['compiler', 'library', 'swing', 'dbc']) {
+        filename = 'scala-' + filename
+        griffonSettings.dependencyManager.addPluginDependency('scala', [
+            conf: 'build',
+            name: filename,
+            group: 'scala',
+            version: scalaVersion
+        ])
+        griffonSettings.dependencyManager.addPluginDependency('scala', [
+            conf: 'compile',
+            name: filename,
+            group: 'scala',
+            version: scalaVersion
+        ])
+    }
+*/
+}
 
 eventPackagePluginStart = { pluginName ->
     def destFileName = "lib/check/scalacheck-tasks.jar"
@@ -32,25 +56,11 @@ eventPackagePluginStart = { pluginName ->
     }
 }
 
-eventCopyLibsEnd = { jardir ->
-    if(compilingScalaPlugin()) return
-    adjustScalaHome()
-    ant.echo(message: "[scala] Copying Scala jar files from ${scalaHome}/lib")
-
-    ant.fileset(dir:"${scalaHome}/lib/", includes:"*.jar").each {
-        griffonCopyDist(it.toString(), jardir)
-    }
-}
-
 eventCompileStart = { 
-    if(compilingScalaPlugin()) return
+    if(compilingPlugin('scala')) return
     compileScalaSrc()
 }
  
-private boolean compilingScalaPlugin() { 
-    getPluginDirForName('scala')?.file?.canonicalPath == basedir
-}
-
 eventStatsStart = { pathToInfo ->
     if(!pathToInfo.find{ it.path == "src.commons"} ) {
         pathToInfo << [name: "Common Sources", path: "src.commons", filetype: [".groovy",".java"]]
