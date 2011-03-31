@@ -18,16 +18,11 @@
  * @author Andres Almiray
  */
 
-includeTargets << griffonScript("Compile")
-includePluginScript("scala", "_ScalaCommon")
+includeTargets << griffonScript('Compile')
+includePluginScript('scala', '_ScalaCommon')
 
 target(scalaRepl: "Run Scala REPL") {
-    depends(checkVersion, configureProxy, compile, classpath, adjustScalaHome)
-    ant.echo(message: "[scala] Using SCALA_HOME => ${scalaHome}")
-
-    ant.fileset(dir:"${scalaHome}/lib/", includes:"*.jar").each { jar ->
-        classLoader.addURL(jar.file.toURI().toURL())
-    }
+    depends(checkVersion, configureProxy, compile, classpath)
     classLoader.parent.addURL(classesDir.toURI().toURL())
     classLoader.parent.addURL("file:${basedir}/griffon-app/resources/".toURL())
     classLoader.parent.addURL("file:${basedir}/griffon-app/i18n/".toURL())

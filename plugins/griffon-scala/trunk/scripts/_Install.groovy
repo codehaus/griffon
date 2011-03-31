@@ -19,3 +19,4 @@
  */
 
 ant.mkdir(dir: "${basedir}/src/scala")
+ant.mkdir(dir: "${basedir}/src/commons-scala")

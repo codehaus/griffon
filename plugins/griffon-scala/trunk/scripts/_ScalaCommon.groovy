@@ -1,7 +1,7 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0(the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -18,49 +18,77 @@
  * @author Andres Almiray
  */
 
-ant.property(environment: "env")
-scalaHome = ant.antProject.properties."env.SCALA_HOME"
+import org.codehaus.groovy.runtime.StackTraceUtils
 
-target(compileScalaSrc: "") {
-    adjustScalaHome()
+includeTargets << griffonScript('_GriffonArgParsing')
+
+target(name: 'compileScalaCommons', description: "", prehook: null, posthook: null) {
+    depends(parseArguments)
+
+    includePluginScript('lang-bridge', 'CompileCommons')
+    compileCommons()
+
+    ant.path(id: 'scala.compile.classpath') {
+        path(refid: 'griffon.compile.classpath')
+        pathElement(location: classesDirPath)
+    }
+
+    def commonsSrc = "${basedir}/src/commons-scala"
+    ant.mkdir(dir: commonsSrc)
+    def commonsSrcDir = new File(commonsSrc)
+    compileSources(classesDir, 'scala.compile.classpath') {
+        src(path: commonsSrcDir)
+        javac(classpathref: 'scala.compile.classpath', debug: 'yes')
+    }
+}
+
+target(name: 'compileScalaSrc', description: "", prehook: null, posthook: null) {
+    depends(compileScalaCommons)
+
     def scalaSrc = "${basedir}/src/scala"
+    ant.mkdir(dir: scalaSrc)
     def scalaSrcDir = new File(scalaSrc)
-    if(!scalaSrcDir.exists() || !scalaSrcDir.list().size()) {
+    def scalaArtifactSrc = resolveResources("file:/${basedir}/griffon-app/**/*.scala")
+
+    if(!scalaArtifactSrc && !scalaSrcDir.list().size()) {
         ant.echo(message: "[scala] No Scala sources were found.")
         return
     }
 
-    includePluginScript("lang-bridge", "CompileCommons")
-    compileCommons()
+    // def srcUptoDate1 = scalaSrcDir.exists() ? sourcesUpToDate(scalaSrc, classesDirPath, ".scala") : true
 
-    if(sourcesUpToDate(scalaSrc, classesDirPath, ".scala")) return
-
-    def scalaDir = resolveResources("file:${scalaHome}/lib/*")
-    if (!scalaDir) {
-       ant.echo(message: "[scala] No Scala jar files found at ${scalaHome}")
-       return
-    }
     defineScalaCompilePathAndTask()
 
     def scalaSrcEncoding = buildConfig.scala?.src?.encoding ?: 'UTF-8'
 
-    ant.echo(message: "[scala] Compiling Scala sources with SCALA_HOME=${scalaHome} to $classesDirPath")
     try {
         ant.scalac(destdir: classesDirPath,
-                   classpathref: "scala.compile.classpath",
+                   logging: isDebugEnabled() ? 'verbose': 'none',
+                   fork: true,
+                   compilerpathref: 'scala.compile.classpath',
+                   classpathref: 'scala.compile.classpath',
                    encoding: scalaSrcEncoding) {
             // joint compile java sources
             src(path: "${basedir}/src/main")
             src(path: scalaSrc)
+            def excludedPaths = ['resources', 'i18n', 'conf'] // conf gets special handling
+            for(dir in new File("${basedir}/griffon-app").listFiles()) {
+                if(!excludedPaths.contains(dir.name) && dir.isDirectory() &&
+                    resolveResources("file:/${dir}/**/*.scala"))
+                    src(path: "$dir")
+            }
         }
-    }
-    catch (Exception e) {
-        ant.fail(message: "Could not compile Scala sources: " + e.class.simpleName + ": " + e.message)
+    } catch(Exception e) {
+        if(argsMap.verboseCompile) {
+            StackTraceUtils.deepSanitize(e)
+            e.printStackTrace(System.err)
+        }
+        event("StatusFinal", ["Compilation error: ${e.message}"])
+        exit(1)
     }
 }
  
-target(compileScalaTest: "") {
-    adjustScalaHome()
+target(name: 'compileScalaTest', description: "", prehook: null, posthook: null) {
     def scalaTestSrc = "${basedir}/test/scalatest"
     def scalaTestDir = new File(scalaTestSrc)
     if(!scalaTestDir.exists() || !scalaTestDir.list().size()) {
@@ -71,31 +99,23 @@ target(compileScalaTest: "") {
     def destDir = new File(griffonSettings.testClassesDir, "scalatest")
     ant.mkdir(dir: destDir)
 
-    def scalaDir = resolveResources("file:${scalaHome}/lib/*")
-    if (!scalaDir) {
-       ant.echo(message: "[scala] No Scala jar files found at ${scalaHome}")
-       return
-    }
     defineScalaTestPathAndTask()
 
     if(sourcesUpToDate(scalaTestSrc, destDir.absolutePath, ".scala")) return
     def scalaSrcEncoding = buildConfig.scala?.src?.encoding ?: 'UTF-8'
 
-    ant.echo(message: "[scala] Compiling Scala tests with SCALA_HOME=${scalaHome} to $destDir")
     try {
         ant.scalac(destdir: destDir,
                    classpathref: "scala.test.classpath",
                    encoding: scalaSrcEncoding) {
             src(path: scalaTestSrc)
         }
-    }
-    catch (Exception e) {
+    } catch(Exception e) {
         ant.fail(message: "Could not compile Scala tests: " + e.class.simpleName + ": " + e.message)
     }
 }
 
-target(compileScalaCheck: "") {
-    adjustScalaHome()
+target(name: 'compileScalaCheck', description: "", prehook: null, posthook: null) {
     def scalaCheckSrc = "${basedir}/test/scalacheck"
     def scalaCheckDir = new File(scalaCheckSrc)
     if(!scalaCheckDir.exists() || !scalaCheckDir.list().size()) {
@@ -106,45 +126,30 @@ target(compileScalaCheck: "") {
     def destDir = new File(griffonSettings.testClassesDir, "scalacheck")
     ant.mkdir(dir: destDir)
 
-    def scalaDir = resolveResources("file:${scalaHome}/lib/*")
-    if (!scalaDir) {
-       ant.echo(message: "[scala] No Scala jar files found at ${scalaHome}")
-       return
-    }
     defineScalaCheckPathAndTask()
 
     if(sourcesUpToDate(scalaCheckSrc, destDir.absolutePath, ".scala")) return
     def scalaSrcEncoding = buildConfig.scala?.src?.encoding ?: 'UTF-8'
 
-    ant.echo(message: "[scala] Compiling ScalaCheck tests with SCALA_HOME=${scalaHome} to $destDir")
     try {
         ant.scalac(destdir: destDir,
                    classpathref: "scala.check.classpath",
                    encoding: scalaSrcEncoding) {
             src(path: scalaCheckSrc)
         }
-    }
-    catch (Exception e) {
+    } catch(Exception e) {
         ant.fail(message: "Could not compile ScalaCheck tests: " + e.class.simpleName + ": " + e.message)
     }
 }
 
-target(defineScalaCompilePathAndTask: "") {
-    ant.path(id : "scalaJarSet") {
-       fileset(dir: "${scalaHome}/lib", includes: "*.jar")
-    }
-    ant.taskdef(resource: "scala/tools/ant/antlib.xml",
-                classpathref: "scalaJarSet")
-    ant.path(id: "scala.compile.classpath" ) {
-       path(refid:"griffon.compile.classpath")
-       path(refid:"scalaJarSet")
-    }
+target(name: 'defineScalaCompilePathAndTask', description: "", prehook: null, posthook: null) {
+    ant.taskdef(resource: 'scala/tools/ant/antlib.xml')
 }
 
-target(defineScalaTestPathAndTask: "") {
+target(name: 'defineScalaTestPathAndTask', description: "", prehook: null, posthook: null) {
     defineScalaCompilePathAndTask()
     ant.path(id: "scala.test.classpath") {
-        path(refid:"scala.compile.classpath")
+        path(refid:"griffon.compile.classpath")
         fileset(dir: "${scalaPluginDir}/lib/test") {
             include(name: "*.jar")
         }
@@ -155,10 +160,10 @@ target(defineScalaTestPathAndTask: "") {
                 classname: "org.scalatest.tools.ScalaTestAntTask")
 }
 
-target(defineScalaCheckPathAndTask: "") {
+target(name: 'defineScalaCheckPathAndTask', description: "", prehook: null, posthook: null) {
     defineScalaCompilePathAndTask()
     ant.path(id: "scala.check.classpath") {
-        path(refid:"scala.compile.classpath")
+        path(refid:"griffon.compile.classpath")
         fileset(dir: "${scalaPluginDir}/lib/check") {
             include(name: "*.jar")
         }
@@ -168,10 +173,3 @@ target(defineScalaCheckPathAndTask: "") {
                 classpathref: "scala.check.classpath",
                 classname: "griffon.scalacheck.ScalacheckTask")
 }
-
-target(adjustScalaHome: "") {
-    if( compilingScalaPlugin() ) return
-    if( !scalaHome || (buildConfig.scala?.useBundledLibs) ) scalaHome = getPluginDirForName("scala").file
-}
-
-private boolean compilingScalaPlugin() { getPluginDirForName("scala") == null }

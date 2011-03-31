@@ -1,4 +1,4 @@
-<plugin name='scala' version='0.7.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='scala' version='0.8' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Brings the Scala language compiler and libraries</title>
@@ -9,6 +9,6 @@
     <resource>BuildConfig</resource>
   </resources>
   <dependencies>
-    <plugin name='lang-bridge' version='0.4.1' />
+    <plugin name='lang-bridge' version='0.4.2' />
   </dependencies>
 </plugin>
