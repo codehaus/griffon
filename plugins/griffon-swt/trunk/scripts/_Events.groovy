@@ -18,33 +18,19 @@
  * @author Andres Almiray
  */
 
-packagingType = ''
-eventPackageStart = { type ->
-    packagingType = type
-}
-
 eventCreateConfigEnd = {
     buildConfig.griffon.application.mainClass = 'griffon.swt.SWTApplication'
 }
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def swtLibDir = "${getPluginDirForName('swt').file}/lib".toString()
-        ant.fileset(dir: swtLibDir, includes: "*.jar").each {
-            if(it.name =~ /griffon.swt.addon.*/) {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-
-        if(!(packagingType in ['applet', 'webstart'])) {
-            ant.fileset(dir: swtLibDir, includes: "*.jar").each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-            copyPlatformJars(swtLibDir, jardir)
-            copyNativeLibs(swtLibDir, jardir)
-        }
-    }
+def eventClosure2 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure2(cl)
+    if(compilingPlugin('swt')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-swt-plugin', dirs: "${swtPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('swt', [
+        conf: 'compile',
+        name: 'griffon-swt-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: swtPluginVersion
+    ])
 }
-

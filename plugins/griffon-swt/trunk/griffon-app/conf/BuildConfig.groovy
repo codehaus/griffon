@@ -1,26 +1,30 @@
 griffon.project.dependency.resolution = {
-    // inherit Griffon' default dependencies
-    inherits("global") {
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    inherits("global")
+    log "warn"
     repositories {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenCentral()
+        flatDir name: 'swtPluginLib', dirs: 'lib'
     }
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        // runtime 'mysql:mysql-connector-java:5.1.5'
+        compile('org.codehaus.groovy:groovy-swt:5.0',
+                'com.miglayout:miglayout:3.7.3.1',
+                'org.eclipse:org.apache.commons.logging:1.0.4.v200904062259',
+                'org.eclipse:org.eclipse.core.commands:3.5.0.I20090525_2000',
+                'org.eclipse:org.eclipse.core.databinding.beans:1.2.0.I20090525_2000',
+                'org.eclipse:org.eclipse.core.databinding.observable:1.2.0.M20090902_0800',
+                'org.eclipse:org.eclipse.core.databinding.property:1.2.0.M20090819_0800',
+                'org.eclipse:org.eclipse.core.databinding:1.2.0.M20090819_0800',
+                'org.eclipse:org.eclipse.core.runtime:3.5.0.v20090525',
+                'org.eclipse:org.eclipse.jface.databinding:1.3.1.M20090826_0800',
+                'org.eclipse:org.eclipse.jface:3.5.2.M20100120_0800',
+                'org.eclipse:org.eclipse.equinox.common:3.5.1.R35x_v20090807_1100',
+                'org.eclipse:org.eclipse.swt:3.5.2.v3557f',
+                'org.eclipse:org.eclipse.ui.forms:3.4.1.v20090714_35x') {
+            transitive = false
+        }
     }
 }
 
@@ -33,4 +37,4 @@ griffon {
 }
 
 griffon.jars.destDir='target/addon'
-griffon.plugin.pack.additional.sources = ['src/gdsl']
+
