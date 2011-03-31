@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
+import griffon.core.GriffonApplication
 import com.ericsson.otp.erlang.*
 
 /**
  * @author Andres Almiray
  */
 class ErlangGriffonAddon {
-    def addonInit(app) {
+    void addonInit(GriffonApplication app) {
         OtpErlangTuple.metaClass.with {
             getAt = { int index -> delegate.elementAt(index) }
             iterator = {-> [
