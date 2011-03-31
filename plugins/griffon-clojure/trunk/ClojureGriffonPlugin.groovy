@@ -18,9 +18,9 @@
  * @author Andres Almiray
  */
 class ClojureGriffonPlugin {
-    def version = '0.6'
-    def dependsOn = ['lang-bridge': '0.4.1']
-    def griffonVersion = '0.9 > *'
+    def version = '0.7'
+    def dependsOn = ['lang-bridge': '0.4.2']
+    def griffonVersion = '0.9.2 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'

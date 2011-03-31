@@ -34,7 +34,7 @@ target('createClojureScript': "Creates a new Clojure script") {
     def scriptName = "./griffon-app/resources/clj/${name}.clj"
     def scriptFile = new File(scriptName) 
     if(scriptFile.exists()) {
-        if(!confirmInput("WARNING: ${scriptName} already exists.  Are you sure you want to replace this script?")) {
+        if(!confirmInput("WARNING: ${scriptName} already exists. Are you sure you want to replace this script?")) {
             exit(0)
         }
     }

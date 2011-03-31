@@ -18,9 +18,14 @@
  * @author Andres Almiray
  */
 
+import org.codehaus.groovy.runtime.StackTraceUtils
 
-target(compileClojureSrc: "") {
-    includePluginScript("lang-bridge", "CompileCommons")
+includeTargets << griffonScript('_GriffonArgParsing')
+
+target(name: 'compileClojureSrc', description: "", prehook: null, posthook: null) {
+    depends(parseArguments)
+
+    includePluginScript('lang-bridge', 'CompileCommons')
     compileCommons()
 
     def clojureSrc = "${basedir}/src/clojure"
@@ -45,7 +50,12 @@ target(compileClojureSrc: "") {
         }
     }
     catch (Exception e) {
-        ant.fail(message: "Could not compile Clojure sources: " + e.class.simpleName + ": " + e.message)
+        if(argsMap.verboseCompile) {
+            StackTraceUtils.deepSanitize(e)
+            e.printStackTrace(System.err)
+        }
+        event("StatusFinal", ["Compilation error: ${e.message}"])
+        exit(1)
     }
 }
 
@@ -74,14 +84,18 @@ target(compileClojureTest: "") {
         }
     }
     catch (Exception e) {
-        ant.fail(message: "Could not compile Clojure test sources: " + e.class.simpleName + ": " + e.message)
+        if(argsMap.verboseCompile) {
+            StackTraceUtils.deepSanitize(e)
+            e.printStackTrace(System.err)
+        }
+        event("StatusFinal", ["Compilation error: ${e.message}"])
+        exit(1)
     }
 }
 
 defineClojureCompilePath = { srcdir, destdir ->
     ant.path(id: "clojure.compile.classpath") {
         path(refid: "griffon.compile.classpath")
-        fileset(dir: "${getPluginDirForName('clojure').file}/lib", includes: "*.jar")
         path(location: destdir)
         path(location: srcdir)
     }
@@ -106,5 +120,3 @@ convertNamespacePath = { srcdir, pathProperty ->
         }
     }
 }
-
-private boolean compilingClojurePlugin() { getPluginDirForName("clojure") == basedir }

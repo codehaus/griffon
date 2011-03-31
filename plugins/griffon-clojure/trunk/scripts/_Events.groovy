@@ -21,37 +21,22 @@
 includeTargets << griffonScript("Init")
 includePluginScript("clojure", "_ClojureCommon")
 
-eventSetClasspath = { classLoader ->
-    if(compilingClojurePlugin()) return
-
-    ant.fileset(dir: "${getPluginDirForName('clojure').file}/lib", includes: "*.jar").each {
-        if(getPluginDirForName('spring')?.file && it.toString() =~ "spring") return
-        // classLoader.addURL(jar.file.toURI().toURL())
-        addUrlIfNotPresent classLoader, jar.file
-    }
-}
-
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('clojure')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                if(getPluginDirForName('spring')?.file && it.toString() =~ "spring") return
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('clojure')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-clojure-plugin', dirs: "${clojurePluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('clojure', [
+        conf: 'compile',
+        name: 'griffon-clojure-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: clojurePluginVersion
+    ])
 }
 
 eventCompileStart = {
-    if(compilingClojurePlugin()) return
+    if(compilingPlugin('clojure')) return
     compileClojureSrc()
-}
-
-private boolean compilingClojurePlugin() {
-    getPluginDirForName('clojure')?.file?.canonicalPath == basedir
 }
 
 eventStatsStart = { pathToInfo ->
