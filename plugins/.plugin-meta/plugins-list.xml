@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3761">
+<plugins revision="3766">
     <plugin name="abeilleform-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -137,7 +137,7 @@ http://groovychart.dev.java.net</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-charts/tags/RELEASE_0_3/griffon-charts-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="clojure" latest-release="0.6">
+    <plugin name="clojure" latest-release="0.7">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables Clojure</title>
             <author>Andres Almiray</author>
@@ -193,6 +193,17 @@ http://groovychart.dev.java.net</description>
             <description>Enables the usage of Clojure on your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_6/griffon-clojure-0.6.zip</file>
+        </release>
+        <release tag="RELEASE_0_7" version="0.7" type="svn">
+            <title>Enables Clojure</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables the usage of Clojure on your Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_7/griffon-clojure-0.7.zip</file>
         </release>
     </plugin>
     <plugin name="clover" latest-release="0.1">
@@ -784,7 +795,7 @@ another docking frame in the application.</description>
             <documentation>http://griffon.codehaus.org/Erlang+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-erlang/tags/RELEASE_0_2/griffon-erlang-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>Erlang support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
