@@ -96,16 +96,16 @@ target(compileClojureTest: "") {
 defineClojureCompilePath = { srcdir, destdir ->
     ant.path(id: "clojure.compile.classpath") {
         path(refid: "griffon.compile.classpath")
-        path(location: destdir)
-        path(location: srcdir)
+        pathElement(location: destdir)
+        pathElement(location: srcdir)
     }
 }
 
 defineClojureTestPath = { srcdir, destdir ->
     ant.path(id: "clojure.test.classpath") {
         path(refid: "clojure.compile.classpath")
-        path(location: destdir)
-        path(location: srcdir)
+        pathElement(location: destdir)
+        pathElement(location: srcdir)
     }
 }
 
