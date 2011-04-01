@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3756">
+<plugins revision="3761">
     <plugin name="abeilleform-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -767,7 +767,7 @@ another docking frame in the application.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_2_1/griffon-effects-0.2.1.zip</file>
         </release>
     </plugin>
-    <plugin name="erlang" latest-release="0.2">
+    <plugin name="erlang" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Erlang support</title>
             <author>Andres Almiray</author>
@@ -783,6 +783,17 @@ another docking frame in the application.</description>
             <description>Erlang support via jinterface</description>
             <documentation>http://griffon.codehaus.org/Erlang+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-erlang/tags/RELEASE_0_2/griffon-erlang-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Erlang support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
+            <description>Erlang support via jinterface</description>
+            <documentation>http://griffon.codehaus.org/Erlang+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-erlang/tags/RELEASE_0_3/griffon-erlang-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="fast-translate" latest-release="0.2">
@@ -1447,7 +1458,7 @@ http://harmoniccode.blogspot.com</description>
             <documentation>http://griffon.codehaus.org/I18n+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-i18n/tags/RELEASE_0_3/griffon-i18n-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_3_1" version="0.3.1" type="svn">
+        <release tag="RELEASE_0_3_1" type="svn" version="0.3.1">
             <title>I18n support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
