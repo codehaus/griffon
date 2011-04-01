@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3766">
+<plugins revision="3771">
     <plugin name="abeilleform-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -194,7 +194,7 @@ http://groovychart.dev.java.net</description>
             <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_6/griffon-clojure-0.6.zip</file>
         </release>
-        <release tag="RELEASE_0_7" version="0.7" type="svn">
+        <release tag="RELEASE_0_7" type="svn" version="0.7">
             <title>Enables Clojure</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -3195,7 +3195,7 @@ http://www.datadosen.se/riverlayout/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rmi/tags/RELEASE_0_5/griffon-rmi-0.5.zip</file>
         </release>
     </plugin>
-    <plugin name="scala" latest-release="0.7.1">
+    <plugin name="scala" latest-release="0.8">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Brings the Scala language compiler and libraries</title>
             <author>Andres Almiray</author>
@@ -3275,6 +3275,17 @@ http://www.datadosen.se/riverlayout/</description>
             <description>This plugin enables the usage of Scala classes in your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_7_1/griffon-scala-0.7.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_8" version="0.8" type="svn">
+            <title>Brings the Scala language compiler and libraries</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>This plugin enables the usage of Scala classes in your Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_8/griffon-scala-0.8.zip</file>
         </release>
     </plugin>
     <plugin name="serial" latest-release="0.2">
