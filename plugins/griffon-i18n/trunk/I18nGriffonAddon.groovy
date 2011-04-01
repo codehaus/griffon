@@ -38,6 +38,12 @@ class I18nGriffonAddon {
         mc.getMessage = {String message, List args, String defaultMessage ->
             messageSource.getMessage(message, args as Object[], defaultMessage, app.locale)
         }
+        mc.getMessage = {String message, String defaultMessage, Locale locale ->
+            messageSource.getMessage(message, new Object[0], defaultMessage, locale)
+        }
+        mc.getMessage = {String message, String defaultMessage ->
+            messageSource.getMessage(message, new Object[0], defaultMessage, app.locale)
+        }
         mc.getMessage = {String message, List args, Locale locale ->
             messageSource.getMessage(message, args as Object[], locale)
         }
@@ -67,6 +73,12 @@ class I18nGriffonAddon {
         }
         mc.getMessage = {String message, List args, String defaultMessage ->
             messageSource.getMessage(message, args as Object[], defaultMessage, app.locale)
+        }
+        mc.getMessage = {String message, String defaultMessage, Locale locale ->
+            messageSource.getMessage(message, new Object[0], defaultMessage, locale)
+        }
+        mc.getMessage = {String message, String defaultMessage ->
+            messageSource.getMessage(message, new Object[0], defaultMessage, app.locale)
         }
         mc.getMessage = {String message, List args, Locale locale ->
             messageSource.getMessage(message, args as Object[], locale)

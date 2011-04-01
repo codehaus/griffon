@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class I18nGriffonPlugin {
-    def version = 0.3
+    def version = '0.3.1'
     def dependsOn = [:]
     def griffonVersion = '0.9.2 > *'
     def license = 'Apache Software License 2.0'
