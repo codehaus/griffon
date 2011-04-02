@@ -18,8 +18,8 @@
  * @author Ixchel Ruiz
  */
 class OxbowGriffonPlugin {
-    def version = 0.2
-    def dependsOn = [miglayout: 0.1]
+    def version = 0.3
+    def dependsOn = [miglayout: 0.2]
     def toolkits = ['swing']
     def griffonVersion = '0.9 > *'
     def license = 'Apache Software License 2.0'
