@@ -1,4 +1,4 @@
-<plugin name='oxbow' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='oxbow' version='0.3' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Ixchel Ruiz</author>
   <authorEmail>ixchelruiz@yahoo.com</authorEmail>
   <title>Based on Oxbow project</title>
@@ -10,6 +10,6 @@
     <resource>BuildConfig</resource>
   </resources>
   <dependencies>
-    <plugin name='miglayout' version='0.1' />
+    <plugin name='miglayout' version='0.2' />
   </dependencies>
 </plugin>

@@ -18,16 +18,16 @@
  * @author Ixchel Ruiz
  */
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('oxbow')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('oxbow')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-oxbow-plugin', dirs: "${oxbowPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('oxbow', [
+        conf: 'compile',
+        name: 'griffon-oxbow-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: oxbowPluginVersion
+    ])
 }
 
