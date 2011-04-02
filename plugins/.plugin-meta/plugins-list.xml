@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3771">
+<plugins revision="3780">
     <plugin name="abeilleform-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -3276,7 +3276,7 @@ http://www.datadosen.se/riverlayout/</description>
             <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_7_1/griffon-scala-0.7.1.zip</file>
         </release>
-        <release tag="RELEASE_0_8" version="0.8" type="svn">
+        <release tag="RELEASE_0_8" type="svn" version="0.8">
             <title>Brings the Scala language compiler and libraries</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -3595,7 +3595,7 @@ Brings the SwingX Builder libraries into a Griffon Build</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingx-ws/tags/RELEASE_0_1/griffon-swingx-ws-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="swingxtras-builder" latest-release="0.3">
+    <plugin name="swingxtras-builder" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Swingxtras Builder Plugin</title>
             <author>Andres Almiray</author>
@@ -3627,6 +3627,17 @@ Brings the SwingX Builder libraries into a Griffon Build</description>
             <description>Brings the Swingxtras Builder libraries into a Griffon Build</description>
             <documentation>http://griffon.codehaus.org/SwingxtrasBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingxtras-builder/tags/RELEASE_0_3/griffon-swingxtras-builder-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>Swingxtras Builder Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Brings the Swingxtras Builder libraries into a Griffon Build</description>
+            <documentation>http://griffon.codehaus.org/SwingxtrasBuilder+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-swingxtras-builder/tags/RELEASE_0_4/griffon-swingxtras-builder-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="swt" latest-release="0.1">
