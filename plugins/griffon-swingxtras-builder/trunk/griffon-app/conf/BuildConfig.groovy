@@ -1,26 +1,22 @@
 griffon.project.dependency.resolution = {
-    // inherit Griffon' default dependencies
-    inherits("global") {
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    inherits("global")
+    log "warn"
     repositories {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        flatDir name: 'swingxtrasBuilderPluginLib', dirs: 'lib'
+        mavenCentral()
+        mavenRepo 'http://repository.codehaus.org'
+        mavenRepo 'http://repository.sonatype.org/content/groups/public'
     }
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        // runtime 'mysql:mysql-connector-java:5.1.5'
+        compile('org.codehaus.griffon:swingxtrasbuilder:0.2') {
+            excludes 'groovy-all'
+        }
+        compile 'org.swinglabs:xswingx:0.2',
+                'net.java.balloontip:balloontip:20090102',
+                'com.l2fprod.common:l2fprod-common-all:6.9.1'
     }
 }
 
@@ -33,4 +29,3 @@ griffon {
 }
 
 griffon.jars.destDir='target/addon'
-griffon.plugin.pack.additional.sources = ['src/gdsl']
