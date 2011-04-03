@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package net.sourceforge.gvalidation.swing
+package net.sourceforge.gvalidation.renderer
 
 import griffon.spock.UnitSpec
 

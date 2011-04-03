@@ -13,14 +13,17 @@
  * limitations under the License.
  */
 
-package net.sourceforge.gvalidation.swing
+package net.sourceforge.gvalidation.renderer
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
-class ErrorRenderer {
+class ConfigReader {
+    def ConfigReader(config){
 
-    def render(node, style) {
     }
 
+    def getErrorField() {
+        return 'email'
+    }
 }
