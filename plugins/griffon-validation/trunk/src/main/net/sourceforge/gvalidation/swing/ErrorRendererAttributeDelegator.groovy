@@ -19,7 +19,9 @@ package net.sourceforge.gvalidation.swing
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 class ErrorRendererAttributeDelegator {
+    private static final String ERROR_RENDERER_ATTRIBUTE_NAME = 'errorRenderer'
+
     public boolean isAttributeSet(Map attributes) {
-        return attributes.remove('errorRenderer') != null
+        return attributes.get(ERROR_RENDERER_ATTRIBUTE_NAME) != null
     }
 }
