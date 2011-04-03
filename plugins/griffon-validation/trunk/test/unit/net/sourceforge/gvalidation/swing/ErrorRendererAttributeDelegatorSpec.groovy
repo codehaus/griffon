@@ -23,11 +23,27 @@ import griffon.spock.UnitSpec
 class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
 
     def 'Delegator should be able to detect errorRenderer attribute'() {
-        given:
+        expect:
+        hasAttribute == expectedResult
+
+        where:
+        hasAttribute << [new ErrorRendererAttributeDelegator().isAttributeSet(['errorRenderer': 'something']),
+                new ErrorRendererAttributeDelegator().isAttributeSet(['errorRenderer': null])]
+        expectedResult << [true, false]
+    }
+
+    def 'Attribute should not be removed during checking'() {
         ErrorRendererAttributeDelegator delegator = new ErrorRendererAttributeDelegator()
+        def attributes = ['errorRenderer': 'something']
 
         expect:
-        delegator.isAttributeSet(['errorRenderer': 'something']) == true
+        delegator.isAttributeSet(attributes) == true
+        delegator.isAttributeSet(attributes) == true
+    }
+
+
+    def 'Delegate should trigger error decorator if error is there'() {
+        ErrorRendererAttributeDelegator delegator = new ErrorRendererAttributeDelegator()
     }
 
 }
