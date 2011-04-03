@@ -16,6 +16,7 @@
 package net.sourceforge.gvalidation.swing
 
 import griffon.spock.UnitSpec
+import net.sourceforge.gvalidation.Errors
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -44,6 +45,26 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
 
     def 'Delegate should trigger error decorator if error is there'() {
         ErrorRendererAttributeDelegator delegator = new ErrorRendererAttributeDelegator()
+
+        def errors = new Errors()
+
+        def builder = [model: [errors: errors]]
+        def node = [:]
+        def attributes = ['errorRenderer': 'errorField: email']
+        def outcome = [:]
+
+        delegator.errorRenderer = [render: {n, style ->
+            outcome['invoked'] = true
+            outcome['style'] = style
+        }] as ErrorRenderer
+
+        when:
+        errors.rejectValue('email', 'emailError')
+        delegator.delegate(builder, node, attributes)
+
+        then:
+        outcome['invoked'] == true
+        outcome['style'] == 'default'
     }
 
 }

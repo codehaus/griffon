@@ -15,13 +15,32 @@
 
 package net.sourceforge.gvalidation.swing
 
+import net.sourceforge.gvalidation.Errors
+
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 class ErrorRendererAttributeDelegator {
     private static final String ERROR_RENDERER_ATTRIBUTE_NAME = 'errorRenderer'
 
+    protected ErrorRenderer errorRenderer
+
     public boolean isAttributeSet(Map attributes) {
         return attributes.get(ERROR_RENDERER_ATTRIBUTE_NAME) != null
+    }
+
+    def delegate(builder, node, attributes) {
+        def attribute = attributes.remove(ERROR_RENDERER_ATTRIBUTE_NAME)
+
+        def errorFieldEntry = attribute.split(':')
+
+        def errorFieldKey = errorFieldEntry[0]?.trim()
+        def errorFieldValue = errorFieldEntry[1]?.trim()
+
+        Errors errors = builder.model.errors
+
+        if(errors.hasFieldErrors(errorFieldValue)){
+            errorRenderer.render(node, 'default')
+        }
     }
 }
