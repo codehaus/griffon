@@ -26,6 +26,7 @@ class ConfigReaderSpec extends UnitSpec {
         ConfigReader reader = new ConfigReader('error: "email"')
 
         expect:
+        reader.isConfigured() == true
         reader.getErrorField() == 'email'
         reader.getRenderStyles().size() == 1
         reader.getRenderStyles()[0] == 'default'
@@ -35,10 +36,19 @@ class ConfigReaderSpec extends UnitSpec {
         ConfigReader reader = new ConfigReader('error: "url", styles: ["highlight", "popup"]')
 
         expect:
+        reader.isConfigured() == true
         reader.getErrorField() == 'url'
         reader.getRenderStyles().size() == 2
         reader.getRenderStyles()[0] == 'highlight'
         reader.getRenderStyles()[1] == 'popup'
+    }
+
+    def 'Config reader should not be configured with empty input'(){
+        expect:
+        new ConfigReader(config).isConfigured() == false
+
+        where:
+        config << ['', null, 'styles: ["popup"]']
     }
 
 }
