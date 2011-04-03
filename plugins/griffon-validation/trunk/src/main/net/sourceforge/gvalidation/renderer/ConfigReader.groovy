@@ -28,8 +28,12 @@ class ConfigReader {
     def configMap
 
     def ConfigReader(config) {
-        GroovyShell shell = new GroovyShell()
-        configMap = shell.evaluate("[$config]")
+        try {
+            GroovyShell shell = new GroovyShell()
+            configMap = shell.evaluate("[$config]")
+        } catch (Exception ex) {
+            configMap = [:]
+        }
     }
 
     def getErrorField() {

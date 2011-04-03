@@ -48,7 +48,7 @@ class ConfigReaderSpec extends UnitSpec {
         new ConfigReader(config).isConfigured() == false
 
         where:
-        config << ['', null, 'styles: ["popup"]']
+        config << ['', null, 'styles: ["popup"]', 'incorrect config']
     }
 
 }
