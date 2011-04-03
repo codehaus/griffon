@@ -15,27 +15,37 @@
 
 package net.sourceforge.gvalidation.renderer
 
+import org.apache.commons.lang.StringUtils
+
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 class ConfigReader {
+    private static final String ERROR_FIELD = 'error'
+    private static final String STYLES = 'styles'
+    private static final String DEFAULT_STYLE = 'default'
+
     def configMap
 
-    def ConfigReader(config){
+    def ConfigReader(config) {
         GroovyShell shell = new GroovyShell()
         configMap = shell.evaluate("[$config]")
     }
 
     def getErrorField() {
-        return configMap['error']
+        return configMap[ERROR_FIELD]
     }
 
     def getRenderStyles() {
-        def styles = configMap['styles']
+        def styles = configMap[STYLES]
 
-        if(!styles)
-            styles = ['default']
+        if (!styles)
+            styles = [DEFAULT_STYLE]
 
         return styles
+    }
+
+    boolean isConfigured() {
+        return configMap[ERROR_FIELD]
     }
 }
