@@ -23,10 +23,22 @@ import griffon.spock.UnitSpec
 class ConfigReaderSpec extends UnitSpec {
 
     def 'Config reader should be able to retrieve error field and default style'(){
-        ConfigReader reader = new ConfigReader('error: email')
+        ConfigReader reader = new ConfigReader('error: "email"')
 
         expect:
         reader.getErrorField() == 'email'
+        reader.getRenderStyles().size() == 1
+        reader.getRenderStyles()[0] == 'default'
+    }
+
+    def 'Config reader should be able to retrieve particular style'(){
+        ConfigReader reader = new ConfigReader('error: "url", styles: ["highlight", "popup"]')
+
+        expect:
+        reader.getErrorField() == 'url'
+        reader.getRenderStyles().size() == 2
+        reader.getRenderStyles()[0] == 'highlight'
+        reader.getRenderStyles()[1] == 'popup'
     }
 
 }

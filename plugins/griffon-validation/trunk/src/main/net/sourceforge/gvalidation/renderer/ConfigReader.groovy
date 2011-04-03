@@ -19,11 +19,23 @@ package net.sourceforge.gvalidation.renderer
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 class ConfigReader {
-    def ConfigReader(config){
+    def configMap
 
+    def ConfigReader(config){
+        GroovyShell shell = new GroovyShell()
+        configMap = shell.evaluate("[$config]")
     }
 
     def getErrorField() {
-        return 'email'
+        return configMap['error']
+    }
+
+    def getRenderStyles() {
+        def styles = configMap['styles']
+
+        if(!styles)
+            styles = ['default']
+
+        return styles
     }
 }
