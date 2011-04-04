@@ -48,7 +48,32 @@ class ConfigReaderSpec extends UnitSpec {
         new ConfigReader(config).isConfigured() == false
 
         where:
-        config << ['', null, 'styles: ["popup"]', 'incorrect config']
+        config << ['', null, 'styles: [popup]', 'incorrect config']
+    }
+
+    def 'Config reader should be configured with various valid input'(){
+        expect:
+        new ConfigReader(config).isConfigured() == true
+
+        where:
+        config << [
+                'error: "email"',
+                'error: email',
+                'error: "url", styles: [ highlight, pop ]',
+                'styles:[popup],error:url',
+                'styles :   [  "popup",   highlight ],    error :url'
+        ]
+    }
+
+    def 'Config reader should be able to read without string quotes'(){
+        ConfigReader reader = new ConfigReader('error: url, styles : [highlight, popup]')
+
+        expect:
+        reader.isConfigured() == true
+        reader.getErrorField() == 'url'
+        reader.getRenderStyles().size() == 2
+        reader.getRenderStyles()[0] == 'highlight'
+        reader.getRenderStyles()[1] == 'popup'
     }
 
 }

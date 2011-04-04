@@ -16,6 +16,8 @@
 package net.sourceforge.gvalidation.renderer
 
 import org.apache.commons.lang.StringUtils
+import java.util.regex.Pattern
+import java.util.regex.Matcher
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -25,15 +27,68 @@ class ConfigReader {
     private static final String STYLES = 'styles'
     private static final String DEFAULT_STYLE = 'default'
 
-    def configMap
+    private static final Pattern errorPattern = ~/${ERROR_FIELD}[\s]*:[\s]*(\w+)/
+    private static final Pattern stylesPattern = ~/${STYLES}[\s]*:[\s]*\[([\w,\s]+)/
+
+
+    def configMap = [:]
 
     def ConfigReader(config) {
+        if (!config)
+            return
+
+        def quotedConfig = removeQuotes(config)
+
+        quotedConfig = quoteErrorField(quotedConfig)
+
+        quotedConfig = quoteStyleOptions(quotedConfig)
+
         try {
             GroovyShell shell = new GroovyShell()
-            configMap = shell.evaluate("[$config]")
+            configMap = shell.evaluate("[$quotedConfig]")
         } catch (Exception ex) {
             configMap = [:]
         }
+    }
+
+    private def removeQuotes(config) {
+        config = config.replaceAll("'", '')
+        config = config.replaceAll('"', '')
+        return config
+    }
+
+    private def quoteErrorField(config) {
+        def quotedConfig = config
+
+        Matcher errorMatcher = errorPattern.matcher(config)
+
+        if (errorMatcher.find()) {
+            def errorField = errorMatcher.group(1)
+            quotedConfig = config.replace(errorField, "'${errorField}'")
+        }
+
+        return quotedConfig
+    }
+
+    private def quoteStyleOptions(String config) {
+        Matcher stylesMatcher = stylesPattern.matcher(config)
+
+        def quotedConfig = config
+
+        if (stylesMatcher.find()) {
+            def styleOptions = stylesMatcher.group(1)
+            def quotedStyleOptions = ""
+
+            styleOptions.split(',').each {
+                quotedStyleOptions += "'${it.trim()}',"
+            }
+
+            quotedStyleOptions = StringUtils.removeEnd(quotedStyleOptions, ",")
+
+            quotedConfig = config.replace(styleOptions, quotedStyleOptions)
+        }
+
+        return quotedConfig
     }
 
     def getErrorField() {

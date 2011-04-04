@@ -20,7 +20,7 @@ package net.sourceforge.gvalidation.renderer
  */
 class ErrorRenderer {
 
-    def render(node, style) {
+    def render(node, styles) {
     }
 
 }

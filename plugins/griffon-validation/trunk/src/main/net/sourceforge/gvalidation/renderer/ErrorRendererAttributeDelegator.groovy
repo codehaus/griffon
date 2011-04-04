@@ -32,15 +32,14 @@ class ErrorRendererAttributeDelegator {
     def delegate(builder, node, attributes) {
         def attribute = attributes.remove(ERROR_RENDERER_ATTRIBUTE_NAME)
 
-        def errorFieldEntry = attribute.split(':')
+        ConfigReader reader = new ConfigReader(attribute)
 
-        def errorFieldKey = errorFieldEntry[0]?.trim()
-        def errorFieldValue = errorFieldEntry[1]?.trim()
+        if (reader.isConfigured()) {
+            Errors errors = builder.model.errors
 
-        Errors errors = builder.model.errors
-
-        if(errors.hasFieldErrors(errorFieldValue)){
-            errorRenderer.render(node, 'default')
+            if (errors.hasFieldErrors(reader.getErrorField())) {
+                errorRenderer.render(node, reader.getRenderStyles())
+            }
         }
     }
 }
