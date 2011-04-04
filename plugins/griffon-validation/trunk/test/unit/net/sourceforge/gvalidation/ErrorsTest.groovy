@@ -226,5 +226,22 @@ class ErrorsTest extends GroovyTestCase {
         assertFalse('Listener should have been removed',errors.hasListener(listener1))
     }
 
+    public void testNewFieldErrorNotification(){
+        Errors errors = new Errors()
+
+        def onFieldErrorAdded = false
+
+        def listener = [onFieldErrorAdded: {FieldError error ->
+            onFieldErrorAdded = true
+            assertEquals('Error field is incorrect', 'email', error.getField())
+        }] as ErrorListener
+
+        errors.addListener(listener)
+
+        errors.rejectValue('email', 'emailErrorCode')
+
+        assertTrue('New field error was not notified', onFieldErrorAdded)
+    }
+
 
 }

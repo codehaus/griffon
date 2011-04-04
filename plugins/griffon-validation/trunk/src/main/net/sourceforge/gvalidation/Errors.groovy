@@ -91,7 +91,13 @@ class Errors {
 
         def oldErrors = cloneErrors()
 
-        fieldErrors[field].add new FieldError(field: field, errorCode: errorCode, defaultErrorCode: defaultErrorCode, arguments: arguments)
+        def fieldError = new FieldError(field: field, errorCode: errorCode, defaultErrorCode: defaultErrorCode, arguments: arguments)
+
+        fieldErrors[field].add(fieldError)
+
+        errorListeners.each{ErrorListener listener ->
+            listener.onFieldErrorAdded(fieldError)
+        }
 
         fireErrorChangedEventOnParent(oldErrors)
     }
