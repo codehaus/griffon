@@ -29,7 +29,7 @@ class ErrorRendererAttributeDelegator {
         return attributes.get(ERROR_RENDERER_ATTRIBUTE_NAME) != null
     }
 
-    def delegate(builder, node, attributes) {
+    def delegate(app, builder, node, attributes) {
         def attribute = attributes.remove(ERROR_RENDERER_ATTRIBUTE_NAME)
 
         ConfigReader reader = new ConfigReader(attribute)
@@ -38,7 +38,13 @@ class ErrorRendererAttributeDelegator {
             Errors errors = builder.model.errors
 
             if (errors.hasFieldErrors(reader.getErrorField())) {
-                errorRenderer.render(node, reader.getRenderStyles())
+                errorRenderer.render(
+                        builder,
+                        node,
+                        reader.getRenderStyles(),
+                        errors.getFieldError(reader.getErrorField()),
+                        app.messageSource
+                )
             }
         }
     }
