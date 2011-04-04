@@ -42,6 +42,49 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
         delegator.isAttributeSet(attributes) == true
     }
 
+    def 'Delegate should not trigger error decorator if error config is not valid'() {
+        ErrorRendererAttributeDelegator delegator = new ErrorRendererAttributeDelegator()
+
+        def errors = new Errors()
+
+        def builder = [model: [errors: errors]]
+        def node = [:]
+        def attributes = ['errorRenderer': 'incorrect config']
+        def outcome = [:]
+
+        delegator.errorRenderer = [render: {n, styles ->
+            outcome['invoked'] = true
+            outcome['styles'] = styles
+        }] as ErrorRenderer
+
+        when:
+        delegator.delegate(builder, node, attributes)
+
+        then:
+        outcome['invoked'] == null
+    }
+
+    def 'Delegate should not trigger error decorator if error is not there'() {
+        ErrorRendererAttributeDelegator delegator = new ErrorRendererAttributeDelegator()
+
+        def errors = new Errors()
+
+        def builder = [model: [errors: errors]]
+        def node = [:]
+        def attributes = ['errorRenderer': 'error: "email"']
+        def outcome = [:]
+
+        delegator.errorRenderer = [render: {n, styles ->
+            outcome['invoked'] = true
+            outcome['styles'] = styles
+        }] as ErrorRenderer
+
+        when:
+        delegator.delegate(builder, node, attributes)
+
+        then:
+        outcome['invoked'] == null
+    }
 
     def 'Delegate should trigger error decorator if error is there'() {
         ErrorRendererAttributeDelegator delegator = new ErrorRendererAttributeDelegator()
@@ -50,12 +93,12 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
 
         def builder = [model: [errors: errors]]
         def node = [:]
-        def attributes = ['errorRenderer': 'errorField: email']
+        def attributes = ['errorRenderer': 'error: "email"']
         def outcome = [:]
 
-        delegator.errorRenderer = [render: {n, style ->
+        delegator.errorRenderer = [render: {n, styles ->
             outcome['invoked'] = true
-            outcome['style'] = style
+            outcome['styles'] = styles
         }] as ErrorRenderer
 
         when:
@@ -64,7 +107,7 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
 
         then:
         outcome['invoked'] == true
-        outcome['style'] == 'default'
+        outcome['styles'] == ['default']
     }
 
 }
