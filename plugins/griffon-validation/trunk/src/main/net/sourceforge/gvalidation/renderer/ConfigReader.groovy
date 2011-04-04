@@ -23,9 +23,10 @@ import java.util.regex.Matcher
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 class ConfigReader {
+    public static final String DEFAULT_STYLE = 'default'
+
     private static final String ERROR_FIELD = 'error'
     private static final String STYLES = 'styles'
-    private static final String DEFAULT_STYLE = 'default'
 
     private static final Pattern ERROR_FIELD_PATTERN = ~/${ERROR_FIELD}[\s]*:[\s]*(\w+)/
     private static final Pattern STYLE_OPTIONS_PATTERN = ~/${STYLES}[\s]*:[\s]*\[([\w,\s]+)/

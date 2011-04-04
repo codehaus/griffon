@@ -46,4 +46,31 @@ class ErrorRendererSpec extends UnitSpec {
         poppedUp == true
     }
 
+    def 'Error renderer should invoke default decorator if style is not given'() {
+        def defaultUsed = false
+        def highlighted = false
+        def poppedUp = false
+
+        ErrorRenderer.decorators = [
+                'default': [decorate: {builder, node, fieldError, messageSource -> defaultUsed = true}] as ErrorNodeDecorator,
+                highlight: [decorate: {builder, node, fieldError, messageSource -> highlighted = true}] as ErrorNodeDecorator,
+                popup: [decorate: {builder, node, fieldError, messageSource -> poppedUp = true}] as ErrorNodeDecorator
+        ]
+
+        ErrorRenderer renderer = new ErrorRenderer()
+
+        def builder = [:]
+        def node = [:]
+        def styles = []
+        def fieldError = [:]
+        def messageSource = [:]
+
+        renderer.render(builder, node, styles, fieldError, messageSource)
+
+        expect:
+        highlighted == false
+        poppedUp == false
+        defaultUsed == true
+    }
+
 }

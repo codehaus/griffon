@@ -23,6 +23,9 @@ class ErrorRenderer {
     static Map<String, ErrorNodeDecorator> decorators = [:]
 
     def render(builder, node, styles, fieldError, messageSource) {
+        if(!styles)
+            styles = [ConfigReader.DEFAULT_STYLE]
+
         styles.each{ style ->
             ErrorNodeDecorator decorator = decorators[style]
             decorator.decorate(builder, node, fieldError, messageSource)
