@@ -27,9 +27,8 @@ class ConfigReader {
     private static final String STYLES = 'styles'
     private static final String DEFAULT_STYLE = 'default'
 
-    private static final Pattern errorPattern = ~/${ERROR_FIELD}[\s]*:[\s]*(\w+)/
-    private static final Pattern stylesPattern = ~/${STYLES}[\s]*:[\s]*\[([\w,\s]+)/
-
+    private static final Pattern ERROR_FIELD_PATTERN = ~/${ERROR_FIELD}[\s]*:[\s]*(\w+)/
+    private static final Pattern STYLE_OPTIONS_PATTERN = ~/${STYLES}[\s]*:[\s]*\[([\w,\s]+)/
 
     def configMap = [:]
 
@@ -60,7 +59,7 @@ class ConfigReader {
     private def quoteErrorField(config) {
         def quotedConfig = config
 
-        Matcher errorMatcher = errorPattern.matcher(config)
+        Matcher errorMatcher = ERROR_FIELD_PATTERN.matcher(config)
 
         if (errorMatcher.find()) {
             def errorField = errorMatcher.group(1)
@@ -71,7 +70,7 @@ class ConfigReader {
     }
 
     private def quoteStyleOptions(String config) {
-        Matcher stylesMatcher = stylesPattern.matcher(config)
+        Matcher stylesMatcher = STYLE_OPTIONS_PATTERN.matcher(config)
 
         def quotedConfig = config
 
