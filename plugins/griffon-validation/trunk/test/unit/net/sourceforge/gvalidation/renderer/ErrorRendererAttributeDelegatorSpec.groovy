@@ -17,6 +17,7 @@ package net.sourceforge.gvalidation.renderer
 
 import griffon.spock.UnitSpec
 import net.sourceforge.gvalidation.Errors
+import org.springframework.context.MessageSource
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -51,6 +52,7 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
         def node = [:]
         def attributes = ['errorRenderer': 'incorrect config']
         def outcome = [:]
+        def app = [messageSource: [] as MessageSource]
 
         delegator.errorRenderer = [render: {n, styles ->
             outcome['invoked'] = true
@@ -58,7 +60,7 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
         }] as ErrorRenderer
 
         when:
-        delegator.delegate(builder, node, attributes)
+        delegator.delegate(app, builder, node, attributes)
 
         then:
         outcome['invoked'] == null
@@ -73,6 +75,7 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
         def node = [:]
         def attributes = ['errorRenderer': 'error: email']
         def outcome = [:]
+        def app = [messageSource: [] as MessageSource]
 
         delegator.errorRenderer = [render: {n, styles ->
             outcome['invoked'] = true
@@ -80,7 +83,7 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
         }] as ErrorRenderer
 
         when:
-        delegator.delegate(builder, node, attributes)
+        delegator.delegate(app, builder, node, attributes)
 
         then:
         outcome['invoked'] == null
@@ -95,15 +98,16 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
         def node = [:]
         def attributes = ['errorRenderer': 'error: email']
         def outcome = [:]
+        def app = [messageSource: [] as MessageSource]
 
-        delegator.errorRenderer = [render: {n, styles ->
+        delegator.errorRenderer = [render: {b, n, styles, fieldError, messageSource ->
             outcome['invoked'] = true
             outcome['styles'] = styles
         }] as ErrorRenderer
 
         when:
         errors.rejectValue('email', 'emailError')
-        delegator.delegate(builder, node, attributes)
+        delegator.delegate(app, builder, node, attributes)
 
         then:
         outcome['invoked'] == true

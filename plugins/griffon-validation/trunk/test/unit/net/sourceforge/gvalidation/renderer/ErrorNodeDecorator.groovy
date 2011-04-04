@@ -18,15 +18,8 @@ package net.sourceforge.gvalidation.renderer
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
-class ErrorRenderer {
+public interface ErrorNodeDecorator {
 
-    static Map<String, ErrorNodeDecorator> decorators = [:]
-
-    def render(builder, node, styles, fieldError, messageSource) {
-        styles.each{ style ->
-            ErrorNodeDecorator decorator = decorators[style]
-            decorator.decorate(builder, node, fieldError, messageSource)
-        }
-    }
+    def decorate(builder, node, fieldError, messageSource)
 
 }
