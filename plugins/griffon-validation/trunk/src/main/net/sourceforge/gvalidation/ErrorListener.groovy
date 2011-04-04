@@ -19,4 +19,9 @@ package net.sourceforge.gvalidation
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 interface ErrorListener {
+
+    def onFieldErrorAdded(FieldError error)
+
+    def onFieldErrorRemoved(FieldError error)
+
 }
