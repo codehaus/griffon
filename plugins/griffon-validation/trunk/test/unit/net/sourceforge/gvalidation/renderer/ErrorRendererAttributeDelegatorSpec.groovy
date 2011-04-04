@@ -71,7 +71,7 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
 
         def builder = [model: [errors: errors]]
         def node = [:]
-        def attributes = ['errorRenderer': 'error: "email"']
+        def attributes = ['errorRenderer': 'error: email']
         def outcome = [:]
 
         delegator.errorRenderer = [render: {n, styles ->
@@ -93,7 +93,7 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
 
         def builder = [model: [errors: errors]]
         def node = [:]
-        def attributes = ['errorRenderer': 'error: "email"']
+        def attributes = ['errorRenderer': 'error: email']
         def outcome = [:]
 
         delegator.errorRenderer = [render: {n, styles ->
