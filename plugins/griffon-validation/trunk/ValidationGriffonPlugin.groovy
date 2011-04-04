@@ -22,7 +22,7 @@ class ValidationGriffonPlugin {
     // the version or versions of Griffon the plugin is designed for
     def griffonVersion = '0.9.2 > *'
     // the other plugins this plugin depends on
-    def dependsOn = [i18n:'0.3']
+    def dependsOn = [i18n:'0.3.1']
     // resources that are included in plugin packaging
     def pluginIncludes = []
     // the plugin license
