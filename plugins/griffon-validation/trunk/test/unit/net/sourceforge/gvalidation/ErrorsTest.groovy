@@ -210,4 +210,21 @@ class ErrorsTest extends GroovyTestCase {
         assertEquals("Multiple field errors should have been generated", 2, globalErrors.size())
     }
 
+    public void testErrorListenerMgmt(){
+        Errors errors = new Errors()
+
+        def listener1 = [name:'listener1'] as ErrorListener
+        def listener2 = [name:'listener2'] as ErrorListener
+
+        errors.addListener(listener1)
+
+        assertTrue('Listener is not added',errors.hasListener(listener1))
+        assertFalse('Listener should not be added',errors.hasListener(listener2))
+
+        errors.removeListener(listener1)
+
+        assertFalse('Listener should have been removed',errors.hasListener(listener1))
+    }
+
+
 }

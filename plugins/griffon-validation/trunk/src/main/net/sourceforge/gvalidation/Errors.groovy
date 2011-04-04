@@ -25,6 +25,8 @@ class Errors {
     def fieldErrors = [:]
     def globalErrors = []
 
+    def errorListeners = []
+
     def Errors() {
         this(null)
     }
@@ -130,6 +132,18 @@ class Errors {
             allErrors.addAll(it)
         }
         return allErrors.iterator()
+    }
+
+    public void addListener(ErrorListener errorListener) {
+        errorListeners.add(errorListener)
+    }
+
+    public boolean hasListener(ErrorListener errorListener) {
+        return errorListeners.contains(errorListener)
+    }
+
+    public boolean removeListener(ErrorListener errorListener) {
+        return errorListeners.remove(errorListener)
     }
 }
 
