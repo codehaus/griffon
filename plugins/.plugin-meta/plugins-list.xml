@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3785">
+<plugins revision="3806">
     <plugin name="abeilleform-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -691,7 +691,7 @@ another docking frame in the application.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_4/griffon-easyb-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="eclipse-support" latest-release="0.4.1">
+    <plugin name="eclipse-support" latest-release="0.4.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Keeps Eclipse files up to date</title>
             <author>Andres Almiray</author>
@@ -750,6 +750,17 @@ another docking frame in the application.</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_1/griffon-eclipse-support-0.4.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_4_2" version="0.4.2" type="svn">
+            <title>Keeps Eclipse files up to date</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Keeps Eclipse files up to date.</description>
+            <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_2/griffon-eclipse-support-0.4.2.zip</file>
         </release>
     </plugin>
     <plugin name="effects" latest-release="0.2.1">
@@ -2928,7 +2939,7 @@ http://www.icon-king.com/projects/nuvola/</description>
             <documentation>http://griffon.codehaus.org/Oxbow+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-oxbow/tags/RELEASE_0_2/griffon-oxbow-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>Based on Oxbow project</title>
             <author>Ixchel Ruiz</author>
             <authorEmail>ixchelruiz@yahoo.com</authorEmail>
