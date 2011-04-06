@@ -153,20 +153,5 @@ class Errors {
     }
 }
 
-class FieldError extends SimpleError {
-    def field
 
-    public String toString() {
-        return "Error[${errorCode}] with args[${arguments}] on field[${field}]"
-    }
-}
 
-class SimpleError {
-    def defaultErrorCode
-    def errorCode
-    def arguments
-
-    public String toString() {
-        return "Error[${errorCode}:${defaultErrorCode}] with args[${arguments}]"
-    }
-}
