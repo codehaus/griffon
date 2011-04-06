@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the 'License');
  * you may not use this file except in compliance with the License.
@@ -61,15 +61,26 @@ updateEclipseClasspathFile = { newPlugin = null ->
 
         mkp.yieldUnescaped("\n${indent}<!-- output paths -->")
         classpathentry(kind: 'con', path: 'org.eclipse.jdt.launching.JRE_CONTAINER')
-        classpathentry(kind: 'output', path: 'staging/classes')
+        classpathentry(kind: 'output', path: classesDirPath.replaceFirst(~/${userHome}/, 'USER_HOME'))
         
+        def normalizeFilePath = { file ->
+            String path = file.absolutePath
+            String originalPath = path
+            path = path.replaceFirst(~/.*\.ivy2(\\|\/)cache/, 'IVY2_CACHE')
+            path = path.replaceFirst(~/${griffonHome}/, 'GRIFFON_HOME')
+            path = path.replaceFirst(~/${userHome}/, 'USER_HOME')
+            boolean var = path != originalPath
+            originalPath = path
+            path = path.replaceFirst(~/${griffonSettings.baseDir.path}(\\|\/)/, '')
+            var = path == originalPath
+            [kind: var? 'var' : 'lib', path: path]
+        }
         def visitDependencies = {List dependencies ->
             dependencies.each { File f ->
                 if(visitedDependencies.contains(f)) return
                 visitedDependencies << f
-                String path = f.absolutePath
-                path = path.replaceFirst(~/.*\.ivy2\/cache/, 'IVY2_CACHE')
-                classpathentry(kind: 'var', path: path)   
+                Map pathEntry = normalizeFilePath(f)
+                classpathentry(kind: pathEntry.kind, path: pathEntry.path)   
             }    
         }
                
@@ -86,13 +97,15 @@ updateEclipseClasspathFile = { newPlugin = null ->
             def nativeLibDir = new File("${libdir}/${platform}")
             if(nativeLibDir.exists()) {
                 nativeLibDir.eachFileMatch(~/.*\.jar/) { file ->
-                    classpathentry(kind: 'lib', path: file.absolutePath)
+                    Map pathEntry = normalizeFilePath(file)
+                    classpathentry(kind: pathEntry.kind, path: pathEntry.path)   
                 }
             }
             nativeLibDir = new File("${libdir}/${platform[0..-3]}")
             if(is64Bit && nativeLibDir.exists()) {
                 nativeLibDir.eachFileMatch(~/.*\.jar/) { file ->
-                    classpathentry(kind: 'lib', path: file.absolutePath)
+                    Map pathEntry = normalizeFilePath(file)
+                    classpathentry(kind: pathEntry.kind, path: pathEntry.path)   
                 }
             }
         }
