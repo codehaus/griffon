@@ -18,11 +18,12 @@ package net.sourceforge.gvalidation.validator
 import net.sourceforge.gvalidation.validator.ClosureValidator
 import net.sourceforge.gvalidation.ValidationEnhancer
 import net.sourceforge.gvalidation.models.ModelBean
+import net.sourceforge.gvalidation.BaseTestCase
 
 /**
  * Created by nick.zhu
  */
-class ClosureValidatorTest extends GroovyTestCase {
+class ClosureValidatorTest extends BaseTestCase {
 
     public void testBasicClosureBasedValidation(){
         ClosureValidator validator = new ClosureValidator()
@@ -32,7 +33,7 @@ class ClosureValidatorTest extends GroovyTestCase {
     }
     
     public void testErrorGeneration(){
-        def obj = new ModelBean()
+        def obj = generateModel()
 
         ClosureValidator validator = new ClosureValidator()
 

@@ -27,10 +27,10 @@ import java.beans.PropertyChangeListener
 /**
  * Created by nick.zhu
  */
-class ValidationEnhancerTest extends GroovyTestCase {
+class ValidationEnhancerTest extends BaseTestCase {
 
     public void testModelEnhancementReturn() {
-        ModelBean model = new ModelBean()
+        def model = generateModel('ModelBean.groovy')
 
         def enhancer = ValidationEnhancer.enhance(model)
 
@@ -38,7 +38,7 @@ class ValidationEnhancerTest extends GroovyTestCase {
     }
 
     public void testModelConstraintInvocation() {
-        ModelBean model = new ModelBean()
+        def model = generateModel('ModelBean.groovy')
 
         ValidationEnhancer.enhance(model)
 
@@ -59,7 +59,7 @@ class ValidationEnhancerTest extends GroovyTestCase {
     }
 
     public void testErrorCorrection() {
-        ModelBean model = new ModelBean()
+        def model = generateModel('ModelBean.groovy')
 
         ValidationEnhancer.enhance(model)
 
@@ -75,7 +75,7 @@ class ValidationEnhancerTest extends GroovyTestCase {
     }
 
     public void testValidationWithNoConstraint() {
-        NoConstraintModelBean model = new NoConstraintModelBean()
+        def model = generateModel('NoConstraintModelBean.groovy')
 
         ValidationEnhancer.enhance(model)
 
@@ -85,7 +85,7 @@ class ValidationEnhancerTest extends GroovyTestCase {
     }
 
     public void testValidationWithInvalidConstraint() {
-        InvalidConstraintModelBean model = new InvalidConstraintModelBean()
+        def model = generateModel('InvalidConstraintModelBean.groovy')
 
         ValidationEnhancer.enhance(model)
 
@@ -98,7 +98,7 @@ class ValidationEnhancerTest extends GroovyTestCase {
     }
 
     public void testUnknownConstraintIsIgnored() {
-        UnknownConstraintModelBean model = new UnknownConstraintModelBean()
+        def model = generateModel('UnknownConstraintModelBean.groovy')
 
         ValidationEnhancer.enhance(model)
 
@@ -108,7 +108,7 @@ class ValidationEnhancerTest extends GroovyTestCase {
     }
 
     public void testNullAndBlankTolerance() {
-        NullToleranceModelBean model = new NullToleranceModelBean()
+        def model = generateModel('NullToleranceModelBean.groovy')
 
         ValidationEnhancer.enhance(model)
 
@@ -125,7 +125,7 @@ class ValidationEnhancerTest extends GroovyTestCase {
         ConstraintRepository.instance.register('magic',
                 [validate: {property, bean, parameter -> false}])
 
-        def model = new CustomConstraintModelBean()
+        def model = generateModel('CustomConstraintModelBean.groovy')
 
         ValidationEnhancer.enhance(model)
 
@@ -140,7 +140,9 @@ class ValidationEnhancerTest extends GroovyTestCase {
     }
 
     public void testFieldLevelValidation() {
-        def model = new ModelBean(email: 'invalidEmail')
+        def model = generateModel('ModelBean.groovy')
+
+        model.email = 'invalidEmail'
 
         ValidationEnhancer.enhance(model)
 
@@ -158,7 +160,9 @@ class ValidationEnhancerTest extends GroovyTestCase {
     }
 
     public void testFieldLevelValidationWithMultipleExecution() {
-        def model = new ModelBean(email: 'invalidEmail')
+        def model = generateModel('ModelBean.groovy')
+
+        model.email = 'invalidEmail'
 
         ValidationEnhancer.enhance(model)
 
@@ -179,7 +183,9 @@ class ValidationEnhancerTest extends GroovyTestCase {
     }
 
     public void testFieldLevelValidationWithMultipleFields() {
-        def model = new ModelBean(email: 'invalidEmail')
+        def model = generateModel('ModelBean.groovy')
+
+        model.email = 'invalidEmail'
 
         ValidationEnhancer.enhance(model)
 
@@ -192,7 +198,9 @@ class ValidationEnhancerTest extends GroovyTestCase {
     }
 
     public void testFieldLevelValidationWithSingleString() {
-        def model = new ModelBean(email: 'invalidEmail')
+        def model = generateModel('ModelBean.groovy')
+
+        model.email = 'invalidEmail'
 
         ValidationEnhancer.enhance(model)
 
