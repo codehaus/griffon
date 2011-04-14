@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3806">
+<plugins revision="3813">
     <plugin name="abeilleform-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -751,7 +751,7 @@ another docking frame in the application.</description>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_1/griffon-eclipse-support-0.4.1.zip</file>
         </release>
-        <release tag="RELEASE_0_4_2" version="0.4.2" type="svn">
+        <release tag="RELEASE_0_4_2" type="svn" version="0.4.2">
             <title>Keeps Eclipse files up to date</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -4271,6 +4271,20 @@ http://sourceforge.net/projects/lipstiklf</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-weld/tags/RELEASE_0_1/griffon-weld-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="syntaxtext" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>RSyntaxTextArea support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>RSyntaxTextArea support
+http://sourceforge.net/projects/rsyntaxtextarea/</description>
+            <documentation>http://griffon.codehaus.org/Syntaxtext+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-syntaxtext/tags/RELEASE_0_1/griffon-syntaxtext-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
