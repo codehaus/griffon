@@ -16,6 +16,7 @@
 package net.sourceforge.gvalidation.renderer
 
 import griffon.spock.UnitSpec
+import org.springframework.context.MessageSource
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -23,54 +24,57 @@ import griffon.spock.UnitSpec
 class ErrorRendererSpec extends UnitSpec {
 
     def 'Error renderer should invoke decorator by style name'() {
-        def highlighted = false
-        def poppedUp = false
-
-        ErrorRenderer.decorators = [
-                highlight: [decorate: {builder, node, fieldError, messageSource -> highlighted = true}] as ErrorNodeDecorator,
-                popup: [decorate: {builder, node, fieldError, messageSource -> poppedUp = true}] as ErrorNodeDecorator
+        ErrorRenderer.decoratorClassMap = [
+                highlight: MockHighlightErrorNodeDecorator.class,
+                popup: MockPopupErrorNodeDecorator.class
         ]
 
         ErrorRenderer renderer = new ErrorRenderer()
 
-        def builder = [:]
+        def model = [:]
         def node = [:]
-        def styles = ['highlight', 'popup']
-        def fieldError = [:]
-        def messageSource = [:]
+        def styles = ['highlight']
+        def errorField = "email"
+        def messageSource = [:] as MessageSource
 
-        renderer.render(builder, node, styles, fieldError, messageSource)
+        def results = renderer.register(model, node, styles, errorField, messageSource)
 
         expect:
-        highlighted == true
-        poppedUp == true
+        results.size() == 1
+        results[0] instanceof MockHighlightErrorNodeDecorator
+        results[0].isRegistered() == true
+        results[0].getModel() == model
+        results[0].getErrorField() == errorField
+        results[0].targetComponent == node
+        results[0].messageSource == messageSource
     }
 
     def 'Error renderer should invoke default decorator if style is not given'() {
-        def defaultUsed = false
-        def highlighted = false
-        def poppedUp = false
-
-        ErrorRenderer.decorators = [
-                'default': [decorate: {builder, node, fieldError, messageSource -> defaultUsed = true}] as ErrorNodeDecorator,
-                highlight: [decorate: {builder, node, fieldError, messageSource -> highlighted = true}] as ErrorNodeDecorator,
-                popup: [decorate: {builder, node, fieldError, messageSource -> poppedUp = true}] as ErrorNodeDecorator
+        ErrorRenderer.decoratorClassMap = [
+                'default': MockDefaultErrorNodeDecorator.class,
+                highlight: MockHighlightErrorNodeDecorator.class,
+                popup: MockPopupErrorNodeDecorator.class
         ]
 
         ErrorRenderer renderer = new ErrorRenderer()
 
-        def builder = [:]
         def node = [:]
+        def model = [:]
         def styles = []
-        def fieldError = [:]
-        def messageSource = [:]
+        def errorField = "email"
+        def messageSource = [:] as MessageSource
 
-        renderer.render(builder, node, styles, fieldError, messageSource)
+        def results = renderer.register(model, node, styles, errorField, messageSource)
 
         expect:
-        highlighted == false
-        poppedUp == false
-        defaultUsed == true
+        results.size() == 1
+        results[0] instanceof MockDefaultErrorNodeDecorator
+        results[0].isRegistered() == true
     }
 
+    public class MockHighlightErrorNodeDecorator extends BaseErrorNodeDecorator {}
+
+    public class MockPopupErrorNodeDecorator extends BaseErrorNodeDecorator {}
+
+    public class MockDefaultErrorNodeDecorator extends BaseErrorNodeDecorator {}
 }

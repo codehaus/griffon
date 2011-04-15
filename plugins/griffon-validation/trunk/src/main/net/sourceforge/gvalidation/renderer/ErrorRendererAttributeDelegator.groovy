@@ -38,7 +38,7 @@ class ErrorRendererAttributeDelegator {
             Errors errors = builder.model.errors
 
             if (errors.hasFieldErrors(reader.getErrorField())) {
-                errorRenderer.render(
+                errorRenderer.register(
                         builder,
                         node,
                         reader.getRenderStyles(),
