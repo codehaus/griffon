@@ -20,6 +20,12 @@ package net.sourceforge.gvalidation.renderer
  */
 public interface ErrorNodeDecorator {
 
-    def decorate(builder, node, fieldError, messageSource)
+    boolean isRegistered()
+
+    Object getModel()
+
+    String getErrorField()
+
+    void register(model, node, errorField, messageSource)
 
 }

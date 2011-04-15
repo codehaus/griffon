@@ -54,7 +54,7 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
         def outcome = [:]
         def app = [messageSource: [] as MessageSource]
 
-        delegator.errorRenderer = [render: {n, styles ->
+        delegator.errorRenderer = [register: {n, styles ->
             outcome['invoked'] = true
             outcome['styles'] = styles
         }] as ErrorRenderer
@@ -77,7 +77,7 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
         def outcome = [:]
         def app = [messageSource: [] as MessageSource]
 
-        delegator.errorRenderer = [render: {n, styles ->
+        delegator.errorRenderer = [register: {n, styles ->
             outcome['invoked'] = true
             outcome['styles'] = styles
         }] as ErrorRenderer
@@ -100,7 +100,7 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
         def outcome = [:]
         def app = [messageSource: [] as MessageSource]
 
-        delegator.errorRenderer = [render: {b, n, styles, fieldError, messageSource ->
+        delegator.errorRenderer = [register: {b, n, styles, fieldError, messageSource ->
             outcome['invoked'] = true
             outcome['styles'] = styles
         }] as ErrorRenderer
