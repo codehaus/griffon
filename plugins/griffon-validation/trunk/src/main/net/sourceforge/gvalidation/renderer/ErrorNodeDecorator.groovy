@@ -15,10 +15,16 @@
 
 package net.sourceforge.gvalidation.renderer
 
+import org.springframework.context.MessageSource
+
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 public interface ErrorNodeDecorator {
+
+    MessageSource getMessageSource()
+
+    Object getTargetComponent()
 
     boolean isRegistered()
 
