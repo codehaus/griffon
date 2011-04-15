@@ -25,7 +25,7 @@ class BaseErrorNodeDecorator implements ErrorNodeDecorator {
     protected Object model
     protected MessageSource messageSource
     protected String errorField
-    protected def targetComponent
+    protected Object targetComponent
 
     public void register(model, node, errorField, messageSource){
         this.model = model
@@ -44,6 +44,14 @@ class BaseErrorNodeDecorator implements ErrorNodeDecorator {
 
     public Object getModel() {
         return model
+    }
+
+    public MessageSource getMessageSource() {
+        return messageSource
+    }
+
+    public Object getTargetComponent() {
+        return targetComponent
     }
 
 
