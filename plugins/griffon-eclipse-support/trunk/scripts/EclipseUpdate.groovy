@@ -66,7 +66,6 @@ updateEclipseClasspathFile = { newPlugin = null ->
         def normalizeFilePath = { file ->
             String path = file.absolutePath
             String originalPath = path
-            path = path.replaceFirst(~/.*\.ivy2(\\|\/)cache/, 'IVY2_CACHE')
             path = path.replaceFirst(~/${griffonHome}/, 'GRIFFON_HOME')
             path = path.replaceFirst(~/${userHome}/, 'USER_HOME')
             boolean var = path != originalPath
