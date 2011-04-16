@@ -95,11 +95,15 @@ class Errors {
 
         fieldErrors[field].add(fieldError)
 
+        fireFieldErrorAddedEvent(fieldError)
+
+        fireErrorChangedEventOnParent(oldErrors)
+    }
+
+    private def fireFieldErrorAddedEvent(fieldError) {
         errorListeners.each {ErrorListener listener ->
             listener.onFieldErrorAdded(fieldError)
         }
-
-        fireErrorChangedEventOnParent(oldErrors)
     }
 
     def hasFieldErrors() {
@@ -126,15 +130,19 @@ class Errors {
         def oldErrors = cloneErrors()
 
         fieldErrors.each {key, error ->
-            errorListeners.each {ErrorListener listener ->
-                listener.onFieldErrorRemoved(error)
-            }
+            fireFieldErrorRemovedEvent(error)
         }
 
         fieldErrors.clear()
         globalErrors.clear()
 
         fireErrorChangedEventOnParent(oldErrors)
+    }
+
+    private def fireFieldErrorRemovedEvent(error) {
+        errorListeners.each {ErrorListener listener ->
+            listener.onFieldErrorRemoved(error)
+        }
     }
 
     def iterator() {
