@@ -72,9 +72,9 @@ class ErrorRendererSpec extends UnitSpec {
         results[0].isRegistered() == true
     }
 
-    public class MockHighlightErrorNodeDecorator extends BaseErrorNodeDecorator {}
+    public class MockHighlightErrorNodeDecorator extends ClosureErrorNodeDecorator {}
 
-    public class MockPopupErrorNodeDecorator extends BaseErrorNodeDecorator {}
+    public class MockPopupErrorNodeDecorator extends ClosureErrorNodeDecorator {}
 
-    public class MockDefaultErrorNodeDecorator extends BaseErrorNodeDecorator {}
+    public class MockDefaultErrorNodeDecorator extends ClosureErrorNodeDecorator {}
 }
