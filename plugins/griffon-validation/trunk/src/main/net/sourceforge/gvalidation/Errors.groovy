@@ -95,7 +95,7 @@ class Errors {
 
         fieldErrors[field].add(fieldError)
 
-        errorListeners.each{ErrorListener listener ->
+        errorListeners.each {ErrorListener listener ->
             listener.onFieldErrorAdded(fieldError)
         }
 
@@ -124,6 +124,12 @@ class Errors {
 
     def clear() {
         def oldErrors = cloneErrors()
+
+        fieldErrors.each {key, error ->
+            errorListeners.each {ErrorListener listener ->
+                listener.onFieldErrorRemoved(error)
+            }
+        }
 
         fieldErrors.clear()
         globalErrors.clear()

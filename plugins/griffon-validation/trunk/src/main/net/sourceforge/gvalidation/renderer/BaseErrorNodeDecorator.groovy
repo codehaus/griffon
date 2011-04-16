@@ -16,11 +16,14 @@
 package net.sourceforge.gvalidation.renderer
 
 import org.springframework.context.MessageSource
+import net.sourceforge.gvalidation.Errors
+import net.sourceforge.gvalidation.FieldError
+import net.sourceforge.gvalidation.ErrorListener
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
-class BaseErrorNodeDecorator implements ErrorNodeDecorator {
+abstract class BaseErrorNodeDecorator implements ErrorNodeDecorator, ErrorListener {
 
     protected Object model
     protected MessageSource messageSource
@@ -32,6 +35,8 @@ class BaseErrorNodeDecorator implements ErrorNodeDecorator {
         this.targetComponent = node
         this.errorField = errorField
         this.messageSource = messageSource
+
+        this.model.errors.addListener(this)
     }
 
     public boolean isRegistered() {
@@ -54,5 +59,25 @@ class BaseErrorNodeDecorator implements ErrorNodeDecorator {
         return targetComponent
     }
 
+    abstract protected void decorate(Errors errors, FieldError fieldError)
 
+    abstract protected void undecorate()
+
+    def onFieldErrorAdded(FieldError error) {
+        if(isNotRelatedError(error))
+            return null
+
+        return decorate(model.errors, error)
+    }
+
+    def onFieldErrorRemoved(FieldError error) {
+        if(isNotRelatedError(error))
+            return null
+
+        return undecorate()
+    }
+
+    private boolean isNotRelatedError(FieldError error) {
+        return error.field != errorField
+    }
 }

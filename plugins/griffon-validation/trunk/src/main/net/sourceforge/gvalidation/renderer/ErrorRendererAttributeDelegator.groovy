@@ -35,11 +35,12 @@ class ErrorRendererAttributeDelegator {
         ConfigReader reader = new ConfigReader(attribute)
 
         if (reader.isConfigured()) {
-            Errors errors = builder.model.errors
+            def model = builder.model
+            Errors errors = model.errors
 
             if (errors.hasFieldErrors(reader.getErrorField())) {
                 errorRenderer.register(
-                        builder,
+                        model,
                         node,
                         reader.getRenderStyles(),
                         errors.getFieldError(reader.getErrorField()),
