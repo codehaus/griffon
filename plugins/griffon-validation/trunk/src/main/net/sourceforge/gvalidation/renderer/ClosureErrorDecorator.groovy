@@ -21,7 +21,7 @@ import net.sourceforge.gvalidation.FieldError
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
-class ClosureErrorNodeDecorator extends BaseErrorNodeDecorator {
+class ClosureErrorDecorator extends BaseErrorDecorator {
 
     protected Closure decorator
     protected Closure undecorator

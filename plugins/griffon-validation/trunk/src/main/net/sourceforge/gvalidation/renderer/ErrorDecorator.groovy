@@ -20,7 +20,7 @@ import org.springframework.context.MessageSource
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
-public interface ErrorNodeDecorator {
+public interface ErrorDecorator {
 
     MessageSource getMessageSource()
 
