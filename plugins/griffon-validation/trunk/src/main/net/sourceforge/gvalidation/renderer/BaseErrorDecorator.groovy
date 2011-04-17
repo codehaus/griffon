@@ -23,7 +23,7 @@ import net.sourceforge.gvalidation.ErrorListener
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
-abstract class BaseErrorNodeDecorator implements ErrorNodeDecorator, ErrorListener {
+abstract class BaseErrorDecorator implements ErrorDecorator, ErrorListener {
 
     protected Object model
     protected MessageSource messageSource

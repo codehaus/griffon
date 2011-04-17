@@ -25,8 +25,8 @@ class ErrorRendererSpec extends UnitSpec {
 
     def 'Error renderer should invoke decorator by style name'() {
         ErrorRenderer.decoratorClassMap = [
-                highlight: MockHighlightErrorNodeDecorator.class,
-                popup: MockPopupErrorNodeDecorator.class
+                highlight: MockHighlightErrorDecorator.class,
+                popup: MockPopupErrorDecorator.class
         ]
 
         ErrorRenderer renderer = new ErrorRenderer()
@@ -41,7 +41,7 @@ class ErrorRendererSpec extends UnitSpec {
 
         expect:
         results.size() == 1
-        results[0] instanceof MockHighlightErrorNodeDecorator
+        results[0] instanceof MockHighlightErrorDecorator
         results[0].isRegistered() == true
         results[0].getModel() == model
         results[0].getErrorField() == errorField
@@ -51,9 +51,9 @@ class ErrorRendererSpec extends UnitSpec {
 
     def 'Error renderer should invoke default decorator if style is not given'() {
         ErrorRenderer.decoratorClassMap = [
-                'default': MockDefaultErrorNodeDecorator.class,
-                highlight: MockHighlightErrorNodeDecorator.class,
-                popup: MockPopupErrorNodeDecorator.class
+                'default': MockDefaultErrorDecorator.class,
+                highlight: MockHighlightErrorDecorator.class,
+                popup: MockPopupErrorDecorator.class
         ]
 
         ErrorRenderer renderer = new ErrorRenderer()
@@ -68,13 +68,13 @@ class ErrorRendererSpec extends UnitSpec {
 
         expect:
         results.size() == 1
-        results[0] instanceof MockDefaultErrorNodeDecorator
+        results[0] instanceof MockDefaultErrorDecorator
         results[0].isRegistered() == true
     }
 
-    public class MockHighlightErrorNodeDecorator extends ClosureErrorNodeDecorator {}
+    public class MockHighlightErrorDecorator extends ClosureErrorDecorator {}
 
-    public class MockPopupErrorNodeDecorator extends ClosureErrorNodeDecorator {}
+    public class MockPopupErrorDecorator extends ClosureErrorDecorator {}
 
-    public class MockDefaultErrorNodeDecorator extends ClosureErrorNodeDecorator {}
+    public class MockDefaultErrorDecorator extends ClosureErrorDecorator {}
 }

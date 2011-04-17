@@ -29,7 +29,7 @@ class ErrorNodeDecoratorSpec extends UnitSpec {
         def resultFieldError
 
         given:
-        ErrorNodeDecorator decorator = new ClosureErrorNodeDecorator(
+        ErrorDecorator decorator = new ClosureErrorDecorator(
                 decorator:{errors, fieldError -> resultErrors = errors; resultFieldError = fieldError}
         )
 
@@ -53,7 +53,7 @@ class ErrorNodeDecoratorSpec extends UnitSpec {
         def resultFieldError
 
         given:
-        ErrorNodeDecorator decorator = new ClosureErrorNodeDecorator(
+        ErrorDecorator decorator = new ClosureErrorDecorator(
                 decorator:{errors, fieldError -> resultErrors = errors; resultFieldError = fieldError}
         )
 
@@ -77,7 +77,7 @@ class ErrorNodeDecoratorSpec extends UnitSpec {
         def resultFieldError
 
         given:
-        ErrorNodeDecorator decorator = new ClosureErrorNodeDecorator(
+        ErrorDecorator decorator = new ClosureErrorDecorator(
                 decorator:{errors, fieldError -> resultErrors = errors; resultFieldError = fieldError},
                 undecorator:{resultErrors = null; resultFieldError = null}
         )

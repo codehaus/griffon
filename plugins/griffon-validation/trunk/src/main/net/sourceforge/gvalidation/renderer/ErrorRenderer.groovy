@@ -20,7 +20,7 @@ package net.sourceforge.gvalidation.renderer
  */
 class ErrorRenderer {
 
-    static Map<String, ErrorNodeDecorator> decoratorClassMap = [:]
+    static Map<String, ErrorDecorator> decoratorClassMap = [:]
 
     def register(model, node, styles, errorField, messageSource) {
         if(!styles)
@@ -29,8 +29,8 @@ class ErrorRenderer {
         def decorators = []
 
         styles.each{ style ->
-            Class<ErrorNodeDecorator> decoratorClass = decoratorClassMap[style]
-            ErrorNodeDecorator decorator = decoratorClass.newInstance()
+            Class<ErrorDecorator> decoratorClass = decoratorClassMap[style]
+            ErrorDecorator decorator = decoratorClass.newInstance()
             decorator.register(model, node, errorField, messageSource)
             decorators << decorator
         }
