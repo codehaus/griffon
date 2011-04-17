@@ -35,7 +35,8 @@ class HighlightErrorDecoratorSpec extends UnitSpec {
         errors.rejectValue(errorField, 'emailErrorCode')
 
         def model = [errors:errors]
-        def node = [background:null] as JComponent
+        def color = Color.WHITE
+        def node = [getBackground:{color},setBackground:{c->color=c}] as JComponent
         def messageResource = [:] as MessageSource
 
 
@@ -45,6 +46,7 @@ class HighlightErrorDecoratorSpec extends UnitSpec {
         decorator.decorate(errors, errors.getFieldError(errorField))
 
         then:
+        decorator.originalBgColor == Color.WHITE
         node.background == Color.PINK
     }
 
