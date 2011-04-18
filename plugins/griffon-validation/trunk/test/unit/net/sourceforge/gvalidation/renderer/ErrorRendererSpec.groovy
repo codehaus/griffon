@@ -17,6 +17,7 @@ package net.sourceforge.gvalidation.renderer
 
 import griffon.spock.UnitSpec
 import org.springframework.context.MessageSource
+import net.sourceforge.gvalidation.Errors
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -31,7 +32,7 @@ class ErrorRendererSpec extends UnitSpec {
 
         ErrorRenderer renderer = new ErrorRenderer()
 
-        def model = [:]
+        def model = [errors:new Errors()]
         def node = [:]
         def styles = ['highlight']
         def errorField = "email"
@@ -59,7 +60,7 @@ class ErrorRendererSpec extends UnitSpec {
         ErrorRenderer renderer = new ErrorRenderer()
 
         def node = [:]
-        def model = [:]
+        def model = [errors:new Errors()]
         def styles = []
         def errorField = "email"
         def messageSource = [:] as MessageSource
@@ -69,6 +70,29 @@ class ErrorRendererSpec extends UnitSpec {
         expect:
         results.size() == 1
         results[0] instanceof MockDefaultErrorDecorator
+        results[0].isRegistered() == true
+    }
+
+    def 'Error renderer should invoke default decorator if style is unknown'() {
+        ErrorRenderer.decoratorClassMap = [
+                'default': MockDefaultErrorDecorator.class,
+                highlight: MockHighlightErrorDecorator.class,
+                popup: MockPopupErrorDecorator.class
+        ]
+
+        ErrorRenderer renderer = new ErrorRenderer()
+
+        def node = [:]
+        def model = [errors:new Errors()]
+        def styles = ['unknown']
+        def errorField = "email"
+        def messageSource = [:] as MessageSource
+
+        def results = renderer.register(model, node, styles, errorField, messageSource)
+
+        expect:
+        results.size() == 1
+        results[0] instanceof HighlightErrorDecorator
         results[0].isRegistered() == true
     }
 

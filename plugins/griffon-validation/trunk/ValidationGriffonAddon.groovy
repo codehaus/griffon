@@ -18,6 +18,7 @@ import net.sourceforge.gvalidation.ValidationEnhancer
 import net.sourceforge.gvalidation.artifact.ConstraintArtifactHandler
 import net.sourceforge.gvalidation.ConstraintRepository
 import griffon.util.ApplicationHolder
+import net.sourceforge.gvalidation.renderer.ErrorRendererAttributeDelegator
 
 /**
  * @author Nick Zhu
@@ -30,9 +31,10 @@ class ValidationGriffonAddon {
 
     def attributeDelegates = [
             {builder, node, attributes ->
-                if (attributes.remove('important')) {
-                    ApplicationHolder.getApplication().event('debug', [[builder, node, attributes]])
-                    node.foreground = java.awt.Color.RED
+                def attributeDelegator = new ErrorRendererAttributeDelegator()
+
+                if(attributeDelegator.isAttributeSet(attributes)){
+                    attributeDelegator.delegate(ApplicationHolder.application, builder, node, attributes)
                 }
             }
     ]
