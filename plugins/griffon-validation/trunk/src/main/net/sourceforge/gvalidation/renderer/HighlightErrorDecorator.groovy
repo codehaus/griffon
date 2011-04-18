@@ -31,7 +31,7 @@ class HighlightErrorDecorator extends BaseErrorDecorator {
     }
 
     @Override protected void undecorate() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        targetComponent.setBackground(originalBgColor)
     }
 
 }
