@@ -50,4 +50,29 @@ class HighlightErrorDecoratorSpec extends UnitSpec {
         node.background == Color.PINK
     }
 
+    def 'Should restore background color when undecorating'(){
+        given:
+        HighlightErrorDecorator decorator = new HighlightErrorDecorator()
+
+        def errorField = "email"
+        def errors = new Errors()
+        errors.rejectValue(errorField, 'emailErrorCode')
+
+        def model = [errors:errors]
+        def color = Color.WHITE
+        def node = [getBackground:{color},setBackground:{c->color=c}] as JComponent
+        def messageResource = [:] as MessageSource
+
+
+        decorator.register(model, node, errorField, messageResource)
+
+        when:
+        decorator.decorate(errors, errors.getFieldError(errorField))
+        decorator.undecorate()
+
+        then:
+        decorator.originalBgColor == Color.WHITE
+        node.background == Color.WHITE
+    }
+
 }
