@@ -10,6 +10,6 @@
     <resource>Config</resource>
   </resources>
   <dependencies>
-    <plugin name='i18n' version='0.3' />
+    <plugin name='i18n' version='0.3.1' />
   </dependencies>
 </plugin>

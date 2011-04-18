@@ -66,29 +66,6 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
         outcome['invoked'] == null
     }
 
-    def 'Delegate should not trigger error decorator if error is not there'() {
-        ErrorRendererAttributeDelegator delegator = new ErrorRendererAttributeDelegator()
-
-        def errors = new Errors()
-
-        def builder = [model: [errors: errors]]
-        def node = [:]
-        def attributes = ['errorRenderer': 'error: email']
-        def outcome = [:]
-        def app = [messageSource: [] as MessageSource]
-
-        delegator.errorRenderer = [register: {n, styles ->
-            outcome['invoked'] = true
-            outcome['styles'] = styles
-        }] as ErrorRenderer
-
-        when:
-        delegator.delegate(app, builder, node, attributes)
-
-        then:
-        outcome['invoked'] == null
-    }
-
     def 'Delegate should trigger error decorator if error is there'() {
         ErrorRendererAttributeDelegator delegator = new ErrorRendererAttributeDelegator()
 
@@ -100,18 +77,19 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
         def outcome = [:]
         def app = [messageSource: [] as MessageSource]
 
-        delegator.errorRenderer = [register: {b, n, styles, fieldError, messageSource ->
+        delegator.errorRenderer = [register: {b, n, styles, errorField, messageSource ->
             outcome['invoked'] = true
             outcome['styles'] = styles
+            outcome['errorField'] = errorField
         }] as ErrorRenderer
 
         when:
-        errors.rejectValue('email', 'emailError')
         delegator.delegate(app, builder, node, attributes)
 
         then:
         outcome['invoked'] == true
         outcome['styles'] == ['default']
+        outcome['errorField'] == 'email'
     }
 
 }

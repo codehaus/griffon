@@ -23,7 +23,7 @@ import net.sourceforge.gvalidation.Errors
 class ErrorRendererAttributeDelegator {
     private static final String ERROR_RENDERER_ATTRIBUTE_NAME = 'errorRenderer'
 
-    protected ErrorRenderer errorRenderer
+    protected ErrorRenderer errorRenderer = new ErrorRenderer()
 
     public boolean isAttributeSet(Map attributes) {
         return attributes.get(ERROR_RENDERER_ATTRIBUTE_NAME) != null
@@ -38,15 +38,13 @@ class ErrorRendererAttributeDelegator {
             def model = builder.model
             Errors errors = model.errors
 
-            if (errors.hasFieldErrors(reader.getErrorField())) {
-                errorRenderer.register(
-                        model,
-                        node,
-                        reader.getRenderStyles(),
-                        errors.getFieldError(reader.getErrorField()),
-                        app.messageSource
-                )
-            }
+            errorRenderer.register(
+                    model,
+                    node,
+                    reader.getRenderStyles(),
+                    reader.getErrorField(),
+                    app.messageSource
+            )
         }
     }
 }

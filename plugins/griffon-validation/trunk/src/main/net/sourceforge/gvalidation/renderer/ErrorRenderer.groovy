@@ -20,16 +20,24 @@ package net.sourceforge.gvalidation.renderer
  */
 class ErrorRenderer {
 
-    static Map<String, ErrorDecorator> decoratorClassMap = [:]
+    static final Class<? extends ErrorDecorator> DEFAULT_DECORATOR_CLASS = HighlightErrorDecorator.class
+    static Map<String, ErrorDecorator> decoratorClassMap = [
+            'default': DEFAULT_DECORATOR_CLASS,
+            'highlight': HighlightErrorDecorator.class
+    ]
 
     def register(model, node, styles, errorField, messageSource) {
-        if(!styles)
+        if (!styles)
             styles = [ConfigReader.DEFAULT_STYLE]
 
         def decorators = []
 
-        styles.each{ style ->
+        styles.each { style ->
             Class<ErrorDecorator> decoratorClass = decoratorClassMap[style]
+
+            if (!decoratorClass)
+                decoratorClass = DEFAULT_DECORATOR_CLASS
+
             ErrorDecorator decorator = decoratorClass.newInstance()
             decorator.register(model, node, errorField, messageSource)
             decorators << decorator
