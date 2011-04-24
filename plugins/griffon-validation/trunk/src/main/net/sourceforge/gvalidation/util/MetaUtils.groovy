@@ -43,4 +43,14 @@ final class MetaUtils {
     static def hasMethodOrClosure(obj, name) {
         return hasMethod(obj, name) || hasClosure(obj, name)
     }
+
+    static boolean fieldExistOnTarget(target, name) {
+        if(target == null || name == null)
+            return false
+
+        if(target instanceof Map)
+            return target.containsKey(name)
+
+        return target.metaClass.properties.find {it.name == name} != null
+    }
 }

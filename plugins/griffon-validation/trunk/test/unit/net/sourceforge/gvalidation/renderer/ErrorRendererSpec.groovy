@@ -18,11 +18,33 @@ package net.sourceforge.gvalidation.renderer
 import griffon.spock.UnitSpec
 import org.springframework.context.MessageSource
 import net.sourceforge.gvalidation.Errors
+import net.sourceforge.gvalidation.models.PlainModelBean
+import net.sourceforge.gvalidation.models.ModelBean
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 class ErrorRendererSpec extends UnitSpec {
+
+    def 'Error renderer should ignore model not annotated by @Validatable'() {
+        ErrorRenderer.decoratorClassMap = [
+                highlight: MockHighlightErrorDecorator.class,
+                popup: MockPopupErrorDecorator.class
+        ]
+
+        ErrorRenderer renderer = new ErrorRenderer()
+
+        def model = new PlainModelBean()
+        def node = [:]
+        def styles = ['highlight']
+        def errorField = "email"
+        def messageSource = [:] as MessageSource
+
+        def results = renderer.register(model, node, styles, errorField, messageSource)
+
+        expect:
+        results.size() == 0
+    }
 
     def 'Error renderer should invoke decorator by style name'() {
         ErrorRenderer.decoratorClassMap = [
@@ -32,7 +54,7 @@ class ErrorRendererSpec extends UnitSpec {
 
         ErrorRenderer renderer = new ErrorRenderer()
 
-        def model = [errors:new Errors()]
+        def model = new ModelBean()
         def node = [:]
         def styles = ['highlight']
         def errorField = "email"
