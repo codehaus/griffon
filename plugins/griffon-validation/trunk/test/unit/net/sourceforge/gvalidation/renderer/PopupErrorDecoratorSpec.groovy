@@ -49,4 +49,27 @@ class PopupErrorDecoratorSpec extends UnitSpec {
         decorator.popup.visible == true
     }
 
+    def 'Popup error decorator should hide popup while undecorating'(){
+        given:
+        PopupErrorDecorator decorator = new PopupErrorDecorator()
+
+        def errorField = "email"
+        def errors = new Errors()
+        errors.rejectValue(errorField, 'emailErrorCode')
+
+        def model = [errors:errors]
+        def node = [:] as JComponent
+        def messageResource = [getMessage:{code, args -> 'Error message'}]
+
+        decorator.register(model, node, errorField, messageResource)
+
+        when:
+        decorator.decorate(errors, errors.getFieldError(errorField))
+        decorator.undecorate()
+
+        then:
+        decorator.popup != null
+        decorator.popup.visible == false
+    }
+
 }
