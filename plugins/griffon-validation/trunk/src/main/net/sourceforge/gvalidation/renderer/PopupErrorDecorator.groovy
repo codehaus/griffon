@@ -62,12 +62,12 @@ class PopupErrorDecorator extends BaseErrorDecorator {
         popup.setLocation((int)(popupLocation.x - targetComponentSize.getWidth() / 2),
                 (int)(popupLocation.y + targetComponentSize.getHeight() / 2))
         popup.pack()
-        popup.setVisible(true)
+        popup.visible = true
     }
 
     @Override
     protected void undecorate() {
-
+        popup.visible = false
     }
 
 
