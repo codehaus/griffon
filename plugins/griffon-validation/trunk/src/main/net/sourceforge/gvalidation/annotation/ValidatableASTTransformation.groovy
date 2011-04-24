@@ -53,7 +53,7 @@ class ValidatableASTTransformation implements ASTTransformation {
     void visit(ASTNode[] astNodes, SourceUnit sourceUnit) {
         ClassNode targetClassNode = sourceUnit.getAST()?.classes.first()
 
-        if (annotatedWithValidatable(targetClassNode)) {
+        if (!alreadyAnnotatedBySuperClass(targetClassNode) && annotatedWithValidatable(targetClassNode)) {
             if (hasNoErrorsField(targetClassNode)) {
                 injectErrorsField(targetClassNode)
             }
@@ -76,6 +76,16 @@ class ValidatableASTTransformation implements ASTTransformation {
         }
     }
 
+    private boolean alreadyAnnotatedBySuperClass(ClassNode targetClassNode) {
+        if(targetClassNode.superClass == null)
+            return false
+
+        if(targetClassNode.superClass.getField(ERRORS_PROPERTY_NAME))
+            return true
+        else
+            return alreadyAnnotatedBySuperClass(targetClassNode.superClass)
+    }
+
     private boolean annotatedWithValidatable(ClassNode classNode) {
         def validatableAnnotation = classNode.getAnnotations().find {
             it.classNode.typeClass == Validatable
@@ -90,7 +100,7 @@ class ValidatableASTTransformation implements ASTTransformation {
 
     private def injectErrorsField(ClassNode targetClassNode) {
         FieldNode errorsField = new FieldNode(ERRORS_PROPERTY_NAME,
-                Opcodes.ACC_PRIVATE,
+                Opcodes.ACC_PROTECTED,
                 ClassHelper.make(Errors.class),
                 targetClassNode,
                 new ConstructorCallExpression(ClassHelper.make(Errors.class), new ArgumentListExpression(new VariableExpression('this')))
