@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+
+
 package net.sourceforge.gvalidation.renderer
 
 import org.springframework.context.MessageSource
@@ -22,13 +24,13 @@ import org.springframework.context.MessageSource
  */
 public interface ErrorDecorator {
 
-    MessageSource getMessageSource()
+    def getMessageSource()
 
-    Object getTargetComponent()
+    def getTargetComponent()
 
     boolean isRegistered()
 
-    Object getModel()
+    def getModel()
 
     String getErrorField()
 

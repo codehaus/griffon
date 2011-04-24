@@ -26,7 +26,7 @@ import net.sourceforge.gvalidation.ErrorListener
 abstract class BaseErrorDecorator implements ErrorDecorator, ErrorListener {
 
     protected Object model
-    protected MessageSource messageSource
+    protected def messageSource
     protected String errorField
     protected Object targetComponent
 
@@ -47,15 +47,15 @@ abstract class BaseErrorDecorator implements ErrorDecorator, ErrorListener {
         return errorField
     }
 
-    public Object getModel() {
+    def getModel() {
         return model
     }
 
-    public MessageSource getMessageSource() {
+    def getMessageSource() {
         return messageSource
     }
 
-    public Object getTargetComponent() {
+    def getTargetComponent() {
         return targetComponent
     }
 
