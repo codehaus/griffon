@@ -15,6 +15,8 @@
 
 package net.sourceforge.gvalidation.renderer
 
+import net.sourceforge.gvalidation.util.MetaUtils
+
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
@@ -27,6 +29,9 @@ class ErrorRenderer {
     ]
 
     def register(model, node, styles, errorField, messageSource) {
+        if(notValidatable(model))
+            return []
+
         if (!styles)
             styles = [ConfigReader.DEFAULT_STYLE]
 
@@ -44,6 +49,10 @@ class ErrorRenderer {
         }
 
         return decorators
+    }
+
+    private boolean notValidatable(model) {
+        return !MetaUtils.fieldExistOnTarget(model, 'errors')
     }
 
 }

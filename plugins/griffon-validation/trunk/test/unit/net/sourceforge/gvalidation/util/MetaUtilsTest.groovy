@@ -22,6 +22,7 @@ import net.sourceforge.gvalidation.util.MetaUtils
  */
 class MetaUtilsTest extends GroovyTestCase {
 
+    def fieldClass = new FieldClass()
     def methodClass = new MethodClass()
     def closureClass = new ClosureClass()
 
@@ -42,6 +43,19 @@ class MetaUtilsTest extends GroovyTestCase {
         assertFalse("Should be false", MetaUtils.hasMethodOrClosure(closureClass, 'doSomethingElse'))
     }
 
+    public void testFieldExistence(){
+        assertTrue("Field should exist", MetaUtils.fieldExistOnTarget(fieldClass, 'errors'))
+        assertFalse("Field should not exist", MetaUtils.fieldExistOnTarget(fieldClass, 'notFound'))
+        assertTrue("Field should exist", MetaUtils.fieldExistOnTarget([errors:[]], 'errors'))
+        assertFalse("Field should not exist", MetaUtils.fieldExistOnTarget([errors:[]], 'notFound'))
+        assertFalse("Should ignore null", MetaUtils.fieldExistOnTarget(null, 'notFound'))
+        assertFalse("Should ignore null", MetaUtils.fieldExistOnTarget(fieldClass, null))
+    }
+
+    class FieldClass {
+        def errors
+    }
+
     class MethodClass {
         boolean done
 
@@ -58,3 +72,4 @@ class MetaUtilsTest extends GroovyTestCase {
         }
     }
 }
+
