@@ -25,7 +25,7 @@ import java.util.regex.Matcher
 class ConfigReader {
     public static final String DEFAULT_STYLE = 'default'
 
-    private static final String ERROR_FIELD = 'error'
+    private static final String ERROR_FIELD = 'for'
     private static final String STYLES = 'styles'
 
     private static final Pattern ERROR_FIELD_PATTERN = ~/${ERROR_FIELD}[\s]*:[\s]*(\w+)/

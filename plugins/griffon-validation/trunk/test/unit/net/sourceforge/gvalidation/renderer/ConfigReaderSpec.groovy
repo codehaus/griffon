@@ -23,7 +23,7 @@ import griffon.spock.UnitSpec
 class ConfigReaderSpec extends UnitSpec {
 
     def 'Config reader should be able to retrieve error field and default style'(){
-        ConfigReader reader = new ConfigReader('error: "email"')
+        ConfigReader reader = new ConfigReader('for: "email"')
 
         expect:
         reader.isConfigured() == true
@@ -33,7 +33,7 @@ class ConfigReaderSpec extends UnitSpec {
     }
 
     def 'Config reader should be able to retrieve particular style'(){
-        ConfigReader reader = new ConfigReader('error: "url", styles: ["highlight", "popup"]')
+        ConfigReader reader = new ConfigReader('for: "url", styles: ["highlight", "popup"]')
 
         expect:
         reader.isConfigured() == true
@@ -57,16 +57,16 @@ class ConfigReaderSpec extends UnitSpec {
 
         where:
         config << [
-                'error: "email"',
-                'error: email',
-                'error: "url", styles: [ highlight, pop ]',
-                'styles:[popup],error:url',
-                'styles :   [  "popup",   highlight ],    error :url'
+                'for: "email"',
+                'for: email',
+                'for: "url", styles: [ highlight, pop ]',
+                'styles:[popup],for:url',
+                'styles :   [  "popup",   highlight ],    for :url'
         ]
     }
 
     def 'Config reader should be able to read without string quotes'(){
-        ConfigReader reader = new ConfigReader('error: url, styles : [highlight, popup]')
+        ConfigReader reader = new ConfigReader('for: url, styles : [highlight, popup]')
 
         expect:
         reader.isConfigured() == true
