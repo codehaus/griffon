@@ -25,7 +25,8 @@ class ErrorRenderer {
     static final Class<? extends ErrorDecorator> DEFAULT_DECORATOR_CLASS = HighlightErrorDecorator.class
     static Map<String, ErrorDecorator> decoratorClassMap = [
             'default': DEFAULT_DECORATOR_CLASS,
-            'highlight': HighlightErrorDecorator.class
+            'highlight': HighlightErrorDecorator.class,
+            'popup' : PopupErrorDecorator.class
     ]
 
     def register(model, node, styles, errorField, messageSource) {
