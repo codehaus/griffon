@@ -21,6 +21,7 @@ import javax.swing.*
 import static javax.swing.SwingConstants.LEFT
 import net.sourceforge.gvalidation.Errors
 import org.springframework.context.NoSuchMessageException
+import net.sourceforge.gvalidation.util.ErrorMessageUtils
 
 /**
  * Created by nick.zhu
@@ -77,13 +78,7 @@ class ErrorMessagePanel extends JPanel {
     }
 
     def createErrorLabel(error) {
-        def errorMessage = ""
-
-        try {
-            errorMessage = messageSource.getMessage(error.errorCode, error.arguments)
-        } catch (NoSuchMessageException ex) {
-            errorMessage = messageSource.getMessage(error.defaultErrorCode, error.arguments)
-        }
+        def errorMessage = ErrorMessageUtils.getErrorMessage(error, messageSource)
 
         def errorLabel = new JLabel(" ${errorMessage}", LEFT)
 

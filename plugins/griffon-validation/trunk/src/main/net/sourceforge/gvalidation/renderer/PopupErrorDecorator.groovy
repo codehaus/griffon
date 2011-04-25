@@ -22,6 +22,7 @@ import java.awt.FlowLayout
 import java.awt.Color
 import javax.swing.JLabel
 import javax.swing.ImageIcon
+import net.sourceforge.gvalidation.util.ErrorMessageUtils
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -53,7 +54,7 @@ class PopupErrorDecorator extends BaseErrorDecorator {
 
     @Override
     protected void decorate(Errors errors, FieldError fieldError) {
-        messageLabel.text = messageSource.getMessage(fieldError.errorCode, fieldError.arguments)
+        messageLabel.text = ErrorMessageUtils.getErrorMessage(fieldError, messageSource)
 
         popup.setSize(0, 0);
         popup.setLocationRelativeTo(targetComponent)
