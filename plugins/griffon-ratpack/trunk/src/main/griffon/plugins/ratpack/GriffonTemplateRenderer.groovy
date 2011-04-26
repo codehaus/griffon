@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 import groovy.text.SimpleTemplateEngine
+
+import griffon.util.GriffonExceptionHandler
 
 /**
  * @author Andres Almiray
@@ -63,7 +65,7 @@ class GriffonTemplateRenderer extends TemplateRenderer {
      }
 
      String renderException(Throwable ex, HttpServletRequest req) {
-         def stackInfo = super.decodeStackTrace(ex)
+         def stackInfo = super.decodeStackTrace(GriffonExceptionHandler.sanitize(ex))
                   
          String text = loadResource('com/bleedingwolf/ratpack/exception.html').text
          Map context = [

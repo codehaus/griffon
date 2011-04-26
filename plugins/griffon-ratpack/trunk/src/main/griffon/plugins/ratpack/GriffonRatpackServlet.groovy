@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,8 @@ import com.bleedingwolf.ratpack.RatpackApp
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+
+import griffon.util.GriffonExceptionHandler
 
 /**
  * @author Andres Almiray
@@ -60,7 +62,7 @@ class GriffonRatpackServlet extends HttpServlet {
             try {
                 output = handler.call()
             } catch(RuntimeException ex) {
-                log.error('Caught Exception ' + ex, ex)
+                log.error('Caught Exception ' + ex, GriffonExceptionHandler.sanitize(ex))
                 
                 res.status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR
                 output = renderer.renderException(ex, req)
