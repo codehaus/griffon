@@ -42,6 +42,7 @@ class PopupErrorDecoratorSpec extends UnitSpec {
 
         when:
         decorator.decorate(errors, errors.getFieldError(errorField))
+        Thread.sleep(300)
 
         then:
         decorator.popup != null
@@ -65,7 +66,9 @@ class PopupErrorDecoratorSpec extends UnitSpec {
 
         when:
         decorator.decorate(errors, errors.getFieldError(errorField))
+        Thread.sleep(300)
         decorator.undecorate()
+        Thread.sleep(300)
 
         then:
         decorator.popup != null

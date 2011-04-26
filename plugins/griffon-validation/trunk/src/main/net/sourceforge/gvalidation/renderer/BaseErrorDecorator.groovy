@@ -80,14 +80,14 @@ abstract class BaseErrorDecorator implements ErrorDecorator, ErrorListener {
         if(isNotRelatedError(error))
             return null
 
-        SwingUtilities.invokeAndWait({decorate(model.errors, error)} as Runnable)
+        SwingUtilities.invokeLater({decorate(model.errors, error)} as Runnable)
     }
 
     def onFieldErrorRemoved(FieldError error) {
         if(isNotRelatedError(error))
             return null
 
-        SwingUtilities.invokeAndWait({undecorate()} as Runnable)
+        SwingUtilities.invokeLater({undecorate()} as Runnable)
     }
 
     private boolean isNotRelatedError(FieldError error) {

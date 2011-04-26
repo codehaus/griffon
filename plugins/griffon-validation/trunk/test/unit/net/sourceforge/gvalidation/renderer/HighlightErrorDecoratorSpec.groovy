@@ -44,6 +44,7 @@ class HighlightErrorDecoratorSpec extends UnitSpec {
 
         when:
         decorator.decorate(errors, errors.getFieldError(errorField))
+        Thread.sleep(300)
 
         then:
         decorator.originalBgColor == Color.WHITE
@@ -68,7 +69,9 @@ class HighlightErrorDecoratorSpec extends UnitSpec {
 
         when:
         decorator.decorate(errors, errors.getFieldError(errorField))
+        Thread.sleep(300)
         decorator.undecorate()
+        Thread.sleep(300)
 
         then:
         decorator.originalBgColor == Color.WHITE
