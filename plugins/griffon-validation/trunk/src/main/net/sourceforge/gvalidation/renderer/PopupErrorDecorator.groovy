@@ -23,6 +23,10 @@ import java.awt.Color
 import javax.swing.JLabel
 import javax.swing.ImageIcon
 import net.sourceforge.gvalidation.util.ErrorMessageUtils
+import javax.swing.JButton
+import java.awt.event.ActionListener
+import java.awt.Insets
+import javax.swing.plaf.basic.BasicButtonUI
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -33,6 +37,7 @@ class PopupErrorDecorator extends BaseErrorDecorator {
     Color bgColor = new Color(243, 255, 159)
     JLabel image
     JLabel messageLabel
+    JButton closeBtn
 
     @Override
     void register(model, node, errorField, messageSource) {
@@ -40,6 +45,13 @@ class PopupErrorDecorator extends BaseErrorDecorator {
 
         image = new JLabel(new ImageIcon(getClass().getClassLoader().getResource('net/sourceforge/gvalidation/error.png')))
         messageLabel = new JLabel()
+        closeBtn = new JButton(new ImageIcon(getClass().getClassLoader().getResource('net/sourceforge/gvalidation/close.png')))
+        closeBtn.addActionListener({e -> popup.visible = false} as ActionListener)
+        closeBtn.border = null
+        closeBtn.borderPainted = false
+        closeBtn.background = bgColor
+        closeBtn.margin = new Insets(0, 0, 0, 0)
+        closeBtn.setUI(new BasicButtonUI())
 
         popup = new JDialog()
         popup.getContentPane().setLayout(new FlowLayout());
@@ -47,6 +59,7 @@ class PopupErrorDecorator extends BaseErrorDecorator {
         popup.getContentPane().setBackground(bgColor);
         popup.getContentPane().add(image);
         popup.getContentPane().add(messageLabel);
+        popup.getContentPane().add(closeBtn)
         popup.setFocusableWindowState(false);
     }
 
