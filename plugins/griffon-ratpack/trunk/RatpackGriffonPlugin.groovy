@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ class RatpackGriffonPlugin {
     // the plugin version
     def version = "0.1"
     // the version or versions of Griffon the plugin is designed for
-    def griffonVersion = '0.9.2 > *' 
+    def griffonVersion = '0.9.3 > *' 
     // the other plugins this plugin depends on
     def dependsOn = [:]
     // resources that are included in plugin packaging
@@ -38,7 +38,7 @@ class RatpackGriffonPlugin {
 
     def author = 'Andres Almiray'
     def authorEmail = 'aalmiray@users.sourceforge.net'
-    def title = 'iRatPack - embedded web framework'
+    def title = 'RatPack - embedded web framework'
     def description = '''
 RatPack - embedded web framework
 '''
