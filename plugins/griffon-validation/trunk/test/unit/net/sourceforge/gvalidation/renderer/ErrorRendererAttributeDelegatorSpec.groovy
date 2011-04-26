@@ -73,11 +73,11 @@ class ErrorRendererAttributeDelegatorSpec extends UnitSpec {
 
         def builder = [model: [errors: errors]]
         def node = [:]
-        def attributes = ['errorRenderer': 'error: email']
+        def attributes = ['errorRenderer': 'for: email']
         def outcome = [:]
         def app = [messageSource: [] as MessageSource]
 
-        delegator.errorRenderer = [register: {b, n, styles, errorField, messageSource ->
+        delegator.errorRenderer = [register: {m, n, styles, errorField, messageSource ->
             outcome['invoked'] = true
             outcome['styles'] = styles
             outcome['errorField'] = errorField
