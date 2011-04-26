@@ -42,6 +42,7 @@ class ErrorNodeDecoratorSpec extends UnitSpec {
 
         when:
         model.errors.rejectValue("email", "emailCode")
+        Thread.sleep(300)
 
         then:
         resultErrors == null
@@ -66,6 +67,7 @@ class ErrorNodeDecoratorSpec extends UnitSpec {
 
         when:
         model.errors.rejectValue(errorField, "${errorField}Code")
+        Thread.sleep(300)
 
         then:
         resultErrors != null
@@ -92,6 +94,7 @@ class ErrorNodeDecoratorSpec extends UnitSpec {
 
         when:
         model.errors.clear()
+        Thread.sleep(300)
 
         then:
         resultErrors == null
