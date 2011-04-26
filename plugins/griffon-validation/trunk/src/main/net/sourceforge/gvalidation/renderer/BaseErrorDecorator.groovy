@@ -19,6 +19,8 @@ import org.springframework.context.MessageSource
 import net.sourceforge.gvalidation.Errors
 import net.sourceforge.gvalidation.FieldError
 import net.sourceforge.gvalidation.ErrorListener
+import griffon.swing.SwingUtils
+import javax.swing.SwingUtilities
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -59,22 +61,33 @@ abstract class BaseErrorDecorator implements ErrorDecorator, ErrorListener {
         return targetComponent
     }
 
+    /**
+     * This abstract method should be implemented by subclasses to perform actual UI
+     * related decoration. This method is guaranteed to be invoked in edt.
+     *
+     * @param errors current errors
+     * @param fieldError associated field error instance
+     */
     abstract protected void decorate(Errors errors, FieldError fieldError)
 
+    /**
+     * This abstract method should be implemented by subclasses to perform actual UI
+     * related un-decoration. This method is guaranteed to be invoked in edt.
+     */
     abstract protected void undecorate()
 
     def onFieldErrorAdded(FieldError error) {
         if(isNotRelatedError(error))
             return null
 
-        return decorate(model.errors, error)
+        SwingUtilities.invokeAndWait({decorate(model.errors, error)} as Runnable)
     }
 
     def onFieldErrorRemoved(FieldError error) {
         if(isNotRelatedError(error))
             return null
 
-        return undecorate()
+        SwingUtilities.invokeAndWait({undecorate()} as Runnable)
     }
 
     private boolean isNotRelatedError(FieldError error) {
