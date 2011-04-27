@@ -18,17 +18,19 @@
  * @author Andres Almiray
  */
 
+builderConfigFile.text = builderConfigFile.text - "root.'JBusyComponentGriffonAddon'.addon=true\n"
+
 // check to see if we already have a JbusyComponentGriffonAddon
 boolean addonIsSet1
 builderConfig.each() { prefix, v ->
     v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'JBusyComponentGriffonAddon' == builder
+        addonIsSet1 = addonIsSet1 || 'JbusyComponentGriffonAddon' == builder
     }
 }
 
 if (!addonIsSet1) {
-    println 'Adding JBusyComponentGriffonAddon to Builder.groovy'
+    println 'Adding JbusyComponentGriffonAddon to Builder.groovy'
     builderConfigFile.append('''
-root.'JBusyComponentGriffonAddon'.addon=true
+root.'JbusyComponentGriffonAddon'.addon=true
 ''')
 }
