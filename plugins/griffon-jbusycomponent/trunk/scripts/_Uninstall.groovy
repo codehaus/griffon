@@ -18,14 +18,14 @@
  * @author Andres Almiray
  */
 
-// check to see if we already have a JBusyComponentGriffonAddon
+// check to see if we already have a JbusyComponentGriffonAddon
 boolean addonIsSet1
 builderConfig.each() { prefix, v ->
     v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'JBusyComponentGriffonAddon' == builder
+        addonIsSet1 = addonIsSet1 || 'JbusyComponentGriffonAddon' == builder
     }
 }
 
 if(addonIsSet1) {
-    builderConfigFile.text = builderConfigFile.text - "root.'JBusyComponentGriffonAddon'.addon=true\n"
+    builderConfigFile.text = builderConfigFile.text - "root.'JbusyComponentGriffonAddon'.addon=true\n"
 }
