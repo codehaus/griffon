@@ -68,7 +68,7 @@ class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListene
         popup.getContentPane().add(closeBtn)
         popup.setFocusableWindowState(false);
 
-        targetComponent.addComponentListener(this)
+        windowManager.griffonWindow.addComponentListener(this)
     }
 
 

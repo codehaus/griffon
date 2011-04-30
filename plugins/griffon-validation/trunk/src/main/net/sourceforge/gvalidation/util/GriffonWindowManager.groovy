@@ -22,6 +22,8 @@ import griffon.util.ApplicationHolder
  */
 class GriffonWindowManager {
 
+    /* TODO: to support multi-window app the get window method should take a JComponent as
+        input to get the associated window instead of getting just the default window */
     def getGriffonWindow(){
         ApplicationHolder.application.windowManager.windows.first()
     }
