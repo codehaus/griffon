@@ -64,16 +64,44 @@ class ValidationEnhancer {
         this.fields = generateTargetFields(params)
 
         try {
-            model.errors.clear()
+            if(isFieldBasedValidation(fields)){
+                model.errors.clear()
+            }else{
+                fields.each{
+                    model.errors.removeError(it)
+                }
+            }
 
             evaluateParentClassConstraintsRecursively(model.getClass())
 
             evaluateCurrentClassConstraints()
+
+            if(isFieldBasedValidation(fields))
+                return hasAnyError(model)
+            else{
+                return hasFieldValidationFailed(fields)
+            }
         } finally {
             this.fields = null
         }
+    }
 
-        return !model.hasErrors()
+    private def hasAnyError(model) {
+        !model.hasErrors()
+    }
+
+    private boolean isFieldBasedValidation(List fields) {
+        return !fields
+    }
+
+    private boolean hasFieldValidationFailed(List fields) {
+        boolean hasError = false
+
+        fields.each {
+            hasError |= !model.errors.hasFieldErrors(it)
+        }
+
+        return hasError
     }
 
     private List generateTargetFields(params) {

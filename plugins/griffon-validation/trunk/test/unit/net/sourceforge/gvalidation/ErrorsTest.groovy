@@ -20,6 +20,21 @@ package net.sourceforge.gvalidation
  */
 class ErrorsTest extends GroovyTestCase {
 
+    public void testRemoveFieldError() {
+        Errors errors = new Errors()
+
+        errors.rejectValue("field", "errorCode")
+        errors.rejectValue("field2", "errorCode")
+
+        assertTrue "Should have error", errors.hasFieldErrors('field')
+        assertTrue "Should have error", errors.hasFieldErrors('field2')
+
+        errors.removeError('field')
+
+        assertFalse "Should not have error", errors.hasFieldErrors('field')
+        assertTrue "Should have error", errors.hasFieldErrors('field2')
+    }
+
     public void testHasErrors() {
         Errors errors = new Errors()
 

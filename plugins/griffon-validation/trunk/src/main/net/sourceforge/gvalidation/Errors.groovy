@@ -165,6 +165,11 @@ class Errors {
     public boolean removeListener(ErrorListener errorListener) {
         return errorListeners.remove(errorListener)
     }
+
+    def removeError(String field) {
+        return fieldErrors.remove(field)
+    }
+
 }
 
 
