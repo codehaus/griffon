@@ -212,4 +212,23 @@ class ValidationEnhancerTest extends BaseTestCase {
         assertTrue model.errors.hasFieldErrors('email')
     }
 
+    public void testFieldLevelValidationShouldNotResetAllErrors() {
+        def model = generateModel('ModelBean.groovy')
+
+        ValidationEnhancer.enhance(model)
+
+        model.email = 'invalidEmail'
+
+        model.validate()
+
+        model.email = 'abc@abc.com'
+
+        boolean result = model.validate(['email'])
+
+        assertTrue "Field validation should not have failed", result
+
+        assertTrue "ID error should still be there", model.errors.hasFieldErrors('id')
+        assertFalse "Email should not contain any error", model.errors.hasFieldErrors('email')
+    }
+
 }
