@@ -140,6 +140,9 @@ class Errors {
     }
 
     private def fireFieldErrorRemovedEvent(error) {
+        if(error == null)
+            return
+
         errorListeners.each {ErrorListener listener ->
             listener.onFieldErrorRemoved(error)
         }
@@ -172,6 +175,8 @@ class Errors {
         def error = fieldErrors.remove(field)
 
         fireFieldErrorRemovedEvent(error)
+
+        fireErrorChangedEventOnParent(oldErrors)
 
         return error
     }
