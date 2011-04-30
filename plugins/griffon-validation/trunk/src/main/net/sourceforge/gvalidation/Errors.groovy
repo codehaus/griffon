@@ -167,7 +167,13 @@ class Errors {
     }
 
     def removeError(String field) {
-        return fieldErrors.remove(field)
+        def oldErrors = cloneErrors()
+
+        def error = fieldErrors.remove(field)
+
+        fireFieldErrorRemovedEvent(error)
+
+        return error
     }
 
 }
