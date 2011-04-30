@@ -27,11 +27,17 @@ import javax.swing.JButton
 import java.awt.event.ActionListener
 import java.awt.Insets
 import javax.swing.plaf.basic.BasicButtonUI
+import java.awt.event.ComponentListener
+import java.awt.event.ComponentEvent
+
+import net.sourceforge.gvalidation.util.GriffonWindowManager
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
-class PopupErrorDecorator extends BaseErrorDecorator {
+class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListener {
+
+    def windowManager = new GriffonWindowManager()
 
     JDialog popup
     Color bgColor = new Color(243, 255, 159)
@@ -53,7 +59,7 @@ class PopupErrorDecorator extends BaseErrorDecorator {
         closeBtn.margin = new Insets(0, 0, 0, 0)
         closeBtn.setUI(new BasicButtonUI())
 
-        popup = new JDialog()
+        popup = new JDialog(windowManager.griffonWindow)
         popup.getContentPane().setLayout(new FlowLayout());
         popup.setUndecorated(true);
         popup.getContentPane().setBackground(bgColor);
@@ -61,6 +67,8 @@ class PopupErrorDecorator extends BaseErrorDecorator {
         popup.getContentPane().add(messageLabel);
         popup.getContentPane().add(closeBtn)
         popup.setFocusableWindowState(false);
+
+        targetComponent.addComponentListener(this)
     }
 
 
@@ -69,14 +77,18 @@ class PopupErrorDecorator extends BaseErrorDecorator {
     protected void decorate(Errors errors, FieldError fieldError) {
         messageLabel.text = ErrorMessageUtils.getErrorMessage(fieldError, messageSource)
 
+        positionPopup()
+        popup.visible = true
+    }
+
+    private def positionPopup() {
         popup.setSize(0, 0);
         popup.setLocationRelativeTo(targetComponent)
         def popupLocation = popup.getLocation()
         def targetComponentSize = targetComponent.getSize()
-        popup.setLocation((int)(popupLocation.x - targetComponentSize.getWidth() / 2),
-                (int)(popupLocation.y + targetComponentSize.getHeight() / 2))
+        popup.setLocation((int) (popupLocation.x - targetComponentSize.getWidth() / 2),
+                (int) (popupLocation.y + targetComponentSize.getHeight() / 2))
         popup.pack()
-        popup.visible = true
     }
 
     @Override
@@ -84,5 +96,20 @@ class PopupErrorDecorator extends BaseErrorDecorator {
         popup.visible = false
     }
 
+    void componentResized(ComponentEvent componentEvent) {
+        positionPopup()
+    }
+
+    void componentMoved(ComponentEvent componentEvent) {
+        positionPopup()
+    }
+
+    void componentShown(ComponentEvent componentEvent) {
+        positionPopup()
+    }
+
+    void componentHidden(ComponentEvent componentEvent) {
+        popup.visible = false
+    }
 
 }
