@@ -20,6 +20,9 @@ import net.sourceforge.gvalidation.Errors
 import java.awt.Color
 import javax.swing.JComponent
 import org.springframework.context.MessageSource
+import javax.swing.JFrame
+import net.sourceforge.gvalidation.util.GriffonWindowManager
+import javax.swing.JDialog
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -34,10 +37,12 @@ class PopupErrorDecoratorSpec extends UnitSpec {
         def errors = new Errors()
         errors.rejectValue(errorField, 'emailErrorCode')
 
+        def windowManager = [getGriffonWindow:{new JDialog()}] as GriffonWindowManager
         def model = [errors:errors]
         def node = [:] as JComponent
         def messageResource = [getMessage:{code, args -> 'Error message'}]
 
+        decorator.windowManager = windowManager
         decorator.register(model, node, errorField, messageResource)
 
         when:
@@ -58,10 +63,12 @@ class PopupErrorDecoratorSpec extends UnitSpec {
         def errors = new Errors()
         errors.rejectValue(errorField, 'emailErrorCode')
 
+        def windowManager = [getGriffonWindow:{new JDialog()}] as GriffonWindowManager
         def model = [errors:errors]
         def node = [:] as JComponent
         def messageResource = [getMessage:{code, args -> 'Error message'}]
 
+        decorator.windowManager = windowManager
         decorator.register(model, node, errorField, messageResource)
 
         when:
