@@ -31,11 +31,13 @@ import java.awt.event.ComponentListener
 import java.awt.event.ComponentEvent
 
 import net.sourceforge.gvalidation.util.GriffonWindowManager
+import java.awt.event.FocusListener
+import java.awt.event.FocusEvent
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
-class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListener {
+class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListener, FocusListener {
 
     def windowManager = new GriffonWindowManager()
 
@@ -69,6 +71,7 @@ class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListene
         popup.setFocusableWindowState(false);
 
         windowManager.griffonWindow.addComponentListener(this)
+        targetComponent.addComponentListener(this)
     }
 
 
@@ -109,6 +112,17 @@ class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListene
     }
 
     void componentHidden(ComponentEvent componentEvent) {
+        popup.visible = false
+    }
+
+    void focusGained(FocusEvent focusEvent) {
+        if (messageLabel.text) {
+            positionPopup()
+            popup.visible = true
+        }
+    }
+
+    void focusLost(FocusEvent focusEvent) {
         popup.visible = false
     }
 
