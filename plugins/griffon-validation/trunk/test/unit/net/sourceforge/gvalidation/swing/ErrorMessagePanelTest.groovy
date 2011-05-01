@@ -46,6 +46,9 @@ class ErrorMessagePanelTest extends GroovyTestCase {
         ErrorMessagePanel errorPanel = new ErrorMessagePanel(messageSource)
 
         errorPanel.errors = errors
+
+        Thread.sleep(100)
+
         return errorPanel
     }
 
@@ -53,6 +56,8 @@ class ErrorMessagePanelTest extends GroovyTestCase {
         ErrorMessagePanel errorPanel = buildErrorPanel()
 
         errorPanel.errors = new Errors()
+
+        Thread.sleep(100)
 
         assertEquals "Error panel should be empty", 0, errorPanel.getContentPanel().components.size()
         assertTrue "Error border was not generated", errorPanel.getContentPanel().getBorder() instanceof EmptyBorder
@@ -62,6 +67,8 @@ class ErrorMessagePanelTest extends GroovyTestCase {
         ErrorMessagePanel errorPanel = buildErrorPanel()
 
         errorPanel.errors = null
+
+        Thread.sleep(100)
 
         assertEquals "Error panel should be empty", 0, errorPanel.getContentPanel().components.size()
         assertTrue "Error border was not generated", errorPanel.getContentPanel().getBorder() instanceof EmptyBorder
