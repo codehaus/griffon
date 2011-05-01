@@ -26,6 +26,7 @@ class ErrorRenderer {
     static Map<String, ErrorDecorator> decoratorClassMap = [
             'default': DEFAULT_DECORATOR_CLASS,
             'highlight': HighlightErrorDecorator.class,
+            'onWithError': OnWithErrorDecorator.class,
             'popup' : PopupErrorDecorator.class
     ]
 
