@@ -40,12 +40,6 @@ class ErrorMessagePanel extends JPanel {
         this.successIcon = new ImageIcon(getClass().getClassLoader().getResource('net/sourceforge/gvalidation/success.png'))
 
         setLayout new BorderLayout()
-
-        contentPanel = new JPanel()
-
-        contentPanel.setLayout new BoxLayout(contentPanel, BoxLayout.Y_AXIS)
-
-        add(contentPanel)
     }
 
     public Errors getErrors() {
@@ -55,20 +49,26 @@ class ErrorMessagePanel extends JPanel {
     public void setErrors(Errors errors) {
         this.errors = errors
 
-        contentPanel.removeAll()
+        SwingUtilities.invokeLater({
+            removeAll()
 
-        if (errors && errors.hasErrors()) {
-            setErrorMessageBorder()
+            contentPanel = new JPanel()
+            contentPanel.setLayout new BoxLayout(contentPanel, BoxLayout.Y_AXIS)
 
-            errors.each {error ->
-                JLabel errorLabel = createErrorLabel(error)
-                contentPanel.add(errorLabel)
+            if (errors && errors.hasErrors()) {
+                setErrorMessageBorder()
+
+                errors.each {error ->
+                    JLabel errorLabel = createErrorLabel(error)
+                    contentPanel.add(errorLabel)
+                }
+            } else {
+                clearErrorMessageBorder()
             }
-        } else {
-            clearErrorMessageBorder()
-        }
 
-        revalidate()
+            add(contentPanel)
+            revalidate()
+        } as Runnable)
     }
 
     private def setErrorMessageBorder() {

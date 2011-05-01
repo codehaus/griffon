@@ -71,6 +71,7 @@ class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListene
         popup.setFocusableWindowState(false);
 
         windowManager.griffonWindow.addComponentListener(this)
+        targetComponent.addComponentListener(this)
         targetComponent.addFocusListener(this)
     }
 
@@ -112,6 +113,7 @@ class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListene
     }
 
     void componentHidden(ComponentEvent componentEvent) {
+        println "Component hidden..."
         popup.visible = false
     }
 
