@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3834">
+<?xml version="1.0" encoding="UTF-8"?><plugins revision="3855">
     <plugin name="abeilleform-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -16,12 +15,10 @@
             <description>\
 This plugin installs the AbeilleFormsBuilder.  The builder helps integrate forms (".jfrm") into griffon</description>
             <documentation>http://griffon.codehaus.org/AbeilleformBuilder+Plugin</documentation>
-            <license>GNU Lesser Public License 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-abeilleform-builder/tags/RELEASE_0_2/griffon-abeilleform-builder-0.2.zip</file>
         </release>
     </plugin>
+    <plugin name="airbag"/>
     <plugin name="avro" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Apache Avro support</title>
@@ -45,9 +42,6 @@ This plugin installs the AbeilleFormsBuilder.  The builder helps integrate forms
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Apache Avro support</description>
             <documentation>http://griffon.codehaus.org/Avro+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-avro/tags/RELEASE_0_3/griffon-avro-0.3.zip</file>
         </release>
     </plugin>
@@ -105,6 +99,7 @@ http://barcode4j.sourceforge.net</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-berkeleydb/tags/RELEASE_0_3_1/griffon-berkeleydb-0.3.1.zip</file>
         </release>
     </plugin>
+    <plugin name="camel"/>
     <plugin name="charts" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Charting support via JFreeChart</title>
@@ -200,9 +195,6 @@ http://groovychart.dev.java.net</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Enables the usage of Clojure on your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_7/griffon-clojure-0.7.zip</file>
         </release>
     </plugin>
@@ -553,6 +545,72 @@ http://everaldo.com/crystal/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-css-builder/tags/RELEASE_0_7/griffon-css-builder-0.7.zip</file>
         </release>
     </plugin>
+    <plugin name="csv" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Griffon CSV Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>A port of Grails CSV Plugin to Griffon. Original (c) Les Hazlewood
+
+        The Griffon CSV Plugin allows you to easily parse and consume CSV data from a number of input sources.  It
+        supports complex parsing scenarios such as nested commas inside quotes, escaped tokens, multi-line quoted
+        values and allows configuration of parsing options (separator char, escape char, text encoding, etc).  It is
+        based on Glen Smith (et. al.)'s OpenCSV project (http://opencsv.sourceforge.net)
+
+        This plugin adds two dynamic methods 'eachCsvLine' and 'toCsvReader' to each of the following classes:
+        - java.lang.String
+        - java.io.File
+        - java.io.InputStream
+        - java.io.Reader
+
+        Using it is extremely simple.  On any instance of the four data types, call the 'eachCvsLine' method with a
+          closure accepting the tokens (a String array) for each parsed line:
+
+        "hello, world, how, are, you".eachCsvLine { tokens -&gt;
+            //only one line in this case and tokens.length == 5
+        }
+
+        new File("iso3166Countries.csv").eachCsvLine { tokens -&gt;
+            new Country(tokens[0],        //ISO 3166 country name
+                        tokens[1]).save() //ISO 3166 2 letter character code
+        }
+
+        Configuration
+
+        If you need to specify how the parsing should occur, you can construct your own csv reader with a map of
+        configuration options and call the 'eachLine' method on the constructed reader:
+
+        anInputStream.toCsvReader(['charset':'UTF-8']).eachLine { tokens -&gt;
+            ...
+        }
+
+        The supported config options:
+
+        'separatorChar': the character to use as the delimiter to separate the tokens.  Defaults to the comma: ','
+
+        'quoteChar': the character indicating a quoted string is about to follow.  Internal separatorChars can be
+                     inside the quoted string and they will not be split into tokens.
+                     Defaults to the double quote char: '"'
+
+        'escapeChar': the character to escape an immediately following character, indicating to the parser not to treat
+                      it as a special char.  Defaults to the backslash char: ''
+
+        'skipLines': the number of lines in the input source to skip before parsing begins.  This is useful to skip
+                     any potential CSV header lines that are not part of the CSV data.  Defaults to zero '0'
+
+        'strictQuotes': if characters outside of quotes should be ignored (implying each individual token is
+                        quoted.  Defaults to false
+
+        'ignoreLeadingWhiteSpace': white space in front of a quoted token is ignored.  Defaults to true
+
+        'charset': use the specified charset when parsing an InputStream.  The value can be either the Charset name
+                   as a String, a java.nio.charset.Charset instance, or a java.nio.charset.CharsetDecoder instance.
+                   Defaults to the system default charset.
+                   *Note that this option is ONLY valid for InputStream instances.  It is ignored otherwise.</description>
+            <documentation>http://griffon.codehaus.org/Csv+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-csv/tags/RELEASE_0_1/griffon-csv-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="db4o" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Db4o support</title>
@@ -649,6 +707,9 @@ another docking frame in the application.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-docking-frame/tags/RELEASE_0_3/griffon-docking-frame-0.3.zip</file>
         </release>
     </plugin>
+    <plugin name="domain"/>
+    <plugin name="domain-db4o"/>
+    <plugin name="domain-gsql"/>
     <plugin name="easyb" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables BDD testing with Easyb</title>
@@ -746,9 +807,6 @@ another docking frame in the application.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Keeps Eclipse files up to date.</description>
             <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_1/griffon-eclipse-support-0.4.1.zip</file>
         </release>
         <release tag="RELEASE_0_4_2" type="svn" version="0.4.2">
@@ -757,9 +815,6 @@ another docking frame in the application.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Keeps Eclipse files up to date.</description>
             <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_2/griffon-eclipse-support-0.4.2.zip</file>
         </release>
         <release tag="RELEASE_0_4_3" type="svn" version="0.4.3">
@@ -768,9 +823,6 @@ another docking frame in the application.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Keeps Eclipse files up to date.</description>
             <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_3/griffon-eclipse-support-0.4.3.zip</file>
         </release>
     </plugin>
@@ -823,9 +875,6 @@ another docking frame in the application.</description>
             <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
             <description>Erlang support via jinterface</description>
             <documentation>http://griffon.codehaus.org/Erlang+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-erlang/tags/RELEASE_0_3/griffon-erlang-0.3.zip</file>
         </release>
     </plugin>
@@ -864,9 +913,6 @@ Provides a nice icon set too.</description>
             <description>Read/Write RSS/Atom feeds with Rome.
 Provides a nice icon set too.</description>
             <documentation>http://griffon.codehaus.org/Feeds+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-feeds/tags/RELEASE_0_2/griffon-feeds-0.2.zip</file>
         </release>
     </plugin>
@@ -1227,9 +1273,6 @@ Provides a nice icon set too.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Adds GlazedLists support to your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_8_1/griffon-glazedlists-0.8.1.zip</file>
         </release>
         <release tag="RELEASE_0_8_2" type="svn" version="0.8.2">
@@ -1238,9 +1281,6 @@ Provides a nice icon set too.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Adds GlazedLists support to your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_8_2/griffon-glazedlists-0.8.2.zip</file>
         </release>
     </plugin>
@@ -1272,6 +1312,7 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gmetrics/tags/RELEASE_0_3/griffon-gmetrics-0.3.zip</file>
         </release>
     </plugin>
+    <plugin name="gorm"/>
     <plugin name="gparallelizer" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>GParallelizer Plugin</title>
@@ -1371,9 +1412,6 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Adds Gsql powered DataSource capabilities to your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_6_1/griffon-gsql-0.6.1.zip</file>
         </release>
     </plugin>
@@ -1497,9 +1535,6 @@ http://harmoniccode.blogspot.com</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>I18n support via Spring.</description>
             <documentation>http://griffon.codehaus.org/I18n+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-i18n/tags/RELEASE_0_3_1/griffon-i18n-0.3.1.zip</file>
         </release>
     </plugin>
@@ -1775,9 +1810,6 @@ http://www.toedter.com/en/jcalendar/</description>
             <description>Date &amp; Calendar support
 http://www.toedter.com/en/jcalendar/</description>
             <documentation>http://griffon.codehaus.org/Jcalendar+Plugin</documentation>
-            <license>GNU LGPL 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jcalendar/tags/RELEASE_0_2/griffon-jcalendar-0.2.zip</file>
         </release>
     </plugin>
@@ -1963,9 +1995,6 @@ http://jgraph.com</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>JMonkeyEngine support.</description>
             <documentation>http://griffon.codehaus.org/Jmonkeyengine+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmonkeyengine/tags/RELEASE_0_1_1/griffon-jmonkeyengine-0.1.1.zip</file>
         </release>
     </plugin>
@@ -2221,9 +2250,6 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
             <description>Enables interoperability between JVM languages</description>
             <documentation>http://griffon.codehaus.org/LangBridge+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lang-bridge/tags/RELEASE_0_4_2/griffon-lang-bridge-0.4.2.zip</file>
         </release>
     </plugin>
@@ -2375,6 +2401,17 @@ http://kunstoff.incors.com/archive/index.php3</description>
 http://kunstoff.incors.com/archive/index.php3</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Kunststoff+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-kunststoff/tags/RELEASE_0_2/griffon-lookandfeel-kunststoff-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="lookandfeel-lipstiklf" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Lipstiklf Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Lipstiklf Look &amp; Feel
+http://sourceforge.net/projects/lipstiklf</description>
+            <documentation>http://griffon.codehaus.org/LookandfeelLipstiklf+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-lipstiklf/tags/RELEASE_0_1/griffon-lookandfeel-lipstiklf-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="lookandfeel-liquidlnf" latest-release="0.2">
@@ -2569,6 +2606,17 @@ http://squareness.beeger.net/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-substance/tags/RELEASE_0_3/griffon-lookandfeel-substance-0.3.zip</file>
         </release>
     </plugin>
+    <plugin name="lookandfeel-synthetica" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Synthetica Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Synthetica Look &amp; Feel
+http://jyloo.com/synthetica</description>
+            <documentation>http://griffon.codehaus.org/LookandfeelSynthetica+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-synthetica/tags/RELEASE_0_1/griffon-lookandfeel-synthetica-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="lookandfeel-tinylaf" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Tinylaf Swing Look &amp; Feel</title>
@@ -2643,6 +2691,7 @@ http://www.digitprop.com/tonic/tonic.php</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lwjgl/tags/RELEASE_0_4/griffon-lwjgl-0.4.zip</file>
         </release>
     </plugin>
+    <plugin name="mac-menus"/>
     <plugin name="macwidgets-builder" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>MacWidgetsBuilder Plugin</title>
@@ -2756,6 +2805,16 @@ http://miglayout.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-miglayout/tags/RELEASE_0_2/griffon-miglayout-0.2.zip</file>
         </release>
     </plugin>
+    <plugin name="mirah" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>The Mirah programming language</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>This plugin enables the usage of Mirah classes in your Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Mirah+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-mirah/tags/RELEASE_0_1/griffon-mirah-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="mongo-db" latest-release="0.1.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Plugin summary/headline</title>
@@ -2791,9 +2850,6 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <description>Mouse gestures recognizer
 http://www.smardec.com/products/mouse-gestures.html</description>
             <documentation>http://griffon.codehaus.org/Mousegestures+Plugin</documentation>
-            <license>GNU LGPL 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-mousegestures/tags/RELEASE_0_2/griffon-mousegestures-0.2.zip</file>
         </release>
     </plugin>
@@ -2927,9 +2983,6 @@ http://www.icon-king.com/projects/nuvola/</description>
             <description>Nuvola desktop icons
 http://www.icon-king.com/projects/nuvola/</description>
             <documentation>http://griffon.codehaus.org/Nuvolaicons+Plugin</documentation>
-            <license>GNU LGPL 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-nuvolaicons/tags/RELEASE_0_2/griffon-nuvolaicons-0.2.zip</file>
         </release>
     </plugin>
@@ -2956,9 +3009,6 @@ http://www.icon-king.com/projects/nuvola/</description>
             <authorEmail>ixchelruiz@yahoo.com</authorEmail>
             <description>A collection of projects for Swing UI enhancements based on Oxbow project</description>
             <documentation>http://griffon.codehaus.org/Oxbow+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-oxbow/tags/RELEASE_0_3/griffon-oxbow-0.3.zip</file>
         </release>
     </plugin>
@@ -3056,9 +3106,6 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Adds Protocol Buffers support.</description>
             <documentation>http://griffon.codehaus.org/Protobuf+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-protobuf/tags/RELEASE_0_4/griffon-protobuf-0.4.zip</file>
         </release>
     </plugin>
@@ -3228,6 +3275,7 @@ http://www.datadosen.se/riverlayout/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rmi/tags/RELEASE_0_5/griffon-rmi-0.5.zip</file>
         </release>
     </plugin>
+    <plugin name="scaffolding"/>
     <plugin name="scala" latest-release="0.8">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Brings the Scala language compiler and libraries</title>
@@ -3315,9 +3363,6 @@ http://www.datadosen.se/riverlayout/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>This plugin enables the usage of Scala classes in your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Scala+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-scala/tags/RELEASE_0_8/griffon-scala-0.8.zip</file>
         </release>
     </plugin>
@@ -3356,9 +3401,6 @@ http://www.famfamfam.com/lab/icons/silk/</description>
             <description>FamFamFam's Silk icon set.
 http://www.famfamfam.com/lab/icons/silk/</description>
             <documentation>http://griffon.codehaus.org/Silkicons+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-silkicons/tags/RELEASE_0_2/griffon-silkicons-0.2.zip</file>
         </release>
     </plugin>
@@ -3373,6 +3415,7 @@ http://slick.cokeandcode.com/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-slick/tags/RELEASE_0_1/griffon-slick-0.1.zip</file>
         </release>
     </plugin>
+    <plugin name="slideware"/>
     <plugin name="splash" latest-release="0.1.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Griffon Splash Screen Plugin</title>
@@ -3568,9 +3611,6 @@ http://grails.org/plugin/spock</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Gerrit Grunwald's Steel Series</description>
             <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
-            <license>BSD</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_5_2/griffon-steel-0.5.2.zip</file>
         </release>
     </plugin>
@@ -3667,9 +3707,6 @@ Brings the SwingX Builder libraries into a Griffon Build</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Brings the Swingxtras Builder libraries into a Griffon Build</description>
             <documentation>http://griffon.codehaus.org/SwingxtrasBuilder+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swingxtras-builder/tags/RELEASE_0_4/griffon-swingxtras-builder-0.4.zip</file>
         </release>
     </plugin>
@@ -3681,6 +3718,17 @@ Brings the SwingX Builder libraries into a Griffon Build</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Swt+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-swt/tags/RELEASE_0_1/griffon-swt-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="syntaxtext" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>RSyntaxTextArea support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>RSyntaxTextArea support
+http://sourceforge.net/projects/rsyntaxtextarea/</description>
+            <documentation>http://griffon.codehaus.org/Syntaxtext+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-syntaxtext/tags/RELEASE_0_1/griffon-syntaxtext-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="tangoicons" latest-release="0.2">
@@ -3700,9 +3748,6 @@ http://freedesktop.org</description>
             <description>Tango! desktop icons 
 http://freedesktop.org</description>
             <documentation>http://griffon.codehaus.org/Tangoicons+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-tangoicons/tags/RELEASE_0_2/griffon-tangoicons-0.2.zip</file>
         </release>
     </plugin>
@@ -3729,9 +3774,6 @@ http://freedesktop.org</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Apache Thrift support</description>
             <documentation>http://griffon.codehaus.org/Thrift+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-thrift/tags/RELEASE_0_3/griffon-thrift-0.3.zip</file>
         </release>
     </plugin>
@@ -3909,6 +3951,16 @@ http://freedesktop.org</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-trident-builder/tags/RELEASE_0_6_1/griffon-trident-builder-0.6.1.zip</file>
         </release>
     </plugin>
+    <plugin name="twitter" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Twitter Plugin</title>
+            <author>Mario García</author>
+            <authorEmail/>
+            <description/>
+            <documentation>http://griffon.codehaus.org/Twitter+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-twitter/tags/RELEASE_0_1/griffon-twitter-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="uispec4j" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Run UI tests with UISpec4J</title>
@@ -3968,6 +4020,16 @@ http://www.uispec4j.org/</description>
             <description>A validation plugin that provides Grails like validation capability using constraints</description>
             <documentation>http://griffon.codehaus.org/Validation+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_6/griffon-validation-0.6.zip</file>
+        </release>
+    </plugin>
+    <plugin name="weld" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>CDI support via Weld</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>CDI support via Weld</description>
+            <documentation>http://griffon.codehaus.org/Weld+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-weld/tags/RELEASE_0_1/griffon-weld-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="wizard" latest-release="0.4">
@@ -4172,143 +4234,6 @@ http://zonelayout.com</description>
 http://zonelayout.com</description>
             <documentation>http://griffon.codehaus.org/Zonelayout+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_2/griffon-zonelayout-0.2.zip</file>
-        </release>
-    </plugin>
-    <plugin name="csv" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Griffon CSV Plugin</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>A port of Grails CSV Plugin to Griffon. Original (c) Les Hazlewood
-
-        The Griffon CSV Plugin allows you to easily parse and consume CSV data from a number of input sources.  It
-        supports complex parsing scenarios such as nested commas inside quotes, escaped tokens, multi-line quoted
-        values and allows configuration of parsing options (separator char, escape char, text encoding, etc).  It is
-        based on Glen Smith (et. al.)'s OpenCSV project (http://opencsv.sourceforge.net)
-
-        This plugin adds two dynamic methods 'eachCsvLine' and 'toCsvReader' to each of the following classes:
-        - java.lang.String
-        - java.io.File
-        - java.io.InputStream
-        - java.io.Reader
-
-        Using it is extremely simple.  On any instance of the four data types, call the 'eachCvsLine' method with a
-          closure accepting the tokens (a String array) for each parsed line:
-
-        "hello, world, how, are, you".eachCsvLine { tokens -&gt;
-            //only one line in this case and tokens.length == 5
-        }
-
-        new File("iso3166Countries.csv").eachCsvLine { tokens -&gt;
-            new Country(tokens[0],        //ISO 3166 country name
-                        tokens[1]).save() //ISO 3166 2 letter character code
-        }
-
-        Configuration
-
-        If you need to specify how the parsing should occur, you can construct your own csv reader with a map of
-        configuration options and call the 'eachLine' method on the constructed reader:
-
-        anInputStream.toCsvReader(['charset':'UTF-8']).eachLine { tokens -&gt;
-            ...
-        }
-
-        The supported config options:
-
-        'separatorChar': the character to use as the delimiter to separate the tokens.  Defaults to the comma: ','
-
-        'quoteChar': the character indicating a quoted string is about to follow.  Internal separatorChars can be
-                     inside the quoted string and they will not be split into tokens.
-                     Defaults to the double quote char: '"'
-
-        'escapeChar': the character to escape an immediately following character, indicating to the parser not to treat
-                      it as a special char.  Defaults to the backslash char: ''
-
-        'skipLines': the number of lines in the input source to skip before parsing begins.  This is useful to skip
-                     any potential CSV header lines that are not part of the CSV data.  Defaults to zero '0'
-
-        'strictQuotes': if characters outside of quotes should be ignored (implying each individual token is
-                        quoted.  Defaults to false
-
-        'ignoreLeadingWhiteSpace': white space in front of a quoted token is ignored.  Defaults to true
-
-        'charset': use the specified charset when parsing an InputStream.  The value can be either the Charset name
-                   as a String, a java.nio.charset.Charset instance, or a java.nio.charset.CharsetDecoder instance.
-                   Defaults to the system default charset.
-                   *Note that this option is ONLY valid for InputStream instances.  It is ignored otherwise.</description>
-            <documentation>http://griffon.codehaus.org/Csv+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-csv/tags/RELEASE_0_1/griffon-csv-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="lookandfeel-synthetica" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Synthetica Look &amp; Feel</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Synthetica Look &amp; Feel
-http://jyloo.com/synthetica</description>
-            <documentation>http://griffon.codehaus.org/LookandfeelSynthetica+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-synthetica/tags/RELEASE_0_1/griffon-lookandfeel-synthetica-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="lookandfeel-lipstiklf" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Lipstiklf Look &amp; Feel</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Lipstiklf Look &amp; Feel
-http://sourceforge.net/projects/lipstiklf</description>
-            <documentation>http://griffon.codehaus.org/LookandfeelLipstiklf+Plugin</documentation>
-            <license>GNU Public License 2.1</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-lipstiklf/tags/RELEASE_0_1/griffon-lookandfeel-lipstiklf-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="weld" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>CDI support via Weld</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>CDI support via Weld</description>
-            <documentation>http://griffon.codehaus.org/Weld+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-weld/tags/RELEASE_0_1/griffon-weld-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="syntaxtext" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>RSyntaxTextArea support</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>RSyntaxTextArea support
-http://sourceforge.net/projects/rsyntaxtextarea/</description>
-            <documentation>http://griffon.codehaus.org/Syntaxtext+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-syntaxtext/tags/RELEASE_0_1/griffon-syntaxtext-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="mirah" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
-            <title>The Mirah programming language</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>This plugin enables the usage of Mirah classes in your Griffon application.</description>
-            <documentation>http://griffon.codehaus.org/Mirah+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-mirah/tags/RELEASE_0_1/griffon-mirah-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
