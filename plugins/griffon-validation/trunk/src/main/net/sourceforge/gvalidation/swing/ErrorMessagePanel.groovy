@@ -20,7 +20,7 @@ import java.awt.Color
 import javax.swing.*
 import static javax.swing.SwingConstants.LEFT
 import net.sourceforge.gvalidation.Errors
-import org.springframework.context.NoSuchMessageException
+
 import net.sourceforge.gvalidation.util.ErrorMessageUtils
 
 /**
@@ -36,8 +36,8 @@ class ErrorMessagePanel extends JPanel {
 
     def ErrorMessagePanel(def messageSource) {
         this.messageSource = messageSource
-        this.errorIcon = new ImageIcon(getClass().getClassLoader().getResource('net/sourceforge/gvalidation/error.png'))
-        this.successIcon = new ImageIcon(getClass().getClassLoader().getResource('net/sourceforge/gvalidation/success.png'))
+        this.errorIcon = Icons.ERROR_ICON
+        this.successIcon = Icons.SUCCESS_ICON
 
         setLayout new BorderLayout()
     }
