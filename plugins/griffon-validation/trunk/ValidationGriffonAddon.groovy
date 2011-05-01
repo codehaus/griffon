@@ -14,11 +14,11 @@
  */
 
 import griffon.core.GriffonApplication
-import net.sourceforge.gvalidation.ValidationEnhancer
-import net.sourceforge.gvalidation.artifact.ConstraintArtifactHandler
-import net.sourceforge.gvalidation.ConstraintRepository
 import griffon.util.ApplicationHolder
+import net.sourceforge.gvalidation.ConstraintRepository
+import net.sourceforge.gvalidation.artifact.ConstraintArtifactHandler
 import net.sourceforge.gvalidation.renderer.ErrorRendererAttributeDelegator
+import net.sourceforge.gvalidation.swing.ErrorIconFactory
 
 /**
  * @author Nick Zhu
@@ -33,10 +33,14 @@ class ValidationGriffonAddon {
             {builder, node, attributes ->
                 def attributeDelegator = new ErrorRendererAttributeDelegator()
 
-                if(attributeDelegator.isAttributeSet(attributes)){
+                if (attributeDelegator.isAttributeSet(attributes)) {
                     attributeDelegator.delegate(ApplicationHolder.application, builder, node, attributes)
                 }
             }
+    ]
+
+    def factories = [
+            errorIcon: new ErrorIconFactory()
     ]
 
 }

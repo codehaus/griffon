@@ -33,6 +33,7 @@ import java.awt.event.ComponentEvent
 import net.sourceforge.gvalidation.util.GriffonWindowManager
 import java.awt.event.FocusListener
 import java.awt.event.FocusEvent
+import net.sourceforge.gvalidation.swing.Icons
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -51,9 +52,9 @@ class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListene
     void register(model, node, errorField, messageSource) {
         super.register(model, node, errorField, messageSource)
 
-        image = new JLabel(new ImageIcon(getClass().getClassLoader().getResource('net/sourceforge/gvalidation/error.png')))
+        image = new JLabel(Icons.ERROR_ICON)
         messageLabel = new JLabel()
-        closeBtn = new JButton(new ImageIcon(getClass().getClassLoader().getResource('net/sourceforge/gvalidation/close.png')))
+        closeBtn = new JButton(Icons.CLOSE_ICON)
         closeBtn.addActionListener({e -> popup.visible = false} as ActionListener)
         closeBtn.border = null
         closeBtn.borderPainted = false
@@ -113,7 +114,6 @@ class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListene
     }
 
     void componentHidden(ComponentEvent componentEvent) {
-        println "Component hidden..."
         popup.visible = false
     }
 
