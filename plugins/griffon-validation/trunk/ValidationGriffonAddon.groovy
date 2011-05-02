@@ -40,7 +40,6 @@ class ValidationGriffonAddon {
     ]
 
     def factories = [
-            errorIcon: new ErrorIconFactory()
+        errorIcon : new ErrorIconFactory()
     ]
-
 }
