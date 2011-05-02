@@ -23,6 +23,7 @@ import javax.swing.JLabel
 class ErrorIcon extends JLabel {
 
     ErrorIcon() {
+        setVisible(false)
         setIcon(Icons.ERROR_ICON)
     }
 

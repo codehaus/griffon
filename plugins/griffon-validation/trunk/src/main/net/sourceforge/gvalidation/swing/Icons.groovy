@@ -21,7 +21,7 @@ import javax.swing.ImageIcon
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 class Icons {
-    public static final ImageIcon ERROR_ICON = new ImageIcon(getClass().getClassLoader().getResource('net/sourceforge/gvalidation/error.png'))
-    public static final ImageIcon SUCCESS_ICON = new ImageIcon(getClass().getClassLoader().getResource('net/sourceforge/gvalidation/success.png'))
-    public static final ImageIcon CLOSE_ICON = new ImageIcon(getClass().getClassLoader().getResource('net/sourceforge/gvalidation/close.png'))
+    public static final ImageIcon ERROR_ICON = new ImageIcon(Icons.classLoader.getResource('net/sourceforge/gvalidation/error.png'))
+    public static final ImageIcon SUCCESS_ICON = new ImageIcon(Icons.classLoader.getResource('net/sourceforge/gvalidation/success.png'))
+    public static final ImageIcon CLOSE_ICON = new ImageIcon(Icons.classLoader.getResource('net/sourceforge/gvalidation/close.png'))
 }
