@@ -30,6 +30,7 @@ class ErrorIconFactorySpec extends UnitSpec {
 
         then:
         icon != null
+        icon instanceof ErrorIcon
     }
 
 }
