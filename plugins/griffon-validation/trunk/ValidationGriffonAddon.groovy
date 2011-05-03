@@ -19,6 +19,7 @@ import net.sourceforge.gvalidation.ConstraintRepository
 import net.sourceforge.gvalidation.artifact.ConstraintArtifactHandler
 import net.sourceforge.gvalidation.renderer.ErrorRendererAttributeDelegator
 import net.sourceforge.gvalidation.swing.ErrorIconFactory
+import net.sourceforge.gvalidation.swing.ErrorMessagePanelFactory
 
 /**
  * @author Nick Zhu
@@ -40,6 +41,7 @@ class ValidationGriffonAddon {
     ]
 
     def factories = [
-        errorIcon : new ErrorIconFactory()
+        errorIcon : new ErrorIconFactory(),
+        errorMessages : new ErrorMessagePanelFactory()
     ]
 }
