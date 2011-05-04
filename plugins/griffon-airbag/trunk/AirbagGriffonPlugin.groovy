@@ -21,7 +21,7 @@ class AirbagGriffonPlugin {
     def authorEmail = 'nzhu@jointsource.com'
     def title = 'Griffon Airbag Plugin'
     def description = '''
-This plugin provides AOP like global exception handling and notification for any Griffon application
+This plugin provides a simple user-friendly dialog to display any uncaught exception
 '''
 
     // URL to the plugin's documentation
