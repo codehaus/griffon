@@ -1,0 +1,10 @@
+jbutton {
+  width: 150;
+  height: 20;
+  pref-width: 175;
+  pref-height: 25;
+  min-width: 100;
+  min-height: 10;
+  max-width: 200;
+  max-height: 30;
+}
