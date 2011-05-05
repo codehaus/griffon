@@ -26,14 +26,13 @@ configurations {
 }
 
 repositories {
-    flatDir(dirs: file('src/lib'))
     mavenCentral()
 }
 
 dependencies {
     groovy  "org.codehaus.groovy:groovy-all:$groovyVersion"
     compile "org.codehaus.groovy:groovy-all:$groovyVersion",
-            'org.pushing-pixels:trident:1.3'
+            'com.github.insubstantial:trident:6.2'
     testCompile "junit:junit:4.8.2"
     deployerJars 'org.apache.maven.wagon:wagon-webdav:1.0-beta-2',
                  'org.apache.maven:maven-ant-tasks:2.1.0'
