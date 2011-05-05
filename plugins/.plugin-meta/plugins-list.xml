@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3870">
+<plugins revision="3891">
     <plugin name="abeilleform-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -19,7 +19,16 @@ This plugin installs the AbeilleFormsBuilder.  The builder helps integrate forms
             <file>http://svn.codehaus.org/griffon/plugins/griffon-abeilleform-builder/tags/RELEASE_0_2/griffon-abeilleform-builder-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="airbag"/>
+    <plugin name="airbag" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Griffon Airbag Plugin</title>
+            <author>Nick Zhu</author>
+            <authorEmail>nzhu@jointsource.com</authorEmail>
+            <description>This plugin provides a simple user-friendly dialog to display any uncaught exception</description>
+            <documentation>http://griffon.codehaus.org/Airbag+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-airbag/tags/RELEASE_0_1/griffon-airbag-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="avro" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Apache Avro support</title>
