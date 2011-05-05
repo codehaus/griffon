@@ -32,7 +32,10 @@ repositories {
 dependencies {
     groovy  "org.codehaus.groovy:groovy-all:$groovyVersion"
     compile "org.codehaus.groovy:groovy-all:$groovyVersion",
-            'org.swinglabs:swingx:1.6.1',
+            'org.swinglabs:swingx-core:1.6.2-2',
+            'org.swinglabs:swingx-beaninfo:1.6.2-2',
+            'org.swinglabs:multiplegradientpaint:1.0',
+            'org.swinglabs:swing-worker:1.1',
             'net.java.dev.timingframework:timingframework:1.0'
     testCompile "junit:junit:4.8.2"
     deployerJars 'org.apache.maven.wagon:wagon-webdav:1.0-beta-2',
