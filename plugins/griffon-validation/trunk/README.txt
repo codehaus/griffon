@@ -16,4 +16,4 @@ of Grails constraints support.
 
 == For more Information ==
 
-Check out our WIKI page: http://gvalidation.sourceforge.net/
+Check out our WIKI page: http://griffon.codehaus.org/Validation+Plugin
