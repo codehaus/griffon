@@ -34,7 +34,7 @@ repositories {
 dependencies {
     groovy  "org.codehaus.groovy:groovy-all:$groovyVersion"
     compile "org.codehaus.groovy:groovy-all:$groovyVersion",
-            'com.jidesoft:jide-oss:2.8.4',
+            'com.jidesoft:jide-oss:2.9.1',
             'com.kitfox.svg:svg-salamander:1.0'
     testCompile "junit:junit:4.8.2"
     deployerJars 'org.apache.maven.wagon:wagon-webdav:1.0-beta-2',
@@ -172,6 +172,11 @@ uploadArchives {
                     id('codehaus-release')
                     name('Codehaus')
                     url('http://repository.codehaus.org')
+                }
+                repository {
+                    id('sonatype-release')
+                    name('Sonatype')
+                    url('http://repository.sonatype.org/content/groups/public')
                 }
             }
         }
