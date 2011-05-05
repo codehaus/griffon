@@ -2,7 +2,7 @@
   <author>Nick Zhu</author>
   <authorEmail>nzhu@jointsource.com</authorEmail>
   <title>Griffon Airbag Plugin</title>
-  <description>This plugin provides AOP like global exception handling and notification for any Griffon application</description>
+  <description>This plugin provides a simple user-friendly dialog to display any uncaught exception</description>
   <documentation>http://griffon.codehaus.org/Airbag+Plugin</documentation>
   <license>Apache Software License 2.0</license>
   <resources>
