@@ -1,12 +1,14 @@
 griffon.project.dependency.resolution = {
     inherits("global") 
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    log "warn" 
     repositories {
         griffonPlugins()
         griffonHome()
         griffonCentral()
+        mavenCentral()
     }
     dependencies {
+        compile('com.github.insubstantial:trident:6.2') { transitive = false }
     }
 }
 
