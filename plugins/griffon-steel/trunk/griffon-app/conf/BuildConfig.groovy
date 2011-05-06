@@ -8,7 +8,10 @@ griffon.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        compile 'eu.hansolo:SteelSeries:3.8'
+        compile('eu.hansolo:SteelSeries:3.9') {
+            excludes 'trident'
+        }
+        compile('com.github.insubstantial:trident:6.2') { transitive = false }
     }
 }
 
