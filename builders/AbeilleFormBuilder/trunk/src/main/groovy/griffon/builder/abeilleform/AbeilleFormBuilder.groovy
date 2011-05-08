@@ -26,7 +26,6 @@ import griffon.builder.abeilleform.factory.FormPanelFactory
  * @author Jim Shingler <shinglerjim@gmail.com>
  */
 public class AbeilleFormBuilder extends SwingBuilder {
-
   public AbeilleFormBuilder(boolean init = true) {
     super(init)
   }
