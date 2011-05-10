@@ -43,4 +43,45 @@ class GriffonWindowManagerSpec extends UnitSpec {
         window == jdialog
     }
 
+    def 'Window manager should be able to retrieve top level JFrame'(){
+        given:
+        def windowManager = new GriffonWindowManager()
+        def frame = new JFrame()
+        def panel = new JPanel()
+        frame.rootPane.add(panel)
+        def component = new JLabel()
+        panel.add(component)
+
+        when:
+        def window = windowManager.getWindow(component)
+
+        then:
+        window == frame
+    }
+
+    def 'Window manager should return null for non-component'(){
+        given:
+        def windowManager = new GriffonWindowManager()
+
+        when:
+        def window = windowManager.getWindow("")
+
+        then:
+        window == null
+    }
+
+    def 'Window manager should return null if component is a orphan'(){
+        given:
+        def windowManager = new GriffonWindowManager()
+        def panel = new JPanel()
+        def component = new JLabel()
+        panel.add(component)
+
+        when:
+        def window = windowManager.getWindow(component)
+
+        then:
+        window == null
+    }
+
 }
