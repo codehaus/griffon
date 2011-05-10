@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3908">
+<plugins revision="3925">
     <plugin name="abeilleform-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -861,15 +861,12 @@ another docking frame in the application.</description>
             <documentation>http://griffon.codehaus.org/Effects+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_2_1/griffon-effects-0.2.1.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>Effects and Animations</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Effects and Animations</description>
             <documentation>http://griffon.codehaus.org/Effects+Plugin</documentation>
-            <license>BSD License</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_3/griffon-effects-0.3.zip</file>
         </release>
     </plugin>
@@ -1631,6 +1628,7 @@ Rainer Brang for his grails plugin</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-i18n-gettext/tags/RELEASE_0_2/griffon-i18n-gettext-0.2.zip</file>
         </release>
     </plugin>
+    <plugin name="infinispan"/>
     <plugin name="installer" latest-release="0.5.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Allows creating installers for your Griffon application</title>
@@ -3640,9 +3638,6 @@ http://grails.org/plugin/spock</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Gerrit Grunwald's Steel Series</description>
             <documentation>http://griffon.codehaus.org/Steel+Plugin</documentation>
-            <license>BSD</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_6/griffon-steel-0.6.zip</file>
         </release>
     </plugin>
@@ -3986,7 +3981,7 @@ http://freedesktop.org</description>
     <plugin name="twitter" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Twitter Plugin</title>
-            <author>Mario García</author>
+            <author>Mario GarcÃ­a</author>
             <authorEmail/>
             <description/>
             <documentation>http://griffon.codehaus.org/Twitter+Plugin</documentation>
@@ -4004,7 +3999,7 @@ http://www.uispec4j.org/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-uispec4j/tags/RELEASE_0_1/griffon-uispec4j-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="validation" latest-release="0.7">
+    <plugin name="validation" latest-release="0.7.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon Validation Plugin</title>
             <author>Nick Zhu</author>
@@ -4060,6 +4055,14 @@ http://www.uispec4j.org/</description>
             <description>A validation plugin that provides Grails like validation capability using constraints</description>
             <documentation>http://griffon.codehaus.org/Validation+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_7/griffon-validation-0.7.zip</file>
+        </release>
+        <release tag="RELEASE_0_7_1" type="svn" version="0.7.1">
+            <title>Griffon Validation Plugin</title>
+            <author>Nick Zhu</author>
+            <authorEmail>nzhu@jointsource.com</authorEmail>
+            <description>A validation plugin that provides Grails like validation capability using constraints</description>
+            <documentation>http://griffon.codehaus.org/Validation+Plugin</documentation>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_7_1/griffon-validation-0.7.1.zip</file>
         </release>
     </plugin>
     <plugin name="weld" latest-release="0.1">
