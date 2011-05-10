@@ -62,7 +62,7 @@ class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListene
         closeBtn.margin = new Insets(0, 0, 0, 0)
         closeBtn.setUI(new BasicButtonUI())
 
-        popup = new JDialog(windowManager.griffonWindow)
+        popup = new JDialog(windowManager.getWindow(node))
         popup.getContentPane().setLayout(new FlowLayout());
         popup.setUndecorated(true);
         popup.getContentPane().setBackground(bgColor);
