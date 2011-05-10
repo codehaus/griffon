@@ -16,6 +16,8 @@
 package net.sourceforge.gvalidation.util
 
 import griffon.util.ApplicationHolder
+import javax.swing.JDialog
+import java.awt.Window
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -28,4 +30,10 @@ class GriffonWindowManager {
         ApplicationHolder.application.windowManager.windows.first()
     }
 
+    def getWindow(component) {
+        if(component.parent instanceof Window)
+            return component.parent
+        else
+            return getWindow(component.parent)
+    }
 }
