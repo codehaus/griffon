@@ -18,19 +18,21 @@ package net.sourceforge.gvalidation.util
 import griffon.util.ApplicationHolder
 import javax.swing.JDialog
 import java.awt.Window
+import java.awt.Component
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 class GriffonWindowManager {
 
-    /* TODO: to support multi-window app the get window method should take a JComponent as
-        input to get the associated window instead of getting just the default window */
     def getGriffonWindow(){
         ApplicationHolder.application.windowManager.windows.first()
     }
 
     def getWindow(component) {
+        if(!(component instanceof Component))
+            return null
+
         if(component.parent instanceof Window)
             return component.parent
         else
