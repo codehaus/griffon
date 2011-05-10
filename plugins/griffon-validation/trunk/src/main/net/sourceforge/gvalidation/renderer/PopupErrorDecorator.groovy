@@ -62,43 +62,50 @@ class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListene
         closeBtn.margin = new Insets(0, 0, 0, 0)
         closeBtn.setUI(new BasicButtonUI())
 
-        popup = new JDialog(windowManager.getWindow(node))
-        popup.getContentPane().setLayout(new FlowLayout());
-        popup.setUndecorated(true);
-        popup.getContentPane().setBackground(bgColor);
-        popup.getContentPane().add(image);
-        popup.getContentPane().add(messageLabel);
-        popup.getContentPane().add(closeBtn)
-        popup.setFocusableWindowState(false);
+
 
         windowManager.griffonWindow.addComponentListener(this)
         targetComponent.addComponentListener(this)
         targetComponent.addFocusListener(this)
     }
 
-
-
     @Override
     protected void decorate(Errors errors, FieldError fieldError) {
         messageLabel.text = ErrorMessageUtils.getErrorMessage(fieldError, messageSource)
 
+        initializePopup()
         positionPopup()
         popup.visible = true
     }
 
+    private def initializePopup() {
+        if (popup == null) {
+            popup = new JDialog(windowManager.getWindow(targetComponent))
+            popup.getContentPane().setLayout(new FlowLayout());
+            popup.setUndecorated(true);
+            popup.getContentPane().setBackground(bgColor);
+            popup.getContentPane().add(image);
+            popup.getContentPane().add(messageLabel);
+            popup.getContentPane().add(closeBtn)
+            popup.setFocusableWindowState(false);
+        }
+    }
+
     private def positionPopup() {
-        popup.setSize(0, 0);
-        popup.setLocationRelativeTo(targetComponent)
-        def popupLocation = popup.getLocation()
-        def targetComponentSize = targetComponent.getSize()
-        popup.setLocation((int) (popupLocation.x - targetComponentSize.getWidth() / 2),
-                (int) (popupLocation.y + targetComponentSize.getHeight() / 2))
-        popup.pack()
+        if (popup != null) {
+            popup.setSize(0, 0);
+            popup.setLocationRelativeTo(targetComponent)
+            def popupLocation = popup.getLocation()
+            def targetComponentSize = targetComponent.getSize()
+            popup.setLocation((int) (popupLocation.x - targetComponentSize.getWidth() / 2),
+                    (int) (popupLocation.y + targetComponentSize.getHeight() / 2))
+            popup.pack()
+        }
     }
 
     @Override
     protected void undecorate() {
-        popup.visible = false
+        popup?.visible = false
     }
 
     void componentResized(ComponentEvent componentEvent) {
@@ -114,18 +121,18 @@ class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListene
     }
 
     void componentHidden(ComponentEvent componentEvent) {
-        popup.visible = false
+        popup?.visible = false
     }
 
     void focusGained(FocusEvent focusEvent) {
         if (messageLabel.text) {
             positionPopup()
-            popup.visible = true
+            popup?.visible = true
         }
     }
 
     void focusLost(FocusEvent focusEvent) {
-        popup.visible = false
+        popup?.visible = false
     }
 
 }
