@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3925">
+<plugins revision="3930">
     <plugin name="abeilleform-builder" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2098,7 +2098,7 @@ http://code.google.com/p/jsyntaxpane/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jsyntaxpane/tags/RELEASE_0_1/griffon-jsyntaxpane-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="jtreemap" latest-release="0.3">
+    <plugin name="jtreemap" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JTreeMap Integration</title>
             <author>Hackergarten</author>
@@ -2122,6 +2122,17 @@ http://code.google.com/p/jsyntaxpane/</description>
             <description>Integrates the JTreeMap library.</description>
             <documentation>http://griffon.codehaus.org/Jtreemap+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jtreemap/tags/RELEASE_0_3/griffon-jtreemap-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>JTreeMap Integration</title>
+            <author>Hackergarten</author>
+            <authorEmail>hackergarten@canoo.com</authorEmail>
+            <description>Integrates the JTreeMap library.</description>
+            <documentation>http://griffon.codehaus.org/Jtreemap+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jtreemap/tags/RELEASE_0_4/griffon-jtreemap-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="jung" latest-release="0.4">
