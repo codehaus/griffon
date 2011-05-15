@@ -164,7 +164,7 @@ public class SwingXBuilder extends SwingBuilder {
         registerFactory("label", new TextArgWidgetFactory(JXLabel))
         registerFactory("button", new RichActionWidgetFactory(JXButton))
         registerBeanFactory("busyLabel", JXBusyLabel)
-        registerBeanFactory("glassBox", JXGlassBox)
+        // registerBeanFactory("glassBox", JXGlassBox)
         registerBeanFactory("findPanel", JXFindPanel)
         registerBeanFactory("findBar", JXFindBar)
         registerBeanFactory("searchPanel", JXSearchPanel)
