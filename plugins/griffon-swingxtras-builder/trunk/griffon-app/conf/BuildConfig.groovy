@@ -11,7 +11,7 @@ griffon.project.dependency.resolution = {
         mavenRepo 'http://repository.sonatype.org/content/groups/public'
     }
     dependencies {
-        compile('org.codehaus.griffon:swingxtrasbuilder:0.2') {
+        compile('org.codehaus.griffon:swingxtrasbuilder:0.3') {
             excludes 'groovy-all'
         }
         compile 'org.swinglabs:xswingx:0.2',
