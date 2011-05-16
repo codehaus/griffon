@@ -1,0 +1,12 @@
+<plugin name='ratpack' version='0.1' griffonVersion='0.9.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>RatPack - embedded web framework</title>
+  <description>RatPack - embedded web framework</description>
+  <documentation>http://griffon.codehaus.org/Ratpack+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
