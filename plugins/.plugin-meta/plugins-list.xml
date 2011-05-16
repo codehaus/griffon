@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3953">
+<plugins revision="3959">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -18,7 +18,7 @@ This plugin installs the AbeilleFormsBuilder.  The builder helps integrate forms
             <documentation>http://griffon.codehaus.org/AbeilleformBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-abeilleform-builder/tags/RELEASE_0_2/griffon-abeilleform-builder-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>A Builder for Abeille Forms</title>
             <author>Jim Shingler</author>
             <authorEmail>ShinglerJim@gmail.com</authorEmail>
