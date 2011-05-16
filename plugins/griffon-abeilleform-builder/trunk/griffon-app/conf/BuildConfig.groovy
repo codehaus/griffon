@@ -5,10 +5,12 @@ griffon.project.dependency.resolution = {
         griffonPlugins()
         griffonHome()
         griffonCentral()
+        mavenRepo 'http://repository.codehaus.org' 
+        mavenCentral()
         flatDir name: 'abeilleformBuilderPluginLib', dirs: 'lib'
     }
     dependencies {
-        compile('org.codehaus.griffon:abeilleformbuilder:1.0')
+        compile('org.codehaus.griffon:abeilleformbuilder:2.0')
         compile 'com.jeta:formsrt:2.1.0M1'
     }
 }
