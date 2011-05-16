@@ -5,11 +5,11 @@ griffon.project.dependency.resolution = {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-        mavenCentral()
         mavenRepo 'http://repository.codehaus.org'
+        mavenCentral()
     }
     dependencies {
-        compile('org.codehaus.griffon:swingxbuilder:0.1.7') {
+        compile('org.codehaus.griffon:swingxbuilder:0.1.8') {
             excludes 'groovy-all'
         }
     }

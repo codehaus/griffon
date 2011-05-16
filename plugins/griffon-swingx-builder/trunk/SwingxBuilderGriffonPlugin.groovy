@@ -1,6 +1,6 @@
 class SwingxBuilderGriffonPlugin {
-    def version = "0.4"
-    def griffonVersion = "0.9.2 > *"
+    def version = "0.5"
+    def griffonVersion = "0.9.3 > *"
     def toolkits = ['swing']
     def license = 'Apache Software License 2.0'
     def dependsOn = [:]
