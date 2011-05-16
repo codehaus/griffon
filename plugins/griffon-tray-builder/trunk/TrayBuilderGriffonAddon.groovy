@@ -24,10 +24,15 @@
 import griffon.builder.tray.factory.*
 import griffon.builder.tray.impl.*
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
 /**
  * @author Andres Almiray
  */
 class TrayBuilderGriffonAddon {
+    private static final Logger LOG = LoggerFactory.getLogger('griffon.addon.tray.TrayBuilderGriffonAddon')
+
     def factories = [:]
     def props = [:]
 
@@ -54,8 +59,7 @@ class TrayBuilderGriffonAddon {
         os += " "
         os += System.getProperty("os.arch") ?: " "
         os += System.getProperty("os.version") ?: ""
-        // TODO use logging instead
-        println("SystemTray is not supported on ${os.trim()} - JVM ${System.getProperty('java.version')}")
+        LOG.warn("SystemTray is not supported on ${os.trim()} - JVM ${System.getProperty('java.version')}")
         props.systemTray = [
             get: { new DummyTrayObject() },
             set: { }
