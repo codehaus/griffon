@@ -21,11 +21,11 @@
  * @author Andres Almiray
  */
 class TrayBuilderGriffonPlugin {
-    def version = '0.5'
+    def version = '0.6'
     def dependsOn = [:]
     def jdk = '1.6'
     def toolkits = ['swing']
-    def griffonVersion = '0.9.2 > *'
+    def griffonVersion = '0.9.3 > *'
     def license = 'GNU General Public License 2.0 (with classpath extension)'
 
     def author = 'Andres Almiray'
