@@ -18,11 +18,11 @@
  * @author Andres Almiray
  */
 class TridentBuilderGriffonPlugin {
-    def version = '0.6.1'
+    def version = '0.7'
     def dependsOn = [:]
     def toolkits = ['swing']
     def jdk = '1.6'
-    def griffonVersion = '0.9.2 > *'
+    def griffonVersion = '0.9.3 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'
