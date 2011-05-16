@@ -6,35 +6,13 @@ griffon.project.dependency.resolution = {
         griffonHome()
         griffonCentral()
 
+        mavenLocal()
         mavenCentral()
-        mavenRepo ' https://repository.jboss.org/nexus/content/groups/public-jboss'
-        flatDir name: 'gfxPluginLib', dirs: 'lib'
     }
     dependencies {
-        compile 'org.codehaus.griffon:gfxbuilder-core:0.4',
-                'org.codehaus.griffon:gfxbuilder-svg:0.4',
-                'org.codehaus.griffon:gfxbuilder-swingx:0.4',
-                'org.swinglabs:swingx:1.0',
-                'org.kordamp:jsilhouette-geom:0.3.1',
-                'xml-apis:xml-apis-ext:1.3.04',
-                'batik:batik-anim:1.7',
-                'batik:batik-awt-util:1.7',
-                'batik:batik-bridge:1.7',
-                'batik:batik-codec:1.7',
-                'batik:batik-css:1.7',
-                'batik:batik-dom:1.7',
-                'batik:batik-ext:1.7',
-                'batik:batik-extension:1.7',
-                'batik:batik-gui-util:1.7',
-                'batik:batik-gvt:1.7',
-                'batik:batik-parser:1.7',
-                'batik:batik-script:1.7',
-                'batik:batik-svg-dom:1.7',
-                'batik:batik-svggen:1.7',
-                'batik:batik-swing:1.7',
-                'batik:batik-transcoder:1.7',
-                'batik:batik-util:1.7',
-                'batik:batik-xml:1.7'
+        compile('org.codehaus.griffon:gfxbuilder-core:0.5')   { excludes 'groovy-all' }
+        compile('org.codehaus.griffon:gfxbuilder-svg:0.5')    { excludes 'groovy-all' }
+        compile('org.codehaus.griffon:gfxbuilder-swingx:0.5') { excludes 'groovy-all' }
     }
 }
 
