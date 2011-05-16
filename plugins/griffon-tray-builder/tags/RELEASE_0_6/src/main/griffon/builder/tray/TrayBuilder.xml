@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<builder type="griffon.builder.tray.TrayBuilder">
+    <group name="Tray">
+        <nodes>
+            <node name="systemTray"
+                type="java.awt.SystemTray"
+                description="The SystemTray class represents the system tray for a desktop.">
+                <properties>
+                    <property name="trayIcons"
+                            type="java.awt.TrayIcon[]"
+                            description=""
+                            readonly="true" />
+                    <property name="trayIconSize"
+                            type="java.awt.Dimension"
+                            description=""
+                            readonly="true" />
+                    <property name="actionPerformed"
+                            description=""
+                            event="true"
+                            eventType="java.awt.event.ActionListener" />
+                </properties>
+            </node>
+            <node name="trayIcon"
+                type="java.awt.TrayIcon"
+                description="A TrayIcon object represents a tray icon that can be added to the system tray.">
+                <properties>
+                    <property name="image"
+                            type="java.awt.Image"
+                            description="" />
+                    <property name="file"
+                            type="java.lang.String"
+                            description="" />
+                    <property name="url"
+                            type="java.net.URL"
+                            description="" />
+                    <property name="resource"
+                            type="java.lang.String"
+                            description="" />
+                    <property name="class"
+                            type="java.lang.Class"
+                            description="" />
+                    <property name="actionCommand"
+                            type="java.lang.String"
+                            description="" />
+                    <property name="imageAutoSize"
+                            type="boolean"
+                            description="" />
+                    <property name="tooltip"
+                            type="java.lang.String"
+                            description="" />
+                    <property name="popupMenu"
+                            type="java.awt.PopupMenu"
+                            description="" />
+                    <property name="actionPerformed"
+                            description=""
+                            event="true"
+                            eventType="java.awt.event.ActionEvent" />
+                    <property name="mouseClicked"
+                            description=""
+                            event="true"
+                            eventType="java.awt.event.MouseEvent" />
+                    <property name="mouseEntered"
+                            description=""
+                            event="true"
+                            eventType="java.awt.event.MouseEvent" />
+                    <property name="mouseExited"
+                            description=""
+                            event="true"
+                            eventType="java.awt.event.MouseEvent" />
+                    <property name="mousePressed"
+                            description=""
+                            event="true"
+                            eventType="java.awt.event.MouseEvent" />
+                    <property name="mouseReleased"
+                            description=""
+                            event="true"
+                            eventType="java.awt.event.MouseEvent" />
+                    <property name="mouseDragged"
+                            description=""
+                            event="true"
+                            eventType="java.awt.event.MouseEvent" />
+                    <property name="mouseMoved"
+                            description=""
+                            event="true"
+                            eventType="java.awt.event.MouseEventr" />
+                </properties>
+            </node>
+            <node name="trayMenu"
+                  type="java.awt.PopupMenu"
+                  description="A class that implements a menu which can be dynamically popped up at a specified position within a component.">
+                <properties>
+                     <property name="actionCommand"
+                               type="java.lang.String"
+                               description="" />
+                     <property name="label"
+                               type="java.lang.String"
+                               description="" />
+                     <property name="shortcut"
+                               type="java.awt.MenuShortcut"
+                               description="" />
+                     <property name="enabled"
+                               type="boolean"
+                               description="" />
+                     <property name="actionPerformed"
+                               description=""
+                               event="true"
+                               eventType="java.awt.event.ActionEvent" />
+                     <property name="itemCount"
+                               type="int"
+                               description=""
+                               readonly="true" />
+                </properties>
+            </node>
+        </nodes>
+    </group>
+</builder>
