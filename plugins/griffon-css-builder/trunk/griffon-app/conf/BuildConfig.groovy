@@ -9,7 +9,7 @@ griffon.project.dependency.resolution = {
         mavenRepo 'http://repository.codehaus.org'
     }
     dependencies {
-        compile('org.codehaus.griffon:cssbuilder:0.4') {
+        compile('org.codehaus.griffon:cssbuilder:0.5') {
             excludes 'groovy-all'
         }
     }
