@@ -11,7 +11,7 @@ griffon.project.dependency.resolution = {
         mavenRepo 'http://repository.sonatype.org/content/groups/public'
     }
     dependencies {
-        compile('org.codehaus.griffon:jidebuilder:3.0') {
+        compile('org.codehaus.griffon:jidebuilder:4.0') {
             excludes 'groovy-all', 'svg-salamander'
         }
         compile 'com.kitfox.svg:svg-salamander:1.0'
