@@ -18,10 +18,10 @@
  * @author Andres Almiray
  */
 class CssBuilderGriffonPlugin {
-    def version = 0.7
+    def version = 0.8
     def dependsOn = [:]
     def toolkits = ['swing']
-    def griffonVersion = '0.9.2 > *'
+    def griffonVersion = '0.9.3 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'
