@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="3946">
-    <plugin name="abeilleform-builder" latest-release="0.2">
+<plugins revision="3953">
+    <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
             <author>Jim Shingler</author>
@@ -17,6 +17,18 @@
 This plugin installs the AbeilleFormsBuilder.  The builder helps integrate forms (".jfrm") into griffon</description>
             <documentation>http://griffon.codehaus.org/AbeilleformBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-abeilleform-builder/tags/RELEASE_0_2/griffon-abeilleform-builder-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>A Builder for Abeille Forms</title>
+            <author>Jim Shingler</author>
+            <authorEmail>ShinglerJim@gmail.com</authorEmail>
+            <description>\
+This plugin installs the AbeilleFormsBuilder.  The builder helps integrate forms (".jfrm") into griffon</description>
+            <documentation>http://griffon.codehaus.org/AbeilleformBuilder+Plugin</documentation>
+            <license>GNU Lesser Public License 2.1</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-abeilleform-builder/tags/RELEASE_0_3/griffon-abeilleform-builder-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="airbag" latest-release="0.1">
@@ -554,7 +566,7 @@ http://everaldo.com/crystal/</description>
             <documentation>http://griffon.codehaus.org/CssBuilder+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-css-builder/tags/RELEASE_0_7/griffon-css-builder-0.7.zip</file>
         </release>
-        <release tag="RELEASE_0_8" version="0.8" type="svn">
+        <release tag="RELEASE_0_8" type="svn" version="0.8">
             <title>CSS for Swing</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
