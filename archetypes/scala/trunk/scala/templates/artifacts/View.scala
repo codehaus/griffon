@@ -17,7 +17,7 @@ class @artifact.name@ extends AbstractGriffonView {
 
     implicit def funToRunnable(fun: () => Unit) = new Runnable() { def run() = fun() }
 
-    override def mvcGroupInit(args:JMap[String,_]) = {
+    override def mvcGroupInit(args:JMap[String,Object]) = {
         execSync(() => {
             val frame = new MyFrame()
             frame.pack()
