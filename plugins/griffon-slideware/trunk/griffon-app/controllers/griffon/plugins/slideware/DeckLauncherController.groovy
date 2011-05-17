@@ -45,8 +45,10 @@ class DeckLauncherController extends AbstractDeckController {
     def playAction = { evt = null ->
         execSync { model.busy = true }
         try {
+            app.event('LaunchDeckStart')
             def (m, v, c) = createMVCGroup('DeckPlayer')
             app.windowManager.hide('deckLauncherWindow')
+            app.event('LaunchDeckEnd')
             c.show()
         } finally {
             execAsync { model.busy = false }

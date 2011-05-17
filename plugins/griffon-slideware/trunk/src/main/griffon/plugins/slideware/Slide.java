@@ -122,7 +122,7 @@ public class Slide extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if(backgroundPainter != null) {
-            backgroundPainter.call(new Object[]{g});
+            backgroundPainter.call(new Object[]{this, g});
         }
     }
 }
