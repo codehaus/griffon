@@ -24,11 +24,11 @@ class SlidewareGriffonPlugin {
     def license = 'Apache Software License 2.0'
     def toolkits = ['swing']
 
-    def dependsOn = ['transitions'    : '0.4.1',
-                     'css-builder'    : '0.7',
-                     'jide-builder'   : '0.5.1',
+    def dependsOn = ['transitions'    : '0.5',
+                     'css-builder'    : '0.8',
+                     'jide-builder'   : '0.6',
                      'glazedlists'    : '0.8.2',
-                     'jbusycomponent' : '0.5.1',
+                     'jbusycomponent' : '0.5.2',
                      'i18n'           : '0.3.1',
                      'lookandfeel'    : '0.4',
                      'syntaxtext'     : '0.1']

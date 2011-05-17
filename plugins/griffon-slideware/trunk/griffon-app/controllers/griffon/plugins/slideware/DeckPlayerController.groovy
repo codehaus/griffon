@@ -19,6 +19,7 @@ package griffon.plugins.slideware
 import java.awt.Toolkit
 import java.awt.Dimension
 import griffon.builder.css.CSSDecorator
+import griffon.builder.css.CSSBindings
 import static griffon.swing.SwingUtils.centerOnScreen
 
 /**
@@ -29,7 +30,15 @@ class DeckPlayerController extends AbstractDeckController {
     def builder
 
     void mvcGroupInit(Map<String, Object> args) {
+        CSSBindings.instance.initDefaults()
+        Map pages = [:]
         app.artifactManager.slideClasses.each { slideClass ->
+            int index = ((slideClass.shortName =~ /Page(\d+)Slide/)[0][1]).toInteger()
+            pages[index] = slideClass
+        }
+        
+        pages.keySet().sort().each { index ->
+            GriffonClass slideClass = pages[index]
             Script slideInstance = slideClass.newInstance()
             slideInstance.binding = view.binding
             slideInstance.builder = view.builder
@@ -47,13 +56,12 @@ class DeckPlayerController extends AbstractDeckController {
 
     @Threading(Threading.Policy.INSIDE_UITHREAD_SYNC)
     def show = { evt = null ->
-        view.deck.layout.first(view.deck)
-        
         if(app.config.presentation.fullScreen) {
             makeFullScreen()
         } else {
             makeNormalSize()
         }
+        view.deck.layout.first(view.deck)
     }
 
     @Threading(Threading.Policy.INSIDE_UITHREAD_SYNC)
@@ -76,6 +84,9 @@ class DeckPlayerController extends AbstractDeckController {
     }
 
     private void resize(width, height, boolean undecorated) {
+        CSSBindings.instance.screenWidth = width
+        CSSBindings.instance.screenHeight = height
+
         app.windowManager.hide('deckPlayerWindow')
         view.deckPlayerWindow.undecorated = undecorated
         view.deckPlayerWindow.preferredSize = [
