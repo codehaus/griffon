@@ -9,7 +9,7 @@ griffon.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        compile('org.codehaus.griffon:swingxbuilder:0.1.8') {
+        compile('org.codehaus.griffon:swingxbuilder:0.1.8.1') {
             excludes 'groovy-all'
         }
     }
