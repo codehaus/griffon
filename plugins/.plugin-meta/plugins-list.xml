@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4004">
+<plugins revision="4013">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1845,7 +1845,7 @@ http://code.google.com/p/jbusycomponent</description>
             <documentation>http://griffon.codehaus.org/JBusyComponent+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jbusycomponent/tags/RELEASE_0_5_1/griffon-jbusycomponent-0.5.1.zip</file>
         </release>
-        <release tag="RELEASE_0_5_2" version="0.5.2" type="svn">
+        <release tag="RELEASE_0_5_2" type="svn" version="0.5.2">
             <title>Enhance any swing components with a 'busy' state</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
