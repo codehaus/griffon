@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Ant build script for Groovy.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+compliance with the License. You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is
+distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied. See the License for the specific language governing permissions and limitations under the License.
+
+This work is copyright by the author(s) and is part of a greater work collectively copyright by Codehaus on
+behalf of the Groovy community. See the NOTICE.txt file distributed with this work for additional information.
+
+-->
+
+<project name="ConsoleX" default="run" basedir=".">
+
+    <property file="local.build.properties"/>
+    <property file="build.properties"/>
+    <property environment="env"/>
+
+    <path id="lib.groovy">
+        <fileset dir="${env.GROOVY_HOME}/lib">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+    <path id="build.classpath">
+        <fileset dir="${swingxbuilder.lib}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${swingxbuilder.dist}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${consolex.lib}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${env.JAVA_HOME}">
+            <include name="lib/tools.jar"/>
+        </fileset>
+        <dirset dir="${consolex.build.classes}"/>
+        <path refid="lib.groovy"/>
+    </path>
+    <path id="run.classpath">
+        <path refid="build.classpath"/>
+        <fileset dir="${consolex.dist}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpathref="lib.groovy"/>
+
+    <target name="clean" description="Clean the build directory.">
+        <delete dir="${consolex.dist}"/>
+        <delete dir="${consolex.build}"/>
+    </target>
+
+    <target name="-initialize">
+        <mkdir dir="${consolex.build.classes}"/>
+        <mkdir dir="${consolex.dist}"/>
+    </target>
+
+    <target name="compile" depends="-initialize" description="Compile all classes.">
+        <javac srcdir="${consolex.src}"  destDir="${consolex.build.classes}" classpathref="build.classpath"/>
+        <groovyc srcdir="${consolex.src}" destDir="${consolex.build.classes}" classpathref="build.classpath"/>
+        <copy toDir="${consolex.build.classes}">
+            <fileset dir="${consolex.src}" includes="**/*.png"/> 
+        </copy>
+    </target>
+
+    <target name="jar" depends="compile" description="Create a distribution of the project">
+        <jar destfile="${consolex.dist}/${consolex.jar.dist}" basedir="${consolex.build.classes}">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Extension-Name" value="ConsoleX"/>
+                <attribute name='Specification-Title' value='ConsoleX: MVC Console Demo using SwingXBuilder'/>
+                <attribute name='Specification-Vendor' value='The Codehaus'/>
+            </manifest>
+            <zipfileset fullpath="META-INF/LICENSE.txt" file="${swingxbuilder.dir}/LICENSE.txt"/>
+        </jar>
+    </target>
+
+    <target name='dist' depends="jar" description='Create a zip file containing a full distribution of the project'>
+        <zip destfile="${consolex.zip.dist}">
+            <zipfileset prefix="src/" dir="${consolex.src}"/>
+            <zipfileset dir="${consolex.dist}" excludes='*.zip'/>
+            <zipfileset dir="${consolex.dist}" excludes='*.zip'/>
+        </zip>
+    </target>
+
+    <target name='run' description='Run the file' depends='jar'>
+        <java classname='groovyx.ui.ConsoleMain' fork='true' classpathref="run.classpath"/>
+    </target>
+</project>
+
