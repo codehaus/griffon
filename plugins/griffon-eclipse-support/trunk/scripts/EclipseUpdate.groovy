@@ -71,7 +71,7 @@ updateEclipseClasspathFile = { newPlugin = null ->
             boolean var = path != originalPath
             originalPath = path
             path = path.replaceFirst(~/${griffonSettings.baseDir.path}(\\|\/)/, '')
-            var = path == originalPath
+            var = path == originalPath && !path.startsWith(File.separator)
             [kind: var? 'var' : 'lib', path: path]
         }
         def visitDependencies = {List dependencies ->
