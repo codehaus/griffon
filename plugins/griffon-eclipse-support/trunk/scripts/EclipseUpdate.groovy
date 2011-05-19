@@ -20,6 +20,7 @@
 
 import griffon.util.PluginBuildSettings
 import static griffon.util.GriffonApplicationUtils.is64Bit
+import static griffon.util.GriffonApplicationUtils.isWindows
 
 import groovy.xml.MarkupBuilder
 
@@ -37,6 +38,8 @@ updateEclipseClasspathFile = { newPlugin = null ->
     if(newPlugin) event('SetClasspath', [classLoader])
     griffonSettings.resetDependencies()
     def visitedDependencies = []
+
+    String userHomeRegex = isWindows ? userHome.replace('\\', '\\\\') : userHome
 
     String indent = '    '
     def writer = new PrintWriter(new FileWriter('.classpath'))
@@ -61,13 +64,13 @@ updateEclipseClasspathFile = { newPlugin = null ->
 
         mkp.yieldUnescaped("\n${indent}<!-- output paths -->")
         classpathentry(kind: 'con', path: 'org.eclipse.jdt.launching.JRE_CONTAINER')
-        classpathentry(kind: 'output', path: classesDirPath.replaceFirst(~/${userHome}/, 'USER_HOME'))
+        classpathentry(kind: 'output', path: classesDirPath.replaceFirst(~/$userHomeRegex/, 'USER_HOME'))
         
         def normalizeFilePath = { file ->
             String path = file.absolutePath
             String originalPath = path
             path = path.replaceFirst(~/${griffonHome}/, 'GRIFFON_HOME')
-            path = path.replaceFirst(~/${userHome}/, 'USER_HOME')
+            path = path.replaceFirst(~/$userHomeRegex/, 'USER_HOME')
             boolean var = path != originalPath
             originalPath = path
             path = path.replaceFirst(~/${griffonSettings.baseDir.path}(\\|\/)/, '')
