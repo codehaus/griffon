@@ -11,7 +11,7 @@ griffon.project.dependency.resolution = {
         mavenRepo 'http://repository.codehaus.org'
     }
     dependencies {
-        compile 'org.codehaus.griffon:macwidgetsbuilder:0.4'
+        compile 'org.codehaus.griffon:macwidgetsbuilder:0.4.1'
     }
 }
 
