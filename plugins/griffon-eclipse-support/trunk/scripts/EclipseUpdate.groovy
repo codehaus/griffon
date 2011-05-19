@@ -39,7 +39,7 @@ updateEclipseClasspathFile = { newPlugin = null ->
     griffonSettings.resetDependencies()
     def visitedDependencies = []
 
-    String userHomeRegex = isWindows ? userHome.replace('\\', '\\\\') : userHome
+    String userHomeRegex = isWindows ? userHome.absolutePath.replace('\\', '\\\\') : userHome.absolutePath
 
     String indent = '    '
     def writer = new PrintWriter(new FileWriter('.classpath'))
