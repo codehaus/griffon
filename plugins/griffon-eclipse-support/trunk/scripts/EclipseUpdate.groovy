@@ -39,7 +39,8 @@ updateEclipseClasspathFile = { newPlugin = null ->
     griffonSettings.resetDependencies()
     def visitedDependencies = []
 
-    String userHomeRegex = isWindows ? userHome.absolutePath.replace('\\', '\\\\') : userHome.absolutePath
+    String userHomeRegex = isWindows ? userHome.toString().replace('\\', '\\\\') : userHome.toString()
+    String griffonHomeRegex = isWindows ? griffonHome.toString().replace('\\', '\\\\') : griffonHome.toString()
 
     String indent = '    '
     def writer = new PrintWriter(new FileWriter('.classpath'))
@@ -69,7 +70,7 @@ updateEclipseClasspathFile = { newPlugin = null ->
         def normalizeFilePath = { file ->
             String path = file.absolutePath
             String originalPath = path
-            path = path.replaceFirst(~/${griffonHome}/, 'GRIFFON_HOME')
+            path = path.replaceFirst(~/$griffonHomeRegex/, 'GRIFFON_HOME')
             path = path.replaceFirst(~/$userHomeRegex/, 'USER_HOME')
             boolean var = path != originalPath
             originalPath = path
