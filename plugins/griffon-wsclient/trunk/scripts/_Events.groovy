@@ -21,13 +21,13 @@
 def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
 eventSetClasspath = { cl ->
     eventClosure1(cl)
-    if(compilingPlugin('slick')) return
-    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-slick-plugin', dirs: "${slickPluginDir}/addon"
-    griffonSettings.dependencyManager.addPluginDependency('slick', [
+    if(compilingPlugin('wsclient')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-wsclient-plugin', dirs: "${wsclientPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('wsclient', [
         conf: 'compile',
-        name: 'griffon-slick-addon',
+        name: 'griffon-wsclient-addon',
         group: 'org.codehaus.griffon.plugins',
-        version: slickPluginVersion
+        version: wsclientPluginVersion
     ])
 }
 
