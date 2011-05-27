@@ -21,7 +21,7 @@ import org.springframework.jmx.export.MBeanExporter
 import griffon.util.GriffonClassUtils as GCU
 
 /**
- * Based on griffon-jmx plugin by Ken Sipe.
+ * Based on grails-jmx plugin by Ken Sipe.
  *
  * @author Andres Almiray
  */
