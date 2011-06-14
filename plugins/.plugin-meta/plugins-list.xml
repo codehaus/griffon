@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4062">
+<plugins revision="4063">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -121,7 +121,6 @@ http://barcode4j.sourceforge.net</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-berkeleydb/tags/RELEASE_0_3_1/griffon-berkeleydb-0.3.1.zip</file>
         </release>
     </plugin>
-    <plugin name="camel"/>
     <plugin name="charts" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Charting support via JFreeChart</title>
@@ -740,9 +739,6 @@ another docking frame in the application.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-docking-frame/tags/RELEASE_0_3/griffon-docking-frame-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="domain"/>
-    <plugin name="domain-db4o"/>
-    <plugin name="domain-gsql"/>
     <plugin name="easyb" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables BDD testing with Easyb</title>
@@ -1190,32 +1186,6 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-font-jiggler/tags/RELEASE_0_2/griffon-font-jiggler-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="fx-builder" latest-release="0.3">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Enables JavaFX on your Griffon application</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
-            <description/>
-            <documentation>http://griffon.codehaus.org/FxBuilder+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-fx-builder/tags/RELEASE_0_1/griffon-fx-builder-0.1.zip</file>
-        </release>
-        <release tag="RELEASE_0_2" type="svn" version="0.2">
-            <title>Enables JavaFX on your Griffon application</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
-            <description/>
-            <documentation>http://griffon.codehaus.org/FxBuilder+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-fx-builder/tags/RELEASE_0_2/griffon-fx-builder-0.2.zip</file>
-        </release>
-        <release tag="RELEASE_0_3" type="svn" version="0.3">
-            <title>Enables JavaFX on your Griffon application</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
-            <description/>
-            <documentation>http://griffon.codehaus.org/FxBuilder+Plugin</documentation>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-fx-builder/tags/RELEASE_0_3/griffon-fx-builder-0.3.zip</file>
-        </release>
-    </plugin>
     <plugin name="gfx-builder" latest-release="0.6">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gfx Builder Plugin</title>
@@ -1408,7 +1378,6 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gmetrics/tags/RELEASE_0_3/griffon-gmetrics-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="gorm"/>
     <plugin name="gparallelizer" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>GParallelizer Plugin</title>
