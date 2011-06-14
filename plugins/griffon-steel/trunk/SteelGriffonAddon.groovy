@@ -71,6 +71,8 @@ class SteelGriffonAddon {
         radialBargraph: RadialBargraph,
         radialSquareSmall: RadialSquareSmall,
         sparkLine: SparkLine,
-        poi: new PoiFactory()
+        poi: new PoiFactory(),
+        stopWatch: StopWatch,
+        windDirection: WindDirection
     ]
 }

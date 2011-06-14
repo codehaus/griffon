@@ -1,5 +1,5 @@
 griffon.project.dependency.resolution = {
-    inherits("global")
+    inherits "global"
     log "warn" 
     repositories {
         griffonPlugins()
@@ -8,7 +8,7 @@ griffon.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        compile('eu.hansolo:SteelSeries:3.9') {
+        compile('eu.hansolo:SteelSeries:3.9.3') {
             excludes 'trident'
         }
         compile('com.github.insubstantial:trident:6.2') { transitive = false }
