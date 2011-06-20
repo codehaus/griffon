@@ -1,6 +1,7 @@
 package net.sourceforge.griffon.airbag
 
 import griffon.spock.UnitSpec
+import java.awt.Dimension
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)

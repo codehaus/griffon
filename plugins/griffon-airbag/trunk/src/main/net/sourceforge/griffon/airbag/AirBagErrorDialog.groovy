@@ -1,21 +1,23 @@
 package net.sourceforge.griffon.airbag
 
 import java.awt.BorderLayout
-import java.awt.TextArea
+
 import javax.swing.JDialog
-import javax.swing.JLabel
-import javax.swing.JPanel
-import javax.swing.JScrollPane
+
 import groovy.swing.SwingBuilder
 import javax.swing.ImageIcon
-import javax.swing.border.Border
+
 import javax.swing.border.EmptyBorder
-import javax.swing.border.EtchedBorder
+
+import java.awt.Dimension
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 class AirBagErrorDialog extends JDialog {
+
+    def dialogDefaultSize = new Dimension(575, 75)
+    def dialogExpandedSize = new Dimension(620, 475)
 
     def AirBagErrorDialog(owner, title, exception) {
         super(owner, title)
@@ -40,10 +42,11 @@ class AirBagErrorDialog extends JDialog {
                 stacktraceBtn = button(selected: false, action: action(name: 'Stack Trace', closure: {
                     stacktracePane.visible = !stacktraceBtn.selected
                     stacktraceBtn.selected = stacktracePane.visible
-                    if(stacktracePane.visible)
-                        dialog.setSize(620, 475)
-                    else
-                        dialog.setSize(575, 75)
+                    if(stacktracePane.visible){
+                        dialog.size = dialog.dialogExpandedSize
+                    }else{
+                        dialog.size = dialog.preferredSize
+                    }
                 }), constraints: BorderLayout.EAST)
             }
 
@@ -54,9 +57,16 @@ class AirBagErrorDialog extends JDialog {
 
         add mainPanel
 
-        setSize(575, 75)
+        preferredSize = dialogDefaultSize
+        size = dialogDefaultSize
         setModal true
         setLocationRelativeTo owner
+    }
+
+    @Override
+    void show() {
+        size = preferredSize
+        super.show()
     }
 
 }
