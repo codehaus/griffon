@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4097">
+<plugins revision="4102">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -4248,7 +4248,7 @@ http://freedesktop.org</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-twitter/tags/RELEASE_0_1/griffon-twitter-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="uispec4j" latest-release="0.1">
+    <plugin name="uispec4j" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Run UI tests with UISpec4J</title>
             <author>Andres Almiray</author>
@@ -4257,6 +4257,18 @@ http://freedesktop.org</description>
 http://www.uispec4j.org/</description>
             <documentation>http://griffon.codehaus.org/Uispec4j+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-uispec4j/tags/RELEASE_0_1/griffon-uispec4j-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Run UI tests with UISpec4J</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Build and run UI tests with UISpec4j
+http://www.uispec4j.org/</description>
+            <documentation>http://griffon.codehaus.org/Uispec4j+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-uispec4j/tags/RELEASE_0_2/griffon-uispec4j-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="validation" latest-release="0.7.1">
