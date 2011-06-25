@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4172">
+<plugins revision="4177">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2876,7 +2876,7 @@ http://squareness.beeger.net/</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Squareness+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-squareness/tags/RELEASE_0_2/griffon-lookandfeel-squareness-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>Squareness Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2889,7 +2889,7 @@ http://squareness.beeger.net/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-squareness/tags/RELEASE_0_3/griffon-lookandfeel-squareness-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-substance" latest-release="0.3">
+    <plugin name="lookandfeel-substance" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Substance Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
@@ -2913,6 +2913,17 @@ http://squareness.beeger.net/</description>
             <description>Substance Swing Look &amp; Feel.</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Substance+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-substance/tags/RELEASE_0_3/griffon-lookandfeel-substance-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>Substance Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Substance Swing Look &amp; Feel.</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+Substance+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-substance/tags/RELEASE_0_4/griffon-lookandfeel-substance-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="lookandfeel-synthetica" latest-release="0.1">
