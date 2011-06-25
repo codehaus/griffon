@@ -5,12 +5,10 @@ griffon.project.dependency.resolution = {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-        flatDir name: 'jalarmsPluginLib', dirs: 'lib'
+        mavenCentral()
     }
     dependencies {
-        compile 'com.solab:jalarms-core:1.5.2',
-                'com.solab:jalarms-aop:1.5.2',
-                'com.solab:jalarms-channels:1.5.2'
+        compile 'net.sf.jalarms:jalarms-core:1.5.2'
     }
 }
 
