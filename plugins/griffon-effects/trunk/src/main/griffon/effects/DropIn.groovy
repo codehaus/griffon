@@ -36,7 +36,7 @@ import java.awt.Point
 import java.awt.Toolkit
 import org.pushingpixels.trident.Timeline
 import griffon.swing.SwingUtils
-import griffon.util.UIThreadHelper
+import griffon.core.UIThreadManager
 
 /**
  * Fades in and moves a window.<p>
@@ -152,7 +152,7 @@ class DropIn extends ParallelEffect {
 
     protected void doBeforePlay() {
         // make sure the window is visible
-        UIThreadHelper.instance.executeSync {
+        UIThreadManager.instance.executeSync {
             if(SwingUtils.isTranslucencySupported()) {
                 SwingUtils.setWindowOpacity(component, params.from)
             }

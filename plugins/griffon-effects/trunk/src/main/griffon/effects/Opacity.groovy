@@ -36,7 +36,7 @@ import org.pushingpixels.trident.Timeline.TimelineState
 import org.pushingpixels.trident.TimelinePropertyBuilder
 import org.pushingpixels.trident.TimelinePropertyBuilder.PropertySetter
 import griffon.swing.SwingUtils
-import griffon.util.UIThreadHelper
+import griffon.core.UIThreadManager
 
 import static griffon.util.GriffonApplicationUtils.isJdk16
 import static griffon.util.GriffonApplicationUtils.isJdk17
@@ -101,7 +101,7 @@ class Opacity extends AbstractBasicEffect {
 
     protected void doBeforePlay() {
         // make sure the window is visible
-        UIThreadHelper.instance.executeSync {
+        UIThreadManager.instance.executeSync {
             component.visible = true
         }
     }
