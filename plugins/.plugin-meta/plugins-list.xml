@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4117">
+<plugins revision="4122">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2521,7 +2521,7 @@ http://www.easynth.com</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+JgoodiesLooks+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-jgoodies-looks/tags/RELEASE_0_2/griffon-lookandfeel-jgoodies-looks-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>JGoodies Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2533,7 +2533,7 @@ http://www.easynth.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-jgoodies-looks/tags/RELEASE_0_3/griffon-lookandfeel-jgoodies-looks-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-jtattoo" latest-release="0.3">
+    <plugin name="lookandfeel-jtattoo" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JTattoo Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
@@ -2560,6 +2560,18 @@ http://www.jtattoo.net:%s%</description>
 http://www.jtattoo.net:%s%</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+JTattoo+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-jtattoo/tags/RELEASE_0_3/griffon-lookandfeel-jtattoo-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>JTattoo Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>JTattoo Swing Look &amp; Feel.
+http://www.jtattoo.net:%s%</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+JTattoo+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-jtattoo/tags/RELEASE_0_4/griffon-lookandfeel-jtattoo-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="lookandfeel-kunststoff" latest-release="0.2">
