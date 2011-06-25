@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+package griffon.plugins.lookandfeel
+
 /**
  * @author Andres Almiray
  */

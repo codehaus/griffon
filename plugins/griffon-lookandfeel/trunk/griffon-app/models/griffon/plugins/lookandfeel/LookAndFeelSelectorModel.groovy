@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+package griffon.plugins.lookandfeel
+
 import groovy.beans.Bindable
 import java.beans.PropertyChangeListener
 import javax.swing.DefaultComboBoxModel
