@@ -5,10 +5,11 @@ griffon.project.dependency.resolution = {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-        flatDir name: 'lookandfeelSubstancePluginLib', dirs: 'lib'
+        mavenCentral()
     }
     dependencies {
-        runtime 'org.java.net.substance:substance:6.1'
+        compile('com.github.insubstantial:substance:6.2') { transitive = false }
+        compile('com.github.insubstantial:trident:6.2') { transitive = false }
     }
 }
 
