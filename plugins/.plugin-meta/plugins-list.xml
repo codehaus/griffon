@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4157">
+<plugins revision="4162">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2770,7 +2770,7 @@ http://officelnfs.sourceforge.net/</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Officelnfs+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-officelnfs/tags/RELEASE_0_2/griffon-lookandfeel-officelnfs-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>Officelnfs Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -2783,7 +2783,7 @@ http://officelnfs.sourceforge.net/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-officelnfs/tags/RELEASE_0_3/griffon-lookandfeel-officelnfs-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="lookandfeel-pgslaf" latest-release="0.2">
+    <plugin name="lookandfeel-pgslaf" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Pgslaf Swing Look &amp; Feel</title>
             <author>Andres Almiray</author>
@@ -2801,6 +2801,18 @@ http://www.pagosoft.com/products/pgslookandfeel/index.html</description>
 http://www.pagosoft.com/products/pgslookandfeel/index.html</description>
             <documentation>http://griffon.codehaus.org/Lookandfeel+Pgslaf+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-pgslaf/tags/RELEASE_0_2/griffon-lookandfeel-pgslaf-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Pgslaf Swing Look &amp; Feel</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Pgslaf Swing Look &amp; Feel.
+http://www.pagosoft.com/products/pgslookandfeel/index.html</description>
+            <documentation>http://griffon.codehaus.org/Lookandfeel+Pgslaf+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-lookandfeel-pgslaf/tags/RELEASE_0_3/griffon-lookandfeel-pgslaf-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="lookandfeel-quaqua" latest-release="0.1">
