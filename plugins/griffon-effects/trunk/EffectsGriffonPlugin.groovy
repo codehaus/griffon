@@ -32,8 +32,8 @@
  * @author Andres Almiray
  */
 class EffectsGriffonPlugin {
-    def version = '0.3'
-    def griffonVersion = '0.9.2 > *' 
+    def version = '0.4'
+    def griffonVersion = '0.9.3 > *' 
     def dependsOn = [:]
     def toolkits = ['swing']
     def jdk = '1.6'

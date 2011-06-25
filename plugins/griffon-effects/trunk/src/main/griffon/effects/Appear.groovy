@@ -32,7 +32,7 @@ package griffon.effects
 
 import java.awt.Window
 import griffon.swing.SwingUtils
-import griffon.util.UIThreadHelper
+import griffon.core.UIThreadManager
 
 /**
  * Make a window appear.<p>
@@ -68,7 +68,7 @@ class Appear extends Opacity {
 
     protected void doBeforePlay() {
         // make sure the window is visible
-        UIThreadHelper.instance.executeSync {
+        UIThreadManager.instance.executeSync {
             if(SwingUtils.isTranslucencySupported()) {
                 SwingUtils.setWindowOpacity(component, params.from)
             }
