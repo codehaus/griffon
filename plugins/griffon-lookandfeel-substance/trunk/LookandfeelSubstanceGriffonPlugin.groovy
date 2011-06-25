@@ -18,10 +18,9 @@
  * @author Andres Almiray
  */
 class LookandfeelSubstanceGriffonPlugin {
-    def version = 0.3
-    def griffonVersion = '0.9.2 > *'
-    def dependsOn = [lookandfeel: 0.4,
-                     'trident-builder': '0.6.1']
+    def version = 0.4
+    def griffonVersion = '0.9.3 > *'
+    def dependsOn = [lookandfeel: 0.5]
     def toolkits = ['swing']
     def license = 'Apache Software License 2.0'
 
