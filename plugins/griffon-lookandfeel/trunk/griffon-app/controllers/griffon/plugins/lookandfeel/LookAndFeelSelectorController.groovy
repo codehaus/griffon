@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+package griffon.plugins.lookandfeel
+
 import javax.swing.SwingUtilities
 import griffon.lookandfeel.LookAndFeelInfo
 import griffon.lookandfeel.LookAndFeelProvider

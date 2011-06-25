@@ -36,7 +36,7 @@ final class LookAndFeelManager {
         if(providers) return
 
         ClassLoader cl = Thread.currentThread().contextClassLoader
-        Enumeration urls = cl.getResources('META-INF/griffon-lookandfeel.properties')
+        Enumeration urls = cl.getResources('META-INF/services/' + LookAndFeelProvider.class.name)
         urls.each { url ->
             url.eachLine { text ->
                 String providerClassName = text.trim()
