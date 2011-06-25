@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4081">
+<plugins revision="4086">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -899,7 +899,7 @@ another docking frame in the application.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_7/griffon-eclipse-support-0.4.7.zip</file>
         </release>
     </plugin>
-    <plugin name="effects" latest-release="0.3">
+    <plugin name="effects" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Effects and Animations</title>
             <author>Andres Almiray</author>
@@ -931,6 +931,17 @@ another docking frame in the application.</description>
             <description>Effects and Animations</description>
             <documentation>http://griffon.codehaus.org/Effects+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_3/griffon-effects-0.3.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>Effects and Animations</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Effects and Animations</description>
+            <documentation>http://griffon.codehaus.org/Effects+Plugin</documentation>
+            <license>BSD License</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-effects/tags/RELEASE_0_4/griffon-effects-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="erlang" latest-release="0.3">
@@ -3715,7 +3726,7 @@ http://grails.org/plugin/spock</description>
             <documentation>http://griffon.codehaus.org/Spring+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_6/griffon-spring-0.6.zip</file>
         </release>
-        <release tag="RELEASE_0_7" version="0.7" type="svn">
+        <release tag="RELEASE_0_7" type="svn" version="0.7">
             <title>Spring framework libraries and helpers</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
