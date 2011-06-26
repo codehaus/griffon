@@ -23,7 +23,7 @@ package griffon.plugins.slideware
 import griffon.lookandfeel.LookAndFeelManager
 import com.bric.image.transition.Transition2D
 import com.bric.image.transition.spunk.SwivelTransition2D
-
+import javax.swing.KeyStroke
 
 createFooter = { idx ->
     def footer
@@ -142,11 +142,11 @@ application(id: 'deckPlayerWindow',
     }
 
     keyStrokeAction(component: deck,
-        keyStroke: shortcut('LEFT'),
+        keyStroke: [shortcut('LEFT'), KeyStroke.getKeyStroke(33, 0)],
         condition: 'in focused window',
         action: previousAction)
     keyStrokeAction(component: deck,
-        keyStroke: shortcut('RIGHT'),
+        keyStroke: [shortcut('RIGHT'), KeyStroke.getKeyStroke(34, 0)],
         condition: 'in focused window',
         action: nextAction)
     keyStrokeAction(component: deck,

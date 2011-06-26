@@ -16,6 +16,8 @@
 
 package griffon.plugins.slideware
 
+import griffon.transform.Threading
+
 /**
  * @author Andres Almiray
  */

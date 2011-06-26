@@ -33,6 +33,8 @@ import org.codehaus.groovy.control.messages.SyntaxErrorMessage
 import org.codehaus.groovy.control.messages.ExceptionMessage
 import org.codehaus.groovy.syntax.SyntaxException
 
+import griffon.transform.Threading
+
 /**
  * @author Andres Almiray
  */
