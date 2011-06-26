@@ -17,7 +17,6 @@
 package org.codehaus.griffon.runtime.slideware;
 
 import griffon.core.*;
-import griffon.util.UIThreadHelper;
 import griffon.util.GriffonExceptionHandler;
 import griffon.plugins.slideware.GriffonSlide;
 import griffon.plugins.slideware.GriffonSlideClass;
@@ -94,35 +93,35 @@ public abstract class AbstractGriffonSlideScript extends Script implements Griff
     }
 
     public boolean isUIThread() {
-        return UIThreadHelper.getInstance().isUIThread();
+        return UIThreadManager.getInstance().isUIThread();
     }
 
     public void execAsync(Runnable runnable) {
-        UIThreadHelper.getInstance().executeAsync(runnable);
+        UIThreadManager.getInstance().executeAsync(runnable);
     }
 
     public void execSync(Runnable runnable) {
-        UIThreadHelper.getInstance().executeSync(runnable);
+        UIThreadManager.getInstance().executeSync(runnable);
     }
 
     public void execOutside(Runnable runnable) {
-        UIThreadHelper.getInstance().executeOutside(runnable);
+        UIThreadManager.getInstance().executeOutside(runnable);
     }
 
     public Future execFuture(ExecutorService executorService, Closure closure) {
-        return UIThreadHelper.getInstance().executeFuture(executorService, closure);
+        return UIThreadManager.getInstance().executeFuture(executorService, closure);
     }
 
     public Future execFuture(Closure closure) {
-        return UIThreadHelper.getInstance().executeFuture(closure);
+        return UIThreadManager.getInstance().executeFuture(closure);
     }
 
     public Future execFuture(ExecutorService executorService, Callable callable) {
-        return UIThreadHelper.getInstance().executeFuture(executorService, callable);
+        return UIThreadManager.getInstance().executeFuture(executorService, callable);
     }
 
     public Future execFuture(Callable callable) {
-        return UIThreadHelper.getInstance().executeFuture(callable);
+        return UIThreadManager.getInstance().executeFuture(callable);
     }
 
     public void mvcGroupInit(Map<String, Object> args) {

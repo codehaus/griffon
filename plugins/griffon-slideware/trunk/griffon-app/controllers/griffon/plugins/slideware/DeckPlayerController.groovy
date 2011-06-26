@@ -22,6 +22,8 @@ import griffon.builder.css.CSSDecorator
 import griffon.builder.css.CSSBindings
 import static griffon.swing.SwingUtils.centerOnScreen
 
+import griffon.transform.Threading
+
 /**
  * @author Andres Almiray
  */

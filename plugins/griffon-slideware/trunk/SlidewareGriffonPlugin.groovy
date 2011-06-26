@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class SlidewareGriffonPlugin {
-    def version = '0.1'
+    def version = '0.2'
     def griffonVersion = '0.9.3 > *'
     def pluginIncludes = []
     def license = 'Apache Software License 2.0'
@@ -30,7 +30,7 @@ class SlidewareGriffonPlugin {
                      'glazedlists'    : '0.8.2',
                      'jbusycomponent' : '0.5.2',
                      'i18n'           : '0.3.1',
-                     'lookandfeel'    : '0.4',
+                     'lookandfeel'    : '0.5',
                      'syntaxtext'     : '0.1']
 
     def author = 'Andres Almiray'

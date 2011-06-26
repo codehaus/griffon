@@ -16,6 +16,7 @@
 
 package griffon.plugins.slideware
 
+import griffon.transform.Threading
 import java.awt.Window
 
 /**
