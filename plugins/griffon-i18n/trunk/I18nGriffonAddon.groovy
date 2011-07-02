@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,110 +15,80 @@
  */
 
 import org.springframework.context.MessageSource
-import org.springframework.context.MessageSourceResolvable
-import org.springframework.context.support.ResourceBundleMessageSource
+import griffon.core.GriffonApplication
+import griffon.plugins.i18n.MessageSourceHolder
+import griffon.plugins.i18n.DelegatingMessageSource
+import griffon.plugins.i18n.ExtendedResourceBundleMessageSource
 
 /**
  * @author Andres Almiray
  */
 class I18nGriffonAddon {
-    private final MessageSource messageSource = new ResourceBundleMessageSource()
     private static final String DEFAULT_I18N_FILE = 'messages'
 
-    def addonInit(app) {
-        def basenames = app.config?.i18n?.basenames ?: [DEFAULT_I18N_FILE]
-        if(!basenames.contains(DEFAULT_I18N_FILE)) basenames = [DEFAULT_I18N_FILE] + basenames
+    void addonInit(GriffonApplication app) {
+        List<String> basenames = app.config.i18n?.basenames ?: [DEFAULT_I18N_FILE]
+        if (!basenames.contains(DEFAULT_I18N_FILE)) basenames = [DEFAULT_I18N_FILE] + basenames
+        MessageSource messageSource = new ExtendedResourceBundleMessageSource()
+        MessageSourceHolder.messageSource = new DelegatingMessageSource(messageSource)
         messageSource.basenames = basenames as String[]
-        app.metaClass.messageSource = messageSource
-        app.metaClass.i18n = messageSource
-        MetaClass mc = MessageSource.metaClass
+        MetaClass mc = app.metaClass
+        mc.messageSource = MessageSourceHolder.messageSource
+        mc.i18n = MessageSourceHolder.messageSource
+        mc.getMessage = { Object... args -> MessageSourceHolder.messageSource.getMessage(* args) }
+        /*
         mc.getMessage = {String message, List args, String defaultMessage, Locale locale ->
-            messageSource.getMessage(message, args as Object[], defaultMessage, locale)
+            MessageSourceHolder.messageSource.getMessage(message, args, defaultMessage, locale)
         }
         mc.getMessage = {String message, List args, String defaultMessage ->
-            messageSource.getMessage(message, args as Object[], defaultMessage, app.locale)
+            MessageSourceHolder.messageSource.getMessage(message, args, defaultMessage)
         }
         mc.getMessage = {String message, String defaultMessage, Locale locale ->
-            messageSource.getMessage(message, new Object[0], defaultMessage, locale)
+            MessageSourceHolder.messageSource.getMessage(message, defaultMessage, locale)
         }
         mc.getMessage = {String message, String defaultMessage ->
-            messageSource.getMessage(message, new Object[0], defaultMessage, app.locale)
+            MessageSourceHolder.messageSource.getMessage(message, defaultMessage)
         }
         mc.getMessage = {String message, List args, Locale locale ->
-            messageSource.getMessage(message, args as Object[], locale)
+            MessageSourceHolder.messageSource.getMessage(message, args)
         }
         mc.getMessage = {String message, List args ->
-            messageSource.getMessage(message, args as Object[], app.locale)
-        }
-        mc.getMessage = {String message, Object[] args, String defaultMessage ->
-            messageSource.getMessage(message, args, defaultMessage, app.locale)
-        }
-        mc.getMessage = {String message, Object[] args ->
-            messageSource.getMessage(message, args, app.locale)
-        }
-        mc.getMessage = {String message, Locale locale ->
-            messageSource.getMessage(message, new Object[0], locale)
-        }
-        mc.getMessage = {String message ->
-            messageSource.getMessage(message, new Object[0], app.locale)
-        }
-        mc.getMessage = {MessageSourceResolvable resolvable ->
-            messageSource.getMessage(resolvable, app.locale)
-        }
-
-        // decorate GriffonApplication too!
-        mc = app.metaClass
-        mc.getMessage = {String message, List args, String defaultMessage, Locale locale ->
-            messageSource.getMessage(message, args as Object[], defaultMessage, locale)
-        }
-        mc.getMessage = {String message, List args, String defaultMessage ->
-            messageSource.getMessage(message, args as Object[], defaultMessage, app.locale)
-        }
-        mc.getMessage = {String message, String defaultMessage, Locale locale ->
-            messageSource.getMessage(message, new Object[0], defaultMessage, locale)
-        }
-        mc.getMessage = {String message, String defaultMessage ->
-            messageSource.getMessage(message, new Object[0], defaultMessage, app.locale)
-        }
-        mc.getMessage = {String message, List args, Locale locale ->
-            messageSource.getMessage(message, args as Object[], locale)
-        }
-        mc.getMessage = {String message, List args ->
-            messageSource.getMessage(message, args as Object[], app.locale)
+            MessageSourceHolder.messageSource.getMessage(message, args)
         }
         mc.getMessage = {String message, Object[] args, String defaultMessage, Locale locale ->
-            messageSource.getMessage(message, args, defaultMessage, locale)
+            MessageSourceHolder.messageSource.getMessage(message, args, defaultMessage, locale)
         }
         mc.getMessage = {String message, Object[] args, String defaultMessage ->
-            messageSource.getMessage(message, args, defaultMessage, app.locale)
+            MessageSourceHolder.messageSource.getMessage(message, args, defaultMessage)
         }
         mc.getMessage = {String message, Object[] args, Locale locale ->
-            messageSource.getMessage(message, args, locale)
+            MessageSourceHolder.messageSource.getMessage(message, args, locale)
         }
         mc.getMessage = {String message, Object[] args ->
-            messageSource.getMessage(message, args, app.locale)
+            MessageSourceHolder.messageSource.getMessage(message, args)
         }
         mc.getMessage = {String message, Locale locale ->
-            messageSource.getMessage(message, new Object[0], locale)
+            MessageSourceHolder.messageSource.getMessage(message, locale)
         }
         mc.getMessage = {String message ->
-            messageSource.getMessage(message, new Object[0], app.locale)
+            MessageSourceHolder.messageSource.getMessage(message)
         }
         mc.getMessage = {MessageSourceResolvable resolvable, Locale locale ->
-            messageSource.getMessage(resolvable, locale)
+            MessageSourceHolder.messageSource.getMessage(resolvable, locale)
         }
         mc.getMessage = {MessageSourceResolvable resolvable ->
-            messageSource.getMessage(resolvable, app.locale)
+            MessageSourceHolder.messageSource.getMessage(resolvable)
         }
+        */
     }
 
     def methods = [
-        getMessage: { Object... args -> messageSource.getMessage(*args) }
+            getMessage: { Object... args -> MessageSourceHolder.messageSource.getMessage(* args) }
     ]
 
     def props = [
-        messageSource: [
-            get: {-> messageSource }
-        ]
+            messageSource: [
+                    get: {-> MessageSourceHolder.messageSource }
+            ]
     ]
 }
