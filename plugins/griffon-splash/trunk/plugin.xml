@@ -1,4 +1,4 @@
-<plugin name='splash' version='0.2' griffonVersion='0.9.2-beta-3 &gt; *' jdk='1.5'>
+<plugin name='splash' version='0.2' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
   <author>Jim Shingler</author>
   <authorEmail>ShinglerJim@gmail.com</authorEmail>
   <title>A Griffon Splash Screen Plugin</title>
