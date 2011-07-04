@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4203">
+<plugins revision="4211">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -3732,7 +3732,7 @@ http://slick.cokeandcode.com/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-slideware/tags/RELEASE_0_2/griffon-slideware-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="splash" latest-release="0.1.4">
+    <plugin name="splash" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Griffon Splash Screen Plugin</title>
             <author>Jim Shingler</author>
@@ -3780,6 +3780,17 @@ http://slick.cokeandcode.com/</description>
             <description/>
             <documentation>http://griffon.codehaus.org/Splash+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-splash/tags/RELEASE_0_1_4/griffon-splash-0.1.4.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>A Griffon Splash Screen Plugin</title>
+            <author>Jim Shingler</author>
+            <authorEmail>ShinglerJim@gmail.com</authorEmail>
+            <description>A Griffon Splash Screen Plugin</description>
+            <documentation>http://griffon.codehaus.org/Splash+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-splash/tags/RELEASE_0_2/griffon-splash-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="spock" latest-release="0.3">
