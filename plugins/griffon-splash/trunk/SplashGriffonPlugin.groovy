@@ -20,6 +20,7 @@
 class SplashGriffonPlugin {
     def version = '0.2'
     def toolkits = ['swing']
+    def griffonVersion = '0.9.2 > *'
     def license = 'Apache Software License 2.0'
 
     def author = "Jim Shingler"

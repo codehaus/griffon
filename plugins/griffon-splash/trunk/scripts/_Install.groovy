@@ -32,3 +32,31 @@ if (!addonIsSet1) {
 root.'SplashGriffonAddon'.addon=true
 ''')
 }
+
+text = 'SplashGriffonAddon.display(app)\n'
+initializeScript = new File("${basedir}/griffon-app/lifecycle/Initialize.groovy")
+if(!initializeScript.text.contains(text)) {
+    initializeScript.text += text
+}
+
+text = 'def splashScreen = SplashScreen.getInstance()\n'
+if(initializeScript.text.contains(text)) {
+    initializeScript.text -= text
+}
+
+text = '''
+splashScreen.splash()
+splashScreen.waitForSplash()
+'''.trim()
+if(initializeScript.text.contains(text)) {
+    initializeScript.text -= text
+}
+
+initializeScript.text = initializeScript.text.replaceAll("\nURL url = this.class.getResource","\n//URL url = this.class.getResource")
+initializeScript.text = initializeScript.text.replaceAll("\nsplashScreen.setImage","\n//splashScreen.setImage")
+
+text = 'SplashScreen.getInstance().dispose()\n'
+readyScript = new File("${basedir}/griffon-app/lifecycle/Ready.groovy")
+if(readyScript.text.contains(text)) {
+    readyScript.text -= text
+}
