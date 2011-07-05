@@ -70,20 +70,20 @@ public class DelegatingMessageSource implements ExtendedMessageSource {
         return messageSource.getMessage(key, EMPTY_ARGS, defaultMessage, locale);
     }
 
-    public String getMessage(String key, List<Object> args) throws NoSuchMessageException {
-        return messageSource.getMessage(key, args.toArray(), locale());
+    public String getMessage(String key, List<?> args) throws NoSuchMessageException {
+        return messageSource.getMessage(key, args.toArray(new Object[args.size()]), locale());
     }
 
-    public String getMessage(String key, List<Object> args, String defaultMessage) {
-        return messageSource.getMessage(key, args.toArray(), defaultMessage, locale());
+    public String getMessage(String key, List<?> args, String defaultMessage) {
+        return messageSource.getMessage(key, args.toArray(new Object[args.size()]), defaultMessage, locale());
     }
 
-    public String getMessage(String key, List<Object> args, Locale locale) throws NoSuchMessageException {
-        return messageSource.getMessage(key, args.toArray(), locale);
+    public String getMessage(String key, List<?> args, Locale locale) throws NoSuchMessageException {
+        return messageSource.getMessage(key, args.toArray(new Object[args.size()]), locale);
     }
 
-    public String getMessage(String key, List<Object> args, String defaultMessage, Locale locale) {
-        return messageSource.getMessage(key, args.toArray(), defaultMessage, locale);
+    public String getMessage(String key, List<?> args, String defaultMessage, Locale locale) {
+        return messageSource.getMessage(key, args.toArray(new Object[args.size()]), defaultMessage, locale);
     }
 
     public String getMessage(String key, Object[] args) throws NoSuchMessageException {
