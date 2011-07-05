@@ -35,13 +35,13 @@ public interface ExtendedMessageSource extends MessageSource {
 
     String getMessage(String key, String defaultMessage, Locale locale);
 
-    String getMessage(String key, List<Object> args) throws NoSuchMessageException;
+    String getMessage(String key, List<?> args) throws NoSuchMessageException;
 
-    String getMessage(String key, List<Object> args, String defaultMessage);
+    String getMessage(String key, List<?> args, String defaultMessage);
 
-    String getMessage(String key, List<Object> args, Locale locale) throws NoSuchMessageException;
+    String getMessage(String key, List<?> args, Locale locale) throws NoSuchMessageException;
 
-    String getMessage(String key, List<Object> args, String defaultMessage, Locale locale);
+    String getMessage(String key, List<?> args, String defaultMessage, Locale locale);
 
     String getMessage(String key, Object[] args) throws NoSuchMessageException;
 
