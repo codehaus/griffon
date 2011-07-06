@@ -30,8 +30,8 @@
 
 package griffon.plugins.slick;
 
-import org.newdawn.slick.Game;
 import griffon.core.GriffonApplication;
+import org.newdawn.slick.Game;
 
 /**
  * 

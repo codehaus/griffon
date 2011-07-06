@@ -30,9 +30,8 @@
 
 package org.codehaus.griffon.runtime.slick;
 
-import griffon.plugins.slick.GriffonGameStateClass;
-
 import griffon.core.GriffonApplication;
+import griffon.plugins.slick.GriffonGameStateClass;
 import org.codehaus.griffon.runtime.core.DefaultGriffonClass;
 
 /**

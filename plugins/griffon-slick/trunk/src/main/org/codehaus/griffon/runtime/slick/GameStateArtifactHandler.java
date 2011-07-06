@@ -30,11 +30,10 @@
 
 package org.codehaus.griffon.runtime.slick;
 
-import griffon.plugins.slick.GriffonGameStateClass;
-
-import org.codehaus.griffon.runtime.core.ArtifactHandlerAdapter;
-import griffon.core.GriffonClass;
 import griffon.core.GriffonApplication;
+import griffon.core.GriffonClass;
+import griffon.plugins.slick.GriffonGameStateClass;
+import org.codehaus.griffon.runtime.core.ArtifactHandlerAdapter;
 
 /**
  * @author Andres Almiray

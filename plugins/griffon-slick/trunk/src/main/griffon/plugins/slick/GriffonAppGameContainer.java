@@ -30,7 +30,6 @@
 
 package griffon.plugins.slick;
 
-import org.newdawn.slick.Game;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
@@ -39,9 +38,9 @@ import org.newdawn.slick.SlickException;
  * @author Andres Almiray
  */
 public class GriffonAppGameContainer extends AppGameContainer {
-    final GriffonSlickApplication app;
+    private final GriffonSlickApplication app;
 
-    GriffonAppGameContainer(GriffonSlickApplication app, int width, int height, boolean fullscreen) throws SlickException {
+    public GriffonAppGameContainer(GriffonSlickApplication app, int width, int height, boolean fullscreen) throws SlickException {
         super(app.getGame(), width, height, fullscreen);
         this.app = app;
     }
@@ -49,7 +48,7 @@ public class GriffonAppGameContainer extends AppGameContainer {
     public GriffonSlickApplication getApp() {
         return app;
     }
-        
+
     public void quit() {
         super.destroy();
     }
