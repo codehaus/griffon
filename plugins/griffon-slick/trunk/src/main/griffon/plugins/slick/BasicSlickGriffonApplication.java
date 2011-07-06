@@ -28,56 +28,72 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package griffon.plugins.slick
+package griffon.plugins.slick;
 
-import org.codehaus.griffon.runtime.core.BaseGriffonApplication
-import griffon.swing.AbstractSwingGriffonApplication
-
-import org.newdawn.slick.Game
-import org.newdawn.slick.GameContainer
-import org.newdawn.slick.state.StateBasedGame
+import griffon.swing.AbstractSwingGriffonApplication;
+import griffon.util.GriffonExceptionHandler;
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.Game;
+import org.newdawn.slick.SlickException;
 
 /**
- * 
  * @author Andres Almiray
  */
-class StateBasedSlickGriffonApplication extends AbstractSwingGriffonApplication implements GriffonSlickApplication {
-    private boolean gameContainerDispensed = false
-    
-    final GameContainer gameContainer
-    final Game game
+public class BasicSlickGriffonApplication extends AbstractSwingGriffonApplication implements GriffonSlickApplication {
+    private boolean gameContainerDispensed = false;
 
-    StateBasedSlickGriffonApplication(String[] args = BaseGriffonApplication.EMPTY_ARGS) {
-        super(args)
-        game = new GriffonStateBasedGame(this)
-        gameContainer = new GriffonAppGameContainer(this, 640, 480, false)
+    private final GriffonAppGameContainer gameContainer;
+    private final Game game;
+
+    public BasicSlickGriffonApplication() {
+        this(AbstractSwingGriffonApplication.EMPTY_ARGS);
     }
 
-    StateBasedGame getStateBasedGame() {
-        game
-    }
-
-    void show() {
-        gameContainer.start()
-
-        callReady()
-    }
-    
-    void exit() {
-        gameContainer.quit()
-        super.exit()
-    }
-
-    Object createApplicationContainer() {
-        if(gameContainerDispensed) {
-            super.createApplicationContainer()
-        } else {
-            gameContainerDispensed = true
-            gameContainer
+    public BasicSlickGriffonApplication(String[] args) {
+        super(args);
+        game = new BasicGameDelegate(this);
+        try {
+            gameContainer = new GriffonAppGameContainer(this, 640, 480, false);
+        } catch (SlickException e) {
+            GriffonExceptionHandler.sanitize(e);
+            e.printStackTrace();
+            throw new IllegalStateException(e);
         }
     }
-    
+
+    public AppGameContainer getGameContainer() {
+        return gameContainer;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void show() {
+        try {
+            gameContainer.start();
+
+            callReady();
+        } catch (SlickException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    public void exit() {
+        gameContainer.quit();
+        super.exit();
+    }
+
+    public Object createApplicationContainer() {
+        if (gameContainerDispensed) {
+            return super.createApplicationContainer();
+        } else {
+            gameContainerDispensed = true;
+            return gameContainer;
+        }
+    }
+
     public static void main(String[] args) {
-        AbstractSwingGriffonApplication.run(StateBasedSlickGriffonApplication, args)
+        AbstractSwingGriffonApplication.run(BasicSlickGriffonApplication.class, args);
     }
 }

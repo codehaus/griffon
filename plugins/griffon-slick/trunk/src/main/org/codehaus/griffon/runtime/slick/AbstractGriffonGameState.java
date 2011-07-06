@@ -30,47 +30,40 @@
 
 package org.codehaus.griffon.runtime.slick;
 
+import griffon.core.*;
 import griffon.plugins.slick.GriffonGameState;
-import static java.util.Arrays.asList;
-import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-
-import griffon.core.GriffonApplication;
-import griffon.core.GriffonClass;
-import griffon.util.UIThreadHelper;
-
-import groovy.lang.MetaClass;
+import griffon.plugins.slick.StateBasedSlickGriffonApplication;
 import groovy.lang.Closure;
 import groovy.lang.GroovySystem;
-import groovy.lang.GroovyObjectSupport;
-import java.util.Map;
-import java.util.List;
-import java.util.Collections;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
-import java.util.concurrent.ExecutorService;
-
-import org.codehaus.griffon.runtime.util.GriffonApplicationHelper;
+import groovy.lang.MetaClass;
 import org.codehaus.griffon.runtime.core.AbstractGriffonArtifact;
-import griffon.plugins.slick.StateBasedSlickGriffonApplication;
-
+import org.codehaus.griffon.runtime.util.GriffonApplicationHelper;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
+import static java.util.Arrays.asList;
+
 /**
- * 
  * @author Andres Almiray
  */
 public abstract class AbstractGriffonGameState extends BasicGameState implements GriffonGameState {
     private GriffonApplication app;
     private final Logger log;
-    
+
     public AbstractGriffonGameState() {
-        log = LoggerFactory.getLogger("griffon.app.state."+getClass().getName());
+        log = LoggerFactory.getLogger("griffon.app.state." + getClass().getName());
     }
 
     public GriffonApplication getApp() {
@@ -92,7 +85,7 @@ public abstract class AbstractGriffonGameState extends BasicGameState implements
     public MetaClass getMetaClass() {
         return AbstractGriffonArtifact.metaClassOf(this);
     }
-    
+
     public void setMetaClass(MetaClass metaClass) {
         GroovySystem.getMetaClassRegistry().setMetaClass(getClass(), metaClass);
     }
@@ -102,42 +95,42 @@ public abstract class AbstractGriffonGameState extends BasicGameState implements
     }
 
     public boolean isUIThread() {
-        return UIThreadHelper.getInstance().isUIThread();
+        return UIThreadManager.getInstance().isUIThread();
     }
 
     public void execAsync(Runnable runnable) {
-        UIThreadHelper.getInstance().executeAsync(runnable);
+        UIThreadManager.getInstance().executeAsync(runnable);
     }
 
     public void execSync(Runnable runnable) {
-        UIThreadHelper.getInstance().executeSync(runnable);
+        UIThreadManager.getInstance().executeSync(runnable);
     }
 
     public void execOutside(Runnable runnable) {
-        UIThreadHelper.getInstance().executeOutside(runnable);
+        UIThreadManager.getInstance().executeOutside(runnable);
     }
 
     public Future execFuture(ExecutorService executorService, Closure closure) {
-        return UIThreadHelper.getInstance().executeFuture(executorService, closure);
+        return UIThreadManager.getInstance().executeFuture(executorService, closure);
     }
 
     public Future execFuture(Closure closure) {
-        return UIThreadHelper.getInstance().executeFuture(closure);
+        return UIThreadManager.getInstance().executeFuture(closure);
     }
 
     public Future execFuture(ExecutorService executorService, Callable callable) {
-        return UIThreadHelper.getInstance().executeFuture(executorService, callable);
+        return UIThreadManager.getInstance().executeFuture(executorService, callable);
     }
 
     public Future execFuture(Callable callable) {
-        return UIThreadHelper.getInstance().executeFuture(callable);
+        return UIThreadManager.getInstance().executeFuture(callable);
     }
-    
+
     public Logger getLog() {
         return log;
     }
 
-    public void mvcGroupInit(Map<String, ?> args) {
+    public void mvcGroupInit(Map<String, Object> args) {
         // empty
     }
 
@@ -145,50 +138,82 @@ public abstract class AbstractGriffonGameState extends BasicGameState implements
         // empty
     }
 
-    public Map<String, ?> buildMVCGroup(String mvcType) {
+    public Map<String, Object> buildMVCGroup(String mvcType) {
         return GriffonApplicationHelper.buildMVCGroup(getApp(), Collections.emptyMap(), mvcType, mvcType);
     }
 
-    public Map<String, ?> buildMVCGroup(String mvcType, String mvcName) {
+    public Map<String, Object> buildMVCGroup(String mvcType, String mvcName) {
         return GriffonApplicationHelper.buildMVCGroup(getApp(), Collections.emptyMap(), mvcType, mvcName);
     }
 
-    public Map<String, ?> buildMVCGroup(Map<String, ?> args, String mvcType) {
+    public Map<String, Object> buildMVCGroup(Map<String, Object> args, String mvcType) {
         return GriffonApplicationHelper.buildMVCGroup(getApp(), args, mvcType, mvcType);
     }
 
-    public Map<String, ?> buildMVCGroup(Map<String, ?> args, String mvcType, String mvcName) {
+    public Map<String, Object> buildMVCGroup(Map<String, Object> args, String mvcType, String mvcName) {
         return GriffonApplicationHelper.buildMVCGroup(getApp(), args, mvcType, mvcName);
     }
 
-    public List<?> createMVCGroup(String mvcType) {
-        return (List<?>) GriffonApplicationHelper.createMVCGroup(getApp(), mvcType);
+    public List<? extends GriffonMvcArtifact> createMVCGroup(String mvcType) {
+        return GriffonApplicationHelper.createMVCGroup(getApp(), mvcType);
     }
 
-    public List<?> createMVCGroup(Map<String, ?> args, String mvcType) {
-        return (List<?>) GriffonApplicationHelper.createMVCGroup(getApp(), args, mvcType);
+    public List<? extends GriffonMvcArtifact> createMVCGroup(Map<String, Object> args, String mvcType) {
+        return GriffonApplicationHelper.createMVCGroup(getApp(), args, mvcType);
     }
 
-    public List<?> createMVCGroup(String mvcType, Map<String, ?> args) {
-        return (List<?>) GriffonApplicationHelper.createMVCGroup(getApp(), args, mvcType);
+    public List<? extends GriffonMvcArtifact> createMVCGroup(String mvcType, Map<String, Object> args) {
+        return GriffonApplicationHelper.createMVCGroup(getApp(), args, mvcType);
     }
 
-    public List<?> createMVCGroup(String mvcType, String mvcName) {
-        return (List<?>) GriffonApplicationHelper.createMVCGroup(getApp(), mvcType, mvcName);
+    public List<? extends GriffonMvcArtifact> createMVCGroup(String mvcType, String mvcName) {
+        return GriffonApplicationHelper.createMVCGroup(getApp(), mvcType, mvcName);
     }
 
-    public List<?> createMVCGroup(Map<String, ?> args, String mvcType, String mvcName) {
-        return (List<?>) GriffonApplicationHelper.createMVCGroup(getApp(), args, mvcType, mvcName);
+    public List<? extends GriffonMvcArtifact> createMVCGroup(Map<String, Object> args, String mvcType, String mvcName) {
+        return GriffonApplicationHelper.createMVCGroup(getApp(), args, mvcType, mvcName);
     }
 
-    public List<?> createMVCGroup(String mvcType, String mvcName, Map<String, ?> args) {
-        return (List<?>) GriffonApplicationHelper.createMVCGroup(getApp(), args, mvcType, mvcName);
+    public List<? extends GriffonMvcArtifact> createMVCGroup(String mvcType, String mvcName, Map<String, Object> args) {
+        return GriffonApplicationHelper.createMVCGroup(getApp(), args, mvcType, mvcName);
     }
 
     public void destroyMVCGroup(String mvcName) {
         GriffonApplicationHelper.destroyMVCGroup(getApp(), mvcName);
     }
-    
+
+    public void withMVCGroup(String mvcType, Closure handler) {
+        withMVCGroup(mvcType, mvcType, Collections.<String, Object>emptyMap(), handler);
+    }
+
+    public void withMVCGroup(String mvcType, String mvcName, Closure handler) {
+        withMVCGroup(mvcType, mvcName, Collections.<String, Object>emptyMap(), handler);
+    }
+
+    public void withMVCGroup(String mvcType, Map<String, Object> args, Closure handler) {
+        withMVCGroup(mvcType, mvcType, args, handler);
+    }
+
+    public void withMVCGroup(String mvcType, String mvcName, Map<String, Object> args, Closure handler) {
+        GriffonApplicationHelper.withMVCGroup(getApp(), mvcType, mvcName, args, handler);
+    }
+
+    public <M extends GriffonModel, V extends GriffonView, C extends GriffonController> void withMVCGroup(String mvcType, MVCClosure<M, V, C> handler) {
+        withMVCGroup(mvcType, mvcType, Collections.<String, Object>emptyMap(), handler);
+    }
+
+    public <M extends GriffonModel, V extends GriffonView, C extends GriffonController> void withMVCGroup(String mvcType, String mvcName, MVCClosure<M, V, C> handler) {
+        withMVCGroup(mvcType, mvcName, Collections.<String, Object>emptyMap(), handler);
+    }
+
+    public <M extends GriffonModel, V extends GriffonView, C extends GriffonController> void withMVCGroup(String mvcType, Map<String, Object> args, MVCClosure<M, V, C> handler) {
+        withMVCGroup(mvcType, mvcType, args, handler);
+    }
+
+    public <M extends GriffonModel, V extends GriffonView, C extends GriffonController> void withMVCGroup(String mvcType, String mvcName, Map<String, Object> args, MVCClosure<M, V, C> handler) {
+        GriffonApplicationHelper.withMVCGroup(getApp(), mvcType, mvcName, args, handler);
+    }
+
     public final void init(GameContainer gc, StateBasedGame game) throws SlickException {
         doInit(gc, game);
         getApp().event("SlickStateInit", asList(app, getID(), gc, game));
@@ -203,7 +228,7 @@ public abstract class AbstractGriffonGameState extends BasicGameState implements
         doRender(gc, game, g);
         getApp().event("SlickStateRender", asList(app, getID(), gc, game, g));
     }
-    
+
     protected void doInit(GameContainer gc, StateBasedGame game) throws SlickException {
         // empty
     }
