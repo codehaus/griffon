@@ -69,6 +69,18 @@ final class CmisConnector {
         app.event('CmisDisconnectEnd', [sessionName])
     }
 
+    void disconnectAll(GriffonApplication app, ConfigObject config) {
+        synchronized(lock) {
+            connections.each { sessionName, state ->
+                if(!state) return
+                app.event('CmisDisconnectStart', [config, sessionName, SessionHolder.instance.sessions[sessionName]])
+                SessionHolder.instance.sessions[sessionName] = null
+                connections[sessionName] = false
+                app.event('CmisDisconnectEnd', [sessionName])
+            }
+        }
+    }
+
     Session createSession(ConfigObject config, String sessionName = 'default') {
         Map parameters = sessionName == 'default' ? config.session : config.sessions[sessionName]
         Session session = sessionFactory.createSession(parameters)
