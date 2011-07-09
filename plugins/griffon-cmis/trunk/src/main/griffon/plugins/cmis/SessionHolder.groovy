@@ -37,7 +37,7 @@ class SessionHolder {
         }
         
         if(s == null) {
-            throw new IllegalArgumentException("No such OpenCMIS Session configuration for name $sessionCmisName")
+            throw new IllegalArgumentException("No such OpenCMIS Session configuration for name $sessionName")
         }
         closure(s)
     }
