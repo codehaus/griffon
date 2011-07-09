@@ -33,7 +33,7 @@ class SessionHolder {
         if(s == null) {
             GriffonApplication app = ApplicationHolder.application
             ConfigObject config = CmisConnector.instance.createConfig(app)
-            s = CmisConnector.connect(app, config, sessionName)
+            s = CmisConnector.instance.connect(app, config, sessionName)
         }
         
         if(s == null) {
