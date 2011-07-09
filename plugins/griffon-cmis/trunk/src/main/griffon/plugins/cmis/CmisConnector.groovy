@@ -42,7 +42,7 @@ final class CmisConnector {
         return new ConfigSlurper(Environment.current.name).parse(configClass)
     }
 
-    Session connect(GriffonApplication app, ConfigObject config, String sessionName = 'default') {
+    void connect(GriffonApplication app, ConfigObject config, String sessionName = 'default') {
         synchronized(lock) {
             if(connections[sessionName]) return
         }
