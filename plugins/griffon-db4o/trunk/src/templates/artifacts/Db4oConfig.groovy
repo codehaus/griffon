@@ -1,6 +1,7 @@
 import com.db4o.config.EmbeddedConfiguration
 
 dataSource {
+    delete = true
 }
 environments {
     development {
@@ -16,6 +17,7 @@ environments {
     production {
         dataSource {
             name = "prodDb.yarv"
+            delete = false
         }
     }
 }

@@ -26,6 +26,7 @@ includeTargets << griffonScript("_GriffonCreateArtifacts")
 
 // check to see if we already have a Db4oGriffonAddon
 boolean addonIsSet1
+builderConfig = configSlurper.parse(builderConfigFile.text)
 builderConfig.each() { prefix, v ->
     v.each { builder, views ->
         addonIsSet1 = addonIsSet1 || 'Db4oGriffonAddon' == builder
@@ -39,6 +40,7 @@ root.'Db4oGriffonAddon'.addon=true
 ''')
 }
 
+config = configSlurper.parse(configFile.text)
 if(!(config.flatten().'griffon.db4o.injectInto')) {
     configFile.append('''
 griffon.db4o.injectInto = ['controller']
