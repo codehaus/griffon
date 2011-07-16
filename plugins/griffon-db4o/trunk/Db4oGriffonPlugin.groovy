@@ -21,9 +21,9 @@
  * @author Andres Almiray
  */
 class Db4oGriffonPlugin {
-    def version = 0.3
+    def version = 0.4
     def dependsOn = [:]
-    def griffonVersion = '0.9.1 > *'
+    def griffonVersion = '0.9.2 > *'
     def license = 'GNU General Public License v3'
 
     def author = 'Andres Almiray'

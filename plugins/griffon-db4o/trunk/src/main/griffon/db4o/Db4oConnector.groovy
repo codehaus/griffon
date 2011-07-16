@@ -66,7 +66,7 @@ final class Db4oConnector {
         app.event('Db4oDisconnectEnd')
     }
 
-    private void startObjectContainer(config) {
+    private void startObjectContainer(ConfigObject config) {
         String dbfileName = config?.dataSource?.name ?: 'db.yarv'
         File dbfile = new File(dbfileName)
         if(!dbfile.absolute) dbfile = new File(Metadata.current.getGriffonWorkingDir(), dbfileName)
@@ -77,16 +77,14 @@ final class Db4oConnector {
         ObjectContainerHolder.instance.objectContainer = Db4oEmbedded.openFile(configuration, dbfile.absolutePath)
     }
 
-    private void stopObjectContainer(config) {
+    private void stopObjectContainer(ConfigObject config) {
         ObjectContainerHolder.instance.objectContainer.close()
 
-        String dbfileName = config?.dataSource?.name ?: 'db.yarv'
-        File dbfile = new File(dbfileName)
-        if(!dbfile.absolute) dbfile = new File(Metadata.current.getGriffonWorkingDir(), dbfileName)
-        switch(Environment.current) {
-            case Environment.DEVELOPMENT:
-            case Environment.TEST:
-                dbfile.delete()
+        if(config?.dataSource?.delete) {
+            String dbfileName = config?.dataSource?.name ?: 'db.yarv'
+            File dbfile = new File(dbfileName)
+            if(!dbfile.absolute) dbfile = new File(Metadata.current.getGriffonWorkingDir(), dbfileName)
+            dbfile.delete()
         }
     }
 
