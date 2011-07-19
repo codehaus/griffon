@@ -1,0 +1,9 @@
+<project name="a" basedir="." default="x">
+    <target name="x">
+        <replace dir="${basedir}">
+            <replaceFilter token="charvax.swing" value="charvax.swing" />
+            <replaceFilter token="charva.awt" value="charva.awt" />
+            <replaceFilter token="griffon.charva" value="griffon.charva" />
+        </replace>
+    </target>
+</project>
