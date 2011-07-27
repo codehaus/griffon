@@ -21,16 +21,15 @@
  * @author Andres Almiray
  */
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        def pluginDir = getPluginDirForName('db4o')
-        if(pluginDir?.file?.exists()) {
-            ant.fileset(dir: "${pluginDir.file}/lib/", includes: '*.jar').each {
-                griffonCopyDist(it.toString(), jardir)
-            }
-        }
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('db4o')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-db4o-plugin', dirs: "${db4oPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('db4o', [
+        conf: 'compile',
+        name: 'griffon-db4o-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: db4oPluginVersion
+    ])
 }
-
