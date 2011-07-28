@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4256">
+<plugins revision="4261">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -3846,7 +3846,7 @@ http://grails.org/plugin/spock</description>
             <documentation>http://griffon.codehaus.org/Spock+Plugin</documentation>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spock/tags/RELEASE_0_3/griffon-spock-0.3.zip</file>
         </release>
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Spock Plugin - spockframework.org</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -4715,6 +4715,20 @@ http://chemistry.apache.org/java/opencmis.html</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-cmis/tags/RELEASE_0_1/griffon-cmis-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="carbonado" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Persistence support via Carbonado</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Presistence support via Carbonado
+http://carbonado.sourceforge.net/</description>
+            <documentation>http://griffon.codehaus.org/Carbonado+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-carbonado/tags/RELEASE_0_1/griffon-carbonado-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
