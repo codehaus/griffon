@@ -1,0 +1,14 @@
+<plugin name='carbonado' version='0.1' griffonVersion='0.9.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Persistence support via Carbonado</title>
+  <description>Presistence support via Carbonado
+http://carbonado.sourceforge.net/</description>
+  <documentation>http://griffon.codehaus.org/Carbonado+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits></toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
