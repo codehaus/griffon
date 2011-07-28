@@ -1,0 +1,3 @@
+lombok.javac.handlers.HandleThreading
+lombok.javac.handlers.HandleEventPublisher
+lombok.javac.handlers.HandleThreadingAware
