@@ -1,20 +1,19 @@
 griffon.project.dependency.resolution = {
-    inherits("global")
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    inherits "global" 
+    log "warn"
     repositories {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-        mavenRepo 'http://m2repo.spockframework.org/snapshots'
         mavenCentral()
     }
   
     dependencies {
-        build('org.spockframework:spock-core:0.5-groovy-1.7') {
-            exclude 'groovy-all'
+        build('org.spockframework:spock-core:0.5-groovy-1.8') {
+            excludes 'groovy-all', 'asm', 'ant'
         }
-        test('org.spockframework:spock-core:0.5-groovy-1.7') {
-            exclude 'groovy-all'
+        test('org.spockframework:spock-core:0.5-groovy-1.8') {
+            excludes 'groovy-all', 'asm', 'ant'
         }
     }
 }
