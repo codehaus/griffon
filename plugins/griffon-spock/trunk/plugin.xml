@@ -1,4 +1,4 @@
-<plugin name='spock' version='0.3' griffonVersion='0.9.2 &gt; *' jdk='1.5'>
+<plugin name='spock' version='0.4' griffonVersion='0.9.3 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Spock Plugin - spockframework.org</title>
