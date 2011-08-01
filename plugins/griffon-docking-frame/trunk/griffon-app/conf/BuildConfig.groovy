@@ -8,7 +8,8 @@ griffon.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        compile 'org.dockingframes:docking-frames-core:1.0.8'
+        //compile 'org.dockingframes:docking-frames-core:1.1.1'
+        //compile 'org.dockingframes:docking-frames-common:1.1.1'
     }
 }
 
