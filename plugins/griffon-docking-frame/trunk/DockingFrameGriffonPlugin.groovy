@@ -17,9 +17,10 @@
 /**
  * @author Per Junel
  * @author Christoph Lipp
+ * @author Alexander Klein
  */
 class DockingFrameGriffonPlugin {
-    def version = 0.3
+    def version = 0.4
     def griffonVersion = "0.9.2 > *" 
     def toolkits = ['swing']
     def license = 'Apache Software License 2.0'
