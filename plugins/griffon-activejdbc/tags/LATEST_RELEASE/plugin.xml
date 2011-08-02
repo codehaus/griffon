@@ -1,0 +1,15 @@
+<plugin name='activejdbc' version='0.1' griffonVersion='0.9.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Persistence support via Activejdbc</title>
+  <description>Presistence support via Activejdbc
+http://code.google.com/p/activejdbc/</description>
+  <documentation>http://griffon.codehaus.org/Activejdbc+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits></toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+    <resource>metainf.spring.springbeans</resource>
+  </resources>
+  <dependencies />
+</plugin>
