@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4273">
+<plugins revision="4279">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -35,7 +35,20 @@ This plugin installs the AbeilleFormsBuilder.  The builder helps integrate forms
         </release>
     </plugin>
     <plugin name="actions"/>
-    <plugin name="activejdbc"/>
+    <plugin name="activejdbc" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Persistence support via Activejdbc</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Presistence support via Activejdbc
+http://code.google.com/p/activejdbc/</description>
+            <documentation>http://griffon.codehaus.org/Activejdbc+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-activejdbc/tags/RELEASE_0_1/griffon-activejdbc-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="airbag" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon Airbag Plugin</title>
