@@ -17,8 +17,6 @@
  * @author Andres Almiray
  */
  
-import activejdbc.instrumentation.Instrumentation
-
 def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
 eventSetClasspath = { cl ->
     eventClosure1(cl)
@@ -32,23 +30,8 @@ eventSetClasspath = { cl ->
     ])
 }
 
-/*
-eventCompileEnd = { 
-    if(compilingPlugin('activejdbc')) return
-    activejdbcInstrument()
-}
-*/
-
 eventCopyLibsEnd = { jardir ->
     new File(jardir).eachFileMatch(~/.*activejdbc-instrumentation.*|.*javassist.*/) { jar ->
         ant.delete(file: jar, failonerror: false, quiet: true)
     }
-}
-
-activejdbcInstrument = {
-    Instrumentation instrumentation = new Instrumentation()
-    instrumentation.outputDirectory = classesDirPath
-    addUrlIfNotPresent rootLoader, classesDirPath
-    addUrlIfNotPresent Instrumentation.class.classLoader, classesDirPath
-    instrumentation.instrument()
 }
