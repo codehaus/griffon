@@ -16,6 +16,7 @@
 
 import griffon.core.GriffonApplication
 import griffon.activejdbc.ActivejdbcConnector
+import griffon.activejdbc.BaseHolder
 
 /**
  * @author Andres Almiray
@@ -39,4 +40,8 @@ class ActivejdbcGriffonAddon {
             mc.withActiveSql = ActivejdbcConnector.instance.withActiveSql
         }
     ]
+
+    def exportWithJmx = { exporter, domain, ctx ->
+        exporter.beans."${domain}:service=activeJdbcDatasource,type=configuration" = BaseHolder.instance.dataSource
+    }
 }
