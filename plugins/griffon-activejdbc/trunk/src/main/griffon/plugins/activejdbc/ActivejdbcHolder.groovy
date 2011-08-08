@@ -14,35 +14,22 @@
  * limitations under the License.
  */
 
-package griffon.activejdbc
+package griffon.plugins.activejdbc
 
 import activejdbc.Base
-import groovy.sql.Sql
-import java.sql.Connection
-import javax.sql.DataSource
+import griffon.plugins.datasource.DataSourceHolder
 
 /**
  * @author Andres Almiray
  */
 @Singleton
-class BaseHolder {
-    DataSource dataSource
-
-    def withActivejdbc = { Closure closure ->
+class ActivejdbcHolder {
+    void withActivejdbc(String dataSourceName = 'default', Closure closure) {
         try {
-            Base.open(dataSource)
-            closure()
+            Base.open(DataSourceHolder.instance.getDataSource(dataSourceName))
+            closure(dataSourceName)
         } finally {
             Base.close()
-        }
-    }
-
-    def withActiveSql = { Closure closure ->
-        Connection connection = dataSource.getConnection()
-        try {
-            closure(new Sql(connection))
-        } finally {
-            connection.close()
         }
     }
 }

@@ -18,11 +18,11 @@
  */
 class ActivejdbcGriffonPlugin {
     // the plugin version
-    def version = "0.1"
+    def version = "0.2"
     // the version or versions of Griffon the plugin is designed for
     def griffonVersion = '0.9.3 > *' 
     // the other plugins this plugin depends on
-    def dependsOn = [:]
+    def dependsOn = [datasource: 0.1]
     // resources that are included in plugin packaging
     def pluginIncludes = []
     // the plugin license
@@ -39,7 +39,7 @@ class ActivejdbcGriffonPlugin {
     def authorEmail = 'aalmiray@users.sourceforge.net'
     def title = 'Persistence support via Activejdbc'
     def description = '''
-Presistence support via Activejdbc
+Persistence support via Activejdbc
 http://code.google.com/p/activejdbc/
 '''
 

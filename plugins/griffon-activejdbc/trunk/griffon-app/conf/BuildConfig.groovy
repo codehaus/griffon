@@ -22,11 +22,6 @@ griffon.project.dependency.resolution = {
         compile("activejdbc:activejdbc-instrumentation:$activejdbcVersion") {
             transitive = false
         }
-        compile('commons-dbcp:commons-dbcp:1.2.2',
-                'commons-pool:commons-pool:1.5.3',
-                'com.h2database:h2:1.3.158') {
-            transitive = false
-        }
     }
 }
 
