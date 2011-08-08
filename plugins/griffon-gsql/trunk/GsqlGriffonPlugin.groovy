@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the 'License');
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,16 @@
  * @author Andres Almiray
  */
 class GsqlGriffonPlugin {
-    def version = '0.6.1'
-    def dependsOn = [:]
-    def griffonVersion = '0.9.2 > *'
+    def version = '0.7'
+    def dependsOn = [datasource: 0.1]
+    def griffonVersion = '0.9.3 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'
     def authorEmail = 'aalmiray@users.sourceforge.net'
-    def title = 'Gsql powered DataSource'
+    def title = 'Groovy SQL support'
     def description = '''
-Adds Gsql powered DataSource capabilities to your Griffon application.
+Groovy SQL support
 '''
 
     // URL to the plugin's documentation

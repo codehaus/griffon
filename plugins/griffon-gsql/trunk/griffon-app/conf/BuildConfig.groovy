@@ -1,19 +1,13 @@
 griffon.project.dependency.resolution = {
-    inherits("global") 
+    inherits "global" 
     log "warn"
     repositories {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-        mavenCentral()
     }
     dependencies {
-        compile('commons-dbcp:commons-dbcp:1.2.2',
-                'commons-logging:commons-logging:1.1.1',
-                'commons-pool:commons-pool:1.5.3',
-                'hsqldb:hsqldb:1.8.0.10') {
-            transitive = false
-        }
+
     }
 }
 
@@ -26,4 +20,3 @@ griffon {
 }
 
 griffon.jars.destDir='target/addon'
-griffon.plugin.pack.additional.sources = ['src/gdsl']
