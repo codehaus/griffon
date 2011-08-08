@@ -20,35 +20,38 @@ import org.jboss.weld.environment.se.events.ContainerInitialized
 
 import griffon.core.GriffonApplication
 import griffon.plugins.weld.util.NonContextual
-import griffon.plugins.weld.util.NonContextual.Instance
+import griffon.plugins.weld.WeldHolder
+import griffon.plugins.weld.WeldContainerHolder
+import static griffon.plugins.weld.GriffonExtension.registerBean
 
 /**
  * @author Andres Almiray
  */
 class WeldGriffonAddon {
-    private Weld weld
-    private WeldContainer weldContainer
-
-    void addonInit(GriffonApplication app) {
-        weld = new Weld()
-        weldContainer = weld.initialize()
-
-        app.metaClass.weld = weld
-        app.metaClass.weldContainer = weldContainer
-    }
 
     def events = [
-            LoadAddonsEnd: { app, addons ->
-                app.weldContainer.event().select(ContainerInitialized).fire(new ContainerInitialized())
-            },
-            NewInstance: { klass, type, instance ->
-                NonContextual.of(klass, app.weldContainer.beanManager).existingInstance(instance).with {
-                    inject()
-                    postConstruct()
-                }
-            },
-            ShutdownStart: { app ->
-                app.weld.shutdown()
+        LoadAddonsEnd: { app, addons ->
+            Map<String, Object> beans = [:]
+            app.event('BeforeWeld', [beans])
+            for(entry in beans.entrySet()) {
+                registerBean(entry.key, entry.value)
             }
+            
+            WeldHolder.weld = new Weld()
+            WeldContainerHolder.weldContainer = WeldHolder.weld.initialize()
+
+            app.metaClass.weld = WeldHolder.weld
+            app.metaClass.weldContainer = WeldContainerHolder.weldContainer
+            WeldContainerHolder.weldContainer.event().select(ContainerInitialized).fire(new ContainerInitialized())
+        },
+        NewInstance: { klass, type, instance ->
+            NonContextual.of(klass, WeldContainerHolder.weldContainer.beanManager).existingInstance(instance).with {
+                inject()
+                postConstruct()
+            }
+        },
+        ShutdownStart: { app ->
+            WeldHolder.weld?.shutdown()
+        }
     ]
 }
