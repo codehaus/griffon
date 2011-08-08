@@ -19,18 +19,10 @@
  */
 
 // check to see if we already have a WeldGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'WeldGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'WeldGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding WeldGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'WeldGriffonAddon'.addon=true
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
 
 beansXml = new File("${basedir}/griffon-app/conf/metainf/beans.xml")

@@ -13,14 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ 
+package griffon.plugins.weld;
+
+import org.jboss.weld.environment.se.WeldContainer;
 
 /**
  * @author Andres Almiray
  */
-
-// check to see if we already have a WeldGriffonAddon
-configText = '''root.'WeldGriffonAddon'.addon=true'''
-if(builderConfigFile.text.contains(configText)) {
-    println 'Removing WeldGriffonAddon from Builder.groovy'
-    builderConfigFile.text -= configText
+public class WeldContainerHolder {
+    private static WeldContainer weldContainerInstance;
+    
+    public static void setWeldContainer(WeldContainer weldContainer) {
+        weldContainerInstance = weldContainer;
+    }
+    
+    public static WeldContainer getWeldContainer() {
+        return weldContainerInstance;
+    }
 }
