@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,32 +15,19 @@
  */
 
 import griffon.core.GriffonApplication
-import griffon.gsql.DataSourceHolder
-import griffon.gsql.GsqlConnector
+import griffon.plugins.gsql.GsqlConnector
 
 /**
  * @author Andres Almiray
  */
 class GsqlGriffonAddon {
     def addonInit = { app ->
-        ConfigObject config = GsqlConnector.instance.createConfig(app)
-        GsqlConnector.instance.connect(app, config)
+        GsqlConnector.instance.connect(app)
     }
 
     def events = [
         ShutdownStart: { app ->
-            ConfigObject config = GsqlConnector.instance.createConfig(app)
-            GsqlConnector.instance.disconnect(app, config)
-        },
-        NewInstance: { klass, type, instance ->
-            def types = app.config.griffon?.gsql?.injectInto ?: ['controller']
-            if(!types.contains(type)) return
-            def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withSql = GsqlConnector.instance.withSql
+            GsqlConnector.instance.disconnect(app)
         }
     ]
-
-    def exportWithJmx = { exporter, domain, ctx ->
-        exporter.beans."${domain}:service=datasource,type=configuration" = DataSourceHolder.instance.dataSource
-    }
 }

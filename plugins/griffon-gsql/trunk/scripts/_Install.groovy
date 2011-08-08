@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,36 +22,14 @@ includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
 // check to see if we already have a GsqlGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'GsqlGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'GsqlGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding GsqlGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'GsqlGriffonAddon'.addon=true
-''')
-}
-
-if(!(config.flatten().'griffon.gsql.injectInto')) {
-     configFile.append('''
-griffon.gsql.injectInto = ['controller']
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
 
 argsMap = argsMap ?: [:]
 argsMap.skipPackagePrompt = true
-
-if(!new File("${basedir}/griffon-app/conf/DataSource.groovy").exists()) {
-   createArtifact(
-      name: "DataSource",
-      suffix: "",
-      type: "DataSource",
-      path: "griffon-app/conf")
-}
 
 if(!new File("${basedir}/griffon-app/conf/BootstrapGsql.groovy").exists()) {
    createArtifact(
@@ -60,6 +38,3 @@ if(!new File("${basedir}/griffon-app/conf/BootstrapGsql.groovy").exists()) {
       type: "BootstrapGsql",
       path: "griffon-app/conf")
 }
-
-printFramed("""You may need to create an schema.ddl file depending on your settings.
-If so, place it in griffon-app/resources.""")
