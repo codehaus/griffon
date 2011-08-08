@@ -30,14 +30,6 @@ if(!(builderConfigFile.text.contains(configText))) {
 argsMap = argsMap ?: [:]
 argsMap.skipPackagePrompt = true
 
-if(!new File("${basedir}/griffon-app/conf/ActivejdbcConfig.groovy").exists()) {
-   createArtifact(
-      name: "ActivejdbcConfig",
-      suffix: "",
-      type: "ActivejdbcConfig",
-      path: "griffon-app/conf")
-}
-
 if(!new File("${basedir}/griffon-app/conf/BootstrapActivejdbc.groovy").exists()) {
    createArtifact(
       name: "BootstrapActivejdbc",
@@ -45,6 +37,3 @@ if(!new File("${basedir}/griffon-app/conf/BootstrapActivejdbc.groovy").exists())
       type: "BootstrapActivejdbc",
       path: "griffon-app/conf")
 }
-
-printFramed("""You may need to create an schema.ddl file depending on your settings.
-If so, place it in griffon-app/resources.""")

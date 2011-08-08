@@ -15,33 +15,26 @@
  */
 
 import griffon.core.GriffonApplication
-import griffon.activejdbc.ActivejdbcConnector
-import griffon.activejdbc.BaseHolder
+import griffon.plugins.activejdbc.ActivejdbcConnector
+import griffon.plugins.activejdbc.ActivejdbcHolder
 
 /**
  * @author Andres Almiray
  */
 class ActivejdbcGriffonAddon {
     void addonInit(GriffonApplication app) {
-        ConfigObject config = ActivejdbcConnector.instance.createConfig(app)
-        ActivejdbcConnector.instance.connect(app, config)
+        ActivejdbcConnector.instance.connect(app)
     }
 
     def events = [
         ShutdownStart: { app ->
-            ConfigObject config = ActivejdbcConnector.instance.createConfig(app)
-            ActivejdbcConnector.instance.disconnect(app, config)
+            ActivejdbcConnector.instance.disconnect(app)
         },
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.activejdbc?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withActivejdbc = ActivejdbcConnector.instance.withActivejdbc
-            mc.withActiveSql = ActivejdbcConnector.instance.withActiveSql
+            mc.withActivejdbc = ActivejdbcHolder.instance.&withActivejdbc
         }
     ]
-
-    def exportWithJmx = { exporter, domain, ctx ->
-        exporter.beans."${domain}:service=activeJdbcDatasource,type=configuration" = BaseHolder.instance.dataSource
-    }
 }

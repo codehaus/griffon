@@ -1,7 +1,7 @@
 class BootstrapActivejdbc {
-    def init = { ->
+    def init = { String dataSourceName ->
     }
 
-    def destroy = { ->
+    def destroy = { String dataSourceName ->
     }
 } 
