@@ -73,6 +73,8 @@ class ValidatableASTTransformation implements ASTTransformation {
             if (hasNoValidateMethod(targetClassNode)) {
                 injectValidateMethod(targetClassNode)
             }
+
+
         }
     }
 

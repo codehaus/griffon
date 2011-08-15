@@ -15,9 +15,9 @@
 
 package net.sourceforge.gvalidation
 
-import org.codehaus.groovy.tools.ast.TranformTestHelper
 import net.sourceforge.gvalidation.annotation.ValidatableASTTransformation
 import org.codehaus.groovy.control.CompilePhase
+import org.codehaus.groovy.tools.ast.TransformTestHelper
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -28,7 +28,7 @@ abstract class BaseTestCase extends GroovyTestCase {
         def file = new File("test/unit/net/sourceforge/gvalidation/models/${fileName}")
         assert file.exists()
 
-        TranformTestHelper invoker = new TranformTestHelper(new ValidatableASTTransformation(), CompilePhase.SEMANTIC_ANALYSIS)
+        TransformTestHelper invoker = new TransformTestHelper(new ValidatableASTTransformation(), CompilePhase.SEMANTIC_ANALYSIS)
         def modelClass = invoker.parse(file)
         def model = modelClass.newInstance()
 

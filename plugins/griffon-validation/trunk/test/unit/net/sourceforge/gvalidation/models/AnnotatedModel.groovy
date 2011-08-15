@@ -21,7 +21,7 @@ import groovy.beans.Bindable
 /**
  * Created by nick.zhu
  */
-@Validatable
+@Validatable(realTime=true)
 class AnnotatedModel {
     @Bindable String id
     @Bindable String email = " "
