@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,13 @@
  */
 
 import griffon.core.GriffonApplication
-import griffon.berkeleydb.BerkeleydbConnector
+import griffon.plugins.berkeleydb.BerkeleydbConnector
 
 /**
  * @author Andres Almiray
  */
 class BerkeleydbGriffonAddon {
-    def addonInit = { app ->
+    void addonInit(GriffonApplication app) {
         ConfigObject config = BerkeleydbConnector.instance.createConfig(app)
         BerkeleydbConnector.instance.connect(app, config)
     }
