@@ -47,4 +47,10 @@ class ValidatableRuntimeEnhancerTest extends BaseTestCase {
         assertFalse("Validation should not have been performed", model.errors.hasFieldErrors('email'))
     }
 
+    void testModelWithoutAnnotationEnhancement() {
+        def model = generateModel('PlainModelBean.groovy')
+
+        ValidatableRuntimeEnhancer.instance.enhance(model)
+    }
+
 }
