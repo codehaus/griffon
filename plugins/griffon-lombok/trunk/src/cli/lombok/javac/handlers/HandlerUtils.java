@@ -32,7 +32,6 @@ import javax.lang.model.element.Modifier;
 import java.util.Set;
 
 import static lombok.javac.handlers.types.JCNoType.voidType;
-import static lombok.javac.handlers.JavacHandlerUtil.chainDots;
 import static lombok.javac.handlers.JavacHandlerUtil.chainDotsString;
 
 /**
@@ -42,7 +41,10 @@ public class HandlerUtils {
     public static final List<JCTree.JCExpression> NIL_EXPRESSION = List.<JCTree.JCExpression>nil();
 
     public static JCTree.JCExpression makeType(String type, JavacNode node) {
-        TreeMaker maker = node.getTreeMaker();
+        return makeType(type, node, node.getTreeMaker());
+    }
+
+    public static JCTree.JCExpression makeType(String type, JavacNode node, TreeMaker maker) {
         if (type.startsWith("[L")) {
             return maker.TypeArray(chainDotsString(maker, node, type.substring(2, type.length() - 1)));
         } else if (type.startsWith("[")) {
@@ -65,7 +67,7 @@ public class HandlerUtils {
     }
 
     public static JCTree.JCExpression thisExpression(JavacNode typeNode) {
-        return chainDots(typeNode.getTreeMaker(), typeNode, "this");
+        return typeNode.getTreeMaker().at(((JCTree) typeNode.get()).pos).Ident(typeNode.toName("this"));
     }
 
     public static List<JCTree.JCExpression> extractArgNames(List<JCTree.JCVariableDecl> params, TreeMaker m) {
@@ -291,6 +293,11 @@ public class HandlerUtils {
             implementing.appendList(classDecl.implementing);
             implementing.append(chainDotsString(context.getTreeMaker(), node, interfaceName));
             classDecl.implementing = implementing.toList();
+        }
+
+        public void setSuperclass(String superclassName, JavacNode node) {
+            JCTree.JCClassDecl classDecl = (JCTree.JCClassDecl) node.get();
+            classDecl.extending = dotExpr(superclassName);
         }
 
         public JCTree.JCExpression staticCallExpr(String classType, String methodName) {

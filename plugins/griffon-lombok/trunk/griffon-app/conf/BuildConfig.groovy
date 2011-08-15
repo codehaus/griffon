@@ -8,7 +8,7 @@ griffon.project.dependency.resolution = {
         mavenRepo 'http://repository.sonatype.org/content/groups/public'
     }
     dependencies {
-        compile('org.projectlombok:lombok:0.10.0-RC1') {
+        compile('org.projectlombok:lombok:0.10.0-RC3') {
             exported = true
         }
     }

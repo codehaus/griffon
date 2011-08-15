@@ -24,6 +24,7 @@ import com.sun.tools.javac.util.List;
 import com.sun.tools.javac.util.Name;
 import groovy.beans.Bindable;
 import lombok.core.AnnotationValues;
+import lombok.javac.Javac;
 import lombok.javac.JavacAnnotationHandler;
 import lombok.javac.JavacNode;
 import org.slf4j.Logger;
@@ -38,12 +39,10 @@ import static lombok.core.util.Names.nameOfConstantBasedOnProperty;
 import static lombok.javac.handlers.AstBuilder.defMethod;
 import static lombok.javac.handlers.AstBuilder.defVar;
 import static lombok.javac.handlers.HandlerUtils.*;
-import static lombok.javac.handlers.HandlerUtils.toJavacModifier;
 import static lombok.javac.handlers.JavacHandlerUtil.*;
 import static lombok.javac.handlers.Lombok.newFieldAccessor;
 import static lombok.javac.handlers.MemberChecks.fieldAlreadyExists;
 import static lombok.javac.handlers.MemberChecks.methodAlreadyExists;
-import static lombok.javac.handlers.FieldBuilder.newField;
 
 /**
  * @author Andres Almiray
@@ -65,12 +64,12 @@ public class HandleBindable extends JavacAnnotationHandler<Bindable> {
             case TYPE:
                 if ((((JCTree.JCClassDecl) typeNode.get()).mods.flags & Flags.INTERFACE) != 0) {
                     annotationNode.addError("@Bindable is legal only on classes.");
-                    return;
+                    break;
                 }
 
                 if (fieldExists(PROPERTY_SUPPORT_FIELD_NAME, typeNode) != MemberExistsResult.NOT_EXISTS) {
                     annotationNode.addWarning("Field '" + PROPERTY_SUPPORT_FIELD_NAME + "' already exists.");
-                    return;
+                    break;
                 }
 
                 addBindableSupportToClass(typeNode);
@@ -80,7 +79,7 @@ public class HandleBindable extends JavacAnnotationHandler<Bindable> {
                         createOrAdjustProperty(typeNode, field);
                     }
                 }
-                return;
+                break;
             case FIELD:
                 if (isCandidateField(typeNode)) {
                     if (fieldExists(PROPERTY_SUPPORT_FIELD_NAME, typeNode.up()) == MemberExistsResult.NOT_EXISTS) {
@@ -88,19 +87,26 @@ public class HandleBindable extends JavacAnnotationHandler<Bindable> {
                     }
                     createOrAdjustProperty(typeNode.up(), typeNode);
                 }
-                return;
+                break;
             default:
                 annotationNode.addError("@Bindable is legal only on types or fields.");
-                return;
         }
     }
 
     private void addBindableSupportToClass(JavacNode typeNode) {
-        createPropertyChangeSupportField(typeNode);
-        injectListenerManagementMethod("addPropertyChangeListener", typeNode);
-        injectListenerManagementMethod("removePropertyChangeListener", typeNode);
-        injectListenerQueryMethod(typeNode);
-        injectFirePropertyChangeMethod(typeNode);
+        JCTree.JCClassDecl classDecl = (JCTree.JCClassDecl) typeNode.get();
+        HandlerUtils.TokenBuilder b = new HandlerUtils.TokenBuilder(typeNode);
+        if (classDecl.extending == null) {
+            b.setSuperclass("org.codehaus.griffon.runtime.core.AbstractObservable", typeNode);
+        } else {
+            b.addInterface("griffon.core.Observable", typeNode);
+
+            createPropertyChangeSupportField(typeNode);
+            injectListenerManagementMethod("addPropertyChangeListener", typeNode);
+            injectListenerManagementMethod("removePropertyChangeListener", typeNode);
+            injectListenerQueryMethod(typeNode);
+            injectFirePropertyChangeMethod(typeNode);
+        }
 
         if (LOG.isDebugEnabled()) LOG.debug("Modified " + typeNode.getName() + " as a Bindable class.");
     }
@@ -108,16 +114,16 @@ public class HandleBindable extends JavacAnnotationHandler<Bindable> {
     private boolean isCandidateField(JavacNode node) {
         if (!isInstanceField(node)) return false;
         JCTree.JCVariableDecl field = (JCTree.JCVariableDecl) node.get();
-        if (PROPERTY_SUPPORT_FIELD_NAME.equals(field.name.toString())) return false;
-        if ((field.mods.flags & Flags.FINAL) != 0) return false;
-
-        return Modifier.isPrivate(toJavacModifier(field.mods));
+        return !PROPERTY_SUPPORT_FIELD_NAME.equals(field.name.toString()) &&
+                (field.mods.flags & Flags.FINAL) == 0 &&
+                Modifier.isPrivate(toJavacModifier(field.mods));
     }
 
     private void createOrAdjustProperty(JavacNode typeNode, JavacNode field) {
         String propertyNameFieldName = nameOfConstantBasedOnProperty(field.getName());
         generatePropertyNameConstant(propertyNameFieldName, field, typeNode);
-        generateSetter(propertyNameFieldName, field);
+        generateSetter(field.getName(), propertyNameFieldName, field);
+        generateGetter(field.getName(), field);
     }
 
     private void injectFirePropertyChangeMethod(JavacNode typeNode) {
@@ -221,21 +227,12 @@ public class HandleBindable extends JavacAnnotationHandler<Bindable> {
     }
 
     private void createPropertyChangeSupportField(JavacNode typeNode) {
-        /*injectField(typeNode, defVar(PROPERTY_SUPPORT_FIELD_NAME)
+        JCVariableDecl fieldDecl = defVar(PROPERTY_SUPPORT_FIELD_NAME)
                 .modifiers(PRIVATE | FINAL)
                 .type(PropertyChangeSupport.class)
                 .withArgs(thisExpression(typeNode))
-                .$(typeNode));
-        */
-        TreeMaker maker = typeNode.getTreeMaker();
-        JCIdent thisExpr = maker.Ident(typeNode.toName("this"));
-        JCExpression exprForThis = chainDots(typeNode.getTreeMaker(), typeNode, "this");
-        JCVariableDecl fieldDecl = newField().ofType(PropertyChangeSupport.class)
-                .withName(PROPERTY_SUPPORT_FIELD_NAME)
-                .withModifiers(PRIVATE | FINAL)
-                .withArgs(thisExpr)
-                .buildWith(typeNode);
-        injectField(typeNode, fieldDecl);
+                .$(typeNode);
+        injectFieldSuppressWarnings(typeNode, fieldDecl);
     }
 
     private void generatePropertyNameConstant(String propertyNameFieldName, JavacNode fieldNode, JavacNode typeNode) {
@@ -250,22 +247,28 @@ public class HandleBindable extends JavacAnnotationHandler<Bindable> {
                 .$(typeNode));
     }
 
-    private void generateSetter(String propertyNameFieldName, JavacNode fieldNode) {
+    private void generateSetter(String fieldName, String propertyNameFieldName, JavacNode fieldNode) {
         String setterName = toSetterName((JCVariableDecl) fieldNode.get());
         if (methodAlreadyExists(setterName, fieldNode)) return;
-        injectMethod(fieldNode.up(), createSetterDecl(propertyNameFieldName, setterName, fieldNode));
+        injectMethod(fieldNode.up(), createSetterDecl(fieldName, propertyNameFieldName, setterName, fieldNode));
     }
 
-    private JCMethodDecl createSetterDecl(String propertyNameFieldName, String setterName,
+    private void generateGetter(String fieldName, JavacNode fieldNode) {
+        String getterName = toGetterName((JCVariableDecl) fieldNode.get());
+        if (methodAlreadyExists(getterName, fieldNode)) return;
+        injectMethod(fieldNode.up(), createGetterDecl(fieldName, getterName, fieldNode));
+    }
+
+    private JCMethodDecl createSetterDecl(String fieldName, String propertyNameFieldName, String setterName,
                                           JavacNode fieldNode) {
-        // public void setFirstName(String value) {
+        // public void setFirstName(String firstName) {
         //   final String oldValue = firstName;
-        //   firstName = value;
-        //   this$propertySupport.firePropertyChange(PROP_FIRST_NAME, oldValue, firstName);
+        //   this.firstName = firstName;
+        //   this.firePropertyChange(PROP_FIRST_NAME, oldValue, firstName);
         // }
         JCVariableDecl fieldDecl = (JCVariableDecl) fieldNode.get();
         List<JCTree.JCVariableDecl> params = List.of(
-                defVar(propertyNameFieldName)
+                defVar(fieldName)
                         .type(fieldDecl.vartype)
                         .$(fieldNode));
         return defMethod(setterName)
@@ -300,11 +303,28 @@ public class HandleBindable extends JavacAnnotationHandler<Bindable> {
 
     private JCStatement fireChangeEventMethodDecl(String propertyNameFieldName, Name oldValueName, JavacNode fieldNode) {
         TreeMaker treeMaker = fieldNode.getTreeMaker();
-        JCExpression fn = chainDots(treeMaker, fieldNode, PROPERTY_SUPPORT_FIELD_NAME, "firePropertyChange");
-        List<JCExpression> args = List.<JCExpression>of(treeMaker.Ident(fieldNode.toName(propertyNameFieldName)),
+        JCExpression fn = chainDots(treeMaker, fieldNode, "this", "firePropertyChange");
+        List<JCExpression> args = List.of(treeMaker.Ident(fieldNode.toName(propertyNameFieldName)),
                 treeMaker.Ident(oldValueName),
                 newFieldAccessor(fieldNode));
         JCMethodInvocation m = treeMaker.Apply(List.<JCExpression>nil(), fn, args);
         return treeMaker.Exec(m);
+    }
+
+    private JCMethodDecl createGetterDecl(String fieldName, String getterName,
+                                          JavacNode fieldNode) {
+        // public String getFirstName() {
+        //   return this.firstName = firstName;
+        // }
+        JCVariableDecl fieldDecl = (JCVariableDecl) fieldNode.get();
+        return defMethod(getterName)
+                .returning(fieldDecl.vartype)
+                .withBody(getterBody(fieldNode))
+                .$(fieldNode);
+    }
+
+    private List<JCTree.JCStatement> getterBody(JavacNode fieldNode) {
+        TokenBuilder b = new TokenBuilder(fieldNode);
+        return List.<JCTree.JCStatement>of(b.getTreeMaker().Return(newFieldAccessor(fieldNode)));
     }
 }

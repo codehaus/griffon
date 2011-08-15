@@ -21,6 +21,7 @@ import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.TreeMaker;
 import com.sun.tools.javac.util.List;
 import com.sun.tools.javac.util.ListBuffer;
+import lombok.javac.Javac;
 import lombok.javac.JavacNode;
 
 import static lombok.javac.handlers.HandlerUtils.makeType;
@@ -140,6 +141,7 @@ public class AstBuilder {
 
         private long modifiers;
         private String returnType;
+        private JCTree.JCExpression returnTypeExpr;
         private List<JCTree.JCTypeParameter> typeParameters;
         private List<JCTree.JCVariableDecl> params;
         private List<JCTree.JCExpression> throwables;
@@ -167,6 +169,11 @@ public class AstBuilder {
 
         public MethodDefBuilder returning(String className) {
             returnType = className;
+            return this;
+        }
+
+        public MethodDefBuilder returning(JCTree.JCExpression type) {
+            this.returnTypeExpr = type;
             return this;
         }
 
@@ -205,9 +212,12 @@ public class AstBuilder {
         public JCTree.JCMethodDecl build(JavacNode context) {
             TreeMaker m = context.getTreeMaker();
 
-            JCTree.JCExpression returns = m.Type(voidType());
-            if (!returnType.equals(Void.TYPE.getName())) {
-                returns = makeType(returnType, context);
+            JCTree.JCExpression returns = returnTypeExpr;
+            if (returns == null) {
+                returns = m.Type(voidType());
+                if (!returnType.equals(Void.TYPE.getName())) {
+                    returns = makeType(returnType, context);
+                }
             }
 
             return context.getTreeMaker().MethodDef(
@@ -268,23 +278,31 @@ public class AstBuilder {
         }
 
         public JCTree.JCVariableDecl $(JavacNode context) {
-            return build(context);
+            return build(context, context.get());
         }
 
         public JCTree.JCVariableDecl build(JavacNode context) {
-            TreeMaker m = context.getTreeMaker();
+            return build(context, context.get());
+        }
 
-            JCTree.JCExpression typeExpression = type != null ? type : makeType(varType, context);
+        public JCTree.JCVariableDecl $(JavacNode context, JCTree source) {
+            return build(context, source);
+        }
+
+        public JCTree.JCVariableDecl build(JavacNode context, JCTree source) {
+            TreeMaker m = context.getTreeMaker().at(source.pos);
+
+            JCTree.JCExpression typeExpression = type != null ? type : makeType(varType, context, m);
             JCTree.JCExpression initExpression = value;
             if (value == null && args != null) {
                 initExpression = m.NewClass(null, null, typeExpression, args, null);
             }
 
-            return context.getTreeMaker().VarDef(
+            return Javac.recursiveSetGeneratedBy(m.VarDef(
                     m.Modifiers(modifiers),
                     context.toName(variableName),
                     typeExpression,
-                    initExpression);
+                    initExpression), source);
         }
     }
 }
