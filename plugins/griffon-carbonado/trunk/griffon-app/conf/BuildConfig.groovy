@@ -9,13 +9,13 @@ griffon.project.dependency.resolution = {
         flatDir name: 'carbonadoPluginLib', dirs: 'lib'
     }
     dependencies {
-        compile('commons-dbcp:commons-dbcp:1.2.2',
-                'commons-pool:commons-pool:1.5.3',
-                'hsqldb:hsqldb:1.8.0.10',
+        compile('commons-dbcp:commons-dbcp:1.4',
+                'commons-pool:commons-pool:1.5.6',
+                'com.h2database:h2:1.3.158',
                 'joda-time:joda-time:1.6.2') {
             transitive = false
         }
-        compile 'com.sleepycat:berkeleydb-je:4.0.92',
+        compile 'com.sleepycat:berkeleydb-je:4.1.10',
                 'com.amazon:carbonado:1.2.2',
                 'com.amazon:carbonado-sleepycat-db:1.2.2',
                 'com.amazon:carbonado-sleepycat-je:1.2.2',
@@ -32,5 +32,3 @@ griffon {
 }
 
 griffon.jars.destDir='target/addon'
-
-//griffon.jars.jarName='CarbonadoGriffonAddon.jar'

@@ -30,11 +30,11 @@ if(!(builderConfigFile.text.contains(configText))) {
 argsMap = argsMap ?: [:]
 argsMap.skipPackagePrompt = true
 
-if(!new File("${basedir}/griffon-app/conf/Carbonado.groovy").exists()) {
+if(!new File("${basedir}/griffon-app/conf/CarbonadoConfig.groovy").exists()) {
    createArtifact(
-      name: "Carbonado",
+      name: "CarbonadoConfig",
       suffix: "",
-      type: "Carbonado",
+      type: "CarbonadoConfig",
       path: "griffon-app/conf")
 }
 
