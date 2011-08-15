@@ -27,8 +27,12 @@ class ValidatableRuntimeEnhancer {
     void enhance(model) {
         if (realTimeOn(model) && annotatedWithBindable(model)) {
             model.addPropertyChangeListener({e ->
-                if (e.propertyName != "errors")
+                if (e.propertyName != "errors") {
+                    if (valueNotChanged(e) || isSetToBlankString(e) || isSetToZero(e))
+                        return
+
                     model.validate(e?.propertyName)
+                }
             } as PropertyChangeListener)
         }
     }
@@ -44,6 +48,18 @@ class ValidatableRuntimeEnhancer {
 
     private boolean annotatedWithBindable(model) {
         return MetaUtils.hasMethod(model, 'addPropertyChangeListener')
+    }
+
+    private boolean valueNotChanged(e) {
+        return e.oldValue == e.newValue
+    }
+
+    private boolean isSetToBlankString(e) {
+        return e.oldValue == null && e.newValue == ""
+    }
+
+    private boolean isSetToZero(e) {
+        return e.oldValue == null && e.newValue == 0
     }
 
 }

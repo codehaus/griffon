@@ -26,10 +26,12 @@ class AnnotatedModel {
     @Bindable String id
     @Bindable String email = " "
     @Bindable String zipCode = " "
+    @Bindable Integer code
 
     static constraints = {
-        id(nullable: false)
+        id(nullable: false, blank: false)
         email(email: true)
         zipCode(nullable: true, blank: true, minSize: 6)
+        code(min:10, max:99)
     }
 }

@@ -25,7 +25,6 @@ class ValidatableRuntimeEnhancerTest extends BaseTestCase {
 
     void testModelRealTimeEnhancement() {
         def model = generateModel()
-
         ValidatableRuntimeEnhancer.instance.enhance(model)
 
         assertEquals('Property change listener is not registered', 1, model.propertyChangeListeners.size())
@@ -37,7 +36,6 @@ class ValidatableRuntimeEnhancerTest extends BaseTestCase {
 
     void testModelWithoutRealTimeEnhancement() {
         def model = generateModel('ModelBean.groovy')
-
         ValidatableRuntimeEnhancer.instance.enhance(model)
 
         assertEquals('Property change listener should not be registered', 0, model.propertyChangeListeners.size())
@@ -49,14 +47,39 @@ class ValidatableRuntimeEnhancerTest extends BaseTestCase {
 
     void testModelWithoutAnnotationEnhancement() {
         def model = generateModel('PlainModelBean.groovy')
-
         ValidatableRuntimeEnhancer.instance.enhance(model)
     }
 
     void testModelWithoutBindableEnhancement() {
         def model = generateModel('NoBindableModelBean.groovy')
-
         ValidatableRuntimeEnhancer.instance.enhance(model)
+    }
+
+    void testRealTimeValidationShouldIgnoreInitialNullSetting() {
+        def model = generateModel()
+        ValidatableRuntimeEnhancer.instance.enhance(model)
+
+        model.id = null
+
+        assertFalse("Validation should not have been performed", model.errors.hasFieldErrors('id'))
+    }
+
+    void testRealTimeValidationShouldIgnoreInitialBlankSetting() {
+        def model = generateModel()
+        ValidatableRuntimeEnhancer.instance.enhance(model)
+
+        model.id = ""
+
+        assertFalse("Validation should not have been performed", model.errors.hasFieldErrors('id'))
+    }
+
+    void testRealTimeValidationShouldIgnoreInitialZeroSetting() {
+        def model = generateModel()
+        ValidatableRuntimeEnhancer.instance.enhance(model)
+
+        model.code = 0
+
+        assertFalse("Validation should not have been performed", model.errors.hasFieldErrors('code'))
     }
 
 }
