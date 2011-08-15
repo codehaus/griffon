@@ -16,6 +16,7 @@
 package net.sourceforge.gvalidation.annotation
 
 import net.sourceforge.gvalidation.BaseTestCase
+import net.sourceforge.gvalidation.models.AnnotatedModel
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -28,6 +29,10 @@ class ValidatableRuntimeEnhancerTest extends BaseTestCase {
         ValidatableRuntimeEnhancer.instance.enhance(model)
 
         assertEquals('Property change listener is not registered', 1, model.propertyChangeListeners.size())
+
+        model.email = "bademail"
+
+        assertTrue("Validation should have been performed", model.errors.hasFieldErrors('email'))
     }
 
 }

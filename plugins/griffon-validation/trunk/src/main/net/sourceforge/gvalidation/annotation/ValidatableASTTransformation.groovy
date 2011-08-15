@@ -74,7 +74,6 @@ class ValidatableASTTransformation implements ASTTransformation {
                 injectValidateMethod(targetClassNode)
             }
 
-
         }
     }
 
