@@ -24,9 +24,9 @@ import java.lang.annotation.Retention
 /**
  * Created by nick.zhu
  */
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 @Target([ElementType.TYPE])
 @GroovyASTTransformationClass(["net.sourceforge.gvalidation.annotation.ValidatableASTTransformation"])
 public @interface Validatable {
-    boolean realTime()
+    boolean realTime() default false;
 }
