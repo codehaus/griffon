@@ -40,7 +40,7 @@ class EbeanGriffonPlugin {
     def title = 'Persistence support via Ebean'
     def description = '''
 Persistence support via Ebean
-http://www.avaje.org/ebean
+http://www.avaje.org/
 '''
 
     // URL to the plugin's documentation
