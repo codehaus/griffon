@@ -29,10 +29,13 @@ final class ActivejdbcConnector {
     private bootstrap
 
     void connect(GriffonApplication app, String dataSourceName = 'default') {
-        if(DataSourceHolder.instance.isDataSourceConnected(dataSourceName)) return
-        
-        ConfigObject config = DataSourceConnector.instance.createConfig(app)
-        DataSource dataSource = DataSourceConnector.instance.connect(app, config, dataSourceName)
+        DataSource dataSource = null
+        if(!DataSourceHolder.instance.isDataSourceConnected(dataSourceName)) {       
+            ConfigObject config = DataSourceConnector.instance.createConfig(app)
+            dataSource = DataSourceConnector.instance.connect(app, config, dataSourceName)
+        } else {
+            dataSource = DataSourceHolder.instance.getDataSource(dataSourceName)
+        }
 
         app.event('ActivejdbcConnectStart', [dataSourceName, dataSource])
         bootstrap = app.class.classLoader.loadClass('BootstrapActivejdbc').newInstance()
@@ -47,7 +50,7 @@ final class ActivejdbcConnector {
         DataSource dataSource = DataSourceHolder.instance.getDataSource(dataSourceName)
         app.event('ActivejdbcDisconnectStart', [dataSourceName, dataSource])
         ActivejdbcHolder.instance.withActivejdbc(dataSourceName) { dsName -> bootstrap.destroy(dsName) }
-        app.event('ActivejdbcDisconnectEnd', [dataSourceName])
+        app.event('ActivejdbcDisconnectEnd', [dataSourceName, dataSource])
         ConfigObject config = DataSourceConnector.instance.createConfig(app)
         DataSourceConnector.instance.disconnect(app, config, dataSourceName)
     }
