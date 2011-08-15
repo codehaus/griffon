@@ -25,7 +25,7 @@ import net.sourceforge.gvalidation.swing.ErrorMessagePanelFactory
  * @author Nick Zhu
  */
 class ValidationGriffonAddon {
-    def addonInit(GriffonApplication app) {
+    void addonInit(GriffonApplication app) {
         app.artifactManager.registerArtifactHandler(new ConstraintArtifactHandler(app))
         ConstraintRepository.instance.initialize(app)
     }
