@@ -1,0 +1,17 @@
+<plugin name='actions' version='0.1' griffonVersion='0.9.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Action management</title>
+  <description>Action management. Atuomatically generates a matching Swing action for each
+controller action (property or method). Relies on naming convention to determine
+name, descriptions, mnemonic, accelerator and icons to be used for each action.</description>
+  <documentation>http://griffon.codehaus.org/Actions+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies>
+    <plugin name='i18n' version='0.4' />
+  </dependencies>
+</plugin>
