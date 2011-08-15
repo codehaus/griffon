@@ -24,10 +24,14 @@ import java.beans.PropertyChangeListener
 class ValidatableRuntimeEnhancer {
 
     void enhance(model) {
-        model.addPropertyChangeListener({e ->
-            if(e.propertyName != "errors")
-                model.validate(e?.propertyName)
-        } as PropertyChangeListener)
+        def annotation = model.getClass().getAnnotation(Validatable.class)
+
+        if (annotation.realTime()) {
+            model.addPropertyChangeListener({e ->
+                if (e.propertyName != "errors")
+                    model.validate(e?.propertyName)
+            } as PropertyChangeListener)
+        }
     }
 
 }

@@ -35,4 +35,16 @@ class ValidatableRuntimeEnhancerTest extends BaseTestCase {
         assertTrue("Validation should have been performed", model.errors.hasFieldErrors('email'))
     }
 
+    void testModelWithoutRealTimeEnhancement() {
+        def model = generateModel('ModelBean.groovy')
+
+        ValidatableRuntimeEnhancer.instance.enhance(model)
+
+        assertEquals('Property change listener should not be registered', 0, model.propertyChangeListeners.size())
+
+        model.email = "bademail"
+
+        assertFalse("Validation should not have been performed", model.errors.hasFieldErrors('email'))
+    }
+
 }
