@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4297">
+<plugins revision="4302">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2963,7 +2963,7 @@ This is a port of the grails-ldap plugin, original from Luke Daley</description>
         </release>
     </plugin>
     <plugin name="lombok" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enhance Java code with Lombok</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -5816,6 +5816,19 @@ http://zonelayout.com</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_2/griffon-zonelayout-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="datasource" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Base Datasource plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Initializes and manages datasources</description>
+            <documentation>http://griffon.codehaus.org/Datasource+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-datasource/tags/RELEASE_0_1/griffon-datasource-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
