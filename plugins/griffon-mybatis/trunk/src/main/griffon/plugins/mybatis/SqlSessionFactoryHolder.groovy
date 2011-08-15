@@ -23,13 +23,17 @@ import griffon.core.GriffonApplication
 import griffon.util.ApplicationHolder
 import static griffon.util.GriffonNameUtils.isBlank
 
+import org.apache.commons.logging.Log
+import org.apache.commons.logging.LogFactory
+
 /**
  * @author Andres Almiray
  */
 @Singleton
 class SqlSessionFactoryHolder {
-    private final Map<String, SqlSessionFactory> sessionFactories = [:]
+    private static final Log LOG = LogFactory.getLog(SqlSessionFactoryHolder)
     private static final Object[] LOCK = new Object[0]
+    private final Map<String, SqlSessionFactory> sessionFactories = [:]
 
     String[] getSessionFactoryNames() {
         List<String> sessionFactoryNames = new ArrayList().addAll(sessionFactories.keySet())
@@ -48,6 +52,7 @@ class SqlSessionFactoryHolder {
 
     void withSqlSession(String sessionFactoryName = 'default', Closure closure) {
         SqlSessionFactory sf = fetchSqlSessionFactory(sessionFactoryName)
+        if(LOG.debugEnabled) LOG.debug("Executing SQL stament on sqlSession '$sessionFactoryName'")
         SqlSession session = sf.openSession(true)
         try {
             closure(sessionFactoryName, session)
