@@ -53,4 +53,10 @@ class ValidatableRuntimeEnhancerTest extends BaseTestCase {
         ValidatableRuntimeEnhancer.instance.enhance(model)
     }
 
+    void testModelWithoutBindableEnhancement() {
+        def model = generateModel('NoBindableModelBean.groovy')
+
+        ValidatableRuntimeEnhancer.instance.enhance(model)
+    }
+
 }
