@@ -29,10 +29,13 @@ final class GsqlConnector {
     private bootstrap
 
     void connect(GriffonApplication app, String dataSourceName = 'default') {
-        if(DataSourceHolder.instance.isDataSourceConnected(dataSourceName)) return
-        
-        ConfigObject config = DataSourceConnector.instance.createConfig(app)
-        DataSource dataSource = DataSourceConnector.instance.connect(app, config, dataSourceName)
+        DataSource dataSource = null
+        if(!DataSourceHolder.instance.isDataSourceConnected(dataSourceName)) {       
+            ConfigObject config = DataSourceConnector.instance.createConfig(app)
+            dataSource = DataSourceConnector.instance.connect(app, config, dataSourceName)
+        } else {
+            dataSource = DataSourceHolder.instance.getDataSource(dataSourceName)
+        }
 
         app.event('GsqlConnectStart', [dataSourceName, dataSource])
         bootstrap = app.class.classLoader.loadClass('BootstrapGsql').newInstance()
@@ -47,7 +50,7 @@ final class GsqlConnector {
         DataSource dataSource = DataSourceHolder.instance.getDataSource(dataSourceName)
         app.event('GsqlDisconnectStart', [dataSourceName, dataSource])
         DataSourceHolder.instance.withSql(dataSourceName) { dsName, sql -> bootstrap.destroy(dsName, sql) }
-        app.event('GsqlDisconnectEnd', [dataSourceName])
+        app.event('GsqlDisconnectEnd', [dataSourceName, dataSource])
         ConfigObject config = DataSourceConnector.instance.createConfig(app)
         DataSourceConnector.instance.disconnect(app, config, dataSourceName)
     }

@@ -21,7 +21,7 @@ import griffon.plugins.gsql.GsqlConnector
  * @author Andres Almiray
  */
 class GsqlGriffonAddon {
-    def addonInit = { app ->
+    void addonInit(GriffonApplication app) {
         GsqlConnector.instance.connect(app)
     }
 
