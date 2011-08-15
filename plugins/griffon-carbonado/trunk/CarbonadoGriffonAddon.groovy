@@ -15,7 +15,8 @@
  */
 
 import griffon.core.GriffonApplication
-import griffon.carbonado.CarbonadoConnector
+import griffon.plugins.carbonado.CarbonadoConnector
+import griffon.plugins.carbonado.RepositoryHolder
 
 /**
  * @author Andres Almiray
@@ -35,7 +36,7 @@ class CarbonadoGriffonAddon {
             def types = app.config.griffon?.carbonado?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withCarbonado = CarbonadoConnector.instance.withCarbonado
+            mc.withCarbonado = RepositoryHolder.instance.&withCarbonado
         }
     ]
 }

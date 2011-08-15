@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package griffon.carbonado
+package griffon.plugins.carbonado
 
 import com.amazon.carbonado.Repository
 
@@ -25,7 +25,7 @@ import com.amazon.carbonado.Repository
 class RepositoryHolder {
     Repository repository
 
-    def withCarbonado = { Closure closure ->
+    void withCarbonado(Closure closure) {
         closure(repository)
     }
 }

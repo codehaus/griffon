@@ -1,8 +1,8 @@
 dataSource {
     pooled = false
-    driverClassName = "org.hsqldb.jdbcDriver"
-    username = "sa"
-    password = ""
+    driverClassName = 'org.h2.Driver'
+    username = 'sa'
+    password = ''
     tokenizeddl = false // set this to true if using MySQL or any other
                         // RDBMS that requires execution of DDL statements
                         // on separate calls
@@ -27,7 +27,7 @@ environments {
         dataSource {
             name = '@griffon.project.key@-dev'
             dbCreate = "create" // one of ['create', 'skip']
-            url = "jdbc:hsqldb:mem:devDB"
+            url = "jdbc:h2:mem:@griffon.project.key@-dev"
         }
         berkeleydb {
             name = '@griffon.project.key@-dev'
@@ -37,7 +37,7 @@ environments {
         dataSource {
             name = '@griffon.project.key@-test'
             dbCreate = "create"
-            url = "jdbc:hsqldb:mem:testDb"
+            url = "jdbc:h2:mem:@griffon.project.key@-test"
         }
         berkeleydb {
             name = '@griffon.project.key@-test'
@@ -47,7 +47,7 @@ environments {
         dataSource {
             name = '@griffon.project.key@-prod'
             dbCreate = "skip"
-            url = "jdbc:hsqldb:file:prodDb;shutdown=true"
+            url = "jdbc:h2:file:@griffon.project.key@-prod;shutdown=true"
         }
         berkeleydb {
             name = '@griffon.project.key@-prod'

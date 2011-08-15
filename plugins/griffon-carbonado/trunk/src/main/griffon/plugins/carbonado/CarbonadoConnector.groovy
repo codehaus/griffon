@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package griffon.carbonado
+package griffon.plugins.carbonado
 
 import groovy.sql.Sql
 import java.sql.Connection
@@ -51,7 +51,7 @@ final class CarbonadoConnector {
     private DataSource dataSource
 
     ConfigObject createConfig(GriffonApplication app) {
-        def carbonadoClass = app.class.classLoader.loadClass('Carbonado')
+        def carbonadoClass = app.class.classLoader.loadClass('CarbonadoConfig')
         return new ConfigSlurper(Environment.current.name).parse(carbonadoClass)
     }
 
@@ -78,7 +78,7 @@ final class CarbonadoConnector {
         
         bootstrap = app.class.classLoader.loadClass('BootstrapCarbonado').newInstance()
         bootstrap.metaClass.app = app
-        withCarbonado { repository -> bootstrap.init(repository) }
+        RepositoryHolder.instance.withCarbonado { repository -> bootstrap.init(repository) }
 
         app.event('CarbonadoConnectEnd', [RepositoryHolder.instance.repository])
     }
@@ -206,6 +206,4 @@ final class CarbonadoConnector {
             connection.close()
         }
     } 
-
-    def withCarbonado = RepositoryHolder.instance.withCarbonado
 }
