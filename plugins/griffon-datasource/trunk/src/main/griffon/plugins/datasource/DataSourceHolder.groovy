@@ -25,13 +25,17 @@ import griffon.core.GriffonApplication
 import griffon.util.ApplicationHolder
 import static griffon.util.GriffonNameUtils.isBlank
 
+import org.apache.commons.logging.Log
+import org.apache.commons.logging.LogFactory
+
 /**
  * @author Andres Almiray
  */
 @Singleton
 class DataSourceHolder {
-    private final Map<String, DataSource> dataSources = [:]
+    private static final Log LOG = LogFactory.getLog(DataSourceHolder)
     private static final Object[] LOCK = new Object[0]
+    private final Map<String, DataSource> dataSources = [:]
 
     String[] getDataSourceNames() {
         List<String> dataSourceNames = new ArrayList().addAll(dataSources.keySet())
@@ -50,6 +54,7 @@ class DataSourceHolder {
 
     void withSql(String dataSourceName = 'default', Closure closure) {
         DataSource ds = fetchDataSource(dataSourceName)
+        if(LOG.debugEnabled) LOG.debug("Executing SQL stament on datasource '$dataSourceName'")
         Connection connection = ds.getConnection()
         try {
             closure(dataSourceName, new Sql(connection))

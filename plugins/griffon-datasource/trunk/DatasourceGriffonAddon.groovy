@@ -23,10 +23,10 @@ import griffon.plugins.datasource.DataSourceHolder
 class DatasourceGriffonAddon {
     def events = [
         BeforeWeld: { beans ->
-            beans.dataSource = DataSourceHolder.instance.getDataSources('default')
+            beans.dataSource = DataSourceHolder.instance.getDataSource('default')
         },
         NewInstance: { klass, type, instance ->
-            def types = app.config.griffon?.plugins.datasource?.injectInto ?: ['controller']
+            def types = app.config.griffon?.datasource?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
             mc.withSql = DataSourceHolder.instance.&withSql
@@ -34,6 +34,6 @@ class DatasourceGriffonAddon {
     ]
 
     def exportWithJmx = { exporter, domain, ctx ->
-        exporter.beans."${domain}:service=datasource,type=configuration" = DataSourceHolder.instance.getDataSources('default')
+        exporter.beans."${domain}:service=datasource,type=configuration" = DataSourceHolder.instance.getDataSource('default')
     }
 }
