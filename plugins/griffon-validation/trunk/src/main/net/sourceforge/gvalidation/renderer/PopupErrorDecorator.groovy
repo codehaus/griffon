@@ -56,8 +56,6 @@ class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListene
         closeBtn.margin = new Insets(0, 0, 0, 0)
         closeBtn.setUI(new BasicButtonUI())
 
-
-
         windowManager.griffonWindow.addComponentListener(this)
         targetComponent.addComponentListener(this)
         targetComponent.addFocusListener(this)

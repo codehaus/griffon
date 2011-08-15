@@ -26,10 +26,14 @@ class ErrorsTest extends GroovyTestCase {
         errors.rejectValue("field", "errorCode")
         errors.rejectValue("field2", "errorCode")
 
+        Thread.sleep(100)
+
         assertTrue "Should have error", errors.hasFieldErrors('field')
         assertTrue "Should have error", errors.hasFieldErrors('field2')
 
         errors.removeError('field')
+
+        Thread.sleep(100)
 
         assertFalse "Should not have error", errors.hasFieldErrors('field')
         assertTrue "Should have error", errors.hasFieldErrors('field2')
@@ -40,14 +44,17 @@ class ErrorsTest extends GroovyTestCase {
 
         errors.reject("errorCode")
 
+        Thread.sleep(100)
         assertTrue "Should have error", errors.hasErrors()
 
         errors.clear()
 
+        Thread.sleep(100)
         assertFalse "Should not have any error", errors.hasErrors()
 
         errors.rejectValue("field", "errorCode")
 
+        Thread.sleep(100)
         assertTrue "Should have error", errors.hasErrors()
     }
 
@@ -61,6 +68,7 @@ class ErrorsTest extends GroovyTestCase {
         Errors errors = new Errors(parent)
         errors.reject("errorCode")
 
+        Thread.sleep(100)
         assertTrue "Should have fired property changed event", fired
     }
 
@@ -74,6 +82,7 @@ class ErrorsTest extends GroovyTestCase {
         Errors errors = new Errors(parent)
         errors.rejectValue('testField', "errorCode")
 
+        Thread.sleep(100)
         assertTrue "Should have fired property changed event", fired
     }
 
@@ -87,6 +96,7 @@ class ErrorsTest extends GroovyTestCase {
         Errors errors = new Errors(parent)
         errors.clear()
 
+        Thread.sleep(100)
         assertTrue "Should have fired property changed event", fired
     }
 
@@ -101,6 +111,7 @@ class ErrorsTest extends GroovyTestCase {
 
         errors.reject("errorCode")
 
+        Thread.sleep(100)
         assertTrue "Should have global error", errors.hasGlobalErrors()
     }
 
@@ -109,6 +120,7 @@ class ErrorsTest extends GroovyTestCase {
 
         errors.reject("errorCode", "defaultErrorCode")
 
+        Thread.sleep(100)
         assertTrue "Should have global error", errors.hasGlobalErrors()
         errors.each {
             assertEquals "Default error code is not correct", "defaultErrorCode", it.defaultErrorCode
@@ -120,6 +132,7 @@ class ErrorsTest extends GroovyTestCase {
 
         errors.reject("errorCode", [10, "arg2"])
 
+        Thread.sleep(100)
         def globalErrors = errors.getGlobalErrors()
 
         assertEquals "Error code is incorrect", globalErrors.first().errorCode, "errorCode"
@@ -132,6 +145,7 @@ class ErrorsTest extends GroovyTestCase {
 
         errors.reject("errorCode", "defaultErrorCode", [10, "arg2"])
 
+        Thread.sleep(100)
         def globalErrors = errors.getGlobalErrors()
 
         assertEquals "Error code is incorrect", globalErrors.first().errorCode, "errorCode"
@@ -145,6 +159,7 @@ class ErrorsTest extends GroovyTestCase {
 
         errors.rejectValue("field", "errorCode")
 
+        Thread.sleep(100)
         assertTrue "Should have field error", errors.hasFieldErrors()
         assertTrue "Field should have error", errors.hasFieldErrors("field")
     }
@@ -154,6 +169,7 @@ class ErrorsTest extends GroovyTestCase {
 
         errors.rejectValue("field", "errorCode", "defaultErrorCode")
 
+        Thread.sleep(100)
         assertTrue "Should have field error", errors.hasFieldErrors()
         assertTrue "Field should have error", errors.hasFieldErrors("field")
         errors.each {
@@ -166,6 +182,7 @@ class ErrorsTest extends GroovyTestCase {
 
         errors.rejectValue("field", "errorCode", [10, "arg2"])
 
+        Thread.sleep(100)
         def fieldError = errors.getFieldError("field")
 
         assertEquals "Field error field value is incorrect", fieldError.field, "field"
@@ -179,6 +196,7 @@ class ErrorsTest extends GroovyTestCase {
 
         errors.rejectValue("field", "errorCode", "defaultErrorCode", [10, "arg2"])
 
+        Thread.sleep(100)
         def fieldError = errors.getFieldError("field")
 
         assertEquals "Field error field value is incorrect", fieldError.field, "field"
@@ -195,6 +213,8 @@ class ErrorsTest extends GroovyTestCase {
 
         errors.rejectValue("field", "errorCode")
 
+        Thread.sleep(100)
+
         errors.each {
             if ("errorCode" == it.errorCode)
                 pass = true
@@ -209,6 +229,7 @@ class ErrorsTest extends GroovyTestCase {
         errors.rejectValue("field", "errorCode1")
         errors.rejectValue("field", "errorCode2")
 
+        Thread.sleep(100)
         def fieldErrors = errors.getFieldErrors("field")
 
         assertEquals("Multiple field errors should have been generated", 2, fieldErrors.size())
@@ -220,28 +241,29 @@ class ErrorsTest extends GroovyTestCase {
         errors.reject("errorCode1")
         errors.reject("errorCode2")
 
+        Thread.sleep(100)
         def globalErrors = errors.getGlobalErrors()
 
         assertEquals("Multiple field errors should have been generated", 2, globalErrors.size())
     }
 
-    public void testErrorListenerMgmt(){
+    public void testErrorListenerMgmt() {
         Errors errors = new Errors()
 
-        def listener1 = [name:'listener1'] as ErrorListener
-        def listener2 = [name:'listener2'] as ErrorListener
+        def listener1 = [name: 'listener1'] as ErrorListener
+        def listener2 = [name: 'listener2'] as ErrorListener
 
         errors.addListener(listener1)
 
-        assertTrue('Listener is not added',errors.hasListener(listener1))
-        assertFalse('Listener should not be added',errors.hasListener(listener2))
+        assertTrue('Listener is not added', errors.hasListener(listener1))
+        assertFalse('Listener should not be added', errors.hasListener(listener2))
 
         errors.removeListener(listener1)
 
-        assertFalse('Listener should have been removed',errors.hasListener(listener1))
+        assertFalse('Listener should have been removed', errors.hasListener(listener1))
     }
 
-    public void testNewFieldErrorNotification(){
+    public void testNewFieldErrorNotification() {
         Errors errors = new Errors()
 
         def onFieldErrorAdded = false
@@ -255,10 +277,11 @@ class ErrorsTest extends GroovyTestCase {
 
         errors.rejectValue('email', 'emailErrorCode')
 
+        Thread.sleep(100)
         assertTrue('New field error was not notified', onFieldErrorAdded)
     }
 
-    public void testRemoveFieldErrorNotification(){
+    public void testRemoveFieldErrorNotification() {
         Errors errors = new Errors()
 
         def onFieldErrorRemoved = false
@@ -270,10 +293,12 @@ class ErrorsTest extends GroovyTestCase {
 
         errors.rejectValue('email', 'emailErrorCode')
 
+        Thread.sleep(100)
         errors.addListener(listener)
 
         errors.removeError('email')
 
+        Thread.sleep(100)
         assertTrue('Remove field error was not notified', onFieldErrorRemoved)
     }
 
