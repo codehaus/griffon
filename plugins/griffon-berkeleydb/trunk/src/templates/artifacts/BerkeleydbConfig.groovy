@@ -11,17 +11,17 @@ entityStores {
 environments {
     development {
         environment {
-            home = 'dev'
+            home = '@griffon.project.key@-dev'
         }
     }
     test {
         environment {
-            home = 'test'
+            home = '@griffon.project.key@-test'
         }
     }
     production {
         environment {
-            home = 'prod'
+            home = '@griffon.project.key@-prod'
         }
     }
 }

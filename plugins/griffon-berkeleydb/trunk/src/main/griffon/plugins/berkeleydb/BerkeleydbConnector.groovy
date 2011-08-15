@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package griffon.berkeleydb
+package griffon.plugins.berkeleydb
 
 import griffon.core.GriffonApplication
 import griffon.util.Metadata
@@ -26,7 +26,7 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 @Singleton
 final class BerkeleydbConnector {
@@ -37,12 +37,13 @@ final class BerkeleydbConnector {
     private boolean connected = false
     private bootstrap
     private GriffonApplication app
+    private final ConfigSlurper configSlurper = new ConfigSlurper(GE.current.name)
 
     final EnvironmentConfig envConfig = new EnvironmentConfig()
 
-    def createConfig(GriffonApplication app) {
+    ConfigObject createConfig(GriffonApplication app) {
         def configClass = app.class.classLoader.loadClass('BerkeleydbConfig')
-        return new ConfigSlurper(GE.current.name).parse(configClass)
+        return configSlurper.parse(configClass)
     }
 
     void connect(GriffonApplication app, ConfigObject config) {
