@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4279">
+<plugins revision="4292">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -36,7 +36,7 @@ This plugin installs the AbeilleFormsBuilder.  The builder helps integrate forms
     </plugin>
     <plugin name="actions"/>
     <plugin name="activejdbc" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Persistence support via Activejdbc</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -5521,7 +5521,7 @@ http://www.uispec4j.org/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_7_1/griffon-validation-0.7.1.zip</file>
         </release>
     </plugin>
-    <plugin name="weld" latest-release="0.1">
+    <plugin name="weld" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>CDI support via Weld</title>
             <author>Andres Almiray</author>
@@ -5531,6 +5531,17 @@ http://www.uispec4j.org/</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-weld/tags/RELEASE_0_1/griffon-weld-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>CDI support via Weld</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>CDI support via Weld</description>
+            <documentation>http://griffon.codehaus.org/Weld+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-weld/tags/RELEASE_0_2/griffon-weld-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="wizard" latest-release="0.4">
