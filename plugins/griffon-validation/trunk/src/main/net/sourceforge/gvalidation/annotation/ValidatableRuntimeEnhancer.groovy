@@ -24,10 +24,9 @@ import java.beans.PropertyChangeListener
 class ValidatableRuntimeEnhancer {
 
     void enhance(model) {
-        model.addPropertyChangeListener({
-            e ->
-//            if(e.propertyName != "errors")
-//                model.validate(e?.propertyName)
+        model.addPropertyChangeListener({e ->
+            if(e.propertyName != "errors")
+                model.validate(e?.propertyName)
         } as PropertyChangeListener)
     }
 
