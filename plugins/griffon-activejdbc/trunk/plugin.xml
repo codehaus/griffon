@@ -2,14 +2,13 @@
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Persistence support via Activejdbc</title>
-  <description>Presistence support via Activejdbc
+  <description>Persistence support via Activejdbc
 http://code.google.com/p/activejdbc/</description>
   <documentation>http://griffon.codehaus.org/Activejdbc+Plugin</documentation>
   <license>Apache Software License 2.0</license>
   <toolkits></toolkits>
   <resources>
     <resource>BuildConfig</resource>
-    <resource>metainf.spring.springbeans</resource>
   </resources>
   <dependencies>
     <plugin name='datasource' version='0.1' />
