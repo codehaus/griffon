@@ -15,25 +15,19 @@
 
 package net.sourceforge.gvalidation.renderer
 
+import java.awt.Color
+import java.awt.FlowLayout
+import java.awt.Insets
+import javax.swing.JButton
+import javax.swing.JDialog
+import javax.swing.JLabel
+import javax.swing.plaf.basic.BasicButtonUI
 import net.sourceforge.gvalidation.Errors
 import net.sourceforge.gvalidation.FieldError
-import javax.swing.JDialog
-import java.awt.FlowLayout
-import java.awt.Color
-import javax.swing.JLabel
-import javax.swing.ImageIcon
-import net.sourceforge.gvalidation.util.ErrorMessageUtils
-import javax.swing.JButton
-import java.awt.event.ActionListener
-import java.awt.Insets
-import javax.swing.plaf.basic.BasicButtonUI
-import java.awt.event.ComponentListener
-import java.awt.event.ComponentEvent
-
-import net.sourceforge.gvalidation.util.GriffonWindowManager
-import java.awt.event.FocusListener
-import java.awt.event.FocusEvent
 import net.sourceforge.gvalidation.swing.Icons
+import net.sourceforge.gvalidation.util.ErrorMessageUtils
+import net.sourceforge.gvalidation.util.GriffonWindowManager
+import java.awt.event.*
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
