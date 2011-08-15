@@ -26,7 +26,7 @@ class ValidatableRuntimeEnhancer {
     void enhance(model) {
         def annotation = model.getClass().getAnnotation(Validatable.class)
 
-        if (annotation.realTime()) {
+        if (annotation?.realTime()) {
             model.addPropertyChangeListener({e ->
                 if (e.propertyName != "errors")
                     model.validate(e?.propertyName)
