@@ -20,6 +20,8 @@ import net.sourceforge.gvalidation.artifact.ConstraintArtifactHandler
 import net.sourceforge.gvalidation.renderer.ErrorRendererAttributeDelegator
 import net.sourceforge.gvalidation.swing.ErrorIconFactory
 import net.sourceforge.gvalidation.swing.ErrorMessagePanelFactory
+import net.sourceforge.gvalidation.annotation.ValidatableRuntimeEnhancerTest
+import net.sourceforge.gvalidation.annotation.ValidatableRuntimeEnhancer
 
 /**
  * @author Nick Zhu
@@ -41,7 +43,16 @@ class ValidationGriffonAddon {
     ]
 
     def factories = [
-        errorIcon : new ErrorIconFactory(),
-        errorMessages : new ErrorMessagePanelFactory()
+            errorIcon: new ErrorIconFactory(),
+            errorMessages: new ErrorMessagePanelFactory()
+    ]
+
+    def events = [
+            NewInstance: { klass, type, instance ->
+                if (type != "model")
+                    return
+
+                ValidatableRuntimeEnhancer.instance.enhance(instance)
+            }
     ]
 }
