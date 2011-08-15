@@ -58,7 +58,7 @@ final class MybatisConnector {
         bootstrap = app.class.classLoader.loadClass('BootstrapMybatis').newInstance()
         bootstrap.metaClass.app = app
         SqlSessionFactoryHolder.instance.withSqlSession(dataSourceName) { dsName, sqlSession -> bootstrap.init(dsName, sqlSession) }
-        app.event('MybatisConnectEnd', [dataSourceName, dataSource])
+        app.event('MybatisConnectEnd', [dataSourceName, sessionFactory])
         sessionFactory
     }
 
