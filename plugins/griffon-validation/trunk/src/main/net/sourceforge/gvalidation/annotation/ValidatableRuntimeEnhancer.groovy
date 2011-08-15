@@ -16,6 +16,7 @@
 package net.sourceforge.gvalidation.annotation
 
 import java.beans.PropertyChangeListener
+import net.sourceforge.gvalidation.util.MetaUtils
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -24,14 +25,25 @@ import java.beans.PropertyChangeListener
 class ValidatableRuntimeEnhancer {
 
     void enhance(model) {
-        def annotation = model.getClass().getAnnotation(Validatable.class)
-
-        if (annotation?.realTime()) {
+        if (realTimeOn(model) && annotatedWithBindable(model)) {
             model.addPropertyChangeListener({e ->
                 if (e.propertyName != "errors")
                     model.validate(e?.propertyName)
             } as PropertyChangeListener)
         }
+    }
+
+    private boolean realTimeOn(model) {
+        Validatable annotation = getValidatableAnnotation(model)
+        return annotation?.realTime()
+    }
+
+    private Validatable getValidatableAnnotation(model) {
+        return model.getClass().getAnnotation(Validatable.class)
+    }
+
+    private boolean annotatedWithBindable(model) {
+        return MetaUtils.hasMethod(model, 'addPropertyChangeListener')
     }
 
 }
