@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4307">
+<plugins revision="4312">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -35,7 +35,7 @@ This plugin installs the AbeilleFormsBuilder.  The builder helps integrate forms
         </release>
     </plugin>
     <plugin name="actions"/>
-    <plugin name="activejdbc" latest-release="0.1">
+    <plugin name="activejdbc" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Persistence support via Activejdbc</title>
             <author>Andres Almiray</author>
@@ -47,6 +47,18 @@ http://code.google.com/p/activejdbc/</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-activejdbc/tags/RELEASE_0_1/griffon-activejdbc-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Persistence support via Activejdbc</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Persistence support via Activejdbc
+http://code.google.com/p/activejdbc/</description>
+            <documentation>http://griffon.codehaus.org/Activejdbc+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-activejdbc/tags/RELEASE_0_2/griffon-activejdbc-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="airbag" latest-release="0.1">
@@ -1871,7 +1883,7 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_6_1/griffon-gsql-0.6.1.zip</file>
         </release>
-        <release tag="RELEASE_0_7" version="0.7" type="svn">
+        <release tag="RELEASE_0_7" type="svn" version="0.7">
             <title>Groovy SQL support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
