@@ -69,8 +69,7 @@ class Errors {
 
     private def fireErrorChangedEventOnParent(Errors oldErrors) {
         if (parent != null && hasPropertyChangeNotifier()) {
-            //parent.__firePropertyChange('errors', oldErrors, this)
-            parent.setErrors(null)
+            parent.setErrors(new Errors())
             parent.setErrors(this)
         }
     }
