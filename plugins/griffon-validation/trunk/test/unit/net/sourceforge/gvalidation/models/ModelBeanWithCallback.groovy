@@ -16,12 +16,13 @@
 package net.sourceforge.gvalidation.models
 
 import net.sourceforge.gvalidation.annotation.Validatable
+import org.codehaus.griffon.runtime.core.AbstractGriffonModel
 
 /**
  * Created by nick.zhu
  */
 @Validatable
-class ModelBeanWithCallback {
+class ModelBeanWithCallback extends AbstractGriffonModel {
     String id
     String email
     boolean callbackInvoked

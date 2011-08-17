@@ -29,11 +29,13 @@ class MetaUtilsTest extends GroovyTestCase {
     public void testFindClosure() {
         assertTrue("Should be true", MetaUtils.hasClosure(closureClass, 'doSomething'))
         assertFalse("Should be false", MetaUtils.hasClosure(methodClass, 'doSomethingElse'))
+        assertFalse("Should be false", MetaUtils.hasClosure([:], 'doSomethingElse'))
     }
 
     public void testFindMethod() {
         assertTrue("Should be true", MetaUtils.hasMethod(methodClass, 'doSomething'))
         assertFalse("Should be false", MetaUtils.hasMethod(closureClass, 'doSomethingElse'))
+        assertFalse("Should be false", MetaUtils.hasMethod([:], 'doSomethingElse'))
     }
 
     public void testFindAnyMethod() {
@@ -41,6 +43,7 @@ class MetaUtilsTest extends GroovyTestCase {
         assertFalse("Should be false", MetaUtils.hasMethodOrClosure(methodClass, 'doSomethingElse'))
         assertTrue("Should be true", MetaUtils.hasMethodOrClosure(closureClass, 'doSomething'))
         assertFalse("Should be false", MetaUtils.hasMethodOrClosure(closureClass, 'doSomethingElse'))
+        assertFalse("Should be false", MetaUtils.hasMethodOrClosure([:], 'doSomethingElse'))
     }
 
     public void testFieldExistence(){

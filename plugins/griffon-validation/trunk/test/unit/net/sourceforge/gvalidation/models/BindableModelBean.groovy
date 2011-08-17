@@ -16,12 +16,13 @@
 package net.sourceforge.gvalidation.models
 
 import groovy.beans.Bindable
+import org.codehaus.griffon.runtime.core.AbstractGriffonModel
 
 /**
  * Created by nick.zhu
  */
 
-class BindableModelBean {
+class BindableModelBean extends AbstractGriffonModel {
     @Bindable String id
     @Bindable String email
 

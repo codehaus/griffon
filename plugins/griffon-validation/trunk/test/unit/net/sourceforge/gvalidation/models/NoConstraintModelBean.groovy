@@ -16,10 +16,11 @@
 package net.sourceforge.gvalidation.models
 
 import net.sourceforge.gvalidation.annotation.Validatable
+import org.codehaus.griffon.runtime.core.AbstractGriffonModel
 
 /**
  * Created by nick.zhu
  */
 @Validatable
-class NoConstraintModelBean {
+class NoConstraintModelBean extends AbstractGriffonModel {
 }

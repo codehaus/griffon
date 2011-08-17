@@ -15,13 +15,13 @@
 
 package net.sourceforge.gvalidation
 
-import javax.swing.SwingUtilities
+import net.sourceforge.gvalidation.util.MetaUtils
 
 /**
  * Created by nick.zhu
  */
 class Errors {
-    static final def FIRE_PROPERTY_CHANGE_METHOD_NAME = 'firePropertyChange'
+    static final def GET_PROPERTY_CHANGE_LISTENERS_METHOD_NAME = 'getPropertyChangeListeners'
 
     def parent
     def fieldErrors = [:]
@@ -29,7 +29,13 @@ class Errors {
 
     def errorListeners = []
 
+    def Errors() {
+        this(null)
+    }
 
+    def Errors(parent) {
+        this.parent = parent
+    }
 
     def reject(errorCode) {
         reject(errorCode, [])
@@ -52,17 +58,25 @@ class Errors {
     }
 
     private Errors cloneErrors() {
-        return new Errors(parent: parent, fieldErrors: fieldErrors.clone(), globalErrors: globalErrors.clone())
+        def clone = new Errors()
+
+        clone.parent = parent
+        clone.fieldErrors = fieldErrors.clone()
+        clone.globalErrors = globalErrors.clone()
+
+        return clone
     }
 
     private def fireErrorChangedEventOnParent(Errors oldErrors) {
-        if (parent && hasPropertyChangeNotifier()) {
-            parent.firePropertyChange('errors', oldErrors, this)
+        if (parent != null && hasPropertyChangeNotifier()) {
+            //parent.__firePropertyChange('errors', oldErrors, this)
+            parent.setErrors(null)
+            parent.setErrors(this)
         }
     }
 
     private def hasPropertyChangeNotifier() {
-        return parent?.metaClass.methods?.find {it.name == FIRE_PROPERTY_CHANGE_METHOD_NAME} != null
+        return MetaUtils.hasMethod(parent, GET_PROPERTY_CHANGE_LISTENERS_METHOD_NAME)
     }
 
     def hasGlobalErrors() {

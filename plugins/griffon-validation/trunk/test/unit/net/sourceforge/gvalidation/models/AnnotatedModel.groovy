@@ -17,12 +17,13 @@ package net.sourceforge.gvalidation.models
 
 import net.sourceforge.gvalidation.annotation.Validatable
 import groovy.beans.Bindable
+import org.codehaus.griffon.runtime.core.AbstractGriffonModel
 
 /**
  * Created by nick.zhu
  */
 @Validatable(realTime=true)
-class AnnotatedModel {
+class AnnotatedModel extends AbstractGriffonModel {
     @Bindable String id
     @Bindable String email = " "
     @Bindable String zipCode = " "

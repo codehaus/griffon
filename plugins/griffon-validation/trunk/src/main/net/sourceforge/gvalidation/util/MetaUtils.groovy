@@ -30,7 +30,7 @@ final class MetaUtils {
 
 
     static def hasMethod(obj, methodName) {
-        def method = obj?.metaClass.methods?.find {
+        def method = obj?.metaClass?.methods?.find {
             it.name == methodName
         }
 
