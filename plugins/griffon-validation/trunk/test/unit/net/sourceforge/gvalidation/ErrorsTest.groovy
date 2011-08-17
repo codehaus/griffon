@@ -15,10 +15,12 @@
 
 package net.sourceforge.gvalidation
 
+import java.beans.PropertyChangeListener
+
 /**
  * Created by nick.zhu
  */
-class ErrorsTest extends GroovyTestCase {
+class ErrorsTest extends BaseTestCase {
 
     public void testRemoveFieldError() {
         Errors errors = new Errors()
@@ -58,32 +60,17 @@ class ErrorsTest extends GroovyTestCase {
         assertTrue "Should have error", errors.hasErrors()
     }
 
-    public void testParentPropertyChangedEventContainsCorrectOldErrors() {
-        boolean fired = false
-
-        def parent = [:] as Expando
-
-        parent.metaClass.firePropertyChange = {
-            property, oldValue, newValue ->
-            fired = true
-            assertEquals "Cloned old errors is incorrect", parent, oldValue.parent
-        }
-
-        Errors errors = new Errors(parent: parent)
-        errors.reject("errorCode")
-
-        Thread.sleep(100)
-        assertTrue "Should have fired property changed event", fired
-    }
-
     public void testRejectCausePropertyChangedEvent() {
         boolean fired = false
 
-        def parent = [:] as Expando
+        def parent = generateModel()
 
-        parent.metaClass.firePropertyChange << {property, oldValue, newValue -> fired = true; assertEquals "errors", property}
+        parent.addPropertyChangeListener('errors', {e ->
+            fired = true
+            assertEquals "errors", e.propertyName
+        } as PropertyChangeListener)
 
-        Errors errors = new Errors(parent: parent)
+        Errors errors = new Errors(parent)
         errors.reject("errorCode")
 
         Thread.sleep(100)
@@ -93,11 +80,15 @@ class ErrorsTest extends GroovyTestCase {
     public void testRejectValueCausePropertyChangedEvent() {
         boolean fired = false
 
-        def parent = [:] as Expando
+        def parent = generateModel()
 
-        parent.metaClass.firePropertyChange << {property, oldValue, newValue -> fired = true; assertEquals "errors", property}
+        parent.addPropertyChangeListener({
+            e ->
+            fired = true
+            assertEquals "errors", e.propertyName
+        } as PropertyChangeListener)
 
-        Errors errors = new Errors(parent: parent)
+        Errors errors = new Errors(parent)
         errors.rejectValue('testField', "errorCode")
 
         Thread.sleep(100)
@@ -107,11 +98,15 @@ class ErrorsTest extends GroovyTestCase {
     public void testClearCausePropertyChangedEvent() {
         boolean fired = false
 
-        def parent = [:] as Expando
+        def parent = generateModel()
 
-        parent.metaClass.firePropertyChange << {property, oldValue, newValue -> fired = true; assertEquals "errors", property}
+        parent.addPropertyChangeListener({
+            e ->
+            fired = true
+            assertEquals "errors", e.propertyName
+        } as PropertyChangeListener)
 
-        Errors errors = new Errors(parent: parent)
+        Errors errors = new Errors(parent)
         errors.clear()
 
         Thread.sleep(100)

@@ -18,12 +18,13 @@
 package net.sourceforge.gvalidation.models
 
 import net.sourceforge.gvalidation.annotation.Validatable
+import org.codehaus.griffon.runtime.core.AbstractGriffonModel
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 @Validatable(realTime=true)
-class NoBindableModelBean {
+class NoBindableModelBean extends AbstractGriffonModel {
     def name
     def password
 }
