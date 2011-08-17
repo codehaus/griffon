@@ -58,6 +58,24 @@ class ErrorsTest extends GroovyTestCase {
         assertTrue "Should have error", errors.hasErrors()
     }
 
+    public void testParentPropertyChangedEventContainsCorrectOldErrors() {
+        boolean fired = false
+
+        def parent = [:] as Expando
+
+        parent.metaClass.firePropertyChange = {
+            property, oldValue, newValue ->
+            fired = true
+            assertEquals "Cloned old errors is incorrect", parent, oldValue.parent
+        }
+
+        Errors errors = new Errors(parent: parent)
+        errors.reject("errorCode")
+
+        Thread.sleep(100)
+        assertTrue "Should have fired property changed event", fired
+    }
+
     public void testRejectCausePropertyChangedEvent() {
         boolean fired = false
 
@@ -65,7 +83,7 @@ class ErrorsTest extends GroovyTestCase {
 
         parent.metaClass.firePropertyChange << {property, oldValue, newValue -> fired = true; assertEquals "errors", property}
 
-        Errors errors = new Errors(parent)
+        Errors errors = new Errors(parent: parent)
         errors.reject("errorCode")
 
         Thread.sleep(100)
@@ -79,7 +97,7 @@ class ErrorsTest extends GroovyTestCase {
 
         parent.metaClass.firePropertyChange << {property, oldValue, newValue -> fired = true; assertEquals "errors", property}
 
-        Errors errors = new Errors(parent)
+        Errors errors = new Errors(parent: parent)
         errors.rejectValue('testField', "errorCode")
 
         Thread.sleep(100)
@@ -93,7 +111,7 @@ class ErrorsTest extends GroovyTestCase {
 
         parent.metaClass.firePropertyChange << {property, oldValue, newValue -> fired = true; assertEquals "errors", property}
 
-        Errors errors = new Errors(parent)
+        Errors errors = new Errors(parent: parent)
         errors.clear()
 
         Thread.sleep(100)
@@ -101,7 +119,7 @@ class ErrorsTest extends GroovyTestCase {
     }
 
     public void testRejectIgnoreNonObservableParent() {
-        Errors errors = new Errors([] as Expando)
+        Errors errors = new Errors(parent: [:])
 
         errors.reject("errorCode")
     }
