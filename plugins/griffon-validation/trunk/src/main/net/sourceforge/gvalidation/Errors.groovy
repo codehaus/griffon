@@ -29,13 +29,7 @@ class Errors {
 
     def errorListeners = []
 
-    def Errors() {
-        this(null)
-    }
 
-    def Errors(parent) {
-        this.parent = parent
-    }
 
     def reject(errorCode) {
         reject(errorCode, [])
@@ -58,14 +52,12 @@ class Errors {
     }
 
     private Errors cloneErrors() {
-        return new Errors(parent: parent, fieldErrors: fieldErrors.clone(), globalErros: globalErrors.clone())
+        return new Errors(parent: parent, fieldErrors: fieldErrors.clone(), globalErrors: globalErrors.clone())
     }
 
     private def fireErrorChangedEventOnParent(Errors oldErrors) {
         if (parent && hasPropertyChangeNotifier()) {
-            SwingUtilities.invokeLater({
-                parent.firePropertyChange('errors', oldErrors, this)
-            } as Runnable)
+            parent.firePropertyChange('errors', oldErrors, this)
         }
     }
 
@@ -105,11 +97,9 @@ class Errors {
     }
 
     private def fireFieldErrorAddedEvent(fieldError) {
-        SwingUtilities.invokeLater({
-            errorListeners.each {ErrorListener listener ->
-                listener.onFieldErrorAdded(fieldError)
-            }
-        } as Runnable)
+        errorListeners.each {ErrorListener listener ->
+            listener.onFieldErrorAdded(fieldError)
+        }
     }
 
     def hasFieldErrors() {
@@ -149,11 +139,9 @@ class Errors {
         if (error == null)
             return
 
-        SwingUtilities.invokeLater({
-            errorListeners.each {ErrorListener listener ->
-                listener.onFieldErrorRemoved(error)
-            }
-        } as Runnable)
+        errorListeners.each {ErrorListener listener ->
+            listener.onFieldErrorRemoved(error)
+        }
     }
 
     def iterator() {
