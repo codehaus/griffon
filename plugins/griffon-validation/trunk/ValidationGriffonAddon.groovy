@@ -49,7 +49,7 @@ class ValidationGriffonAddon {
     def events = [
             InitializeMVCGroup: { type, name, instanceMap ->
                 def model = instanceMap['model']
-                //ValidatableRuntimeEnhancer.instance.enhance(model)
+                ValidatableRuntimeEnhancer.instance.enhance(model)
             }
     ]
 }
