@@ -159,10 +159,14 @@ class Errors {
 
     def iterator() {
         def allErrors = []
-        allErrors.addAll(globalErrors)
-        fieldErrors.values().each {
+        def globalErrorsCopy = globalErrors.clone()
+        def fieldErrorsCopy = fieldErrors.clone()
+
+        allErrors.addAll(globalErrorsCopy)
+        fieldErrorsCopy.values().each {
             allErrors.addAll(it)
         }
+
         return allErrors.iterator()
     }
 
