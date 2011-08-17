@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4342">
+<plugins revision="4360">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2924,7 +2924,7 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jython/tags/RELEASE_0_1/griffon-jython-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Enables Jython</title>
             <author>Eric Wendelin</author>
             <authorEmail>emwendelin@gmail.com</authorEmail>
@@ -5927,6 +5927,20 @@ http://www.avaje.org/</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-ebean/tags/RELEASE_0_1/griffon-ebean-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="jeuclid" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>MathML renderer</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>MathML renderer
+http://jeuclid.sourceforge.net</description>
+            <documentation>http://griffon.codehaus.org/Jeuclid+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jeuclid/tags/RELEASE_0_1/griffon-jeuclid-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
