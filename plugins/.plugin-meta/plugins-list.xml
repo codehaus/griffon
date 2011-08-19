@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4360">
+<plugins revision="4370">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -43,9 +43,8 @@ This plugin installs the AbeilleFormsBuilder.  The builder helps integrate forms
 controller action (property or method). Relies on naming convention to determine
 name, descriptions, mnemonic, accelerator and icons to be used for each action.</description>
             <documentation>http://griffon.codehaus.org/Actions+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
             <platforms/>
+            <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-actions/tags/RELEASE_0_1/griffon-actions-0.1.zip</file>
         </release>
     </plugin>
@@ -57,9 +56,8 @@ name, descriptions, mnemonic, accelerator and icons to be used for each action.<
             <description>Presistence support via Activejdbc
 http://code.google.com/p/activejdbc/</description>
             <documentation>http://griffon.codehaus.org/Activejdbc+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-activejdbc/tags/RELEASE_0_1/griffon-activejdbc-0.1.zip</file>
         </release>
         <release tag="RELEASE_0_2" type="svn" version="0.2">
@@ -69,12 +67,12 @@ http://code.google.com/p/activejdbc/</description>
             <description>Persistence support via Activejdbc
 http://code.google.com/p/activejdbc/</description>
             <documentation>http://griffon.codehaus.org/Activejdbc+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-activejdbc/tags/RELEASE_0_2/griffon-activejdbc-0.2.zip</file>
         </release>
     </plugin>
+    <plugin name="activemq"/>
     <plugin name="airbag" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon Airbag Plugin</title>
@@ -190,9 +188,8 @@ http://barcode4j.sourceforge.net</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Berkeleydb support</description>
             <documentation>http://griffon.codehaus.org/Berkeleydb+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-berkeleydb/tags/RELEASE_0_4/griffon-berkeleydb-0.4.zip</file>
         </release>
     </plugin>
@@ -216,9 +213,8 @@ http://carbonado.sourceforge.net/</description>
             <description>Presistence support via Carbonado
 http://carbonado.sourceforge.net/</description>
             <documentation>http://griffon.codehaus.org/Carbonado+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-carbonado/tags/RELEASE_0_2/griffon-carbonado-0.2.zip</file>
         </release>
     </plugin>
@@ -870,6 +866,18 @@ http://everaldo.com/crystal/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-csv/tags/RELEASE_0_1/griffon-csv-0.1.zip</file>
         </release>
     </plugin>
+    <plugin name="datasource" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Base Datasource plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Initializes and manages datasources</description>
+            <documentation>http://griffon.codehaus.org/Datasource+Plugin</documentation>
+            <platforms/>
+            <toolkits/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-datasource/tags/RELEASE_0_1/griffon-datasource-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="db4o" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Db4o support</title>
@@ -1062,6 +1070,19 @@ another docking frame in the application.</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_4/griffon-easyb-0.4.zip</file>
+        </release>
+    </plugin>
+    <plugin name="ebean" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Persistence support via Ebean</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Persistence support via Ebean
+http://www.avaje.org/</description>
+            <documentation>http://griffon.codehaus.org/Ebean+Plugin</documentation>
+            <platforms/>
+            <toolkits/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-ebean/tags/RELEASE_0_1/griffon-ebean-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="eclipse-support" latest-release="0.4.7">
@@ -1926,9 +1947,8 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Groovy SQL support</description>
             <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_7/griffon-gsql-0.7.zip</file>
         </release>
     </plugin>
@@ -2483,6 +2503,19 @@ and maintainability to manage package dependencies effectively.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jdepend/tags/RELEASE_0_3/griffon-jdepend-0.3.zip</file>
         </release>
     </plugin>
+    <plugin name="jeuclid" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>MathML renderer</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>MathML renderer
+http://jeuclid.sourceforge.net</description>
+            <documentation>http://griffon.codehaus.org/Jeuclid+Plugin</documentation>
+            <platforms/>
+            <toolkits>swing</toolkits>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jeuclid/tags/RELEASE_0_1/griffon-jeuclid-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="jexplose" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Expose-like effect for DesktopPanes</title>
@@ -2676,6 +2709,7 @@ http://jgraph.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmonkeyengine/tags/RELEASE_0_1_1/griffon-jmonkeyengine-0.1.1.zip</file>
         </release>
     </plugin>
+    <plugin name="jms"/>
     <plugin name="jmx" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>JMX support</title>
@@ -2930,9 +2964,8 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <authorEmail>emwendelin@gmail.com</authorEmail>
             <description>Enables the usage of Jython on your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Jython+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jython/tags/RELEASE_0_2/griffon-jython-0.2.zip</file>
         </release>
     </plugin>
@@ -3040,9 +3073,8 @@ This is a port of the grails-ldap plugin, original from Luke Daley</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Enables Java AST manipulation via Lombok</description>
             <documentation>http://griffon.codehaus.org/Lombok+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-lombok/tags/RELEASE_0_1/griffon-lombok-0.1.zip</file>
         </release>
     </plugin>
@@ -3992,6 +4024,18 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-multidoc/tags/RELEASE_0_1/griffon-multidoc-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="mybatis" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Persistence support via Mybatis</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Persistence support via Mybatis</description>
+            <documentation>http://griffon.codehaus.org/Mybatis+Plugin</documentation>
+            <platforms/>
+            <toolkits/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-mybatis/tags/RELEASE_0_1/griffon-mybatis-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="neo4j" latest-release="0.3.1">
@@ -5489,7 +5533,7 @@ http://freedesktop.org</description>
     <plugin name="twitter" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Twitter Plugin</title>
-            <author>Mario García</author>
+            <author>Mario GarcÃ­a</author>
             <authorEmail/>
             <description/>
             <documentation>http://griffon.codehaus.org/Twitter+Plugin</documentation>
@@ -5522,7 +5566,7 @@ http://www.uispec4j.org/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-uispec4j/tags/RELEASE_0_2/griffon-uispec4j-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="validation" latest-release="0.7.1">
+    <plugin name="validation" latest-release="0.8">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon Validation Plugin</title>
             <author>Nick Zhu</author>
@@ -5603,6 +5647,16 @@ http://www.uispec4j.org/</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_7_1/griffon-validation-0.7.1.zip</file>
         </release>
+        <release tag="RELEASE_0_8" type="svn" version="0.8">
+            <title>Griffon Validation Plugin</title>
+            <author>Nick Zhu</author>
+            <authorEmail>nzhu@jointsource.com</authorEmail>
+            <description>A validation plugin that provides Grails like validation capability using constraints</description>
+            <documentation>http://griffon.codehaus.org/Validation+Plugin</documentation>
+            <platforms/>
+            <toolkits/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_8/griffon-validation-0.8.zip</file>
+        </release>
     </plugin>
     <plugin name="weld" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
@@ -5621,9 +5675,8 @@ http://www.uispec4j.org/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>CDI support via Weld</description>
             <documentation>http://griffon.codehaus.org/Weld+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-weld/tags/RELEASE_0_2/griffon-weld-0.2.zip</file>
         </release>
     </plugin>
@@ -5887,60 +5940,6 @@ http://zonelayout.com</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_2/griffon-zonelayout-0.2.zip</file>
-        </release>
-    </plugin>
-    <plugin name="datasource" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Base Datasource plugin</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Initializes and manages datasources</description>
-            <documentation>http://griffon.codehaus.org/Datasource+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-datasource/tags/RELEASE_0_1/griffon-datasource-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="mybatis" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Persistence support via Mybatis</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Persistence support via Mybatis</description>
-            <documentation>http://griffon.codehaus.org/Mybatis+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-mybatis/tags/RELEASE_0_1/griffon-mybatis-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="ebean" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Persistence support via Ebean</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Persistence support via Ebean
-http://www.avaje.org/</description>
-            <documentation>http://griffon.codehaus.org/Ebean+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-ebean/tags/RELEASE_0_1/griffon-ebean-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="jeuclid" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
-            <title>MathML renderer</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>MathML renderer
-http://jeuclid.sourceforge.net</description>
-            <documentation>http://griffon.codehaus.org/Jeuclid+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-jeuclid/tags/RELEASE_0_1/griffon-jeuclid-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
