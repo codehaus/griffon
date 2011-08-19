@@ -191,6 +191,7 @@ class ValidationEnhancerTest extends BaseTestCase {
 
         boolean result = model.validate(['id', 'email'])
 
+        Thread.sleep(100)
         assertFalse "Field validation should have failed", result
 
         assertTrue model.errors.hasFieldErrors('id')

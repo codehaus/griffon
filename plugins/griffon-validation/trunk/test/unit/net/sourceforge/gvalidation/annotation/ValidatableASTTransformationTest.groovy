@@ -79,6 +79,7 @@ class ValidatableASTTransformationTest extends BaseTestCase {
 
         model.errors.reject('testError')
 
+        Thread.sleep(100)
         assertTrue "Property change event should have been fired", firedEvent
     }
 

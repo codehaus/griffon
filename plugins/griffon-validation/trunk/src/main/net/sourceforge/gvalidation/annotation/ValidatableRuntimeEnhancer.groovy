@@ -17,6 +17,8 @@ package net.sourceforge.gvalidation.annotation
 
 import java.beans.PropertyChangeListener
 import net.sourceforge.gvalidation.util.MetaUtils
+import griffon.core.ApplicationHandler
+import griffon.util.ApplicationHolder
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
@@ -31,7 +33,9 @@ class ValidatableRuntimeEnhancer {
                     if (valueNotChanged(e) || isSetToBlankString(e) || isSetToZero(e))
                         return
 
-                    model.validate(e?.propertyName)
+                    ApplicationHolder.application.execAsync {
+                        model.validate(e?.propertyName)
+                    }
                 }
             } as PropertyChangeListener)
         }
