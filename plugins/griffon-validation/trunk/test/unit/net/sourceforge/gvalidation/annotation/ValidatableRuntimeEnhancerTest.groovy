@@ -17,11 +17,18 @@ package net.sourceforge.gvalidation.annotation
 
 import net.sourceforge.gvalidation.BaseTestCase
 import net.sourceforge.gvalidation.models.AnnotatedModel
+import griffon.util.ApplicationHolder
+import griffon.core.GriffonApplication
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 class ValidatableRuntimeEnhancerTest extends BaseTestCase {
+    @Override protected void setUp() {
+        super.setUp()
+
+        ApplicationHolder.application = [execAsync:{c -> c.call()}] as GriffonApplication
+    }
 
     void testModelRealTimeEnhancement() {
         def model = generateModel()

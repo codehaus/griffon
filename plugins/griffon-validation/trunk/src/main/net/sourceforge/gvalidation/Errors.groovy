@@ -16,6 +16,7 @@
 package net.sourceforge.gvalidation
 
 import net.sourceforge.gvalidation.util.MetaUtils
+import javax.swing.SwingUtilities
 
 /**
  * Created by nick.zhu
@@ -68,9 +69,11 @@ class Errors {
     }
 
     private def fireErrorChangedEventOnParent(Errors oldErrors) {
-        if (parent != null && hasPropertyChangeNotifier()) {
-            parent.setErrors(new Errors())
-            parent.setErrors(this)
+        SwingUtilities.invokeLater {
+            if (parent != null && hasPropertyChangeNotifier()) {
+                parent.setErrors(new Errors())
+                parent.setErrors(this)
+            }
         }
     }
 
@@ -110,8 +113,10 @@ class Errors {
     }
 
     private def fireFieldErrorAddedEvent(fieldError) {
-        errorListeners.each {ErrorListener listener ->
-            listener.onFieldErrorAdded(fieldError)
+        SwingUtilities.invokeLater {
+            errorListeners.each {ErrorListener listener ->
+                listener.onFieldErrorAdded(fieldError)
+            }
         }
     }
 
@@ -152,8 +157,10 @@ class Errors {
         if (error == null)
             return
 
-        errorListeners.each {ErrorListener listener ->
-            listener.onFieldErrorRemoved(error)
+        SwingUtilities.invokeLater {
+            errorListeners.each {ErrorListener listener ->
+                listener.onFieldErrorRemoved(error)
+            }
         }
     }
 
