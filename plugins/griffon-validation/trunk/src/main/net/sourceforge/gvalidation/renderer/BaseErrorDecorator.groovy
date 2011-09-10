@@ -78,14 +78,14 @@ abstract class BaseErrorDecorator implements ErrorDecorator, ErrorListener {
     @Override
     def onFieldErrorAdded(FieldError error) {
         if (isRelatedError(error))
-            SwingUtilities.invokeLater({decorate(model.errors, error)} as Runnable)
+            decorate(model.errors, error)
     }
 
     @Override
     def onFieldErrorRemoved(List errors) {
         errors.each {FieldError error ->
             if (isRelatedError(error))
-                SwingUtilities.invokeLater({undecorate()} as Runnable)
+                undecorate()
         }
     }
 

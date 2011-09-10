@@ -63,24 +63,25 @@ class PopupErrorDecorator extends BaseErrorDecorator implements ComponentListene
 
     @Override
     protected void decorate(Errors errors, FieldError fieldError) {
-        messageLabel.text = ErrorMessageUtils.getErrorMessage(fieldError, messageSource)
+        if (popup == null)
+            initializePopup()
 
-        initializePopup()
-        positionPopup()
-        popup.visible = true
+        if (!popup.visible) {
+            messageLabel.text = ErrorMessageUtils.getErrorMessage(fieldError, messageSource)
+            positionPopup()
+            popup.visible = true
+        }
     }
 
     private def initializePopup() {
-        if (popup == null) {
-            popup = new JDialog(windowManager.getWindow(targetComponent))
-            popup.getContentPane().setLayout(new FlowLayout());
-            popup.setUndecorated(true);
-            popup.getContentPane().setBackground(bgColor);
-            popup.getContentPane().add(image);
-            popup.getContentPane().add(messageLabel);
-            popup.getContentPane().add(closeBtn)
-            popup.setFocusableWindowState(false);
-        }
+        popup = new JDialog(windowManager.getWindow(targetComponent))
+        popup.getContentPane().setLayout(new FlowLayout());
+        popup.setUndecorated(true);
+        popup.getContentPane().setBackground(bgColor);
+        popup.getContentPane().add(image);
+        popup.getContentPane().add(messageLabel);
+        popup.getContentPane().add(closeBtn)
+        popup.setFocusableWindowState(false);
     }
 
     private def positionPopup() {

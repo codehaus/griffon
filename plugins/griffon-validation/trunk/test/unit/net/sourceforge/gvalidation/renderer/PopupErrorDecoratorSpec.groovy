@@ -29,21 +29,21 @@ import javax.swing.JDialog
  */
 class PopupErrorDecoratorSpec extends UnitSpec {
 
-    def 'Popup error decorator should create popup while decorating'(){
+    def 'Popup error decorator should create popup while decorating'() {
         given:
         PopupErrorDecorator decorator = new PopupErrorDecorator()
 
         def errorField = "email"
         def errors = new Errors()
-        errors.rejectValue(errorField, 'emailErrorCode')
 
-        def windowManager = [getGriffonWindow:{new JDialog()}] as GriffonWindowManager
-        def model = [errors:errors]
+        def windowManager = [getGriffonWindow: {new JDialog()}] as GriffonWindowManager
+        def model = [errors: errors]
         def node = [:] as JComponent
-        def messageResource = [getMessage:{code, args -> 'Error message'}]
+        def messageResource = [getMessage: {code, args -> 'Error message'}]
 
         decorator.windowManager = windowManager
         decorator.register(model, node, errorField, messageResource)
+        errors.rejectValue(errorField, 'emailErrorCode')
 
         when:
         decorator.decorate(errors, errors.getFieldError(errorField))
@@ -55,21 +55,53 @@ class PopupErrorDecoratorSpec extends UnitSpec {
         decorator.popup.visible == true
     }
 
-    def 'Popup error decorator should hide popup while undecorating'(){
+    def 'Popup error decorator should create popup while decorating multiple errors'() {
         given:
         PopupErrorDecorator decorator = new PopupErrorDecorator()
 
         def errorField = "email"
         def errors = new Errors()
-        errors.rejectValue(errorField, 'emailErrorCode')
 
-        def windowManager = [getGriffonWindow:{new JDialog()}] as GriffonWindowManager
-        def model = [errors:errors]
+        def windowManager = [getGriffonWindow: {new JDialog()}] as GriffonWindowManager
+        def model = [errors: errors]
         def node = [:] as JComponent
-        def messageResource = [getMessage:{code, args -> 'Error message'}]
+        def messageResource = [getMessage: {code, args ->
+            if (code == 'emailErrorCode1')
+                return 'Error message1'
+            else
+                return 'Error message2'
+        }]
 
         decorator.windowManager = windowManager
         decorator.register(model, node, errorField, messageResource)
+        errors.rejectValue(errorField, 'emailErrorCode1')
+        errors.rejectValue(errorField, 'emailErrorCode2')
+
+        when:
+        decorator.decorate(errors, errors.getFieldError(errorField))
+        Thread.sleep(300)
+
+        then:
+        decorator.popup != null
+        decorator.messageLabel.text == "Error message1"
+        decorator.popup.visible == true
+    }
+
+    def 'Popup error decorator should hide popup while undecorating'() {
+        given:
+        PopupErrorDecorator decorator = new PopupErrorDecorator()
+
+        def errorField = "email"
+        def errors = new Errors()
+
+        def windowManager = [getGriffonWindow: {new JDialog()}] as GriffonWindowManager
+        def model = [errors: errors]
+        def node = [:] as JComponent
+        def messageResource = [getMessage: {code, args -> 'Error message'}]
+
+        decorator.windowManager = windowManager
+        decorator.register(model, node, errorField, messageResource)
+        errors.rejectValue(errorField, 'emailErrorCode')
 
         when:
         decorator.decorate(errors, errors.getFieldError(errorField))
