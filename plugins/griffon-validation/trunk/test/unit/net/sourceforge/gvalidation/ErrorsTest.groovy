@@ -299,12 +299,34 @@ class ErrorsTest extends BaseTestCase {
 
         def onFieldErrorRemoved = false
 
-        def listener = [onFieldErrorRemoved: {FieldError error ->
+        def listener = [onFieldErrorRemoved: {List e ->
             onFieldErrorRemoved = true
-            assertEquals('Error field is incorrect', 'email', error.getField())
+            assertEquals('Error field is incorrect', 'email', e.first().getField())
         }] as ErrorListener
 
         errors.rejectValue('email', 'emailErrorCode')
+
+        Thread.sleep(100)
+        errors.addListener(listener)
+
+        errors.removeError('email')
+
+        Thread.sleep(100)
+        assertTrue('Remove field error was not notified', onFieldErrorRemoved)
+    }
+
+    public void testRemoveMultipleFieldErrorNotification() {
+        Errors errors = new Errors()
+
+        def onFieldErrorRemoved = false
+
+        def listener = [onFieldErrorRemoved: {List e ->
+            onFieldErrorRemoved = true
+            assertEquals('Error field is incorrect', 'email', e.first().getField())
+        }] as ErrorListener
+
+        errors.rejectValue('email', 'emailErrorCode1')
+        errors.rejectValue('email', 'emailErrorCode2')
 
         Thread.sleep(100)
         errors.addListener(listener)
