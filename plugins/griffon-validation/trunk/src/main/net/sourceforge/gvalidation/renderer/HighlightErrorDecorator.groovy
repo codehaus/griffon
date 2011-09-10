@@ -23,10 +23,11 @@ import java.awt.Color
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 class HighlightErrorDecorator extends BaseErrorDecorator {
-    def originalBgColor = Color.WHITE
+    def originalBgColor
 
     @Override protected void decorate(Errors errors, FieldError fieldError) {
-        originalBgColor = targetComponent.getBackground()
+        if(!originalBgColor)
+            originalBgColor = targetComponent.getBackground()
         targetComponent.setBackground(Color.PINK)
     }
 

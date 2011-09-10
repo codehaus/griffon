@@ -20,27 +20,28 @@ import org.springframework.context.MessageSource
 import net.sourceforge.gvalidation.Errors
 import java.awt.Color
 import javax.swing.JComponent
+import javax.swing.JLabel
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 class HighlightErrorDecoratorSpec extends UnitSpec {
 
-    def 'Should change background color to pink when decorating'(){
+    def 'Should change background color to pink when decorating'() {
         given:
         HighlightErrorDecorator decorator = new HighlightErrorDecorator()
 
         def errorField = "email"
         def errors = new Errors()
-        errors.rejectValue(errorField, 'emailErrorCode')
 
-        def model = [errors:errors]
+        def model = [errors: errors]
         def color = Color.WHITE
-        def node = [getBackground:{color},setBackground:{c->color=c}] as JComponent
+        def node = [getBackground: {color}, setBackground: {c -> color = c}] as JComponent
         def messageResource = [:] as MessageSource
 
 
         decorator.register(model, node, errorField, messageResource)
+        errors.rejectValue(errorField, 'emailErrorCode')
 
         when:
         decorator.decorate(errors, errors.getFieldError(errorField))
@@ -51,21 +52,21 @@ class HighlightErrorDecoratorSpec extends UnitSpec {
         node.background == Color.PINK
     }
 
-    def 'Should restore background color when undecorating'(){
+    def 'Should restore background color when undecorating'() {
         given:
         HighlightErrorDecorator decorator = new HighlightErrorDecorator()
 
         def errorField = "email"
         def errors = new Errors()
-        errors.rejectValue(errorField, 'emailErrorCode')
 
-        def model = [errors:errors]
+        def model = [errors: errors]
         def color = Color.WHITE
-        def node = [getBackground:{color},setBackground:{c->color=c}] as JComponent
+        def node = [getBackground: {color}, setBackground: {c -> color = c}] as JComponent
         def messageResource = [:] as MessageSource
 
 
         decorator.register(model, node, errorField, messageResource)
+        errors.rejectValue(errorField, 'emailErrorCode')
 
         when:
         decorator.decorate(errors, errors.getFieldError(errorField))
@@ -76,6 +77,36 @@ class HighlightErrorDecoratorSpec extends UnitSpec {
         then:
         decorator.originalBgColor == Color.WHITE
         node.background == Color.WHITE
+    }
+
+
+    def 'Should restore background color when undecorating w/ multiple errors'() {
+        given:
+        HighlightErrorDecorator decorator = new HighlightErrorDecorator()
+
+        def errorField = "email"
+        def errors = new Errors()
+
+        def model = [errors: errors]
+        def node = new JLabel("something")
+        def color = node.background
+        def messageResource = [:] as MessageSource
+
+
+        decorator.register(model, node, errorField, messageResource)
+
+        errors.rejectValue(errorField, 'emailErrorCode1')
+        errors.rejectValue(errorField, 'emailErrorCode2')
+
+        when:
+        decorator.decorate(errors, errors.getFieldError(errorField))
+        Thread.sleep(100)
+        decorator.undecorate()
+        Thread.sleep(100)
+
+        then:
+        decorator.originalBgColor == color
+        node.background == color
     }
 
 }
