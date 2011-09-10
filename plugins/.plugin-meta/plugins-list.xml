@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4382">
+<plugins revision="4393">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1860,6 +1860,18 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gpars/tags/RELEASE_0_1/griffon-gpars-0.1.zip</file>
         </release>
     </plugin>
+    <plugin name="groovyfx" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Griffon GroovyFX Plugin</title>
+            <author>Dean Iverson</author>
+            <authorEmail>deanriverson@gmail.com</authorEmail>
+            <description>A plugin that provides use of the GroovyFX library from within a Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Groovyfx+Plugin</documentation>
+            <platforms/>
+            <toolkits>javafx</toolkits>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-groovyfx/tags/RELEASE_0_1/griffon-groovyfx-0.1.zip</file>
+        </release>
+    </plugin>
     <plugin name="gsql" latest-release="0.7">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Gsql powered DataSource</title>
@@ -2357,6 +2369,18 @@ http://jalarms.sourceforge.net</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jalarms/tags/RELEASE_0_3/griffon-jalarms-0.3.zip</file>
+        </release>
+    </plugin>
+    <plugin name="javafx" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Griffon JavaFX Plugin</title>
+            <author>Dean Iverson</author>
+            <authorEmail>deanriverson@gmail.com</authorEmail>
+            <description>This plugin allows you to write JavaFX applications using the Griffon framework.</description>
+            <documentation>http://griffon.codehaus.org/Javafx+Plugin</documentation>
+            <platforms/>
+            <toolkits>javafx</toolkits>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-javafx/tags/RELEASE_0_1/griffon-javafx-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="jbusycomponent" latest-release="0.5.2">
@@ -5533,7 +5557,7 @@ http://freedesktop.org</description>
     <plugin name="twitter" latest-release="0.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Twitter Plugin</title>
-            <author>Mario GarcÃ­a</author>
+            <author>Mario García</author>
             <authorEmail/>
             <description/>
             <documentation>http://griffon.codehaus.org/Twitter+Plugin</documentation>
@@ -5566,7 +5590,7 @@ http://www.uispec4j.org/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-uispec4j/tags/RELEASE_0_2/griffon-uispec4j-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="validation" latest-release="0.8">
+    <plugin name="validation" latest-release="0.8.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon Validation Plugin</title>
             <author>Nick Zhu</author>
@@ -5656,6 +5680,16 @@ http://www.uispec4j.org/</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_8/griffon-validation-0.8.zip</file>
+        </release>
+        <release tag="RELEASE_0_8_1" type="svn" version="0.8.1">
+            <title>Griffon Validation Plugin</title>
+            <author>Nick Zhu</author>
+            <authorEmail>nzhu@jointsource.com</authorEmail>
+            <description>A validation plugin that provides Grails like validation capability using constraints</description>
+            <documentation>http://griffon.codehaus.org/Validation+Plugin</documentation>
+            <platforms/>
+            <toolkits/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_8_1/griffon-validation-0.8.1.zip</file>
         </release>
     </plugin>
     <plugin name="weld" latest-release="0.2">
@@ -5940,32 +5974,6 @@ http://zonelayout.com</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_2/griffon-zonelayout-0.2.zip</file>
-        </release>
-    </plugin>
-    <plugin name="groovyfx" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Griffon GroovyFX Plugin</title>
-            <author>Dean Iverson</author>
-            <authorEmail>deanriverson@gmail.com</authorEmail>
-            <description>A plugin that provides use of the GroovyFX library from within a Griffon application.</description>
-            <documentation>http://griffon.codehaus.org/Groovyfx+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>javafx</toolkits>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-groovyfx/tags/RELEASE_0_1/griffon-groovyfx-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="javafx" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
-            <title>Griffon JavaFX Plugin</title>
-            <author>Dean Iverson</author>
-            <authorEmail>deanriverson@gmail.com</authorEmail>
-            <description>This plugin allows you to write JavaFX applications using the Griffon framework.</description>
-            <documentation>http://griffon.codehaus.org/Javafx+Plugin</documentation>
-            <license>Apache Public License 2.0</license>
-            <toolkits>javafx</toolkits>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-javafx/tags/RELEASE_0_1/griffon-javafx-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
