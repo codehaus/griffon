@@ -22,6 +22,6 @@ interface ErrorListener {
 
     def onFieldErrorAdded(FieldError error)
 
-    def onFieldErrorRemoved(FieldError error)
+    def onFieldErrorRemoved(List errors)
 
 }

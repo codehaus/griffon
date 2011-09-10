@@ -15,11 +15,10 @@
 
 package net.sourceforge.gvalidation.renderer
 
-import org.springframework.context.MessageSource
 import net.sourceforge.gvalidation.Errors
 import net.sourceforge.gvalidation.FieldError
 import net.sourceforge.gvalidation.ErrorListener
-import griffon.swing.SwingUtils
+
 import javax.swing.SwingUtilities
 
 /**
@@ -32,7 +31,7 @@ abstract class BaseErrorDecorator implements ErrorDecorator, ErrorListener {
     protected String errorField
     protected Object targetComponent
 
-    public void register(model, node, errorField, messageSource){
+    public void register(model, node, errorField, messageSource) {
         this.model = model
         this.targetComponent = node
         this.errorField = errorField
@@ -76,21 +75,21 @@ abstract class BaseErrorDecorator implements ErrorDecorator, ErrorListener {
      */
     abstract protected void undecorate()
 
+    @Override
     def onFieldErrorAdded(FieldError error) {
-        if(isNotRelatedError(error))
-            return null
-
-        SwingUtilities.invokeLater({decorate(model.errors, error)} as Runnable)
+        if (isRelatedError(error))
+            SwingUtilities.invokeLater({decorate(model.errors, error)} as Runnable)
     }
 
-    def onFieldErrorRemoved(FieldError error) {
-        if(isNotRelatedError(error))
-            return null
-
-        SwingUtilities.invokeLater({undecorate()} as Runnable)
+    @Override
+    def onFieldErrorRemoved(List errors) {
+        errors.each {FieldError error ->
+            if (isRelatedError(error))
+                SwingUtilities.invokeLater({undecorate()} as Runnable)
+        }
     }
 
-    private boolean isNotRelatedError(FieldError error) {
-        return error.field != errorField
+    protected boolean isRelatedError(FieldError error) {
+        return error.field == errorField
     }
 }

@@ -25,7 +25,7 @@ class Errors {
     static final def GET_PROPERTY_CHANGE_LISTENERS_METHOD_NAME = 'getPropertyChangeListeners'
 
     def parent
-    def fieldErrors = [:]
+    private Map<String, List> fieldErrors = [:]
     def globalErrors = []
 
     def errorListeners = []
@@ -143,8 +143,8 @@ class Errors {
     def clear() {
         def oldErrors = cloneErrors()
 
-        fieldErrors.each {key, error ->
-            fireFieldErrorRemovedEvent(error)
+        fieldErrors.each {key, errors ->
+            fireFieldErrorRemovedEvent(errors)
         }
 
         fieldErrors.clear()
@@ -153,13 +153,13 @@ class Errors {
         fireErrorChangedEventOnParent(oldErrors)
     }
 
-    private def fireFieldErrorRemovedEvent(error) {
-        if (error == null)
+    private def fireFieldErrorRemovedEvent(errors) {
+        if (errors == null || errors.size() == 0)
             return
 
         SwingUtilities.invokeLater {
             errorListeners.each {ErrorListener listener ->
-                listener.onFieldErrorRemoved(error)
+                listener.onFieldErrorRemoved(errors)
             }
         }
     }
@@ -192,13 +192,13 @@ class Errors {
     def removeError(String field) {
         def oldErrors = cloneErrors()
 
-        def error = fieldErrors.remove(field)
+        List errors = fieldErrors.remove(field)
 
-        fireFieldErrorRemovedEvent(error)
+        fireFieldErrorRemovedEvent(errors)
 
         fireErrorChangedEventOnParent(oldErrors)
 
-        return error
+        return errors
     }
 
 }
