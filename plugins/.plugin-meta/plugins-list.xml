@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4393">
+<plugins revision="4398">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1860,7 +1860,7 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gpars/tags/RELEASE_0_1/griffon-gpars-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="groovyfx" latest-release="0.1">
+    <plugin name="groovyfx" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon GroovyFX Plugin</title>
             <author>Dean Iverson</author>
@@ -1870,6 +1870,17 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <platforms/>
             <toolkits>javafx</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-groovyfx/tags/RELEASE_0_1/griffon-groovyfx-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Griffon GroovyFX Plugin</title>
+            <author>Dean Iverson</author>
+            <authorEmail>deanriverson@gmail.com</authorEmail>
+            <description>A plugin that provides use of the GroovyFX library from within a Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Groovyfx+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>javafx</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-groovyfx/tags/RELEASE_0_2/griffon-groovyfx-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="gsql" latest-release="0.7">
