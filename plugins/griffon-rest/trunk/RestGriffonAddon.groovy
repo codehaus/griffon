@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,80 +14,19 @@
  * limitations under the License.
  */
 
-import groovyx.net.http.AsyncHTTPBuilder
-import groovyx.net.http.HTTPBuilder
-import groovyx.net.http.RESTClient
-
-import java.lang.reflect.InvocationTargetException
+import griffon.util.RunnableWithArgs
+import griffon.plugins.rest.RestConnector
 
 /**
  * @author Andres Almiray
  */
 class RestGriffonAddon {
-   def events = [
-      NewInstance: {klass, type, instance ->
-         def types = app.config.griffon?.rest?.injectInto ?: ['controller']
-         if(!types.contains(type)) return
-         def mc = app.artifactManager.findGriffonClass(klass).metaClass
-         mc.withAsyncHttp = withClient.curry(AsyncHTTPBuilder, instance)
-         mc.withHttp = withClient.curry(HTTPBuilder, instance)
-         mc.withRest = withClient.curry(RESTClient, instance)
-      }
-   ]
-
-   // ======================================================
-
-   private withClient = {Class klass, Object instance, Map params, Closure closure ->
-      def client = null
-      if(params.id) {
-         String id = params.remove('id').toString()
-         MetaClass mc = app.artifactManager.findGriffonClass(instance).metaClass
-         if(mc.hasProperty(instance, id)) {
-            client = instance."$id"
-         } else {
-            client = makeClient(klass, params) 
-            mc."$id" = client
-         }
-      } else {
-        client = makeClient(klass, params) 
-      }
-
-      if(params.containsKey('proxy')) {
-         Map proxyArgs = [scheme: 'http', port: 80] + params.remove('proxy')
-         if(!proxyArgs.host) throw new IllegalArgumentException('proxy.host cannot be null!')
-         client.setProxy(proxyArgs.host, proxyArgs.port as int, proxyArgs.scheme)
-      }
-
-      if(closure) {
-         closure.delegate = client
-         closure.resolveStrategy = Closure.DELEGATE_FIRST
-         closure()
-      }
-   }
-
-   private makeClient(Class klass, Map params) {
-      if(klass == AsyncHTTPBuilder) {
-         try {
-            Map args = [:]
-            ['threadPool', 'poolSize', 'uri', 'contentType', 'timeout'].each { arg ->
-               if(params[(arg)] != null) args[(arg)] = params[(arg)]
-            }
-            return klass.newInstance(args)
-         } catch(IllegalArgumentException e) {
-            throw new RuntimeException("Failed to create async http client, reason: $e", e)
-         } catch(InvocationTargetException e) {
-            throw new RuntimeException("Failed to create async http client, reason: $e", e)
-         }
-      }
-      try {
-         def client =  klass.newInstance()
-         if(params.uri) client.uri = params.remove('uri')
-         if(params.contentType) client.contentType = params.remove('contentType')
-         return client
-      } catch(IllegalArgumentException e) {
-         throw new RuntimeException("Failed to create ${(klass == HTTPBuilder? 'http' : 'rest')} client, reason: $e", e)
-      } catch(InvocationTargetException e) {
-         throw new RuntimeException("Failed to create ${(klass == HTTPBuilder? 'http' : 'rest')} client, reason: $e", e)
-      }
-   }
+    def events = [
+        NewInstance: {Class klass, String type, Object instance ->
+            def types = app.config.griffon?.rest?.injectInto ?: ['controller']
+            if(!types.contains(type)) return
+            def mc = app.artifactManager.findGriffonClass(klass).metaClass
+            RestConnector.enhance(mc, instance)
+        }
+    ]
 }

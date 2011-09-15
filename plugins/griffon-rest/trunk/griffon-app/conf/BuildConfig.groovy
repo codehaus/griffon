@@ -9,7 +9,7 @@ griffon.project.dependency.resolution = {
     }
     dependencies {
         compile('org.codehaus.groovy.modules.http-builder:http-builder:0.5.1') {
-            excludes 'commons-logging', 'xml-apis', 'groovy', 'log4j'
+            excludes 'commons-logging', 'xml-apis', 'groovy', 'log4j', 'xercesImpl'
         }
     }
 }
