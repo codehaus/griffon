@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4411">
+<plugins revision="4417">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -4421,7 +4421,7 @@ Based on the Grails plugin of the same name.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-resources/tags/RELEASE_0_1/griffon-resources-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="rest" latest-release="0.6">
+    <plugin name="rest" latest-release="0.7">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>REST client libraries</title>
             <author>Andres Almiray</author>
@@ -4491,6 +4491,17 @@ Based on the Grails plugin of the same name.</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rest/tags/RELEASE_0_6/griffon-rest-0.6.zip</file>
+        </release>
+        <release tag="RELEASE_0_7" version="0.7" type="svn">
+            <title>REST client libraries</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Adds REST capabilities to your Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Rest+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-rest/tags/RELEASE_0_7/griffon-rest-0.7.zip</file>
         </release>
     </plugin>
     <plugin name="riak" latest-release="0.2.1">
