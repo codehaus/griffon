@@ -50,7 +50,7 @@ class JmxGriffonAddon {
     }
 
     private def exportAddonBeans(MBeanExporter exporter, domain, ctx) {
-        app.addons.each { name, addon ->
+        app.addonManager.addons.each { name, addon ->
             def addonMetaClass = addon.metaClass
             def exportWithJmx = addonMetaClass.getMetaProperty('exportWithJmx')
             if(exportWithJmx) {
