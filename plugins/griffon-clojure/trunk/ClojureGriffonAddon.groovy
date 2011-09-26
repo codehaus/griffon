@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-// import clojure.lang.Compiler
 import griffon.core.GriffonApplication
 import griffon.clojure.ClojureProxy
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 class ClojureGriffonAddon {
    private final ClojureProxy CLJ_PROXY = new ClojureProxy()

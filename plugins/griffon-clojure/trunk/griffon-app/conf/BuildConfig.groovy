@@ -6,16 +6,15 @@ griffon.project.dependency.resolution = {
         griffonHome()
         griffonCentral()
         mavenCentral()
+        mavenRepo 'http://repository.sonatype.org/content/groups/public'
         mavenRepo 'http://repository.springsource.com/maven/bundles/release'
     }
     dependencies {
-        def clojureVersion = '1.2.0'
+        def clojureVersion = '1.3.0'
         build "org.clojure:clojure:$clojureVersion",
-              "org.clojure:clojure-contrib:$clojureVersion",
               "jline:jline:0.9.94",
               "org.fusesource.jansi:jansi:1.4"
-        compile "org.clojure:clojure:$clojureVersion",
-                "org.clojure:clojure-contrib:$clojureVersion"
+        compile "org.clojure:clojure:$clojureVersion"
 
         def springVersion = '3.0.5.RELEASE'
         compile("org.springframework:org.springframework.core:$springVersion") {
