@@ -18,35 +18,13 @@
  * @author Andres Almiray
  */
 
-includeTargets << griffonScript("_GriffonInit")
-
-// append hints for config options if not present
-if(!(config.flatten().'griffon.clojure.dynamicPropertyName')) {
-    configFile.append('''
-griffon.clojure.dynamicPropertyName = 'clj'
-''')
-}
-if(!(config.flatten().'griffon.clojure.injectInto')) {
-    configFile.append('''
-griffon.clojure.injectInto = ['controller']
-''')
-}
-
 ant.mkdir(dir: "${basedir}/src/clojure")
 ant.mkdir(dir: "${basedir}/griffon-app/resources/clj")
 // ant.mkdir(dir: "${basedir}/test/tap")
 
 // check to see if we already have a ClojureGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'ClojureGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'ClojureGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding ClojureGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'ClojureGriffonAddon'.addon=true
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }

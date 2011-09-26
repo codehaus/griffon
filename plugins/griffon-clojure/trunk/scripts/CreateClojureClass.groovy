@@ -23,7 +23,7 @@
  * @since 0.3
  */
 
-import org.codehaus.griffon.commons.GriffonClassUtils as GCU
+import griffon.util.GriffonUtil
 
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
@@ -33,7 +33,7 @@ target('createClojureClass': "Creates a new Clojure script") {
     promptForName(type: "Class")
     def (pkg, name) = extractArtifactName(argsMap["params"][0])
     if(!pkg) pkg = "griffon"
-    name = GCU.getClassNameRepresentation(name)
+    name = GriffonUtil.getClassNameRepresentation(name)
 
     def packageDir = new File("${basedir}/src/clojure/${pkg.replace('.','/')}")
     packageDir.mkdirs()

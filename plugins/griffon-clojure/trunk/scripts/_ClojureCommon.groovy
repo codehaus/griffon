@@ -82,8 +82,7 @@ target(compileClojureTest: "") {
             sysproperty(key: "clojure.compile.path", value: destdir)
             arg(line: ant.antProject.properties."clojure.test.namespaces")
         }
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
         if(argsMap.verboseCompile) {
             StackTraceUtils.deepSanitize(e)
             e.printStackTrace(System.err)
