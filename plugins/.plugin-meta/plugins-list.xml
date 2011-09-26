@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4430">
+<plugins revision="4435">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -257,7 +257,7 @@ http://groovychart.dev.java.net</description>
         </release>
     </plugin>
     <plugin name="charva"/>
-    <plugin name="clojure" latest-release="0.7">
+    <plugin name="clojure" latest-release="0.8">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables Clojure</title>
             <author>Andres Almiray</author>
@@ -337,6 +337,17 @@ http://groovychart.dev.java.net</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_7/griffon-clojure-0.7.zip</file>
+        </release>
+        <release tag="RELEASE_0_8" version="0.8" type="svn">
+            <title>Enables Clojure</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables the usage of Clojure on your Griffon application.</description>
+            <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_8/griffon-clojure-0.8.zip</file>
         </release>
     </plugin>
     <plugin name="clover" latest-release="0.1">
@@ -5020,7 +5031,7 @@ http://grails.org/plugin/spock</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_7/griffon-spring-0.7.zip</file>
         </release>
-        <release tag="RELEASE_0_7_1" version="0.7.1" type="svn">
+        <release tag="RELEASE_0_7_1" type="svn" version="0.7.1">
             <title>Spring framework libraries and helpers</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
