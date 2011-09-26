@@ -21,7 +21,7 @@ class SerialGriffonPlugin {
     def version = 0.3
     def dependsOn = [:]
     def platforms = ['linux', 'windows', 'windows64', 'macosx']
-    def griffonVersion = '0.9.1 > *'
+    def griffonVersion = '0.9.2 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'
