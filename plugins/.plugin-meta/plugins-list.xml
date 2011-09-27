@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4446">
+<plugins revision="4447">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -6051,19 +6051,6 @@ http://zonelayout.com</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_2/griffon-zonelayout-0.2.zip</file>
-        </release>
-    </plugin>
-    <plugin name="swing" latest-release="0.9.4">
-        <release tag="RELEASE_0_9_4" version="0.9.4" type="svn">
-            <title>Swing support</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Swing support</description>
-            <documentation>http://griffon.codehaus.org/Swing+Plugin</documentation>
-            <license>Apache License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-swing/tags/RELEASE_0_9_4/griffon-swing-0.9.4.zip</file>
         </release>
     </plugin>
 </plugins>
