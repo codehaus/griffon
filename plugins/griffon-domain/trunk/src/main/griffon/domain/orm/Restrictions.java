@@ -24,8 +24,16 @@ public final class Restrictions {
         return new CompositeCriterion(Operator.AND, new Criterion[]{lhs, rhs});
     }
 
+    public static CompositeCriterion and(Criterion... criteria) {
+        return new CompositeCriterion(Operator.AND, criteria);
+    }
+
     public static CompositeCriterion or(Criterion lhs, Criterion rhs) {
         return new CompositeCriterion(Operator.OR, new Criterion[]{lhs, rhs});
+    }
+
+    public static CompositeCriterion or(Criterion... criteria) {
+        return new CompositeCriterion(Operator.OR, criteria);
     }
 
     public static BinaryExpression eq(String propertyName, Object value) {
@@ -93,35 +101,51 @@ public final class Restrictions {
     }
 
     public static Criterion not(Criterion criterion) {
-        if(criterion instanceof BinaryExpression) {
+        if (criterion instanceof BinaryExpression) {
             BinaryExpression exp = (BinaryExpression) criterion;
-            switch(exp.getOperator()) {
-                case EQUAL: return ne(exp.getPropertyName(), exp.getValue());
-                case NOT_EQUAL: return eq(exp.getPropertyName(), exp.getValue());
-                case GREATER_THAN: return le(exp.getPropertyName(), exp.getValue());
-                case GREATER_THAN_OR_EQUAL: return lt(exp.getPropertyName(), exp.getValue());
-                case LESS_THAN: return ge(exp.getPropertyName(), exp.getValue());
-                case LESS_THAN_OR_EQUAL: return gt(exp.getPropertyName(), exp.getValue());
-                case LIKE: return notLike(exp.getPropertyName(), exp.getValue());
-                case NOT_LIKE: return like(exp.getPropertyName(), exp.getValue());
+            switch (exp.getOperator()) {
+                case EQUAL:
+                    return ne(exp.getPropertyName(), exp.getValue());
+                case NOT_EQUAL:
+                    return eq(exp.getPropertyName(), exp.getValue());
+                case GREATER_THAN:
+                    return le(exp.getPropertyName(), exp.getValue());
+                case GREATER_THAN_OR_EQUAL:
+                    return lt(exp.getPropertyName(), exp.getValue());
+                case LESS_THAN:
+                    return ge(exp.getPropertyName(), exp.getValue());
+                case LESS_THAN_OR_EQUAL:
+                    return gt(exp.getPropertyName(), exp.getValue());
+                case LIKE:
+                    return notLike(exp.getPropertyName(), exp.getValue());
+                case NOT_LIKE:
+                    return like(exp.getPropertyName(), exp.getValue());
             }
-        } else if(criterion instanceof PropertyExpression) {
+        } else if (criterion instanceof PropertyExpression) {
             PropertyExpression exp = (PropertyExpression) criterion;
-            switch(exp.getOperator()) {
-                case EQUAL: return neProperty(exp.getPropertyName(), exp.getOtherPropertyName());
-                case NOT_EQUAL: return eqProperty(exp.getPropertyName(), exp.getOtherPropertyName());
-                case GREATER_THAN: return leProperty(exp.getPropertyName(), exp.getOtherPropertyName());
-                case GREATER_THAN_OR_EQUAL: return ltProperty(exp.getPropertyName(), exp.getOtherPropertyName());
-                case LESS_THAN: return geProperty(exp.getPropertyName(), exp.getOtherPropertyName());
-                case LESS_THAN_OR_EQUAL: return gtProperty(exp.getPropertyName(), exp.getOtherPropertyName());
+            switch (exp.getOperator()) {
+                case EQUAL:
+                    return neProperty(exp.getPropertyName(), exp.getOtherPropertyName());
+                case NOT_EQUAL:
+                    return eqProperty(exp.getPropertyName(), exp.getOtherPropertyName());
+                case GREATER_THAN:
+                    return leProperty(exp.getPropertyName(), exp.getOtherPropertyName());
+                case GREATER_THAN_OR_EQUAL:
+                    return ltProperty(exp.getPropertyName(), exp.getOtherPropertyName());
+                case LESS_THAN:
+                    return geProperty(exp.getPropertyName(), exp.getOtherPropertyName());
+                case LESS_THAN_OR_EQUAL:
+                    return gtProperty(exp.getPropertyName(), exp.getOtherPropertyName());
             }
-        } else if(criterion instanceof UnaryExpression) {
+        } else if (criterion instanceof UnaryExpression) {
             UnaryExpression exp = (UnaryExpression) criterion;
-            switch(exp.getOperator()) {
-                case IS_NULL: return isNotNull(exp.getPropertyName());
-                case IS_NOT_NULL: return isNull(exp.getPropertyName());
+            switch (exp.getOperator()) {
+                case IS_NULL:
+                    return isNotNull(exp.getPropertyName());
+                case IS_NOT_NULL:
+                    return isNull(exp.getPropertyName());
             }
-        } 
+        }
         return criterion;
     }
 }

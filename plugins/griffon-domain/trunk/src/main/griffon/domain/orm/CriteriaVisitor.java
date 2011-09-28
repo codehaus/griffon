@@ -16,24 +16,18 @@
 
 package griffon.domain.orm;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import groovy.lang.Closure;
-
 import org.codehaus.groovy.ast.ClassNode;
-import org.codehaus.groovy.ast.MethodNode;
 import org.codehaus.groovy.ast.CodeVisitorSupport;
-import org.codehaus.groovy.ast.expr.Expression;
+import org.codehaus.groovy.ast.MethodNode;
 import org.codehaus.groovy.ast.expr.BinaryExpression;
-import org.codehaus.groovy.ast.expr.BooleanExpression;
-import org.codehaus.groovy.ast.expr.ConstantExpression;
+import org.codehaus.groovy.ast.expr.*;
 import org.codehaus.groovy.ast.expr.PropertyExpression;
-import org.codehaus.groovy.ast.expr.VariableExpression;
-import org.codehaus.groovy.ast.stmt.Statement;
 import org.codehaus.groovy.ast.stmt.ReturnStatement;
+import org.codehaus.groovy.ast.stmt.Statement;
 import org.codehaus.groovy.syntax.Token;
-import org.codehaus.groovy.syntax.Types;
+
+import java.util.List;
 
 /**
  * @author Andres Almiray

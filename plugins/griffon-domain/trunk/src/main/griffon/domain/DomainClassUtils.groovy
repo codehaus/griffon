@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,10 @@
 package griffon.domain
 
 import griffon.core.GriffonApplication
-import griffon.domain.orm.Criterion
 import griffon.domain.orm.CriteriaBuilder
-import griffon.domain.orm.CriteriaVisitor
 import griffon.domain.orm.CriteriaVisitException
-
-import java.beans.Introspector
+import griffon.domain.orm.CriteriaVisitor
+import griffon.domain.orm.Criterion
 import java.util.regex.Pattern
 
 /**
@@ -45,7 +43,7 @@ final class DomainClassUtils {
             String entityName = fetchAndSetEntityNameFor(domain)
         }
     }
-    
+
     String getEntityNameFor(Class klass) {
         ENTITY_NAMES[klass.name]
     }
@@ -56,14 +54,17 @@ final class DomainClassUtils {
 
     Criterion buildCriterion(Closure criteria) {
         Criterion criterion = null;
-       
+
         try {
             criterion = CriteriaVisitor.visit(criteria);
-        } catch(CriteriaVisitException cve) {
+        } catch (CriteriaVisitException cve) {
+            criteria.setDelegate(new CriteriaBuilder());
+            criterion = (Criterion) criteria.call();
+        } catch (ClassCastException cce) {
             criteria.setDelegate(new CriteriaBuilder());
             criterion = (Criterion) criteria.call();
         }
-        
+
         return criterion;
     }
 

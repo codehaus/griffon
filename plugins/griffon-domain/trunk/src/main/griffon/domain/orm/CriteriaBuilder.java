@@ -16,13 +16,13 @@
 
 package griffon.domain.orm;
 
+import groovy.util.AbstractFactory;
+import groovy.util.Factory;
+import groovy.util.FactoryBuilderSupport;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import groovy.lang.Closure;
-import groovy.util.Factory;
-import groovy.util.AbstractFactory;
-import groovy.util.FactoryBuilderSupport;
 
 /**
  * @author Andres Almiray

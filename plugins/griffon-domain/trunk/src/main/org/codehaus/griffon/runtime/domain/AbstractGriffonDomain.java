@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,9 @@
 
 package org.codehaus.griffon.runtime.domain;
 
-import org.codehaus.griffon.runtime.core.AbstractGriffonArtifact;
 import griffon.domain.GriffonDomain;
+import griffon.domain.GriffonDomainClass;
+import org.codehaus.griffon.runtime.core.AbstractGriffonArtifact;
 
 /**
  * Base implementation of the GriffonDomain interface.
@@ -25,6 +26,10 @@ import griffon.domain.GriffonDomain;
  * @author Andres Almiray
  */
 public abstract class AbstractGriffonDomain extends AbstractGriffonArtifact implements GriffonDomain {
+    protected String getArtifactType() {
+        return GriffonDomainClass.TYPE;
+    }
+
     public void onLoad() {}
     public void onSave() {}
     public void beforeLoad() {}
