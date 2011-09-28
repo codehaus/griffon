@@ -16,19 +16,56 @@
 package griffon.domain;
 
 import griffon.core.GriffonArtifact;
+import org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation;
 
 /**
  * @author Andres Almiray
  */
 public interface GriffonDomain extends GriffonArtifact {
     void onLoad();
+
     void onSave();
+
     void beforeLoad();
+
     void beforeInsert();
+
     void beforeUpdate();
+
     void beforeDelete();
+
     void afterLoad();
+
     void afterInsert();
+
     void afterUpdate();
+
     void afterDelete();
+
+    public class Comparator implements java.util.Comparator<GriffonDomain> {
+        public enum Order {ASC, DESC}
+
+        private final String propertyName;
+        private final Order order;
+
+        public Comparator(String propertyName) {
+            this(propertyName, Order.ASC);
+        }
+
+        public Comparator(String propertyName, Order order) {
+            this.propertyName = propertyName;
+            this.order = order;
+        }
+
+        public int compare(GriffonDomain domain1, GriffonDomain domain2) {
+            Object value1 = propertyOf(domain1).getValue(domain1);
+            Object value2 = propertyOf(domain2).getValue(domain2);
+            int result = DefaultTypeTransformation.compareTo(value1, value2);
+            return order == Order.ASC ? result : result * -1;
+        }
+
+        private GriffonDomainClassProperty propertyOf(GriffonDomain domain) {
+            return ((GriffonDomainClass) domain.getGriffonClass()).getPropertyByName(propertyName);
+        }
+    }
 }

@@ -33,9 +33,9 @@ public final class GriffonPersistenceUtil {
 
     public static int retrieveMaxValue(Object[] arguments) {
         int result = -1;
-        if(arguments.length > 1) { 
+        if (arguments.length > 1) {
             result = retrieveInt(arguments[1], ARGUMENT_MAX);
-            if(arguments.length > 2 && result == -1) {
+            if (arguments.length > 2 && result == -1) {
                 result = retrieveInt(arguments[2], ARGUMENT_MAX);
             }
         }
@@ -44,32 +44,32 @@ public final class GriffonPersistenceUtil {
 
     public static int retrieveOffsetValue(Object[] arguments) {
         int result = -1;
-        if(arguments.length > 1) {
-            if(isMapWithValue(arguments[1], ARGUMENT_OFFSET)) {
-                result = ((Number)((Map)arguments[1]).get(ARGUMENT_OFFSET)).intValue();
+        if (arguments.length > 1) {
+            if (isMapWithValue(arguments[1], ARGUMENT_OFFSET)) {
+                result = ((Number) ((Map) arguments[1]).get(ARGUMENT_OFFSET)).intValue();
             }
-            if(arguments.length > 2 && result == -1) {
-                if(isMapWithValue(arguments[2], ARGUMENT_OFFSET) ) {
+            if (arguments.length > 2 && result == -1) {
+                if (isMapWithValue(arguments[2], ARGUMENT_OFFSET)) {
                     result = retrieveInt(arguments[2], ARGUMENT_OFFSET);
-                } else if(isIntegerOrLong(arguments[1]) && isIntegerOrLong(arguments[2])) {
-                    result = ((Number)arguments[2]).intValue();
+                } else if (isIntegerOrLong(arguments[1]) && isIntegerOrLong(arguments[2])) {
+                    result = ((Number) arguments[2]).intValue();
                 }
             }
-            if(arguments.length > 3 && result == -1 ) {
-                if(isIntegerOrLong(arguments[3])) {
-                     result = ((Number)arguments[3]).intValue();
+            if (arguments.length > 3 && result == -1) {
+                if (isIntegerOrLong(arguments[3])) {
+                    result = ((Number) arguments[3]).intValue();
                 }
             }
         }
         return result;
     }
-    
+
     public static int retrieveInt(Object param, String key) {
-        if(isMapWithValue(param, key)) {
-             Integer convertedParam = parseInt(((Map) param).get(key));
-             return convertedParam.intValue();
-        } else if(isIntegerOrLong(param)) {
-             return ((Number)param).intValue();
+        if (isMapWithValue(param, key)) {
+            Integer convertedParam = parseInt(((Map) param).get(key));
+            return convertedParam.intValue();
+        } else if (isIntegerOrLong(param)) {
+            return ((Number) param).intValue();
         }
         return -1;
     }
@@ -79,17 +79,17 @@ public final class GriffonPersistenceUtil {
     }
 
     public static boolean isMapWithValue(Object param, String key) {
-        return (param instanceof Map) && ((Map)param).containsKey(key);
+        return (param instanceof Map) && ((Map) param).containsKey(key);
     }
 
     private static Integer parseInt(Object obj) {
-        if(obj == null) {
+        if (obj == null) {
             return new Integer(0);
-        } else if(Number.class.isAssignableFrom(obj.getClass())) {
+        } else if (Number.class.isAssignableFrom(obj.getClass())) {
             return new Integer(((Number) obj).intValue());
-        } else if(obj instanceof CharSequence) {
+        } else if (obj instanceof CharSequence) {
             return Integer.valueOf(((CharSequence) obj).toString());
         }
-        return new Integer(0); 
+        return new Integer(0);
     }
 }

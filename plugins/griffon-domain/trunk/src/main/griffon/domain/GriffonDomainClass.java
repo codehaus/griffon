@@ -12,182 +12,49 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 package griffon.domain;
 
-// import org.springframework.validation.Validator;
-
 import griffon.core.GriffonClass;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * <p>Represents a persistable Griffon domain class</p>
- * 
- * @author Graeme Rocher (Grails 0.1)
+ *
+ * @author Andres Almiray
  */
 public interface GriffonDomainClass extends GriffonClass {
-    /** "domain" */
+    /**
+     * "domain"
+     */
     String TYPE = "domain";
-    /** "" (empty) */
+    /**
+     * "" (empty)
+     */
     String TRAILING = "";
 
     /**
-     * The name of the default ORM implementation used to map the class
-     */
-    // String GORM = "GORM";
-    
-    // String ORM_MAPPING = "mapping";
-
-    /**
-     * @param domainClass
-     * @return True if the specifying domain class is on the owning side of a relationship
-     */
-    boolean isOwningClass(Class domainClass);
-
-    /**
      * Returns all of the properties of the domain class
+     *
      * @return The domain class properties
      */
     GriffonDomainClassProperty[] getProperties();
 
     /**
-     * Returns all of the persistant properties of the domain class
-     * @return The domain class' persistant properties
+     * Returns all of the persistent properties of the domain class
+     *
+     * @return The domain class' persistent properties
      */
     GriffonDomainClassProperty[] getPersistentProperties();
 
     /**
-     * Returns the identifier property
-     * @return The identifier property
-     */
-    GriffonDomainClassProperty getIdentifier();
-
-    /**
-     * Returns the version property
-     * @return The version property
-     */
-    GriffonDomainClassProperty getVersion();
-    
-    /**
-     * Returns this classes association map
-     * @return The association map
-     */
-    Map getAssociationMap();
-    
-    /**
      * Returns the property for the given name
-     * 
+     *
      * @param name The property for the name
-     * @throws griffon.exceptions.domain.InvalidPropertyException
      * @return The domain class property for the given name
+     * @throws griffon.exceptions.domain.InvalidPropertyException
+     *
      */
-    GriffonDomainClassProperty getPropertyByName(String name);    
-    
-    /**
-     * Returns the field name for the given property name
-     * @param propertyName
-     * @return The field representation of the property name
-     */
-    String getFieldName(String propertyName);
-    
-    /**
-     * Returns true if the given property is a one to many relationship
-     * @param propertyName The name of the property
-     * @return A boolean value
-     */
-    boolean isOneToMany(String propertyName);
-    
-    /**
-     * Returns true if the given property is a many to one relationship
-     * @param propertyName The name of the property
-     * @return A boolean value
-     */
-    boolean isManyToOne(String propertyName);
-    
-    /**
-     * Returns true if the given property is a bi-directional relationship
-     * 
-     * @param propertyName The name of the property
-     * @return A boolean value
-     */
-    boolean isBidirectional(String propertyName);
-    
-    /**
-     * Returns the type of the related class of the given property
-     * 
-     * @param propertyName The name of the property 
-     * @return The type of the class or null if no relationship exists for the specified property
-     */
-    Class getRelatedClassType(String propertyName);
+    GriffonDomainClassProperty getPropertyByName(String name);
 
-    /**
-     * Returns a map of constraints applied to this domain class with the keys being the property name
-     * and the values being ConstrainedProperty instances
-     * 
-     * @return A map of constraints
-     */
-    Map getConstrainedProperties();
-
-    /**
-     * Retreives the validator for this domain class 
-     * 
-     * @return A validator instance or null if none exists
-     */
-//    Validator getValidator();
-
-    /**
-     * Sets the validator for this domain class 
-     * 
-     * @param validator The domain class validator to set
-     */
-//    void setValidator(Validator validator);
-    
-    /**
-     * @return The name of the ORM implementation used to map the domain class (default is "GORM")
-     */
-//    String getMappingStrategy();
-    
-    /**
-     * Whether the class is the root of a heirarchy
-     * 
-     * @return True if it is the root of the heirarchy
-     */
-    boolean isRoot();
-    
-    /**
-     * Returns the sub-classes for this class if any
-     * 
-     * @return A set of sub classes or an empty set if none exist
-     */
-    Set<GriffonDomainClass> getSubClasses();
-
-    /**
-     * Refreshes the constraint defined on a domain class
-     */
-    void refreshConstraints();
-
-    /**
-     * Returns true if the domain classes has sub classes
-     * @return True if it does
-     */
-    boolean hasSubClasses();
-
-    /**
-     * @return The map that defines association mappings
-     */
-    Map getMappedBy();
-
-    /**
-     * Returns true if this domain class has a persistent property for the given name
-     * @param propertyName The property name
-     * @return True if it does
-     */
-    boolean hasPersistentProperty(String propertyName);
-
-    /**
-     * Sets the strategy to use for ORM mapping. Default is GORM
-     * @param strategy The mapping strategy
-     */
-//    void setMappingStrategy(String strategy);
+    GriffonDomainClassProperty getIdentity();
 }
