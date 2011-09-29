@@ -1,4 +1,4 @@
-couchdb {
+database {
     host = "localhost"
     port = 5984
     username = ""
@@ -6,18 +6,18 @@ couchdb {
 }
 environments {
     development {
-        couchdb {
-            database = "devdb"
+        database {
+            datastore = "@griffon.project.key@-dev"
         }
     }
     test {
-        couchdb {
-            database = "testdb"
+        database {
+            datastore = "@griffon.project.key@-test"
         }
     }
     production {
-        couchdb {
-            database = "proddb"
+        database {
+            datastore = "@griffon.project.key@-prod"
         }
     }
 }

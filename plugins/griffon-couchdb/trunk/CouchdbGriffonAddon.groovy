@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,27 +15,25 @@
  */
 
 import griffon.core.GriffonApplication
-import griffon.couchdb.CouchdbConnector
+import griffon.plugins.couchdb.CouchdbConnector
 
 /**
  * @author Andres Almiray
  */
 class CouchdbGriffonAddon {
-    def addonInit = { app ->
-        ConfigObject config = CouchdbConnector.instance.createConfig(app)
-        CouchdbConnector.instance.connect(app, config)
+    void addonInit(GriffonApplication app) {
+        CouchdbConnector.instance.connect(app)
     }
 
     def events = [
         ShutdownStart: { app ->
-            ConfigObject config = CouchdbConnector.instance.createConfig(app)
-            CouchdbConnector.instance.disconnect(app, config)
+            CouchdbConnector.instance.disconnect(app)
         },
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.couchdb?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withCouchdb = CouchdbConnector.instance.withCouchdb
+            CouchdbConnector.enhance(mc)
         }
     ]
 }

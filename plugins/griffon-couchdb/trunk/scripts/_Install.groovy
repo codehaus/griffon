@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,27 +22,13 @@ includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
 // check to see if we already have a CouchdbGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'CouchdbGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'CouchdbGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding CouchdbGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'CouchdbGriffonAddon'.addon=true
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
 
 ant.mkdir(dir:"${basedir}/griffon-app/resources/couchdb/views")
-
-if(!(config.flatten().'griffon.couchdb.injectInto')) {
-    configFile.append('''
-griffon.couchdb.injectInto = ['controller']
-''')
-}
 
 argsMap = argsMap ?: [:]
 argsMap.skipPackagePrompt = true
