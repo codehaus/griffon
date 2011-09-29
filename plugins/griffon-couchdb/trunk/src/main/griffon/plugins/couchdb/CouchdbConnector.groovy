@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package griffon.couchdb
+package griffon.plugins.couchdb
 
 import griffon.core.GriffonApplication
 import griffon.util.Environment
+import griffon.util.RunnableWithArgs
 
 import org.apache.commons.lang.StringUtils
 import org.apache.http.auth.AuthScope
@@ -24,13 +25,6 @@ import org.apache.http.auth.UsernamePasswordCredentials
 import org.codehaus.griffon.couchdb.json.JsonConverterUtils
 import org.codehaus.griffon.couchdb.json.JsonDateConverter
 import org.jcouchdb.db.Database
-import org.jcouchdb.db.Options
-import org.jcouchdb.document.Attachment
-import org.jcouchdb.document.DesignDocument
-import org.jcouchdb.document.ValueRow
-import org.jcouchdb.document.ViewResult
-import org.jcouchdb.exception.NotFoundException
-import org.jcouchdb.util.CouchDBUpdater
 import org.svenson.JSON
 import org.svenson.JSONConfig
 import org.svenson.JSONParser
@@ -43,53 +37,63 @@ import org.svenson.converter.DefaultTypeConverterRepository
  */
 @Singleton
 final class CouchdbConnector {
-    private final Object lock = new Object()
-    private boolean connected = false
     private bootstrap
-    private GriffonApplication app
 
-    def createConfig(GriffonApplication app) {
+    static void enhance(MetaClass mc) {
+        mc.withCouchdb = {Closure closure ->
+            DatabaseHolder.instance.withCouchdb(closure)   
+        }
+        mc.withCouchdb << {RunnableWithArgs runnable ->
+            DatabaseHolder.instance.withCouchdb(runnable)   
+        }       
+    }
+
+    ConfigObject createConfig(GriffonApplication app) {
         def couchconfigClass = app.class.classLoader.loadClass('CouchdbConfig')
         return new ConfigSlurper(Environment.current.name).parse(couchconfigClass)
     }
 
-    void connect(GriffonApplication app, ConfigObject config) {
-        synchronized(lock) {
-            if(connected) return
-            connected = true
+    private ConfigObject narrowConfig(ConfigObject config, String databaseName) {   
+        return databaseName == 'default' ? config.database : config.databases[databaseName]
+    }
+    
+    Database connect(GriffonApplication app, String databaseName = 'default') {
+        if(DatabaseHolder.instance.isDatabaseConnected(databaseName)) {
+            return DatabaseHolder.instance.getDatabase(databaseName)
         }
-
-        this.app = app
-        app.event('CouchdbConnectStart', [config])
-        startCouchdb(config)
+        
+        ConfigObject config = createConfig(app)
+        config = narrowConfig(config, databaseName)
+        app.event('CouchdbConnectStart', [config, databaseName])
+        Database db = createDatabase(app, config, databaseName)
+        DatabaseHolder.instance.setDatabase(databaseName, db)
         bootstrap = app.class.classLoader.loadClass('BootstrapCouchdb').newInstance()
         bootstrap.metaClass.app = app
-        bootstrap.init(DatabaseHolder.instance.db)
-        app.event('CouchdbConnectEnd', [DatabaseHolder.instance.db])
+        bootstrap.init(db, databaseName)
+        app.event('CouchdbConnectEnd', [databaseName, db])
+        db
     }
-
-    void disconnect(GriffonApplication app, ConfigObject config) {
-        synchronized(lock) {
-            if(!connected) return
-            connected = false
+    
+    void disconnect(GriffonApplication app, String databaseName = 'default') {
+        if(DatabaseHolder.instance.isDatabaseConnected(databaseName)) {
+            config = narrowConfig(config, databaseName)
+            Database db = DatabaseHolder.instance.getDatabase(databaseName)
+            app.event('CouchdbDisconnectStart', [config, databaseName, db])
+            bootstrap.destroy(db)
+            app.event('CouchdbDisconnectStart', [config, databaseName])
+            DatabaseHolder.instance.disconnectDatabase(databaseName)
         }
-
-        app.event('CouchdbDisconnectStart', [config, DatabaseHolder.instance.db])
-        bootstrap.destroy(DatabaseHolder.instance.db)
-        app.event('CouchdbDisconnectEnd')
     }
 
-    private void startCouchdb(config) {
-        def ds = config.couchdb
+    private Database createDatabase(GriffonApplication app, ConfigObject config, String databaseName) {
+        String host = config?.host ?: 'localhost'
+        Integer port = config?.port ?: 5984
+        String database = config?.datastore ?: app.metadata['app.name']
+        String username = config?.username ?: ''
+        String password = config?.password ?: ''
 
-        String host = ds?.host ?: 'localhost'
-        Integer port = ds?.port ?: 5984
-        String database = ds?.database ?: app.metadata['app.name']
-        String username = ds?.username ?: ''
-        String password = ds?.password ?: ''
-
-        String realm = ds?.realm ?: null
-        String scheme = ds?.scheme ?: null
+        String realm = config?.realm ?: null
+        String scheme = config?.scheme ?: null
 
         Database db = new Database(host, port, database)
 
@@ -122,17 +126,15 @@ final class CouchdbConnector {
         parser.registerTypeConversion(java.util.Date, dateConverter)
         parser.registerTypeConversion(java.sql.Date, dateConverter)
         parser.registerTypeConversion(java.sql.Timestamp, dateConverter)
+        app.event('ConfigureCouchdbJSONParser', [config, databaseName, parser])
 
         db.jsonConfig = new JSONConfig(generator, parser)
-        DatabaseHolder.instance.db = db
 
         // setup views
         ClasspathCouchDBUpdater updater = new ClasspathCouchDBUpdater()
         updater.setDatabase(db)
         updater.updateDesignDocuments()
-    }
 
-    def withCouchdb = { Closure closure ->
-        closure(DatabaseHolder.instance.db)
+        db
     }
 }
