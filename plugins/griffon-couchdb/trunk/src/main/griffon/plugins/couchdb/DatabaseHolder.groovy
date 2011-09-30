@@ -37,14 +37,14 @@ class DatabaseHolder {
         if(isBlank(databaseName)) databaseName = 'default'
         Database db = fetchDatabase(databaseName)
         if(LOG.debugEnabled) LOG.debug("Executing Couchdb staments on datasource '$databaseName'")
-        return closure(db)
+        return closure(databaseName, db)
     }
     
     void withCouchdb(String databaseName, RunnableWithArgs runnable) {
         if(isBlank(databaseName)) databaseName = 'default'
         Database db = fetchDatabase(databaseName)
         if(LOG.debugEnabled) LOG.debug("Executing Couchdb staments on datasource '$databaseName'")
-        runnable.setArgs(db)
+        runnable.setArgs([databaseName, db] as Object[])
         runnable.run()
     }
 
