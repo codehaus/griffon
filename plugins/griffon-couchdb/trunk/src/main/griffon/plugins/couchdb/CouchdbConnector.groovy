@@ -43,8 +43,14 @@ final class CouchdbConnector {
         mc.withCouchdb = {String databaseName, Closure closure ->
             DatabaseHolder.instance.withCouchdb(databaseName, closure)
         }
+        mc.withCouchdb << {Closure closure ->
+            DatabaseHolder.instance.withCouchdb('default', closure)
+        }
         mc.withCouchdb << {String databaseName, RunnableWithArgs runnable ->
             DatabaseHolder.instance.withCouchdb(databaseName, runnable)
+        }
+        mc.withCouchdb << {RunnableWithArgs runnable ->
+            DatabaseHolder.instance.withCouchdb('default', runnable)
         }
     }
 
