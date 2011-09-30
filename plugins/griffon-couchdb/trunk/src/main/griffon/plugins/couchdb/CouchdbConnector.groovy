@@ -40,12 +40,12 @@ final class CouchdbConnector {
     private bootstrap
 
     static void enhance(MetaClass mc) {
-        mc.withCouchdb = {Closure closure ->
-            DatabaseHolder.instance.withCouchdb(closure)   
+        mc.withCouchdb = {String databaseName, Closure closure ->
+            DatabaseHolder.instance.withCouchdb(databaseName, closure)
         }
-        mc.withCouchdb << {RunnableWithArgs runnable ->
-            DatabaseHolder.instance.withCouchdb(runnable)   
-        }       
+        mc.withCouchdb << {String databaseName, RunnableWithArgs runnable ->
+            DatabaseHolder.instance.withCouchdb(databaseName, runnable)
+        }
     }
 
     ConfigObject createConfig(GriffonApplication app) {
