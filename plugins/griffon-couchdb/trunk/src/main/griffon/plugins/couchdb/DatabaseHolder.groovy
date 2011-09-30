@@ -18,7 +18,6 @@ package griffon.plugins.couchdb
 
 import org.jcouchdb.db.Database
 import griffon.util.RunnableWithArgs
-
 import griffon.util.ApplicationHolder
 import static griffon.util.GriffonNameUtils.isBlank
 
@@ -34,13 +33,15 @@ class DatabaseHolder {
     private static final Object[] LOCK = new Object[0]
     private final Map<String, Database> databases = [:]
 
-    Object withCouchdb(Closure closure) {
+    Object withCouchdb(String databaseName, Closure closure) {
+        if(isBlank(databaseName)) databaseName = 'default'
         Database db = fetchDatabase(databaseName)
         if(LOG.debugEnabled) LOG.debug("Executing Couchdb staments on datasource '$databaseName'")
         return closure(db)
     }
     
-    void withCouchdb(RunnableWithArgs runnable) {
+    void withCouchdb(String databaseName, RunnableWithArgs runnable) {
+        if(isBlank(databaseName)) databaseName = 'default'
         Database db = fetchDatabase(databaseName)
         if(LOG.debugEnabled) LOG.debug("Executing Couchdb staments on datasource '$databaseName'")
         runnable.setArgs(db)
@@ -57,9 +58,9 @@ class DatabaseHolder {
         retrieveDatabase(databaseName)
     }
 
-    void setDatabase(String databaseName = 'default', Database ds) {
+    void setDatabase(String databaseName = 'default', Database db) {
         if(isBlank(databaseName)) databaseName = 'default'
-        storeDatabase(databaseName, ds)       
+        storeDatabase(databaseName, db)       
     }
     
     boolean isDatabaseConnected(String databaseName) {
