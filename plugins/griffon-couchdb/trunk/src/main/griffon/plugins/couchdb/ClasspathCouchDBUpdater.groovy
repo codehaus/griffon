@@ -23,7 +23,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver
  * @author Andres Almiray
  */
 class ClasspathCouchDBUpdater extends AbstractCouchDBUpdater {
-    String parentPath = 'couchdb/views/'
+    String parentPath = 'classpath*:/couchdb/views/'
 
     protected List<DesignDocument> readDesignDocuments() throws IOException {
         Map<String,DesignDocument> designDocuments = new HashMap<String, DesignDocument>()
