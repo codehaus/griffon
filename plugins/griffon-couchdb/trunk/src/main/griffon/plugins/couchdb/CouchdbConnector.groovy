@@ -86,7 +86,7 @@ final class CouchdbConnector {
             Database db = DatabaseHolder.instance.getDatabase(databaseName)
             app.event('CouchdbDisconnectStart', [config, databaseName, db])
             bootstrap.destroy(db, databaseName)
-            app.event('CouchdbDisconnectStart', [config, databaseName])
+            app.event('CouchdbDisconnectEnd', [databaseName])
             DatabaseHolder.instance.disconnectDatabase(databaseName)
         }
     }
