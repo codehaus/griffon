@@ -76,10 +76,10 @@ final class CouchdbConnector {
     
     void disconnect(GriffonApplication app, String databaseName = 'default') {
         if(DatabaseHolder.instance.isDatabaseConnected(databaseName)) {
-            config = narrowConfig(config, databaseName)
+            ConfigObject config = narrowConfig(createConfig(app), databaseName)
             Database db = DatabaseHolder.instance.getDatabase(databaseName)
             app.event('CouchdbDisconnectStart', [config, databaseName, db])
-            bootstrap.destroy(db)
+            bootstrap.destroy(db, databaseName)
             app.event('CouchdbDisconnectStart', [config, databaseName])
             DatabaseHolder.instance.disconnectDatabase(databaseName)
         }
