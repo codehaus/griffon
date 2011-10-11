@@ -29,7 +29,7 @@ class DatasourceGriffonAddon {
             def types = app.config.griffon?.datasource?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withSql = DataSourceHolder.instance.&withSql
+            DataSourceHolder.enhance(mc)
         }
     ]
 

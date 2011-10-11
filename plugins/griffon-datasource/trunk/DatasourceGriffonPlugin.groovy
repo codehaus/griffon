@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class DatasourceGriffonPlugin {
-    def version = '0.1'
+    def version = '0.2'
     def dependsOn = [:]
     def griffonVersion = '0.9.3 > *'
     def license = 'Apache Software License 2.0'
