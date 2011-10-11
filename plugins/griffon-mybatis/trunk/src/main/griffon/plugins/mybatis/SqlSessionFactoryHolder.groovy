@@ -21,6 +21,7 @@ import org.apache.ibatis.session.SqlSessionFactory
 
 import griffon.core.GriffonApplication
 import griffon.util.ApplicationHolder
+import griffon.util.CallableWithArgs
 import static griffon.util.GriffonNameUtils.isBlank
 
 import org.apache.commons.logging.Log
@@ -50,12 +51,23 @@ class SqlSessionFactoryHolder {
         storeSqlSessionFactory(sessionFactoryName, sf)       
     }
 
-    void withSqlSession(String sessionFactoryName = 'default', Closure closure) {
+    Object withSqlSession(String sessionFactoryName = 'default', Closure closure) {
         SqlSessionFactory sf = fetchSqlSessionFactory(sessionFactoryName)
         if(LOG.debugEnabled) LOG.debug("Executing SQL stament on sqlSession '$sessionFactoryName'")
         SqlSession session = sf.openSession(true)
         try {
-            closure(sessionFactoryName, session)
+            return closure(sessionFactoryName, session)
+        } finally {
+            session.close()
+        }
+    }
+
+    Object withSqlSession(String sessionFactoryName = 'default', CallableWithArgs callable) {
+        SqlSessionFactory sf = fetchSqlSessionFactory(sessionFactoryName)
+        if(LOG.debugEnabled) LOG.debug("Executing SQL stament on sqlSession '$sessionFactoryName'")
+        SqlSession session = sf.openSession(true)
+        try {
+            return callable.call([sessionFactoryName, session] as Object[])
         } finally {
             session.close()
         }
