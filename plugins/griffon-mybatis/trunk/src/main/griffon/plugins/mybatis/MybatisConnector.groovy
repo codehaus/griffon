@@ -23,6 +23,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory
 
 import griffon.core.GriffonApplication
+import griffon.util.CallableWithArgs
 import griffon.plugins.datasource.DataSourceHolder
 import griffon.plugins.datasource.DataSourceConnector
 
@@ -31,8 +32,25 @@ import griffon.plugins.datasource.DataSourceConnector
  */
 @Singleton
 final class MybatisConnector {
-    private final List<Class> mappers = []
+    private final Set<Class> mappers = [] as LinkedHashSet
     private bootstrap
+
+    static void enhance(MetaClass mc) {
+        mc.withSqlSession = {Closure closure ->
+            SqlSessionFactoryHolder.instance.withSqlSession('default', closure)   
+        }
+        mc.withSqlSession << {String sessionFactoryName, Closure closure ->
+            SqlSessionFactoryHolder.instance.withSqlSession(sessionFactoryName, closure)   
+        }
+        mc.withSqlSession << {CallableWithArgs callable ->
+            SqlSessionFactoryHolder.instance.withSqlSession('default', callable)   
+        }
+        mc.withSqlSession << {String sessionFactoryName, CallableWithArgs callable ->
+            SqlSessionFactoryHolder.instance.withSqlSession(sessionFactoryName, callable)   
+        }       
+    }
+
+    // ======================================================
 
     ConfigObject createConfig(GriffonApplication app) {
         def configClass = app.class.classLoader.loadClass('MybatisConfig')

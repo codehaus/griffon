@@ -33,8 +33,8 @@ class MybatisGriffonAddon {
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.mybatis?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withSqlSession = SqlSessionFactoryHolder.instance.&withSqlSession
+            MetaClass mc = app.artifactManager.findGriffonClass(klass).metaClass
+            MybatisConnector.enhance(mc)
         }
     ]
 }

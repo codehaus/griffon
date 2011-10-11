@@ -1,4 +1,4 @@
-<plugin name='mybatis' version='0.1' griffonVersion='0.9.3 &gt; *' jdk='1.5'>
+<plugin name='mybatis' version='0.2' griffonVersion='0.9.3 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Persistence support via Mybatis</title>
@@ -10,6 +10,6 @@
     <resource>BuildConfig</resource>
   </resources>
   <dependencies>
-    <plugin name='datasource' version='0.1' />
+    <plugin name='datasource' version='0.2' />
   </dependencies>
 </plugin>
