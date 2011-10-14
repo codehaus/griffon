@@ -15,7 +15,7 @@
  */
 
 import griffon.core.GriffonApplication
-import griffon.riak.RiakConnector
+import griffon.plugins.riak.RiakConnector
 
 /**
  * @author Andres Almiray
@@ -35,7 +35,7 @@ class RiakGriffonAddon {
             def types = app.config.griffon?.riak?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withRiak = RiakConnector.instance.withRiak
+            RiakConnector.enhance(mc)
         }
     ]
 }

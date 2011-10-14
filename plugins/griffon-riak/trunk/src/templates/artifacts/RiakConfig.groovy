@@ -1,21 +1,21 @@
-raw {
+client {
     timeout = 2000
     maxConnections = 50
 }
 environments {
     development {
-        raw {
-            url = 'http://localhost:8098/rawdev'
+        client {
+            url = 'http://localhost:8098/@griffon.project.key@-dev'
         }
     }
     test {
-        raw {
-            url = 'http://localhost:8098/rawtest'
+        client {
+            url = 'http://localhost:8098/@griffon.project.key@-test'
         }
     }
     production {
-        raw {
-            url = 'http://localhost:8098/rawprod'
+        client {
+            url = 'http://localhost:8098/@griffon.project.key@-prod'
         }
     }
 }

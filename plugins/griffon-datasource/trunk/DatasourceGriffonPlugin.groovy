@@ -20,7 +20,7 @@
 class DatasourceGriffonPlugin {
     def version = '0.2'
     def dependsOn = [:]
-    def griffonVersion = '0.9.3 > *'
+    def griffonVersion = '0.9.4 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'

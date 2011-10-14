@@ -22,14 +22,8 @@
  */
 
 // check to see if we already have a Db4oGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'Db4oGriffonAddon' == builder
-    }
+configText = '''root.'Db4oGriffonAddon'.addon=true'''
+if(builderConfigFile.text.contains(configText)) {
+    println 'Removing Db4oGriffonAddon from Builder.groovy'
+    builderConfigFile.text -= configText
 }
-
-if(addonIsSet1) {
-    builderConfigFile.text = builderConfigFile.text - "root.'Db4oGriffonAddon'.addon=true\n"
-}
-

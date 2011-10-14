@@ -16,7 +16,6 @@
 
 import griffon.core.GriffonApplication
 import griffon.plugins.activejdbc.ActivejdbcConnector
-import griffon.plugins.activejdbc.ActivejdbcHolder
 
 /**
  * @author Andres Almiray
@@ -34,7 +33,7 @@ class ActivejdbcGriffonAddon {
             def types = app.config.griffon?.activejdbc?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withActivejdbc = ActivejdbcHolder.instance.&withActivejdbc
+            ActivejdbcConnector.enhance(mc)
         }
     ]
 }

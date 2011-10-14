@@ -19,13 +19,8 @@
  */
 
 // check to see if we already have a NeodatisGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'NeodatisGriffonAddon' == builder
-    }
-}
-
-if(addonIsSet1) {
-    builderConfigFile.text = builderConfigFile.text - "root.'NeodatisGriffonAddon'.addon=true\n"
+configText = '''root.'NeodatisGriffonAddon'.addon=true'''
+if(builderConfigFile.text.contains(configText)) {
+    println 'Removing NeodatisGriffonAddon from Builder.groovy'
+    builderConfigFile.text -= configText
 }

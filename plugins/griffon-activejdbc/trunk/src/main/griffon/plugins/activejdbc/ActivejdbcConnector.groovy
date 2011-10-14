@@ -18,6 +18,7 @@ package griffon.plugins.activejdbc
 import javax.sql.DataSource
 
 import griffon.core.GriffonApplication
+import griffon.util.CallableWithArgs
 import griffon.plugins.datasource.DataSourceHolder
 import griffon.plugins.datasource.DataSourceConnector
 
@@ -27,6 +28,31 @@ import griffon.plugins.datasource.DataSourceConnector
 @Singleton
 final class ActivejdbcConnector {
     private bootstrap
+
+    static void enhance(MetaClass mc) {
+        mc.withActivejdbc = {Closure closure ->
+            ActivejdbcHolder.instance.withActivejdbc('default', closure)
+        }
+        mc.withActivejdbc << {String dataSourceName, Closure closure ->
+            ActivejdbcHolder.instance.withActivejdbc(dataSourceName, closure)
+        }
+        mc.withActivejdbc << {CallableWithArgs callable ->
+            ActivejdbcHolder.instance.withActivejdbc('default', callable)
+        }
+        mc.withActivejdbc << {String dataSourceName, CallableWithArgs callable ->
+            ActivejdbcHolder.instance.withActivejdbc(dataSourceName, callable)
+        }
+    }
+
+    Object withActivejdbc(String dataSourceName = 'default', Closure closure) {
+        return ActivejdbcHolder.instance.withActivejdbc(dataSourceName, closure)
+    }
+
+    public <T> T withActivejdbc(String dataSourceName = 'default', CallableWithArgs<T> callable) {
+        return ActivejdbcHolder.instance.withActivejdbc(dataSourceName, callable)
+    }
+
+    // ======================================================
 
     void connect(GriffonApplication app, String dataSourceName = 'default') {
         DataSource dataSource = null

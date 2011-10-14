@@ -17,7 +17,7 @@ package griffon.plugins.couchdb
 
 import griffon.core.GriffonApplication
 import griffon.util.Environment
-import griffon.util.RunnableWithArgs
+import griffon.util.CallableWithArgs
 
 import org.apache.commons.lang.StringUtils
 import org.apache.http.auth.AuthScope
@@ -46,12 +46,20 @@ final class CouchdbConnector {
         mc.withCouchdb << {Closure closure ->
             DatabaseHolder.instance.withCouchdb('default', closure)
         }
-        mc.withCouchdb << {String databaseName, RunnableWithArgs runnable ->
-            DatabaseHolder.instance.withCouchdb(databaseName, runnable)
+        mc.withCouchdb << {String databaseName, CallableWithArgs callable ->
+            DatabaseHolder.instance.withCouchdb(databaseName, callable)
         }
-        mc.withCouchdb << {RunnableWithArgs runnable ->
-            DatabaseHolder.instance.withCouchdb('default', runnable)
+        mc.withCouchdb << {CallableWithArgs callable ->
+            DatabaseHolder.instance.withCouchdb('default', callable)
         }
+    }
+
+    Object withCouchdb(String databaseName, Closure closure) {
+        return DatabaseHolder.instance.withCouchdb(databaseName, closure)
+    }
+    
+    public <T> T withCouchdb(String databaseName, CallableWithArgs<T> callable) {
+        return DatabaseHolder.instance.withCouchdb(databaseName, callable)
     }
 
     ConfigObject createConfig(GriffonApplication app) {

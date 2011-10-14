@@ -17,17 +17,20 @@
 */
 
 import griffon.core.GriffonApplication
-import griffon.neo4j.Neo4jConnector
+import griffon.plugins.neo4j.Neo4jConnector
 
+/*
 import org.neo4j.graphdb.Node
 import org.neo4j.graphdb.Relationship
 import org.neo4j.graphdb.RelationshipType
+*/
 
 /**
  * @author Andres Almiray
  */
 class Neo4jGriffonAddon {
     def addonInit(app) {
+        /*
         [Node.metaClass, Relationship.metaClass].each { mc ->
             mc.getAt = {String propertyName ->
                 delegate.getProperty(propertyName)
@@ -39,7 +42,7 @@ class Neo4jGriffonAddon {
         Node.metaClass.relate = {RelationshipType relType, Node other ->
             return delegate.createRelationshipTo(other, relType)
         }
-
+        */
         ConfigObject config = Neo4jConnector.instance.createConfig(app)
         Neo4jConnector.instance.connect(app, config)
     }
@@ -53,7 +56,7 @@ class Neo4jGriffonAddon {
             def types = app.config.griffon?.neo4j?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withNeo4j = Neo4jConnector.instance.withNeo4j
+            Neo4jConnector.enhance(mc)
         }
     ]
 }

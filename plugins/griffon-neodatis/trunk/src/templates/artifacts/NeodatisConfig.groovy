@@ -5,17 +5,17 @@ database {
 environments {
     development {
         database {
-            alias = 'neodatis/dev.odb'
+            alias = 'neodatis/@griffon.project.key@-dev.odb'
         }
     }
     test {
         database {
-            alias = 'neodatis/test.odb'
+            alias = 'neodatis/@griffon.project.key@-test.odb'
         }
     }
     production {
         database {
-            alias = 'neodatis/prod.odb'
+            alias = 'neodatis/@griffon.project.key@-prod.odb'
         }
     }
 }

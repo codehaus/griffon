@@ -26,35 +26,18 @@ import griffon.util.ApplicationHolder
 import griffon.util.CallableWithArgs
 import static griffon.util.GriffonNameUtils.isBlank
 
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * @author Andres Almiray
  */
 @Singleton
 class DataSourceHolder {
-    private static final Log LOG = LogFactory.getLog(DataSourceHolder)
+    private static final Logger LOG = LoggerFactory.getLogger(DataSourceHolder)
     private static final Object[] LOCK = new Object[0]
     private final Map<String, DataSource> dataSources = [:]
-
-    static void enhance(MetaClass mc) {
-        mc.withSql = {Closure closure ->
-            DataSourceHolder.instance.withSql('default', closure)   
-        }
-        mc.withSql << {String datasourceName, Closure closure ->
-            DataSourceHolder.instance.withSql(datasourceName, closure)   
-        }
-        mc.withSql << {CallableWithArgs callable ->
-            DataSourceHolder.instance.withSql('default', callable)   
-        }
-        mc.withSql << {String datasourceName, CallableWithArgs callable ->
-            DataSourceHolder.instance.withSql(datasourceName, callable)   
-        }       
-    }
-
-    // ======================================================
-    
+  
     String[] getDataSourceNames() {
         List<String> dataSourceNames = new ArrayList().addAll(dataSources.keySet())
         dataSourceNames.toArray(new String[dataSourceNames.size()])
@@ -72,7 +55,7 @@ class DataSourceHolder {
 
     Object withSql(String dataSourceName = 'default', Closure closure) {
         DataSource ds = fetchDataSource(dataSourceName)
-        if(LOG.debugEnabled) LOG.debug("Executing SQL stament on datasource '$dataSourceName'")
+        if(LOG.debugEnabled) LOG.debug("Executing SQL statement on datasource '$dataSourceName'")
         Connection connection = ds.getConnection()
         try {
             return closure(dataSourceName, new Sql(connection))
@@ -83,7 +66,7 @@ class DataSourceHolder {
 
     Object withSql(String dataSourceName = 'default', CallableWithArgs callable) {
         DataSource ds = fetchDataSource(dataSourceName)
-        if(LOG.debugEnabled) LOG.debug("Executing SQL stament on datasource '$dataSourceName'")
+        if(LOG.debugEnabled) LOG.debug("Executing SQL statement on datasource '$dataSourceName'")
         Connection connection = ds.getConnection()
         try {
             return callable.call([dataSourceName, new Sql(connection)] as Object[])

@@ -1,19 +1,20 @@
-neo4j {
+database {
+    params = [:]
 }
 environments {
     development {
-        neo4j {
-            storeDir = "neo4j/dev"
+        database {
+            storeDir = "neo4j/@griffon.project.key@-dev"
         }
     }
     test {
-        neo4j {
-            storeDir = "neo4j/test"
+        database {
+            storeDir = "neo4j/@griffon.project.key@-test"
         }
     }
     production {
-        neo4j {
-            storeDir = "neo4j/prod"
+        database {
+            storeDir = "neo4j/@griffon.project.key@-prod"
         }
     }
 }

@@ -22,24 +22,10 @@ includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
 // check to see if we already have a RiakGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'RiakGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'RiakGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding RiakGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'RiakGriffonAddon'.addon=true
-''')
-}
-
-if(!(config.flatten().'griffon.riak.injectInto')) {
-    configFile.append('''
-griffon.riak.injectInto = ['controller']
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
 
 argsMap = argsMap ?: [:]

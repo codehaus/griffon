@@ -22,24 +22,10 @@ includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
 // check to see if we already have a NeodatisGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'NeodatisGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'NeodatisGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding NeodatisGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'NeodatisGriffonAddon'.addon=true
-''')
-}
-
-if(!(config.flatten().'griffon.neodatis.injectInto')) {
-    configFile.append('''
-griffon.neodatis.injectInto = ['controller']
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
 
 argsMap = argsMap ?: [:]

@@ -24,24 +24,10 @@ includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
 // check to see if we already have a Neo4jGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'Neo4jGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'Neo4jGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding Neo4jGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'Neo4jGriffonAddon'.addon=true
-''')
-}
-
-if(!(config.flatten().'griffon.neo4j.injectInto')) {
-    configFile.append('''
-griffon.neo4j.injectInto = ['controller']
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
 
 argsMap = argsMap ?: [:]
@@ -62,4 +48,3 @@ if(!new File("${basedir}/griffon-app/conf/BootstrapNeo4j.groovy").exists()) {
       type: "BootstrapNeo4j",
       path: "griffon-app/conf")
 }
-

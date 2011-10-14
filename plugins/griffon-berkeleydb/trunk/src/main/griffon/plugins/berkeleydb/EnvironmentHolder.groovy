@@ -16,6 +16,7 @@
 package griffon.plugins.berkeleydb
 
 import com.sleepycat.je.Environment
+import griffon.util.CallableWithArgs
 
 /**
  * @author Andres Almiray
@@ -24,7 +25,12 @@ import com.sleepycat.je.Environment
 class EnvironmentHolder {
     Environment environment
 
-    def withBerkeleyEnv = { Closure closure ->
-        closure(environment)
+    Object withBerkeleyEnv(Closure closure) {
+        return closure(environment)
+    }
+    
+    public <T> T withBerkeleyEnv(CallableWithArgs<T> callable) {
+        callable.args = [environment] as Object[]
+        return callable.run()
     }
 }

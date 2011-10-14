@@ -31,7 +31,7 @@ import org.neodatis.odb.core.query.criteria.W
 class NeodatisGriffonAddon {
     private bootstrap
 
-    def addonInit(GriffonApplication app) {
+    void addonInit(GriffonApplication app) {
         // ODB.metaClass.query = { Closure cls ->
         //    delegate.query(new ClosureQuery(cls))
         // }
@@ -64,7 +64,7 @@ class NeodatisGriffonAddon {
             def types = app.config.griffon?.neodatis?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withOdb = NeodatisConnector.instance.withOdb
+            NeodatisConnector.enhance(mc)
         }
     ]
 }
