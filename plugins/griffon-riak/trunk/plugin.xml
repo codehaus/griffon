@@ -1,4 +1,4 @@
-<plugin name='riak' version='0.2.1' griffonVersion='0.9.1 &gt; *' jdk='1.5'>
+<plugin name='riak' version='0.3' griffonVersion='0.9.4 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Riak support</title>

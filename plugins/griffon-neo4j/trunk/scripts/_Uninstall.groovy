@@ -21,14 +21,8 @@
  */
 
 // check to see if we already have a Neo4jGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'Neo4jGriffonAddon' == builder
-    }
-}
-
-if (addonIsSet1) {
+configText = '''root.'Neo4jGriffonAddon'.addon=true'''
+if(builderConfigFile.text.contains(configText)) {
     println 'Removing Neo4jGriffonAddon from Builder.groovy'
-    builderConfigFile.text = builderConfigFile.text - "root.'Neo4jGriffonAddon'.addon=true\n"
+    builderConfigFile.text -= configText
 }

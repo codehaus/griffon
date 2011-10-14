@@ -22,15 +22,15 @@ import griffon.util.ApplicationHolder
 import griffon.util.CallableWithArgs
 import static griffon.util.GriffonNameUtils.isBlank
 
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * @author Andres Almiray
  */
 @Singleton
 class RedisPoolHolder {
-    private static final Log LOG = LogFactory.getLog(RedisPoolHolder)
+    private static final Logger LOG = LoggerFactory.getLogger(RedisPoolHolder)
     private static final Object[] LOCK = new Object[0]
     private final Map<String, JedisPool> pools = [:]
   
@@ -51,7 +51,7 @@ class RedisPoolHolder {
 
     Object withRedis(String datasourceName = 'default', Closure closure) {
         JedisPool pool = fetchJedisPool(datasourceName)
-        if(LOG.debugEnabled) LOG.debug("Executing stament on datasource '$datasourceName'")
+        if(LOG.debugEnabled) LOG.debug("Executing statement on datasource '$datasourceName'")
         Jedis jedis = pool.resource
         try {
             return closure(datasourceName, jedis)
@@ -62,7 +62,7 @@ class RedisPoolHolder {
 
     public <T> T withRedis(String datasourceName = 'default', CallableWithArgs<T> callable) {
         JedisPool pool = fetchJedisPool(datasourceName)
-        if(LOG.debugEnabled) LOG.debug("Executing stament on datasource '$datasourceName'")
+        if(LOG.debugEnabled) LOG.debug("Executing statement on datasource '$datasourceName'")
         Jedis jedis = pool.resource
         try {
             callable.args = [datasourceName, jedis] as Object[]

@@ -18,11 +18,11 @@
  */
 class ActivejdbcGriffonPlugin {
     // the plugin version
-    def version = "0.2"
+    def version = "0.3"
     // the version or versions of Griffon the plugin is designed for
-    def griffonVersion = '0.9.3 > *' 
+    def griffonVersion = '0.9.4 > *' 
     // the other plugins this plugin depends on
-    def dependsOn = [datasource: 0.1]
+    def dependsOn = [datasource: 0.2]
     // resources that are included in plugin packaging
     def pluginIncludes = []
     // the plugin license

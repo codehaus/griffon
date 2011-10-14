@@ -22,8 +22,8 @@ import griffon.util.Environment
 import griffon.util.Metadata
 import griffon.util.CallableWithArgs
 
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * @author Andres Almiray
@@ -32,7 +32,7 @@ import org.apache.commons.logging.LogFactory
 final class RedisConnector {
     private bootstrap
 
-    private static final Log LOG = LogFactory.getLog(RedisConnector)
+    private static final Logger LOG = LoggerFactory.getLogger(RedisConnector)
 
     static void enhance(MetaClass mc) {
         mc.withRedis = {Closure closure ->

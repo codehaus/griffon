@@ -17,35 +17,35 @@
 package griffon.plugins.couchdb
 
 import org.jcouchdb.db.Database
-import griffon.util.RunnableWithArgs
+import griffon.util.CallableWithArgs
 import griffon.util.ApplicationHolder
 import static griffon.util.GriffonNameUtils.isBlank
 
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * @author Andres Almiray
  */
 @Singleton
 class DatabaseHolder {
-    private static final Log LOG = LogFactory.getLog(DatabaseHolder)
+    private static final Logger LOG = LoggerFactory.getLogger(DatabaseHolder)
     private static final Object[] LOCK = new Object[0]
     private final Map<String, Database> databases = [:]
 
     Object withCouchdb(String databaseName, Closure closure) {
         if(isBlank(databaseName)) databaseName = 'default'
         Database db = fetchDatabase(databaseName)
-        if(LOG.debugEnabled) LOG.debug("Executing Couchdb staments on datasource '$databaseName'")
+        if(LOG.debugEnabled) LOG.debug("Executing Couchdb statements on datasource '$databaseName'")
         return closure(databaseName, db)
     }
     
-    void withCouchdb(String databaseName, RunnableWithArgs runnable) {
+    public <T> T withCouchdb(String databaseName, CallableWithArgs<T> callable) {
         if(isBlank(databaseName)) databaseName = 'default'
         Database db = fetchDatabase(databaseName)
-        if(LOG.debugEnabled) LOG.debug("Executing Couchdb staments on datasource '$databaseName'")
-        runnable.setArgs([databaseName, db] as Object[])
-        runnable.run()
+        if(LOG.debugEnabled) LOG.debug("Executing Couchdb statements on datasource '$databaseName'")
+        callable.args = [databaseName, db] as Object[]
+        return callable.run()
     }
 
     String[] getDatabaseNames() {

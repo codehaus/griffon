@@ -1,9 +1,9 @@
 import org.neodatis.odb.ODB
 
 class BootstrapNeodatis {
-    def init = { ODB odb -> 
+    def init = { String databaseName, ODB odb -> 
     }
 
-    def destroy = { ODB odb ->
+    def destroy = { String databaseName, ODB odb ->
     }
 } 

@@ -6,17 +6,17 @@ dataSource {
 environments {
     development {
         dataSource {
-            name = "devDb.yarv"
+            name = "@griffon.project.key@-dev.yarv"
         }
     }
     test {
         dataSource {
-            name = "testDb.yarv"
+            name = "@griffon.project.key@-test.yarv"
         }
     }
     production {
         dataSource {
-            name = "prodDb.yarv"
+            name = "@griffon.project.key@-prod.yarv"
             delete = false
         }
     }

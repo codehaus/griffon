@@ -34,21 +34,41 @@ import com.amazon.carbonado.repo.sleepycat.BDBRepositoryBuilder
 
 import griffon.core.GriffonApplication
 import griffon.util.Environment
+import griffon.util.CallableWithArgs
 
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 @Singleton
 final class CarbonadoConnector {
-    private static final Log LOG = LogFactory.getLog(CarbonadoConnector)
-    private final Object lock = new Object()
+    private static final Logger LOG = LoggerFactory.getLogger(CarbonadoConnector)
+    private final Object[] lock = new Object[0]
     private boolean connected = false
     private bootstrap
     private GriffonApplication app
     private DataSource dataSource
+
+    static void enhance(MetaClass mc) {
+        mc.withCarbonado = {Closure closure ->
+            RepositoryHolder.instance.withCarbonado(closure)
+        }
+        mc.withCarbonado << {CallableWithArgs callable ->
+            RepositoryHolder.instance.withCarbonado(callable)
+        }
+    }
+
+    Object withCarbonado(Closure closure) {
+        return RepositoryHolder.instance.withCarbonado(closure)
+    }
+
+    public <T> T withCarbonado(CallableWithArgs<T> callable) {
+        return RepositoryHolder.instance.withCarbonado(callable)
+    }
+    
+    // ======================================================
 
     ConfigObject createConfig(GriffonApplication app) {
         def carbonadoClass = app.class.classLoader.loadClass('CarbonadoConfig')

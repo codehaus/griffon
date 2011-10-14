@@ -19,14 +19,8 @@
  */
 
 // check to see if we already have a RiakGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'RiakGriffonAddon' == builder
-    }
-}
-
-if (addonIsSet1) {
+configText = '''root.'RiakGriffonAddon'.addon=true'''
+if(builderConfigFile.text.contains(configText)) {
     println 'Removing RiakGriffonAddon from Builder.groovy'
-    builderConfigFile.text = builderConfigFile.text - "root.'RiakGriffonAddon'.addon=true\n"
+    builderConfigFile.text -= configText
 }

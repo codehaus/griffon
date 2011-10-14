@@ -18,9 +18,9 @@
  * @author Andres Almiray
  */
 class GsqlGriffonPlugin {
-    def version = '0.7'
-    def dependsOn = [datasource: 0.1]
-    def griffonVersion = '0.9.3 > *'
+    def version = '0.8'
+    def dependsOn = [datasource: 0.2]
+    def griffonVersion = '0.9.4 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'

@@ -29,43 +29,69 @@ import org.apache.commons.dbcp.DriverManagerConnectionFactory
 
 import griffon.core.GriffonApplication
 import griffon.util.Environment
+import griffon.util.CallableWithArgs
 
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * @author Andres Almiray
  */
 @Singleton
-final class DataSourceConnector {
-    private static final Log LOG = LogFactory.getLog(DataSourceConnector)
+class DataSourceConnector {
+    private static final Logger LOG = LoggerFactory.getLogger(DataSourceConnector)
+
+    static void enhance(MetaClass mc) {
+        mc.withSql = {Closure closure ->
+            DataSourceHolder.instance.withSql('default', closure)
+        }
+        mc.withSql << {String datasourceName, Closure closure ->
+            DataSourceHolder.instance.withSql(datasourceName, closure)
+        }
+        mc.withSql << {CallableWithArgs callable ->
+            DataSourceHolder.instance.withSql('default', callable)
+        }
+        mc.withSql << {String datasourceName, CallableWithArgs callable ->
+            DataSourceHolder.instance.withSql(datasourceName, callable)
+        }
+    }
+
+    Object withSql(String dataSourceName = 'default', Closure closure) {
+        DataSourceHolder.instance.withSql(datasourceName, closure)
+    }
+
+    Object withSql(String dataSourceName = 'default', CallableWithArgs callable) {
+        DataSourceHolder.instance.withSql(datasourceName, callable)
+    }
+
+    // ======================================================
 
     ConfigObject createConfig(GriffonApplication app) {
         def dataSourceClass = app.class.classLoader.loadClass('DataSource')
-        new ConfigSlurper(Environment.current.name).parse(dataSourceClass) 
-    }   
-    
-    private ConfigObject narrowConfig(ConfigObject config, String dataSourceName) {   
+        new ConfigSlurper(Environment.current.name).parse(dataSourceClass)
+    }
+
+    private ConfigObject narrowConfig(ConfigObject config, String dataSourceName) {
         return dataSourceName == 'default' ? config.dataSource : config.dataSources[dataSourceName]
     }
 
     DataSource connect(GriffonApplication app, ConfigObject config, String dataSourceName = 'default') {
-        if(DataSourceHolder.instance.isDataSourceConnected(dataSourceName)) {
+        if (DataSourceHolder.instance.isDataSourceConnected(dataSourceName)) {
             return DataSourceHolder.instance.getDataSource(dataSourceName)
         }
-        
+
         config = narrowConfig(config, dataSourceName)
         app.event('DataSourceConnectStart', [config, dataSourceName])
         DataSource ds = createDataSource(config, dataSourceName)
         DataSourceHolder.instance.setDataSource(dataSourceName, ds)
         def skipSchema = config.schema?.skip ?: false
-        if(!skipSchema) createSchema(config, dataSourceName)
+        if (!skipSchema) createSchema(config, dataSourceName)
         app.event('DataSourceConnectEnd', [dataSourceName, ds])
         ds
     }
 
     void disconnect(GriffonApplication app, ConfigObject config, String dataSourceName = 'default') {
-        if(DataSourceHolder.instance.isDataSourceConnected(dataSourceName)) {
+        if (DataSourceHolder.instance.isDataSourceConnected(dataSourceName)) {
             config = narrowConfig(config, dataSourceName)
             app.event('DataSourceDisconnectStart', [config, dataSourceName, DataSourceHolder.instance.getDataSource(dataSourceName)])
             app.event('DataSourceDisconnectEnd', [config, dataSourceName])
@@ -76,46 +102,46 @@ final class DataSourceConnector {
     private DataSource createDataSource(ConfigObject config, String dataSourceName) {
         Class.forName(config.driverClassName.toString())
         ObjectPool connectionPool = new GenericObjectPool(null)
-        if(config.pool) {
-            if(config.pool.maxWait   != null)  connectionPool.maxWait   = config.pool.maxWait
-            if(config.pool.maxIdle   != null)  connectionPool.maxIdle   = config.pool.maxIdle
-            if(config.pool.maxActive != null)  connectionPool.maxActive = config.pool.maxActive
+        if (config.pool) {
+            if (config.pool.maxWait != null) connectionPool.maxWait = config.pool.maxWait
+            if (config.pool.maxIdle != null) connectionPool.maxIdle = config.pool.maxIdle
+            if (config.pool.maxActive != null) connectionPool.maxActive = config.pool.maxActive
         }
- 
+
         String url = config.url.toString()
         String username = config.username.toString()
         String password = config.password.toString()
         ConnectionFactory connectionFactory = null
-        if(username) {
+        if (username) {
             connectionFactory = new DriverManagerConnectionFactory(url, username, password)
         } else {
             connectionFactory = new DriverManagerConnectionFactory(url, null)
         }
-        PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,connectionPool,null,null,false,true)
+        PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory, connectionPool, null, null, false, true)
         new PoolingDataSource(connectionPool)
     }
 
     private void createSchema(ConfigObject config, String dataSourceName) {
         String dbCreate = config.dbCreate.toString()
-        if(dbCreate != 'create') return
- 
-        URL ddl = getClass().classLoader.getResource(dataSourceName-'schema.ddl')
-        if(!ddl) {
-            LOG.warn("DataSource[${dataSourceName}].dbCreate was set to 'create' but ${dataSourceName}-schema.ddl was not found in classpath.") 
+        if (dbCreate != 'create') return
+
+        URL ddl = getClass().classLoader.getResource(dataSourceName - 'schema.ddl')
+        if (!ddl) {
+            LOG.warn("DataSource[${dataSourceName}].dbCreate was set to 'create' but ${dataSourceName}-schema.ddl was not found in classpath.")
         }
         ddl = getClass().classLoader.getResource('schema.ddl')
-        if(!ddl) {
-            LOG.warn("DataSource[${dataSourceName}].dbCreate was set to 'create' but schema.ddl was not found in classpath.") 
+        if (!ddl) {
+            LOG.warn("DataSource[${dataSourceName}].dbCreate was set to 'create' but schema.ddl was not found in classpath.")
             return
         }
- 
+
         boolean tokenizeddl = config.tokenizeddl ?: false
-        DataSourceHolder.instance.withSql(dataSourceName) { dsName, sql -> 
-            if(!tokenizeddl) {
+        DataSourceHolder.instance.withSql(dataSourceName) { dsName, sql ->
+            if (!tokenizeddl) {
                 sql.execute(ddl.text)
             } else {
                 ddl.text.split(';').each { stmnt ->
-                    if(stmnt?.trim()) sql.execute(stmnt + ';')
+                    if (stmnt?.trim()) sql.execute(stmnt + ';')
                 }
             }
         }

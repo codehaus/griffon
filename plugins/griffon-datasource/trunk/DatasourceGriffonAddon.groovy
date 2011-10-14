@@ -16,6 +16,7 @@
 
 import griffon.core.GriffonApplication
 import griffon.plugins.datasource.DataSourceHolder
+import griffon.plugins.datasource.DataSourceConnector
 
 /**
  * @author Andres Almiray
@@ -29,7 +30,7 @@ class DatasourceGriffonAddon {
             def types = app.config.griffon?.datasource?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            DataSourceHolder.enhance(mc)
+            DataSourceConnector.enhance(mc)
         }
     ]
 

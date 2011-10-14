@@ -17,6 +17,7 @@
 package griffon.plugins.carbonado
 
 import com.amazon.carbonado.Repository
+import griffon.util.CallableWithArgs
 
 /**
  * @author Andres Almiray
@@ -25,7 +26,12 @@ import com.amazon.carbonado.Repository
 class RepositoryHolder {
     Repository repository
 
-    void withCarbonado(Closure closure) {
-        closure(repository)
+    Object withCarbonado(Closure closure) {
+        return closure(repository)
+    }
+
+    public <T> T withCarbonado(CallableWithArgs<T> callable) {
+        callable.args = [repository] as Object[]
+        return callable.run()
     }
 }

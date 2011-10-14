@@ -1,9 +1,9 @@
-import com.basho.riak.client.raw.RawClient
+import com.basho.riak.client.RiakClient
 
 class BootstrapRiak {
-    def init = { RawClient riak -> 
+    def init = { String clientName, RiakClient riak -> 
     }
 
-    def destroy = { RawClient riak ->
+    def destroy = { String clientName, RiakClient riak ->
     }
 } 

@@ -18,16 +18,27 @@ package griffon.plugins.activejdbc
 
 import activejdbc.Base
 import griffon.plugins.datasource.DataSourceHolder
+import griffon.util.CallableWithArgs
 
 /**
  * @author Andres Almiray
  */
 @Singleton
 class ActivejdbcHolder {
-    void withActivejdbc(String dataSourceName = 'default', Closure closure) {
+    Object withActivejdbc(String dataSourceName = 'default', Closure closure) {
         try {
             Base.open(DataSourceHolder.instance.getDataSource(dataSourceName))
-            closure(dataSourceName)
+            return closure(dataSourceName)
+        } finally {
+            Base.close()
+        }
+    }
+
+    public <T> T withActivejdbc(String dataSourceName = 'default', CallableWithArgs<T> callable) {
+        try {
+            Base.open(DataSourceHolder.instance.getDataSource(dataSourceName))
+            callable.args = [dataSourceName] as Object[]
+            return callable.run()
         } finally {
             Base.close()
         }

@@ -18,8 +18,8 @@
  * @author Andres Almiray
  */
 class NeodatisGriffonPlugin {
-    def version = '0.3.2'
-    def griffonVersion = '0.9.1 > *' 
+    def version = '0.4'
+    def griffonVersion = '0.9.4 > *' 
     def dependsOn = [:]
     def license = 'Apache Software License 2.0'
 
