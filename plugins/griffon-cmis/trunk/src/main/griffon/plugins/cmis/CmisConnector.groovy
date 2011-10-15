@@ -21,74 +21,79 @@ import org.apache.chemistry.opencmis.client.runtime.SessionFactoryImpl
 
 import griffon.core.GriffonApplication
 import griffon.util.Environment
-import static griffon.util.GriffonNameUtils.isBlank
+import griffon.util.Metadata
+import griffon.util.CallableWithArgs
 
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 @Singleton
 final class CmisConnector {
-    private static final Log LOG = LogFactory.getLog(CmisConnector)
     final SessionFactory sessionFactory = SessionFactoryImpl.newInstance()
-    private final Object lock = new Object()
-    private final Map<String, Boolean> connections = [:]
-    private GriffonApplication app
+    private static final Logger LOG = LoggerFactory.getLogger(CmisConnector)
+
+    static void enhance(MetaClass mc) {
+        mc.withCmis = {Closure closure ->
+            SessionHolder.instance.withCmis('default', closure)
+        }
+        mc.withCmis << {String sessionName, Closure closure ->
+            SessionHolder.instance.withCmis(sessionName, closure)
+        }
+        mc.withCmis << {CallableWithArgs callable ->
+            SessionHolder.instance.withCmis('default', callable)
+        }
+        mc.withCmis << {String sessionName, CallableWithArgs callable ->
+            SessionHolder.instance.withCmis(sessionName, callable)
+        }
+    }
+
+    Object withCmis(String sessionName = 'default', Closure closure) {
+        return SessionHolder.instance.withCmis(sessionName, closure)
+    }
+
+    public <T> T withCmis(String sessionName = 'default', CallableWithArgs<T> callable) {
+        return SessionHolder.instance.withCmis(sessionName, callable)
+    }
+
+    // ======================================================
 
     ConfigObject createConfig(GriffonApplication app) {
         def configClass = app.class.classLoader.loadClass('CmisConfig')
         return new ConfigSlurper(Environment.current.name).parse(configClass)
     }
 
+    private ConfigObject narrowConfig(ConfigObject config, String sessionName) {
+        return sessionName == 'default' ? config.session : config.sessions[sessionName]
+    }
+
     Session connect(GriffonApplication app, ConfigObject config, String sessionName = 'default') {
-        synchronized(lock) {
-            if(connections[sessionName]) return
+        if (SessionHolder.instance.isSessionConnected(sessionName)) {
+            return SessionHolder.instance.getSession(sessionName)
         }
 
-        this.app = app
+        config = narrowConfig(config, sessionName)
         app.event('CmisConnectStart', [config, sessionName])
-        Session session = createSession(config, sessionName)
-        synchronized(lock) {
-           connections[sessionName] = true
-        }
-        app.event('CmisConnectEnd', [sessionName, session])
-        return session
+        Session s = createSession(config)
+        SessionHolder.instance.setSession(sessionName, s)
+        app.event('CmisConnectEnd', [sessionName, s])
+        s
     }
 
     void disconnect(GriffonApplication app, ConfigObject config, String sessionName = 'default') {
-        synchronized(lock) {
-            if(!connections[sessionName]) return
-        }
-
-        app.event('CmisDisconnectStart', [config, sessionName, SessionHolder.instance.sessions[sessionName]])
-        SessionHolder.instance.sessions[sessionName] = null
-        synchronized(lock) {
-            connections[sessionName] = false
-        }
-        app.event('CmisDisconnectEnd', [sessionName])
-    }
-
-    void disconnectAll(GriffonApplication app, ConfigObject config) {
-        synchronized(lock) {
-            connections.each { sessionName, state ->
-                if(!state) return
-                app.event('CmisDisconnectStart', [config, sessionName, SessionHolder.instance.sessions[sessionName]])
-                SessionHolder.instance.sessions[sessionName] = null
-                connections[sessionName] = false
-                app.event('CmisDisconnectEnd', [sessionName])
-            }
+        if (SessionHolder.instance.isSessionConnected(sessionName)) {
+            config = narrowConfig(config, sessionName)
+            Session s = SessionHolder.instance.getSession(sessionName)
+            app.event('CmisDisconnectStart', [config, sessionName, s])
+            app.event('CmisDisconnectEnd', [config, sessionName])
+            SessionHolder.instance.disconnectSession(sessionName)
         }
     }
+
 
     Session createSession(ConfigObject config, String sessionName = 'default') {
-        Map parameters = sessionName == 'default' ? config.session : config.sessions[sessionName]
-        Session session = sessionFactory.createSession(parameters)
-        SessionHolder.instance.sessions[sessionName] = session
-        if(sessionName == 'default') SessionHolder.instance.session = session
-        session
+        sessionFactory.createSession(config)
     }
-
-    def withCmis = SessionHolder.instance.withCmis
 }

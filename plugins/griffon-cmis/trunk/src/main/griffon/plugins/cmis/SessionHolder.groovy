@@ -18,6 +18,12 @@ package griffon.plugins.cmis
 
 import griffon.core.GriffonApplication
 import griffon.util.ApplicationHolder
+import griffon.util.CallableWithArgs
+import static griffon.util.GriffonNameUtils.isBlank
+
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
 import org.apache.chemistry.opencmis.client.api.Session
 
 /**
@@ -25,20 +31,72 @@ import org.apache.chemistry.opencmis.client.api.Session
  */
 @Singleton
 class SessionHolder {
-    Session session
-    final Map<String, Session> sessions = [:]
+    private static final Logger LOG = LoggerFactory.getLogger(SessionHolder)
+    private static final Object[] LOCK = new Object[0]
+    private final Map<String, Session> sessions = [:]
+  
+    String[] getSessionNames() {
+        List<String> sessionNames = new ArrayList().addAll(sessions.keySet())
+        sessionNames.toArray(new String[sessionNames.size()])
+    }
 
-    def withCmis = { String sessionName = 'default', Closure closure ->
-        Session s = sessions[sessionName]
-        if(s == null) {
+    Session getSession(String sessionName = 'default') {
+        if(isBlank(sessionName)) sessionName = 'default'
+        retrieveSession(sessionName)
+    }
+
+    void setSession(String sessionName = 'default', Session session) {
+        if(isBlank(sessionName)) sessionName = 'default'
+        storeSession(sessionName, session)       
+    }
+
+    Object withCmis(String sessionName = 'default', Closure closure) {
+        Session session = fetchSession(sessionName)
+        if(LOG.debugEnabled) LOG.debug("Executing statement on session '$sessionName'")
+        return closure(sessionName, session)
+    }
+
+    public <T> T withCmis(String sessionName = 'default', CallableWithArgs<T> callable) {
+        Session session = fetchSession(sessionName)
+        if(LOG.debugEnabled) LOG.debug("Executing statement on session '$sessionName'")
+        callable.args = [sessionName, session] as Object[]
+        return callable.call()
+    }
+    
+    boolean isSessionConnected(String sessionName) {
+        if(isBlank(sessionName)) sessionName = 'default'
+        retrieveSession(sessionName) != null
+    }
+    
+    void disconnectSession(String sessionName) {
+        if(isBlank(sessionName)) sessionName = 'default'
+        storeSession(sessionName, null)        
+    }
+
+    private Session fetchSession(String sessionName) {
+        if(isBlank(sessionName)) sessionName = 'default'
+        Session session = retrieveSession(sessionName)
+        if(session == null) {
             GriffonApplication app = ApplicationHolder.application
             ConfigObject config = CmisConnector.instance.createConfig(app)
-            s = CmisConnector.instance.connect(app, config, sessionName)
+            session = CmisConnector.instance.connect(app, config, sessionName)
         }
         
-        if(s == null) {
-            throw new IllegalArgumentException("No such OpenCMIS Session configuration for name $sessionName")
+        if(session == null) {
+            throw new IllegalArgumentException("No such Session configuration for name $sessionName")
         }
-        closure(s)
+        session
+    }
+
+    private Session retrieveSession(String sessionName) {
+        synchronized(LOCK) {
+            sessions[sessionName]
+        }
+    }
+
+    private void storeSession(String sessionName, Session session) {
+        synchronized(LOCK) {
+            sessions[sessionName] = session
+        }
     }
 }
