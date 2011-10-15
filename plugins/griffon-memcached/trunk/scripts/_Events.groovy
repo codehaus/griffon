@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,49 +18,15 @@
  * @author Andres Almiray
  */
 
-includeTargets << griffonScript('_GriffonCompile')
-
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        String libdir = "${getPluginDirForName('memcached').file}/lib/"
-        ant.fileset(dir: libdir, includes: '*addon*').each {
-            griffonCopyDist(it.toString(), jardir)
-        }
-
-        String connectorType = config.griffon?.memcached?.connector ?: 'java_memcached'
-        switch(connectorType.toUpperCase()) {
-            case 'SPYMEMCACHED':
-                libdir = "${libdir}spymemcached/"
-                break
-            case 'XMEMCACHED':
-                libdir = "${libdir}xmemcached/"
-                break
-        }
-
-        ant.fileset(dir: libdir, includes: '*.jar').each {
-            griffonCopyDist(it.toString(), jardir)
-        }
-    }
-}
-
-eventCompileEnd = {
-    if(compilingMemcachedPlugin()) {
-        ['spymemcached', 'xmemcached'].each { type ->
-            ant.path(id: "${type}.classpath") {
-                path(refid: 'griffon.compile.classpath')
-                pathElement(location: classesDirPath)
-                fileset(dir: "${basedir}/lib/${type}", includes: "*.jar")
-            }
-            compileSources(classesDirPath, "${type}.classpath") {
-                src(path: "${basedir}/src/${type}")
-                include(name:'**/*.groovy')
-            }
-        }
-    }
-}
-
-private boolean compilingMemcachedPlugin() {
-    getPluginDirForName('memcached')?.file?.canonicalPath == basedir
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('memcached')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-memcached-plugin', dirs: "${memcachedPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('memcached', [
+        conf: 'compile',
+        name: 'griffon-memcached-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: memcachedPluginVersion
+    ])
 }

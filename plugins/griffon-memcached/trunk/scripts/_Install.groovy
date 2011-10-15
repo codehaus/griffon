@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,32 +22,16 @@ includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
 // check to see if we already have a MemcachedGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'MemcachedGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'MemcachedGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding MemcachedGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'MemcachedGriffonAddon'.addon=true
-''')
-}
-
-if(!(config.flatten().'griffon.memcached.injectInto')) {
-     configFile.append('''
-griffon.memcached.injectInto = ['controller']
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
 
 argsMap = argsMap ?: [:]
 argsMap.skipPackagePrompt = true
 
-['JavaMemcachedConfig', 'BootstrapJavaMemcached',
- 'SpyMemcachedConfig', 'BootstrapSpyMemcached',
- 'XMemcachedConfig', 'BootstrapXMemcached'].each { file ->
+['MemcachedConfig', 'BootstrapMemcached'].each { file ->
     if(!new File("${basedir}/griffon-app/conf/${file}.groovy").exists()) {
         createArtifact(
             name: file,
