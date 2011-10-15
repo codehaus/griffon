@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,13 @@
  */
 
 import griffon.core.GriffonApplication
-import griffon.memcached.MemcachedClientHolder
-import griffon.memcached.MemcachedConnector
+import griffon.plugins.memcached.MemcachedConnector
 
 /**
  * @author Andres Almiray
  */
 class MemcachedGriffonAddon {
-    def addonPostInit = { app ->
+    void addonInit(GriffonApplication app) {
         ConfigObject config = MemcachedConnector.instance.createConfig(app)
         MemcachedConnector.instance.connect(app, config)
     }
@@ -39,7 +38,8 @@ class MemcachedGriffonAddon {
         NewInstance: { klass, type, instance ->
             def types = app.config.griffon?.memcached?.injectInto ?: ['controller']
             if(!types.contains(type)) return
-            instance.metaClass.withMcc = MemcachedConnector.instance.withMcc
+            def mc = app.artifactManager.findGriffonClass(klass).metaClass
+            MemcachedConnector.enhance(mc)
         }
     ]
 }
