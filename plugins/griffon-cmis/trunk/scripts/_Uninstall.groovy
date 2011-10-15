@@ -19,14 +19,8 @@
  */
 
 // check to see if we already have a CmisGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'CmisGriffonAddon' == builder
-    }
-}
-
-if (addonIsSet1) {
+configText = '''root.'CmisGriffonAddon'.addon=true'''
+if(builderConfigFile.text.contains(configText)) {
     println 'Removing CmisGriffonAddon from Builder.groovy'
-    builderConfigFile.text = builderConfigFile.text - "root.'CmisGriffonAddon'.addon=true\n"
+    builderConfigFile.text -= configText
 }

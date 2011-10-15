@@ -22,24 +22,10 @@ includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
 // check to see if we already have a CmisGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'CmisGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'CmisGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding CmisGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'CmisGriffonAddon'.addon=true
-''')
-}
-
-if(!(config.flatten().'griffon.cmis.injectInto')) {
-     configFile.append('''
-griffon.cmis.injectInto = ['controller']
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
 
 argsMap = argsMap ?: [:]

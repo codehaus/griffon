@@ -37,7 +37,7 @@ class CmisGriffonAddon {
             def types = app.config.griffon?.cmis?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withCmis = CmisConnector.instance.withCmis
+            CmisConnector.enhance(mc)
         }
     ]
 }
