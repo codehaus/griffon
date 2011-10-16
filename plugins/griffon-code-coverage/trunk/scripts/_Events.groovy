@@ -56,16 +56,14 @@ def createCoverageReports() {
         ant.'cobertura-report'(destDir: "${coverageReportDir}", datafile: "${dataFile}", format: reportFormat) {
             //load all these dirs independently so the dir structure is flattened,
             //otherwise the source isn't found for the reports
-            def exclusions = ["conf", "i18n", "resources"]
+            def exclusions = ["i18n", "resources"]
             new File("${basedir}/griffon-app").list().each { f ->
                 if(f in exclusions) return
                 fileset(dir: "${basedir}/griffon-app/${f}")
             }
             fileset(dir: "${basedir}/src/main")
-            if (buildConfig.coverage?.sourceInclusions) {
-                buildConfig.coverage.sourceInclusions.each {
-                    fileset(dir: "${basedir}/${it}")
-                }
+            buildConfig.coverage.sourceInclusions.each {
+                fileset(dir: "${basedir}/${it}")
             }
         }
     }
@@ -106,30 +104,74 @@ def findArtefacts(String type) {
 
 
 def replaceClosureNamesInReports() {
+    try{
     if (!argsMap.nopost || !buildConfig.coverage.noPost) {
         def startTime = new Date().time
-        replaceClosureNames(findArtefacts("controllers"))
-        replaceClosureNames(findArtefacts("models"))
-        replaceClosureNamesInXmlReports(findArtefacts("controllers"))
-        replaceClosureNamesInXmlReports(findArtefacts("models"))
+        Map<String, List<Class>> artifacts = collectArtifacts()
+        replaceClosureNames(artifacts.controller)
+        replaceClosureNames(artifacts.model)
+        replaceClosureNamesInXmlReports(artifacts.controller)
+        replaceClosureNamesInXmlReports(artifacts.model)
         def endTime = new Date().time
         println "Done with post processing reports in ${endTime - startTime}ms"
     }
+    }catch(x){griffon.util.GriffonExceptionHandler.sanitize(x).printStackTrace()}
 }
 
-def replaceClosureNames(artefacts) {
-    artefacts?.each { artefact ->
-		def klass = artefact.class
+collectArtifacts = {
+    Map<String, List<Class>> artifacts = [:]
+    collectArtifactMetadata()
+    File resourcesDir = new File("${resourcesDirPath}/griffon-app/resources")
+    File artifactMetadataDir = new File("${resourcesDirPath}/griffon-app/resources/META-INF")
+    File artifactMetadataFile = new File(artifactMetadataDir, '/griffon-artifacts.properties')
+    Properties p = new Properties()
+    try {
+        p.load(new FileReader(artifactMetadataFile))
+    } catch (IOException e) {
+        return artifacts
+    }
+
+    ConfigObject artifactConfig = new ConfigSlurper().parse(p)
+
+    for (Object key : artifactConfig.keySet()) {
+        String type = key.toString()
+        String classes = (String) artifactConfig.get(type)
+        if (classes.startsWith("'") && classes.endsWith("'")) {
+            classes = classes.substring(1, classes.length() - 1)
+        }
+        String[] classNames = classes.split(",")
+
+        List<Class> list = artifacts.get(type)
+        if (list == null) {
+            list = new ArrayList<Class>()
+            artifacts.put(type, list)
+        }
+
+        for (String className : classNames) {
+            try {
+                Class clazz = classLoader.loadClass(className)
+                if (!list.contains(clazz)) list.add(clazz)
+            } catch (ClassNotFoundException e) {
+                continue
+            }
+        }
+    }
+    return artifacts
+}
+
+def replaceClosureNames(List<Class> artifacts) {
+    artifacts.each { Class klass ->
         def packageName = ""
         def shortName = klass.name.toString()
-        def lastdot = klass.name.toString().lastIndexOf(".")
+        def lastdot = shortName.lastIndexOf(".")
         if (lastdot != -1) {
-            packageName = klass.toString()[0..lastdot]
-            shortName = klass.name.toString[(lastdot+1)..-1]
+            packageName = shortName[0..lastdot]
+            shortName = shortName[(lastdot+1)..-1]
         }
         def beanInfo = java.beans.Introspector.getBeanInfo(klass)
+        def reference = klass.newInstance()
         beanInfo.propertyDescriptors.each {propertyDescriptor ->
-            def property = artefact."${propertyDescriptor.name}"
+            def property = reference."${propertyDescriptor.name}"
             if(!(property instanceof Closure)) return
             def closureClassName = property.class.name 
             // the name in the reports is sans package; subtract the package name
@@ -138,27 +180,38 @@ def replaceClosureNames(artefacts) {
             ant.replace(dir: "${coverageReportDir}",
 				token: ">${nameToReplace}<",
 				value: ">${shortName}.${propertyDescriptor.name}<") {
-                include(name: "**/*${klass.toString()}.html")
+                include(name: "**/*${klass.name}.html")
+                include(name: "frame-summary*.html")
+            }
+            ant.replace(dir: "${coverageReportDir}",
+				token: ">${nameToReplace}_closure2<",
+				value: ">${shortName}.${propertyDescriptor.name}<") {
+                include(name: "**/*${klass.name}.html")
                 include(name: "frame-summary*.html")
             }
         }
     }
 }
 
-def replaceClosureNamesInXmlReports(artefacts) {
+def replaceClosureNamesInXmlReports(List<Class> artifacts) {
     def xml = new File("${coverageReportDir}/coverage.xml")
     if(xml.exists()) {
         def parser = new XmlParser().parse(xml)
 
-        artefacts?.each {artefact ->
-            def closures = [:]
-            artefact.reference.propertyDescriptors.each {propertyDescriptor ->
-                def closureClassName = artefact.getPropertyOrStaticPropertyOrFieldValue(propertyDescriptor.name, Closure)?.class?.name
-                if (closureClassName) {
-                    def node = parser['packages']['package']['classes']['class'].find {it.@name == closureClassName}
-                    if(node) {
-                        node.@name = "${artefact.fullName}.${propertyDescriptor.name}"
-                    }
+        artifacts.each {Class klass ->
+            def beanInfo = java.beans.Introspector.getBeanInfo(klass)
+            def reference = klass.newInstance()
+            beanInfo.propertyDescriptors.each {propertyDescriptor ->
+                def property = reference."${propertyDescriptor.name}"
+                if(!(property instanceof Closure)) return
+                def closureClassName = property.class.name
+                def node = parser['packages']['package']['classes']['class'].find {it.@name == closureClassName}
+                if(node) {
+                    node.@name = "${klass.name}.${propertyDescriptor.name}"
+                }
+                node = parser['packages']['package']['classes']['class'].find {it.@name == closureClassName + '_closure2'}
+                if(node) {
+                    node.@name = "${klass.name}.${propertyDescriptor.name}"
                 }
             }
         }
