@@ -19,22 +19,8 @@
  */
 
 // check to see if we already have a XmlrpcGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'XmlrpcGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'XmlrpcGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding XmlrpcGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'XmlrpcGriffonAddon'.addon=true
-''')
-}
-
-if(!(config.flatten().'griffon.xmlrpc.injectInto')) {
-    configFile.append('''
-griffon.xmlrpc.injectInto = ["controller"]
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
