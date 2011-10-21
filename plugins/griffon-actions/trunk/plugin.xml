@@ -1,4 +1,4 @@
-<plugin name='actions' version='0.1' griffonVersion='0.9.3 &gt; *' jdk='1.5'>
+<plugin name='actions' version='0.2' griffonVersion='0.9.4 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Action management</title>
@@ -12,6 +12,6 @@ name, descriptions, mnemonic, accelerator and icons to be used for each action.<
     <resource>BuildConfig</resource>
   </resources>
   <dependencies>
-    <plugin name='i18n' version='0.4' />
+    <plugin name='i18n' version='0.4.1' />
   </dependencies>
 </plugin>
