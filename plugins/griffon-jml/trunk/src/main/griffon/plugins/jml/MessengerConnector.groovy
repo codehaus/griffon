@@ -21,6 +21,7 @@ import net.sf.jml.impl.MsnMessengerFactory
 
 import griffon.core.GriffonApplication
 import griffon.util.Environment
+import griffon.util.CallableWithArgs
 
 /**
  * @author Andres Almiray
@@ -30,6 +31,25 @@ final class MessengerConnector {
     private final Object lock = new Object()
     private boolean connected = false
     private GriffonApplication app
+
+    static void enhance(MetaClass mc) {
+        mc.withMessenger = {Closure closure ->
+            MessengerHolder.instance.withMessenger(closure)   
+        }
+        mc.withMessenger << {CallableWithArgs callable ->
+            MessengerHolder.instance.withMessenger(callable)   
+        }        
+    }
+
+    Object withMessenger(Closure closure) {
+        return MessengerHolder.instance.withMessenger(closure) 
+    }
+    
+    public <T> T withMessenger(CallableWithArgs<T> callable) {
+        return MessengerHolder.instance.withMessenger(callable)  
+    }
+        
+    // ======================================================
 
     ConfigObject createConfig(GriffonApplication app) {
         def msnClass = app.class.classLoader.loadClass('MessengerConfig')
@@ -87,6 +107,4 @@ final class MessengerConnector {
         messenger.login()
         MessengerHolder.instance.messenger = messenger
     }
-
-    def withMessenger = MessengerHolder.instance.withMessenger
 }

@@ -17,6 +17,7 @@
 package griffon.plugins.jml
 
 import net.sf.jml.MsnMessenger
+import griffon.util.CallableWithArgs
 
 /**
  * @author Andres Almiray
@@ -25,7 +26,12 @@ import net.sf.jml.MsnMessenger
 class MessengerHolder {
     MsnMessenger messenger
 
-    def withMessenger = { Closure closure ->
-        closure(messneger)
+    Object withMessenger(Closure closure) {
+        return closure(messenger)
+    }
+    
+    public <T> T withMessenger(CallableWithArgs<T> callable) {
+        callable.args = [messenger] as Object[]
+        return callable.run()
     }
 }
