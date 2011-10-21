@@ -20,7 +20,7 @@
  * @author Andres Almiray
  */
 
-import org.codehaus.griffon.commons.GriffonClassUtils as GCU
+import griffon.util.GriffonUtil
 
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
@@ -29,7 +29,7 @@ target(createUispecTest: "Creates a new Griffon UISpec4J test") {
     depends(checkVersion,parseArguments)
     promptForName(type: "UISpec4J Test")
     def (pkg, name) = extractArtifactName(argsMap["params"][0])
-    def fqn = "${pkg?pkg:''}${pkg?'.':''}${GCU.getClassNameRepresentation(name)}"
+    def fqn = "${pkg?pkg:''}${pkg?'.':''}${GriffonUtil.getClassNameRepresentation(name)}"
 
     createArtifact(
         name: fqn,
