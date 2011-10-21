@@ -18,10 +18,10 @@
  * @author Andres Almiray
  */
 class GlazedlistsGriffonPlugin {
-    def version = '0.8.2'
+    def version = '0.8.3'
     def dependsOn = [:]
     def toolkits = ['swing']
-    def griffonVersion = '0.9.2 > *'
+    def griffonVersion = '0.9.4 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'

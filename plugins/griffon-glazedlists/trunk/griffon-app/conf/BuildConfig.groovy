@@ -5,10 +5,11 @@ griffon.project.dependency.resolution = {
         griffonPlugins()
         griffonHome()
         griffonCentral()
-        flatDir name: 'glazedlistsPluginLib', dirs: 'lib'
+        mavenCentral()
+        mavenRepo 'http://repository.sonatype.org/content/groups/public'
     }
     dependencies {
-        compile 'ca.odell:glazedlists:1.8.0_java15'
+        compile 'net.java.dev.glazedlists:glazedlists_java15:1.8.0'
     }
 }
 
