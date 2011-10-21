@@ -29,7 +29,7 @@ class JmlGriffonAddon {
             def types = app.config.griffon.msn.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withMessenger = MessengerConnector.instance.withMessenger
+            MessengerConnector.instance.enhance(mc)
         }
     ]
 }
