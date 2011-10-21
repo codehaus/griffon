@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4542">
+<plugins revision="4547">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -207,7 +207,7 @@ http://barcode4j.sourceforge.net</description>
         </release>
     </plugin>
     <plugin name="camel"/>
-    <plugin name="carbonado" latest-release="0.2">
+    <plugin name="carbonado" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Persistence support via Carbonado</title>
             <author>Andres Almiray</author>
@@ -229,6 +229,18 @@ http://carbonado.sourceforge.net/</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-carbonado/tags/RELEASE_0_2/griffon-carbonado-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Persistence support via Carbonado</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Presistence support via Carbonado
+http://carbonado.sourceforge.net/</description>
+            <documentation>http://griffon.codehaus.org/Carbonado+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-carbonado/tags/RELEASE_0_3/griffon-carbonado-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="charts" latest-release="0.3">
@@ -6193,7 +6205,7 @@ http://zonelayout.com</description>
         </release>
     </plugin>
     <plugin name="dialogs" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Provides common dialogs</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
