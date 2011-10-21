@@ -16,7 +16,6 @@
 
 import griffon.core.GriffonApplication
 import griffon.plugins.ebean.EbeanConnector
-import griffon.plugins.ebean.EbeanServerHolder
 
 /**
  * @author Andres Almiray
@@ -34,7 +33,7 @@ class EbeanGriffonAddon {
             def types = app.config.griffon?.ebean?.injectInto ?: ['controller']
             if(!types.contains(type)) return
             def mc = app.artifactManager.findGriffonClass(klass).metaClass
-            mc.withEbean = EbeanServerHolder.instance.&withEbean
+            EbeanConnector.enhance(mc)
         }
     ]
 }

@@ -22,6 +22,7 @@ import com.avaje.ebean.EbeanServerFactory
 import com.avaje.ebean.config.ServerConfig
 
 import griffon.core.GriffonApplication
+import griffon.util.RunnableWithArgs
 import griffon.plugins.datasource.DataSourceHolder
 import griffon.plugins.datasource.DataSourceConnector
 
@@ -31,6 +32,31 @@ import griffon.plugins.datasource.DataSourceConnector
 @Singleton
 final class EbeanConnector {
     private bootstrap
+
+    static void enhance(MetaClass mc) {
+        mc.withEbean = {Closure closure ->
+            EbeanServerHolder.instance.withEbean('default', closure)
+        }
+        mc.withEbean << {String ebeanServerName, Closure closure ->
+            EbeanServerHolder.instance.withEbean(ebeanServerName, closure)
+        }
+        mc.withEbean << {RunnableWithArgs runnable ->
+            EbeanServerHolder.instance.withEbean('default', runnable)
+        }
+        mc.withEbean << {String ebeanServerName, RunnableWithArgs runnable ->
+            EbeanServerHolder.instance.withEbean(ebeanServerName, runnable)
+        }
+    }
+
+    void withEbean(String ebeanServerName = 'default', Closure closure) {
+        EbeanServerHolder.instance.withEbean(ebeanServerName, closure)
+    }
+
+    void withEbean(String ebeanServerName = 'default', RunnableWithArgs runnable) {
+        EbeanServerHolder.instance.withEbean(ebeanServerName, runnable)
+    }
+
+    // ======================================================
 
     ConfigObject createConfig(GriffonApplication app) {
         def configClass = app.class.classLoader.loadClass('EbeanConfig')
