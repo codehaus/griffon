@@ -19,13 +19,8 @@
  */
 
 // check to see if we already have a I18nGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'I18nGriffonAddon' == builder
-    }
-}
-
-if (addonIsSet1) {
-    builderConfigFile.text = builderConfigFile.text - "root.'I18nGriffonAddon'.addon=true\n"
+configText = '''root.'I18nGriffonAddon'.addon=true'''
+if(builderConfigFile.text.contains(configText)) {
+    println 'Removing I18nGriffonAddon from Builder.groovy'
+    builderConfigFile.text -= configText
 }

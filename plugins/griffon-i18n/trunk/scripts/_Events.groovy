@@ -30,4 +30,3 @@ eventSetClasspath = { cl ->
         version: i18nPluginVersion
     ])
 }
-

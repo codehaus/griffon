@@ -18,9 +18,9 @@
  * @author Andres Almiray
  */
 class I18nGriffonPlugin {
-    def version = '0.4'
+    def version = '0.4.1'
     def dependsOn = [:]
-    def griffonVersion = '0.9.3 > *'
+    def griffonVersion = '0.9.4 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'
@@ -32,4 +32,3 @@ I18n support via Spring.
 
     def documentation = 'http://griffon.codehaus.org/I18n+Plugin'
 }
-
