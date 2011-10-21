@@ -7,7 +7,7 @@
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by getApplication()licable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -19,6 +19,8 @@ import javax.swing.Action;
 import griffon.core.GriffonApplication;
 import griffon.core.GriffonController;
 import griffon.core.GriffonControllerClass;
+import griffon.core.MVCGroup;
+import griffon.core.MVCGroupConfiguration;
 import griffon.util.ApplicationHolder;
 import griffon.util.RunnableWithArgs;
 import griffon.util.RunnableWithArgsClosure;
@@ -50,15 +52,16 @@ public class ActionsGriffonAddon extends AbstractGriffonAddon {
 
         events.put(GriffonApplication.Event.INITIALIZE_MVC_GROUP.getName(), new RunnableWithArgsClosure(new RunnableWithArgs() {
             public void run(Object[] args) {
-                Map<String, Object> instanceMap = (Map<String, Object>) args[2];
-                GriffonController controller = (GriffonController) instanceMap.get(GriffonControllerClass.TYPE);
+                MVCGroupConfiguration groupConfig = (MVCGroupConfiguration) args[0];
+                MVCGroup group = (MVCGroup) args[1];
+                GriffonController controller = group.getController();
                 if (controller == null) return;
-                FactoryBuilderSupport builder = (FactoryBuilderSupport) instanceMap.get("builder");
+                FactoryBuilderSupport builder = group.getBuilder();
                 Map<String, Action> actions = ActionManager.getInstance().actionsFor(controller);
                 for (Map.Entry<String, Action> action : actions.entrySet()) {
                     String actionKey = ActionManager.getInstance().normalizeName(action.getKey()) + ActionManager.ACTION;
                     if (getLog().isTraceEnabled()) {
-                        getLog().trace("Adding action " + actionKey + " to " + args[0] + ":" + args[1] + ":builder");
+                        getLog().trace("Adding action " + actionKey + " to " + groupConfig.getMvcType() + ":" + group.getMvcId() + ":builder");
                     }
                     builder.setVariable(actionKey, action.getValue());
                 }
