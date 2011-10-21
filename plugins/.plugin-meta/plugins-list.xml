@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4603">
+<plugins revision="4608">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -4750,7 +4750,7 @@ Based on the Grails plugin of the same name.</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-riak/tags/RELEASE_0_2_1/griffon-riak-0.2.1.zip</file>
         </release>
-        <release tag="RELEASE_0_3" version="0.3" type="svn">
+        <release tag="RELEASE_0_3" type="svn" version="0.3">
             <title>Riak support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -6328,6 +6328,19 @@ http://zonelayout.com</description>
             <toolkits>swing</toolkits>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-dialogs/tags/RELEASE_0_1/griffon-dialogs-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="redis" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Redis support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Redis support</description>
+            <documentation>http://griffon.codehaus.org/Redis+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-redis/tags/RELEASE_0_1/griffon-redis-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
