@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4492">
+<plugins revision="4497">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1042,7 +1042,7 @@ another docking frame in the application.</description>
     <plugin name="domain"/>
     <plugin name="domain-db4o"/>
     <plugin name="domain-gsql"/>
-    <plugin name="easyb" latest-release="0.4">
+    <plugin name="easyb" latest-release="0.5">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables BDD testing with Easyb</title>
             <author>Andres Almiray</author>
@@ -1092,6 +1092,17 @@ another docking frame in the application.</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_4/griffon-easyb-0.4.zip</file>
+        </release>
+        <release tag="RELEASE_0_5" version="0.5" type="svn">
+            <title>Enables BDD testing with Easyb</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables BDD testing with Easyb (http://easyb.org)</description>
+            <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_5/griffon-easyb-0.5.zip</file>
         </release>
     </plugin>
     <plugin name="ebean" latest-release="0.1">
@@ -4981,7 +4992,7 @@ http://grails.org/plugin/spock</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spock/tags/RELEASE_0_4/griffon-spock-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>Spock Plugin - spockframework.org</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
