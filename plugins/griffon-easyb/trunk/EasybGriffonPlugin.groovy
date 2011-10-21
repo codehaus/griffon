@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the 'License');
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
  * @author Andres Almiray
  */
 class EasybGriffonPlugin {
-    def version = '0.4'
+    def version = '0.5'
     def dependsOn = [:]
-    def griffonVersion = '0.9.2 > *'
+    def griffonVersion = '0.9.4 > *'
     def license = 'Apache Software License 2.0'
 
     def author = 'Andres Almiray'
