@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4673">
+<plugins revision="4678">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -4460,7 +4460,7 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neodatis/tags/RELEASE_0_3_2/griffon-neodatis-0.3.2.zip</file>
         </release>
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Neodatis support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -6492,6 +6492,20 @@ http://project-voldemort.com/</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-voldemort/tags/RELEASE_0_1/griffon-voldemort-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="metawidget" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Metawidget integration</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Metawidget integration
+http://metawidget.sourceforge.net</description>
+            <documentation>http://griffon.codehaus.org/Metawidget+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-metawidget/tags/RELEASE_0_1/griffon-metawidget-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
