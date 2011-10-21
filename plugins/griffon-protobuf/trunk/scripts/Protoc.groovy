@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ Make sure you have a similar setting on your griffon-app/conf/BuildConfig.groovy
     protobufsrcDir = new File(protobufsrc)
     if(!protobufsrcDir.list().size()) {
         ant.echo(message: "[protoc] No protobuf sources found at $protobufsrc")
-        System.exit(0)
+        return
     }
 
     boolean uptodate = true

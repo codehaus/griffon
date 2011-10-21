@@ -6,11 +6,10 @@ griffon.project.dependency.resolution = {
         griffonHome()
         griffonCentral()
         mavenCentral()
-        flatDir name: 'protobufPluginLib', dirs: 'lib'
     }
     dependencies {
-        build   'com.google.protobuf:protobuf-java:2.4.0a'
-        compile 'com.google.protobuf:protobuf-java:2.4.0a'
+        build   'com.google.protobuf:protobuf-java:2.4.1'
+        compile 'com.google.protobuf:protobuf-java:2.4.1'
     }
 }
 
