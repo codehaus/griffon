@@ -30,4 +30,3 @@ eventSetClasspath = { cl ->
         version: miglayoutPluginVersion
     ])
 }
-
