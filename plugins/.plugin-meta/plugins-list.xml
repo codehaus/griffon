@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4663">
+<plugins revision="4668">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1366,7 +1366,7 @@ http://www.avaje.org/</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_7/griffon-eclipse-support-0.4.7.zip</file>
         </release>
-        <release tag="RELEASE_0_4_8" version="0.4.8" type="svn">
+        <release tag="RELEASE_0_4_8" type="svn" version="0.4.8">
             <title>Keeps Eclipse files up to date</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -5144,7 +5144,7 @@ http://slick.cokeandcode.com/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-slick/tags/RELEASE_0_2/griffon-slick-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="slideware" latest-release="0.2">
+    <plugin name="slideware" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon based slideware</title>
             <author>Andres Almiray</author>
@@ -5164,6 +5164,17 @@ http://slick.cokeandcode.com/</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-slideware/tags/RELEASE_0_2/griffon-slideware-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Griffon based slideware</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Griffon based slideware</description>
+            <documentation>http://griffon.codehaus.org/Slideware+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-slideware/tags/RELEASE_0_3/griffon-slideware-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="splash" latest-release="0.2">
