@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4613">
+<plugins revision="4618">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -4299,7 +4299,7 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-mybatis/tags/RELEASE_0_2/griffon-mybatis-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="neo4j" latest-release="0.3.1">
+    <plugin name="neo4j" latest-release="0.4">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Neo4j support</title>
             <author>Andres Almiray</author>
@@ -4339,6 +4339,17 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neo4j/tags/RELEASE_0_3_1/griffon-neo4j-0.3.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_4" version="0.4" type="svn">
+            <title>Neo4j support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Neo4j support</description>
+            <documentation>http://griffon.codehaus.org/Neo4j+Plugin</documentation>
+            <license>GNU Affero General Public License v3</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-neo4j/tags/RELEASE_0_4/griffon-neo4j-0.4.zip</file>
         </release>
     </plugin>
     <plugin name="neodatis" latest-release="0.3.2">
@@ -4598,7 +4609,7 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-protobuf/tags/RELEASE_0_4/griffon-protobuf-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>Adds Protocol Buffers support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
