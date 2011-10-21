@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4497">
+<plugins revision="4502">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1093,7 +1093,7 @@ another docking frame in the application.</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_4/griffon-easyb-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>Enables BDD testing with Easyb</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -1380,7 +1380,7 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-feeds/tags/RELEASE_0_2/griffon-feeds-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="fest" latest-release="0.6">
+    <plugin name="fest" latest-release="0.7">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables application testing with FEST</title>
             <author>Andres Almiray</author>
@@ -1460,6 +1460,17 @@ Provides a nice icon set too.</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_6/griffon-fest-0.6.zip</file>
+        </release>
+        <release tag="RELEASE_0_7" version="0.7" type="svn">
+            <title>Enables application testing with FEST</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables application testing with FEST (http://easytesting.org)</description>
+            <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_7/griffon-fest-0.7.zip</file>
         </release>
     </plugin>
     <plugin name="findbugs" latest-release="0.2">
