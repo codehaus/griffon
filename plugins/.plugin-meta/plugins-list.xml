@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4684">
+<plugins revision="4689">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2937,7 +2937,7 @@ http://jgraph.com</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jide-builder/tags/RELEASE_0_6/griffon-jide-builder-0.6.zip</file>
         </release>
     </plugin>
-    <plugin name="jml" latest-release="0.1">
+    <plugin name="jml" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Msn Messenger support</title>
             <author>Andres Almiray</author>
@@ -2947,6 +2947,17 @@ http://jgraph.com</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jml/tags/RELEASE_0_1/griffon-jml-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Msn Messenger support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Msn Messenger support.</description>
+            <documentation>http://griffon.codehaus.org/Jml+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-jml/tags/RELEASE_0_2/griffon-jml-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="jmonkeyengine" latest-release="0.2">
