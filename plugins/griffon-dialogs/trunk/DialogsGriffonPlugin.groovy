@@ -25,7 +25,7 @@ class DialogsGriffonPlugin {
     // resources that are included in plugin packaging
     def pluginIncludes = [actions: 0.2,
                           miglayout: 0.3,
-                          glazedlists: '0.8.2']
+                          glazedlists: '0.8.3']
     // the plugin license
     def license = 'GNU Lesser General Public License'
     // Toolkit compatibility. No value means compatible with all
