@@ -50,6 +50,14 @@ final class MybatisConnector {
         }       
     }
 
+    Object withSqlSession(String sessionFactoryName = 'default', Closure closure) {
+        SqlSessionFactoryHolder.instance.withSqlSession(sessionFactoryName, closure) 
+    }
+
+    Object withSqlSession(String sessionFactoryName = 'default', CallableWithArgs callable) {
+        SqlSessionFactoryHolder.instance.withSqlSession(sessionFactoryName, callable) 
+    }
+
     // ======================================================
 
     ConfigObject createConfig(GriffonApplication app) {
