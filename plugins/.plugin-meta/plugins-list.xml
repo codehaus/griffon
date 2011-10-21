@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4618">
+<plugins revision="4623">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -417,7 +417,7 @@ Clover's reports include:
             <file>http://svn.codehaus.org/griffon/plugins/griffon-clover/tags/RELEASE_0_1/griffon-clover-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="cmis" latest-release="0.1">
+    <plugin name="cmis" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Open CMIS support</title>
             <author>Andres Almiray</author>
@@ -428,6 +428,18 @@ http://chemistry.apache.org/java/opencmis.html</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-cmis/tags/RELEASE_0_1/griffon-cmis-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Open CMIS support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Open CMIS support
+http://chemistry.apache.org/java/opencmis.html</description>
+            <documentation>http://griffon.codehaus.org/Cmis+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-cmis/tags/RELEASE_0_2/griffon-cmis-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="code-coverage" latest-release="0.5">
@@ -4340,7 +4352,7 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neo4j/tags/RELEASE_0_3_1/griffon-neo4j-0.3.1.zip</file>
         </release>
-        <release tag="RELEASE_0_4" version="0.4" type="svn">
+        <release tag="RELEASE_0_4" type="svn" version="0.4">
             <title>Neo4j support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
