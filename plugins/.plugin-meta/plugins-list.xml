@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4557">
+<plugins revision="4562">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1153,7 +1153,7 @@ another docking frame in the application.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_5/griffon-easyb-0.5.zip</file>
         </release>
     </plugin>
-    <plugin name="ebean" latest-release="0.1">
+    <plugin name="ebean" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Persistence support via Ebean</title>
             <author>Andres Almiray</author>
@@ -1164,6 +1164,18 @@ http://www.avaje.org/</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-ebean/tags/RELEASE_0_1/griffon-ebean-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Persistence support via Ebean</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Persistence support via Ebean
+http://www.avaje.org/</description>
+            <documentation>http://griffon.codehaus.org/Ebean+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-ebean/tags/RELEASE_0_2/griffon-ebean-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="eclipse-support" latest-release="0.4.7">
@@ -2077,7 +2089,7 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_7/griffon-gsql-0.7.zip</file>
         </release>
-        <release tag="RELEASE_0_8" version="0.8" type="svn">
+        <release tag="RELEASE_0_8" type="svn" version="0.8">
             <title>Groovy SQL support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
