@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4598">
+<plugins revision="4603">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1011,7 +1011,7 @@ http://everaldo.com/crystal/</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-db4o/tags/RELEASE_0_4/griffon-db4o-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>Db4o support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -4719,7 +4719,7 @@ Based on the Grails plugin of the same name.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rest/tags/RELEASE_0_7/griffon-rest-0.7.zip</file>
         </release>
     </plugin>
-    <plugin name="riak" latest-release="0.2.1">
+    <plugin name="riak" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Riak support</title>
             <author>Andres Almiray</author>
@@ -4749,6 +4749,17 @@ Based on the Grails plugin of the same name.</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-riak/tags/RELEASE_0_2_1/griffon-riak-0.2.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Riak support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Riak support</description>
+            <documentation>http://griffon.codehaus.org/Riak+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-riak/tags/RELEASE_0_3/griffon-riak-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="riverlayout" latest-release="0.2">
