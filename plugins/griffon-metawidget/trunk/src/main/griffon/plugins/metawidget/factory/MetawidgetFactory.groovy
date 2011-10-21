@@ -26,7 +26,7 @@ import org.metawidget.inspector.impl.propertystyle.groovy.*
 import org.metawidget.inspector.java5.*
 import org.metawidget.inspector.propertytype.*
 import org.metawidget.swing.*
-import org.metawidget.inspector.impl.propertystyle.javabean.GriffonArtifactPropertyStyle as JGriffonArtifactPropertyStyle
+import org.metawidget.inspector.impl.propertystyle.javabean.GriffonPropertyStyle as JGriffonPropertyStyle
 
 /**
  * @author Andres Almiray
@@ -42,7 +42,7 @@ class MetawidgetFactory extends ComponentFactory {
         super(SwingMetawidget)
     }
     
-    public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {
+    Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {
         SwingMetawidget metawidget = null
         if(value instanceof SwingMetawidget) {
             metawidget = value
@@ -85,8 +85,8 @@ class MetawidgetFactory extends ComponentFactory {
         metawidget
     }
     
-    static groovyInspector() {
-        def groovyConfig = new BaseObjectInspectorConfig().setPropertyStyle(new GriffonArtifactPropertyStyle())
+    static groovyInspector(String[] exclusions = null) {
+        def groovyConfig = new BaseObjectInspectorConfig().setPropertyStyle(new GriffonPropertyStyle(exclusions))
         new CompositeInspector(new CompositeInspectorConfig().setInspectors(
             new PropertyTypeInspector(groovyConfig),
             new MetawidgetAnnotationInspector(groovyConfig),
@@ -94,8 +94,8 @@ class MetawidgetFactory extends ComponentFactory {
         ))
     }
     
-    static javaInspector() {
-        def javaConfig = new BaseObjectInspectorConfig().setPropertyStyle(new JGriffonArtifactPropertyStyle())
+    static javaInspector(String[] exclusions = null) {
+        def javaConfig = new BaseObjectInspectorConfig().setPropertyStyle(new JGriffonPropertyStyle(exclusions))
         new CompositeInspector(new CompositeInspectorConfig().setInspectors(
             new PropertyTypeInspector(javaConfig),
             new MetawidgetAnnotationInspector(javaConfig),

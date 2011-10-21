@@ -31,7 +31,7 @@ class StubFactory extends AbstractFactory {
         newInstance(builder, NAME, value, attributes)
     }
     
-    public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {
+    Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {
         if(value instanceof Stub) return value
         if(value != null) value = value.toString()
         String stubName = attributes.remove('name') ?: value

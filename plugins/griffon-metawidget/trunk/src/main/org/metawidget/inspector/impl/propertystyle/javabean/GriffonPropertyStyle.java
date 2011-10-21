@@ -14,14 +14,27 @@
  * limitations under the License.
  */
  
-package org.metawidget.inspector.impl.propertystyle.groovy;
+package org.metawidget.inspector.impl.propertystyle.javabean;
 
 import griffon.core.GriffonClass;
+import java.util.Arrays;
 
 /**
  * @author Andres Almiray
  */
-public class GriffonArtifactPropertyStyle extends GroovyPropertyStyle {
+public class GriffonPropertyStyle extends JavaBeanPropertyStyle {
+    private final String[] exclusions;
+    
+    public GriffonPropertyStyle() {
+        this(new String[0]);
+    }
+    
+    public GriffonPropertyStyle(String[] exclusions) {
+        if(exclusions == null) exclusions = new String[0];
+        this.exclusions = new String[exclusions.length];
+        System.arraycopy(exclusions, 0, this.exclusions, 0, exclusions.length);
+    }
+
 	/**
 	 * Whether to exclude the given property name when searching for properties.
 	 * <p>
@@ -37,13 +50,9 @@ public class GriffonArtifactPropertyStyle extends GroovyPropertyStyle {
 		if (GriffonClass.STANDARD_PROPERTIES.contains(name)) {
 			return true;
 		}
-		
-		if ("propertyChangeListeners".equals(name)) {
-			return true;
-		}
-		
-		if ("vetoableChangeListeners".equals(name)) {
-			return true;
+
+		if(Arrays.binarySearch(exclusions, name) > -1) {
+		    return true;
 		}
 
 		return super.isExcludedName(name);
