@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Griffon Slick - Andres Almiray. All Rights Reserved.
+ * Copyright (c) 2010-2011 Griffon Slick - Andres Almiray. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -36,7 +36,7 @@ import org.newdawn.slick.SlickException
 import org.newdawn.slick.state.StateBasedGame
 
 /**
- * 
+ *
  * @author Andres Almiray
  */
 class GriffonStateBasedGame extends StateBasedGame {
@@ -46,7 +46,7 @@ class GriffonStateBasedGame extends StateBasedGame {
     Closure onPostRenderState
     Closure onPreUpdateState
     Closure onPostUpdateState
-    
+
     GriffonStateBasedGame(StateBasedSlickGriffonApplication app) {
         super('')
         this.app = app
@@ -55,40 +55,40 @@ class GriffonStateBasedGame extends StateBasedGame {
     void initStatesList(GameContainer container) {
         app.event('SlickInitStates', [this])
     }
-        
-	protected void preRenderState(GameContainer container, Graphics g) throws SlickException {
-	    if(onPreRenderState) {
-	        onPreRenderState.delegate = this
-	        onPreRenderState.resolveStrategy = Closure.DELEGATE_FIRST
-	        onPreRenderState(container, g)
-	    }
+
+    protected void preRenderState(GameContainer container, Graphics g) throws SlickException {
+        if (onPreRenderState) {
+            onPreRenderState.delegate = this
+            onPreRenderState.resolveStrategy = Closure.DELEGATE_FIRST
+            onPreRenderState(container, g)
+        }
         app.event('SlickPreRenderState', [container, g])
-	}
-	
-	protected void postRenderState(GameContainer container, Graphics g) throws SlickException {
-	    if(onPostRenderState) {
-	        onPostRenderState.delegate = this
-	        onPostRenderState.resolveStrategy = Closure.DELEGATE_FIRST
-	        onPostRenderState(container, g)
-	    }
+    }
+
+    protected void postRenderState(GameContainer container, Graphics g) throws SlickException {
+        if (onPostRenderState) {
+            onPostRenderState.delegate = this
+            onPostRenderState.resolveStrategy = Closure.DELEGATE_FIRST
+            onPostRenderState(container, g)
+        }
         app.event('SlickPostRenderState', [container, g])
-	}
-	
-	protected void preUpdateState(GameContainer container, int delta) throws SlickException {
-        if(onPreUpdateState) {
-	        onPreUpdateState.delegate = this
-	        onPreUpdateState.resolveStrategy = Closure.DELEGATE_FIRST
-	        onPreUpdateState(container, delta)
-	    }
+    }
+
+    protected void preUpdateState(GameContainer container, int delta) throws SlickException {
+        if (onPreUpdateState) {
+            onPreUpdateState.delegate = this
+            onPreUpdateState.resolveStrategy = Closure.DELEGATE_FIRST
+            onPreUpdateState(container, delta)
+        }
         app.event('SlickPreUpdateState', [container, delta])
-	}
-	
-	protected void postUpdateState(GameContainer container, int delta) throws SlickException {
-	    if(onPostUpdateState) {
-	        onPostUpdateState.delegate = this
-	        onPostUpdateState.resolveStrategy = Closure.DELEGATE_FIRST
-	        onPostUpdateState(container, delta)
-	    }
+    }
+
+    protected void postUpdateState(GameContainer container, int delta) throws SlickException {
+        if (onPostUpdateState) {
+            onPostUpdateState.delegate = this
+            onPostUpdateState.resolveStrategy = Closure.DELEGATE_FIRST
+            onPostUpdateState(container, delta)
+        }
         app.event('SlickPostUpdateState', [container, delta])
-	}
+    }
 }

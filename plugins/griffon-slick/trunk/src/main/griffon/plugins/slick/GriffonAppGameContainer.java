@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Griffon Slick - Andres Almiray. All Rights Reserved.
+ * Copyright (c) 2010-2011 Griffon Slick - Andres Almiray. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -34,7 +34,6 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
 /**
- * 
  * @author Andres Almiray
  */
 public class GriffonAppGameContainer extends AppGameContainer {
@@ -44,7 +43,7 @@ public class GriffonAppGameContainer extends AppGameContainer {
         super(app.getGame(), width, height, fullscreen);
         this.app = app;
     }
-    
+
     public GriffonSlickApplication getApp() {
         return app;
     }
@@ -52,7 +51,7 @@ public class GriffonAppGameContainer extends AppGameContainer {
     public void quit() {
         super.destroy();
     }
-        
+
     public void destroy() {
         app.shutdown();
     }

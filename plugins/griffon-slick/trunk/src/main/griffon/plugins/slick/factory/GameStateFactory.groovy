@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Griffon Slick - Andres Almiray. All Rights Reserved.
+ * Copyright (c) 2010-2011 Griffon Slick - Andres Almiray. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -31,16 +31,17 @@
 package griffon.plugins.slick.factory
 
 import griffon.plugins.slick.GameStateDelegate
+import griffon.util.ApplicationHolder
 
 /**
  * @author Andres Almiray
  */
 class GameStateFactory extends AbstractFactory {
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {
-        if(!attributes.containsKey('ID')) {
+        if (!attributes.containsKey('ID')) {
             throw new IllegalArgumentException("In $name you must define a value for ID: of type int.")
         }
 
-        new GameStateDelegate(builder.app, attributes.remove('ID') as int)
+        new GameStateDelegate(ApplicationHolder.application, attributes.remove('ID') as int)
     }
 }

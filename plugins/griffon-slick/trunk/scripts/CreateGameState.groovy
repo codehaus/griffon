@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Griffon Slick - Andres Almiray. All Rights Reserved.
+ * Copyright (c) 2010-2011 Griffon Slick - Andres Almiray. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -28,41 +28,43 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.codehaus.griffon.commons.GriffonClassUtils as GCU
+import griffon.util.GriffonUtil
 
 includeTargets << griffonScript("Init")
 includeTargets << griffonScript("CreateIntegrationTest")
 
-target(createGameState : "Creates a new Game State") {
+target(createGameState: "Creates a new Game State") {
     depends(checkVersion, parseArguments)
 
-    if(isPluginProject && !isAddonPlugin) {
+    if (isPluginProject && !isAddonPlugin) {
         println """You must create an Addon descriptor first.
 Type in griffon create-addon then execute this command again."""
-        System.exit(1)        
+        System.exit(1)
     }
 
     promptForName(type: "Game State")
     def (pkg, name) = extractArtifactName(argsMap['params'][0])
-    def fqn = "${pkg?pkg:''}${pkg?'.':''}${GCU.getClassNameRepresentation(name)}"
+    def fqn = "${pkg ? pkg : ''}${pkg ? '.' : ''}${GRiffonUtil.getClassNameRepresentation(name)}"
 
     createArtifact(
-        name: fqn,
-        suffix: "Model",
-        type: "Model",
-        path: "griffon-app/models")
+            name: fqn,
+            suffix: "Model",
+            type: "Model",
+            path: "griffon-app/models")
 
     createArtifact(
-        name: fqn,
-        suffix: "GameState",
-        type: "GameState",
-        path: "griffon-app/gamestates")
+            name: fqn,
+            suffix: "GameState",
+            type: "GameState",
+            path: "griffon-app/gamestates")
 
     createArtifact(
-        name: fqn,
-        suffix: "Controller",
-        type: "Controller",
-        path: "griffon-app/controllers")
+            name: fqn,
+            suffix: "Controller",
+            type: "Controller",
+            path: "griffon-app/controllers")
+
+    name = GriffonUtil.uncapitalize(name)
 
     if (isAddonPlugin) {
         // create mvcGroup in a plugin
@@ -76,15 +78,17 @@ Type in griffon create-addon then execute this command again."""
 }
 """)
         }
-        addonFile.withWriter { it.write addonText.replaceAll(/\s*def\s*mvcGroups\s*=\s*\[/, """
+        addonFile.withWriter {
+            it.write addonText.replaceAll(/\s*def\s*mvcGroups\s*=\s*\[/, """
     def mvcGroups = [
         // Game State for "$args"
         '$name' : [
-            model : '${fqn}Model',
-            state : '${fqn}GameState',
-            controller : '${fqn}Controller'
+            model:      '${fqn}Model',
+            state:      '${fqn}GameState',
+            controller: '${fqn}Controller'
         ]
-    """) }
+    """)
+        }
 
 
     } else {
@@ -97,15 +101,17 @@ mvcGroups {
 }
 """
         }
-        applicationConfigFile.withWriter { it.write configText.replaceAll(/\s*mvcGroups\s*\{/, """
+        applicationConfigFile.withWriter {
+            it.write configText.replaceAll(/\s*mvcGroups\s*\{/, """
 mvcGroups {
     // Game State for "$name"
     '$name' {
-        model = '${fqn}Model'
-        state = '${fqn}GameState'
+        model      = '${fqn}Model'
+        state      = '${fqn}GameState'
         controller = '${fqn}Controller'
     }
-""") }
+""")
+        }
     }
 }
 

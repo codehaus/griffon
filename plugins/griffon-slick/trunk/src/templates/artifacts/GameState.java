@@ -20,7 +20,7 @@ public class @artifact.name@ extends AbstractGriffonGameState {
         this.controller = controller;
     }
 
-    public void mvcGroupInit(Map<String, ?> args) {
+    public void mvcGroupInit(Map<String, Object> args) {
         getStateBasedApp().getStateBasedGame().addState(this);
     }
 

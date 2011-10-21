@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Griffon Slick - Andres Almiray. All Rights Reserved.
+ * Copyright (c) 2010-2011 Griffon Slick - Andres Almiray. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -33,12 +33,12 @@ package griffon.plugins.slick
 import org.newdawn.slick.*
 
 /**
- * 
+ *
  * @author Andres Almiray
  */
 class BasicGameDelegate extends BasicGame {
     final BasicSlickGriffonApplication app
-    
+
     Closure onInit
     Closure onRender
     Closure onUpdate
@@ -65,7 +65,7 @@ class BasicGameDelegate extends BasicGame {
     Closure onMouseReleased
     Closure onMouseWheelMoved
     Closure onSetInput
-    
+
     BasicGameDelegate(BasicSlickGriffonApplication app) {
         super('')
         this.app = app
@@ -78,22 +78,22 @@ class BasicGameDelegate extends BasicGame {
 
     void update(GameContainer gc, int delta) throws SlickException {
         callClosure(onUpdate, gc, delta)
-        app.event('SlickUpdate', [app, gc, delta])   
+        app.event('SlickUpdate', [app, gc, delta])
     }
 
     void render(GameContainer gc, Graphics g) throws SlickException {
         callClosure(onRender, gc, g)
         app.event('SlickRender', [app, gc, g])
     }
-    
+
     boolean isAcceptingInput() {
-       def val = callClosure(acceptingInput)
-       val != null ? val : true 
+        def val = callClosure(acceptingInput)
+        val != null ? val : true
     }
 
     boolean closeRequested() {
-       def val = callClosure(onCloseRequested)
-       val != null ? val : true  
+        def val = callClosure(onCloseRequested)
+        val != null ? val : true
     }
 
     void controllerButtonPressed(int controller, int button) {
@@ -137,11 +137,11 @@ class BasicGameDelegate extends BasicGame {
     }
 
     void inputEnded() {
-        callClosure(onInputEnded, )
+        callClosure(onInputEnded,)
     }
 
     void inputStarted() {
-        callClosure(onInputStarted, )
+        callClosure(onInputStarted,)
     }
 
     void keyPressed(int key, char c) {
@@ -179,12 +179,12 @@ class BasicGameDelegate extends BasicGame {
     void setInput(Input input) {
         callClosure(onSetInput, input)
     }
-    
+
     private callClosure(Closure cls, Object[] args) {
-        if(cls) {
+        if (cls) {
             cls.delegate = this
             cls.resolveStrategy = Closure.DELEGATE_FIRST
-            return cls(*args)
+            return cls(* args)
         }
         return null
     }

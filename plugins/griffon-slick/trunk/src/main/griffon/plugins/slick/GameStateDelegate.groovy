@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Griffon Slick - Andres Almiray. All Rights Reserved.
+ * Copyright (c) 2010-2011 Griffon Slick - Andres Almiray. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -38,13 +38,13 @@ import org.newdawn.slick.state.BasicGameState
 import org.newdawn.slick.state.StateBasedGame
 
 /**
- * 
+ *
  * @author Andres Almiray
  */
 class GameStateDelegate extends BasicGameState {
     final StateBasedSlickGriffonApplication app
     final int ID
-    
+
     Closure onInit
     Closure onRender
     Closure onUpdate
@@ -70,7 +70,7 @@ class GameStateDelegate extends BasicGameState {
     Closure onMouseReleased
     Closure onMouseWheelMoved
     Closure onSetInput
-    
+
     GameStateDelegate(StateBasedSlickGriffonApplication app, int id) {
         this.app = app
         this.ID = id
@@ -83,17 +83,17 @@ class GameStateDelegate extends BasicGameState {
 
     void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
         callClosure(onUpdate, gc, game, delta)
-        app.event('SlickUpdate', [app, gc, game, delta])   
+        app.event('SlickUpdate', [app, gc, game, delta])
     }
 
     void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
         callClosure(onRender, gc, game, g)
         app.event('SlickRender', [app, gc, game, g])
     }
-    
+
     boolean isAcceptingInput() {
-       def val = callClosure(acceptingInput)
-       val != null ? val : true 
+        def val = callClosure(acceptingInput)
+        val != null ? val : true
     }
 
     void controllerButtonPressed(int controller, int button) {
@@ -137,11 +137,11 @@ class GameStateDelegate extends BasicGameState {
     }
 
     void inputEnded() {
-        callClosure(onInputEnded, )
+        callClosure(onInputEnded,)
     }
 
     void inputStarted() {
-        callClosure(onInputStarted, )
+        callClosure(onInputStarted,)
     }
 
     void keyPressed(int key, char c) {
@@ -179,20 +179,20 @@ class GameStateDelegate extends BasicGameState {
     void setInput(Input input) {
         callClosure(onSetInput, input)
     }
-    
+
     void enter(GameContainer container, StateBasedGame game) {
         callClosure(onEnter, container, game)
     }
-    
+
     void leave(GameContainer container, StateBasedGame game) {
         callClosure(onLeave, container, game)
     }
-    
+
     private callClosure(Closure cls, Object[] args) {
-        if(cls) {
+        if (cls) {
             cls.delegate = this
             cls.resolveStrategy = Closure.DELEGATE_FIRST
-            return cls(*args)
+            return cls(* args)
         }
         return null
     }

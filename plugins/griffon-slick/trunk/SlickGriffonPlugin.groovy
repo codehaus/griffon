@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Griffon Slick - Andres Almiray. All Rights Reserved.
+ * Copyright (c) 2010-2011 Griffon Slick - Andres Almiray. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -35,7 +35,7 @@ class SlickGriffonPlugin {
     // the plugin version
     def version = "0.2"
     // the version or versions of Griffon the plugin is designed for
-    def griffonVersion = '0.9.3 > *' 
+    def griffonVersion = '0.9.4 > *' 
     // the other plugins this plugin depends on
     def dependsOn = [lwjgl: 0.4]
     // resources that are included in plugin packaging

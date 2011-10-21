@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Griffon Slick - Andres Almiray. All Rights Reserved.
+ * Copyright (c) 2010-2011 Griffon Slick - Andres Almiray. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -38,12 +38,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * 
  * @author Andres Almiray
  */
 public interface GriffonGameState extends GriffonMvcArtifact {
     StateBasedSlickGriffonApplication getStateBasedApp();
-    
+
     int getID();
 
     void init(GameContainer gc, StateBasedGame game) throws SlickException;
@@ -51,9 +50,9 @@ public interface GriffonGameState extends GriffonMvcArtifact {
     void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException;
 
     void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException;
-    
+
     boolean isAcceptingInput();
-    
+
     void controllerButtonPressed(int controller, int button);
 
     void controllerButtonReleased(int controller, int button);
@@ -95,8 +94,8 @@ public interface GriffonGameState extends GriffonMvcArtifact {
     void mouseWheelMoved(int change);
 
     void setInput(Input input);
-    
+
     void enter(GameContainer container, StateBasedGame game) throws SlickException;
-    
+
     void leave(GameContainer container, StateBasedGame game) throws SlickException;
 }
