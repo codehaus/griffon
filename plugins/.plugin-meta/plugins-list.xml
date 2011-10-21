@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4512">
+<plugins revision="4517">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -34,7 +34,7 @@ This plugin installs the AbeilleFormsBuilder.  The builder helps integrate forms
             <file>http://svn.codehaus.org/griffon/plugins/griffon-abeilleform-builder/tags/RELEASE_0_3/griffon-abeilleform-builder-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="actions" latest-release="0.1">
+    <plugin name="actions" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Action management</title>
             <author>Andres Almiray</author>
@@ -46,6 +46,19 @@ name, descriptions, mnemonic, accelerator and icons to be used for each action.<
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-actions/tags/RELEASE_0_1/griffon-actions-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Action management</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Action management. Atuomatically generates a matching Swing action for each
+controller action (property or method). Relies on naming convention to determine
+name, descriptions, mnemonic, accelerator and icons to be used for each action.</description>
+            <documentation>http://griffon.codehaus.org/Actions+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-actions/tags/RELEASE_0_2/griffon-actions-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="activejdbc" latest-release="0.2">
@@ -2179,7 +2192,7 @@ http://harmoniccode.blogspot.com</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-i18n/tags/RELEASE_0_4/griffon-i18n-0.4.zip</file>
         </release>
-        <release tag="RELEASE_0_4_1" version="0.4.1" type="svn">
+        <release tag="RELEASE_0_4_1" type="svn" version="0.4.1">
             <title>I18n support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
