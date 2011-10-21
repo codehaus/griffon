@@ -16,7 +16,6 @@
 
 import griffon.core.GriffonApplication
 import griffon.plugins.mybatis.MybatisConnector
-import griffon.plugins.mybatis.SqlSessionFactoryHolder
 
 /**
  * @author Andres Almiray
