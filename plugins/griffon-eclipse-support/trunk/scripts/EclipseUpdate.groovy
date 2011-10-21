@@ -74,7 +74,7 @@ updateEclipseClasspathFile = { newPlugin = null ->
             path = path.replaceFirst(~/$userHomeRegex/, 'USER_HOME')
             boolean var = path != originalPath
             originalPath = path
-            path = path.replaceFirst(~/${griffonSettings.baseDir.path}(\\|\/)/, '')
+            path = path.replaceFirst(~/${griffonSettings.baseDir.path.toString().replace('\\', '\\\\')}(\\|\/)/, '')
             var = path == originalPath && !path.startsWith(File.separator)
             [kind: var? 'var' : 'lib', path: path]
         }
