@@ -17,7 +17,7 @@
 package griffon.plugins.rest
 
 import griffon.util.ApplicationHolder
-import griffon.util.RunnableWithArgs
+import griffon.util.CallableWithArgs
 import groovyx.net.http.AsyncHTTPBuilder
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.RESTClient
@@ -36,98 +36,70 @@ class RestConnector {
         mc.withAsyncHttp = {Map args, Closure closure ->
             RestConnector.instance.withAsyncHttp(instance, args, closure)   
         }
-        mc.withAsyncHttp << {Map args, RunnableWithArgs runnable ->
-            RestConnector.instance.withAsyncHttp(instance, args, runnable)   
+        mc.withAsyncHttp << {Map args, CallableWithArgs callable ->
+            RestConnector.instance.withAsyncHttp(instance, args, callable)   
         }
         mc.withHttp = {Map args, Closure closure ->
             RestConnector.instance.withHttp(instance, args, closure)   
         }
-        mc.withHttp << {Map args, RunnableWithArgs runnable ->
-            RestConnector.instance.withHttp(instance, args, runnable)   
+        mc.withHttp << {Map args, CallableWithArgs callable ->
+            RestConnector.instance.withHttp(instance, args, callable)   
         }
         mc.withRest = {Map args, Closure closure ->
             RestConnector.instance.withRest(instance, args, closure)   
         }
-        mc.withRest << {Map args, RunnableWithArgs runnable ->
-            RestConnector.instance.withRest(instance, args, runnable)   
+        mc.withRest << {Map args, CallableWithArgs callable ->
+            RestConnector.instance.withRest(instance, args, callable)   
         }        
     }
     
     // ======================================================
     
-    def withAsyncHttp(Object instance, Map params, Closure closure) {
-        doWithBuilder(AsyncHTTPBuilder, instance, params, closure)
+    Object withAsyncHttp(Object instance = null, Map params, Closure closure) {
+        return doWithBuilder(AsyncHTTPBuilder, instance, params, closure)
     }
        
-    def withHttp(Object instance, Map params, Closure closure) {
-        doWithBuilder(HTTPBuilder, instance, params, closure)
+    Object withHttp(Object instance = null, Map params, Closure closure) {
+        return doWithBuilder(HTTPBuilder, instance, params, closure)
     } 
        
-    def withRest(Object instance, Map params, Closure closure) {
-        doWithBuilder(RESTClient, instance, params, closure)
+    Object withRest(Object instance = null, Map params, Closure closure) {
+        return doWithBuilder(RESTClient, instance, params, closure)
     }
     
-    void withAsyncHttp(Object instance, Map params, RunnableWithArgs runnable) {
-        doWithBuilder(AsyncHTTPBuilder, instance, params, runnable)
+    public <T> T withAsyncHttp(Object instance = null, Map params, CallableWithArgs<T> callable) {
+        return doWithBuilder(AsyncHTTPBuilder, instance, params, callable)
     } 
   
-    void withHttp(Object instance, Map params, RunnableWithArgs runnable) {
-        doWithBuilder(HTTPBuilder, instance, params, runnable)
+    public <T> T withHttp(Object instance = null, Map params, CallableWithArgs<T> callable) {
+        return doWithBuilder(HTTPBuilder, instance, params, callable)
     } 
 
-    void withRest(Object instance, Map params, RunnableWithArgs runnable) {
-        doWithBuilder(RESTClient, instance, params, runnable)
-    }
-
-    // ======================================================
-    // context free versions of previous definitions, i.e,
-    // the builder will not be saved in a local variable
-    // attached to a MetaClass
-    // ======================================================
-    
-    def withAsyncHttp(Map params, Closure closure) {
-        doWithBuilder(AsyncHTTPBuilder, null, params, closure)
-    }
-       
-    def withHttp(Map params, Closure closure) {
-        doWithBuilder(HTTPBuilder, null, params, closure)
-    } 
-       
-    def withRest(Map params, Closure closure) {
-        doWithBuilder(RESTClient, null, params, closure)
-    }
-    
-    void withAsyncHttp(Map params, RunnableWithArgs runnable) {
-        doWithBuilder(AsyncHTTPBuilder, null, params, runnable)
-    } 
-  
-    void withHttp(Map params, RunnableWithArgs runnable) {
-        doWithBuilder(HTTPBuilder, null, params, runnable)
-    } 
-
-    void withRest(Map params, RunnableWithArgs runnable) {
-        doWithBuilder(RESTClient, null, params, runnable)
+    public <T> T withRest(Object instance = null, Map params, CallableWithArgs<T> callable) {
+        return doWithBuilder(RESTClient, instance, params, callable)
     }
 
     // ======================================================
 
-    private doWithBuilder(Class klass, Object instance, Map params, Closure closure) {
+    private Object doWithBuilder(Class klass, Object instance, Map params, Closure closure) {
         def builder = configureBuilder(klass, instance, params)
 
         if (closure) {
             closure.delegate = builder
             closure.resolveStrategy = Closure.DELEGATE_FIRST
-            closure()
+            return closure()
         }
+        return null
     }
 
-    private void doWithBuilder(Class klass, Object instance, Map params, RunnableWithArgs runnable) {
+    private <T> T doWithBuilder(Class klass, Object instance, Map params, CallableWithArgs<T> callable) {
         def builder = configureBuilder(klass, instance, params)
 
-        if (runnable) {
-            runnable.args = [builder] as Object[]
-            runnable.run()
+        if (callable) {
+            callable.args = [builder] as Object[]
+            return callable.run()
         }
+        return null
     }
 
     private configureBuilder(Class klass, Object instance, Map params) {
