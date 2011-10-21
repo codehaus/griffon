@@ -1,0 +1,14 @@
+<plugin name='dialogs' version='0.1' griffonVersion='0.9.4 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Provides common dialogs</title>
+  <description>Provides common dialogs:
+ - TextMate inspired finder</description>
+  <documentation>http://griffon.codehaus.org/Dialogs+Plugin</documentation>
+  <license>GNU Lesser General Public License</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
