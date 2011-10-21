@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,5 @@
 /**
  * @author Andres Almiray
  */
-
-//
-// This script is executed by Griffon after plugin was installed to project.
-// This script is a Gant script so you can use all special variables provided
-// by Gant (such as 'baseDir' which points on project base dir). You can
-// use 'ant' to access a global instance of AntBuilder
-//
-// For example you can create directory under project tree:
-//
-//    ant.mkdir(dir:"${basedir}/griffon-app/jobs")
-//
 
 ant.mkdir(dir: "${basedir}/src/protobuf")
