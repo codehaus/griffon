@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Griffon Slick - Andres Almiray. All Rights Reserved.
+ * Copyright (c) 2010-2011 Griffon Slick - Andres Almiray. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -27,29 +27,24 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 import org.newdawn.slick.AppGameContainer
 import griffon.plugins.slick.factory.GameStateFactory
-import org.codehaus.griffon.runtime.slick.GameStateArtifactHandler
 
 /**
  * @author Andres Almiray
  */
 class SlickGriffonAddon {
-    void addonInit(GriffonApplication app) {
-        app.artifactManager.registerArtifactHandler(new GameStateArtifactHandler(app))
-    }
-
     def attributeDelegates = [
-        {builder, node, attributes ->
-            if(node instanceof AppGameContainer) {
-                def size = attributes.remove('size') ?: [640, 480]
-                node.setDisplayMode(size[0] as int, size[1] as int, false)
+            {builder, node, attributes ->
+                if (node instanceof AppGameContainer) {
+                    def size = attributes.remove('size') ?: [640, 480]
+                    node.setDisplayMode(size[0] as int, size[1] as int, false)
+                }
             }
-        }
     ]
 
     def factories = [
-        gameState: new GameStateFactory()
+            gameState: new GameStateFactory()
     ]
 }

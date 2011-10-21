@@ -11,7 +11,7 @@ class @artifact.name@ extends AbstractGriffonGameState {
     
     int getID() { ID } 
     
-    void mvcGroupInit(Map args) {
+    void mvcGroupInit(Map<String, Object> args) {
         app.game.addState(this)
     }
     

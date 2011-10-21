@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Griffon Slick - Andres Almiray. All Rights Reserved.
+ * Copyright (c) 2010-2011 Griffon Slick - Andres Almiray. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -32,8 +32,6 @@
  * @author Andres Almiray
  */
 
-import griffon.util.GriffonNameUtils
-
 includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
@@ -47,8 +45,8 @@ target('convertView': "Replaces a View script with a Slick View") {
 
     replaceNonag = true
     createArtifact(name: name,
-        suffix: type,
-        type: 'SlickView',
-        path: "griffon-app/views")
+            suffix: type,
+            type: 'SlickView',
+            path: "griffon-app/views")
 }
 setDefaultTarget(convertView)
