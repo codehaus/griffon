@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4658">
+<plugins revision="4663">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1235,7 +1235,7 @@ http://www.avaje.org/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-ebean/tags/RELEASE_0_2/griffon-ebean-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="eclipse-support" latest-release="0.4.7">
+    <plugin name="eclipse-support" latest-release="0.4.8">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Keeps Eclipse files up to date</title>
             <author>Andres Almiray</author>
@@ -1365,6 +1365,17 @@ http://www.avaje.org/</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_7/griffon-eclipse-support-0.4.7.zip</file>
+        </release>
+        <release tag="RELEASE_0_4_8" version="0.4.8" type="svn">
+            <title>Keeps Eclipse files up to date</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Keeps Eclipse files up to date.</description>
+            <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_8/griffon-eclipse-support-0.4.8.zip</file>
         </release>
     </plugin>
     <plugin name="effects" latest-release="0.4">
@@ -4786,7 +4797,7 @@ Based on the Grails plugin of the same name.</description>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rest/tags/RELEASE_0_7/griffon-rest-0.7.zip</file>
         </release>
-        <release tag="RELEASE_0_7_1" version="0.7.1" type="svn">
+        <release tag="RELEASE_0_7_1" type="svn" version="0.7.1">
             <title>REST client libraries</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
