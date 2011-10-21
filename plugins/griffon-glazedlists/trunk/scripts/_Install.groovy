@@ -19,16 +19,8 @@
  */
 
 // check to see if we already have a GlazedlistsGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'GlazedlistsGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'GlazedlistsGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding GlazedlistsGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'GlazedlistsGriffonAddon'.addon=true
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
