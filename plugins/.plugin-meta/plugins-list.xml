@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4502">
+<plugins revision="4507">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1461,7 +1461,7 @@ Provides a nice icon set too.</description>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_6/griffon-fest-0.6.zip</file>
         </release>
-        <release tag="RELEASE_0_7" version="0.7" type="svn">
+        <release tag="RELEASE_0_7" type="svn" version="0.7">
             <title>Enables application testing with FEST</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -4847,7 +4847,7 @@ http://www.famfamfam.com/lab/icons/silk/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-silkicons/tags/RELEASE_0_2/griffon-silkicons-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="slick" latest-release="0.1">
+    <plugin name="slick" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Slick2D is a simple set of tools wrapped around the LWJGL OpenGL binding for Java</title>
             <author>Andres Almiray</author>
@@ -4858,6 +4858,18 @@ http://slick.cokeandcode.com/</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-slick/tags/RELEASE_0_1/griffon-slick-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Slick2D is a simple set of tools wrapped around the LWJGL OpenGL binding for Java</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Slick2D is a simple set of tools wrapped around the LWJGL OpenGL binding for Java
+http://slick.cokeandcode.com/</description>
+            <documentation>http://griffon.codehaus.org/Slick+Plugin</documentation>
+            <license>BSD</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-slick/tags/RELEASE_0_2/griffon-slick-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="slideware" latest-release="0.2">
