@@ -1,13 +1,12 @@
 griffon.project.dependency.resolution = {
     inherits("global")
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    log "warn"
     repositories {
         griffonPlugins()
         griffonHome()
         griffonCentral()
 
         mavenCentral()
-        flatDir name: 'hessianPluginLib', dirs: 'lib'
     }
     dependencies {
         compile 'com.caucho:hessian:4.0.7'
@@ -21,6 +20,3 @@ griffon {
         footer = "<br/><br/>Made with Griffon (@griffon.version@)"
     }
 }
-
-griffon.jars.destDir='target/addon'
-griffon.plugin.pack.additional.sources = ['src/gdsl']

@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,22 +19,8 @@
  */
 
 // check to see if we already have a HessianGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'HessianGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'HessianGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding HessianGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'HessianGriffonAddon'.addon=true
-''')
-}
-
-if(!(config.flatten().'griffon.hessian.injectInto')) {
-    configFile.append('''
-griffon.hessian.injectInto = ["controller"]
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
