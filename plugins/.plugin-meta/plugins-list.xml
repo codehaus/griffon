@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4608">
+<plugins revision="4613">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -4557,7 +4557,7 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-processing/tags/RELEASE_0_3/griffon-processing-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="protobuf" latest-release="0.4">
+    <plugin name="protobuf" latest-release="0.5">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Adds Protocol Buffers support</title>
             <author>Andres Almiray</author>
@@ -4597,6 +4597,17 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-protobuf/tags/RELEASE_0_4/griffon-protobuf-0.4.zip</file>
+        </release>
+        <release tag="RELEASE_0_5" version="0.5" type="svn">
+            <title>Adds Protocol Buffers support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Adds Protocol Buffers support.</description>
+            <documentation>http://griffon.codehaus.org/Protobuf+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-protobuf/tags/RELEASE_0_5/griffon-protobuf-0.5.zip</file>
         </release>
     </plugin>
     <plugin name="quartz" latest-release="0.1">
@@ -6331,7 +6342,7 @@ http://zonelayout.com</description>
         </release>
     </plugin>
     <plugin name="redis" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Redis support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
