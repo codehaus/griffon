@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4633">
+<plugins revision="4638">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -6389,7 +6389,7 @@ http://zonelayout.com</description>
         </release>
     </plugin>
     <plugin name="terrastore" latest-release="0.1">
-        <release tag="RELEASE_0_1" version="0.1" type="svn">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Terrastore support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -6400,6 +6400,20 @@ http://code.google.com/p/terrastore/</description>
             <toolkits/>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-terrastore/tags/RELEASE_0_1/griffon-terrastore-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="voldemort" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Voldemort support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Voldemort support
+http://project-voldemort.com/</description>
+            <documentation>http://griffon.codehaus.org/Voldemort+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-voldemort/tags/RELEASE_0_1/griffon-voldemort-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
