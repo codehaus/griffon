@@ -24,4 +24,10 @@ class MetawidgetGriffonAddon {
         metawidget: new MetawidgetFactory(),
         stub: new StubFactory()
     ]
+    
+    def methods = [
+        groovyInspector: {List exclusions = [] ->
+            MetawidgetFactory.groovyInspector(exclusions as String[])
+        }
+    ]
 }
