@@ -26,7 +26,7 @@ import groovy.util.FactoryBuilderSupport;
  *
  * @author Andres Almiray 
  */
-public class GriffonSlideASTInjector extends GriffonMvcArtifactASTInjector {
+public class GriffonSlideASTInjector extends GriffonArtifactASTInjector {
     private static final ClassNode FBS_CLASS = ClassHelper.makeWithoutCaching(FactoryBuilderSupport.class);
     
     public void inject(ClassNode classNode, String artifactType) {

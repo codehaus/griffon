@@ -18,13 +18,9 @@
  * @author Andres Almiray
  */
 
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'SlidewareGriffonAddon' == builder
-    }
-}
-
-if(addonIsSet1) {
-    builderConfigFile.text = builderConfigFile.text - "root.'SlidewareGriffonAddon'.addon=true\n"
+// check to see if we already have a SlidewareGriffonAddon
+configText = '''root.'SlidewareGriffonAddon'.addon=true'''
+if(builderConfigFile.text.contains(configText)) {
+    println 'Removing SlidewareGriffonAddon from Builder.groovy'
+    builderConfigFile.text -= configText
 }
