@@ -10,7 +10,7 @@ griffon.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        compile('org.spockframework:spock-core:0.5-groovy-1.7') {
+        compile('org.spockframework:spock-core:0.5-groovy-1.8') {
             exclude 'groovy-all'
             export = false
         }
