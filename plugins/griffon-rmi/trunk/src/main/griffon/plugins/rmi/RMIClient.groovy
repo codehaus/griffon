@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package griffon.rmi
+package griffon.plugins.rmi
 
+import griffon.util.CallableWithArgs
 import java.rmi.RemoteException
 import java.rmi.registry.Registry
 import java.rmi.registry.LocateRegistry
@@ -37,18 +38,28 @@ class RMIClient {
       }
    }
 
-   def service(String serviceName, Closure closure) {
+   Object service(String serviceName, Closure closure) {
+      def service = locateService(serviceName)
+      closure.resolveStrategy = Closure.DELEGATE_FIRST
+      closure.delegate = service
+      return closure()
+   }
+
+   public <T> T service(String serviceName, CallableWithArgs<T> callable) {
+      def service = locateService(serviceName)
+      callable.args = [service] as Object[]
+      return callable.call()
+   }
+
+   private locateService(String serviceName) {
       locateRegistry()
       def service = services.get(serviceName)
       if(!service) {
          service = registry.lookup(serviceName)
          services.put(serviceName, service)
       }
-      
-      closure.resolveStrategy = Closure.DELEGATE_FIRST
-      closure.delegate = service
-      closure()
-   }
+      service
+   } 
 
    private void locateRegistry() {
       if(!registry) {
