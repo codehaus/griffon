@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,53 +14,18 @@
  * limitations under the License.
  */
 
-import griffon.rmi.RMIClient
+import griffon.plugins.rmi.RmiConnector
 
 /**
  * @author Andres Almiray
  */
 class RmiGriffonAddon {
-   def events = [
-      NewInstance: { klass, type, instance ->
-         def types = app.config.griffon?.rmi?.injectInto ?: ['controller']
-         if(!types.contains(type)) return
-         def mc = app.artifactManager.findGriffonClass(klass).metaClass
-         mc.withRmi = withClient.curry(instance)
-      }
-   ]
-
-   // ======================================================
-
-   private withClient = { Object instance, Map params, Closure closure ->
-      def client = null
-      if(params.id) {
-         String id = params.remove('id').toString()
-         MetaClass mc = app.artifactManager.findGriffonClass(klass).metaClass
-         if(mc.hasProperty(instance, id)) {
-            client = instance."$id"
-         } else {
-            client = makeClient(params) 
-            mc."$id" = client
-         }
-      } else {
-        client = makeClient(params) 
-      }
-
-      if(closure) {
-         closure.delegate = client
-         closure.resolveStrategy = Closure.DELEGATE_FIRST
-         closure()
-      }
-   }
-
-   private makeClient(Map params) {
-      def host = params.remove("host") ?: 'localhost'
-      def port = params.remove("port") ?: 1199
-      def lazy = params.remove("lazy") ?: true
-      try {
-         return new RMIClient(host, port as int, lazy)
-      } catch(Exception e) {
-         throw new RuntimeException("Failed to create RMI client, reason: $e", e)
-      }
-   }
+    def events = [
+        NewInstance: { klass, type, instance ->
+            def types = app.config.griffon?.rmi?.injectInto ?: ['controller']
+            if(!types.contains(type)) return
+            def mc = app.artifactManager.findGriffonClass(klass).metaClass
+            RmiConnector.enhance(mc, instance)
+        }
+    ]
 }
