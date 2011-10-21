@@ -1,4 +1,4 @@
-<plugin name='slideware' version='0.2' griffonVersion='0.9.3 &gt; *' jdk='1.5'>
+<plugin name='slideware' version='0.3' griffonVersion='0.9.4 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
   <title>Griffon based slideware</title>
@@ -30,9 +30,9 @@
     <plugin name='transitions' version='0.5' />
     <plugin name='css-builder' version='0.8' />
     <plugin name='jide-builder' version='0.6' />
-    <plugin name='glazedlists' version='0.8.2' />
+    <plugin name='glazedlists' version='0.8.3' />
     <plugin name='jbusycomponent' version='0.5.2' />
-    <plugin name='i18n' version='0.3.1' />
+    <plugin name='i18n' version='0.4.1' />
     <plugin name='lookandfeel' version='0.5' />
     <plugin name='syntaxtext' version='0.1' />
   </dependencies>

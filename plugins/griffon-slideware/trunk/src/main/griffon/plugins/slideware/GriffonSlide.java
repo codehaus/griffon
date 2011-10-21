@@ -16,7 +16,7 @@
  
 package griffon.plugins.slideware;
 
-import griffon.core.GriffonMvcArtifact;
+import griffon.core.GriffonArtifact;
 import groovy.util.FactoryBuilderSupport;
 
 /**
@@ -24,7 +24,7 @@ import groovy.util.FactoryBuilderSupport;
  *
  * @author Andres Almiray
  */
-public interface GriffonSlide extends GriffonMvcArtifact {
+public interface GriffonSlide extends GriffonArtifact {
     /**
      * Sets the corresponding builder instance on this slide.<p>
      * Views will normally use a builder in order to create their UI elements

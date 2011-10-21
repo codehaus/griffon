@@ -18,18 +18,11 @@
  * @author Andres Almiray
  */
 
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'SlidewareGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+// check to see if we already have a GriffonAddon
+configText = '''root.'SlidewareGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding SlidewareGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'SlidewareGriffonAddon'.addon=true
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
 
 ant.mkdir(dir: "${basedir}/griffon-app/slides")

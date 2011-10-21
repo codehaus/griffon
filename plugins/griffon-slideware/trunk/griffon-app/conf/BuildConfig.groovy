@@ -1,4 +1,4 @@
-griffon.jars.destDir='dist/addon'
+// griffon.jars.destDir='dist/addon'
 
 griffon.project.dependency.resolution = {
     inherits"global"
