@@ -5,10 +5,11 @@ griffon.project.dependency.resolution = {
         griffonPlugins()
         griffonHome()
         griffonCentral()
+        mavenCentral()
         mavenRepo 'http://repository.sonatype.org/content/groups/public'
     }
     dependencies {
-        compile('com.miglayout:miglayout:3.7.3.1') {
+        compile('com.miglayout:miglayout:3.7.4') {
             excludes 'substance', 'junit'
         }
     }

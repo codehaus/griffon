@@ -18,8 +18,8 @@
  * @author Andres Almiray
  */
 class MiglayoutGriffonPlugin {
-    def version = 0.2
-    def griffonVersion = '0.9.2 > *' 
+    def version = 0.3
+    def griffonVersion = '0.9.4 > *' 
     def dependsOn = [:]
     def toolkits = ['swing']
     def license = 'Apache Software License 2.0'

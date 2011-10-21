@@ -19,14 +19,8 @@
  */
 
 // check to see if we already have a MiglayoutGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'MiglayoutGriffonAddon' == builder
-    }
-}
-
-if (addonIsSet1) {
+configText = '''root.'MiglayoutGriffonAddon'.addon=true'''
+if(builderConfigFile.text.contains(configText)) {
     println 'Removing MiglayoutGriffonAddon from Builder.groovy'
-    builderConfigFile.text = builderConfigFile.text - "root.'MiglayoutGriffonAddon'.addon=true\n"
+    builderConfigFile.text -= configText
 }
