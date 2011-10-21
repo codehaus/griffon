@@ -19,13 +19,8 @@
  */
 
 // check to see if we already have a XmlrpcGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'XmlrpcGriffonAddon' == builder
-    }
-}
-
-if(addonIsSet1) {
-    builderConfigFile.text = builderConfigFile.text - "root.'XmlrpcGriffonAddon'.addon=true\n"
+configText = '''root.'XmlrpcGriffonAddon'.addon=true'''
+if(builderConfigFile.text.contains(configText)) {
+    println 'Removing XmlrpcGriffonAddon from Builder.groovy'
+    builderConfigFile.text -= configText
 }
