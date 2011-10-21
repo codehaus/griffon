@@ -69,7 +69,7 @@ class OdbHolder {
         T result = null
         try { 
             callable.args = [databaseName, db] as Object[]
-            T = callable.run()
+            result = callable.run()
             db.commit()
         } catch(x) {
             db.rollback()
