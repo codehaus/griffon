@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4623">
+<plugins revision="4628">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -429,7 +429,7 @@ http://chemistry.apache.org/java/opencmis.html</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-cmis/tags/RELEASE_0_1/griffon-cmis-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Open CMIS support</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -4167,7 +4167,7 @@ A port of grails-maven-publisher originally created by Graeme Rocher.</descripti
             <file>http://svn.codehaus.org/griffon/plugins/griffon-maven-publisher/tags/RELEASE_0_1/griffon-maven-publisher-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="memcached" latest-release="0.1">
+    <plugin name="memcached" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Memcached support</title>
             <author>Andres Almiray</author>
@@ -4180,6 +4180,17 @@ A port of grails-maven-publisher originally created by Graeme Rocher.</descripti
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-memcached/tags/RELEASE_0_1/griffon-memcached-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>Memcached support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Memcached support via Spymemcached -&gt; http://code.google.com/p/spymemcached</description>
+            <documentation>http://griffon.codehaus.org/Memcached+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-memcached/tags/RELEASE_0_2/griffon-memcached-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="miglayout" latest-release="0.3">
