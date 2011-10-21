@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4517">
+<plugins revision="4522">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -47,7 +47,7 @@ name, descriptions, mnemonic, accelerator and icons to be used for each action.<
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-actions/tags/RELEASE_0_1/griffon-actions-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>Action management</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -4057,7 +4057,7 @@ A port of grails-maven-publisher originally created by Graeme Rocher.</descripti
             <file>http://svn.codehaus.org/griffon/plugins/griffon-memcached/tags/RELEASE_0_1/griffon-memcached-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="miglayout" latest-release="0.2">
+    <plugin name="miglayout" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>MigLayout Plugin</title>
             <author>Andres Almiray</author>
@@ -4079,6 +4079,18 @@ http://miglayout.com</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-miglayout/tags/RELEASE_0_2/griffon-miglayout-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>MigLayout Plugin</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>MigLayout Plugin
+http://miglayout.com</description>
+            <documentation>http://griffon.codehaus.org/Miglayout+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-miglayout/tags/RELEASE_0_3/griffon-miglayout-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="mirah" latest-release="0.1">
