@@ -21,7 +21,7 @@ import griffon.plugins.terrastore.TerrastoreConnector
  * @author Andres Almiray
  */
 class TerrastoreGriffonAddon {
-    def addonInit = { app ->
+    void addonInit(GriffonApplication app) {
         ConfigObject config = TerrastoreConnector.instance.createConfig(app)
         TerrastoreConnector.instance.connect(app, config)
     }
