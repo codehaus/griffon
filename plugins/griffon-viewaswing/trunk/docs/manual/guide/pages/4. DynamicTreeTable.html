@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>4. DynamicTreeTable</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <img border="0" class="center" src="../img/dynamicTreeTable.png"></img><p class="paragraph"/>Sometimes we want to group some tabular data by some of the columns we have at hand. Well this components becomes very useful in that situations.<p class="paragraph"/><h3>The View</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/><span class="java&#45;keyword">import</span> <span class="java&#45;keyword">static</span> java.awt.BorderLayout.&#42;<p class="paragraph"/>application(title: 'PluginTester',
+  preferredSize: &#91;320, 240&#93;,
+  pack: <span class="java&#45;keyword">true</span>,
+  //location: &#91;50,50&#93;,
+  locationByPlatform:<span class="java&#45;keyword">true</span>,
+  iconImage: imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+  iconImages: &#91;imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+               imageIcon('/griffon&#45;icon&#45;32x32.png').image,
+               imageIcon('/griffon&#45;icon&#45;16x16.png').image&#93;) &#123;
+    borderLayout()
+    scrollPane(constraints:CENTER)&#123;
+        dynamicTreeTable(id:'dynTable')&#123;
+            dynamicColumn(propertyName:'name',title:'Name',grouping:<span class="java&#45;keyword">true</span>)
+            dynamicColumn(propertyName:'age',title:'Age')
+        &#125;
+    &#125;   
+    button(text:'Click',actionPerformed:controller.paginationAction,constraints:SOUTH)
+&#125;</pre></div><p class="paragraph"/><h3>The Model</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>class PluginTesterModel &#123;
+   def name
+   def age
+   def hair
+&#125;</pre></div><p class="paragraph"/><h3>The controller</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>class PluginTesterController &#123;<p class="paragraph"/>    def list = &#91;&#93;    
+    def model
+    def view<p class="paragraph"/>    void mvcGroupInit(Map args) &#123;
+        50.times&#123;
+            <span class="java&#45;keyword">switch</span>(it)&#123;<p class="paragraph"/>                <span class="java&#45;keyword">case</span> 0..10:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"John"</span>,age:it&#93; as PluginTesterModel)
+                <span class="java&#45;keyword">break</span>
+                <span class="java&#45;keyword">case</span> 10..20:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"Peter"</span>,age:it&#93; as PluginTesterModel)
+                <span class="java&#45;keyword">break</span>
+                <span class="java&#45;keyword">case</span> 20..30:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"Jarret"</span>,age:it&#93; as PluginTesterModel)
+                <span class="java&#45;keyword">break</span>
+                <span class="java&#45;keyword">default</span>:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"Pallowski"</span>,age:45&#93; as PluginTesterModel)
+                <span class="java&#45;keyword">break</span>                
+            &#125;
+        &#125;
+    &#125;<p class="paragraph"/>    // void mvcGroupDestroy() &#123;
+    //    // <span class="java&#45;keyword">this</span> method is called when the group is destroyed
+    // &#125;<p class="paragraph"/>    /&#42;
+    Remember that actions will be called outside of the UI thread
+    by <span class="java&#45;keyword">default</span>. You can change <span class="java&#45;keyword">this</span> setting of course.
+    Please read chapter 9 of the Griffon Guide to know more.
+     &#42;/
+    def paginationAction = &#123; evt &#45;&#62;        
+        edt&#123;
+            view.dynTable.treeTableModel.with&#123;
+                rawObjects.addAll(list)
+            &#125;      
+        &#125;             
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>To add entries to the tree table you have to get the table's treetableModel's rawObjects collection:
+<ul class="star">
+<li>viewInstance.treeTableInstance.treeTableModel.rawObjects.collectionMethodAndParameters</li>
+</ul><p class="paragraph"/>Once you have the rawObjects collection, then use the common methods of a collection (add/addAll/remove/removeAll...) to 
+add/remove the table entries.
+    </body>
+</html>
