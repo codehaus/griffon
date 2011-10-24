@@ -29,7 +29,7 @@ import org.neo4j.graphdb.RelationshipType
  * @author Andres Almiray
  */
 class Neo4jGriffonAddon {
-    def addonInit(app) {
+    void addonInit(GriffonApplication app) {
         /*
         [Node.metaClass, Relationship.metaClass].each { mc ->
             mc.getAt = {String propertyName ->
