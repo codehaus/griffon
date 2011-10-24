@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>2. MasterViewPanel</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1><a name="2. MasterViewPanel">2. MasterViewPanel</a></h1>The MasterViewPanel component looks like this:<p class="paragraph"/><img border="0" class="center" src="../img/masterTable.png"></img><p class="paragraph"/>It has three different areas, 
+<ul class="star">
+<li>The title</li>
+<li>The table area</li>
+<li>The pagination area.</li>
+</ul><p class="paragraph"/>A MasterViewPanel is just a JXTitledPanel with a DynamicTable at the top and a PaginationPanel at the bottom.<p class="paragraph"/>Let's see how to use it:<p class="paragraph"/><h3>The View</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>application(title: 'PluginTester',
+  preferredSize: &#91;320, 240&#93;,
+  pack: <span class="java&#45;keyword">true</span>,
+  //location: &#91;50,50&#93;,
+  locationByPlatform:<span class="java&#45;keyword">true</span>,
+  iconImage: imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+  iconImages: &#91;imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+               imageIcon('/griffon&#45;icon&#45;32x32.png').image,
+               imageIcon('/griffon&#45;icon&#45;16x16.png').image&#93;) &#123;
+     borderLayout()
+     masterTable(id:'masterTable',title:'Some People',
+            pagination:<span class="java&#45;keyword">true</span>,constraints:CENTER)&#123;
+            masterColumn(propertyName:<span class="java&#45;quote">"name"</span>)
+            masterColumn(propertyName:<span class="java&#45;quote">"nationality"</span>)
+            masterColumn(propertyName:<span class="java&#45;quote">"hair"</span>)
+            masterColumn(propertyName:<span class="java&#45;quote">"age"</span>)
+            masterPaginationController&#123;evt&#45;&#62; controller.masterPagination(evt)&#125;
+      &#125;
+&#125;</pre></div><p class="paragraph"/><h3>The Model</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>class MasterTableModel &#123;
+   def name
+   def nationality
+   def hair
+   def age
+&#125;</pre></div><p class="paragraph"/><h3>The Controller</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>class MasterTableController &#123;
+    // these will be injected by Griffon
+    def model
+    def view
+    def list = &#91;&#93;<p class="paragraph"/>     void mvcGroupInit(Map args) &#123;
+          50.times&#123;
+            <span class="java&#45;keyword">switch</span>(it)&#123;                
+                <span class="java&#45;keyword">case</span> 0..10:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"John"</span>,age:it,hair:'Blonde',nationality:'German'&#93;)as MasterTableModel&#91;&#93;
+                <span class="java&#45;keyword">break</span>
+                <span class="java&#45;keyword">case</span> 10..20:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"Peter"</span>,age:it,,hair:'Red',nationality:'Canadian'&#93;)as MasterTableModel&#91;&#93;
+                <span class="java&#45;keyword">break</span>
+                <span class="java&#45;keyword">case</span> 20..30:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"Jarret"</span>,age:it,hair:'Brown',nationality:'Spanish'&#93;)as MasterTableModel&#91;&#93;
+                <span class="java&#45;keyword">break</span>
+                <span class="java&#45;keyword">default</span>:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"Pallowski"</span>,age:45,hair:'Blonde',nationality:'German'&#93;)as MasterTableModel&#91;&#93;
+                <span class="java&#45;keyword">break</span>                
+            &#125;
+        &#125;<p class="paragraph"/>        view.masterTable.with&#123;
+            paginationPanel.with&#123;
+                paginationStatus.with&#123;
+                    totalResults = list.size
+                    maxResults = 10
+                    offset = 1
+                &#125;
+            &#125;
+            table.model.addAll(
+                list.subList(0,10)
+            )
+        &#125;<p class="paragraph"/>     &#125;<p class="paragraph"/>    def masterPagination = &#123; evt = <span class="java&#45;keyword">null</span> &#45;&#62;
+        evt.paginationStatus.with&#123;
+            view.masterTable.table.model.addAll(
+                list.subList(firstRecordInPage,lastRecordInPage)
+            )
+        &#125;
+    &#125;    
+&#125;</pre></div><p class="paragraph"/>
+    </body>
+</html>

@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>5. PaginationPanel</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1><a name="5. PaginationPanel">5. PaginationPanel</a></h1><img border="0" class="center" src="../img/paginationPanel.png"></img><p class="paragraph"/>In this example we're going to paginate over a list of countries, using the pagination panel, and a JList.<p class="paragraph"/><h3>The View</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/><span class="java&#45;keyword">import</span> java.awt.BorderLayout.&#42;<p class="paragraph"/>application(title: 'PluginTester',
+  preferredSize: &#91;320, 240&#93;,
+  pack: <span class="java&#45;keyword">true</span>,
+  //location: &#91;50,50&#93;,
+  locationByPlatform:<span class="java&#45;keyword">true</span>,
+  iconImage: imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+  iconImages: &#91;imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+               imageIcon('/griffon&#45;icon&#45;32x32.png').image,
+               imageIcon('/griffon&#45;icon&#45;16x16.png').image&#93;) &#123;           
+    borderLayout()
+    list(id:'countryList',constraints:CENTER)
+    paginationPanel(
+        id:'pagination',
+        enabled:<span class="java&#45;keyword">true</span>,
+        constraints: SOUTH
+    )
+&#125;</pre></div><p class="paragraph"/>It's important to pay attention to the enabled property. If you don't enable the paginationPanel it will show up shadowed, and any 
+further configuration in the controller will be useless.<p class="paragraph"/><h3>The Controller</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/><span class="java&#45;keyword">import</span> javax.swing.DefaultListModel
+<span class="java&#45;keyword">import</span> org.viewaframework.swing.pagination.PaginationListener<p class="paragraph"/>class PaginationPanelController &#123;<p class="paragraph"/>    def model
+    def view
+    List&#60;<span class="java&#45;object">String</span>&#62; countries = Arrays.asList(
+        <span class="java&#45;quote">"Spain"</span>,<span class="java&#45;quote">"Mexico"</span>,<span class="java&#45;quote">"USA"</span>,<span class="java&#45;quote">"Canada"</span>,<span class="java&#45;quote">"France"</span>,<span class="java&#45;quote">"UK"</span>,<span class="java&#45;quote">"Belgium"</span>,<span class="java&#45;quote">"Germany"</span>,
+        <span class="java&#45;quote">"Netherlands"</span>,<span class="java&#45;quote">"Switzerland"</span>,<span class="java&#45;quote">"Denmark"</span>,<span class="java&#45;quote">"Sweden"</span>,<span class="java&#45;quote">"Finland"</span>,<span class="java&#45;quote">"Norway"</span>,
+        <span class="java&#45;quote">"Italy"</span>,<span class="java&#45;quote">"Austria"</span>,<span class="java&#45;quote">"Iceland"</span>,<span class="java&#45;quote">"Poland"</span>    
+    )<p class="paragraph"/>    void mvcGroupInit(Map args) &#123;
+     /&#42; Initializing JList component with a DefaultListModel. I'm aware
+      &#42; it may be another way to <span class="java&#45;keyword">do</span> <span class="java&#45;keyword">this</span> with bindings &#42;/
+        view.countryList.model = <span class="java&#45;keyword">new</span> DefaultListModel()
+        countries&#91;0..3&#93;.each&#123;country&#45;&#62;
+            edt&#123;
+                view.countryList.model.addElement(country)
+            &#125;            
+        &#125;
+     /&#42; Initializing the pagination information and adding a listener
+      &#42; to the pagination. In next releases will be possible to add a
+      &#42; closure directly at the paginationPanel() node. &#42;/
+        view.pagination.with&#123;
+            paginationStatus.totalResults = countries.size()
+            paginationStatus.offset = 1
+            paginationStatus.maxResults = 3
+            addPaginationListener(&#123;evt&#45;&#62; paginate evt&#125; as PaginationListener)
+        &#125;
+    &#125;<p class="paragraph"/> /&#42; Here we paginate over the entries on the list &#42;/
+    def paginate = &#123;evt&#45;&#62;
+    /&#42; The evt instance is one of PaginationEvent &#42;/
+        edt&#123;
+           evt.paginationStatus.with&#123;
+         /&#42; Every time we paginate we just clean up the list &#42;/
+            view.countryList.model.clear()
+         /&#42; And add the selected entries by the pagination event &#42;/
+            countries.subList(
+                firstRecordInPage,
+                lastRecordInPage).each&#123;c&#45;&#62;
+                 /&#42; The chosen ones are added to the list component &#42;/
+                    view.countryList.model.addElement(c)
+                &#125;            
+           &#125;           
+        &#125; 
+    &#125;
+&#125;</pre></div><p class="paragraph"/><blockquote class="warning">
+ There is an issue ID: 3427885 in Viewa, in which the lastRecordInPage property is calculated badly when the
+ number of results per page is greater than the total results. It may cause a IndexArrayOutOfBound if you do not
+ check the indexes.
+</blockquote><p class="paragraph"/>When the MVC group is initialized, then the list is populated and the pagination panel is set up. The most important property
+in the paginationPanel is the paginationStatus object which is the object handling the pagination info. Besides setting up
+the paginationStatus instance you also have to add a paginationListener in order to handle the pagination over the entries. Here 
+we've dispatched the pagination behavior to the paginate method inside the controller.<p class="paragraph"/>Right now if you use the navigationPanel outside a MasterViewPanel you have to do this hack (casting the closure the PaginationListener type),
+but in next release I'll change it to enable it to receive just a closure.<p class="paragraph"/>Every pagination listener receives a PaginationEvent as parameter. That event has an updated PaginationStatus instance. As you see
+we've used the paginationStatus instance for getting the start index and the end index of the current page (firstRecordInPage,lastRecordInPage properties).<p class="paragraph"/>
+    </body>
+</html>

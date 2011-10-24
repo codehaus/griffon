@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>7. LoginPanel-LoginTitledPanel</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1><a name="7. LoginPanel-LoginTitledPanel">7. LoginPanel-LoginTitledPanel</a></h1><img border="0" class="center" src="../img/loginPanel.png"></img><p class="paragraph"/>Whether you need to add a title or not to your login panel, you would use simpleLoginTitledPanel() or simpleLoginPanel() nodes. The
+only difference is the latter uses one attribute called "title".<p class="paragraph"/>In the snapshot above you can see a simpleLoginTitledPanel().<p class="paragraph"/>Why this component? Well I was using the JXLogin panel from org.jdesktop components and I realized I needed a validation message area
+to show users what they did wrong during the login process. Then I built a simple login panel, with a validation message area.<p class="paragraph"/>Here you have the available properties from login components:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name/id</strong></th><th><strong class="bold">Getter(Java Accessor)</strong></th></tr><tr class="table-odd"><td>username</td><td>getUsername()</td></tr><tr class="table-even"><td>usernameLabel</td><td>&#160;</td></tr><tr class="table-odd"><td>password</td><td>getPassword()</td></tr><tr class="table-even"><td>passwordLabel</td><td>&#160;</td></tr><tr class="table-odd"><td>acceptButton</td><td>getAcceptButton()</td></tr><tr class="table-even"><td>cancelButton</td><td>getCancelButton()</td></tr><tr class="table-odd"><td>validationMessage</td><td>getValidationMessage()</td></tr></table><p class="paragraph"/>
+<blockquote class="warning">
+	Right now there's an issue in LoginTitledPanel and the login panel itself can't be accessed from within its JXTitledPane. It
+	will be fixed in the next version. So meanwhile you can nest a simpleLoginPanel() inside a JXTitledPanel from swingx components. It will be 
+</blockquote><p class="paragraph"/>
+<h3>The View</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>application(title: 'PluginTester',
+  preferredSize: &#91;320, 240&#93;,
+  pack: <span class="java&#45;keyword">true</span>,
+  //location: &#91;50,50&#93;,
+  locationByPlatform:<span class="java&#45;keyword">true</span>,
+  iconImage: imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+  iconImages: &#91;imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+               imageIcon('/griffon&#45;icon&#45;32x32.png').image,
+               imageIcon('/griffon&#45;icon&#45;16x16.png').image&#93;) &#123;
+    borderLayout()
+    simpleLoginPanel(id:'loginPanel',constraints:CENTER)
+&#125;</pre></div><p class="paragraph"/>
+<h3>The Controller</h3><p class="paragraph"/>The controller just initializes the validation message area telling asking the user username and password<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>class LoginController &#123;
+    def model
+    def view<p class="paragraph"/>     void mvcGroupInit(Map args) &#123;
+        view.loginPanel.validationMessage.text='Please fill username and password'
+     &#125;
+&#125;</pre></div><p class="paragraph"/>
+
+    </body>
+</html>
