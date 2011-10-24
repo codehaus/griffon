@@ -1,0 +1,326 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>viewaswing 0.1 - Reference Documentation</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Style" charset="utf-8"/>
+        <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
+    </head>
+    <body class="body">
+        <div id="header">
+            <div class="images"><br/><br/>
+                <a href="http://griffon.codehaus.org" target="_blank"><img alt="The Griffon Framework" src="../img/griffon.png" border="0"/></a>
+                <span style="right:30px; top:20px; position:absolute;">
+                    <a href="../index.html" target="_top">Frames</a> | <a href="index.html" target="_top">No Frames</a><br/><br/>
+                    <br/>
+                </span>
+            </div>
+            <div class="message">viewaswing</div>
+            <h1>viewaswing - Reference Documentation</h1>
+            <p><strong>Authors:</strong> Mario Garcia</p>
+            <p><strong>Version:</strong> 0.1</p>
+            <em></em>
+        </div>
+
+        <div id="toc">
+            <h2>Table of Contents</h2>
+            <div class="tocItem" style="margin-left:0px"><a href="#1. Introduction">1. Introduction</a></div><div class="tocItem" style="margin-left:0px"><a href="#2. MasterViewPanel">2. MasterViewPanel</a></div><div class="tocItem" style="margin-left:0px"><a href="#3. DynamicTable">3. DynamicTable</a></div><div class="tocItem" style="margin-left:0px"><a href="#4. DynamicTreeTable">4. DynamicTreeTable</a></div><div class="tocItem" style="margin-left:0px"><a href="#5. PaginationPanel">5. PaginationPanel</a></div><div class="tocItem" style="margin-left:0px"><a href="#6. DatePicker">6. DatePicker</a></div><div class="tocItem" style="margin-left:0px"><a href="#7. LoginPanel-LoginTitledPanel">7. LoginPanel-LoginTitledPanel</a></div>
+        </div>
+        <div id="content">
+            <h1><a name="1. Introduction">1. Introduction</a></h1>This plugin adds some new UI components from the Viewa framework (http://www.viewaframework.org) to your Griffon project. These components will be available in your project thanks to some builders added by this plugin's addon. 
+These components basically bring you an easy way of creating tables and pagination to display your data.<p class="paragraph"/>The list of enabled components sorted by functionality:
+<ul class="star">
+<li>Tabular Data</li>
+<ul class="star">
+<li>MasterViewPanel</li>
+<li>DynamicTable</li>
+<li>DynamicTreeTable</li>
+</ul>
+<li>Pagination</li>
+<ul class="star">
+<li>PaginationPanel</li>
+</ul>
+<li>Miscelaneus</li>
+<ul class="star">
+<li>LoginPanel</li>
+<li>LoginTitledPanel</li>
+<li>DatePicker</li>
+</ul></ul><p class="paragraph"/>In the following chapter this guide will show you how to use these components inside your Griffon views. <h1><a name="2. MasterViewPanel">2. MasterViewPanel</a></h1>The MasterViewPanel component looks like this:<p class="paragraph"/><img border="0" class="center" src="../img/masterTable.png"></img><p class="paragraph"/>It has three different areas, 
+<ul class="star">
+<li>The title</li>
+<li>The table area</li>
+<li>The pagination area.</li>
+</ul><p class="paragraph"/>A MasterViewPanel is just a JXTitledPanel with a DynamicTable at the top and a PaginationPanel at the bottom.<p class="paragraph"/>Let's see how to use it:<p class="paragraph"/><h3>The View</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>application(title: 'PluginTester',
+  preferredSize: &#91;320, 240&#93;,
+  pack: <span class="java&#45;keyword">true</span>,
+  //location: &#91;50,50&#93;,
+  locationByPlatform:<span class="java&#45;keyword">true</span>,
+  iconImage: imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+  iconImages: &#91;imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+               imageIcon('/griffon&#45;icon&#45;32x32.png').image,
+               imageIcon('/griffon&#45;icon&#45;16x16.png').image&#93;) &#123;
+     borderLayout()
+     masterTable(id:'masterTable',title:'Some People',
+            pagination:<span class="java&#45;keyword">true</span>,constraints:CENTER)&#123;
+            masterColumn(propertyName:<span class="java&#45;quote">"name"</span>)
+            masterColumn(propertyName:<span class="java&#45;quote">"nationality"</span>)
+            masterColumn(propertyName:<span class="java&#45;quote">"hair"</span>)
+            masterColumn(propertyName:<span class="java&#45;quote">"age"</span>)
+            masterPaginationController&#123;evt&#45;&#62; controller.masterPagination(evt)&#125;
+      &#125;
+&#125;</pre></div><p class="paragraph"/><h3>The Model</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>class MasterTableModel &#123;
+   def name
+   def nationality
+   def hair
+   def age
+&#125;</pre></div><p class="paragraph"/><h3>The Controller</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>class MasterTableController &#123;
+    // these will be injected by Griffon
+    def model
+    def view
+    def list = &#91;&#93;<p class="paragraph"/>     void mvcGroupInit(Map args) &#123;
+          50.times&#123;
+            <span class="java&#45;keyword">switch</span>(it)&#123;                
+                <span class="java&#45;keyword">case</span> 0..10:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"John"</span>,age:it,hair:'Blonde',nationality:'German'&#93;)as MasterTableModel&#91;&#93;
+                <span class="java&#45;keyword">break</span>
+                <span class="java&#45;keyword">case</span> 10..20:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"Peter"</span>,age:it,,hair:'Red',nationality:'Canadian'&#93;)as MasterTableModel&#91;&#93;
+                <span class="java&#45;keyword">break</span>
+                <span class="java&#45;keyword">case</span> 20..30:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"Jarret"</span>,age:it,hair:'Brown',nationality:'Spanish'&#93;)as MasterTableModel&#91;&#93;
+                <span class="java&#45;keyword">break</span>
+                <span class="java&#45;keyword">default</span>:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"Pallowski"</span>,age:45,hair:'Blonde',nationality:'German'&#93;)as MasterTableModel&#91;&#93;
+                <span class="java&#45;keyword">break</span>                
+            &#125;
+        &#125;<p class="paragraph"/>        view.masterTable.with&#123;
+            paginationPanel.with&#123;
+                paginationStatus.with&#123;
+                    totalResults = list.size
+                    maxResults = 10
+                    offset = 1
+                &#125;
+            &#125;
+            table.model.addAll(
+                list.subList(0,10)
+            )
+        &#125;<p class="paragraph"/>     &#125;<p class="paragraph"/>    def masterPagination = &#123; evt = <span class="java&#45;keyword">null</span> &#45;&#62;
+        evt.paginationStatus.with&#123;
+            view.masterTable.table.model.addAll(
+                list.subList(firstRecordInPage,lastRecordInPage)
+            )
+        &#125;
+    &#125;    
+&#125;</pre></div><p class="paragraph"/><h1><a name="3. DynamicTable">3. DynamicTable</a></h1><img border="0" class="center" src="../img/dynamicTable.png"></img><p class="paragraph"/>
+The DynamicTable enables you to create a table without creating a specific model for each table. You only have create a dynamicTablel()
+node and add as many dynamicColumn() nodes as columns you want to display. The latter column nodes handle the information about
+the property you want to display for each entry in the table.<p class="paragraph"/>
+<h3>The View</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>application(title: 'PluginTester',
+    preferredSize: &#91;320, 240&#93;,
+    pack: <span class="java&#45;keyword">true</span>,
+    //location: &#91;50,50&#93;,
+    locationByPlatform:<span class="java&#45;keyword">true</span>,
+    iconImage: imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+    iconImages: &#91;imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+        imageIcon('/griffon&#45;icon&#45;32x32.png').image,
+        imageIcon('/griffon&#45;icon&#45;16x16.png').image&#93;) &#123;
+    borderLayout()
+    scrollPane(constraints:CENTER)&#123;
+        dynamicTable(id:'dynTable')&#123;						
+            dynamicColumn(propertyName:'name',title:'Name')
+            dynamicColumn(propertyName:'age',title:'Age')
+        &#125;	
+    &#125;
+    button(text:'Add People',constraints:SOUTH,actionPerformed: &#123;evt&#45;&#62;controller.addPeople evt&#125;)
+&#125;</pre></div><p class="paragraph"/>Here we declare the table with its id for later handling ( dynamicTable(id:'dynTable') ). Then we want to show the name and the
+age of each person in the list so, we provide the property name inside the DynamicTableModel object and the title we want to see as the header
+of the column.<p class="paragraph"/>
+<h3>The Model</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/><span class="java&#45;keyword">import</span> groovy.beans.Bindable<p class="paragraph"/>class DynamicTableModel &#123;
+   <span class="java&#45;object">String</span> name
+   <span class="java&#45;object">Integer</span> age
+&#125;</pre></div><p class="paragraph"/>This is the model for our example. It could be any other Groovy Bean.<p class="paragraph"/><h3>The Controller</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>class DynamicTableController &#123;
+    def model
+    def view
+    def people = &#91;
+        <span class="java&#45;keyword">new</span> DynamicTableModel(name:'Auggie',age:36),
+        <span class="java&#45;keyword">new</span> DynamicTableModel(name:'Joan',age:38),
+        <span class="java&#45;keyword">new</span> DynamicTableModel(name:'Annie',age:28),
+        <span class="java&#45;keyword">new</span> DynamicTableModel(name:'Jai',age:32)
+    &#93;<p class="paragraph"/>    def addPeople = &#123;evt&#45;&#62;
+         edt&#123;
+            dynTable.model.addAll people
+        &#125;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>We've declared a list of people and all we have to do to add them to the table is getting the table's model instance and use
+the add/addAll methods. Use remove/removeAll for the opposite.<p class="paragraph"/><h1><a name="4. DynamicTreeTable">4. DynamicTreeTable</a></h1><img border="0" class="center" src="../img/dynamicTreeTable.png"></img><p class="paragraph"/>Sometimes we want to group some tabular data by some of the columns we have at hand. Well this components becomes very useful in that situations.<p class="paragraph"/><h3>The View</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/><span class="java&#45;keyword">import</span> <span class="java&#45;keyword">static</span> java.awt.BorderLayout.&#42;<p class="paragraph"/>application(title: 'PluginTester',
+  preferredSize: &#91;320, 240&#93;,
+  pack: <span class="java&#45;keyword">true</span>,
+  //location: &#91;50,50&#93;,
+  locationByPlatform:<span class="java&#45;keyword">true</span>,
+  iconImage: imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+  iconImages: &#91;imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+               imageIcon('/griffon&#45;icon&#45;32x32.png').image,
+               imageIcon('/griffon&#45;icon&#45;16x16.png').image&#93;) &#123;
+    borderLayout()
+    scrollPane(constraints:CENTER)&#123;
+        dynamicTreeTable(id:'dynTable')&#123;
+            dynamicColumn(propertyName:'name',title:'Name',grouping:<span class="java&#45;keyword">true</span>)
+            dynamicColumn(propertyName:'age',title:'Age')
+        &#125;
+    &#125;   
+    button(text:'Click',actionPerformed:controller.paginationAction,constraints:SOUTH)
+&#125;</pre></div><p class="paragraph"/><h3>The Model</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>class PluginTesterModel &#123;
+   def name
+   def age
+   def hair
+&#125;</pre></div><p class="paragraph"/><h3>The controller</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>class PluginTesterController &#123;<p class="paragraph"/>    def list = &#91;&#93;    
+    def model
+    def view<p class="paragraph"/>    void mvcGroupInit(Map args) &#123;
+        50.times&#123;
+            <span class="java&#45;keyword">switch</span>(it)&#123;<p class="paragraph"/>                <span class="java&#45;keyword">case</span> 0..10:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"John"</span>,age:it&#93; as PluginTesterModel)
+                <span class="java&#45;keyword">break</span>
+                <span class="java&#45;keyword">case</span> 10..20:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"Peter"</span>,age:it&#93; as PluginTesterModel)
+                <span class="java&#45;keyword">break</span>
+                <span class="java&#45;keyword">case</span> 20..30:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"Jarret"</span>,age:it&#93; as PluginTesterModel)
+                <span class="java&#45;keyword">break</span>
+                <span class="java&#45;keyword">default</span>:
+                    list &#60;&#60; (&#91;name:<span class="java&#45;quote">"Pallowski"</span>,age:45&#93; as PluginTesterModel)
+                <span class="java&#45;keyword">break</span>                
+            &#125;
+        &#125;
+    &#125;<p class="paragraph"/>    // void mvcGroupDestroy() &#123;
+    //    // <span class="java&#45;keyword">this</span> method is called when the group is destroyed
+    // &#125;<p class="paragraph"/>    /&#42;
+    Remember that actions will be called outside of the UI thread
+    by <span class="java&#45;keyword">default</span>. You can change <span class="java&#45;keyword">this</span> setting of course.
+    Please read chapter 9 of the Griffon Guide to know more.
+     &#42;/
+    def paginationAction = &#123; evt &#45;&#62;        
+        edt&#123;
+            view.dynTable.treeTableModel.with&#123;
+                rawObjects.addAll(list)
+            &#125;      
+        &#125;             
+    &#125;<p class="paragraph"/>&#125;</pre></div><p class="paragraph"/>To add entries to the tree table you have to get the table's treetableModel's rawObjects collection:
+<ul class="star">
+<li>viewInstance.treeTableInstance.treeTableModel.rawObjects.collectionMethodAndParameters</li>
+</ul><p class="paragraph"/>Once you have the rawObjects collection, then use the common methods of a collection (add/addAll/remove/removeAll...) to 
+add/remove the table entries.<h1><a name="5. PaginationPanel">5. PaginationPanel</a></h1><img border="0" class="center" src="../img/paginationPanel.png"></img><p class="paragraph"/>In this example we're going to paginate over a list of countries, using the pagination panel, and a JList.<p class="paragraph"/><h3>The View</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/><span class="java&#45;keyword">import</span> java.awt.BorderLayout.&#42;<p class="paragraph"/>application(title: 'PluginTester',
+  preferredSize: &#91;320, 240&#93;,
+  pack: <span class="java&#45;keyword">true</span>,
+  //location: &#91;50,50&#93;,
+  locationByPlatform:<span class="java&#45;keyword">true</span>,
+  iconImage: imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+  iconImages: &#91;imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+               imageIcon('/griffon&#45;icon&#45;32x32.png').image,
+               imageIcon('/griffon&#45;icon&#45;16x16.png').image&#93;) &#123;           
+    borderLayout()
+    list(id:'countryList',constraints:CENTER)
+    paginationPanel(
+        id:'pagination',
+        enabled:<span class="java&#45;keyword">true</span>,
+        constraints: SOUTH
+    )
+&#125;</pre></div><p class="paragraph"/>It's important to pay attention to the enabled property. If you don't enable the paginationPanel it will show up shadowed, and any 
+further configuration in the controller will be useless.<p class="paragraph"/><h3>The Controller</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/><span class="java&#45;keyword">import</span> javax.swing.DefaultListModel
+<span class="java&#45;keyword">import</span> org.viewaframework.swing.pagination.PaginationListener<p class="paragraph"/>class PaginationPanelController &#123;<p class="paragraph"/>    def model
+    def view
+    List&#60;<span class="java&#45;object">String</span>&#62; countries = Arrays.asList(
+        <span class="java&#45;quote">"Spain"</span>,<span class="java&#45;quote">"Mexico"</span>,<span class="java&#45;quote">"USA"</span>,<span class="java&#45;quote">"Canada"</span>,<span class="java&#45;quote">"France"</span>,<span class="java&#45;quote">"UK"</span>,<span class="java&#45;quote">"Belgium"</span>,<span class="java&#45;quote">"Germany"</span>,
+        <span class="java&#45;quote">"Netherlands"</span>,<span class="java&#45;quote">"Switzerland"</span>,<span class="java&#45;quote">"Denmark"</span>,<span class="java&#45;quote">"Sweden"</span>,<span class="java&#45;quote">"Finland"</span>,<span class="java&#45;quote">"Norway"</span>,
+        <span class="java&#45;quote">"Italy"</span>,<span class="java&#45;quote">"Austria"</span>,<span class="java&#45;quote">"Iceland"</span>,<span class="java&#45;quote">"Poland"</span>    
+    )<p class="paragraph"/>    void mvcGroupInit(Map args) &#123;
+     /&#42; Initializing JList component with a DefaultListModel. I'm aware
+      &#42; it may be another way to <span class="java&#45;keyword">do</span> <span class="java&#45;keyword">this</span> with bindings &#42;/
+        view.countryList.model = <span class="java&#45;keyword">new</span> DefaultListModel()
+        countries&#91;0..3&#93;.each&#123;country&#45;&#62;
+            edt&#123;
+                view.countryList.model.addElement(country)
+            &#125;            
+        &#125;
+     /&#42; Initializing the pagination information and adding a listener
+      &#42; to the pagination. In next releases will be possible to add a
+      &#42; closure directly at the paginationPanel() node. &#42;/
+        view.pagination.with&#123;
+            paginationStatus.totalResults = countries.size()
+            paginationStatus.offset = 1
+            paginationStatus.maxResults = 3
+            addPaginationListener(&#123;evt&#45;&#62; paginate evt&#125; as PaginationListener)
+        &#125;
+    &#125;<p class="paragraph"/> /&#42; Here we paginate over the entries on the list &#42;/
+    def paginate = &#123;evt&#45;&#62;
+    /&#42; The evt instance is one of PaginationEvent &#42;/
+        edt&#123;
+           evt.paginationStatus.with&#123;
+         /&#42; Every time we paginate we just clean up the list &#42;/
+            view.countryList.model.clear()
+         /&#42; And add the selected entries by the pagination event &#42;/
+            countries.subList(
+                firstRecordInPage,
+                lastRecordInPage).each&#123;c&#45;&#62;
+                 /&#42; The chosen ones are added to the list component &#42;/
+                    view.countryList.model.addElement(c)
+                &#125;            
+           &#125;           
+        &#125; 
+    &#125;
+&#125;</pre></div><p class="paragraph"/><blockquote class="warning">
+ There is an issue ID: 3427885 in Viewa, in which the lastRecordInPage property is calculated badly when the
+ number of results per page is greater than the total results. It may cause a IndexArrayOutOfBound if you do not
+ check the indexes.
+</blockquote><p class="paragraph"/>When the MVC group is initialized, then the list is populated and the pagination panel is set up. The most important property
+in the paginationPanel is the paginationStatus object which is the object handling the pagination info. Besides setting up
+the paginationStatus instance you also have to add a paginationListener in order to handle the pagination over the entries. Here 
+we've dispatched the pagination behavior to the paginate method inside the controller.<p class="paragraph"/>Right now if you use the navigationPanel outside a MasterViewPanel you have to do this hack (casting the closure the PaginationListener type),
+but in next release I'll change it to enable it to receive just a closure.<p class="paragraph"/>Every pagination listener receives a PaginationEvent as parameter. That event has an updated PaginationStatus instance. As you see
+we've used the paginationStatus instance for getting the start index and the end index of the current page (firstRecordInPage,lastRecordInPage properties).<p class="paragraph"/><h1><a name="6. DatePicker">6. DatePicker</a></h1><img border="0" class="center" src="../img/datePicker.png"></img><p class="paragraph"/>This component is just a JXDatePicker using the silk icons to decorate the picker.<p class="paragraph"/><h3>The View</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/><span class="java&#45;keyword">import</span> java.awt.BorderLayout.&#42;<p class="paragraph"/>application(title: 'PluginTester',
+  preferredSize: &#91;320, 240&#93;,
+  pack: <span class="java&#45;keyword">true</span>,
+  //location: &#91;50,50&#93;,
+  locationByPlatform:<span class="java&#45;keyword">true</span>,
+  iconImage: imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+  iconImages: &#91;imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+               imageIcon('/griffon&#45;icon&#45;32x32.png').image,
+               imageIcon('/griffon&#45;icon&#45;16x16.png').image&#93;) &#123;           
+    borderLayout()
+    customDatePicker(id:'searchDate',constraints:NORTH)
+    list(id:'countryList',constraints:CENTER)
+    paginationPanel(
+        id:'pagination',
+        enabled:<span class="java&#45;keyword">true</span>,
+        constraints: SOUTH
+    )
+&#125;</pre></div><h1><a name="7. LoginPanel-LoginTitledPanel">7. LoginPanel-LoginTitledPanel</a></h1><img border="0" class="center" src="../img/loginPanel.png"></img><p class="paragraph"/>Whether you need to add a title or not to your login panel, you would use simpleLoginTitledPanel() or simpleLoginPanel() nodes. The
+only difference is the latter uses one attribute called "title".<p class="paragraph"/>In the snapshot above you can see a simpleLoginTitledPanel().<p class="paragraph"/>Why this component? Well I was using the JXLogin panel from org.jdesktop components and I realized I needed a validation message area
+to show users what they did wrong during the login process. Then I built a simple login panel, with a validation message area.<p class="paragraph"/>Here you have the available properties from login components:<p class="paragraph"/><table class="wiki-table" cellpadding="0" cellspacing="0" border="0"><tr><th><strong class="bold">Name/id</strong></th><th><strong class="bold">Getter(Java Accessor)</strong></th></tr><tr class="table-odd"><td>username</td><td>getUsername()</td></tr><tr class="table-even"><td>usernameLabel</td><td>&#160;</td></tr><tr class="table-odd"><td>password</td><td>getPassword()</td></tr><tr class="table-even"><td>passwordLabel</td><td>&#160;</td></tr><tr class="table-odd"><td>acceptButton</td><td>getAcceptButton()</td></tr><tr class="table-even"><td>cancelButton</td><td>getCancelButton()</td></tr><tr class="table-odd"><td>validationMessage</td><td>getValidationMessage()</td></tr></table><p class="paragraph"/>
+<blockquote class="warning">
+	Right now there's an issue in LoginTitledPanel and the login panel itself can't be accessed from within its JXTitledPane. It
+	will be fixed in the next version. So meanwhile you can nest a simpleLoginPanel() inside a JXTitledPanel from swingx components. It will be 
+</blockquote><p class="paragraph"/>
+<h3>The View</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>application(title: 'PluginTester',
+  preferredSize: &#91;320, 240&#93;,
+  pack: <span class="java&#45;keyword">true</span>,
+  //location: &#91;50,50&#93;,
+  locationByPlatform:<span class="java&#45;keyword">true</span>,
+  iconImage: imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+  iconImages: &#91;imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+               imageIcon('/griffon&#45;icon&#45;32x32.png').image,
+               imageIcon('/griffon&#45;icon&#45;16x16.png').image&#93;) &#123;
+    borderLayout()
+    simpleLoginPanel(id:'loginPanel',constraints:CENTER)
+&#125;</pre></div><p class="paragraph"/>
+<h3>The Controller</h3><p class="paragraph"/>The controller just initializes the validation message area telling asking the user username and password<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/>class LoginController &#123;
+    def model
+    def view<p class="paragraph"/>     void mvcGroupInit(Map args) &#123;
+        view.loginPanel.validationMessage.text='Please fill username and password'
+     &#125;
+&#125;</pre></div><p class="paragraph"/>
+
+        </div>
+        <div id="footer">
+             <br/><br/>Made with Griffon (0.9.3)
+        </div>
+    </body>
+</html>
