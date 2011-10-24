@@ -21,7 +21,7 @@ import griffon.plugins.voldemort.VoldemortConnector
  * @author Andres Almiray
  */
 class VoldemortGriffonAddon {
-    def addonInit = { app ->
+    void addonInit(GriffonApplication app) {
         ConfigObject config = VoldemortConnector.instance.createConfig(app)
         VoldemortConnector.instance.connect(app, config)
     }
