@@ -21,7 +21,7 @@ import griffon.plugins.redis.RedisConnector
  * @author Andres Almiray
  */
 class RedisGriffonAddon {
-    def addonInit = { app ->
+    void addonInit(GriffonApplication app) {
         ConfigObject config = RedisConnector.instance.createConfig(app)
         RedisConnector.instance.connect(app, config)
     }
