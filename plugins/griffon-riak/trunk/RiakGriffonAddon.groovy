@@ -21,7 +21,7 @@ import griffon.plugins.riak.RiakConnector
  * @author Andres Almiray
  */
 class RiakGriffonAddon {
-    def addonInit = { app ->
+    void addonInit(GriffonApplication app) {
         ConfigObject config = RiakConnector.instance.createConfig(app)
         RiakConnector.instance.connect(app, config)
     }
