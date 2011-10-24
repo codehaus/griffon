@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>6. DatePicker</title>
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" title="Ref" charset="utf-8"/>
+    </head>
+    <body class="body">
+    <h1><a name="6. DatePicker">6. DatePicker</a></h1><img border="0" class="center" src="../img/datePicker.png"></img><p class="paragraph"/>This component is just a JXDatePicker using the silk icons to decorate the picker.<p class="paragraph"/><h3>The View</h3><p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">package</span> plugintester<p class="paragraph"/><span class="java&#45;keyword">import</span> java.awt.BorderLayout.&#42;<p class="paragraph"/>application(title: 'PluginTester',
+  preferredSize: &#91;320, 240&#93;,
+  pack: <span class="java&#45;keyword">true</span>,
+  //location: &#91;50,50&#93;,
+  locationByPlatform:<span class="java&#45;keyword">true</span>,
+  iconImage: imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+  iconImages: &#91;imageIcon('/griffon&#45;icon&#45;48x48.png').image,
+               imageIcon('/griffon&#45;icon&#45;32x32.png').image,
+               imageIcon('/griffon&#45;icon&#45;16x16.png').image&#93;) &#123;           
+    borderLayout()
+    customDatePicker(id:'searchDate',constraints:NORTH)
+    list(id:'countryList',constraints:CENTER)
+    paginationPanel(
+        id:'pagination',
+        enabled:<span class="java&#45;keyword">true</span>,
+        constraints: SOUTH
+    )
+&#125;</pre></div>
+    </body>
+</html>
