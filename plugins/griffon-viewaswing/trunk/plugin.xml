@@ -1,0 +1,12 @@
+<plugin name='viewaswing' version='0.1' griffonVersion='0.9.3 &gt; *' jdk='1.5'>
+  <author>Mario Garcia</author>
+  <title>Viewa swing components</title>
+  <description>This plugin adds new builders to use viewa components inside your Griffon applications.</description>
+  <documentation>http://griffon.codehaus.org/Viewaswing+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits>swing</toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
