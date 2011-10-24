@@ -1,0 +1,13 @@
+<plugin name='terrastore' version='0.1' griffonVersion='0.9.4 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Terrastore support</title>
+  <description>Terrastore support
+http://code.google.com/p/terrastore/</description>
+  <documentation>http://griffon.codehaus.org/Terrastore+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
+  <dependencies />
+</plugin>
