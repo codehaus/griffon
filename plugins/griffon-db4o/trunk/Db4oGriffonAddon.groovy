@@ -24,7 +24,7 @@ import griffon.plugins.db4o.Db4oConnector
  * @author Andres Almiray
  */
 class Db4oGriffonAddon {
-    def addonInit = { app ->
+    void addonInit(GriffonApplication app) {
         ConfigObject config = Db4oConnector.instance.createConfig(app)
         Db4oConnector.instance.connect(app, config)
     }
