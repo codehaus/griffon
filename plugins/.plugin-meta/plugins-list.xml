@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4737">
+<plugins revision="4742">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -55,9 +55,8 @@ name, descriptions, mnemonic, accelerator and icons to be used for each action.<
 controller action (property or method). Relies on naming convention to determine
 name, descriptions, mnemonic, accelerator and icons to be used for each action.</description>
             <documentation>http://griffon.codehaus.org/Actions+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
             <platforms/>
+            <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-actions/tags/RELEASE_0_2/griffon-actions-0.2.zip</file>
         </release>
     </plugin>
@@ -91,9 +90,8 @@ http://code.google.com/p/activejdbc/</description>
             <description>Persistence support via Activejdbc
 http://code.google.com/p/activejdbc/</description>
             <documentation>http://griffon.codehaus.org/Activejdbc+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-activejdbc/tags/RELEASE_0_3/griffon-activejdbc-0.3.zip</file>
         </release>
     </plugin>
@@ -223,9 +221,8 @@ http://barcode4j.sourceforge.net</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Berkeleydb support</description>
             <documentation>http://griffon.codehaus.org/Berkeleydb+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-berkeleydb/tags/RELEASE_0_5/griffon-berkeleydb-0.5.zip</file>
         </release>
     </plugin>
@@ -260,9 +257,8 @@ http://carbonado.sourceforge.net/</description>
             <description>Presistence support via Carbonado
 http://carbonado.sourceforge.net/</description>
             <documentation>http://griffon.codehaus.org/Carbonado+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-carbonado/tags/RELEASE_0_3/griffon-carbonado-0.3.zip</file>
         </release>
     </plugin>
@@ -392,9 +388,8 @@ http://groovychart.dev.java.net</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Enables the usage of Clojure on your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Clojure+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-clojure/tags/RELEASE_0_8/griffon-clojure-0.8.zip</file>
         </release>
     </plugin>
@@ -436,9 +431,8 @@ http://chemistry.apache.org/java/opencmis.html</description>
             <description>Open CMIS support
 http://chemistry.apache.org/java/opencmis.html</description>
             <documentation>http://griffon.codehaus.org/Cmis+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-cmis/tags/RELEASE_0_2/griffon-cmis-0.2.zip</file>
         </release>
     </plugin>
@@ -522,9 +516,8 @@ Based on grails-code-coverage by Mike Hugo.</description>
             <description>Creates Code Coverage reports for your code.
 Based on grails-code-coverage by Mike Hugo.</description>
             <documentation>http://griffon.codehaus.org/CodeCoverage+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-code-coverage/tags/RELEASE_0_6/griffon-code-coverage-0.6.zip</file>
         </release>
     </plugin>
@@ -704,9 +697,8 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Couchdb support</description>
             <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_6/griffon-couchdb-0.6.zip</file>
         </release>
         <release tag="RELEASE_0_6_1" type="svn" version="0.6.1">
@@ -715,9 +707,8 @@ Based on the original Grails codenarc plugin by Burt Beckwith.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Couchdb support</description>
             <documentation>http://griffon.codehaus.org/Couchdb+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-couchdb/tags/RELEASE_0_6_1/griffon-couchdb-0.6.1.zip</file>
         </release>
     </plugin>
@@ -988,9 +979,8 @@ http://everaldo.com/crystal/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Initializes and manages datasources</description>
             <documentation>http://griffon.codehaus.org/Datasource+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-datasource/tags/RELEASE_0_2/griffon-datasource-0.2.zip</file>
         </release>
     </plugin>
@@ -1041,9 +1031,8 @@ http://everaldo.com/crystal/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Db4o support</description>
             <documentation>http://griffon.codehaus.org/Db4o+Plugin</documentation>
-            <license>GNU General Public License v3</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-db4o/tags/RELEASE_0_5/griffon-db4o-0.5.zip</file>
         </release>
     </plugin>
@@ -1091,6 +1080,19 @@ https://designgridlayout.dev.java.net</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-designgridlayout/tags/RELEASE_0_4/griffon-designgridlayout-0.4.zip</file>
+        </release>
+    </plugin>
+    <plugin name="dialogs" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Provides common dialogs</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Provides common dialogs:
+ - TextMate inspired finder</description>
+            <documentation>http://griffon.codehaus.org/Dialogs+Plugin</documentation>
+            <platforms/>
+            <toolkits>swing</toolkits>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-dialogs/tags/RELEASE_0_1/griffon-dialogs-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="docking-frame" latest-release="0.4">
@@ -1204,9 +1206,8 @@ another docking frame in the application.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Enables BDD testing with Easyb (http://easyb.org)</description>
             <documentation>http://griffon.codehaus.org/Easyb+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-easyb/tags/RELEASE_0_5/griffon-easyb-0.5.zip</file>
         </release>
     </plugin>
@@ -1229,9 +1230,8 @@ http://www.avaje.org/</description>
             <description>Persistence support via Ebean
 http://www.avaje.org/</description>
             <documentation>http://griffon.codehaus.org/Ebean+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-ebean/tags/RELEASE_0_2/griffon-ebean-0.2.zip</file>
         </release>
     </plugin>
@@ -1372,9 +1372,8 @@ http://www.avaje.org/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Keeps Eclipse files up to date.</description>
             <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_8/griffon-eclipse-support-0.4.8.zip</file>
         </release>
     </plugin>
@@ -1595,9 +1594,8 @@ Provides a nice icon set too.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Enables application testing with FEST (http://easytesting.org)</description>
             <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
             <platforms/>
+            <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_7/griffon-fest-0.7.zip</file>
         </release>
     </plugin>
@@ -1958,9 +1956,8 @@ Provides a nice icon set too.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Adds GlazedLists support to your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Glazedlists+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
             <platforms/>
+            <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-glazedlists/tags/RELEASE_0_8_3/griffon-glazedlists-0.8.3.zip</file>
         </release>
     </plugin>
@@ -2060,9 +2057,8 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <authorEmail>deanriverson@gmail.com</authorEmail>
             <description>A plugin that provides use of the GroovyFX library from within a Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Groovyfx+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>javafx</toolkits>
             <platforms/>
+            <toolkits>javafx</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-groovyfx/tags/RELEASE_0_2/griffon-groovyfx-0.2.zip</file>
         </release>
     </plugin>
@@ -2163,9 +2159,8 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Groovy SQL support</description>
             <documentation>http://griffon.codehaus.org/Gsql+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gsql/tags/RELEASE_0_8/griffon-gsql-0.8.zip</file>
         </release>
     </plugin>
@@ -2283,9 +2278,8 @@ http://harmoniccode.blogspot.com</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Hessian client &amp; libraries.</description>
             <documentation>http://griffon.codehaus.org/Hessian+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-hessian/tags/RELEASE_0_6/griffon-hessian-0.6.zip</file>
         </release>
     </plugin>
@@ -2346,9 +2340,8 @@ http://harmoniccode.blogspot.com</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>I18n support via Spring.</description>
             <documentation>http://griffon.codehaus.org/I18n+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-i18n/tags/RELEASE_0_4_1/griffon-i18n-0.4.1.zip</file>
         </release>
     </plugin>
@@ -2615,9 +2608,8 @@ http://jalarms.sourceforge.net</description>
             <authorEmail>deanriverson@gmail.com</authorEmail>
             <description>This plugin allows you to write JavaFX applications using the Griffon framework.</description>
             <documentation>http://griffon.codehaus.org/Javafx+Plugin</documentation>
-            <license>Apache Public License 2.0</license>
-            <toolkits>javafx</toolkits>
             <platforms/>
+            <toolkits>javafx</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-javafx/tags/RELEASE_0_2/griffon-javafx-0.2.zip</file>
         </release>
     </plugin>
@@ -2954,9 +2946,8 @@ http://jgraph.com</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Msn Messenger support.</description>
             <documentation>http://griffon.codehaus.org/Jml+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jml/tags/RELEASE_0_2/griffon-jml-0.2.zip</file>
         </release>
     </plugin>
@@ -2987,9 +2978,8 @@ http://jgraph.com</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>JMonkeyEngine support.</description>
             <documentation>http://griffon.codehaus.org/Jmonkeyengine+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
             <platforms/>
+            <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmonkeyengine/tags/RELEASE_0_2/griffon-jmonkeyengine-0.2.zip</file>
         </release>
     </plugin>
@@ -3041,9 +3031,8 @@ http://jgraph.com</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Adds JMX support to Griffon applications</description>
             <documentation>http://griffon.codehaus.org/Jmx+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jmx/tags/RELEASE_0_5/griffon-jmx-0.5.zip</file>
         </release>
     </plugin>
@@ -4232,10 +4221,22 @@ A port of grails-maven-publisher originally created by Graeme Rocher.</descripti
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Memcached support via Spymemcached -&gt; http://code.google.com/p/spymemcached</description>
             <documentation>http://griffon.codehaus.org/Memcached+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-memcached/tags/RELEASE_0_2/griffon-memcached-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="metawidget" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Metawidget integration</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Metawidget integration
+http://metawidget.sourceforge.net</description>
+            <documentation>http://griffon.codehaus.org/Metawidget+Plugin</documentation>
+            <platforms/>
+            <toolkits>swing</toolkits>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-metawidget/tags/RELEASE_0_1/griffon-metawidget-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="miglayout" latest-release="0.3">
@@ -4268,9 +4269,8 @@ http://miglayout.com</description>
             <description>MigLayout Plugin
 http://miglayout.com</description>
             <documentation>http://griffon.codehaus.org/Miglayout+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
             <platforms/>
+            <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-miglayout/tags/RELEASE_0_3/griffon-miglayout-0.3.zip</file>
         </release>
     </plugin>
@@ -4361,9 +4361,8 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Persistence support via MyBatis</description>
             <documentation>http://griffon.codehaus.org/Mybatis+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-mybatis/tags/RELEASE_0_2/griffon-mybatis-0.2.zip</file>
         </release>
     </plugin>
@@ -4414,9 +4413,8 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Neo4j support</description>
             <documentation>http://griffon.codehaus.org/Neo4j+Plugin</documentation>
-            <license>GNU Affero General Public License v3</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neo4j/tags/RELEASE_0_4/griffon-neo4j-0.4.zip</file>
         </release>
     </plugin>
@@ -4477,9 +4475,8 @@ http://www.smardec.com/products/mouse-gestures.html</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Neodatis support.</description>
             <documentation>http://griffon.codehaus.org/Neodatis+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-neodatis/tags/RELEASE_0_4/griffon-neodatis-0.4.zip</file>
         </release>
     </plugin>
@@ -4652,9 +4649,8 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>2D/3D animations with Processing (http://processing.org)</description>
             <documentation>http://griffon.codehaus.org/Processing+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
             <platforms/>
+            <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-processing/tags/RELEASE_0_4/griffon-processing-0.4.zip</file>
         </release>
     </plugin>
@@ -4705,9 +4701,8 @@ Based on Grails' P6spy plugin http://grails.org/plugin/p6spy</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Adds Protocol Buffers support.</description>
             <documentation>http://griffon.codehaus.org/Protobuf+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-protobuf/tags/RELEASE_0_5/griffon-protobuf-0.5.zip</file>
         </release>
     </plugin>
@@ -4734,6 +4729,18 @@ Based on the Grails plugin of the same name.</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-ratpack/tags/RELEASE_0_1/griffon-ratpack-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="redis" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Redis support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Redis support</description>
+            <documentation>http://griffon.codehaus.org/Redis+Plugin</documentation>
+            <platforms/>
+            <toolkits/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-redis/tags/RELEASE_0_1/griffon-redis-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="resources" latest-release="0.1">
@@ -4825,9 +4832,8 @@ Based on the Grails plugin of the same name.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Adds REST capabilities to your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Rest+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rest/tags/RELEASE_0_7/griffon-rest-0.7.zip</file>
         </release>
         <release tag="RELEASE_0_7_1" type="svn" version="0.7.1">
@@ -4836,9 +4842,8 @@ Based on the Grails plugin of the same name.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Adds REST capabilities to your Griffon application.</description>
             <documentation>http://griffon.codehaus.org/Rest+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rest/tags/RELEASE_0_7_1/griffon-rest-0.7.1.zip</file>
         </release>
     </plugin>
@@ -4879,9 +4884,8 @@ Based on the Grails plugin of the same name.</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Riak support</description>
             <documentation>http://griffon.codehaus.org/Riak+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-riak/tags/RELEASE_0_3/griffon-riak-0.3.zip</file>
         </release>
     </plugin>
@@ -4976,9 +4980,8 @@ http://www.datadosen.se/riverlayout/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>RMI client</description>
             <documentation>http://griffon.codehaus.org/Rmi+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-rmi/tags/RELEASE_0_6/griffon-rmi-0.6.zip</file>
         </release>
     </plugin>
@@ -5122,9 +5125,8 @@ http://www.datadosen.se/riverlayout/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Serial port communication libraries</description>
             <documentation>http://griffon.codehaus.org/Serial+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms>linux,windows,windows64,macosx</platforms>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-serial/tags/RELEASE_0_3/griffon-serial-0.3.zip</file>
         </release>
     </plugin>
@@ -5152,6 +5154,7 @@ http://www.famfamfam.com/lab/icons/silk/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-silkicons/tags/RELEASE_0_2/griffon-silkicons-0.2.zip</file>
         </release>
     </plugin>
+    <plugin name="simpledb"/>
     <plugin name="slick" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Slick2D is a simple set of tools wrapped around the LWJGL OpenGL binding for Java</title>
@@ -5171,9 +5174,8 @@ http://slick.cokeandcode.com/</description>
             <description>Slick2D is a simple set of tools wrapped around the LWJGL OpenGL binding for Java
 http://slick.cokeandcode.com/</description>
             <documentation>http://griffon.codehaus.org/Slick+Plugin</documentation>
-            <license>BSD</license>
-            <toolkits>swing</toolkits>
             <platforms/>
+            <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-slick/tags/RELEASE_0_2/griffon-slick-0.2.zip</file>
         </release>
     </plugin>
@@ -5204,9 +5206,8 @@ http://slick.cokeandcode.com/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Griffon based slideware</description>
             <documentation>http://griffon.codehaus.org/Slideware+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
             <platforms/>
+            <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-slideware/tags/RELEASE_0_3/griffon-slideware-0.3.zip</file>
         </release>
     </plugin>
@@ -5339,9 +5340,8 @@ http://grails.org/plugin/spock</description>
 A port of the Grails Spock plugin by Luke Daley
 http://grails.org/plugin/spock</description>
             <documentation>http://griffon.codehaus.org/Spock+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spock/tags/RELEASE_0_5/griffon-spock-0.5.zip</file>
         </release>
     </plugin>
@@ -5422,9 +5422,8 @@ http://grails.org/plugin/spock</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Brings the Spring framework libraries and some helper classes.</description>
             <documentation>http://griffon.codehaus.org/Spring+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_7_1/griffon-spring-0.7.1.zip</file>
         </release>
         <release tag="RELEASE_0_8" type="svn" version="0.8">
@@ -5433,9 +5432,8 @@ http://grails.org/plugin/spock</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>Brings the Spring framework libraries and some helper classes.</description>
             <documentation>http://griffon.codehaus.org/Spring+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spring/tags/RELEASE_0_8/griffon-spring-0.8.zip</file>
         </release>
     </plugin>
@@ -5539,6 +5537,18 @@ http://grails.org/plugin/spock</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-steel/tags/RELEASE_0_7/griffon-steel-0.7.zip</file>
+        </release>
+    </plugin>
+    <plugin name="swing" latest-release="0.9.4">
+        <release tag="RELEASE_0_9_4" type="svn" version="0.9.4">
+            <title>Swing support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Swing support</description>
+            <documentation>http://griffon.codehaus.org/Swing+Plugin</documentation>
+            <platforms/>
+            <toolkits>swing</toolkits>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-swing/tags/RELEASE_0_9_4/griffon-swing-0.9.4.zip</file>
         </release>
     </plugin>
     <plugin name="swingx-builder" latest-release="0.5.1">
@@ -5736,6 +5746,19 @@ http://freedesktop.org</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-tangoicons/tags/RELEASE_0_2/griffon-tangoicons-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="terrastore" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Terrastore support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Terrastore support
+http://code.google.com/p/terrastore/</description>
+            <documentation>http://griffon.codehaus.org/Terrastore+Plugin</documentation>
+            <platforms/>
+            <toolkits/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-terrastore/tags/RELEASE_0_1/griffon-terrastore-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="thrift" latest-release="0.3">
@@ -6058,9 +6081,8 @@ http://www.uispec4j.org/</description>
             <description>Build and run UI tests with UISpec4j
 http://www.uispec4j.org/</description>
             <documentation>http://griffon.codehaus.org/Uispec4j+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
             <platforms/>
+            <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-uispec4j/tags/RELEASE_0_3/griffon-uispec4j-0.3.zip</file>
         </release>
     </plugin>
@@ -6164,6 +6186,31 @@ http://www.uispec4j.org/</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_8_1/griffon-validation-0.8.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="viewaswing" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Viewa swing components</title>
+            <author>Mario Garcia</author>
+            <authorEmail/>
+            <description>This plugin adds new builders to use viewa components inside your Griffon applications.</description>
+            <documentation>http://griffon.codehaus.org/Viewaswing+Plugin</documentation>
+            <platforms/>
+            <toolkits>swing</toolkits>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-viewaswing/tags/RELEASE_0_1/griffon-viewaswing-0.1.zip</file>
+        </release>
+    </plugin>
+    <plugin name="voldemort" latest-release="0.1">
+        <release tag="RELEASE_0_1" type="svn" version="0.1">
+            <title>Voldemort support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Voldemort support
+http://project-voldemort.com/</description>
+            <documentation>http://griffon.codehaus.org/Voldemort+Plugin</documentation>
+            <platforms/>
+            <toolkits/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-voldemort/tags/RELEASE_0_1/griffon-voldemort-0.1.zip</file>
         </release>
     </plugin>
     <plugin name="weld" latest-release="0.2">
@@ -6431,9 +6478,8 @@ http://www.uispec4j.org/</description>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
             <description>XML-RPC client &amp; libraries.</description>
             <documentation>http://griffon.codehaus.org/Xmlrpc+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
             <platforms/>
+            <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-xmlrpc/tags/RELEASE_0_6/griffon-xmlrpc-0.6.zip</file>
         </release>
     </plugin>
@@ -6459,75 +6505,6 @@ http://zonelayout.com</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_2/griffon-zonelayout-0.2.zip</file>
-        </release>
-    </plugin>
-    <plugin name="dialogs" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Provides common dialogs</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Provides common dialogs:
- - TextMate inspired finder</description>
-            <documentation>http://griffon.codehaus.org/Dialogs+Plugin</documentation>
-            <license>GNU Lesser General Public License</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-dialogs/tags/RELEASE_0_1/griffon-dialogs-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="redis" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Redis support</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Redis support</description>
-            <documentation>http://griffon.codehaus.org/Redis+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-redis/tags/RELEASE_0_1/griffon-redis-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="terrastore" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Terrastore support</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Terrastore support
-http://code.google.com/p/terrastore/</description>
-            <documentation>http://griffon.codehaus.org/Terrastore+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-terrastore/tags/RELEASE_0_1/griffon-terrastore-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="voldemort" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Voldemort support</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Voldemort support
-http://project-voldemort.com/</description>
-            <documentation>http://griffon.codehaus.org/Voldemort+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits/>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-voldemort/tags/RELEASE_0_1/griffon-voldemort-0.1.zip</file>
-        </release>
-    </plugin>
-    <plugin name="metawidget" latest-release="0.1">
-        <release tag="RELEASE_0_1" type="svn" version="0.1">
-            <title>Metawidget integration</title>
-            <author>Andres Almiray</author>
-            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
-            <description>Metawidget integration
-http://metawidget.sourceforge.net</description>
-            <documentation>http://griffon.codehaus.org/Metawidget+Plugin</documentation>
-            <license>Apache Software License 2.0</license>
-            <toolkits>swing</toolkits>
-            <platforms/>
-            <file>http://svn.codehaus.org/griffon/plugins/griffon-metawidget/tags/RELEASE_0_1/griffon-metawidget-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
