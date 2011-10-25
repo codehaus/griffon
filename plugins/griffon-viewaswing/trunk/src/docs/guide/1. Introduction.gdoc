@@ -1,0 +1,17 @@
+This plugin adds some new UI components from the Viewa framework (http://www.viewaframework.org) to your Griffon project. These components will be available in your project thanks to some builders added by this plugin's addon. 
+These components basically bring you an easy way of creating tables and pagination to display your data.
+
+The list of enabled components sorted by functionality:
+
+* Tabular Data
+** MasterViewPanel
+** DynamicTable
+** DynamicTreeTable
+* Pagination 
+** PaginationPanel
+* Miscelaneus 
+** LoginPanel
+** LoginTitledPanel
+** DatePicker
+
+In the following chapter this guide will show you how to use these components inside your Griffon views. 

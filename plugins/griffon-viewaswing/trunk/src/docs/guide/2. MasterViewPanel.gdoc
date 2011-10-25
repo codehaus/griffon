@@ -1,0 +1,110 @@
+The MasterViewPanel component looks like this:
+
+!masterTable.png!
+
+It has three different areas, 
+
+* The title
+* The table area
+* The pagination area. 
+
+A MasterViewPanel is just a JXTitledPanel with a DynamicTable at the top and a PaginationPanel at the bottom.
+
+Let's see how to use it:
+
+h3. The View
+
+{code}
+package plugintester
+
+application(title: 'PluginTester',
+  preferredSize: [320, 240],
+  pack: true,
+  //location: [50,50],
+  locationByPlatform:true,
+  iconImage: imageIcon('/griffon-icon-48x48.png').image,
+  iconImages: [imageIcon('/griffon-icon-48x48.png').image,
+               imageIcon('/griffon-icon-32x32.png').image,
+               imageIcon('/griffon-icon-16x16.png').image]) {
+     borderLayout()
+     masterTable(id:'masterTable',title:'Some People',
+            pagination:true,constraints:CENTER){
+            masterColumn(propertyName:"name")
+            masterColumn(propertyName:"nationality")
+            masterColumn(propertyName:"hair")
+            masterColumn(propertyName:"age")
+            masterPaginationController{evt-> controller.masterPagination(evt)}
+      }
+}
+
+
+{code}
+
+h3. The Model
+
+{code}
+package plugintester
+
+class MasterTableModel {
+   def name
+   def nationality
+   def hair
+   def age
+}
+{code}
+
+h3. The Controller
+
+{code}
+package plugintester
+
+class MasterTableController {
+    // these will be injected by Griffon
+    def model
+    def view
+    def list = []
+
+     void mvcGroupInit(Map args) {
+          50.times{
+            switch(it){                
+                case 0..10:
+                    list << ([name:"John",age:it,hair:'Blonde',nationality:'German'])as MasterTableModel[]
+                break
+                case 10..20:
+                    list << ([name:"Peter",age:it,,hair:'Red',nationality:'Canadian'])as MasterTableModel[]
+                break
+                case 20..30:
+                    list << ([name:"Jarret",age:it,hair:'Brown',nationality:'Spanish'])as MasterTableModel[]
+                break
+                default:
+                    list << ([name:"Pallowski",age:45,hair:'Blonde',nationality:'German'])as MasterTableModel[]
+                break                
+            }
+        }
+        
+        view.masterTable.with{
+            paginationPanel.with{
+                paginationStatus.with{
+                    totalResults = list.size
+                    maxResults = 10
+                    offset = 1
+                }
+            }
+            table.model.addAll(
+                list.subList(0,10)
+            )
+        }
+        
+     }
+
+    def masterPagination = { evt = null ->
+        evt.paginationStatus.with{
+            view.masterTable.table.model.addAll(
+                list.subList(firstRecordInPage,lastRecordInPage)
+            )
+        }
+    }    
+}
+
+{code}
+
