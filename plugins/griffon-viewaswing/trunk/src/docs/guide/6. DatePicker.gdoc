@@ -1,0 +1,30 @@
+!datePicker.png!
+
+This component is just a JXDatePicker using the silk icons to decorate the picker.
+
+h3. The View
+
+{code}
+package plugintester
+
+import java.awt.BorderLayout.*
+
+application(title: 'PluginTester',
+  preferredSize: [320, 240],
+  pack: true,
+  //location: [50,50],
+  locationByPlatform:true,
+  iconImage: imageIcon('/griffon-icon-48x48.png').image,
+  iconImages: [imageIcon('/griffon-icon-48x48.png').image,
+               imageIcon('/griffon-icon-32x32.png').image,
+               imageIcon('/griffon-icon-16x16.png').image]) {           
+    borderLayout()
+    customDatePicker(id:'searchDate',constraints:NORTH)
+    list(id:'countryList',constraints:CENTER)
+    paginationPanel(
+        id:'pagination',
+        enabled:true,
+        constraints: SOUTH
+    )
+}
+{code}

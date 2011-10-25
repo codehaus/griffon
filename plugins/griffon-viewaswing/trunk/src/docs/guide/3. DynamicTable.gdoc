@@ -1,0 +1,81 @@
+!dynamicTable.png!
+
+
+The DynamicTable enables you to create a table without creating a specific model for each table. You only have create a dynamicTablel()
+node and add as many dynamicColumn() nodes as columns you want to display. The latter column nodes handle the information about
+the property you want to display for each entry in the table. 
+
+
+h3. The View
+
+{code}
+package plugintester
+
+application(title: 'PluginTester',
+    preferredSize: [320, 240],
+    pack: true,
+    //location: [50,50],
+    locationByPlatform:true,
+    iconImage: imageIcon('/griffon-icon-48x48.png').image,
+    iconImages: [imageIcon('/griffon-icon-48x48.png').image,
+        imageIcon('/griffon-icon-32x32.png').image,
+        imageIcon('/griffon-icon-16x16.png').image]) {
+    borderLayout()
+    scrollPane(constraints:CENTER){
+        dynamicTable(id:'dynTable'){						
+            dynamicColumn(propertyName:'name',title:'Name')
+            dynamicColumn(propertyName:'age',title:'Age')
+        }	
+    }
+    button(text:'Add People',constraints:SOUTH,actionPerformed: {evt->controller.addPeople evt})
+}
+
+{code}
+
+Here we declare the table with its id for later handling ( dynamicTable(id:'dynTable') ). Then we want to show the name and the
+age of each person in the list so, we provide the property name inside the DynamicTableModel object and the title we want to see as the header
+of the column.
+
+
+h3. The Model
+
+{code}
+package plugintester
+
+import groovy.beans.Bindable
+
+class DynamicTableModel {
+   String name
+   Integer age
+}
+{code}
+
+This is the model for our example. It could be any other Groovy Bean.
+
+h3. The Controller
+
+{code}
+package plugintester
+
+class DynamicTableController {
+    def model
+    def view
+    def people = [
+        new DynamicTableModel(name:'Auggie',age:36),
+        new DynamicTableModel(name:'Joan',age:38),
+        new DynamicTableModel(name:'Annie',age:28),
+        new DynamicTableModel(name:'Jai',age:32)
+    ] 
+
+    def addPeople = {evt->
+         edt{
+            dynTable.model.addAll people
+        }
+    }
+}
+
+{code}
+
+We've declared a list of people and all we have to do to add them to the table is getting the table's model instance and use
+the add/addAll methods. Use remove/removeAll for the opposite.
+

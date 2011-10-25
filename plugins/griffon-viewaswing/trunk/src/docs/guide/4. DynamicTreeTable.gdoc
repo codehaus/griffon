@@ -1,0 +1,102 @@
+!dynamicTreeTable.png!
+
+Sometimes we want to group some tabular data by some of the columns we have at hand. Well this components becomes very useful in that situations.
+
+h3. The View
+
+{code}
+package plugintester
+
+import static java.awt.BorderLayout.*
+
+application(title: 'PluginTester',
+  preferredSize: [320, 240],
+  pack: true,
+  //location: [50,50],
+  locationByPlatform:true,
+  iconImage: imageIcon('/griffon-icon-48x48.png').image,
+  iconImages: [imageIcon('/griffon-icon-48x48.png').image,
+               imageIcon('/griffon-icon-32x32.png').image,
+               imageIcon('/griffon-icon-16x16.png').image]) {
+    borderLayout()
+    scrollPane(constraints:CENTER){
+        dynamicTreeTable(id:'dynTable'){
+            dynamicColumn(propertyName:'name',title:'Name',grouping:true)
+            dynamicColumn(propertyName:'age',title:'Age')
+        }
+    }   
+    button(text:'Click',actionPerformed:controller.paginationAction,constraints:SOUTH)
+}
+
+{code}
+
+h3. The Model
+
+{code}
+package plugintester
+
+class PluginTesterModel {
+   def name
+   def age
+   def hair
+}
+{code}
+
+h3. The controller
+
+{code}
+package plugintester
+
+class PluginTesterController {
+    
+    def list = []    
+    def model
+    def view
+
+    void mvcGroupInit(Map args) {
+        50.times{
+            switch(it){
+                
+                case 0..10:
+                    list << ([name:"John",age:it] as PluginTesterModel)
+                break
+                case 10..20:
+                    list << ([name:"Peter",age:it] as PluginTesterModel)
+                break
+                case 20..30:
+                    list << ([name:"Jarret",age:it] as PluginTesterModel)
+                break
+                default:
+                    list << ([name:"Pallowski",age:45] as PluginTesterModel)
+                break                
+            }
+        }
+    }
+
+    // void mvcGroupDestroy() {
+    //    // this method is called when the group is destroyed
+    // }
+
+    /*
+    Remember that actions will be called outside of the UI thread
+    by default. You can change this setting of course.
+    Please read chapter 9 of the Griffon Guide to know more.
+     */
+    def paginationAction = { evt ->        
+        edt{
+            view.dynTable.treeTableModel.with{
+                rawObjects.addAll(list)
+            }      
+        }             
+    }
+    
+}
+
+{code}
+
+To add entries to the tree table you have to get the table's treetableModel's rawObjects collection:
+
+* [viewInstance].[treeTableInstance].treeTableModel.rawObjects.[collectionMethodAndParameters]
+
+Once you have the rawObjects collection, then use the common methods of a collection (add/addAll/remove/removeAll...) to 
+add/remove the table entries.

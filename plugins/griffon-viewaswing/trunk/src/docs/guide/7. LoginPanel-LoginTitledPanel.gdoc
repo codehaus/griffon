@@ -1,0 +1,70 @@
+!loginPanel.png!
+
+Whether you need to add a title or not to your login panel, you would use simpleLoginTitledPanel() or simpleLoginPanel() nodes. The
+only difference is the latter uses one attribute called "title".
+
+In the snapshot above you can see a simpleLoginTitledPanel().
+
+Why this component? Well I was using the JXLogin panel from org.jdesktop components and I realized I needed a validation message area
+to show users what they did wrong during the login process. Then I built a simple login panel, with a validation message area.
+
+Here you have the available properties from login components:
+
+{table}
+ *Name/id* | *Getter(Java Accessor)* 
+ username | getUsername()
+ usernameLabel | 
+ password | getPassword()
+ passwordLabel | 
+ acceptButton | getAcceptButton()
+ cancelButton | getCancelButton()
+ validationMessage | getValidationMessage()
+{table} 
+
+
+{warning}
+	Right now there's an issue in LoginTitledPanel and the login panel itself can't be accessed from within its JXTitledPane. It
+	will be fixed in the next version. So meanwhile you can nest a simpleLoginPanel() inside a JXTitledPanel from swingx components. It will be 
+{warning}
+
+
+h3. The View
+
+{code}
+package plugintester
+
+application(title: 'PluginTester',
+  preferredSize: [320, 240],
+  pack: true,
+  //location: [50,50],
+  locationByPlatform:true,
+  iconImage: imageIcon('/griffon-icon-48x48.png').image,
+  iconImages: [imageIcon('/griffon-icon-48x48.png').image,
+               imageIcon('/griffon-icon-32x32.png').image,
+               imageIcon('/griffon-icon-16x16.png').image]) {
+    borderLayout()
+    simpleLoginPanel(id:'loginPanel',constraints:CENTER)
+}
+
+{code}
+
+
+h3. The Controller
+
+The controller just initializes the validation message area telling asking the user username and password
+
+{code}
+package plugintester
+
+class LoginController {
+    def model
+    def view
+
+     void mvcGroupInit(Map args) {
+        view.loginPanel.validationMessage.text='Please fill username and password'
+     }
+}
+
+{code}
+
+
