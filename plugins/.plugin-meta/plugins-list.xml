@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4742">
+<plugins revision="4749">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -6086,7 +6086,7 @@ http://www.uispec4j.org/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-uispec4j/tags/RELEASE_0_3/griffon-uispec4j-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="validation" latest-release="0.8.1">
+    <plugin name="validation" latest-release="0.8.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon Validation Plugin</title>
             <author>Nick Zhu</author>
@@ -6186,6 +6186,17 @@ http://www.uispec4j.org/</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_8_1/griffon-validation-0.8.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_8_2" version="0.8.2" type="svn">
+            <title>Griffon Validation Plugin</title>
+            <author>Nick Zhu</author>
+            <authorEmail>nzhu@jointsource.com</authorEmail>
+            <description>A validation plugin that provides Grails like validation capability using constraints</description>
+            <documentation>http://griffon.codehaus.org/Validation+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-validation/tags/RELEASE_0_8_2/griffon-validation-0.8.2.zip</file>
         </release>
     </plugin>
     <plugin name="viewaswing" latest-release="0.1">
