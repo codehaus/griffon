@@ -35,6 +35,8 @@ public class BackgroundPanel extends DrawingPanel {
 
     public void setBackgroundPaint(Paint backgroundPaint) {
         this.backgroundPaint = backgroundPaint;
+        clearCache();
+        repaint();
     }
 
     protected void paintImage(Graphics2D g, Rectangle bounds) {

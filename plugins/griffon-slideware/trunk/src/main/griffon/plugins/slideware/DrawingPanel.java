@@ -26,8 +26,8 @@ import java.awt.image.BufferedImage;
  * @author Andres Almiray
  */
 public abstract class DrawingPanel extends JPanel {
-    private Rectangle previousBounds;
-    private Image cachedImage;
+    protected Rectangle previousBounds;
+    protected Image cachedImage;
 
     protected void paintComponent(Graphics g) {
         if (previousBounds == null) {
@@ -40,6 +40,11 @@ public abstract class DrawingPanel extends JPanel {
             cachedImage = createImage();
         }
         g.drawImage(cachedImage, 0, 0, this);
+    }
+
+    public void clearCache() {
+        this.previousBounds = null;
+        this.cachedImage = null;
     }
 
     private boolean equals(Rectangle a, Rectangle b) {
