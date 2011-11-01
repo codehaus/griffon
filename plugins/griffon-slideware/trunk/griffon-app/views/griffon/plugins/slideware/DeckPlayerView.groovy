@@ -83,7 +83,10 @@ previousSlideActions = {
             deck.layout.previous(deck)
         } else {
             currentAction--
-            slideActions[page][currentAction].call(true)
+            if(slideActions[page][currentAction].maximumNumberOfParameters == 2)
+                slideActions[page][currentAction].call(true, false)
+            else
+                slideActions[page][currentAction].call(true)
         }
     }
 }
