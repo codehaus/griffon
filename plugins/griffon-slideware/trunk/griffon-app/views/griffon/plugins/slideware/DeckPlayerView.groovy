@@ -24,6 +24,9 @@ import griffon.lookandfeel.LookAndFeelManager
 import com.bric.image.transition.Transition2D
 import com.bric.image.transition.spunk.SwivelTransition2D
 import javax.swing.KeyStroke
+import griffon.builder.css.CSSDecorator
+
+currentSlide = null
 
 createFooter = { idx ->
     def footer
@@ -51,6 +54,40 @@ createHeader = { str ->
     header
 }
 
+decorateCss = { component ->
+    CSSDecorator.decorate('style', component)
+}
+
+slideActions = []
+currentAction = 0
+
+nextSlideActions = {
+    def page = deck.layout.getCurrentCardIndex(deck)
+    if(slideActions[page]?.size() <= currentAction) {
+        currentAction = 0
+        deck.layout.next(deck)
+    } else {
+        if(slideActions[page][currentAction].maximumNumberOfParameters == 2)
+            slideActions[page][currentAction].call(false, false)
+        else
+            slideActions[page][currentAction].call(false)
+        currentAction++
+    }
+}
+
+previousSlideActions = {
+    def page = deck.layout.getCurrentCardIndex(deck)
+    if(page > 0) {
+        if(!slideActions[page] || currentAction == 0) {
+            currentAction = 0
+            deck.layout.previous(deck)
+        } else {
+            currentAction--
+            slideActions[page][currentAction].call(true)
+        }
+    }
+}
+
 try {
     build(getClass().classLoader.loadClass('SlideConfig'))
 } catch(ClassNotFoundException cnfe) {
@@ -59,9 +96,9 @@ try {
 
 actions {
     action(id: 'previousAction',
-        closure: {deck.layout.previous(deck)})
+        closure: {previousSlideActions() /*deck.layout.previous(deck)*/})
     action(id: 'nextAction',
-        closure: {deck.layout.next(deck)})
+        closure: {nextSlideActions() /*deck.layout.next(deck)*/})
     action(id: 'closeAction',
         closure: controller.hide)
     action(id: 'helpAction',
@@ -78,6 +115,7 @@ actions {
             jumpPopup.hidePopup(true)
             def page = "page${input.text}"
             input.text = ''
+            currentAction = 0
             deck.layout.show(deck, page)
         })
     action(id: 'showLafsAction',
@@ -88,14 +126,16 @@ actions {
         closure: {
             lafsPopup.hidePopup(true)
             if(lafList.selectedValue) LookAndFeelManager.instance.apply(model.lafs[lafList.selectedValue], app)
-        })  
+        })
 }
 
 handleMouseEvent = { evt ->
     if(evt.button == MouseEvent.BUTTON1) {
-        deck.layout.next(deck)
+        nextSlideActions()
+        //deck.layout.next(deck)
     } else if(evt.button == MouseEvent.BUTTON3) {
-        deck.layout.previous(deck)
+        previousSlideActions()
+        //deck.layout.previous(deck)
     }
 }
 

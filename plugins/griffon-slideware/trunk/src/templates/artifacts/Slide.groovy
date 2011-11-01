@@ -1,4 +1,4 @@
-slide(id: 'slide@count@', title: 'slide@count@') {
+slide(id: '@name@', title: '@name@') {
     migLayout(layoutConstraints: 'fill',
               columnConstraints: '[center]',
               rowConstraints: '[center]')
