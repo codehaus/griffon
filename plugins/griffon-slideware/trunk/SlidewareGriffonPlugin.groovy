@@ -18,20 +18,22 @@
  * @author Andres Almiray
  */
 class SlidewareGriffonPlugin {
-    def version = '0.3'
+    def version = '0.4'
     def griffonVersion = '0.9.4 > *'
     def pluginIncludes = []
     def license = 'Apache Software License 2.0'
     def toolkits = ['swing']
 
-    def dependsOn = ['transitions'    : '0.5',
+    def dependsOn = [
+                     'transitions'    : '0.5',
                      'css-builder'    : '0.8',
                      'jide-builder'   : '0.6',
                      'glazedlists'    : '0.8.3',
                      'jbusycomponent' : '0.5.2',
                      'i18n'           : '0.4.1',
                      'lookandfeel'    : '0.5',
-                     'syntaxtext'     : '0.1']
+                     'syntaxtext'     : '0.1'
+    ]
 
     def author = 'Andres Almiray'
     def authorEmail = 'aalmiray@users.sourceforge.net'

@@ -89,7 +89,29 @@ class DeckLauncherController extends AbstractDeckController {
                     img.setXYRatio(2.5f)
                     document.add(img)
                 }
-                execSync { v.deck.layout.next(v.deck) }
+                for(def action: v.slideActions[i]) {
+                    def print = true
+                    execSync {
+                        if(action.maximumNumberOfParameters == 2) {
+                            print = action.call(false, true)
+                        } else {
+                            print = action.call(false)
+                        }
+                    }
+                    if(print == null || print) {
+                        imageSet = null
+                        execSync {imageSet = slide.takeSnapshot() }
+                        imageSet.each { image ->
+                            Image img = Image.getInstance(image, null)
+                            img.setDpi(600i, 600i)
+                            img.setXYRatio(2.5f)
+                            document.add(img)
+                        }
+                    }
+                }
+                execSync {
+                    v.deck.layout.next(v.deck)
+                }
             }
             document.close()
         } finally {

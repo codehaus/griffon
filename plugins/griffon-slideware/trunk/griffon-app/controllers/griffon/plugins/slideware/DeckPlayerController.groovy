@@ -35,22 +35,32 @@ class DeckPlayerController extends AbstractDeckController {
         CSSBindings.instance.initDefaults()
         Map pages = [:]
         app.artifactManager.slideClasses.each { slideClass ->
-            int index = ((slideClass.shortName =~ /Page(\d+)Slide/)[0][1]).toInteger()
-            pages[index] = slideClass
+            String name = ((slideClass.shortName =~ /(.+)Slide/)[0][1])
+            pages[name] = slideClass
         }
-        
+        def order = app.config?.presentation?.order
+        if (order) {
+            def p = [:]
+            order.eachWithIndex { page, index ->
+                p[index] = pages[page]
+            }
+            pages = p
+        }
+
         pages.keySet().sort().each { index ->
             GriffonClass slideClass = pages[index]
             Script slideInstance = slideClass.newInstance()
             slideInstance.binding = view.binding
             slideInstance.builder = view.builder
             def slide = view.builder.build(slideInstance)
+            view.currentSlide = slide
             builder.container(view.deck) {
                 widget(slide, constraints: [name: 'page' + view.pageNumber,
-                    transition: slide.transition],
-                    mouseClicked: view.handleMouseEvent,
-                    header: slide.header ?: view.createHeader(slide.title),
-                    footer: slide.footer ?: view.createFooter(view.pageNumber))
+                        transition: slide.transition],
+                        mouseClicked: view.handleMouseEvent,
+                        header: slide.header ?: (view.createHeader.maximumNumberOfParameters == 2 ? view.createHeader(slide, view.pageNumber) : view.createHeader(slide.title)),
+                        footer: slide.footer ?: (view.createFooter.maximumNumberOfParameters == 2 ? view.createFooter(slide, view.pageNumber) : view.createFooter(view.pageNumber)))
+                view.slideActions[view.pageNumber - 1] = slide.slideActions
             }
             view.pageNumber++
         }
@@ -58,18 +68,19 @@ class DeckPlayerController extends AbstractDeckController {
 
     @Threading(Threading.Policy.INSIDE_UITHREAD_SYNC)
     def show = { evt = null ->
-        if(app.config.presentation.fullScreen) {
+        if (app.config.presentation.fullScreen) {
             makeFullScreen()
         } else {
             makeNormalSize()
         }
+        view.currentAction = 0
         view.deck.layout.first(view.deck)
     }
 
     @Threading(Threading.Policy.INSIDE_UITHREAD_SYNC)
     def toggleFullScreenAction = { evt = null ->
         app.config.presentation.fullScreen = !app.config.presentation.fullScreen
-        if(app.config.presentation.fullScreen) {
+        if (app.config.presentation.fullScreen) {
             makeFullScreen()
         } else {
             makeNormalSize()
@@ -92,13 +103,14 @@ class DeckPlayerController extends AbstractDeckController {
         app.windowManager.hide('deckPlayerWindow')
         view.deckPlayerWindow.undecorated = undecorated
         view.deckPlayerWindow.preferredSize = [
-            width as int,
-            height as int
+                width as int,
+                height as int
         ]
         view.deckPlayerWindow.pack()
-        CSSDecorator.decorate('style', view.deckPlayerWindow)
-        centerOnScreen(view.deckPlayerWindow) 
-        app.windowManager.show('deckPlayerWindow') 
+        view.decorateCss(view.deckPlayerWindow)
+        centerOnScreen(view.deckPlayerWindow)
+        app.windowManager.show('deckPlayerWindow')
+        app.eventAsync('DeckPlayerOpened')
     }
 
     @Threading(Threading.Policy.INSIDE_UITHREAD_SYNC)

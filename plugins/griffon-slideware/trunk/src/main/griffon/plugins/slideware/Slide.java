@@ -21,12 +21,14 @@ import java.awt.LayoutManager;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Image;
+import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import com.bric.image.transition.Transition2D;
 
 import groovy.lang.Closure;
 import griffon.swing.SwingUtils;
+import org.xhtmlrenderer.css.parser.property.PrimitivePropertyBuilders;
 
 /**
  * @author Andres Almiray
@@ -35,10 +37,12 @@ public class Slide extends JPanel {
     private final JPanel _content;
     private Transition2D transition;
     private String title;
+    private String master;
     private JComponent header;
     private JComponent footer;
     private Closure snapshot;
     private Closure backgroundPainter;
+    private List<Closure> slideActions;
 
     public Slide() {
         super.setLayout(new BorderLayout());
@@ -55,6 +59,10 @@ public class Slide extends JPanel {
         return title;
     }
 
+    public String getMaster() {
+        return master;
+    }
+
     public JComponent getHeader() {
         return header;
     }
@@ -63,12 +71,20 @@ public class Slide extends JPanel {
         return footer;
     }
 
+    public List<Closure> getSlideActions() {
+        return slideActions;
+    }
+
     public void setTransition(Transition2D transition) {
         this.transition = transition;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setMaster(String master) {
+        this.master = master;
     }
 
     public void setHeader(JComponent header) {
@@ -81,6 +97,10 @@ public class Slide extends JPanel {
         this.footer = footer;
         footer.setOpaque(false);
         super.add(footer, BorderLayout.SOUTH);
+    }
+
+    public void setSlideActions(List<Closure> actions) {
+        this.slideActions = actions;
     }
 
     public void setLayout(LayoutManager layout) {
