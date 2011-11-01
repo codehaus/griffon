@@ -73,8 +73,8 @@ presentation {
         def m = configText =~ /(?ms)\s*presentation\s*\{.*order\s*=\s*(\[.*\]).*}/
         def order = evaluate(m[0][1])
         order << slideName
-        def newOrder = order.inspect().replaceAll(/, /, ',\n\t').replaceAll(/\[/, '[\n\t').replaceAll(/\]/, '\n]')
-        configText = m.replaceFirst(newOrder)
+        def newOrder = order.inspect().replaceAll(/, /, ',\n\t').replaceAll(/\[/, '[\n\t').replaceAll(/\]/, '\n\t]')
+        configText = configText.substring(0, m.start(1)) + newOrder + configText.substring(m.end(1))
     }
     configFile.write configText
 }
