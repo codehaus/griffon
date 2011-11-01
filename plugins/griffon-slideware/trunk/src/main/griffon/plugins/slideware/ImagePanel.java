@@ -41,6 +41,7 @@ public class ImagePanel extends BackgroundPanel {
 
     public void setScale(float scale) {
         this.scale = scale;
+        clearCache();
         repaint();
     }
 
@@ -50,6 +51,7 @@ public class ImagePanel extends BackgroundPanel {
 
     public void setImage(Image image) {
         this.image = image;
+        clearCache();
         repaint();
     }
 
@@ -59,12 +61,14 @@ public class ImagePanel extends BackgroundPanel {
 
     public void setCenterImage(boolean centerImage) {
         this.centerImage = centerImage;
+        clearCache();
         repaint();
     }
 
     public void setImagePath(String imagePath) {
         try {
             image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResource(imagePath));
+            clearCache();
             repaint();
         } catch (IOException e) {
             // ignore ??
