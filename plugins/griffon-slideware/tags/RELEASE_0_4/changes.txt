@@ -1,9 +1,0 @@
-ImagePanel: take opacity into account
-DeckPlayerView/-Controller: reference to currentSlide
-AppicationEvent: DeckPlayerOpened called when Presentation starts
-DeckPlayerView: decorateCss is part of View to be overwritten by SlideConfig
-DeckPlayerView: createHeader and createFooter with new optional signature: (Slide, pageIndex)
-Config: presentation.order an optional list to specify the slide-order, makes multiple instances of the same slide possible
-SlideActions: Slide-internal actions: slideActions : [{ revert, print -> }, ...]
-ImagePanel: scale to component bounds if image is larger that component, centers the image in the component
-CreateSlide: Now can take an argument as the SlideName
