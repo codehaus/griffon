@@ -10,9 +10,9 @@ griffon.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        compile('org.codehaus.griffon:gfxbuilder-core:0.5.1')   { excludes 'groovy-all' }
-        compile('org.codehaus.griffon:gfxbuilder-svg:0.5.1')    { excludes 'groovy-all' }
-        compile('org.codehaus.griffon:gfxbuilder-swingx:0.5.1') { excludes 'groovy-all' }
+        compile('org.codehaus.griffon:gfxbuilder-core:0.5.2')   { excludes 'groovy-all' }
+        compile('org.codehaus.griffon:gfxbuilder-svg:0.5.2')    { excludes 'groovy-all' }
+        compile('org.codehaus.griffon:gfxbuilder-swingx:0.5.2') { excludes 'groovy-all' }
     }
 }
 
