@@ -1,7 +1,7 @@
 /*
- * Copyright 2008-2011 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License")
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package griffon.swt;
 
 import org.eclipse.swt.widgets.Shell;
@@ -20,15 +21,19 @@ import org.eclipse.swt.widgets.Shell;
 /**
  * Default implementation of {@code WindowDisplayHandler} that simply makes the window
  * visible on show() and disposes it on hide().
- *
+ * 
  * @author Andres Almiray
  */
 public class DefaultWindowDisplayHandler implements WindowDisplayHandler {
     public void show(Shell window, SWTGriffonApplication application) {
-        if(window != null) window.open();
+        if (window != null) {
+            window.open();
+        }
     }
-
+    
     public void hide(Shell window, SWTGriffonApplication application) {
-        if(window != null) window.close();
+        if (window != null) {
+            window.dispose();
+        }
     }
 }

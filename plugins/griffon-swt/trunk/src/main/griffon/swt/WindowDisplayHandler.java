@@ -1,7 +1,7 @@
 /*
- * Copyright 2008-2011 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License")
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package griffon.swt;
 
 import org.eclipse.swt.widgets.Shell;
 
 /**
  * Controls how windows are shown and hidden at runtime.
- *
+ * 
  * @author Andres Almiray
- * @since 0.3.1
  */
 public interface WindowDisplayHandler {
     /**
      * Callback for displaying a window.
-     *
+     * 
      * @param window the window to be displayed
      * @param application the current application
      */

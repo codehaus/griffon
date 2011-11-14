@@ -9,7 +9,7 @@ griffon.project.dependency.resolution = {
         flatDir name: 'swtPluginLib', dirs: 'lib'
     }
     dependencies {
-        compile('org.codehaus.groovy:groovy-swt:5.0',
+        compile('org.codehaus.groovy:groovy-swt:0.5.2',
                 'com.miglayout:miglayout:3.7.3.1',
                 'org.eclipse:org.apache.commons.logging:1.0.4.v200904062259',
                 'org.eclipse:org.eclipse.core.commands:3.5.0.I20090525_2000',

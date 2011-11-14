@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,21 @@
 
 eventCreateConfigEnd = {
     buildConfig.griffon.application.mainClass = 'griffon.swt.SWTApplication'
+    if(!buildConfig.griffon.app.javaOpts) buildConfig.griffon.app.javaOpts = []
+    buildConfig.griffon.app.javaOpts << '-XstartOnFirstThread'
+    
+    if(!isPluginProject) {
+        def runtimeConfigFile = new File("${basedir}/griffon-app/conf/Config.groovy")
+        def runtimeConfig = new ConfigSlurper().parse(runtimeConfigFile.text)
+        if(!runtimeConfig.platform.handler.macosx) {
+            runtimeConfigFile.append("platform.handler.macosx = 'griffon.swt.DefaultMacOSXPlatformHandler'")
+        }
+    }
 }
 
-def eventClosure2 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
 eventSetClasspath = { cl ->
-    eventClosure2(cl)
+    eventClosure1(cl)
     if(compilingPlugin('swt')) return
     griffonSettings.dependencyManager.flatDirResolver name: 'griffon-swt-plugin', dirs: "${swtPluginDir}/addon"
     griffonSettings.dependencyManager.addPluginDependency('swt', [
