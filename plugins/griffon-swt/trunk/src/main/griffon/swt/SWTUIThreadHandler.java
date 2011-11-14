@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,44 +16,28 @@
 
 package griffon.swt;
 
-import griffon.util.UIThreadHandler;
+import org.codehaus.griffon.runtime.util.AbstractUIThreadHandler;
 import org.eclipse.swt.widgets.Display;
 
 /**
  * Executes code using SWT's Display.
- *
+ * 
  * @author Andres Almiray
  */
-public class SWTUIThreadHandler implements UIThreadHandler {
+public class SWTUIThreadHandler extends AbstractUIThreadHandler {
     public boolean isUIThread() {
         return Display.getDefault() == Display.findDisplay(Thread.currentThread());
     }
-
+    
     public void executeAsync(Runnable runnable) {
-        // Display.getDefault().asyncExec(runnable);
-        runnable.run();
+        Display.getDefault().asyncExec(runnable);
     }
-
+    
     public void executeSync(Runnable runnable) {
-        /*
-        if(isUIThread()) {
+        if (isUIThread()) {
             runnable.run();
         } else {
             Display.getDefault().syncExec(runnable);
         }
-        */
-        runnable.run();
-    }
-
-    public void executeOutside(Runnable runnable) {
-        runnable.run();
-        /*
-        if(!isUIThread()) {
-            runnable.run();
-        } else {
-            // TODO use a ThreadPool
-            new Thread(runnable).start();
-        }
-        */
     }
 }

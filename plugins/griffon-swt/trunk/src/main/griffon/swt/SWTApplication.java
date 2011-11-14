@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-package griffon.swt
-
-import org.codehaus.griffon.runtime.core.BaseGriffonApplication
+package griffon.swt;
 
 /**
  * @author Andres Almiray
  */
 class SWTApplication extends AbstractSWTGriffonApplication {
-    SWTApplication(String[] args = BaseGriffonApplication.EMPTY_ARGS) {
-        super(args)
+    public SWTApplication() {
+        this(AbstractSWTGriffonApplication.EMPTY_ARGS);
     }
-
+    
+    public SWTApplication(String[] args) {
+        super(args);
+    }
+    
     public static void main(String[] args) {
-        AbstractSWTGriffonApplication.run(SWTApplication, args)
+        AbstractSWTGriffonApplication.run(SWTApplication.class, args);
     }
 }
