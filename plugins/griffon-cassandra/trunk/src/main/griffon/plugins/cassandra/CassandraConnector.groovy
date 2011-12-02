@@ -83,7 +83,7 @@ class CassandraConnector {
         }
 
         config = narrowConfig(config, dataSourceName)
-        app.event('DataSourceConnectStart', [config, dataSourceName])
+        app.event('CassandraConnectStart', [config, dataSourceName])
         DataSource ds = createDataSource(config, dataSourceName)
         DataSourceHolder.instance.setDataSource(dataSourceName, ds)
         def skipSchema = config.schema?.skip ?: false
@@ -91,7 +91,7 @@ class CassandraConnector {
         bootstrap = app.class.classLoader.loadClass('BootstrapCassandra').newInstance()
         bootstrap.metaClass.app = app
         DataSourceHolder.instance.withCql(dataSourceName) { dsName, sql -> bootstrap.init(dsName, sql) }
-        app.event('DataSourceConnectEnd', [dataSourceName, ds])
+        app.event('CassandraConnectEnd', [dataSourceName, ds])
         ds
     }
 
@@ -99,9 +99,9 @@ class CassandraConnector {
         if (DataSourceHolder.instance.isDataSourceConnected(dataSourceName)) {
             config = narrowConfig(config, dataSourceName)
             DataSource ds = DataSourceHolder.instance.getDataSource(dataSourceName)
-            app.event('DataSourceDisconnectStart', [config, dataSourceName, ds])
+            app.event('CassandraDisconnectStart', [config, dataSourceName, ds])
             DataSourceHolder.instance.withCql(dataSourceName) { dsName, sql -> bootstrap.destroy(dsName, sql) }
-            app.event('DataSourceDisconnectEnd', [config, dataSourceName])
+            app.event('CassandraDisconnectEnd', [config, dataSourceName])
             DataSourceHolder.instance.disconnectDataSource(dataSourceName)
         }
     }
