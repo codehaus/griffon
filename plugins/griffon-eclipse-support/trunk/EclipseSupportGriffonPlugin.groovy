@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class EclipseSupportGriffonPlugin {
-    def version = '0.4.8'
+    def version = '0.4.9'
     def dependsOn = [:]
     def griffonVersion = '0.9.4 > *'
     def license = 'Apache Software License 2.0'

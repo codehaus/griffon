@@ -41,6 +41,7 @@ updateEclipseClasspathFile = { newPlugin = null ->
 
     String userHomeRegex = isWindows ? userHome.toString().replace('\\', '\\\\') : userHome.toString()
     String griffonHomeRegex = isWindows ? griffonHome.toString().replace('\\', '\\\\') : griffonHome.toString()
+    String baseDirPath = isWindows ? griffonSettings.baseDir.path.replace('\\', '\\\\') : griffonSettings.baseDir.path
 
     String indent = '    '
     def writer = new PrintWriter(new FileWriter('.classpath'))
@@ -74,7 +75,7 @@ updateEclipseClasspathFile = { newPlugin = null ->
             path = path.replaceFirst(~/$userHomeRegex/, 'USER_HOME')
             boolean var = path != originalPath
             originalPath = path
-            path = path.replaceFirst(~/${griffonSettings.baseDir.path.toString().replace('\\', '\\\\')}(\\|\/)/, '')
+            path = path.replaceFirst(~/${baseDirPath}(\\|\/)/, '')
             var = path == originalPath && !path.startsWith(File.separator)
             [kind: var? 'var' : 'lib', path: path]
         }
