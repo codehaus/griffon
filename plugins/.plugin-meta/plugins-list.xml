@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4799">
+<plugins revision="4806">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1376,7 +1376,7 @@ http://www.avaje.org/</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_8/griffon-eclipse-support-0.4.8.zip</file>
         </release>
-        <release tag="RELEASE_0_4_9" version="0.4.9" type="svn">
+        <release tag="RELEASE_0_4_9" type="svn" version="0.4.9">
             <title>Keeps Eclipse files up to date</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -5327,7 +5327,7 @@ http://slick.cokeandcode.com/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-splash/tags/RELEASE_0_2/griffon-splash-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="spock" latest-release="0.5">
+    <plugin name="spock" latest-release="0.5.1">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Spock Plugin - spockframework.org</title>
             <author>Andres Almiray</author>
@@ -5387,6 +5387,19 @@ http://grails.org/plugin/spock</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spock/tags/RELEASE_0_5/griffon-spock-0.5.zip</file>
+        </release>
+        <release tag="RELEASE_0_5_1" version="0.5.1" type="svn">
+            <title>Spock Plugin - spockframework.org</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Test your Griffon apps with Spock.
+A port of the Grails Spock plugin by Luke Daley
+http://grails.org/plugin/spock</description>
+            <documentation>http://griffon.codehaus.org/Spock+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-spock/tags/RELEASE_0_5_1/griffon-spock-0.5.1.zip</file>
         </release>
     </plugin>
     <plugin name="spring" latest-release="0.8">
