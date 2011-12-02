@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4791">
+<plugins revision="4799">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1235,7 +1235,7 @@ http://www.avaje.org/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-ebean/tags/RELEASE_0_2/griffon-ebean-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="eclipse-support" latest-release="0.4.8">
+    <plugin name="eclipse-support" latest-release="0.4.9">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Keeps Eclipse files up to date</title>
             <author>Andres Almiray</author>
@@ -1375,6 +1375,17 @@ http://www.avaje.org/</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_8/griffon-eclipse-support-0.4.8.zip</file>
+        </release>
+        <release tag="RELEASE_0_4_9" version="0.4.9" type="svn">
+            <title>Keeps Eclipse files up to date</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Keeps Eclipse files up to date.</description>
+            <documentation>http://griffon.codehaus.org/EclipseSupport+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-eclipse-support/tags/RELEASE_0_4_9/griffon-eclipse-support-0.4.9.zip</file>
         </release>
     </plugin>
     <plugin name="effects" latest-release="0.4">
@@ -1859,7 +1870,7 @@ Provides a nice icon set too.</description>
             <platforms/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-gfx-builder/tags/RELEASE_0_6_1/griffon-gfx-builder-0.6.1.zip</file>
         </release>
-        <release tag="RELEASE_0_6_2" version="0.6.2" type="svn">
+        <release tag="RELEASE_0_6_2" type="svn" version="0.6.2">
             <title>Gfx Builder Plugin</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
