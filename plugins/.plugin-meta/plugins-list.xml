@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4806">
+<plugins revision="4813">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -5388,7 +5388,7 @@ http://grails.org/plugin/spock</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-spock/tags/RELEASE_0_5/griffon-spock-0.5.zip</file>
         </release>
-        <release tag="RELEASE_0_5_1" version="0.5.1" type="svn">
+        <release tag="RELEASE_0_5_1" type="svn" version="0.5.1">
             <title>Spock Plugin - spockframework.org</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
@@ -6573,6 +6573,19 @@ http://zonelayout.com</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-zonelayout/tags/RELEASE_0_2/griffon-zonelayout-0.2.zip</file>
+        </release>
+    </plugin>
+    <plugin name="cassandra" latest-release="0.1">
+        <release tag="RELEASE_0_1" version="0.1" type="svn">
+            <title>Cassandra support</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Cassandra support using CQL via JDBC</description>
+            <documentation>http://griffon.codehaus.org/Cassandra+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-cassandra/tags/RELEASE_0_1/griffon-cassandra-0.1.zip</file>
         </release>
     </plugin>
 </plugins>
