@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4821">
+<?xml version="1.0" encoding="UTF-8"?><plugins revision="4828">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -6397,7 +6396,7 @@ http://project-voldemort.com/</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-worldwind/tags/RELEASE_0_4/griffon-worldwind-0.4.zip</file>
         </release>
     </plugin>
-    <plugin name="wsclient" latest-release="0.4.2">
+    <plugin name="wsclient" latest-release="0.5">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>WS client &amp; libraries</title>
             <author>Andres Almiray</author>
@@ -6477,6 +6476,17 @@ http://project-voldemort.com/</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wsclient/tags/RELEASE_0_4_2/griffon-wsclient-0.4.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_5" version="0.5" type="svn">
+            <title>WS client &amp; libraries</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>WS client &amp; libraries</description>
+            <documentation>http://griffon.codehaus.org/Wsclient+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-wsclient/tags/RELEASE_0_5/griffon-wsclient-0.5.zip</file>
         </release>
     </plugin>
     <plugin name="xmlrpc" latest-release="0.6">
