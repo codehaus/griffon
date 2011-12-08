@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,22 +19,8 @@
  */
 
 // check to see if we already have a WsclientGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'WsclientGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'WsclientGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding WsclientGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'WsclientGriffonAddon'.addon=true
-''')
-}
-
-if(!(config.flatten().'griffon.ws.injectInto')) {
-    configFile.append('''
-griffon.ws.injectInto = ['controller']
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }
