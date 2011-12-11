@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><plugins revision="4828">
+<?xml version="1.0" encoding="UTF-8"?>
+<plugins revision="4835">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -4775,7 +4776,7 @@ Based on the Grails plugin of the same name.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-redis/tags/RELEASE_0_1/griffon-redis-0.1.zip</file>
         </release>
     </plugin>
-    <plugin name="resources" latest-release="0.1">
+    <plugin name="resources" latest-release="0.2">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>i18n and resource manager</title>
             <author>Alexander Klein</author>
@@ -4785,6 +4786,17 @@ Based on the Grails plugin of the same name.</description>
             <platforms/>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-resources/tags/RELEASE_0_1/griffon-resources-0.1.zip</file>
+        </release>
+        <release tag="RELEASE_0_2" version="0.2" type="svn">
+            <title>i18n and resource manager</title>
+            <author>Alexander Klein</author>
+            <authorEmail>info@aklein.org</authorEmail>
+            <description>Groovy-style i18n support for messages and resources like images and so on</description>
+            <documentation>http://griffon.codehaus.org/Resources+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits/>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-resources/tags/RELEASE_0_2/griffon-resources-0.2.zip</file>
         </release>
     </plugin>
     <plugin name="rest" latest-release="0.7.1">
@@ -6477,7 +6489,7 @@ http://project-voldemort.com/</description>
             <toolkits/>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-wsclient/tags/RELEASE_0_4_2/griffon-wsclient-0.4.2.zip</file>
         </release>
-        <release tag="RELEASE_0_5" version="0.5" type="svn">
+        <release tag="RELEASE_0_5" type="svn" version="0.5">
             <title>WS client &amp; libraries</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
