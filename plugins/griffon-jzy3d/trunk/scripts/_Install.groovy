@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Griffon Jzy3d - Andres Almiray. All Rights Reserved.
+ * Copyright (c) 2010-2011 Griffon Jzy3d - Andres Almiray. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -33,16 +33,8 @@
  */
 
 // check to see if we already have a Jzy3dGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'Jzy3dGriffonAddon' == builder
-    }
-}
-
-if (!addonIsSet1) {
+configText = '''root.'Jzy3dGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
     println 'Adding Jzy3dGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'Jzy3dGriffonAddon'.addon=true
-''')
+    builderConfigFile.text += '\n' + configText + '\n'
 }

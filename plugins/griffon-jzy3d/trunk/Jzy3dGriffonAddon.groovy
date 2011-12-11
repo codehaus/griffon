@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Griffon Jzy3d - Andres Almiray. All Rights Reserved.
+ * Copyright (c) 2010-2011 Griffon Jzy3d - Andres Almiray. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -28,15 +28,8 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import griffon.core.GriffonApplication
-import griffon.util.Metadata
-import org.codehaus.griffon.runtime.jzy3d.Chart3DArtifactHandler
-
 /**
  * @author Andres Almiray
  */
 class Jzy3dGriffonAddon {
-    void addonInit(GriffonApplication app) {
-        app.artifactManager.registerArtifactHandler(new Chart3DArtifactHandler(app))
-    }
 }
