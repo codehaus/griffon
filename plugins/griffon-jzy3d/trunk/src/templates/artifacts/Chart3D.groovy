@@ -10,7 +10,7 @@ import org.jzy3d.plot3d.primitives.Shape
 import org.jzy3d.plot3d.rendering.legends.colorbars.ColorbarLegend
 
 class @artifact.name@ {
-    void mvcGroupInit(Map<String, ?> args) {
+    void mvcGroupInit(Map<String, Object> args) {
         // Be sure to call initGraph() before the chart is displayed
         initChart()
     }

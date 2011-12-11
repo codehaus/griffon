@@ -12,7 +12,7 @@ import org.codehaus.griffon.runtime.jzy3d.AbstractGriffonChart3D;
 import java.util.Map;
 
 public class @artifact.name@ extends AbstractGriffonChart3D {
-    public void mvcGroupInit(Map<String, ?> args) {
+    public void mvcGroupInit(Map<String, Object> args) {
         // Be sure to call initGraph() before the chart is displayed
         initChart();
     }
