@@ -47,7 +47,7 @@ class ErrorMessagePanelTest extends GroovyTestCase {
 
         errorPanel.errors = errors
 
-        Thread.sleep(100)
+        Thread.sleep(300)
 
         return errorPanel
     }
