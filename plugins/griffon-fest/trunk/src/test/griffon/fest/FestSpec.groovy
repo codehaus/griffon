@@ -18,7 +18,6 @@ package griffon.fest
 
 import spock.lang.Specification
 import griffon.util.ApplicationHolder
-import org.codehaus.griffon.test.support.GriffonTestAutowirer
 import org.fest.swing.fixture.FrameFixture
 import griffon.swing.SwingGriffonApplication
 import java.util.concurrent.CountDownLatch
@@ -31,17 +30,15 @@ class FestSpec extends Specification {
     protected FrameFixture window
     private boolean realized = false
     private final Object realizedLock = new Object()
-    private autowirer = new GriffonTestAutowirer(app)
 
     def final setup() {
-        autowirer.autowire(this)
         initApp()
         onSetup()
     }
 
     def final cleanup() {
-        window.cleanUp()
         onCleanup()
+        window.cleanUp()
     }
 
     protected void setupConfig(SwingGriffonApplication app) { }
