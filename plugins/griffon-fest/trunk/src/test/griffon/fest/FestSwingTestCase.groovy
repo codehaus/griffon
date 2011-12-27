@@ -38,8 +38,8 @@ abstract class FestSwingTestCase extends GriffonUnitTestCase {
     }
 
     protected final void tearDown() {
-        window.cleanUp()
         onTearDown()
+        window.cleanUp()
         super.tearDown()
     }
  
