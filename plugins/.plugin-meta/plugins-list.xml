@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="4841">
+<plugins revision="4850">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -1518,7 +1518,7 @@ Provides a nice icon set too.</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-feeds/tags/RELEASE_0_2/griffon-feeds-0.2.zip</file>
         </release>
     </plugin>
-    <plugin name="fest" latest-release="0.7">
+    <plugin name="fest" latest-release="0.8">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Enables application testing with FEST</title>
             <author>Andres Almiray</author>
@@ -1608,6 +1608,17 @@ Provides a nice icon set too.</description>
             <platforms/>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_7/griffon-fest-0.7.zip</file>
+        </release>
+        <release tag="RELEASE_0_8" version="0.8" type="svn">
+            <title>Enables application testing with FEST</title>
+            <author>Andres Almiray</author>
+            <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+            <description>Enables application testing with FEST (http://easytesting.org)</description>
+            <documentation>http://griffon.codehaus.org/Fest+Plugin</documentation>
+            <license>Apache Software License 2.0</license>
+            <toolkits>swing</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-fest/tags/RELEASE_0_8/griffon-fest-0.8.zip</file>
         </release>
     </plugin>
     <plugin name="findbugs" latest-release="0.2">
@@ -3297,7 +3308,7 @@ See http://jung.sourceforge.net for more information about JUNG2</description>
             <toolkits>swing</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jzy3d/tags/RELEASE_0_1/griffon-jzy3d-0.1.zip</file>
         </release>
-        <release tag="RELEASE_0_2" version="0.2" type="svn">
+        <release tag="RELEASE_0_2" type="svn" version="0.2">
             <title>3D chart support via Jzy3d</title>
             <author>Andres Almiray</author>
             <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
