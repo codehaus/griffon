@@ -24,7 +24,7 @@ import charvax.swing.JDialog
  */
 abstract class AbstractCharvaFactory extends AbstractFactory {
     static boolean isRootPaneContainer(bean) {
-        bean.metaClass.respondsTo(bean, 'getContentPane') ? true: false
+        bean && bean.metaClass.respondsTo(bean, 'getContentPane') ? true: false
     }
 
     static int toInteger(value) {

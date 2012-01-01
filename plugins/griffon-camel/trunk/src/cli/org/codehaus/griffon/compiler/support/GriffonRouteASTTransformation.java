@@ -24,7 +24,12 @@ import org.codehaus.groovy.transform.GroovyASTTransformation;
 
 import griffon.plugins.camel.GriffonRoute;
 import griffon.plugins.camel.GriffonRouteClass;
+import org.codehaus.griffon.compiler.GriffonCompilerContext;
+import org.codehaus.griffon.compiler.SourceUnitCollector;
 import org.codehaus.griffon.runtime.camel.AbstractGriffonRoute;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Handles generation of code for Camel routes.<p/>
@@ -33,16 +38,23 @@ import org.codehaus.griffon.runtime.camel.AbstractGriffonRoute;
  */
 @GroovyASTTransformation(phase=CompilePhase.CANONICALIZATION)
 public class GriffonRouteASTTransformation extends GriffonArtifactASTTransformation {
+    private static final Logger LOG = LoggerFactory.getLogger(GriffonRouteASTTransformation.class);
     private static final String ARTIFACT_PATH = "routes";
     private static final ClassNode GRIFFON_ROUTE_CLASS = ClassHelper.makeWithoutCaching(GriffonRoute.class);
     private static final ClassNode ABSTRACT_GRIFFON_ROUTE_CLASS = ClassHelper.makeWithoutCaching(AbstractGriffonRoute.class);
 
-    protected void transform(ClassNode classNode, SourceUnit source, String artifactPath) {
-        if(!ARTIFACT_PATH.equals(artifactPath) || !classNode.getName().endsWith(GriffonRouteClass.TRAILING)) return;
+    public static boolean isRouteArtifact(ClassNode classNode, SourceUnit source) {
+        if (classNode == null || source == null) return false;
+        return ARTIFACT_PATH.equals(GriffonCompilerContext.getArtifactPath(source)) && classNode.getName().endsWith(GriffonRouteClass.TRAILING);
+    }
 
-        if(ClassHelper.OBJECT_TYPE.equals(classNode.getSuperClass())) {
+    protected void transform(ClassNode classNode, SourceUnit source, String artifactPath) {
+        if (!isRouteArtifact(classNode, source)) return;
+
+        if (ClassHelper.OBJECT_TYPE.equals(classNode.getSuperClass())) {
+            if (LOG.isDebugEnabled()) LOG.debug("Setting " + ABSTRACT_GRIFFON_ROUTE_CLASS.getName() + " as the superclass of " + classNode.getName());
             classNode.setSuperClass(ABSTRACT_GRIFFON_ROUTE_CLASS);
-        } else if(!classNode.implementsInterface(GRIFFON_ROUTE_CLASS)){
+        } else if (!classNode.implementsInterface(GRIFFON_ROUTE_CLASS)) {
             // not supported!!!
             throw new RuntimeException("Custom super classes are not supported for artifacts of type "+GriffonRouteClass.TYPE+".");
         }

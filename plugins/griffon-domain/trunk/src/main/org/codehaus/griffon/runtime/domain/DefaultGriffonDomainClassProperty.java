@@ -25,7 +25,7 @@ import java.beans.PropertyDescriptor;
  * @author Andres Almiray
  */
 public class DefaultGriffonDomainClassProperty extends AbstractGriffonDomainClassProperty {
-    private boolean persistent;
+    private boolean persistent = true;
 
     public DefaultGriffonDomainClassProperty(GriffonDomainClass domainClass, PropertyDescriptor propertyDescriptor) {
         super(domainClass, propertyDescriptor);

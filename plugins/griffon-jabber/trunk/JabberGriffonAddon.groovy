@@ -24,7 +24,7 @@ import org.jivesoftware.smack.proxy.ProxyInfo
 import org.jivesoftware.smack.packet.Message
 
 /**
- * @author Andres.Almiray
+ * @author Andres Almiray
  */
 class JabberGriffonAddon {
    private static final Map CHATS = [:]

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,14 +44,6 @@ class CharvaBuilder extends FactoryBuilderSupport {
 
         //object id delegage, for propertyNotFound
         addAttributeDelegate(CharvaBuilder.&objectIDAttributeDelegate)
-    }
-
-    void registerCharvaBinding() {
-        BindFactory bindFactory = new BindFactory()
-        registerFactory("bind", bindFactory)
-        addAttributeDelegate(bindFactory.&bindingAttributeDelegate)
-        registerFactory("bindProxy", new BindProxyFactory())
-        registerFactory ("bindGroup", new BindGroupFactory());
     }
 
     void registerCharvaPassThruNodes() {
@@ -105,7 +97,7 @@ class CharvaBuilder extends FactoryBuilderSupport {
 
     void registerTableComponents() {
         registerFactory("table", new TableFactory())
-        // registerBeanFactory("tableColumn", TableColumn)
+        // registerBeanFactory2("tableColumn", TableColumn)
         registerFactory("tableModel", new TableModelFactory())
         registerFactory("propertyColumn", new PropertyColumnFactory())
         registerFactory("closureColumn", new ClosureColumnFactory())
@@ -144,7 +136,7 @@ class CharvaBuilder extends FactoryBuilderSupport {
         registerFactory("compoundBorder", new CompoundBorderFactory())
     }
 
-    private void registerBeanFactory(String name, Class charvaBeanClass, boolean leaf = true) {
+    private void registerBeanFactory2(String name, Class charvaBeanClass, boolean leaf = true) {
         registerFactory(name, new BeanFactory(charvaBeanClass, leaf))
     }
 

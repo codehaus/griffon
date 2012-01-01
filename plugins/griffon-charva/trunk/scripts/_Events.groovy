@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,32 +18,20 @@
  * @author Andres Almiray
  */
 
-import org.codehaus.griffon.util.BuildSettings
-
-includeTargets << griffonScript("_GriffonSettings")
-
-packagingType = ''
-eventPackageStart = { type ->
-    packagingType = type
-}
-
 eventCreateConfigEnd = {
-    config.griffon.application.mainClass = 'griffon.charva.CharvaApplication'
+    buildConfig.griffon.application.mainClass = 'griffon.charva.CharvaApplication'
 }
 
-def eventClosure1 = binding.variables.containsKey('eventCopyLibsEnd') ? eventCopyLibsEnd : {jardir->}
-eventCopyLibsEnd = { jardir ->
-    eventClosure1(jardir)
-    if (!isPluginProject) {
-        if(packagingType in ['applet', 'webstart']) {
-           ant.fail("Charva does not support $type mode.") 
-        }
-
-        def charvaLibDir = "${getPluginDirForName('charva').file}/lib".toString()
-        ant.fileset(dir: charvaLibDir, includes: "*.jar").each {
-            griffonCopyDist(it.toString(), jardir)
-        }
-        copyPlatformJars(charvaLibDir, jardir)
-        copyNativeLibs(charvaLibDir, jardir)
-    }
+def eventClosure1 = binding.variables.containsKey('eventSetClasspath') ? eventSetClasspath : {cl->}
+eventSetClasspath = { cl ->
+    eventClosure1(cl)
+    if(compilingPlugin('charva')) return
+    griffonSettings.dependencyManager.flatDirResolver name: 'griffon-charva-plugin', dirs: "${charvaPluginDir}/addon"
+    griffonSettings.dependencyManager.addPluginDependency('charva', [
+        conf: 'compile',
+        name: 'griffon-charva-addon',
+        group: 'org.codehaus.griffon.plugins',
+        version: charvaPluginVersion
+    ])
 }
+

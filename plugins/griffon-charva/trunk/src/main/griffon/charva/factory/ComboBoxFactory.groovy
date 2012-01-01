@@ -17,7 +17,6 @@
 package griffon.charva.factory
 
 import charvax.swing.JComboBox
-import griffon.charva.binding.JComboBoxMetaMethods
 
 public class ComboBoxFactory extends AbstractCharvaFactory {
     
@@ -38,7 +37,6 @@ public class ComboBoxFactory extends AbstractCharvaFactory {
         } else {
             comboBox = new JComboBox()
         }
-        JComboBoxMetaMethods.enhanceMetaClass(comboBox)
         return comboBox
     }
 

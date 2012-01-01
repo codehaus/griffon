@@ -62,8 +62,9 @@ class CamelGriffonAddon {
 
         log.debug "Configuring Routes"
         routeClasses.each { routeClass ->
-            configureRouteBeans.delegate = delegate
-            configureRouteBeans(routeClass)
+            "${routeClass.fullName}Builder"(GriffonRouteBuilderFactoryBean) {
+                routeBean = ref(routeClass.propertyName)
+            }
         }
 
         xmlns camel:'http://camel.apache.org/schema/spring'
@@ -79,23 +80,18 @@ class CamelGriffonAddon {
     def whenSpringReady = { app ->
         def template = app.applicationContext.getBean('producerTemplate')
 
-        def types = app.config.griffon?.camel?.injectInto ?: ['controller']
-        types.each { type ->
-            log.debug "Adding dynamic methods to ${type}"
+        (app.config.griffon?.camel?.injectInto ?: ['controller']).each { type ->
+            log.debug "Adding dynamic methods to artifacts of type '${type}'"
             app.artifactManager.getClassesOfType(type).each { griffonClass ->
+                log.debug "Adding sendMessage() to $griffonClass"
                 griffonClass.metaClass.sendMessage = { endpoint, message ->
                     template.sendBody(endpoint, message)
                 }
+                log.debug "Adding requestMessage() to $griffonClass"
                 griffonClass.metaClass.requestMessage = { endpoint, message ->
                     template.requestBody(endpoint, message)
                 }                
             }    
-        }
-    }
-    
-    private configureRouteBeans = { routeClass ->
-        "${routeClass.fullName}Builder"(GriffonRouteBuilderFactoryBean) {
-            routeBean = ref(routeClass.propertyName)
         }
     }
 }

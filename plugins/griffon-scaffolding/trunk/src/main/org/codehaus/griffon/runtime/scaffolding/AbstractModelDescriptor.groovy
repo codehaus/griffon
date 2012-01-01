@@ -16,16 +16,13 @@
 
 package org.codehaus.griffon.runtime.scaffolding
 
-import java.beans.PropertyChangeEvent
-import java.beans.PropertyChangeListener
-import java.beans.PropertyDescriptor
-import groovy.beans.Bindable
-
-import griffon.util.ApplicationHolder
-import griffon.util.GriffonNameUtils
-
 import griffon.plugins.scaffolding.Model
 import griffon.plugins.scaffolding.ModelDescriptor
+import griffon.util.ApplicationHolder
+import griffon.util.GriffonNameUtils
+import groovy.beans.Bindable
+import java.beans.PropertyChangeEvent
+import java.beans.PropertyChangeListener
 
 /**
  * @author Andres Almiray
@@ -45,10 +42,10 @@ abstract class AbstractModelDescriptor<T> implements ModelDescriptor<T> {
 
     String toString() {
         String desc = [
-            'name=', name,
-            ', displayName=', displayName,
-            ', description=', description
-         ].join('')
+                'name=', name,
+                ', displayName=', displayName,
+                ', description=', description
+        ].join('')
         '[' + desc + ']'
     }
 
@@ -75,18 +72,18 @@ abstract class AbstractModelDescriptor<T> implements ModelDescriptor<T> {
         String setterName = GriffonNameUtils.getSetterName(propName)
 
         String value = i18nFromApplication(i18nKey)
-        if(!value) value = i18nFromIntrospection(alternatePropName)
+        if (!value) value = i18nFromIntrospection(alternatePropName)
         this."$setterName"(value)
     }
 
     private String i18nFromApplication(String i18nKey) {
-        if(ApplicationHolder.application) {
+        if (ApplicationHolder.application) {
             try {
                 String val = ApplicationHolder.application.getMessage(i18nKey)
-                if(val && val != i18nKey) {
+                if (val && val != i18nKey) {
                     return val
                 }
-            } catch(MissingMethodException mme) {
+            } catch (MissingMethodException mme) {
                 // i18n addon is not installed
                 // continue with the next strategy
             }

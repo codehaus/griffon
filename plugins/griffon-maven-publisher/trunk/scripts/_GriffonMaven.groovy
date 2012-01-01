@@ -19,6 +19,12 @@ import org.codehaus.griffon.plugins.*
 import org.apache.ivy.util.ChecksumHelper
 
 includeTargets << griffonScript("Package")    
+    
+// Open source licences.
+globalLicenses = [
+        APACHE: [ name: "Apache License 2.0", url: "http://www.apache.org/licenses/LICENSE-2.0.txt" ],
+        GPL2: [ name: "GNU General Public License 2", url: "http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt"],
+        GPL3: [ name: "GNU General Public License 3", url: "http://www.gnu.org/licenses/gpl.txt"] ]
 
 artifact = groovy.xml.NamespaceBuilder.newInstance(ant, 'antlib:org.apache.maven.artifact.ant')
 
@@ -26,80 +32,165 @@ target(init: "Initialisation for maven deploy/install") {
     depends(packageApp)
 
     ant.mkdir(dir: griffonSettings.projectTargetDir)
-    plugin = pluginManager?.allPlugins?.find { it.basePlugin }
-    pomFileLocation = "${griffonSettings.projectTargetDir}/pom.xml"
-    basePom = new File( "${basedir}/pom.xml" )
-    if(basePom.exists())
-        pomFileLocation = basePom.absolutePath
+    // plugin = pluginManager?.allPlugins?.find { it.basePlugin }
 
-    if(!plugin) {
+    if(!isPluginProject) {
         package_zip()
-    }
-    else {
+    } else {
         includeTargets << griffonScript("_GriffonPluginDev")    
         packagePlugin()
-        plugin = pluginManager?.allPlugins?.find { it.basePlugin }
-        pluginInstance = plugin.pluginClass.newInstance()    
+        // plugin = pluginManager?.allPlugins?.find { it.basePlugin }
     }
 
-    if(!basePom.exists()) {
-        new File(pomFileLocation).withWriter { w ->
-            xml = new groovy.xml.MarkupBuilder(w)
+    generatePom()
+}
 
-            xml.project {
-                modelVersion "4.0.0"
-                if(plugin) {
-                    def group = "org.codehaus.griffon.plugins"
-                    if(pluginInstance.hasProperty('group') && pluginInstance.group) {
-                        group = pluginInstance.group
-                    }
-                    else if(pluginInstance.hasProperty('groupId') && pluginInstance.groupId) {
-                        group = pluginInstance.groupId
-                    }
+target(generatePom: "Generates a pom.xml file for the current project unless './pom.xml' exists.") {
+    depends(init)
 
-                    groupId group
-                    artifactId plugin.fileSystemShortName 
-                    packaging "zip"
-                    version plugin.version
-                    name plugin.fileSystemShortName                    
+    pomFileLocation = "${griffonSettings.projectTargetDir}/pom.xml"
+    basePom = new File("${basedir}/pom.xml")
+
+    if (basePom.exists()) {
+        pomFileLocation = basePom.absolutePath
+        println "Skipping POM generation because 'pom.xml' exists in the root of the project."
+        return 1
+    }
+
+    // Get hold of the plugin instance for this plugin if it's a plugin
+    // project. If it isn't, then these variables will be null.
+
+    new File(pomFileLocation).withWriter { w ->
+        def xml = new groovy.xml.MarkupBuilder(w)
+
+        xml.project(xmlns: "http://maven.apache.org/POM/4.0.0", 
+                'xmlns:xsi': "http://www.w3.org/2001/XMLSchema-instance", 
+                'xsi:schemaLocation': "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd") {
+            modelVersion "4.0.0"
+            if(plugin) {
+                def group = "org.griffon.plugins"
+                if (getOptionalProperty(plugin, 'group')) {
+                    group = plugin.group
                 }
-                else {
-                    groupId buildConfig.griffon.project.groupId ?: (config?.griffon?.project?.groupId ?: griffonAppName)
-                    artifactId griffonAppName
-                    packaging "zip"
-                    version griffonAppVersion
-                    name griffonAppName                
+                else if(getOptionalProperty(plugin, 'groupId')) {
+                    group = plugin.groupId
                 }
-                    
-                if(plugin && plugin.dependencyNames) {
-                    dependencies {                    
-                        for(dep in pluginInstance.dependsOn) {
-                            String depName = dep.key
-                            // Note: specifying group in dependsOn is a Griffon 0.9 feature
-                            // pre 0.9 users don't have this capability
-                            def depGroup = "org.codehaus.griffon.plugins"
-                            if(depName.contains(":")) {
-                                def i = depName.split(":")
-                                depGroup = i[0]
-                                depName = i[1]
-                            }
-                            String depVersion = dep.value
-                            def upper = GriffonPluginUtils.getUpperVersion(depVersion)
-                            def lower = GriffonPluginUtils.getLowerVersion(depVersion)
-                            if(upper == lower) depVersion = upper
-                            else {
-                                upper = upper == '*' ? '' : upper
-                                lower = lower == '*' ? '' : lower
-                                
-                                depVersion = "[$upper,$lower]"
-                            }
-                            
-                            dependency {
-                                groupId depGroup
-                                artifactId depName
-                                version depVersion
+
+                groupId group
+                artifactId GriffonUtil.getLogicalName(plugin.class.name, 'GriffonPlugin') 
+                packaging "zip"
+                version plugin.version
+
+                // I think description() and url() resolve against the AntBuilder
+                // by default, so we have to call them explicitly on the MarkupBuilder.
+                if (getOptionalProperty(plugin, "title")) name plugin.title
+                if (getOptionalProperty(plugin, "description")) delegate.description plugin.description
+                if (getOptionalProperty(plugin, "documentation")) delegate.url plugin.documentation
+                if (getOptionalProperty(plugin, "license")) {
+                    def l = globalLicenses[plugin.license]
+                    if (l) {
+                        licenses {
+                            license {
+                                name l.name
+                                delegate.url l.url
                             }
                         }
+                    } else if(plugin.license){
+                        licenses {
+                            license {
+                                name plugin.license
+                            }
+                        }
+                    } else {
+                        event("StatusUpdate", [ "Unknown license: ${plugin.license}" ])
+                    }
+                }
+                if (getOptionalProperty(plugin, "organization")) {
+                    organization {
+                        name plugin.organization.name
+                        delegate.url plugin.organization.url
+                    }
+                }
+
+                // Handle the developers
+                def devs = []
+                if (getOptionalProperty(plugin, "author")) {
+                    def author = [ name: plugin.author ]
+                    if (getOptionalProperty(plugin, "authorEmail")) {
+                        author["email"] = plugin.authorEmail
+                    }
+
+                    devs << author
+                }
+                if (getOptionalProperty(plugin, "developers")) {
+                    devs += plugin.developers
+                }
+
+                if (devs) {
+                    developers {
+                        for (d in devs) {
+                            developer {
+                                name d.name
+                                if (d.email) email d.email
+                            }
+                        }
+                    }
+                }
+
+                // Handle the issue tracker
+                if (getOptionalProperty(plugin, "issueManagement")) {
+                    def trackerInfo = plugin.issueManagement
+                    issueManagement {
+                        if (trackerInfo.system) system trackerInfo.system
+                        if (trackerInfo.url) delegate.url trackerInfo.url
+                    }
+                }
+
+                // Source control
+                if (getOptionalProperty(plugin, "scm")) {
+                    def scmInfo = plugin.scm
+                    scm {
+                        if (scmInfo.connection) connection scmInfo.connection
+                        if (scmInfo.developerConnection) developerConnection scmInfo.developerConnection
+                        if (scmInfo.tag) tag scmInfo.tag
+                        if (scmInfo.url) delegate.url scmInfo.url
+                    }
+                }
+            }
+            else {
+                groupId buildConfig.griffon.project.groupId ?: (config?.griffon?.project?.groupId ?: griffonAppName)
+                artifactId griffonAppName
+                packaging "zip"
+                version griffonAppVersion
+                name griffonAppName                
+            }
+                
+            if(plugin && plugin.dependsOn) {
+                dependencies {                    
+                    for(dep in plugin.dependsOn) {
+                        String depName = dep.key
+                        def depGroup = "org.griffon.plugins"
+                        if(depName.contains(":")) {
+                            def i = depName.split(":")
+                            depGroup = i[0]
+                            depName = i[1]
+                        }
+                        String depVersion = dep.value
+                        def upper = GriffonPluginUtils.getUpperVersion(depVersion)
+                        def lower = GriffonPluginUtils.getLowerVersion(depVersion)
+                        if(upper == lower) depVersion = upper
+                        else {
+                            upper = upper == '*' ? '' : upper
+                            lower = lower == '*' ? '' : lower
+                            
+                            depVersion = "[$lower,$upper]"
+                        }
+                        
+                        dependency {
+                            groupId depGroup
+                            artifactId GriffonUtil.getScriptName(depName)
+                            version depVersion
+                        }                            
                     }
                 }
             }
@@ -115,7 +206,7 @@ target(mavenInstall:"Installs a plugin or application into your local Maven cach
 
 private generateChecksum(File file) {
     def checksum = new File("${file.parentFile.absolutePath}/${file.name}.sha1")
-    checksum.write ChecksumHelper.computeAsString(file, "sha1")    
+    checksum.write ChecksumHelper.computeAsString(file, "sha1")
     return checksum
 }
 private installOrDeploy(File file, isPlugin, boolean deploy, repos = [:]) {
@@ -144,13 +235,18 @@ private installOrDeploy(File file, isPlugin, boolean deploy, repos = [:]) {
                 remoteRepository(repo.args, repo.configurer)
             }
             else {
-                remoteRepository(repo.args)                            
+                remoteRepository(repo.args)
             }
         }
         if(repos.local) {
             localRepository(path:repos.local)
         }
     }    
+}
+
+
+private getOptionalProperty(obj, prop) {
+    return obj.hasProperty(prop) ? obj."$prop" : null
 }
 
 target(mavenDeploy:"Deploys the plugin to a Maven repository") {
@@ -167,7 +263,7 @@ target(mavenDeploy:"Deploys the plugin to a Maven repository") {
         callable.delegate = distInfo
         callable.resolveStrategy = Closure.DELEGATE_FIRST
         try {
-            callable.call()                
+            callable.call()
         }
         catch(e) {
             println "Error reading dependency distribution settings: ${e.message}"
@@ -175,12 +271,12 @@ target(mavenDeploy:"Deploys the plugin to a Maven repository") {
         }
     }
     def protocol = protocols.http
-    def repo = argsMap.repository ? distInfo.remoteRepos[argsMap.repository] : null        
+    def repo = argsMap.repository ? distInfo.remoteRepos[argsMap.repository] : null
     if(argsMap.protocol) {
         protocol = protocols[argsMap.protocol]
     }
     else if(repo) {
-        def url = repo?.args?.url            
+        def url = repo?.args?.url
         if(url) {
             def i = url.indexOf('://')
             def urlProt = url[0..i-1]

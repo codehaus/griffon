@@ -16,12 +16,13 @@
 
 package griffon.domain
 
-import griffon.core.GriffonApplication
 import griffon.domain.orm.CriteriaBuilder
 import griffon.domain.orm.CriteriaVisitException
 import griffon.domain.orm.CriteriaVisitor
 import griffon.domain.orm.Criterion
 import java.util.regex.Pattern
+import static griffon.util.GriffonNameUtils.isBlank
+import griffon.util.GriffonClassUtils
 
 /**
  * @author Andres Almiray
@@ -38,6 +39,7 @@ final class DomainClassUtils {
 
     private DomainClassUtils() {}
 
+    /*
     void init(GriffonApplication app) {
         app.artifactManager.domainClasses.each { domain ->
             String entityName = fetchAndSetEntityNameFor(domain)
@@ -51,6 +53,7 @@ final class DomainClassUtils {
     String getEntityNameFor(GriffonDomainClass domain) {
         ENTITY_NAMES[domain.clazz.name]
     }
+    */
 
     Criterion buildCriterion(Closure criteria) {
         Criterion criterion = null;
@@ -66,6 +69,34 @@ final class DomainClassUtils {
         }
 
         return criterion;
+    }
+
+    void addTo(GriffonDomain owner, Map<String, Object> params, String relationshipName) {
+        if (owner == null || params == null || params.isEmpty() || isBlank(relationshipName)) return;
+        GriffonDomainClass ownerDomainClass = (GriffonDomainClass) = owner.getGriffonClass();
+    }
+
+    void addTo(GriffonDomain owner, GriffonDomain target, String relationshipName) {
+        if (owner == null || target == null || isBlank(relationshipName)) return;
+        GriffonDomainClass ownerDomainClass = (GriffonDomainClass) = owner.getGriffonClass();
+        GriffonDomainClassProperty relationship = ownerDomainClass.getPropertyByName(relationshipName);
+        Collection collection = (Collection) relationship.getValue(owner);
+        GriffonClassUtils.invokeInstanceMethod(collection, "add", target);
+        // set owning side on target
+    }
+
+    void addAllTo(GriffonDomain owner, Collection<Map<String, Object>> targets, String relationshipName) {
+        if (targets == null || targets.isEmpty()) return;
+        for (Map<String, Object> target: targets) {
+            addTo(owner, target, relationshipName)
+        }
+    }
+
+    void addAllTo(GriffonDomain owner, Collection<GriffonDomain> targets, String relationshipName) {
+        if (targets == null || targets.isEmpty()) return;
+        for (GriffonDomain target: targets) {
+            addTo(owner, target, relationshipName)
+        }
     }
 
     // ----------------------------------------------

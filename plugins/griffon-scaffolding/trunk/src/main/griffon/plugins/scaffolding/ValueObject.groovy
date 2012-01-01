@@ -25,7 +25,7 @@ import groovy.beans.Vetoable
  */
 @Vetoable
 class ValueObject<T> {
-    static final String VALUE_PROPERTY = 'value'
+    public static final String VALUE_PROPERTY = 'value'
 
     @Bindable T value
 

@@ -22,7 +22,6 @@ class ScalaGriffonPlugin {
     def dependsOn = ['lang-bridge': '0.4.2']
     def griffonVersion = '0.9.2 > *'
     def license = 'Apache Software License 2.0'
-    def pluginIncludes = ['bundle/lib/*.jar']
 
     def author = 'Andres Almiray'
     def authorEmail = 'aalmiray@users.sourceforge.net'

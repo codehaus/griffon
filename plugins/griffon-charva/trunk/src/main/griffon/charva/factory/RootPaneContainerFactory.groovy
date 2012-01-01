@@ -22,6 +22,7 @@ import charvax.swing.JButton
 
 abstract class RootPaneContainerFactory extends AbstractCharvaFactory {
     public void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
+        println ">>> adding $child to $parent"
         if (!(child instanceof Component) || (child instanceof Window)) {
             return;
         }

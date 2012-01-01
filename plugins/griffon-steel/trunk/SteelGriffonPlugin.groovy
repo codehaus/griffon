@@ -33,9 +33,9 @@
  */
 class SteelGriffonPlugin {
     // the plugin version
-    def version = "0.7"
+    def version = "0.7.1"
     // the version or versions of Griffon the plugin is designed for
-    def griffonVersion = '0.9.2 > *' 
+    def griffonVersion = '0.9.4 > *' 
     // the other plugins this plugin depends on
     def dependsOn = [:]
     // resources that are included in plugin packaging
@@ -50,7 +50,7 @@ class SteelGriffonPlugin {
     // linux, linux64, windows, windows64, macosx, macosx64, solaris
     def platforms = []
 
-    def author = 'Andres Almirays'
+    def author = 'Andres Almiray'
     def authorEmail = 'aalmiray@users.sourceforge.net'
     def title = "Gerrit Grunwald's Steel Series"
     def description = '''

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import griffon.util.RunnableWithArgs
 import griffon.plugins.rest.RestConnector
 
 /**

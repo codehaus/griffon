@@ -19,12 +19,16 @@ package org.codehaus.griffon.runtime.domain;
 import griffon.core.GriffonApplication;
 import griffon.domain.GriffonDomainClass;
 import griffon.domain.GriffonDomainClassProperty;
+import griffon.domain.GriffonDomainHandler;
 import org.codehaus.griffon.runtime.core.AbstractGriffonClass;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static griffon.util.GriffonClassUtils.EMPTY_ARGS;
+import static griffon.util.GriffonClassUtils.invokeExactStaticMethod;
 
 /**
  * Base implementation of the {@code GriffonDomainClass} interface
@@ -61,5 +65,13 @@ public abstract class AbstractGriffonDomainClass extends AbstractGriffonClass im
 
     public GriffonDomainClassProperty getIdentity() {
         return getPropertyByName(GriffonDomainClassProperty.IDENTITY);
+    }
+
+    public GriffonDomainHandler getDomainHandler() {
+        return (GriffonDomainHandler) invokeExactStaticMethod(getClazz(), "domainHandler", EMPTY_ARGS);
+    }
+
+    public String getDatasourceName() {
+        return (String) invokeExactStaticMethod(getClazz(), "datasource", EMPTY_ARGS);
     }
 }

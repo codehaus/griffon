@@ -20,8 +20,10 @@ import griffon.domain.orm.AbstractCriterionEvaluator;
 import griffon.domain.orm.BinaryExpression;
 import griffon.domain.orm.PropertyExpression;
 import griffon.domain.orm.UnaryExpression;
-import org.codehaus.groovy.runtime.InvokerHelper;
-import org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation;
+
+import static org.codehaus.groovy.runtime.InvokerHelper.getProperty;
+import static org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareEqual;
+import static org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareTo;
 
 /**
  * @author Andres Almiray
@@ -44,17 +46,17 @@ public class BeanCriterionEvaluator extends AbstractCriterionEvaluator {
         Object propertyValue = getPropertyValue(target, criterion.getPropertyName());
         switch (criterion.getOperator()) {
             case EQUAL:
-                return DefaultTypeTransformation.compareEqual(propertyValue, criterion.getValue());
+                return compareEqual(propertyValue, criterion.getValue());
             case NOT_EQUAL:
-                return !DefaultTypeTransformation.compareEqual(propertyValue, criterion.getValue());
+                return !compareEqual(propertyValue, criterion.getValue());
             case GREATER_THAN:
-                return DefaultTypeTransformation.compareTo(propertyValue, criterion.getValue()) > 0;
+                return compareTo(propertyValue, criterion.getValue()) > 0;
             case GREATER_THAN_OR_EQUAL:
-                return DefaultTypeTransformation.compareTo(propertyValue, criterion.getValue()) >= 0;
+                return compareTo(propertyValue, criterion.getValue()) >= 0;
             case LESS_THAN:
-                return DefaultTypeTransformation.compareTo(propertyValue, criterion.getValue()) < 0;
+                return compareTo(propertyValue, criterion.getValue()) < 0;
             case LESS_THAN_OR_EQUAL:
-                return DefaultTypeTransformation.compareTo(propertyValue, criterion.getValue()) <= 0;
+                return compareTo(propertyValue, criterion.getValue()) <= 0;
             case LIKE:
             case NOT_LIKE:
             default:
@@ -68,23 +70,23 @@ public class BeanCriterionEvaluator extends AbstractCriterionEvaluator {
         Object propertyValue2 = getPropertyValue(target, criterion.getOtherPropertyName());
         switch (criterion.getOperator()) {
             case EQUAL:
-                return DefaultTypeTransformation.compareEqual(propertyValue1, propertyValue2);
+                return compareEqual(propertyValue1, propertyValue2);
             case NOT_EQUAL:
-                return !DefaultTypeTransformation.compareEqual(propertyValue1, propertyValue2);
+                return !compareEqual(propertyValue1, propertyValue2);
             case GREATER_THAN:
-                return DefaultTypeTransformation.compareTo(propertyValue1, propertyValue2) > 0;
+                return compareTo(propertyValue1, propertyValue2) > 0;
             case GREATER_THAN_OR_EQUAL:
-                return DefaultTypeTransformation.compareTo(propertyValue1, propertyValue2) >= 0;
+                return compareTo(propertyValue1, propertyValue2) >= 0;
             case LESS_THAN:
-                return DefaultTypeTransformation.compareTo(propertyValue1, propertyValue2) < 0;
+                return compareTo(propertyValue1, propertyValue2) < 0;
             case LESS_THAN_OR_EQUAL:
-                return DefaultTypeTransformation.compareTo(propertyValue1, propertyValue2) <= 0;
+                return compareTo(propertyValue1, propertyValue2) <= 0;
             default:
                 throw new IllegalArgumentException("Invalid BinaryExpression " + criterion);
         }
     }
 
     private Object getPropertyValue(Object owner, String propertyName) {
-        return InvokerHelper.getProperty(owner, propertyName);
+        return getProperty(owner, propertyName);
     }
 }

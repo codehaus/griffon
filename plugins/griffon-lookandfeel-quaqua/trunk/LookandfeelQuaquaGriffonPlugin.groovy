@@ -18,9 +18,9 @@
  * @author Andres Almiray
  */
 class LookandfeelQuaquaGriffonPlugin {
-    def version = 0.1
-    def griffonVersion = '0.9 > *'
-    def dependsOn = [lookandfeel: 0.1]
+    def version = 0.2
+    def griffonVersion = '0.9.3 > *'
+    def dependsOn = [lookandfeel: 0.r51]
     def toolkits = ['swing']
     def platforms = ['macosx', 'macosx64']
     def license = 'GNU LGPL 2.1'

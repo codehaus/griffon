@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,12 @@
  */
 
 import griffon.charva.ApplicationFactory
-// import griffon.charva.CharvaUtils
-import griffon.util.UIThreadHelper
 
 /**
  * @author Andres Almiray
  */
 class CharvaGriffonAddon {
-    CharvaGriffonAddon() {
-//        CharvaUtils.enhanceClasses()
-    }
-
     def factories = [
         application: new ApplicationFactory()
-    ]
-
-    def methods = [
-        execAsync: UIThreadHelper.instance.&executeAsync,
-        execSync: UIThreadHelper.instance.&executeSync,
-        execOutside: UIThreadHelper.instance.&executeOutside
     ]
 }

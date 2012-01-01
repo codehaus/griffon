@@ -18,10 +18,11 @@
  * @author Andres Almiray
  */
 class LangBridgeGriffonPlugin {
-    def version = '0.4.2'
+    def version = '0.4.3'
     def dependsOn = [:]
     def griffonVersion = '0.9.2 > *'
     def license = 'Apache Software License 2.0'
+    def includes = ['src/ide-support']
 
     def author = 'Andres Almiray'
     def authorEmail = 'aalmiray@user.sourceforge.net'

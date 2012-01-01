@@ -53,6 +53,7 @@ public abstract class AbstractGriffonApplet extends JApplet implements GriffonAp
     private AddonManager addonManager;
     private ArtifactManager artifactManager;
     private MVCGroupManager mvcGroupManager;
+    private ServiceManager serviceManager;
 
     private Locale locale = Locale.getDefault();
     public static final String[] EMPTY_ARGS = new String[0];
@@ -176,6 +177,18 @@ public abstract class AbstractGriffonApplet extends JApplet implements GriffonAp
         this.mvcGroupManager = mvcGroupManager;
     }
 
+    public ServiceManager getServiceManager() {
+        return serviceManager;
+    }
+
+    public void setServiceManager(ServiceManager serviceManager) {
+        this.serviceManager = serviceManager;
+    }
+
+    public Map<String, ? extends GriffonService> getServices() {
+        return serviceManager.getServices();
+    }
+
     public Locale getLocale() {
         return locale;
     }
@@ -243,7 +256,7 @@ public abstract class AbstractGriffonApplet extends JApplet implements GriffonAp
                     event(GriffonApplication.Event.SHUTDOWN_ABORTED.getName(), asList(this));
                     if (log.isDebugEnabled()) {
                         try {
-                            log.debug("Shutdown aborted by "+ handler);
+                            log.debug("Shutdown aborted by " + handler);
                         } catch (UnsupportedOperationException uoe) {
                             log.debug("Shutdown aborted by a handler");
                         }
@@ -294,11 +307,13 @@ public abstract class AbstractGriffonApplet extends JApplet implements GriffonAp
         }
 
         // stage 3 - destroy all mvc groups
-        List<String> mvcNames = new ArrayList<String>();
-        mvcNames.addAll(getMvcGroupManager().getGroups().keySet());
         log.debug("Shutdown stage 3: destroy all MVC groups");
-        for (String name : mvcNames) {
-            destroyMVCGroup(name);
+        List<String> mvcNames = new ArrayList<String>();
+        if (getMvcGroupManager() != null) {
+            mvcNames.addAll(getMvcGroupManager().getGroups().keySet());
+            for (String name : mvcNames) {
+                destroyMVCGroup(name);
+            }
         }
 
         // stage 4 - call shutdown script

@@ -16,17 +16,15 @@
 
 package org.codehaus.griffon.runtime.scaffolding;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 import griffon.plugins.scaffolding.Model;
 import griffon.plugins.scaffolding.ModelDescriptor;
+import org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation;
 
-import java.util.List;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation;
+import java.util.List;
 
 /**
  * @author Andres Almiray
@@ -34,25 +32,36 @@ import org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation;
 public abstract class AbstractCompositeModel<T> implements Model<T> {
     private T value;
     private boolean initialized;
-    
+
     private final Object lock = new Object();
     private final List<Model<T>> models = new ArrayList<Model<T>>();
     private final List<PropertyChangeListener> valueChangeListeners = new ArrayList<PropertyChangeListener>();
     private final ModelDescriptor<T> modelDescriptor;
 
     public AbstractCompositeModel(List<Model<T>> models) {
-        if(models == null || models.isEmpty()) {
+        if (models == null || models.isEmpty()) {
             throw new IllegalArgumentException(getClass().getName() + " cannot be empty!");
         }
 
         this.models.addAll(models);
-        for(Model<T> model : models) model.addValueChangeListener(valueChangedUpdater);
+        for (Model<T> model : models) model.addValueChangeListener(valueChangedUpdater);
 
         modelDescriptor = new ModelDescriptor<T>() {
-            public Model<T> getModel() { return AbstractCompositeModel.this; }
-            public String getName() { return ""; }
-            public String getDisplayName() { return ""; }
-            public String getDescription() { return ""; }
+            public Model<T> getModel() {
+                return AbstractCompositeModel.this;
+            }
+
+            public String getName() {
+                return "";
+            }
+
+            public String getDisplayName() {
+                return "";
+            }
+
+            public String getDescription() {
+                return "";
+            }
         };
     }
 
@@ -61,8 +70,8 @@ public abstract class AbstractCompositeModel<T> implements Model<T> {
     }
 
     public T getValue() {
-        synchronized(lock) {
-            if(!initialized) {
+        synchronized (lock) {
+            if (!initialized) {
                 value = calculateValue();
                 initialized = true;
             }
@@ -71,16 +80,16 @@ public abstract class AbstractCompositeModel<T> implements Model<T> {
     }
 
     public void setValue(T value) {
-        throw new UnsupportedOperationException("Instances of "+ getClass().getName() + " are read-only!");
+        throw new UnsupportedOperationException("Instances of " + getClass().getName() + " are read-only!");
     }
 
     public void addValueChangeListener(PropertyChangeListener listener) {
-        if(listener == null || valueChangeListeners.contains(listener)) return;
+        if (listener == null || valueChangeListeners.contains(listener)) return;
         valueChangeListeners.add(listener);
     }
 
     public void removeValueChangeListener(PropertyChangeListener listener) {
-        if(listener == null) return;
+        if (listener == null) return;
         valueChangeListeners.remove(listener);
     }
 
@@ -99,9 +108,9 @@ public abstract class AbstractCompositeModel<T> implements Model<T> {
     };
 
     protected void fireValueChange(T oldValue, T newValue) {
-        if(oldValue == newValue || (oldValue != null && oldValue.equals(newValue))) return;
+        if (oldValue == newValue || (oldValue != null && oldValue.equals(newValue))) return;
         PropertyChangeEvent event = new PropertyChangeEvent(this, "value", oldValue, newValue);
-        for(PropertyChangeListener listener : valueChangeListeners) {
+        for (PropertyChangeListener listener : valueChangeListeners) {
             listener.propertyChange(event);
         }
     }

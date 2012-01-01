@@ -16,19 +16,17 @@
 
 package org.codehaus.griffon.runtime.scaffolding
 
+import griffon.plugins.scaffolding.ValueObject
+import griffon.util.GriffonClassUtils
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
-
-import griffon.util.GriffonClassUtils
-import griffon.plugins.scaffolding.ValueObject
-
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 /**
  * @author Andres Almiray
  */
-class DefaultAttributeModel<B,T> extends AbstractAttributeModel<B,T> {
+class DefaultAttributeModel<B, T> extends AbstractAttributeModel<B, T> {
     private static final Logger LOG = LoggerFactory.getLogger(DefaultAttributeModel)
 
     final ValueObject<B> bean
@@ -48,22 +46,22 @@ class DefaultAttributeModel<B,T> extends AbstractAttributeModel<B,T> {
     }
 
     protected T readPropertyFromBean() {
-        if(!bean.value) return null
+        if (!bean.value) return null
         propertyDescriptor.readMethod.invoke(bean.value, GriffonClassUtils.EMPTY_ARGS)
     }
 
     protected void writePropertyToBean(T val) {
-        if(!bean.value) return
+        if (!bean.value) return
         propertyDescriptor.writeMethod.invoke(bean.value, [val] as Object[])
     }
 
     String toString() {
         String desc = [
-            'description=', modelDescriptor,
-            ', value=', value,
-            ', beanClass=', beanClass,
-            ', bean=', bean
-         ].join('')
+                'description=', modelDescriptor,
+                ', value=', value,
+                ', beanClass=', beanClass,
+                ', bean=', bean
+        ].join('')
         '[' + desc + ']'
     }
 }

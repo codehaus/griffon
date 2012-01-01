@@ -97,12 +97,12 @@ class FormFactory extends AbstractFactory {
     public boolean onNodeChildren(FactoryBuilderSupport builder, Object node, Closure childContent) {
         def currentNode = builder.current
         try {
-            builder.context[builder.CURRENT_NODE] = currentNode instanceof RootPaneContainer ? [] : currentNode
+            builder.context[FactoryBuilderSupport.CURRENT_NODE] = currentNode instanceof RootPaneContainer ? [] : currentNode
             childContent.resolveStrategy = Closure.DELEGATE_FIRST
             childContent.delegate = new ChainedDelegate([builder.context.formBuilder, builder])
             childContent()
         } finally {
-            builder.context[builder.CURRENT_NODE] = currentNode
+            builder.context[FactoryBuilderSupport.CURRENT_NODE] = currentNode
             return false
         }
     }

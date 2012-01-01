@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import griffon.wizard.*
 import griffon.wizard.factory.*
 
 import java.awt.Rectangle
@@ -22,20 +21,10 @@ import javax.swing.Action
 import org.netbeans.api.wizard.WizardDisplayer
 import org.netbeans.spi.wizard.Wizard
 
-import griffon.core.GriffonApplication
-
 /**
  * @author Andres Almiray
  */
 class WizardGriffonAddon {
-    private GriffonApplication application
-
-    def addonInit(app) {
-        application = app
-        app.artifactManager.registerArtifactHandler(new WizardPageArtifactHandler())
-        app.artifactManager.registerArtifactHandler(new WizardPanelProviderArtifactHandler())
-    }
-
     def factories = [
         wizard: new WizardFactory(),
         branchingWizard: new BranchingWizardFactory(),
@@ -43,8 +32,9 @@ class WizardGriffonAddon {
 
     def events = [
         NewInstance: { klass, type, instance ->
-            if(!application.artifactManager.isControllerClass(klass)) return
-            instance.metaClass.showWizard = { Object... args -> showWizard(*args) }
+            if(!app.artifactManager.isControllerClass(klass)) return
+            def mc = app.artifactManager.findGriffonClass(klass).metaClass
+            mc.showWizard = { Object... args -> showWizard(*args) }
         }
     ]
 
