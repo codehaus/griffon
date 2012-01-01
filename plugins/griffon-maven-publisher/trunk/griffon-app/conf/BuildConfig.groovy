@@ -1,26 +1,26 @@
 griffon.project.dependency.resolution = {
     // inherit Griffon' default dependencies
-    inherits("global") {
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    inherits "global"
+    log "warn"
     repositories {
         griffonPlugins()
         griffonHome()
         griffonCentral()
 
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
         mavenLocal()
         mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
     }
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
-        build 'org.apache.maven:maven-ant-tasks:2.1.0'
+        build "org.apache.maven:maven-ant-tasks:2.1.0",
+              "org.codehaus.groovy.modules.http-builder:http-builder:0.5.0", {
+            excludes "commons-logging", "xml-apis", "groovy"
+        }
+        compile "org.tmatesoft.svnkit:svnkit:1.3.3", {
+            excludes "jna", "trilead-ssh2", "sqljet"
+        }
+        test  "org.gmock:gmock:0.8.0", {
+            export = false
+        }
     }
 }
 

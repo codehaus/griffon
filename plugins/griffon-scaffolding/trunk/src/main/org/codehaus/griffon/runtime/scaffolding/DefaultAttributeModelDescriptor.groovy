@@ -16,19 +16,18 @@
 
 package org.codehaus.griffon.runtime.scaffolding
 
-import java.beans.PropertyDescriptor
-
-import griffon.util.GriffonNameUtils
 import griffon.plugins.scaffolding.AttributeModel
 import griffon.plugins.scaffolding.AttributeModelDescriptor
+import griffon.util.GriffonNameUtils
+import java.beans.PropertyDescriptor
 
 /**
  * @author Andres Almiray
  */
-class DefaultAttributeModelDescriptor<B,T> extends AbstractModelDescriptor<T> implements AttributeModelDescriptor<T> {
+class DefaultAttributeModelDescriptor<B, T> extends AbstractModelDescriptor<T> implements AttributeModelDescriptor<T> {
     private final String baseKey
 
-    DefaultAttributeModelDescriptor(AttributeModel<B,T> model) {
+    DefaultAttributeModelDescriptor(AttributeModel<B, T> model) {
         super(model)
         baseKey = model.beanClass.name + '.' + model.propertyName
     }

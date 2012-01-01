@@ -28,8 +28,7 @@ import griffon.wizard.impl.GriffonWizardPage
 import griffon.wizard.impl.GriffonWizardPanelProvider
 import griffon.wizard.impl.WizardResultProducerImpl
 
-import griffon.util.UIThreadHelper
-import java.util.concurrent.Future
+import griffon.core.UIThreadManager
 
 /**
  * @author Andres Almiray
@@ -190,7 +189,7 @@ class WizardFactory extends AbstractFactory {
 
     // must wait until all NewInstance events have been processed
     static newArtifactInstance(FactoryBuilderSupport builder, Class klass, String type) {
-        return (UIThreadHelper.instance.executeFuture { 
+        return (UIThreadManager.instance.executeFuture { 
             return builder.app.newInstance(klass, type)
         }).get()
     }

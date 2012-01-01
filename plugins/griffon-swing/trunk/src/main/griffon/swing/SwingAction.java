@@ -15,7 +15,6 @@
  */
 package griffon.swing;
 
-import griffon.util.GriffonNameUtils;
 import griffon.util.RunnableWithArgs;
 import griffon.util.RunnableWithArgsClosure;
 import groovy.lang.Closure;

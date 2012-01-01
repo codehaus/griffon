@@ -35,7 +35,7 @@ public class FrameFactory extends RootPaneContainerFactory {
 
     public void setChild(FactoryBuilderSupport build, Object parent, Object child) {
         if (child instanceof JMenuBar) {
-            parent.JMenuBar = child
+            parent.setJMenuBar(child)
         } else {
             super.setChild(build, parent, child)
         }

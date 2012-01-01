@@ -16,7 +16,6 @@
 
 package griffon.charva.factory
 
-import griffon.charva.binding.JTableMetaMethods
 import charvax.swing.JTable
 // import charvax.swing.table.TableColumn
 import charvax.swing.table.TableModel
@@ -34,7 +33,6 @@ class TableFactory extends BeanFactory {
     public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {
         Object table = super.newInstance(builder, name, value, attributes);
         // insure metaproperties are registered
-        JTableMetaMethods.enhanceMetaClass(table)
         return table
     }
 

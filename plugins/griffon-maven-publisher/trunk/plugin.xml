@@ -1,4 +1,4 @@
-<plugin name='maven-publisher' version='0.1' griffonVersion='0.9 &gt; *' jdk='1.5'>
+<plugin name='maven-publisher' version='0.2' griffonVersion='0.9 &gt; *' jdk='1.5'>
   <author>Andres Almiray</author>
   <authorEmail>aalmiray@user.sourceforge.net</authorEmail>
   <title>Publish to Maven repositories</title>

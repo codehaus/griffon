@@ -19,9 +19,9 @@
  */
 class SwingGriffonPlugin {
     // the plugin version
-    def version = "0.9.4"
+    def version = "0.9.5"
     // the version or versions of Griffon the plugin is designed for
-    def griffonVersion = '0.9.4 > *' 
+    def griffonVersion = '0.9.5 > *' 
     // the other plugins this plugin depends on
     def dependsOn = [:]
     // resources that are included in plugin packaging

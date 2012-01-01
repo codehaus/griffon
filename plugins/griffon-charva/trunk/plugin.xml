@@ -1,6 +1,13 @@
-<plugin name='charva' version='0.1' jdk='1.5'>
-  <author>Your name</author>
-  <title>Plugin summary/headline</title>
+<plugin name='charva' version='0.1' griffonVersion='0.9.3 &gt; *' jdk='1.5'>
+  <author>Andres Almiray</author>
+  <authorEmail>aalmiray@users.sourceforge.net</authorEmail>
+  <title>Console based UI toolkit</title>
+  <description>Charva: console based UI toolkit</description>
   <documentation>http://griffon.codehaus.org/Charva+Plugin</documentation>
+  <license>Apache Software License 2.0</license>
+  <toolkits></toolkits>
+  <resources>
+    <resource>BuildConfig</resource>
+  </resources>
   <dependencies />
 </plugin>

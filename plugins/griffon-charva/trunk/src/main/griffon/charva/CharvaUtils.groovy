@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,18 @@
 
 package griffon.charva
 
-// import griffon.app.AbstractSyntheticMetaMethods
+import charva.awt.Window
+import charvax.swing.JFrame
 
 /**
  * @author Andres Almiray
  */
 final class CharvaUtils {
     private CharvaUtils() {}
+    
+    static Window createApplicationFrame(CharvaGriffonApplication app) {
+        new JFrame()
+    }
 
     static void setBeanProperty(String propertyName, value, bean) {
         bean[propertyName] = value

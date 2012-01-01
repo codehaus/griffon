@@ -16,9 +16,10 @@
 
 package org.codehaus.griffon.runtime.scaffolding;
 
-import java.util.List;
-import groovy.lang.Closure;
 import griffon.plugins.scaffolding.Model;
+import groovy.lang.Closure;
+
+import java.util.List;
 
 /**
  * @author Andres Almiray

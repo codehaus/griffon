@@ -20,49 +20,38 @@ import java.lang.reflect.Constructor
 import java.lang.reflect.InvocationTargetException
 import java.util.logging.Level
 import java.util.logging.Logger
-import charvax.swing.Action
-import charvax.swing.Icon
+import griffon.util.GriffonExceptionHandler
 
 /**
  *
  * @author shemnon
  */
 public class RichActionWidgetFactory extends AbstractCharvaFactory {
-    static final Class[] ACTION_ARGS = [Action];
-    static final Class[] ICON_ARGS = [Icon];
-    static final Class[] STRING_ARGS = [String];
+    static final Class[] STRING_ARGS = [String] as Class[];
 
-    final Constructor actionCtor;
-    final Constructor iconCtor;
     final Constructor stringCtor;
     final Class klass;
 
     public RichActionWidgetFactory(Class klass) {
         try {
-            actionCtor = klass.getConstructor(ACTION_ARGS);
-            iconCtor = klass.getConstructor(ICON_ARGS);
             stringCtor = klass.getConstructor(STRING_ARGS);
             this.klass = klass;
         } catch (NoSuchMethodException ex) {
-            Logger.getLogger("global").log(Level.INFO, null, ex);
+            Logger.getLogger("global").log(Level.INFO, null, GriffonExceptionHandler.sanitize(ex));
         } catch (SecurityException ex) {
-            Logger.getLogger("global").log(Level.SEVERE, null, ex);
+            Logger.getLogger("global").log(Level.SEVERE, null, GriffonExceptionHandler.sanitize(ex));
         }
     }
 
     public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) throws InstantiationException, IllegalAccessException {
         try {
-            if (value instanceof GString) value = value as String
+            if (value instanceof GString) value = value.toString()
             if (value == null) {
-                return klass.newInstance();
-            } else if (value instanceof Action) {
-                return actionCtor.newInstance(value);
-            } else if (value instanceof Icon) {
-                return iconCtor.newInstance(value);
+                return klass.newInstance()
             } else if (value instanceof String) {
                 return stringCtor.newInstance(value);
             } else if (klass.isAssignableFrom(value.getClass())) {
-                return value;
+                return value
             } else {
                 throw new RuntimeException("$name can only have a value argument of type charvax.swing.Action, charvax.swing.Icon, java.lang.String, or $klass.name");
             }

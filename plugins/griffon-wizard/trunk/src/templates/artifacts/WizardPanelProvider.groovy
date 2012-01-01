@@ -8,7 +8,7 @@ class @artifact.name@ {
    /*
     * You must follow these rules:
     * - one closure per step, its name must match the stepId
-    * - bind widget vlaues to settings explicitely
+    * - bind widget values to settings explicitely
     * - use wizardController.problem to give feedback when something
     *   failed to be validated, a null value indicates no error,
     *   otherwise use a String

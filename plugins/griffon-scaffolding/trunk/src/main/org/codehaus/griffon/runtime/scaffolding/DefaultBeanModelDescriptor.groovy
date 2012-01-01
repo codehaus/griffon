@@ -16,19 +16,18 @@
 
 package org.codehaus.griffon.runtime.scaffolding
 
-import java.beans.BeanDescriptor
-
-import griffon.util.GriffonNameUtils
 import griffon.plugins.scaffolding.BeanModel
 import griffon.plugins.scaffolding.BeanModelDescriptor
+import griffon.util.GriffonNameUtils
+import java.beans.BeanDescriptor
 
 /**
  * @author Andres Almiray
  */
-class DefaultBeanModelDescriptor<B,T> extends AbstractModelDescriptor<T> implements BeanModelDescriptor<T> {
+class DefaultBeanModelDescriptor<B, T> extends AbstractModelDescriptor<T> implements BeanModelDescriptor<T> {
     private final String baseKey
 
-    DefaultBeanModelDescriptor(BeanModel<B,T> model) {
+    DefaultBeanModelDescriptor(BeanModel<B, T> model) {
         super(model)
         baseKey = model.beanClass.name
     }

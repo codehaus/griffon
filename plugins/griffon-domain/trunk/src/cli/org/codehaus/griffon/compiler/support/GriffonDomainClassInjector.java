@@ -108,7 +108,7 @@ public abstract class GriffonDomainClassInjector {
                 args(args)));
     }
 
-    protected void injectDomainHandler(ClassNode classNode, String implementation, String dataSource) {
+    protected void injectDomainHandler(ClassNode classNode, String implementation, String datasource) {
         classNode.addMethod(new MethodNode(
                 DOMAIN_HANDLER_METHOD_NAME,
                 Modifier.PUBLIC | Modifier.STATIC,
@@ -133,7 +133,7 @@ public abstract class GriffonDomainClassInjector {
                 ClassHelper.STRING_TYPE,
                 Parameter.EMPTY_ARRAY,
                 ClassNode.EMPTY_ARRAY,
-                returns(constx(dataSource))
+                returns(constx(datasource))
         ));
     }
 

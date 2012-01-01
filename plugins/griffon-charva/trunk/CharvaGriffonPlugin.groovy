@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,15 +19,16 @@
  */
 class CharvaGriffonPlugin {
     def version = 0.1
-    def canBeGlobal = false
+    def griffonVersion = '0.9.3 > *' 
     def dependsOn = [:]
+    def toolkits = ['']
+    def license = 'Apache Software License 2.0'
 
-    // TODO Fill in these fields
-    def author = "Your name"
-    def authorEmail = ""
-    def title = "Plugin summary/headline"
-    def description = '''\\
-Brief description of the plugin.
+    def author = 'Andres Almiray'
+    def authorEmail = 'aalmiray@users.sourceforge.net'
+    def title = "Console based UI toolkit"
+    def description = '''
+Charva: console based UI toolkit
 '''
 
     // URL to the plugin's documentation

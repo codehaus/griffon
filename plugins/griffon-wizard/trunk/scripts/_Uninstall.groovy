@@ -18,15 +18,13 @@
  * @author Andres Almiray
  */
 
-// check to see if we already have a WizardGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'WizardGriffonAddon' == builder
-    }
+// check to see if we already have a CouchdbGriffonAddon
+configText = '''root.'CouchdbGriffonAddon'.addon=true'''
+if(builderConfigFile.text.contains(configText)) {
+    println 'Removing CouchdbGriffonAddon from Builder.groovy'
+    builderConfigFile.text -= configText
 }
-
-if(addonIsSet1) {
-    builderConfigFile.text = builderConfigFile.text - "root.'WizardGriffonAddon'.addon=true\n"
-    builderConfigFile.text = builderConfigFile.text - "root.'WizardGriffonAddon'.controller=['wizard', 'branchingWizard', 'showWizard']\n"
+configText = '''root.'WizardGriffonAddon'.controller=['wizard', 'branchingWizard', 'showWizard']'''
+if(builderConfigFile.text.contains(configText)) {
+    builderConfigFile.text -= configText
 }

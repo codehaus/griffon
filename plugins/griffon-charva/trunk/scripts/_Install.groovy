@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,64 +18,31 @@
  * @author Andres Almiray
  */
 
-//
-// This script is executed by Griffon after plugin was installed to project.
-// This script is a Gant script so you can use all special variables provided
-// by Gant (such as 'baseDir' which points on project base dir). You can
-// use 'ant' to access a global instance of AntBuilder
-//
-// For example you can create directory under project tree:
-//
-//    ant.mkdir(dir:"${basedir}/griffon-app/jobs")
-//
-
-includeTargets << griffonScript('_GriffonArgParsing')
-
 appToolkits = metadata.'app.toolkits'
 if(!appToolkits) appToolkits = ''
 appToolkits = appToolkits.split(',').toList()
-firstTime = !metadata.'plugins.charva'
-
 updateMetadata('app.toolkits': 'charva')
 
-if(firstTime) {
-    def builderConfigFile = new File("${basedir}/griffon-app/conf/Builder.groovy")
-    def addonPattern = ~/^.+\.addon=true$/
-    def addonsCopied = false
-    def builderConf = new StringBuffer("/* CHARVA_PLUGIN_COMMENT_START\n")
-    builderConf.append(builderConfigFile.text)
-    builderConf.append("CHARVA_PLUGIN_COMMENT_END */\n")
-    builderConf.append("// ADDED_BY_CHARVA_PLUGIN_START\n")
-    builderConf.append("root.'griffon.charva.CharvaBuilder'.view = '*'\n")
-    builderConf.append("root.'CharvaGriffonAddon'.addon=true\n")
-    builderConfigFile.text.eachLine { line ->
-        if(line =~ addonPattern) {
-            addonsCopied = true
-            builderConf.append(line).append('\n')
-        }
-    }
-    builderConf.append("\n// ADDED_BY_CHARVA_PLUGIN_END\n")
-    builderConfigFile.text = builderConf.toString()
-    
-    if(addonsCopied) {
-        printFramed("""Please review griffon-app/conf/Builder.groovy as some addons
-were relocated. Make sure any ommisions are inserted in the
-same block as CharvaGriffonAddon.""")
+// check to see if we already have a CharvaGriffonAddon
+boolean addonIsSet1
+boolean builderIsSet1
+builderConfig = configSlurper.parse(builderConfigFile.text)
+builderConfig.each() { prefix, v ->
+    v.each { builder, views ->
+        addonIsSet1 = addonIsSet1 || 'CharvaGriffonAddon' == builder
+        builderIsSet1 = builderIsSet1 || 'griffon.charva.CharvaBuilder' == builder
     }
 }
 
-// Replace views
-new File("${basedir}/griffon-app/views").eachFileMatch(~/.*View\.groovy/) { view ->
-    if(view.text =~ /application\(/) {
-        askAndDoNoNag("Would you like to replace ${view.name} with a Charva view?") {
-            println "Replacing ${view.name} with Charva code..."
-            view.text = """application(title: '$griffonAppName') {
-//    vbox(spacing: 3) {
-        label(text: "Hello Griffon!")
-//        button(label: "Press me!", onClicked: {println "I was clicked: \${it.label}"})
-//    }
+if (!builderIsSet1) {
+    println 'Adding griffon.charva.CharvaBuilder to Builder.groovy'
+    builderConfigFile.append('''
+root.'griffon.charva.CharvaBuilder'.view = '*'
+''')
 }
-"""
-        }
-    }
+if (!addonIsSet1) {
+    println 'Adding CharvaGriffonAddon to Builder.groovy'
+    builderConfigFile.append('''
+root.'CharvaGriffonAddon'.addon=true
+''')
 }

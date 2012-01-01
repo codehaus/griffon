@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,9 @@ import griffon.charva.factory.FrameFactory
  */
 class ApplicationFactory extends FrameFactory {
     public Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {
+        println " === $attributes === "
         def frame = builder.app.createApplicationContainer()
-println frame
-println builder.app.frames
+        println ">>> created frame $frame"
         handleRootPaneTasks(builder, frame, attributes)
         return frame
     }

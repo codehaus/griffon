@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,22 +18,9 @@
  * @author Andres Almiray
  */
 
-includeTargets << griffonScript("_GriffonInit")
-
-def checkOptionIsSet = { where, option ->
-   boolean optionIsSet = false
-   where.each { prefix, v ->
-       v.each { key, views ->
-           optionIsSet = optionIsSet || option == key
-       }
-   }
-   optionIsSet
-}
-
-// check if JGoodiesFormsGriffonAddon needs to be defined
-if(!checkOptionIsSet(builderConfig, "JGoodiesFormsGriffonAddon")) {
-    println 'Adding JGoodiesFormsAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'JGoodiesFormsGriffonAddon'.addon=true
-''')
+// check to see if we already have a JgoodiesFormsGriffonAddon
+configText = '''root.'JgoodiesFormsGriffonAddon'.addon=true'''
+if(!(builderConfigFile.text.contains(configText))) {
+    println 'Adding JgoodiesFormsGriffonAddon to Builder.groovy'
+    builderConfigFile.text += '\n' + configText + '\n'
 }

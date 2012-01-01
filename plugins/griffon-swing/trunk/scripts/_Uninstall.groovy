@@ -29,11 +29,13 @@ if(builderConfigFile.text.contains(configText)) {
     builderConfigFile.text -= configText
 }
 
+/*
 configText = '''root.'SwingGriffonAddon'.addon=true'''
 if(builderConfigFile.text.contains(configText)) {
     println 'Removing SwingGriffonAddon from Builder.groovy'
     builderConfigFile.text -= configText
 }
+*/
 
 initializeFile = new File(basedir, '/griffon-app/lifecycle/Initialize.groovy')
 initializeFile.text -= 'import groovy.swing.SwingBuilder\n'

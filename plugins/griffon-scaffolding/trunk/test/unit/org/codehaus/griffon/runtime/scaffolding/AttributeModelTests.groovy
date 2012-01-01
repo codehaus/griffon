@@ -16,12 +16,11 @@
 
 package org.codehaus.griffon.runtime.scaffolding
 
-import static griffon.util.GriffonClassUtils.getPropertyDescriptor
 import griffon.test.*
 import java.beans.*
 import griffon.plugins.scaffolding.*
 import griffon.plugins.scaffolding.editors.*
-import org.codehaus.groovy.runtime.GStringImpl
+
 import javax.swing.*
 
 /**
@@ -130,7 +129,7 @@ class AttributeModelTests extends GriffonUnitTestCase {
 
         assert model1.title.value == book1.title
         assert book1.title == 'Title1'
-        Binder.bind(model1.title, model2.title)
+        Binder.make(model1.title, model2.title)
         assert model1.title.value == book2.title
         assert book1.title == book2.title
         
@@ -150,7 +149,7 @@ class AttributeModelTests extends GriffonUnitTestCase {
 
         assert model1.title.value == book1.title
         assert book1.title == 'Title1'
-        Binder.bind(target: model1.title, source: model2.title, mutual: true)
+        Binder.make(target: model1.title, source: model2.title, mutual: true)
         assert model1.title.value == book2.title
         assert book1.title == book2.title
         
@@ -176,10 +175,10 @@ class AttributeModelTests extends GriffonUnitTestCase {
         PropertyEditorManager.registerEditor(org.codehaus.groovy.runtime.GStringImpl, StringEditor)
         assert model1.title.value == book1.title
         assert book1.title == 'Title1'
-        Binder.bind(target: model1.title,
+        Binder.make(target: model1.title,
                     source: model2.title,
-                    reader: {m -> "SOURCE(${m.value})"},
-                    writer: {m, v -> m.value = "TARGET($v)"})
+                    reader: {m, p -> "SOURCE(${m[p]})"},
+                    writer: {m, p, v -> m[p] = "TARGET($v)"})
         assert model1.title.value == "TARGET(SOURCE(${book2.title}))"
         assert book1.title == "TARGET(SOURCE(${book2.title}))"
         
@@ -198,7 +197,7 @@ class AttributeModelTests extends GriffonUnitTestCase {
         model2.value = book2
 
         assert model1.title.value == book1.title
-        Binder.bind(model1, model2)
+        Binder.make(model1, model2)
         assert model1.value != model2.value
         assert model1.title.value == book2.title
         assert book1.title == book2.title
@@ -227,7 +226,7 @@ class AttributeModelTests extends GriffonUnitTestCase {
         model2.value = book2
 
         assert model1.title.value == book1.title
-        Binder.bind(target: model1, source: model2, mutual: true)
+        Binder.make(target: model1, source: model2, mutual: true)
         assert model1.value != model2.value
         assert model1.title.value == book2.title
         assert book1.title == book2.title
@@ -263,7 +262,7 @@ class AttributeModelTests extends GriffonUnitTestCase {
 
         assert model1.title.value == book1.title
         assert book1.title == 'Title1'
-        Binder.bind(model1.title, composite)
+        Binder.make(model1.title, composite)
         assert model1.title.value == [book2.title, book3.title].join(' ')
         assert book1.title == [book2.title, book3.title].join(' ')
         
@@ -280,7 +279,7 @@ class AttributeModelTests extends GriffonUnitTestCase {
         Book book1 = new Book(title: 'Title1', author: 'Author1')
         model1.value = book1
         
-        Binder.beanBind(bean: button, model: model1.title, property: 'label')
+        Binder.beanBind(target: button, source: model1.title, property: 'label')
         assert button.label == book1.title
         
         model1.title.value = 'Title2'

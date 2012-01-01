@@ -16,24 +16,18 @@
 
 package org.codehaus.griffon.runtime.scaffolding
 
-import java.beans.PropertyChangeEvent
-import java.beans.PropertyChangeListener
-import java.beans.PropertyDescriptor
-import java.beans.PropertyEditor
-import java.beans.PropertyEditorManager
-
-import griffon.util.GriffonClassUtils
 import griffon.plugins.scaffolding.AttributeModel
 import griffon.plugins.scaffolding.ModelDescriptor
 import griffon.plugins.scaffolding.ValueObject
-
+import griffon.util.GriffonClassUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.beans.*
 
 /**
  * @author Andres Almiray
  */
-abstract class AbstractAttributeModel<B,T> extends ValueObject<T> implements AttributeModel<B,T> {
+abstract class AbstractAttributeModel<B, T> extends ValueObject<T> implements AttributeModel<B, T> {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractAttributeModel)
 
     final Class<B> beanClass
@@ -58,8 +52,8 @@ abstract class AbstractAttributeModel<B,T> extends ValueObject<T> implements Att
 
     final void setValueFromProperty(boolean propagate = true) {
         T obj = readPropertyFromBean()
-        if(LOG.isTraceEnabled()) LOG.trace("Setting value '$obj' on ${this} after reading property $propertyName [propagate=$propagate]")
-        propagate? setValue(obj) : setValueInternal(obj)
+        if (LOG.isTraceEnabled()) LOG.trace("Setting value '$obj' on ${this} after reading property $propertyName [propagate=$propagate]")
+        propagate ? setValue(obj) : setValueInternal(obj)
     }
 
     protected void setValueInternal(T value) {
@@ -80,11 +74,11 @@ abstract class AbstractAttributeModel<B,T> extends ValueObject<T> implements Att
 
     protected T transformValue(T val) {
         PropertyEditor editor = val != null ? PropertyEditorManager.findEditor(val.getClass()) : null
-        if(editor) {
+        if (editor) {
             editor.value = val
             val = editor.value
         }
-        val        
+        val
     }
 
     protected abstract T readPropertyFromBean()
@@ -93,9 +87,9 @@ abstract class AbstractAttributeModel<B,T> extends ValueObject<T> implements Att
 
     String toString() {
         String desc = [
-            'description=', modelDescriptor,
-            ', value=', getValue()
-         ].join('')
+                'description=', modelDescriptor,
+                ', value=', getValue()
+        ].join('')
         '[' + desc + ']'
     }
 }

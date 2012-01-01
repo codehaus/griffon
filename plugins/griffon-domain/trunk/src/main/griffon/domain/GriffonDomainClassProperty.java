@@ -27,7 +27,7 @@ import java.util.TreeSet;
 public interface GriffonDomainClassProperty {
     String IDENTITY = "id";
     String VERSION = "version";
-    String TRANSIENT = "transients";
+    String TRANSIENTS = "transients";
     String CONSTRAINTS = "constraints";
     String BELONGS_TO = "belongsTo";
     String HAS_MANY = "hasMany";
@@ -36,7 +36,7 @@ public interface GriffonDomainClassProperty {
     String LAST_UPDATED = "lastUpdated";
 
     Set<String> NON_CONFIGURATIONAL_PROPERTIES = new TreeSet<String>(
-            Arrays.asList(TRANSIENT, CONSTRAINTS, BELONGS_TO, HAS_MANY, HAS_ONE));
+            Arrays.asList(TRANSIENTS, CONSTRAINTS, BELONGS_TO, HAS_MANY, HAS_ONE));
 
     /**
      * Returns the name of the property

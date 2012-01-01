@@ -125,14 +125,18 @@ class DataSourceConnector {
         String dbCreate = config.dbCreate.toString()
         if (dbCreate != 'create') return
 
-        URL ddl = getClass().classLoader.getResource(dataSourceName - 'schema.ddl')
-        if (!ddl) {
-            LOG.warn("DataSource[${dataSourceName}].dbCreate was set to 'create' but ${dataSourceName}-schema.ddl was not found in classpath.")
+        String env = getEnvironmentShortName()
+        URL ddl = null
+        for(String schemaName : [dataSourceName + '-schema-'+ env +'.ddl', dataSourceName + '-schema.ddl', 'schema-'+ env +'.ddl', 'schema.ddl']) {
+            ddl = getClass().classLoader.getResource(schemaName)
+            if (!ddl) {
+                LOG.warn("DataSource[${dataSourceName}].dbCreate was set to 'create' but ${schemaName} was not found in classpath.")
+            } else {
+                break
+            }
         }
-        ddl = getClass().classLoader.getResource('schema.ddl')
-        if (!ddl) {
-            LOG.warn("DataSource[${dataSourceName}].dbCreate was set to 'create' but schema.ddl was not found in classpath.")
-            return
+        if(!ddl) {
+            LOG.error("DataSource[${dataSourceName}].dbCreate was set to 'create' but no suitable schema was found in classpath.")
         }
 
         boolean tokenizeddl = config.tokenizeddl ?: false
@@ -144,6 +148,15 @@ class DataSourceConnector {
                     if (stmnt?.trim()) sql.execute(stmnt + ';')
                 }
             }
+        }
+    }
+
+    private String getEnvironmentShortName() {
+        switch(Environment.current) {
+            case Environment.DEVELOPMENT: return 'dev'
+            case Environment.TEST: return 'test'
+            case Environment.PRODUCTION: return 'prod'
+            default: return Environment.current.name
         }
     }
 }

@@ -16,17 +16,11 @@
 
 package org.codehaus.griffon.runtime.scaffolding
 
-import java.beans.Introspector
 import java.beans.BeanDescriptor
+import java.beans.Introspector
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
-
-import griffon.util.GriffonClassUtils
-import griffon.plugins.scaffolding.Model
-import griffon.plugins.scaffolding.BeanModel
-import griffon.plugins.scaffolding.ModelDescriptor
-import griffon.plugins.scaffolding.ValueObject
-import griffon.plugins.scaffolding.AttributeChangeEvent
+import griffon.plugins.scaffolding.*
 
 /**
  * @author Andres Almiray
@@ -49,12 +43,12 @@ abstract class AbstractBeanModel<T> extends ValueObject<T> implements BeanModel<
     }
 
     void addAttributesChangeListener(PropertyChangeListener listener) {
-        if(listener == null || attributesChangeListeners.contains(listener)) return;
+        if (listener == null || attributesChangeListeners.contains(listener)) return;
         attributesChangeListeners.add(listener);
     }
 
     void removeAttributesChangeListener(PropertyChangeListener listener) {
-        if(listener == null) return;
+        if (listener == null) return;
         attributesChangeListeners.remove(listener);
     }
 
@@ -63,7 +57,7 @@ abstract class AbstractBeanModel<T> extends ValueObject<T> implements BeanModel<
     }
 
     protected void attachToAttributes() {
-        for(Model<?> model : getModelAttributes().values()) {
+        for (Model<?> model: getModelAttributes().values()) {
             model.addValueChangeListener(attributesChangeForwarder)
         }
     }
@@ -71,14 +65,14 @@ abstract class AbstractBeanModel<T> extends ValueObject<T> implements BeanModel<
     private final PropertyChangeListener attributesChangeForwarder = new PropertyChangeListener() {
         void propertyChange(PropertyChangeEvent e) {
             String attributeName = null
-            for(Map.Entry attributeEntry : AbstractBeanModel.this.getModelAttributes()) {
-                if(attributeEntry.value == e.source) {
+            for (Map.Entry attributeEntry: AbstractBeanModel.this.getModelAttributes()) {
+                if (attributeEntry.value == e.source) {
                     attributeName = attributeEntry.key
                     break
                 }
             }
             AttributeChangeEvent event = new AttributeChangeEvent(AbstractBeanModel.this, e.source, attributeName, e.oldValue, e.newValue)
-            for(PropertyChangeListener listener : attributesChangeListeners) {
+            for (PropertyChangeListener listener: attributesChangeListeners) {
                 listener.propertyChange(event)
             }
         }
@@ -86,9 +80,9 @@ abstract class AbstractBeanModel<T> extends ValueObject<T> implements BeanModel<
 
     String toString() {
         String desc = [
-            'description=', modelDescriptor,
-            ', value=', value
-         ].join('')
+                'description=', modelDescriptor,
+                ', value=', value
+        ].join('')
         '[' + desc + ']'
     }
 }

@@ -16,10 +16,9 @@
 
 package org.codehaus.griffon.runtime.scaffolding
 
+import griffon.plugins.scaffolding.Model
 import griffon.util.GriffonClassUtils
 import griffon.util.GriffonNameUtils
-
-import griffon.plugins.scaffolding.Model
 
 /**
  * @author Andres Almiray
@@ -35,24 +34,24 @@ class DefaultBeanModel<T> extends AbstractBeanModel<T> {
 
     DefaultBeanModel(Class<T> beanClass, String[] propertyNames) {
         super(beanClass)
-        if(propertyNames == null || propertyNames.length == 0) {
+        if (propertyNames == null || propertyNames.length == 0) {
             throw new IllegalArgumentException("DefaultBeanModel for class '${beanClass.name}' has no properties.")
         }
 
-        for(String propertyName : propertyNames) {
-            if(!propertyName || 'class' == propertyName || 'metaClass' == propertyName) continue
+        for (String propertyName: propertyNames) {
+            if (!propertyName || 'class' == propertyName || 'metaClass' == propertyName) continue
             attributes[propertyName] = ModelUtils.makeModelFor(beanClass, this, propertyName)
         }
 
-        if(!attributes) {
+        if (!attributes) {
             throw new IllegalArgumentException("DefaultBeanModel for class '${beanClass.name}' has no attributes!")
         }
-        
+
         attachToAttributes()
     }
 
     Map<String, Model<?>> getModelAttributes() {
-        Collections.<String, Model<?>>unmodifiableMap(attributes)
+        Collections.<String, Model<?>> unmodifiableMap(attributes)
     }
 
     Model<?> getModelAttribute(String name) {
@@ -60,8 +59,8 @@ class DefaultBeanModel<T> extends AbstractBeanModel<T> {
     }
 
     void realize() {
-        synchronized(lock) {
-            if(realized) return
+        synchronized (lock) {
+            if (realized) return
 
             attributes.each { name, model ->
                 metaClass."${GriffonNameUtils.getGetterName(name)}" = {it}.curry(model)
@@ -73,7 +72,7 @@ class DefaultBeanModel<T> extends AbstractBeanModel<T> {
     }
 
     def propertyMissing(String name) {
-        if(!attributes.containsKey(name)) {
+        if (!attributes.containsKey(name)) {
             throw new MissingPropertyException(name, DefaultBeanModel)
         }
 
@@ -84,16 +83,16 @@ class DefaultBeanModel<T> extends AbstractBeanModel<T> {
     }
 
     def methodMissing(String methodName, args) {
-        if(methodName.startsWith('get') && methodName.length() > 3) {
+        if (methodName.startsWith('get') && methodName.length() > 3) {
             String name = GriffonNameUtils.uncapitalize(methodName[3..-1])
             Model<?> model = attributes[name]
-            if(model) {
+            if (model) {
                 metaClass."$methodName" = {it}.curry(model)
                 metaClass."$name" = model
                 return model
             }
         }
-        
+
         throw new MissingMethodException(methodName, ArtifactManager, args)
     }
 }

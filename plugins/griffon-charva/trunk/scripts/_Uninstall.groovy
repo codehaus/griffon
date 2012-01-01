@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,6 @@
  * @author Andres Almiray
  */
 
-//
-// This script is executed by Griffon when the plugin is uninstalled from project.
-// Use this script if you intend to do any additional clean-up on uninstall, but
-// beware of messing up SVN directories!
-//
-
 appToolkits = metadata.'app.toolkits'.split(',').toList() - 'charva'
 if(appToolkits) {
     updateMetadata('app.toolkits': appToolkits.join(','))
@@ -32,22 +26,22 @@ if(appToolkits) {
     metadata.persist()
 }
 
-def builderConfigFile = new File("${basedir}/griffon-app/conf/Builder.groovy")
-def builderConfigText = new StringBuffer()
-boolean insideOldDefs = false
-boolean insideCharvaPluginDefs = false
-builderConfigFile.eachLine { line ->
-    switch(line) {
-        case ~/.*CHARVA_PLUGIN_COMMENT_START.*/: insideOldDefs = true;  break
-        case ~/.*CHARVA_PLUGIN_COMMENT_END.*/: insideOldDefs = false; break
-        case ~/.*ADDED_BY_CHARVA_PLUGIN_START.*/: insideCharvaPluginDefs = true; break
-        case ~/.*ADDED_BY_CHARVA_PLUGIN_END.*/: insideCharvaPluginDefs = false; break
-        default:
-            if(insideOldDefs || !insideCharvaPluginDefs) builderConfigText += line + '\n'
+// check to see if we already have a CharvaGriffonAddon
+boolean addonIsSet1
+boolean builderIsSet1
+builderConfig = configSlurper.parse(builderConfigFile.text)
+builderConfig.each() { prefix, v ->
+    v.each { builder, views ->
+        addonIsSet1 = addonIsSet1 || 'CharvaGriffonAddon' == builder
+        builderIsSet1 = builderIsSet1 || 'griffon.charva.CharvaBuilder' == builder
     }
 }
-builderConfigFile.text = builderConfigText
 
-printFramed("""Please review your View scripts as they may contain
-Charva specific nodes which won't work after uninstalling
-""")
+if (builderIsSet1) {
+    println 'Removing griffon.charva.CharvaBuilder from Builder.groovy'
+    builderConfigFile.text = builderConfigFile.text - "root.'griffon.charva.CharvaBuilder'.view = '*'\n"
+}
+if (addonIsSet1) {
+    println 'Removing CharvaGriffonAddon from Builder.groovy'
+    builderConfigFile.text = builderConfigFile.text - "root.'CharvaGriffonAddon'.addon=true\n"
+}
