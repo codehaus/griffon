@@ -1,0 +1,1 @@
+{"name":"neo4j","title":"Neo4j support","description":"","license":"<UNKNOWN>","source":"http://svn.codehaus.org/griffon/plugins/griffon-neo4j","authors":[{"name":"Andres Almiray","email":"aalmiray@users.sourceforge.net"}],"toolkits":[],"platforms":[],"version":"0.1","griffonVersion":"0.3-SNAPSHOT > *","dependencies":[],"date":"2010-04-09T13:07:23+0200","type":"plugin"}
