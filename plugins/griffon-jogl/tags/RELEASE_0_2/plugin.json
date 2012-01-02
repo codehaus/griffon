@@ -1,0 +1,1 @@
+{"name":"jogl","title":"JOGL support","description":"","license":"<UNKNOWN>","source":"http://svn.codehaus.org/griffon/plugins/griffon-jogl","authors":[{"name":"Andres Almiray","email":"aalmiray@users.sourceforge.net"}],"toolkits":["swing"],"platforms":[],"version":"0.2","griffonVersion":"0.3 > *","dependencies":[],"date":"2010-04-12T17:02:39+0200","type":"plugin"}
