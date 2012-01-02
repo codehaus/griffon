@@ -1,0 +1,1 @@
+{"name":"swt","title":"SWT UI toolkit plugin","description":"","license":"<UNKNOWN>","source":"http://svn.codehaus.org/griffon/plugins/griffon-swt","authors":[{"name":"Andres Almiray","email":"aalmiray@users.sourceforge.net"}],"toolkits":["swt"],"platforms":[],"version":"0.1","griffonVersion":"0.3 > *","dependencies":[],"date":"2010-04-09T12:58:22+0200","type":"plugin"}
