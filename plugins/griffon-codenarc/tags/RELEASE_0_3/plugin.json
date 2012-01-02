@@ -1,0 +1,1 @@
+{"name":"codenarc","title":"CodeNarc plugin","description":"","license":"<UNKNOWN>","source":"http://svn.codehaus.org/griffon/plugins/griffon-codenarc","authors":[{"name":"Andres Almiray","email":"aalmiray@users.sourceforge.net"}],"toolkits":[],"platforms":[],"version":"0.3","griffonVersion":"0.3.1 > *","dependencies":[],"date":"2010-05-30T11:49:00+0200","type":"plugin"}
