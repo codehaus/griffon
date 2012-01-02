@@ -1,0 +1,1 @@
+{"name":"wsclient","title":"WS client & libraries","description":"","license":"<UNKNOWN>","source":"http://svn.codehaus.org/griffon/plugins/griffon-wsclient","authors":[{"name":"Andres Almiray","email":"aalmiray@users.sourceforge.net"}],"toolkits":[],"platforms":[],"version":"0.2","griffonVersion":"0.3 > *","dependencies":[],"date":"2010-04-12T16:11:13+0200","type":"plugin"}
