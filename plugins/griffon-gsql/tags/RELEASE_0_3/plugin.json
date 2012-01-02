@@ -1,0 +1,1 @@
+{"name":"gsql","title":"Gsql powered DataSource","description":"","license":"<UNKNOWN>","source":"http://svn.codehaus.org/griffon/plugins/griffon-gsql","authors":[{"name":"Andres Almiray","email":"aalmiray@users.sourceforge.net"}],"toolkits":[],"platforms":[],"version":"0.3","griffonVersion":"0.3 > *","dependencies":[],"date":"2010-04-13T11:00:52+0200","type":"plugin"}
