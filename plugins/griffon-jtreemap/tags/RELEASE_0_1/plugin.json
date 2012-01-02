@@ -1,0 +1,1 @@
+{"name":"jtreemap","title":"JTreeMap Integration","description":"","license":"<UNKNOWN>","source":"http://svn.codehaus.org/griffon/plugins/griffon-jtreemap","authors":[{"name":"Hackergarten","email":"hackergarten@canoo.com"}],"toolkits":["swing"],"platforms":[],"version":"0.1","griffonVersion":"0.3 > *","dependencies":[],"date":"2010-05-06T13:20:47+0200","type":"plugin"}
