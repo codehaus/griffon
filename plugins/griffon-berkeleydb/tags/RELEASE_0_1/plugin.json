@@ -1,0 +1,1 @@
+{"name":"berkeleydb","title":"Berkeleydb support","description":"","license":"<UNKNOWN>","source":"http://svn.codehaus.org/griffon/plugins/griffon-berkeleydb","authors":[{"name":"Andres Almiray","email":"aalmiray@users.sourceforge.net"}],"toolkits":[],"platforms":[],"version":"0.1","griffonVersion":"0.3 > *","dependencies":[],"date":"2010-04-13T09:42:50+0200","type":"plugin"}
