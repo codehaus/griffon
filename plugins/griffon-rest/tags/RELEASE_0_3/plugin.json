@@ -1,0 +1,1 @@
+{"name":"rest","title":"REST client libraries","description":"","license":"<UNKNOWN>","source":"http://svn.codehaus.org/griffon/plugins/griffon-rest","authors":[{"name":"Andres Almiray","email":"aalmiray@users.sourceforge.net"}],"toolkits":[],"platforms":[],"version":"0.3","griffonVersion":"0.3 > *","dependencies":[],"date":"2010-04-13T10:19:19+0200","type":"plugin"}
