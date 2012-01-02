@@ -1,0 +1,1 @@
+{"name":"mail","title":"Send email from your Griffon app","description":"","license":"<UNKNOWN>","source":"http://svn.codehaus.org/griffon/plugins/griffon-mail","authors":[{"name":"Josh Reed","email":"jareed@andrill.org"}],"toolkits":[],"platforms":[],"version":"0.2","griffonVersion":"0.3 < *","dependencies":[],"date":"2010-04-14T09:21:15+0200","type":"plugin"}
