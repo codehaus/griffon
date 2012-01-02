@@ -1,0 +1,1 @@
+{"name":"couchdb","title":"Couchdb support","description":"","license":"<UNKNOWN>","source":"http://svn.codehaus.org/griffon/plugins/griffon-couchdb","authors":[{"name":"Andres Almiray","email":"aalmiray@users.sourceforge.net"}],"toolkits":[],"platforms":[],"version":"0.1","griffonVersion":"0.3-SNAPSHOT > *","dependencies":[],"date":"2010-04-13T09:38:28+0200","type":"plugin"}
