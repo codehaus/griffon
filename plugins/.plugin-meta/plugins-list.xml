@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugins revision="5013">
+<plugins revision="5019">
     <plugin name="abeilleform-builder" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>A Builder for Abeille Forms</title>
@@ -2105,7 +2105,7 @@ Based on the original Grails gmetrics plugin by Scott Ryan.</description>
             <toolkits>javafx</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-groovyfx/tags/RELEASE_0_2/griffon-groovyfx-0.2.zip</file>
         </release>
-        <release tag="RELEASE_0_2_1" version="0.2.1" type="svn">
+        <release tag="RELEASE_0_2_1" type="svn" version="0.2.1">
             <title>Griffon GroovyFX Plugin</title>
             <author>Dean Iverson</author>
             <authorEmail>deanriverson@gmail.com</authorEmail>
@@ -2646,7 +2646,7 @@ http://jalarms.sourceforge.net</description>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-jalarms/tags/RELEASE_0_3/griffon-jalarms-0.3.zip</file>
         </release>
     </plugin>
-    <plugin name="javafx" latest-release="0.2">
+    <plugin name="javafx" latest-release="0.3">
         <release tag="RELEASE_0_1" type="svn" version="0.1">
             <title>Griffon JavaFX Plugin</title>
             <author>Dean Iverson</author>
@@ -2666,6 +2666,17 @@ http://jalarms.sourceforge.net</description>
             <platforms/>
             <toolkits>javafx</toolkits>
             <file>http://svn.codehaus.org/griffon/plugins/griffon-javafx/tags/RELEASE_0_2/griffon-javafx-0.2.zip</file>
+        </release>
+        <release tag="RELEASE_0_3" version="0.3" type="svn">
+            <title>Griffon JavaFX Plugin</title>
+            <author>Dean Iverson</author>
+            <authorEmail>deanriverson@gmail.com</authorEmail>
+            <description>This plugin allows you to write JavaFX applications using the Griffon framework.</description>
+            <documentation>http://griffon.codehaus.org/Javafx+Plugin</documentation>
+            <license>Apache Public License 2.0</license>
+            <toolkits>javafx</toolkits>
+            <platforms/>
+            <file>http://svn.codehaus.org/griffon/plugins/griffon-javafx/tags/RELEASE_0_3/griffon-javafx-0.3.zip</file>
         </release>
     </plugin>
     <plugin name="jbusycomponent" latest-release="0.5.2">
