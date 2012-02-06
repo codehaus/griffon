@@ -108,7 +108,7 @@ class HessianConnector {
             proxy = makeProxy(klass, params)
         }
         
-        client
+        proxy
     }
 
     private makeProxy(Class klass, Map params) {
