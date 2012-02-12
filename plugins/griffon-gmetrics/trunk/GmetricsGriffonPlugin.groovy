@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the 'License');
  * you may not use this file except in compliance with the License.
@@ -18,20 +18,24 @@
  * @author Andres Almiray
  */
 class GmetricsGriffonPlugin {
-    def version = 0.3
-    def dependsOn = [:]
-    def griffonVersion = '0.9 > *'
-    def license = 'Apache Software License 2.0'
+    String version = '0.4'
+    Map dependsOn = [:]
+    String griffonVersion = '0.9.5 > *'
+    String license = 'Apache Software License 2.0'
+    List toolkits = []
+    List platforms = []
+    String documentation = ''
+    String source = ''
 
-    def author = 'Andres Almiray'
-    def authorEmail = 'aalmiray@users.sourceforge.net'
-    def title = 'GMetrics plugin'
-    def description = '''
+    List authors = [
+        [
+            name: 'Andres Almiray',
+            email: 'aalmiray@yahoo.com'
+        ]
+    ]
+    String title = 'GMetrics plugin'
+    String description = '''
 Runs GMetrics analysis rules for Groovy source.
 Based on the original Grails gmetrics plugin by Scott Ryan.
 '''
-
-    // URL to the plugin's documentation
-    def documentation = 'http://griffon.codehaus.org/Gmetrics+Plugin'
 }
-

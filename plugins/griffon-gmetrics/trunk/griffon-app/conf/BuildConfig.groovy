@@ -1,17 +1,12 @@
 griffon.project.dependency.resolution = {
-    // inherit Griffon' default dependencies
-    inherits("global") {
-    }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    inherits 'global'
+    log 'warn'
     repositories {
-        griffonPlugins()
         griffonHome()
-        griffonCentral()
-
-        // mavenCentral()
+        mavenCentral()
     }
     dependencies {
-        // compile('org.gmetrics:GMetrics:0.3') { transitive = false }
+        build('org.gmetrics:GMetrics:0.5') { transitive = false }
     }
 }
 
@@ -22,5 +17,3 @@ griffon {
         footer = "<br/><br/>Made with Griffon (@griffon.version@)"
     }
 }
-
-griffon.jars.destDir='target/addon'
