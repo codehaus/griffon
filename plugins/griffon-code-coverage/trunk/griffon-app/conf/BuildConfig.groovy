@@ -2,21 +2,12 @@ griffon.project.dependency.resolution = {
     inherits("global")
     log "warn"
     repositories {
-        griffonPlugins()
         griffonHome()
-        griffonCentral()
         mavenCentral()
-        flatDir name: 'codeCoveragePluginLib', dirs: 'lib'
     }
     dependencies {
-        build 'net.sourceforge.cobertura:cobertura:1.9.8',
-              'oro:oro:2.0.8',
-              'asm:asm:3.0',
-              'asm:asm-tree:3.0'
-        test 'net.sourceforge.cobertura:cobertura:1.9.8',
-             'oro:oro:2.0.8',
-             'asm:asm:3.0',
-             'asm:asm-tree:3.0'
+        build 'net.sourceforge.cobertura:cobertura:1.9.4.1'
+        test 'net.sourceforge.cobertura:cobertura:1.9.4.1'
     }
 }
 
@@ -27,4 +18,3 @@ griffon {
         footer = "<br/><br/>Made with Griffon (@griffon.version@)"
     }
 }
-

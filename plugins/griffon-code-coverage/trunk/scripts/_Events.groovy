@@ -1,4 +1,4 @@
-dataFile = "cobertura.ser"
+dataFile = buildConfig.cobertura.file ?: 'cobertura.ser'
 
 codeCoverageExclusionList = [
         "Application*",
@@ -7,8 +7,7 @@ codeCoverageExclusionList = [
         "Config*",
         "**/*Tests*",
         "**/griffon/test/**",
-        "**/org/codehaus/griffon/**",
-        "*GriffonPlugin*"]
+        "**/org/codehaus/griffon/**",]
 
 eventTestPhasesStart = {
     if (isCoverageEnabled()) {
@@ -92,11 +91,11 @@ def findArtefacts(String type) {
     def pattern = ~/.*\.groovy/
     def artefactFinder
     artefactFinder = {
-        it.eachFileMatch(pattern) { f ->
-	    def artefact = f.absolutePath - searchDir.absolutePath - File.separator - ".groovy"
-	    artefacts << artefact.replaceAll(File.separator, ".")
-	}
-	it.eachDir(artefactFinder)
+            it.eachFileMatch(pattern) { f ->
+	        def artefact = f.absolutePath - searchDir.absolutePath - File.separator - ".groovy"
+	        artefacts << artefact.replaceAll(File.separator, ".")
+	    }
+	    it.eachDir(artefactFinder)
     }
     artefactFinder(searchDir)
     artefacts.collect([]){ a -> classLoader.loadClass(a).newInstance() }
@@ -104,7 +103,6 @@ def findArtefacts(String type) {
 
 
 def replaceClosureNamesInReports() {
-    try{
     if (!argsMap.nopost || !buildConfig.coverage.noPost) {
         def startTime = new Date().time
         Map<String, List<Class>> artifacts = collectArtifacts()
@@ -115,7 +113,6 @@ def replaceClosureNamesInReports() {
         def endTime = new Date().time
         println "Done with post processing reports in ${endTime - startTime}ms"
     }
-    }catch(x){griffon.util.GriffonExceptionHandler.sanitize(x).printStackTrace()}
 }
 
 collectArtifacts = {
@@ -170,7 +167,8 @@ def replaceClosureNames(List<Class> artifacts) {
         }
         def beanInfo = java.beans.Introspector.getBeanInfo(klass)
         def reference = klass.newInstance()
-        beanInfo.propertyDescriptors.each {propertyDescriptor ->
+        beanInfo.propertyDescriptors.each { propertyDescriptor ->
+            if(propertyDescriptor.name == 'griffonClass') return
             def property = reference."${propertyDescriptor.name}"
             if(!(property instanceof Closure)) return
             def closureClassName = property.class.name 
@@ -201,7 +199,8 @@ def replaceClosureNamesInXmlReports(List<Class> artifacts) {
         artifacts.each {Class klass ->
             def beanInfo = java.beans.Introspector.getBeanInfo(klass)
             def reference = klass.newInstance()
-            beanInfo.propertyDescriptors.each {propertyDescriptor ->
+            beanInfo.propertyDescriptors.each { propertyDescriptor ->
+                if(propertyDescriptor.name == 'griffonClass') return
                 def property = reference."${propertyDescriptor.name}"
                 if(!(property instanceof Closure)) return
                 def closureClassName = property.class.name
