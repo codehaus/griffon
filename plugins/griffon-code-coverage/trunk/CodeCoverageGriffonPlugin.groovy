@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the 'License');
  * you may not use this file except in compliance with the License.
@@ -18,19 +18,25 @@
  * @author Andres Almiray
  */
 class CodeCoverageGriffonPlugin {
-    def version = '0.6'
-    def dependsOn = [:]
-    def griffonVersion = '0.9.2 > *'
-    def license = 'Apache Software License 2.0'
+    String version = '0.7'
+    Map dependsOn = [:]
+    String griffonVersion = '0.9.5 > *'
+    String license = 'Apache Software License 2.0'
+    List toolkits = []
+    List platforms = []
+    String source = ''
+    String documentation = ''
 
-    def author = 'Andres Almiray'
-    def authorEmail = 'aalmiray@users.sourceforge.net'
-    def title = 'Generates Code Coverage reports'
-    def description = '''
+    List authors = [
+        [
+            name: 'Andres Almiray',
+            email: 'aalmiray@yahoo.com'
+        ]
+    ]
+
+    String title = 'Generates Code Coverage reports'
+    String description = '''
 Creates Code Coverage reports for your code.
 Based on grails-code-coverage by Mike Hugo.
     '''
-
-    // URL to the plugin's documentation
-    def documentation = 'http://griffon.codehaus.org/CodeCoverage+Plugin'
 }
