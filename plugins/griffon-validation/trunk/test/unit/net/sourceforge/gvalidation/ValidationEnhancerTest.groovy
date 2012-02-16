@@ -123,7 +123,9 @@ class ValidationEnhancerTest extends BaseTestCase {
 
     public void testCustomValidator() {
         ConstraintRepository.instance.register('magic',
-                [validate: {property, bean, parameter -> false}])
+                [validate: {property, bean, parameter ->
+                    return false
+                }])
 
         def model = generateModel('CustomConstraintModelBean.groovy')
 

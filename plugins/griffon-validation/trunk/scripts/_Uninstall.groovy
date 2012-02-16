@@ -13,21 +13,19 @@
  *  limitations under the License.
  */
 
-//
 // This script is executed by Griffon when the plugin is uninstalled from project.
 // Use this script if you intend to do any additional clean-up on uninstall, but
 // beware of messing up SVN directories!
 //
 
+// Update the following configuration if your addon
+// requires a different prefix or exposes nodes in
+// a different way.
+// Remember to apply the reverse changes in _Install.groovy
+//
 // check to see if we already have a ValidationGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'ValidationGriffonAddon' == builder
-    }
-}
-
-if (addonIsSet1) {
-    println 'Removing ValidationGriffonAddon from Builder.groovy'
-    builderConfigFile.text = builderConfigFile.text - "root.'ValidationGriffonAddon'.addon=true\n"
-}
+// def configText = '''root.'ValidationGriffonAddon'.addon=true'''
+// if(builderConfigFile.text.contains(configText)) {
+//     println 'Removing ValidationGriffonAddon from Builder.groovy'
+//     builderConfigFile.text -= configText
+// }

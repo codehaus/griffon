@@ -13,33 +13,38 @@
  *  limitations under the License.
  */
 
-/**
- * @author Nick Zhu
- */
 class ValidationGriffonPlugin {
-     // the plugin version
-    def version = "0.8.2"
+    // the plugin version
+    String version = '0.9'
     // the version or versions of Griffon the plugin is designed for
-    def griffonVersion = '0.9.4 > *'
+    String griffonVersion = '0.9.5-rc1 > *'
     // the other plugins this plugin depends on
-    def dependsOn = [i18n:'0.4.1']
+    Map dependsOn = [i18n:'0.4.1', spock:'0.5.1']
     // resources that are included in plugin packaging
-    def pluginIncludes = []
+    List pluginIncludes = []
     // the plugin license
-    def license = 'Apache Software License 2.0'
+    String license = 'Apache Software License 2.0'
     // Toolkit compatibility. No value means compatible with all
     // Valid values are: swing, javafx, swt, pivot, gtk
-    def toolkits = []
+    List toolkits = ['swing']
     // Platform compatibility. No value means compatible with all
     // Valid values are:
     // linux, linux64, windows, windows64, macosx, macosx64, solaris
-    def platforms = []
+    List platforms = []
+    // URL where documentation can be found
+    String documentation = 'http://griffon.codehaus.org/Validation+Plugin'
+    // URL where source can be found
+    String source = 'https://svn.codehaus.org/griffon/plugins/griffon-validation/trunk/'
 
-    def author = "Nick Zhu"
-    def authorEmail = "nzhu@jointsource.com"
-    def title = "Griffon Validation Plugin"
-    def description = 'A validation plugin that provides Grails like validation capability using constraints'
-
-    // URL to the plugin's documentation
-    def documentation = 'http://griffon.codehaus.org/Validation+Plugin'
+    List authors = [
+        [
+            name: 'Nick Zhu',
+            email: 'nick.qi.zhu@gmail.com'
+        ]
+    ]
+    String title = 'Griffon Validation Plugin'
+    // accepts Markdown syntax. See http://daringfireball.net/projects/markdown/ for details
+    String description = '''
+A validation plugin that provides Grails like validation capability using constraints
+'''
 }
