@@ -44,9 +44,9 @@ griffon.project.dependency.resolution = {
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime' or 'test' scopes eg.
-        compile 'common-lang:commons-lang:2.5'
+        compile 'commons-lang:commons-lang:2.5'
         compile 'commons-validator:commons-validator:1.3.1'
-        compile 'apache-oro:jakarta-oro:2.0.8'// runtime 'mysql:mysql-connector-java:5.1.5'
+        compile 'oro:oro:2.0.8'
     }
 }
 
