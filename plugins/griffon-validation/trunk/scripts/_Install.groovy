@@ -24,19 +24,18 @@
 //    ant.mkdir(dir:"${basedir}/griffon-app/jobs")
 //
 
-// check to see if we already have a ValidationGriffonAddon
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'ValidationGriffonAddon' == builder
-    }
-}
+// Update the following configuration if your addon
+// requires a different prefix or exposes nodes in
+// a different way.
+// Remember to apply the reverse changes in _Uninstall.groovy
 
-if (!addonIsSet1) {
-    println 'Adding ValidationGriffonAddon to Builder.groovy'
-    builderConfigFile.append('''
-root.'ValidationGriffonAddon'.addon=true
-''')
-}
+// check to see if we already have a ValidationGriffonAddon
+//def configText = '''root.'ValidationGriffonAddon'.addon=true'''
+//if(!(builderConfigFile.text.contains(configText))) {
+//     println 'Adding ValidationGriffonAddon to Builder.groovy'
+//     builderConfigFile.append("""
+//$configText
+//""")
+//}
 
 ant.mkdir(dir: "${basedir}/griffon-app/constraints")

@@ -100,9 +100,9 @@ class HighlightErrorDecoratorSpec extends UnitSpec {
 
         when:
         decorator.decorate(errors, errors.getFieldError(errorField))
-        Thread.sleep(100)
+        Thread.sleep(300)
         decorator.undecorate()
-        Thread.sleep(100)
+        Thread.sleep(300)
 
         then:
         decorator.originalBgColor == color

@@ -39,7 +39,7 @@ class ValidationInheritenceTest extends BaseTestCase {
 
         model.validate()
 
-        assertTrue "Shoudl have errors", model.hasErrors()
+        assertTrue "Should have errors", model.hasErrors()
         assertTrue "Email can not be blank", model.errors.hasFieldErrors('email')
     }
 

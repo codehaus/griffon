@@ -21,7 +21,6 @@
  * @since 0.3
  */
 
-includeTargets << griffonScript("_GriffonInit")
 includeTargets << griffonScript("_GriffonCreateArtifacts")
 
 target('default': "Creates a new constraint") {
