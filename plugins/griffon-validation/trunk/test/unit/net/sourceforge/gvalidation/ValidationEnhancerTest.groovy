@@ -23,6 +23,7 @@ import net.sourceforge.gvalidation.models.InvalidConstraintModelBean
 import net.sourceforge.gvalidation.models.CustomConstraintModelBean
 import net.sourceforge.gvalidation.models.BindableModelBean
 import java.beans.PropertyChangeListener
+import net.sourceforge.gvalidation.util.MetaUtils
 
 /**
  * Created by nick.zhu
@@ -232,6 +233,30 @@ class ValidationEnhancerTest extends BaseTestCase {
 
         assertTrue "ID error should still be there", model.errors.hasFieldErrors('id')
         assertFalse "Email should not contain any error", model.errors.hasFieldErrors('email')
+    }
+
+    public void testCleanup() {
+        def model = generateModel()
+
+        ValidationEnhancer.enhance(model)
+
+        model.metaClass.properties.each{
+            println(it.name)
+        }
+
+        model.metaClass.hasProperty(model, '__validationEnhancer')
+
+        println(model.__validationEnhancer)
+
+        assertFalse("Model should have been enhanced", ValidationEnhancer.isNotEnhanced(model))
+
+        assertTrue("Model should have validate method", MetaUtils.hasMethodOrClosure(model, "validate"))
+
+        ValidationEnhancer.degrade(model)
+
+        assertTrue("Model should not be enhanced", ValidationEnhancer.isNotEnhanced(model))
+
+        assertFalse("Model should not have validate method", MetaUtils.hasMethodOrClosure(model, "validate"))
     }
 
 }

@@ -27,6 +27,10 @@ class ValidationEnhancer {
     static final def BEFORE_VALIDATION_CALLBACK_NAME = 'beforeValidation'
     static final def CONSTRAINT_PROPERTY_NAME = "constraints"
 
+    static def degrade(bean){
+
+    }
+
     static def enhance(bean) {
         if (isNotEnhanced(bean)) {
             final def enhancer = new ValidationEnhancer(bean)
@@ -36,7 +40,7 @@ class ValidationEnhancer {
         return bean."${VALIDATION_ENHANCER_PROPERTY_NAME}"
     }
 
-    private static def isNotEnhanced(bean) {
+    protected static def isNotEnhanced(bean) {
         return !bean.metaClass.hasProperty(VALIDATION_ENHANCER_PROPERTY_NAME)
     }
 
