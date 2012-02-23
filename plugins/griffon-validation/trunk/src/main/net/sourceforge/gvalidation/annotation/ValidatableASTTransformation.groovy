@@ -38,6 +38,7 @@ import net.sourceforge.gvalidation.Errors
 
 import org.codehaus.groovy.ast.expr.ArgumentListExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
+import org.codehaus.groovy.ast.ConstructorNode
 
 /**
  * Groovy AST transformation class that enhances any class
@@ -54,6 +55,8 @@ class ValidatableASTTransformation implements ASTTransformation {
         ClassNode targetClassNode = sourceUnit.getAST()?.classes.first()
 
         if (!alreadyAnnotatedBySuperClass(targetClassNode) && annotatedWithValidatable(targetClassNode)) {
+            injectConstructor(targetClassNode)
+
             if (hasNoErrorsField(targetClassNode)) {
                 injectErrorsField(targetClassNode)
             }
@@ -69,11 +72,6 @@ class ValidatableASTTransformation implements ASTTransformation {
             if (hasNoHasErrorsMethod(targetClassNode)) {
                 injectHasErrorsMethod(targetClassNode)
             }
-
-            if (hasNoValidateMethod(targetClassNode)) {
-                injectValidateMethod(targetClassNode)
-            }
-
         }
     }
 
@@ -173,27 +171,18 @@ class ValidatableASTTransformation implements ASTTransformation {
         ))
     }
 
-    private boolean hasNoValidateMethod(ClassNode classNode) {
-        return !classNode.hasMethod('validate',
-                [new Parameter(new ClassNode(Object), 'fields', new ConstantExpression(null))] as Parameter[]
-        )
-    }
-
-    private def injectValidateMethod(ClassNode targetClassNode) {
-        MethodNode validateMethod = new MethodNode(
-                "validate",
+    private def injectConstructor(ClassNode targetClassNode) {
+        ConstructorNode constructorNode = new ConstructorNode(
                 Opcodes.ACC_PUBLIC,
-                ClassHelper.make(Boolean, false),
-                [new Parameter(ClassHelper.make(Object, false), "fields", new ConstantExpression(null))] as Parameter[],
-                [] as ClassNode[],
                 new BlockStatement(
                         new AstBuilder().buildFromCode {
-                            def enhancer = net.sourceforge.gvalidation.ValidationEnhancer.enhance(this)
-                            return enhancer.doValidate(fields)
+                            println "AST Constructor on Model: $this"
+                            net.sourceforge.gvalidation.ValidationEnhancer.enhance(this)
+                            return
                         },
                         new VariableScope()
                 ))
-        targetClassNode.addMethod(validateMethod)
+        targetClassNode.addConstructor(constructorNode)
     }
 
 }

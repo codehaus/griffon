@@ -235,18 +235,24 @@ class ValidationEnhancerTest extends BaseTestCase {
         assertFalse "Email should not contain any error", model.errors.hasFieldErrors('email')
     }
 
-    public void testCleanup() {
+    public void testEnhancedAndCleanup() {
         def model = generateModel()
 
         ValidationEnhancer.enhance(model)
 
         model.metaClass.properties.each{
-            println(it.name)
+            println("Prop: " + it.name)
         }
 
-        model.metaClass.hasProperty(model, '__validationEnhancer')
+        model.metaClass.methods.each{
+                println("Methods: " + it.toString())
+        }
+
+        println "Enhanced: " + (model.metaClass.hasProperty(model, '__validationEnhancer') != null)
 
         println(model.__validationEnhancer)
+
+        assertEquals("Incorrect number of validate methods were synthesized", 2, model.metaClass.methods.count {it.name == 'validate'})
 
         assertFalse("Model should have been enhanced", ValidationEnhancer.isNotEnhanced(model))
 
@@ -255,8 +261,6 @@ class ValidationEnhancerTest extends BaseTestCase {
         ValidationEnhancer.degrade(model)
 
         assertTrue("Model should not be enhanced", ValidationEnhancer.isNotEnhanced(model))
-
-        assertFalse("Model should not have validate method", MetaUtils.hasMethodOrClosure(model, "validate"))
     }
 
 }
