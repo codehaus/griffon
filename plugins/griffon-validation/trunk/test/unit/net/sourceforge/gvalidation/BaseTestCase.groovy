@@ -28,7 +28,7 @@ abstract class BaseTestCase extends GroovyTestCase {
         def file = new File("test/unit/net/sourceforge/gvalidation/models/${fileName}")
         assert file.exists()
 
-        TransformTestHelper invoker = new TransformTestHelper(new ValidatableASTTransformation(), CompilePhase.SEMANTIC_ANALYSIS)
+        TransformTestHelper invoker = new TransformTestHelper(new ValidatableASTTransformation(), CompilePhase.PARSING)
         def modelClass = invoker.parse(file)
         def model = modelClass.newInstance()
 

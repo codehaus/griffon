@@ -28,7 +28,10 @@ class ValidationEnhancer {
     static final def CONSTRAINT_PROPERTY_NAME = "constraints"
 
     static def degrade(bean){
-
+        if (!isNotEnhanced(bean)) {
+            bean."${VALIDATION_ENHANCER_PROPERTY_NAME}" = null
+            bean.metaClass.validate = { fields = null -> }
+        }
     }
 
     static def enhance(bean) {
@@ -41,7 +44,10 @@ class ValidationEnhancer {
     }
 
     protected static def isNotEnhanced(bean) {
-        return !bean.metaClass.hasProperty(VALIDATION_ENHANCER_PROPERTY_NAME)
+        def property = bean.metaClass.hasProperty(bean, VALIDATION_ENHANCER_PROPERTY_NAME)
+        println "Prop: " + property
+        if(property != null) println "Value: " + bean."${VALIDATION_ENHANCER_PROPERTY_NAME}"
+        return property == null || bean."${VALIDATION_ENHANCER_PROPERTY_NAME}" == null
     }
 
     private List fields
@@ -62,6 +68,8 @@ class ValidationEnhancer {
      * executed each time
      */
     def doValidate = {params = null ->
+        println "Validating:: ValidationEnhancer: $this - Model: $model"
+
         if (MetaUtils.hasMethodOrClosure(model, BEFORE_VALIDATION_CALLBACK_NAME))
             model."${BEFORE_VALIDATION_CALLBACK_NAME}"()
 
