@@ -24,6 +24,7 @@ import net.sourceforge.gvalidation.models.CustomConstraintModelBean
 import net.sourceforge.gvalidation.models.BindableModelBean
 import java.beans.PropertyChangeListener
 import net.sourceforge.gvalidation.util.MetaUtils
+import net.sourceforge.gvalidation.models.AnnotatedModel
 
 /**
  * Created by nick.zhu
@@ -114,10 +115,6 @@ class ValidationEnhancerTest extends BaseTestCase {
         ValidationEnhancer.enhance(model)
 
         boolean result = model.validate()
-
-        model.errors.each {
-            println it
-        }
 
         assertTrue("Validation result should be true", result)
     }
@@ -235,32 +232,25 @@ class ValidationEnhancerTest extends BaseTestCase {
         assertFalse "Email should not contain any error", model.errors.hasFieldErrors('email')
     }
 
-    public void testEnhancedAndCleanup() {
+    public void testEnhancement() {
         def model = generateModel()
-
-        ValidationEnhancer.enhance(model)
-
-        model.metaClass.properties.each{
-            println("Prop: " + it.name)
-        }
-
-        model.metaClass.methods.each{
-                println("Methods: " + it.toString())
-        }
-
-        println "Enhanced: " + (model.metaClass.hasProperty(model, '__validationEnhancer') != null)
-
-        println(model.__validationEnhancer)
 
         assertEquals("Incorrect number of validate methods were synthesized", 2, model.metaClass.methods.count {it.name == 'validate'})
 
         assertFalse("Model should have been enhanced", ValidationEnhancer.isNotEnhanced(model))
 
         assertTrue("Model should have validate method", MetaUtils.hasMethodOrClosure(model, "validate"))
+    }
 
-        ValidationEnhancer.degrade(model)
+    public void testMultipleEnhance(){
+        def m1 = generateModel()
+        def m2 = generateModel()
 
-        assertTrue("Model should not be enhanced", ValidationEnhancer.isNotEnhanced(model))
+        assertNotSame('Enhancer instances should not be the same', m1.__validationEnhancer, m2.__validationEnhancer)
+
+        m2.validate()
+
+        assertFalse("Model should have error", m1.hasErrors())
     }
 
 }

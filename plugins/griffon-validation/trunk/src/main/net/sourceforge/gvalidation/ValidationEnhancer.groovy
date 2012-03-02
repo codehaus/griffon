@@ -27,26 +27,14 @@ class ValidationEnhancer {
     static final def BEFORE_VALIDATION_CALLBACK_NAME = 'beforeValidation'
     static final def CONSTRAINT_PROPERTY_NAME = "constraints"
 
-    static def degrade(bean){
-        if (!isNotEnhanced(bean)) {
-            bean."${VALIDATION_ENHANCER_PROPERTY_NAME}" = null
-            bean.metaClass.validate = { fields = null -> }
-        }
-    }
-
     static def enhance(bean) {
-        if (isNotEnhanced(bean)) {
-            final def enhancer = new ValidationEnhancer(bean)
-            bean.metaClass."${VALIDATION_ENHANCER_PROPERTY_NAME}" = enhancer
-        }
-
-        return bean."${VALIDATION_ENHANCER_PROPERTY_NAME}"
+        final def enhancer = new ValidationEnhancer(bean)
+        bean.metaClass."${VALIDATION_ENHANCER_PROPERTY_NAME}" = enhancer
+        return enhancer
     }
 
     protected static def isNotEnhanced(bean) {
         def property = bean.metaClass.hasProperty(bean, VALIDATION_ENHANCER_PROPERTY_NAME)
-        println "Prop: " + property
-        if(property != null) println "Value: " + bean."${VALIDATION_ENHANCER_PROPERTY_NAME}"
         return property == null || bean."${VALIDATION_ENHANCER_PROPERTY_NAME}" == null
     }
 
@@ -58,7 +46,6 @@ class ValidationEnhancer {
         model = bean
 
         bean.metaClass.validate = { fields = null ->
-            ValidationEnhancer.enhance(bean)
             doValidate(fields)
         }
     }
@@ -68,8 +55,6 @@ class ValidationEnhancer {
      * executed each time
      */
     def doValidate = {params = null ->
-        println "Validating:: ValidationEnhancer: $this - Model: $model"
-
         if (MetaUtils.hasMethodOrClosure(model, BEFORE_VALIDATION_CALLBACK_NAME))
             model."${BEFORE_VALIDATION_CALLBACK_NAME}"()
 
