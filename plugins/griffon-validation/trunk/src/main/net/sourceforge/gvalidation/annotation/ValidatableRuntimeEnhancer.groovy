@@ -19,12 +19,17 @@ import java.beans.PropertyChangeListener
 import net.sourceforge.gvalidation.util.MetaUtils
 import griffon.core.ApplicationHandler
 import griffon.util.ApplicationHolder
+import net.sourceforge.gvalidation.ValidationEnhancer
 
 /**
  * @author Nick Zhu (nzhu@jointsource.com)
  */
 @Singleton
 class ValidatableRuntimeEnhancer {
+
+    void degrade(model){
+        ValidationEnhancer.degrade(model)
+    }
 
     void enhance(model) {
         if (realTimeOn(model) && annotatedWithBindable(model)) {

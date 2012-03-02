@@ -21,6 +21,7 @@ import net.sourceforge.gvalidation.renderer.ErrorRendererAttributeDelegator
 import net.sourceforge.gvalidation.swing.ErrorIconFactory
 import net.sourceforge.gvalidation.swing.ErrorMessagePanelFactory
 import net.sourceforge.gvalidation.annotation.ValidatableRuntimeEnhancer
+import net.sourceforge.gvalidation.ValidationEnhancer
 
 /**
  * @author Nick Zhu

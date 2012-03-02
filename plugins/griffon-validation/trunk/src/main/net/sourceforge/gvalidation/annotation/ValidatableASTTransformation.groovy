@@ -176,7 +176,6 @@ class ValidatableASTTransformation implements ASTTransformation {
                 Opcodes.ACC_PUBLIC,
                 new BlockStatement(
                         new AstBuilder().buildFromCode {
-                            println "AST Constructor on Model: $this"
                             net.sourceforge.gvalidation.ValidationEnhancer.enhance(this)
                             return
                         },
